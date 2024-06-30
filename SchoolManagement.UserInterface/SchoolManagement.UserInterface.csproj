@@ -1,0 +1,139 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2022.3.913" />
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <None Remove="Resources\all_categories.png" />
+    <None Remove="Resources\blue_category.png" />
+    <None Remove="Resources\busyMarker.png" />
+    <None Remove="Resources\calendar_16x16.png" />
+    <None Remove="Resources\calendar_32x32.png" />
+    <None Remove="Resources\calendar_categories.png" />
+    <None Remove="Resources\calendar_delete.png" />
+    <None Remove="Resources\calendar_month.png" />
+    <None Remove="Resources\calendar_new.png" />
+    <None Remove="Resources\calendar_next_range.png" />
+    <None Remove="Resources\calendar_timeline.png" />
+    <None Remove="Resources\calendar_time_marker.png" />
+    <None Remove="Resources\calendar_today.png" />
+    <None Remove="Resources\calendar_week.png" />
+    <None Remove="Resources\calendar_work.png" />
+    <None Remove="Resources\Categorize.png" />
+    <None Remove="Resources\complete.png" />
+    <None Remove="Resources\Delete.png" />
+    <None Remove="Resources\Discard.png" />
+    <None Remove="Resources\email_16x16.png" />
+    <None Remove="Resources\FollowUp.png" />
+    <None Remove="Resources\Forward.png" />
+    <None Remove="Resources\Forward_16x16.png" />
+    <None Remove="Resources\freeMarker.png" />
+    <None Remove="Resources\green_category.png" />
+    <None Remove="Resources\Icon.ico" />
+    <None Remove="Resources\mail_32x32.png" />
+    <None Remove="Resources\minus.png" />
+    <None Remove="Resources\NewEmail.png" />
+    <None Remove="Resources\note_16x16.png" />
+    <None Remove="Resources\note_32x32.png" />
+    <None Remove="Resources\oooMarker.png" />
+    <None Remove="Resources\plus.png" />
+    <None Remove="Resources\Popout.png" />
+    <None Remove="Resources\printLayout.png" />
+    <None Remove="Resources\ReadUnread.png" />
+    <None Remove="Resources\redo.png" />
+    <None Remove="Resources\red_category.png" />
+    <None Remove="Resources\reminder.png" />
+    <None Remove="Resources\Reply.png" />
+    <None Remove="Resources\ReplyAll.png" />
+    <None Remove="Resources\ReplyAll_16x16.png" />
+    <None Remove="Resources\Reply_16x16.png" />
+    <None Remove="Resources\searchIcon.png" />
+    <None Remove="Resources\tentativeMarker.png" />
+    <None Remove="Resources\today.png" />
+    <None Remove="Resources\tomorrow.png" />
+    <None Remove="Resources\undo.png" />
+    <None Remove="Resources\webLayout.png" />
+    <None Remove="Resources\week.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\all_categories.png" />
+    <EmbeddedResource Include="Resources\blue_category.png" />
+    <EmbeddedResource Include="Resources\busyMarker.png" />
+    <EmbeddedResource Include="Resources\calendar_16x16.png" />
+    <EmbeddedResource Include="Resources\calendar_32x32.png" />
+    <EmbeddedResource Include="Resources\calendar_categories.png" />
+    <EmbeddedResource Include="Resources\calendar_delete.png" />
+    <EmbeddedResource Include="Resources\calendar_month.png" />
+    <EmbeddedResource Include="Resources\calendar_new.png" />
+    <EmbeddedResource Include="Resources\calendar_next_range.png" />
+    <EmbeddedResource Include="Resources\calendar_timeline.png" />
+    <EmbeddedResource Include="Resources\calendar_time_marker.png" />
+    <EmbeddedResource Include="Resources\calendar_today.png" />
+    <EmbeddedResource Include="Resources\calendar_week.png" />
+    <EmbeddedResource Include="Resources\calendar_work.png" />
+    <EmbeddedResource Include="Resources\Categorize.png" />
+    <EmbeddedResource Include="Resources\complete.png" />
+    <EmbeddedResource Include="Resources\Delete.png" />
+    <EmbeddedResource Include="Resources\Discard.png" />
+    <EmbeddedResource Include="Resources\email_16x16.png" />
+    <EmbeddedResource Include="Resources\FollowUp.png" />
+    <EmbeddedResource Include="Resources\Forward.png" />
+    <EmbeddedResource Include="Resources\Forward_16x16.png" />
+    <EmbeddedResource Include="Resources\freeMarker.png" />
+    <EmbeddedResource Include="Resources\green_category.png" />
+    <EmbeddedResource Include="Resources\Icon.ico" />
+    <EmbeddedResource Include="Resources\mail_32x32.png" />
+    <EmbeddedResource Include="Resources\minus.png" />
+    <EmbeddedResource Include="Resources\NewEmail.png" />
+    <EmbeddedResource Include="Resources\note_16x16.png" />
+    <EmbeddedResource Include="Resources\note_32x32.png" />
+    <EmbeddedResource Include="Resources\oooMarker.png" />
+    <EmbeddedResource Include="Resources\plus.png" />
+    <EmbeddedResource Include="Resources\Popout.png" />
+    <EmbeddedResource Include="Resources\printLayout.png" />
+    <EmbeddedResource Include="Resources\ReadUnread.png" />
+    <EmbeddedResource Include="Resources\redo.png" />
+    <EmbeddedResource Include="Resources\red_category.png" />
+    <EmbeddedResource Include="Resources\reminder.png" />
+    <EmbeddedResource Include="Resources\Reply.png" />
+    <EmbeddedResource Include="Resources\ReplyAll.png" />
+    <EmbeddedResource Include="Resources\ReplyAll_16x16.png" />
+    <EmbeddedResource Include="Resources\Reply_16x16.png" />
+    <EmbeddedResource Include="Resources\searchIcon.png" />
+    <EmbeddedResource Include="Resources\tentativeMarker.png" />
+    <EmbeddedResource Include="Resources\today.png" />
+    <EmbeddedResource Include="Resources\tomorrow.png" />
+    <EmbeddedResource Include="Resources\undo.png" />
+    <EmbeddedResource Include="Resources\webLayout.png" />
+    <EmbeddedResource Include="Resources\week.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties ShouldAddDPIScalingManifest="" /></VisualStudio></ProjectExtensions>
+
+</Project>

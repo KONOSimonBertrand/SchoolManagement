@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="UI\CustomControls\DateNavigator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolYearInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SearchTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolYearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.Administration.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.CashFlow.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.Discipline.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.Report.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.Setting.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.StudentNoteTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.TimeTable.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

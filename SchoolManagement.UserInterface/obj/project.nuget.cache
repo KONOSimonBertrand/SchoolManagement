@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "S/l8yAJjuSur/W5JkcPU0CShLFkpHkkfW4uExo/ACvFD+QLkrIQa0WwrMqzkdp/kWqrTABPKAiQYzEFRIB0ueQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UserInterface\\SchoolManagement.UserInterface.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.codedom\\4.7.0\\system.codedom.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.componentmodel.composition\\4.7.0\\system.componentmodel.composition.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.management\\4.7.0\\system.management.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\ui.for.winforms.allcontrols.net60\\2022.3.913\\ui.for.winforms.allcontrols.net60.2022.3.913.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\unofficial.microsoft.mshtml.netstandard\\7.0.3300\\unofficial.microsoft.mshtml.netstandard.7.0.3300.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,17 @@
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Infrastructure.deps.json
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Infrastructure.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Infrastructure.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Application.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Core.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Application.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\bin\Debug\net7.0\SchoolManagement.Core.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.AssemblyInfo.cs
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolMa.324EA75F.Up2Date
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\refint\SchoolManagement.Infrastructure.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\SchoolManagement.Infrastructure.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\obj\Debug\net7.0\ref\SchoolManagement.Infrastructure.dll

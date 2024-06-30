@@ -1,0 +1,136 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\database\\dbcontextschoolyearrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\database\\dbcontextschoolyearrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\database\\dapperschoolyearrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\database\\dapperschoolyearrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\mainform.settingstab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\mainform.settingstab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\editschoolyearform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\editschoolyearform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.application\\schoolyears\\schoolyearservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|solutionrelative:schoolmanagement.application\\schoolyears\\schoolyearservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DbContextSchoolYearRepository.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\DbContextSchoolYearRepository.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\DataBase\\DbContextSchoolYearRepository.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\DbContextSchoolYearRepository.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\DataBase\\DbContextSchoolYearRepository.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAzwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T11:26:19.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T11:24:40.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainForm.SettingsTab.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\MainForm.SettingsTab.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\MainForm.SettingsTab.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\MainForm.SettingsTab.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\MainForm.SettingsTab.cs",
+              "ViewState": "AQIAAJEBAAAAAAAAAAAjwJoBAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T11:20:39.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DapperSchoolYearRepository.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\DapperSchoolYearRepository.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\DataBase\\DapperSchoolYearRepository.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\DapperSchoolYearRepository.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\DataBase\\DapperSchoolYearRepository.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAkwDwAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T10:55:35.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SchoolYearService.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\SchoolYears\\SchoolYearService.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Application\\SchoolYears\\SchoolYearService.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\SchoolYears\\SchoolYearService.cs",
+              "RelativeToolTip": "SchoolManagement.Application\\SchoolYears\\SchoolYearService.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAIA6wCIAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T10:54:16.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditSchoolYearForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\EditSchoolYearForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\EditSchoolYearForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\EditSchoolYearForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\EditSchoolYearForm.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwBkAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-30T10:31:04.876Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1120,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
