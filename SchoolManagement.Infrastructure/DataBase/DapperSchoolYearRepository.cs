@@ -11,15 +11,16 @@ namespace SchoolManagement.Infrastructure.DataBase
         {
             _dbConnectionFactory = dbConnectionFactory;
         }
-        public  Task<List<SchoolYear>> GetAllAsync()
+        public  async Task<List<SchoolYear>> GetAllAsync()
         {
             var connection = _dbConnectionFactory.CreateConnection();
             string sqlText = "SELECT * FROM SchoolYears ";
             var result= connection.Query<SchoolYear>(sqlText).ToList();
-            return Task.FromResult(result);
+            await Task.Delay(0);
+            return result;
         }
 
-        public Task<bool> AddAsync(SchoolYear schoolYear)
+        public async Task<bool> AddAsync(SchoolYear schoolYear)
         {
             using var connection = _dbConnectionFactory.CreateConnection();
             string sqlText = @"INSERT INTO SchoolYears(Name, StartFirstQuarter, EndFirstQuarter, StartSecondQuarter, EndSecondQuarter, StartThirdQuarter, EndThirdQuarter, ) 
@@ -36,10 +37,11 @@ namespace SchoolManagement.Infrastructure.DataBase
                 schoolYear.EndThirdQuarter
             }
                 );
-            return Task.FromResult(result > 0);
+            await Task.Delay(0);
+            return (result > 0);
         }
 
-        public Task<bool> UpdateAsync(SchoolYear schoolYear)
+        public async Task<bool> UpdateAsync(SchoolYear schoolYear)
         {
             using var connection = _dbConnectionFactory.CreateConnection();
             string sqlText = @"UPDATE SchoolYears 
@@ -58,7 +60,17 @@ namespace SchoolManagement.Infrastructure.DataBase
                 schoolYear.Id
             }
                 );
-            return Task.FromResult(result > 0);
+            await Task.Delay(0);
+            return (result > 0);
+        }
+
+        public async Task<SchoolYear> GetSchoolYear(string name)
+        {
+            var connection = _dbConnectionFactory.CreateConnection();
+            string sqlText = "SELECT * FROM SchoolYears Where Name=@name ";
+            var result = connection.Query<SchoolYear>(sqlText, new {Name=name}).FirstOrDefault();
+            await Task.Delay(0);
+            return result;
         }
     }
 }

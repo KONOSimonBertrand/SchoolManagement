@@ -207,8 +207,21 @@ namespace SchoolManagement.UI
             }
             if (this.endFirstQuarterDateTimePicker.Value < this.startFirstQuarterDateTimePicker.Value)
             {
-                this.errorLabel.Text = "La date de fin est inférieure à la date de fin!";
+                this.errorLabel.Text = "La date de fin est inférieure à la date de début!";
                 this.endFirstQuarterDateTimePicker.Focus();
+                return false;
+            }
+            if (this.endSecondQuarterDateTimePicker.Value < this.startSecondQuarterDateTimePicker.Value)
+            {
+                this.errorLabel.Text = "La date de fin est inférieure à la date de début!";
+                this.endSecondQuarterDateTimePicker.Focus();
+                return false;
+            }
+
+            if (this.endThirdQuarterDateTimePicker.Value < this.startThirdQuarterDateTimePicker.Value)
+            {
+                this.errorLabel.Text = "La date de fin est inférieure à la date de début!";
+                this.endThirdQuarterDateTimePicker.Focus();
                 return false;
             }
 

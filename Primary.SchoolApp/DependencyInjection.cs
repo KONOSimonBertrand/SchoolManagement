@@ -10,6 +10,7 @@ namespace Primary.SchoolApp
             services.AddTransient<MainForm>();
             services.AddTransient<LoginForm>();
             services.AddTransient<EditSchoolYearForm>();
+            services.AddTransient<AddSchoolYearForm>();
             return services;
         }
     }

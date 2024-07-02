@@ -6,6 +6,7 @@ using SchoolManagement.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telerik.WinControls;
@@ -17,6 +18,7 @@ namespace Primary.SchoolApp
     {
         private SchoolYearInfo schoolYearInfo;
         private ICollection<SchoolYear> schoolYears;
+        private List<string> threadLog=new();
         private void InitSettingPage()
         {
             InitSettingPageComponents();
@@ -38,6 +40,7 @@ namespace Primary.SchoolApp
         //initialisation des modules a afficher sur la page setting
         private void InitSettingModule()
         {
+            threadLog.Add($"4=> {Thread.CurrentThread.ManagedThreadId}");
             ListViewDataItemGroup settingGroup = new()
             {
                 Text = "PARAMETRES"
@@ -240,8 +243,9 @@ namespace Primary.SchoolApp
 
         }
         //chargement la liste des années scolaires dans le datagridview de la page setting
-        private void LoadSchoolYearListToSettingGridView()
-        {
+        private async void LoadSchoolYearListToSettingGridView()
+        {      
+            var getData = schoolYearService.GetAllSchoolYears();
             GridViewTextBoxColumn yearNameColum = new("Name");
             GridViewDateTimeColumn startFirstQuarterColum = new("StartFirstQuarter");
             GridViewDateTimeColumn endFirstQuarterColum = new("EndFirstQuarter");
@@ -285,7 +289,8 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Add(endThirdQuarterColum);
             SettingGridView.Columns.Add(yearStateColum);
             //chargement des données
-            SettingGridView.DataSource = GetSchoolYears().Result;
+            schoolYears = await getData;
+            SettingGridView.DataSource= schoolYears;
         }
         //extraction de la liste des années scolaires de la source de données du système
 
@@ -295,13 +300,29 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolYearForm>();
                 form.Init(schoolYear);
-                form.ShowDialog(this);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    var data = schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
+                    RadMessageBox.Show(data.Name);
+                }
             }
             else
             {
                 RadMessageBox.Show("Année scolaire inconnue");
             }
         }
+        private void ShowSchoolYearAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddSchoolYearForm>();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var data= schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
+                schoolYears.Add(data);
+                SettingGridView.DataSource = schoolYears;
+                SettingGridView.Refresh();
+            }
+        }
+
         #endregion
 
         #region Events
@@ -400,7 +421,12 @@ namespace Primary.SchoolApp
 
         private void SettingAddButton_Click(object sender, EventArgs e)
         {
-            RadMessageBox.Show("En cours d'implementation");
+            switch (SettingLeftListView.SelectedItem.Key)
+            {
+                case 1:
+                    ShowSchoolYearAddForm();
+                    break;
+            }
         }
         // permet la modification des entite telles que année scolaire, classes, moyens de paiement, ...
         private void SettingEditButton_Click(object sender, EventArgs e)
@@ -423,12 +449,6 @@ namespace Primary.SchoolApp
         }
         #endregion
 
-        #region Services
-        private async Task<List<SchoolYear>> GetSchoolYears()
-        {
-            return await schoolYearService.GetAllSchoolYears();
-        }
-
-        #endregion
+       
     }
 }

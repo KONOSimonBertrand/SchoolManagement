@@ -1,7 +1,9 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Application.SchoolYears;
 using SchoolManagement.Core.Model;
 using System;
+using System.Diagnostics.Metrics;
 
 
 namespace SchoolManagement.Infrastructure.DataBase
@@ -17,24 +19,28 @@ namespace SchoolManagement.Infrastructure.DataBase
             this.appDbContext = appDbContext;
         }
 
-        public  Task<List<SchoolYear>> GetAllAsync()
+        public async Task<List<SchoolYear>> GetAllAsync()
         {
             var result = appDbContext.SchoolYears.ToList();
-            return Task.FromResult(result);
+            await Task.Delay(0);
+            return result;           
         }
-        public Task<bool> AddAsync(SchoolYear schoolYear)
+        public async Task<bool> AddAsync(SchoolYear schoolYear)
         {
+            appDbContext.ChangeTracker.Clear();
             appDbContext.SchoolYears.Add(schoolYear);
             var result=appDbContext.SaveChanges();
-            return Task.FromResult(result > 0);
+            await Task.Delay(0);
+            return (result > 0);
         }
 
-        public Task<bool> UpdateAsync(SchoolYear schoolYear)
+        public async Task<bool> UpdateAsync(SchoolYear schoolYear)
         {
             int result = 0;
             var item=appDbContext.SchoolYears.FirstOrDefault(s=>s.Id==schoolYear.Id);
             if (item != null)
             {
+                appDbContext.ChangeTracker.Clear();
                 item.Name = schoolYear.Name;
                 item.StartFirstQuarter=schoolYear.StartFirstQuarter;
                 item.EndFirstQuarter=schoolYear.EndFirstQuarter;
@@ -43,11 +49,18 @@ namespace SchoolManagement.Infrastructure.DataBase
                 item.StartThirdQuarter=schoolYear.StartThirdQuarter;
                 item.EndThirdQuarter=schoolYear.EndThirdQuarter;
                 item.IsClosed=schoolYear.IsClosed;
-               appDbContext.SchoolYears.Update(item);
-               result = appDbContext.SaveChanges();
+                appDbContext.SchoolYears.Update(item);
+                result =appDbContext.SaveChanges();
             }
-           
-            return Task.FromResult(result > 0);
+            await Task.Delay(0);
+            return (result > 0);
+        }
+
+        public async Task<SchoolYear> GetSchoolYear(string name)
+        {
+            var result = appDbContext.SchoolYears.FirstOrDefault(s=>s.Name==name);
+            await Task.Delay(0);
+            return result;
         }
     }
 }

@@ -13,3 +13,4 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net7.0\refint\SchoolManagement.Application.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net7.0\SchoolManagement.Application.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net7.0\ref\SchoolManagement.Application.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net7.0\SchoolManagement.Application.sourcelink.json

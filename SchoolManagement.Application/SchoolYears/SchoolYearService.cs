@@ -16,15 +16,15 @@ namespace SchoolManagement.Application.SchoolYears
            this.clientApp = clientApp;
            this.configuration = configuration;
         }
-        public Task<SchoolYear> GetSchoolYear(string name)
+        public async Task<SchoolYear> GetSchoolYear(string name)
         {
-            throw new NotImplementedException();
+            return await readRepository.GetSchoolYear(name);
         }
 
         //
         public async Task<List<SchoolYear>> GetAllSchoolYears()
         {
-            return await readRepository.GetAllAsync();
+            return await readRepository.GetAllAsync();          
         }
 
         public async Task<bool> CreateSchoolYear(SchoolYear schoolYear)
