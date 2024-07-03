@@ -1,17 +1,10 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SchoolManagement.UI.Utilities
+namespace Primary.SchoolApp.Utilities
 {
-    public static class UiUtilities
+    internal static class AppUtilities
     {
-        public static Color MainThemeColor;
-        public static string MainFont = "Roboto";
-        public static string MainFontMedium = "Roboto Medium";
         public static List<string> Religions()
         {
             List<string> religions = new List<string>();
@@ -34,22 +27,6 @@ namespace SchoolManagement.UI.Utilities
 
             return religions;
 
-        }
-        public static bool IsNumber(string text)
-        {
-            bool res = true;
-            try
-            {
-                if (!string.IsNullOrEmpty(text) && ((text.Length != 1) || (text != "-")))
-                {
-                    Decimal d = decimal.Parse(text, System.Globalization.CultureInfo.CurrentCulture);
-                }
-            }
-            catch
-            {
-                res = false;
-            }
-            return res;
         }
     }
 }

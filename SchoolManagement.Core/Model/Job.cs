@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Core.Model
-{/// <summary>
-  /// Cette classe represente une fonction
-  /// Exemple Enseignant
+{
+  /// <summary>
+      /// Cette classe represente une fonction
+      /// Exemple Enseignant
   /// </summary>
     public class Job 
     {

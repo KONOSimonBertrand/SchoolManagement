@@ -7,6 +7,6 @@ namespace SchoolManagement.Application.SchoolYears
         public Task<bool> CreateSchoolYear(SchoolYear schoolYear);
         public Task<bool> UpdateSchoolYear(SchoolYear schoolYear);
         public Task<List<SchoolYear>> GetAllSchoolYears();
-        public Task<SchoolYear> GetSchoolYear(string name);
+        public Task<SchoolYear?> GetSchoolYear(string name);
     }
 }

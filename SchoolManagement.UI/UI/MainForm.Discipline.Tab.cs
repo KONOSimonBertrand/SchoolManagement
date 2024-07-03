@@ -32,12 +32,12 @@ namespace SchoolManagement.UI
             disciplineLeftListView.ListViewElement.Padding = new System.Windows.Forms.Padding(0, 16, 0, 0);
 
             disciplineSchoolYearDropDownList.RootElement.EnableElementShadow = false;
-            disciplineSchoolYearDropDownList.RootElement.CustomFont = Utilities.UiUtilities.MainFont;
+            disciplineSchoolYearDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             disciplineSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             disciplineSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             disciplineSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
-            disciplineSchoolYearLabel.LabelElement.CustomFont = Utilities.UiUtilities.MainFont;
+            disciplineSchoolYearLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             disciplineSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             disciplineSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
 

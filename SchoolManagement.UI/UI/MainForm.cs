@@ -16,6 +16,13 @@ namespace SchoolManagement.UI
         public RadButtonElement AboutButton { get => aboutButton; }
         public RadMenuItem LogOutMenu { get => logoutMenuItem; }
         public RadMenuItem ChangePasswordMenu{ get => changePasswordMenuItem; }
+        public RadDropDownList HomeSchoolYearDropDownList { get=>homeSchoolYearDropDownList; }
+        public RadDropDownList CashFlowSchoolYearDropDownList { get => cashFlowSchoolYearDropDownList; }
+        public RadDropDownList TimeTableSchoolYearDropDownList {  get => timeTableSchoolYearDropDownList; }
+        public RadDropDownList DisciplineSchoolYearDropDownList { get=>disciplineSchoolYearDropDownList;}
+        public RadDropDownList StudentNoteSchoolYearDropDownList { get=>studentNoteSchoolYearDropDownList; }
+        public RadDropDownList ReportSchoolYearDropDownList { get => reportSchoolYearDropDownList; }
+        public RadDropDownList EmployeeSchoolYearDropDownList { get => employeeSchoolYearDropDownList;}
         #endregion
 
         public MainForm()
@@ -162,12 +169,12 @@ namespace SchoolManagement.UI
             homeLeftListView.ListViewElement.Padding = new Padding(0, 16, 0, 0);
 
             homeSchoolYearDropDownList.RootElement.EnableElementShadow = false;
-            homeSchoolYearDropDownList.RootElement.CustomFont = UiUtilities.MainFont;
+            homeSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             homeSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             homeSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             homeSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
-            homeSchoolYearLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            homeSchoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             homeSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             homeSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             homeSchoolYearLabel.TextAlignment = ContentAlignment.BottomCenter;
@@ -201,7 +208,7 @@ namespace SchoolManagement.UI
         }
         private void AdjustMainColor()
         {
-            UiUtilities.MainThemeColor = FormElement.TitleBar.FillPrimitive.BackColor;
+            ViewUtilities.MainThemeColor = FormElement.TitleBar.FillPrimitive.BackColor;
             switch (ThemeResolutionService.ApplicationThemeName)
             {
                 case "Material":
@@ -229,19 +236,19 @@ namespace SchoolManagement.UI
                     Icon = Resources.icon_pink;
                     break;
             }
-            timeTablePrintButton.ForeColor = UiUtilities.MainThemeColor;
-            homeAddButton.ForeColor = UiUtilities.MainThemeColor;
-            homeExportToExcelButton.ForeColor = UiUtilities.MainThemeColor;
-            cashFlowAddButton.ForeColor = UiUtilities.MainThemeColor;
-            cashFlowExportToExcelButton.ForeColor = UiUtilities.MainThemeColor;
-            disciplineExportToExcelButton.ForeColor = UiUtilities.MainThemeColor;
-            disciplineAddButton.ForeColor = UiUtilities.MainThemeColor;
-            studentNoteExportToExcelButton.ForeColor = UiUtilities.MainThemeColor;
-            studentNoteAddButton.ForeColor = UiUtilities.MainThemeColor;
-            settingExportToExcelButton.ForeColor = UiUtilities.MainThemeColor;
-            settingAddButton.ForeColor = UiUtilities.MainThemeColor;
-            employeeExportToExcelButton.ForeColor = UiUtilities.MainThemeColor;
-            employeeAddButton.ForeColor = UiUtilities.MainThemeColor;
+            timeTablePrintButton.ForeColor = ViewUtilities.MainThemeColor;
+            homeAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            homeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            cashFlowAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            cashFlowExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            disciplineExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            disciplineAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            studentNoteExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            studentNoteAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            settingExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            settingAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            employeeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            employeeAddButton.ForeColor = ViewUtilities.MainThemeColor;
             homeMainListView.ListViewElement.SynchronizeVisualItems();
 
         }

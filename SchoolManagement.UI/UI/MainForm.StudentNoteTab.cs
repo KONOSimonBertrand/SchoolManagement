@@ -62,17 +62,17 @@ namespace SchoolManagement.UI
             studentNoteLeftListView.ListViewElement.Padding = new Padding(0, 16, 0, 0);
 
             studentNoteSchoolYearDropDownList.RootElement.EnableElementShadow = false;
-            studentNoteSchoolYearDropDownList.RootElement.CustomFont = UiUtilities.MainFont;
+            studentNoteSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             studentNoteSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             studentNoteSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             studentNoteSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
-            studentNoteSchoolYearLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            studentNoteSchoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             studentNoteSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             studentNoteSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             studentNoteSchoolYearLabel.TextAlignment = ContentAlignment.BottomCenter;
 
-            studentNoteRoomLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            studentNoteRoomLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             studentNoteRoomLabel.LabelElement.CustomFontSize = 10.5f;
             studentNoteRoomLabel.ForeColor = Color.FromArgb(89, 89, 89);
             studentNoteRoomLabel.TextAlignment = ContentAlignment.BottomCenter;

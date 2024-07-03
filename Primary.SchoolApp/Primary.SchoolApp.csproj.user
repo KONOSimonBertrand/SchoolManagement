@@ -14,8 +14,14 @@
     <Compile Update="UI\AboutAppForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\SchoolGroupInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\SchoolYearInfo.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolGroup\EditSchoolGroupForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SchoolYearForm\AddSchoolYearForm.cs">
       <SubType>Form</SubType>

@@ -6,6 +6,7 @@ namespace SchoolManagement.Infrastructure.DataBase
     public class AppDbContext:DbContext
     {
         public DbSet<SchoolYear> SchoolYears { get; set; }
+        public DbSet<SchoolGroup> SchoolGroups { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<UserModule> UsersModules { get; set; }
         public DbSet<Job> Jobs { get; set; }

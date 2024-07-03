@@ -9,3 +9,4 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net7.0
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net7.0\refint\SchoolManagement.Core.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net7.0\SchoolManagement.Core.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net7.0\ref\SchoolManagement.Core.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net7.0\SchoolManagement.Core.sourcelink.json

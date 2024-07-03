@@ -158,3 +158,4 @@ C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-win
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-windows\Primary.SchoolApp.UI.EditSchoolYearForm.resources
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-windows\Primary.SchoolApp.sourcelink.json
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-windows\Primary.SchoolApp.UI.AddSchoolYearForm.resources
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-windows\Primary.SchoolApp.UI.EditSchoolGroupForm.resources

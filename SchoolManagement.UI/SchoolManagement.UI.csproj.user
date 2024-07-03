@@ -5,11 +5,17 @@
     <Compile Update="UI\CustomControls\DateNavigator.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\SchoolGroupInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\SchoolYearInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\SearchTextBox.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolGroupForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EditSchoolYearForm.cs">
       <SubType>Form</SubType>

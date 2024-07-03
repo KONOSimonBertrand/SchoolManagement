@@ -53,7 +53,7 @@ namespace SchoolManagement.UI.CustomControls
             this.rightNavigationButton.ButtonElement.Margin = new Padding(0, 15, 0, 15);
             this.rightNavigationButton.ButtonElement.EnableElementShadow = false;
 
-            this.dateLabel.LabelElement.CustomFont = Utilities.UiUtilities.MainFont;
+            this.dateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 15;
             this.dateLabel.LabelElement.CustomFontStyle = FontStyle.Regular;
             this.dateLabel.TextAlignment = ContentAlignment.MiddleLeft;
@@ -142,7 +142,7 @@ namespace SchoolManagement.UI.CustomControls
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            calendarGlyph.ForeColor = Utilities.UiUtilities.MainThemeColor;
+            calendarGlyph.ForeColor = Utilities.ViewUtilities.MainThemeColor;
         }
         #endregion
     }

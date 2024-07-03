@@ -34,7 +34,7 @@ namespace SchoolManagement.UI.CustomControls
             this.TextBoxElement.TextBoxItem.NullText = "Rechercher par ....";
             searchButton.Click += new EventHandler(button_Click);
             searchButton.Margin = new Padding(0, 0, 0, 0);
-            this.TextBoxElement.TextBoxItem.CustomFont = UiUtilities.MainFont;
+            this.TextBoxElement.TextBoxItem.CustomFont = ViewUtilities.MainFont;
             this.TextBoxElement.TextBoxItem.CustomFontSize = 9;
             searchButton.TextElement.CustomFont = "TelerikWebUI";
             searchButton.TextElement.CustomFontSize = 12;

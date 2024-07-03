@@ -16,9 +16,9 @@ namespace SchoolManagement.Application.SchoolYears
            this.clientApp = clientApp;
            this.configuration = configuration;
         }
-        public async Task<SchoolYear> GetSchoolYear(string name)
+        public async Task<SchoolYear?> GetSchoolYear(string name)
         {
-            return await readRepository.GetSchoolYear(name);
+            return await readRepository.GetAsync(name);
         }
 
         //

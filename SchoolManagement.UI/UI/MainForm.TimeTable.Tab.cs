@@ -43,12 +43,12 @@ namespace SchoolManagement.UI
             timeTableLeftListView.ListViewElement.Padding = new System.Windows.Forms.Padding(0, 16, 0, 0);
 
             timeTableSchoolYearDropDownList.RootElement.EnableElementShadow = false;
-            timeTableSchoolYearDropDownList.RootElement.CustomFont = UiUtilities.MainFont;
+            timeTableSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             timeTableSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             timeTableSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             timeTableSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
-            timeTableSchoolYearLabel.LabelElement.CustomFont = Utilities.UiUtilities.MainFont;
+            timeTableSchoolYearLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             timeTableSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             timeTableSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
 

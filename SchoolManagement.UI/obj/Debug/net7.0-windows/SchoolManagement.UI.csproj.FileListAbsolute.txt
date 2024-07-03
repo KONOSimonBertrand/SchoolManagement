@@ -90,3 +90,5 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.SchoolYearInfo.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolYearForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.sourcelink.json
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.SchoolGroupInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolGroupForm.resources

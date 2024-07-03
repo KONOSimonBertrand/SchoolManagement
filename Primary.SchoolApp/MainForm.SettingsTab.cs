@@ -6,25 +6,27 @@ using SchoolManagement.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
+using Telerik.WinForms.Documents.Model.Code;
 
 namespace Primary.SchoolApp
 {
     public partial class MainForm
     {
         private SchoolYearInfo schoolYearInfo;
-        private ICollection<SchoolYear> schoolYears;
-        private List<string> threadLog=new();
+        private SchoolGroupInfo schoolGroupInfo;
+        private IList<SchoolYear> schoolYearList;
+        private IList<SchoolGroup> schoolGroupList;
+        private List<UserControl> settingPageUserControlList=new();
         private void InitSettingPage()
         {
             InitSettingPageComponents();
             InitSettingPageCustomControls();
-            InitSettingPageEvents();
             InitSettingModule();
+            InitSettingPageEvents();
         }
         //initialisation des composantes de la page setting
         private void InitSettingPageComponents()
@@ -40,7 +42,6 @@ namespace Primary.SchoolApp
         //initialisation des modules a afficher sur la page setting
         private void InitSettingModule()
         {
-            threadLog.Add($"4=> {Thread.CurrentThread.ManagedThreadId}");
             ListViewDataItemGroup settingGroup = new()
             {
                 Text = "PARAMETRES"
@@ -207,6 +208,20 @@ namespace Primary.SchoolApp
             };
             schoolYearInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(schoolYearInfo);
+            settingPageUserControlList.Add(schoolYearInfo);
+            schoolGroupInfo=new SchoolGroupInfo
+            {
+                Dock= DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin=new Padding(2,2,2,2)
+            };
+            schoolGroupInfo.CloseButton.Click += delegate (object sender, EventArgs e) {
+                SettingInfoRightPanel.Visible = false;
+            };
+            schoolGroupInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(schoolGroupInfo);
+            settingPageUserControlList.Add(schoolGroupInfo);
+
         }
         //initialise les évenements relatifs aux contrôles Windows Forms de la page setting
         private void InitSettingPageEvents()
@@ -217,29 +232,40 @@ namespace Primary.SchoolApp
             SettingGridView.CustomFiltering += SettingGridView_CustomFiltering;
             SettingSearchModuleDropDownList.SelectedIndexChanged += SettingSearchModuleDropDownList_SelectedIndexChanged;
             SettingAddButton.Click += SettingAddButton_Click;
+            //déclenche l'évenement  SettingLeftListView.SelectedItemChanged pour un premier affichage
+            SettingLeftListView.SelectedItem = null;
+            SettingLeftListView.SelectedItem= SettingLeftListView.Items.FirstOrDefault();
         }
 
         #region Methodes
         // affiche les informations d'une année scolaire sur le contrôle personnalisé SchoolYearInfo
         private void LoadSelectedSchoolYearDetail(SchoolYear schoolYear)
-        {
-            if (schoolYearInfo.Visible == false) schoolYearInfo.Visible = true;
+        {  
             schoolYearInfo.TitleInfoLabel.Text = "INFOS SUR L'ANNEE SCOLAIRE";
             schoolYearInfo.StartDateTextBox.Text = schoolYear.StartFirstQuarter.ToString();
             schoolYearInfo.NameTextBox.Text = schoolYear.Name;
             schoolYearInfo.StartDateTextBox.Text = schoolYear.StartFirstQuarter?.ToString("dd-MM-yyyy");
             schoolYearInfo.EndDateTextBox.Text = schoolYear.EndThirdQuarter?.ToString("dd-MM-yyyy");
         }
+        // affiche les info d'un group de classe
+        private void LoadSelectedSchoolGroupDetail(SchoolGroup schoolGroup)
+        {        
+            schoolGroupInfo.TitleInfoLabel.Text = "INFOS SUR LE GROUP";
+            schoolGroupInfo.NameTextBox.Text= schoolGroup.Name;
 
+        }
         //chargement des groupes de classes dans le datagridview de la page setting
-        private void LoadSchoolGroupListToSettingGridView()
+        private async void LoadSchoolGroupListToSettingGridView()
         {
+            var getData=schoolGroupService.GetAllSchoolGroups();
             GridViewTextBoxColumn nameColum = new("Name");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
             nameColum.HeaderText = "Désignation";
             sequenceColum.HeaderText = "Séquence";
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(sequenceColum);
+            schoolGroupList = await getData;
+            SettingGridView.DataSource = schoolGroupList;
 
         }
         //chargement la liste des années scolaires dans le datagridview de la page setting
@@ -289,8 +315,8 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Add(endThirdQuarterColum);
             SettingGridView.Columns.Add(yearStateColum);
             //chargement des données
-            schoolYears = await getData;
-            SettingGridView.DataSource= schoolYears;
+            schoolYearList = await getData;
+            SettingGridView.DataSource= schoolYearList;
         }
         //extraction de la liste des années scolaires de la source de données du système
 
@@ -303,7 +329,8 @@ namespace Primary.SchoolApp
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     var data = schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
-                    RadMessageBox.Show(data.Name);
+                    SettingGridView.DataSource = new List<SchoolYear>();
+                    SettingGridView.DataSource = schoolYearList;
                 }
             }
             else
@@ -317,12 +344,45 @@ namespace Primary.SchoolApp
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data= schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
-                schoolYears.Add(data);
-                SettingGridView.DataSource = schoolYears;
+                schoolYearList.Add(data);
+                SettingGridView.DataSource=new List<SchoolYear>();
+                SettingGridView.DataSource = schoolYearList;
                 SettingGridView.Refresh();
             }
         }
+        private void ShowSchoolGroupEditForm(SchoolGroup schoolGroup)
+        {
+            var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
+            form.Init(schoolGroup);
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var data = schoolGroupService.GetSchoolGroup(form.NameTextBox.Text).Result;
+                SettingGridView.DataSource = new List<SchoolGroup>();
+                SettingGridView.DataSource = schoolGroupList;
+            }
+        }
+        // rend visible le user control selectionnee, les autre invisible
+        private void SetVisibleSelectedSettingPageUserControl(UserControl userControl)
+        {
+            if (userControl != null)
+            {
+              if(SettingGridView.RowCount>0)  userControl.Visible = true;
+                foreach (var item in settingPageUserControlList.Where(u => u.Name != userControl.Name && u.Visible))
+                {
+                    item.Visible = false;
+                }
 
+            }
+            else
+            {
+                foreach (var item in settingPageUserControlList.Where(u => u.Visible))
+                {
+                    item.Visible = false;
+                }
+            }
+           
+            
+        }
         #endregion
 
         #region Events
@@ -333,18 +393,20 @@ namespace Primary.SchoolApp
             {
                 SettingGridView.Columns.Clear();
                 SettingGridView.DataSource = null;
-                schoolYearInfo.Visible = (int)SettingLeftListView.SelectedItem.Key == 1;
                 switch (SettingLeftListView.SelectedItem.Key)
                 {
                     case 1:
                         LoadSchoolYearListToSettingGridView();
                         SettingSearchTextBox.NullText = "Rechercher par Désignation";
+                        SetVisibleSelectedSettingPageUserControl(schoolYearInfo);
                         break;
                     case 2:
                         LoadSchoolGroupListToSettingGridView();
                         SettingSearchTextBox.NullText = "Rechercher par Désignation";
+                        SetVisibleSelectedSettingPageUserControl(schoolGroupInfo);
                         break;
                     default:
+                        SetVisibleSelectedSettingPageUserControl(null);
                         break;
                 }
                 SettingGridView.BestFitColumns();
@@ -406,8 +468,17 @@ namespace Primary.SchoolApp
                 {
                     case 1:
                         LoadSelectedSchoolYearDetail(SettingGridView.CurrentRow.DataBoundItem as SchoolYear);
+                        if(SettingGridView.RowCount > 0)
+                        {
+                            if (!schoolYearInfo.Visible) schoolYearInfo.Visible=true;
+                        }
                         break;
                     case 2:
+                        LoadSelectedSchoolGroupDetail(SettingGridView.CurrentRow.DataBoundItem as SchoolGroup);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!schoolGroupInfo.Visible) schoolGroupInfo.Visible = true;
+                        }
                         break;
                     default:
                         break;
@@ -437,10 +508,16 @@ namespace Primary.SchoolApp
                     ShowSchoolYearEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolYear);
                     break;
                 case 2:
+                    ShowSchoolGroupEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolGroup);
+                    break;
+                default:
                     RadMessageBox.Show("En cours d'implementation");
                     break;
             }
         }
+
+       
+
         // recherche les lignes du datagridview conrrespondantes au contenu du contrôle SettingSearchTextBox
         private void SettingSearchTextBox_TextChanged(object sender, EventArgs e)
         {

@@ -9,13 +9,13 @@ namespace SchoolManagement.UI
         public RadButton SaveButton { get => saveButton; }
         public RadButton CloseButton { get => closeButton; }
         public RadTextBox NameTextBox { get => nameTextBox; }
-        public RadLabel ErrorLabel {  get => errorLabel; }
-        public RadDateTimePicker StartFirstQuarter {get=> startFirstQuarterDateTimePicker;}
-        public RadDateTimePicker EndFirstQuarter {get=> endFirstQuarterDateTimePicker;}
-        public RadDateTimePicker StartSecondQuarter {get=> startSecondQuarterDateTimePicker;}
-        public RadDateTimePicker EndSecondQuarter {get=> endSecondQuarterDateTimePicker;}
-        public RadDateTimePicker StartThirdQuarter {get=> startThirdQuarterDateTimePicker;}
-        public RadDateTimePicker EndThirdQuarter {get=> endThirdQuarterDateTimePicker;}
+        public RadLabel ErrorLabel { get => errorLabel; }
+        public RadDateTimePicker StartFirstQuarter { get => startFirstQuarterDateTimePicker; }
+        public RadDateTimePicker EndFirstQuarter { get => endFirstQuarterDateTimePicker; }
+        public RadDateTimePicker StartSecondQuarter { get => startSecondQuarterDateTimePicker; }
+        public RadDateTimePicker EndSecondQuarter { get => endSecondQuarterDateTimePicker; }
+        public RadDateTimePicker StartThirdQuarter { get => startThirdQuarterDateTimePicker; }
+        public RadDateTimePicker EndThirdQuarter { get => endThirdQuarterDateTimePicker; }
 
         public EditSchoolYearForm()
         {
@@ -26,46 +26,46 @@ namespace SchoolManagement.UI
         private void InitComponent()
         {
 
-            this.nameLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
             this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.startFirstQuarterLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.startFirstQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startFirstQuarterLabel.LabelElement.CustomFontSize = 10.5f;
             this.startFirstQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startFirstQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.endFirstQuarterLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.endFirstQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endFirstQuarterLabel.LabelElement.CustomFontSize = 10.5f;
             this.endFirstQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endFirstQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.startSecondQuarterLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.startSecondQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startSecondQuarterLabel.LabelElement.CustomFontSize = 10.5f;
             this.startSecondQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startSecondQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.endSecondQuarterLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.endSecondQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endSecondQuarterLabel.LabelElement.CustomFontSize = 10.5f;
             this.endSecondQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endSecondQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.startThirdQuarterLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.startThirdQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startThirdQuarterLabel.LabelElement.CustomFontSize = 10.5f;
             this.startThirdQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startThirdQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.endThirdQuarterLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            this.endThirdQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endThirdQuarterLabel.LabelElement.CustomFontSize = 10.5f;
             this.endThirdQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endThirdQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.nameTextBox.TextBoxElement.CustomFont = UiUtilities.MainFont;
+            this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.startFirstQuarterDateTimePicker.DateTimePickerElement.CustomFont = UiUtilities.MainFont;
+            this.startFirstQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
             this.startFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
@@ -75,7 +75,7 @@ namespace SchoolManagement.UI
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
 
-            this.endFirstQuarterDateTimePicker.DateTimePickerElement.CustomFont = UiUtilities.MainFont;
+            this.endFirstQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
             this.endFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
@@ -85,7 +85,7 @@ namespace SchoolManagement.UI
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
 
-            this.startSecondQuarterDateTimePicker.DateTimePickerElement.CustomFont = UiUtilities.MainFont;
+            this.startSecondQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
             this.startSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
@@ -95,7 +95,7 @@ namespace SchoolManagement.UI
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
 
-            this.endSecondQuarterDateTimePicker.DateTimePickerElement.CustomFont = UiUtilities.MainFont;
+            this.endSecondQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
             this.endSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
@@ -105,7 +105,7 @@ namespace SchoolManagement.UI
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
 
-            this.startThirdQuarterDateTimePicker.DateTimePickerElement.CustomFont = UiUtilities.MainFont;
+            this.startThirdQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
             this.startThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
@@ -115,7 +115,7 @@ namespace SchoolManagement.UI
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
 
-            this.endThirdQuarterDateTimePicker.DateTimePickerElement.CustomFont = UiUtilities.MainFont;
+            this.endThirdQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.endThirdQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
             this.endThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
@@ -144,7 +144,7 @@ namespace SchoolManagement.UI
             this.endThirdQuarterSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
 
 
-            this.saveButton.ButtonElement.CustomFont = UiUtilities.MainFontMedium;
+            this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.startFirstQuarterDateTimePicker.Value = DateTime.Now;
@@ -154,14 +154,14 @@ namespace SchoolManagement.UI
             this.startThirdQuarterDateTimePicker.Value = DateTime.Now;
             this.endThirdQuarterDateTimePicker.Value = DateTime.Now;
         }
-    private void InitEvent()
+        private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
+            this.Close();
         }
         public bool IsValidData()
         {

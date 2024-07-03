@@ -58,12 +58,12 @@ namespace SchoolManagement.UI
             reportLeftListView.ListViewElement.Padding = new System.Windows.Forms.Padding(0, 16, 0, 0);
 
             reportSchoolYearDropDownList.RootElement.EnableElementShadow = false;
-            reportSchoolYearDropDownList.RootElement.CustomFont = Utilities.UiUtilities.MainFont;
+            reportSchoolYearDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             reportSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             reportSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             reportSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
-            reportSchoolYearLabel.LabelElement.CustomFont = Utilities.UiUtilities.MainFont;
+            reportSchoolYearLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             reportSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             reportSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
 

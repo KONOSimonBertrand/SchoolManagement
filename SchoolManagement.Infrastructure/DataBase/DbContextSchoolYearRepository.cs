@@ -1,9 +1,6 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Application.SchoolYears;
 using SchoolManagement.Core.Model;
-using System;
-using System.Diagnostics.Metrics;
 
 
 namespace SchoolManagement.Infrastructure.DataBase
@@ -12,10 +9,10 @@ namespace SchoolManagement.Infrastructure.DataBase
     {
       
         private readonly AppDbContext appDbContext;
-        private readonly ClientApp _clientApp;
+        private readonly ClientApp clientApp;
         public DbContextSchoolYearRepository(ClientApp clientApp, AppDbContext appDbContext)
         {
-            _clientApp = clientApp;
+            this.clientApp = clientApp;
             this.appDbContext = appDbContext;
         }
 
@@ -56,7 +53,7 @@ namespace SchoolManagement.Infrastructure.DataBase
             return (result > 0);
         }
 
-        public async Task<SchoolYear> GetSchoolYear(string name)
+        public async Task<SchoolYear?> GetAsync(string name)
         {
             var result = appDbContext.SchoolYears.FirstOrDefault(s=>s.Name==name);
             await Task.Delay(0);

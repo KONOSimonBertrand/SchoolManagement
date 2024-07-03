@@ -63,12 +63,12 @@ namespace SchoolManagement.UI
             employeeLeftListView.ListViewElement.Padding = new Padding(0, 16, 0, 0);
 
             employeeSchoolYearDropDownList.RootElement.EnableElementShadow = false;
-            employeeSchoolYearDropDownList.RootElement.CustomFont = UiUtilities.MainFont;
+            employeeSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             employeeSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             employeeSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             employeeSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
-            employeeSchoolYearLabel.LabelElement.CustomFont = UiUtilities.MainFont;
+            employeeSchoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             employeeSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             employeeSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             employeeSchoolYearLabel.TextAlignment = ContentAlignment.BottomCenter;

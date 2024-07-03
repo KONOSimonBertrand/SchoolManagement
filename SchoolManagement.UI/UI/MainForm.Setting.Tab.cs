@@ -73,7 +73,7 @@ namespace SchoolManagement.UI
             settingLeftListView.ListViewElement.Padding = new Padding(0, 16, 0, 0);
 
             settingSearchModuleDropDownList.RootElement.EnableElementShadow = false;
-            settingSearchModuleDropDownList.RootElement.CustomFont = UiUtilities.MainFont;
+            settingSearchModuleDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             settingSearchModuleDropDownList.RootElement.CustomFontSize = 10.5f;
             settingSearchModuleDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             settingSearchModuleDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
