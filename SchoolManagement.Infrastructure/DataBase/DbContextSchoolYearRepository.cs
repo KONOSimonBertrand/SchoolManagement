@@ -16,9 +16,11 @@ namespace SchoolManagement.Infrastructure.DataBase
             this.appDbContext = appDbContext;
         }
 
-        public async Task<List<SchoolYear>> GetAllAsync()
+        public async Task<List<SchoolYear>> GetListAsync()
         {
-            var result = appDbContext.SchoolYears.ToList();
+            var result = appDbContext.SchoolYears
+                .OrderByDescending(x=>x.Id)
+                .ToList();
             await Task.Delay(0);
             return result;           
         }
@@ -33,7 +35,7 @@ namespace SchoolManagement.Infrastructure.DataBase
 
         public async Task<bool> UpdateAsync(SchoolYear schoolYear)
         {
-            int result = 0;
+            bool isDone=false;
             var item=appDbContext.SchoolYears.FirstOrDefault(s=>s.Id==schoolYear.Id);
             if (item != null)
             {
@@ -47,10 +49,10 @@ namespace SchoolManagement.Infrastructure.DataBase
                 item.EndThirdQuarter=schoolYear.EndThirdQuarter;
                 item.IsClosed=schoolYear.IsClosed;
                 appDbContext.SchoolYears.Update(item);
-                result =appDbContext.SaveChanges();
+                if (appDbContext.SaveChanges() > 0) isDone = true;
             }
             await Task.Delay(0);
-            return (result > 0);
+            return isDone;
         }
 
         public async Task<SchoolYear?> GetAsync(string name)

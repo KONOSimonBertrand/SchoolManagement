@@ -27,7 +27,7 @@ namespace SchoolManagement.Core.Model
                 _connectionString = value;
             }
         }
-        public User? UserConnected { get; set; }
+        public virtual User? UserConnected { get; set; }
 
 
     }

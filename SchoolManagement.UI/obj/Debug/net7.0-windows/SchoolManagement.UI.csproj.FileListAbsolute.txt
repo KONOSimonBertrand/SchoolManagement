@@ -70,7 +70,6 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\TelerikCommon.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\TelerikData.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\TelerikExport.dll
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\Microsoft.mshtml.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\runtimes\win\lib\netcoreapp2.0\System.Management.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.Resources.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.DateNavigator.resources
@@ -92,3 +91,14 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.sourcelink.json
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.SchoolGroupInfo.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolGroupForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolClassForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolRoomForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.SchoolClassInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.SchoolRoomInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.CashFlowTypeInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditCashFlowTypeForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.PaymentMeanInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditPaymentMeanForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.CustomControls.SchoolingCostInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolingCostForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\Telerik.WinControls.Themes.Windows11.dll

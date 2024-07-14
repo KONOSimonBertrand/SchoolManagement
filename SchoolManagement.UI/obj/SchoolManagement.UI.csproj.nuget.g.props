@@ -14,6 +14,6 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgUI_for_WinForms_AllControls_Net60 Condition=" '$(PkgUI_for_WinForms_AllControls_Net60)' == '' ">C:\Users\HP\.nuget\packages\ui.for.winforms.allcontrols.net60\2022.3.913</PkgUI_for_WinForms_AllControls_Net60>
+    <PkgUI_for_WinForms_AllControls_Net60 Condition=" '$(PkgUI_for_WinForms_AllControls_Net60)' == '' ">C:\Users\HP\.nuget\packages\ui.for.winforms.allcontrols.net60\2023.2.718</PkgUI_for_WinForms_AllControls_Net60>
   </PropertyGroup>
 </Project>

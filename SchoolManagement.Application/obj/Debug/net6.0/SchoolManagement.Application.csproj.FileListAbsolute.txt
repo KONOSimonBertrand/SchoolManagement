@@ -8,6 +8,7 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\SchoolManagement.Application.AssemblyInfoInputs.cache
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\SchoolManagement.Application.AssemblyInfo.cs
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\SchoolManagement.Application.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\SchoolManagement.Application.sourcelink.json
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\SchoolMa.1175F4A4.Up2Date
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\SchoolManagement.Application.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Debug\net6.0\refint\SchoolManagement.Application.dll

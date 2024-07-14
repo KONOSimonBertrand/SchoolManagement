@@ -8,7 +8,7 @@ namespace SchoolManagement.Application.SchoolGroups
     {
         public Task<bool> CreateSchoolGroup(SchoolGroup schoolGroup);
         public Task<bool> UpdateSchoolGroup(SchoolGroup schoolGroup);
-        public Task<List<SchoolGroup>> GetAllSchoolGroups();
+        public Task<List<SchoolGroup>> GetSchoolGroupList();
         public Task<SchoolGroup?> GetSchoolGroup(string name);
     }
 }

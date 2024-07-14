@@ -22,7 +22,8 @@
                 return IsClosed ? "Clôturée" : "Ouverte";              
             }
         }
-        
+        public virtual ICollection<SchoolingCost> SchoolingCosts { get; set; }
+        public virtual ICollection<SubscriptionFee> SubscriptionFees { get; set; }
         public override int GetHashCode()
         {
             base.GetHashCode();

@@ -1,0 +1,12 @@
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\bin\Release\net7.0\SchoolManagement.Core.deps.json
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\bin\Release\net7.0\SchoolManagement.Core.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\bin\Release\net7.0\SchoolManagement.Core.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.AssemblyInfo.cs
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.sourcelink.json
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\refint\SchoolManagement.Core.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\SchoolManagement.Core.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Release\net7.0\ref\SchoolManagement.Core.dll

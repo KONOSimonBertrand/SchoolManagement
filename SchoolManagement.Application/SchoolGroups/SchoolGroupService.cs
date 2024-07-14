@@ -4,6 +4,7 @@ namespace SchoolManagement.Application.SchoolGroups
 {
     public class SchoolGroupService : ISchoolGroupService
     {
+        
         private readonly ISchoolGroupReadRepository readRepository;
         private readonly ISchoolGroupWriteRepository writeRepository;
         public SchoolGroupService(ISchoolGroupRepository repository) { 
@@ -15,9 +16,9 @@ namespace SchoolManagement.Application.SchoolGroups
             return  await writeRepository.AddAsync(schoolGroup);
         }
 
-        public async Task<List<SchoolGroup>> GetAllSchoolGroups()
+        public async Task<List<SchoolGroup>> GetSchoolGroupList()
         {
-            return await readRepository.GetAllAsync();
+            return await readRepository.GetListAsync();
         }
 
         public async Task<SchoolGroup?> GetSchoolGroup(string name)

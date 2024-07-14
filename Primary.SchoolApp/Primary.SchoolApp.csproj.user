@@ -14,19 +14,103 @@
     <Compile Update="UI\AboutAppForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\CashFlowType\AddCashFlowTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\CashFlowType\EditCashFlowTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\CashFlowTypeInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\EvaluationTypeInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\PaymentMeanInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolClassInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\SchoolGroupInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolingCostInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolRoomInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\SchoolYearInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\SubjectGroupInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SubjectInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SubscriptionFeeInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\EvaluationType\AddEvaluationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EvaluationType\EditEvaluationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\PaymentMean\AddPaymentMeanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\PaymentMean\EditPaymentMeanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolClass\AddSchoolClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolClass\EditSchoolClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolGroup\AddSchoolGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\SchoolGroup\EditSchoolGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\SchoolYearForm\AddSchoolYearForm.cs">
+    <Compile Update="UI\SchoolingCost\AddSchoolingCostForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\SchoolYearForm\EditSchoolYearForm.cs">
+    <Compile Update="UI\SchoolingCost\EditSchoolingCostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolRoom\AddSchoolRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolRoom\EditSchoolRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolYear\AddSchoolYearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolYear\EditSchoolYearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SubjectGroup\AddSubjectGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SubjectGroup\EditSubjectGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Subject\AddSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Subject\EditSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SubscriptionFee\AddSubscriptionFeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SubscriptionFee\EditSubscriptionFeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

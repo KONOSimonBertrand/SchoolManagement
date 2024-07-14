@@ -12,11 +12,11 @@ namespace SchoolManagement.Infrastructure.DataBase
         {
             this.dbConnectionFactory = dbConnectionFactory;
         }
-        public  async Task<List<SchoolYear>> GetAllAsync()
+        public  async Task<List<SchoolYear>> GetListAsync()
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string sqlText = "SELECT * FROM SchoolYears ";
-            var result= connection.Query<SchoolYear>(sqlText).ToList();
+            string query = "SELECT * FROM SchoolYears ORDER BY Id DESC ";
+            var result= connection.Query<SchoolYear>(query).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -24,9 +24,9 @@ namespace SchoolManagement.Infrastructure.DataBase
         public async Task<bool> AddAsync(SchoolYear schoolYear)
         {
             using var connection = dbConnectionFactory.CreateConnection();
-            string sqlText = @"INSERT INTO SchoolYears(Name, StartFirstQuarter, EndFirstQuarter, StartSecondQuarter, EndSecondQuarter, StartThirdQuarter, EndThirdQuarter ) 
+            string query = @"INSERT INTO SchoolYears(Name, StartFirstQuarter, EndFirstQuarter, StartSecondQuarter, EndSecondQuarter, StartThirdQuarter, EndThirdQuarter ) 
                               VALUES(@name, @startFirstQuarter, @endFirstQuarter, @startsecondQuarter, @endSecondQuarter, @startThirdQuarter, @endThirdQuarter) ;";
-            var result = connection.Execute(sqlText,
+            var result = connection.Execute(query,
             new
             {
                 schoolYear.Name,
@@ -45,10 +45,10 @@ namespace SchoolManagement.Infrastructure.DataBase
         public async Task<bool> UpdateAsync(SchoolYear schoolYear)
         {
             using var connection = dbConnectionFactory.CreateConnection();
-            string sqlText = @"UPDATE SchoolYears 
+            string query = @"UPDATE SchoolYears 
                                SET Name=@name,StartFirstQuarter=@startFirstQuarter,EndFirstQuarter=@endFirstQuarter,StartSecondQuarter=@startsecondQuarter, EndSecondQuarter=@endSecondQuarter,StartThirdQuarter=@startThirdQuarter,EndThirdQuarter=@endThirdQuarter 
                                WHERE Id=@Id";  
-            var result = connection.Execute(sqlText,
+            var result = connection.Execute(query,
             new
             {
                 schoolYear.Name,
@@ -68,8 +68,8 @@ namespace SchoolManagement.Infrastructure.DataBase
         public async Task<SchoolYear?> GetAsync(string name)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string sqlText = "SELECT * FROM SchoolYears Where Name=@name ";
-            var result = connection.Query<SchoolYear>(sqlText, new {Name=name}).FirstOrDefault();
+            string query = "SELECT * FROM SchoolYears Where Name=@name ";
+            var result = connection.Query<SchoolYear>(query, new {Name=name}).FirstOrDefault();
             await Task.Delay(0);
             return result;
         }

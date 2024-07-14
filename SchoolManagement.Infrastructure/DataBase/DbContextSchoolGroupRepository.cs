@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Application.SchoolGroups;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Application.SchoolGroups;
 using SchoolManagement.Core.Model;
 
 
@@ -7,10 +8,8 @@ namespace SchoolManagement.Infrastructure.DataBase
     public class DbContextSchoolGroupRepository : ISchoolGroupRepository
     {
         private readonly AppDbContext appDbContext;
-        private readonly ClientApp _clientApp;
-        public DbContextSchoolGroupRepository(ClientApp clientApp, AppDbContext appDbContext) { 
+        public DbContextSchoolGroupRepository( AppDbContext appDbContext) { 
             this.appDbContext = appDbContext;
-            this._clientApp = clientApp;
         }
         public async Task<bool> AddAsync(SchoolGroup schoolGroup)
         {
@@ -21,7 +20,7 @@ namespace SchoolManagement.Infrastructure.DataBase
             return (result > 0);
         }
 
-        public async Task<List<SchoolGroup>> GetAllAsync()
+        public async Task<List<SchoolGroup>> GetListAsync()
         {
             var result = appDbContext.SchoolGroups.ToList();
             await Task.Delay(0);
@@ -37,7 +36,7 @@ namespace SchoolManagement.Infrastructure.DataBase
 
         public async Task<bool> UpdateAsync(SchoolGroup schoolGroup)
         {
-            int result = 0;
+            bool isDone=false;
             var item = appDbContext.SchoolGroups.FirstOrDefault(s => s.Id == schoolGroup.Id);
             if (item != null)
             {
@@ -45,10 +44,10 @@ namespace SchoolManagement.Infrastructure.DataBase
                 item.Name = schoolGroup.Name;
                 item.Sequence=schoolGroup.Sequence;               
                 appDbContext.SchoolGroups.Update(item);
-                result = appDbContext.SaveChanges();
+                if (appDbContext.SaveChanges() > 0) isDone = true;
             }
             await Task.Delay(0);
-            return result > 0;
+            return isDone;
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Model;
 using SchoolManagement.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;
 
@@ -13,7 +15,16 @@ namespace Primary.SchoolApp
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-
+        public static IList<SchoolYear> SchoolYearList;
+        public static IList<SchoolGroup> SchoolGroupList;
+        public static IList<SchoolClass> SchoolClassList;
+        public static IList<SchoolRoom> SchoolRoomList;
+        public static IList<CashFlowType> CashFlowTypeList;
+        public static IList<PaymentMean> PaymentMeanList;
+        public static IList<SchoolingCost> SchoolingCostList;
+        public static IList<SubscriptionFee> SubscriptionFeeList;
+        public static IList<SubjectGroup> SubjectGroupList;
+        public static IList<Subject> SubjectList;
         public static IServiceProvider ServiceProvider { get; private set; }
         public static  string ConnectionString {  get; private set; }
         [STAThread]

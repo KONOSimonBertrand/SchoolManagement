@@ -5,6 +5,7 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\SchoolManagement.Core.AssemblyInfoInputs.cache
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\SchoolManagement.Core.AssemblyInfo.cs
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\SchoolManagement.Core.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\SchoolManagement.Core.sourcelink.json
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\SchoolManagement.Core.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\refint\SchoolManagement.Core.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\obj\Debug\net6.0\SchoolManagement.Core.pdb

@@ -5,6 +5,14 @@ using System.Windows.Forms;
 using Telerik.WinControls;
 using System.Linq;
 using SchoolManagement.Application.SchoolGroups;
+using SchoolManagement.Application.SchoolClasses;
+using SchoolManagement.Application.SchoolRooms;
+using SchoolManagement.Application.CashFlowTypes;
+using SchoolManagement.Application.PaymentMeans;
+using SchoolManagement.Application.SchoolingCosts;
+using SchoolManagement.Application.SubscriptionFees;
+using SchoolManagement.Application.SubjectGroups;
+using SchoolManagement.Application.Subjects;
 
 namespace Primary.SchoolApp
 {
@@ -13,12 +21,32 @@ namespace Primary.SchoolApp
         private bool isLogOut;// si true se deconnecter
         private readonly ISchoolYearService schoolYearService;
         private readonly ISchoolGroupService schoolGroupService;
-        public MainForm(ISchoolYearService schoolYearService,ISchoolGroupService schoolGroupService)
+        private readonly ISchoolClassService schoolClassService;
+        private readonly ISchoolRoomService schoolRoomService;
+        private readonly ICashFlowTypeService cashFlowTypeService;
+        private readonly IPaymentMeanService paymentMeanService;
+        private readonly ISchoolingCostService schoolingCostService;
+        private readonly ISubscriptionFeeService subscriptionFeeService;
+        private readonly ISubjectGroupService subjectGroupService;
+        private readonly ISubjectService subjectService;
+        public MainForm(ISchoolYearService schoolYearService,ISchoolGroupService schoolGroupService,
+            ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
+            ,IPaymentMeanService paymentMeanService, ISchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
+            , ISubjectGroupService subjectGroupService, ISubjectService subjectService
+            ) 
         {
             InitializeComponent();
             this.schoolYearService = schoolYearService;
             this.schoolGroupService=schoolGroupService;
-            PopulateSchoolYearOnDropDownList();
+            this.schoolClassService = schoolClassService;
+            this.schoolRoomService = schoolRoomService;
+            this.cashFlowTypeService = cashFlowTypeService;
+            this.paymentMeanService = paymentMeanService;
+            this.schoolingCostService = schoolingCostService;
+            this.subscriptionFeeService = subscriptionFeeService;
+            this.subjectGroupService = subjectGroupService;
+            this.subjectService = subjectService;
+            LoadBasicData();
             InitSettingPage();
             InitMainEvents();
         }
@@ -74,38 +102,37 @@ namespace Primary.SchoolApp
 
         }
         //load school year on dropDownList
-        private async void PopulateSchoolYearOnDropDownList()
+        private void PopulateSchoolYearOnDropDownList()
         {
-            schoolYearList=await schoolYearService.GetAllSchoolYears();
-            HomeSchoolYearDropDownList.DataSource = schoolYearList;
+            HomeSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             HomeSchoolYearDropDownList.DisplayMember = "Name";
             HomeSchoolYearDropDownList.ValueMember = "Id";
 
-            CashFlowSchoolYearDropDownList.DataSource = schoolYearList;
+            CashFlowSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             CashFlowSchoolYearDropDownList.DisplayMember = "Name";
             CashFlowSchoolYearDropDownList.ValueMember = "Id";
 
-            TimeTableSchoolYearDropDownList.DataSource = schoolYearList;
+            TimeTableSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             TimeTableSchoolYearDropDownList.DisplayMember = "Name";
             TimeTableSchoolYearDropDownList.ValueMember = "Id";
 
-            DisciplineSchoolYearDropDownList.DataSource = schoolYearList;
+            DisciplineSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             DisciplineSchoolYearDropDownList.DisplayMember = "Name";
            DisciplineSchoolYearDropDownList.ValueMember = "Id";
 
-            StudentNoteSchoolYearDropDownList.DataSource = schoolYearList;
+            StudentNoteSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             StudentNoteSchoolYearDropDownList.DisplayMember = "Name";
             StudentNoteSchoolYearDropDownList.ValueMember = "Id";
 
-            ReportSchoolYearDropDownList.DataSource = schoolYearList;
+            ReportSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             ReportSchoolYearDropDownList.DisplayMember = "Name";
             ReportSchoolYearDropDownList.ValueMember = "Id";
 
-            EmployeeSchoolYearDropDownList.DataSource = schoolYearList;
+            EmployeeSchoolYearDropDownList.DataSource = Program.SchoolYearList;
             EmployeeSchoolYearDropDownList.DisplayMember = "Name";
             EmployeeSchoolYearDropDownList.ValueMember = "Id";
 
-            if (schoolYearList.Any())
+            if (Program.SchoolYearList.Any())
             {
                 var openYear = GetOpenSchoolYear();
                 if (openYear.Id != 0)
@@ -124,7 +151,7 @@ namespace Primary.SchoolApp
         //return open year 
         private SchoolYear GetOpenSchoolYear()
         {            
-            var openYearList = schoolYearList.Where(y => y.IsClosed == false);
+            var openYearList = Program.SchoolYearList.Where(y => y.IsClosed == false);
             return openYearList.Any() ? openYearList.FirstOrDefault() : new SchoolYear();
         }
         #endregion

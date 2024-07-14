@@ -53,6 +53,8 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            this.errorLabel.ForeColor = Color.Red;
+
         }
         private void InitEvent()
         {
@@ -66,7 +68,6 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
-            this.errorLabel.ForeColor = Color.Red;
             if (this.nameTextBox.Text == "")
             {
                 this.errorLabel.Text = "La saisie de la désignation est requise!";

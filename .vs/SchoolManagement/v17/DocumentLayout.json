@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\schoolgroup\\editschoolgroupform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\schoolgroup\\editschoolgroupform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\subject\\editsubjectform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\subject\\editsubjectform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\evaluationtype\\addevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\evaluationtype\\addevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\evaluationtype\\editevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\evaluationtype\\editevaluationform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\mainform.settingstab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,41 +38,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EditSchoolGroupForm.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\SchoolGroup\\EditSchoolGroupForm.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\SchoolGroup\\EditSchoolGroupForm.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\SchoolGroup\\EditSchoolGroupForm.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\UI\\SchoolGroup\\EditSchoolGroupForm.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAADwvyUAAAARAAAA",
+              "DocumentIndex": 1,
+              "Title": "AddEvaluationForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\EvaluationType\\AddEvaluationForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\EvaluationType\\AddEvaluationForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\EvaluationType\\AddEvaluationForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\EvaluationType\\AddEvaluationForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-03T22:36:58.338Z",
+              "WhenOpened": "2024-07-13T21:44:08.881Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "EditEvaluationForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\EvaluationType\\EditEvaluationForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\EvaluationType\\EditEvaluationForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\EvaluationType\\EditEvaluationForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\EvaluationType\\EditEvaluationForm.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T21:42:55.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EditSubjectForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Subject\\EditSubjectForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\Subject\\EditSubjectForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Subject\\EditSubjectForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\Subject\\EditSubjectForm.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAQwEkAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-13T12:18:21.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\MainForm.cs",
               "RelativeDocumentMoniker": "Primary.SchoolApp\\MainForm.cs",
               "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\MainForm.cs",
               "RelativeToolTip": "Primary.SchoolApp\\MainForm.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAArwBMAAAA3AAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAAAQwDAAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-03T14:20:16.01Z",
+              "WhenOpened": "2024-07-12T13:19:08.305Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "MainForm.SettingsTab.cs",
               "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\MainForm.SettingsTab.cs",
               "RelativeDocumentMoniker": "Primary.SchoolApp\\MainForm.SettingsTab.cs",
               "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\MainForm.SettingsTab.cs",
               "RelativeToolTip": "Primary.SchoolApp\\MainForm.SettingsTab.cs",
-              "ViewState": "AQIAAEIBAAAAAAAAAAAUwGMBAAAVAAAA",
+              "ViewState": "AQIAAMQDAAAAAAAAAIAzwNgDAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-03T11:41:36.607Z",
+              "WhenOpened": "2024-07-12T13:18:03.255Z",
               "EditorCaption": ""
             }
           ]

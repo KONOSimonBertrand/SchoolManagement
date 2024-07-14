@@ -2,10 +2,28 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="UI\CustomControls\CashFlowTypeInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\DateNavigator.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\EvaluationTypeInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\PaymentMeanInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolClassInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\SchoolGroupInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolingCostInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SchoolRoomInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\SchoolYearInfo.cs">
@@ -14,10 +32,43 @@
     <Compile Update="UI\CustomControls\SearchTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\SubjectGroupInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SubjectInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\SubscriptionFeesInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\EditCashFlowTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditEvaluationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditPaymentMeanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\EditSchoolGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\EditSchoolingCostForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\EditSchoolYearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSubjectGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSubscriptionFeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\LoginForm.cs">
@@ -45,6 +96,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\MainForm.TimeTable.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

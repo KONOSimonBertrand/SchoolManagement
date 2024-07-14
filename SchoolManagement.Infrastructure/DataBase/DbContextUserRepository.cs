@@ -1,5 +1,6 @@
 ﻿using SchoolManagement.Application.Users;
 using SchoolManagement.Core.Model;
+using System;
 
 
 namespace SchoolManagement.Infrastructure.DataBase
@@ -10,21 +11,24 @@ namespace SchoolManagement.Infrastructure.DataBase
         public DbContextUserRepository(AppDbContext appDbContext) { 
             this.appDbContext = appDbContext;
         }
-        public  Task<List<User>> GetUsers()
+        public async  Task<List<User>> GetListAsync()
         {
-          return Task.FromResult( appDbContext.Users.ToList());
+            var result = appDbContext.Users.ToList();
+            await Task.Delay(0);
+            return result;
         }
 
-        public Task<User?> GetUser(string userName, string userPassword)
+        public async Task<User?> GetAsync(string userName, string userPassword)
         {
             var user = appDbContext.Users.SingleOrDefault(user => user.Username == userName && user.Password == userPassword);
-            return Task.FromResult(user);
+            await Task.Delay(0);
+            return user;
         }
-
-        public Task<bool> Login(string userName, string userPassword)
+        public async Task<bool> LoginAsync(string userName, string userPassword)
         {
             var user = appDbContext.Users.SingleOrDefault(user => user.Username == userName && user.Password == userPassword);
-            return Task.FromResult( user != null);
+            await Task.Delay(0);
+            return user!=null;
         }
     }
 }

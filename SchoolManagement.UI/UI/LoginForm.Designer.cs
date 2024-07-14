@@ -60,7 +60,7 @@
             // 
             // connectionButton
             // 
-            connectionButton.Location = new Point(5, 288);
+            connectionButton.Location = new Point(5, 299);
             connectionButton.Margin = new Padding(10);
             connectionButton.Name = "connectionButton";
             connectionButton.Size = new Size(118, 30);
@@ -70,10 +70,10 @@
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(130, 288);
+            errorLabel.Location = new Point(130, 299);
             errorLabel.Margin = new Padding(12, 15, 12, 15);
             errorLabel.Name = "errorLabel";
-            errorLabel.Size = new Size(188, 40);
+            errorLabel.Size = new Size(182, 40);
             errorLabel.TabIndex = 66;
             // 
             // pictureLogo
@@ -83,7 +83,7 @@
             pictureLogo.Location = new Point(0, 0);
             pictureLogo.Margin = new Padding(3, 2, 3, 2);
             pictureLogo.Name = "pictureLogo";
-            pictureLogo.Size = new Size(312, 131);
+            pictureLogo.Size = new Size(323, 131);
             pictureLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureLogo.TabIndex = 67;
             pictureLogo.TabStop = false;
@@ -98,7 +98,7 @@
             editPanel.Location = new Point(0, 131);
             editPanel.Margin = new Padding(12, 15, 12, 15);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(312, 154);
+            editPanel.Size = new Size(323, 148);
             editPanel.TabIndex = 68;
             // 
             // passwordTextBox
@@ -110,7 +110,7 @@
             passwordTextBox.Margin = new Padding(12, 15, 12, 15);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.PasswordChar = '*';
-            passwordTextBox.Size = new Size(312, 40);
+            passwordTextBox.Size = new Size(323, 40);
             passwordTextBox.TabIndex = 1;
             // 
             // passwordSeparator
@@ -129,7 +129,7 @@
             passwordLabel.Location = new Point(0, 70);
             passwordLabel.Margin = new Padding(12, 15, 12, 15);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(312, 30);
+            passwordLabel.Size = new Size(323, 30);
             passwordLabel.TabIndex = 7;
             passwordLabel.Text = "Mot de passe:";
             // 
@@ -141,7 +141,7 @@
             userNameTextBox.Location = new Point(0, 30);
             userNameTextBox.Margin = new Padding(12, 15, 12, 15);
             userNameTextBox.Name = "userNameTextBox";
-            userNameTextBox.Size = new Size(312, 40);
+            userNameTextBox.Size = new Size(323, 40);
             userNameTextBox.TabIndex = 0;
             // 
             // userNameSeparator
@@ -160,7 +160,7 @@
             loginLabel.Location = new Point(0, 0);
             loginLabel.Margin = new Padding(12, 15, 12, 15);
             loginLabel.Name = "loginLabel";
-            loginLabel.Size = new Size(312, 30);
+            loginLabel.Size = new Size(323, 30);
             loginLabel.TabIndex = 5;
             loginLabel.Text = "Nom utilisateur:";
             // 
@@ -170,7 +170,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(312, 319);
+            ClientSize = new Size(323, 354);
             Controls.Add(editPanel);
             Controls.Add(pictureLogo);
             Controls.Add(errorLabel);

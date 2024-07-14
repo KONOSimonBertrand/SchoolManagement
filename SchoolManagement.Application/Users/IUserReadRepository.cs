@@ -5,8 +5,8 @@ namespace SchoolManagement.Application.Users
 {
     public  interface IUserReadRepository
     {
-        public Task<List<User>> GetUsers();
-        public Task<User?> GetUser(string userName, string userPassword);
-        public Task<bool> Login(string userName, string userPassword);
+        public Task<List<User>> GetListAsync();
+        public Task<User?> GetAsync(string userName, string password);
+        public Task<bool> LoginAsync(string userName, string password);
     }
 }

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net7.0-windows7.0": {
+    "net6.0-windows7.0": {
       "Microsoft.NETCore.Platforms/3.1.0": {
         "type": "package",
         "compile": {
@@ -143,13 +143,12 @@
           }
         }
       },
-      "UI.for.WinForms.AllControls.Net60/2022.3.913": {
+      "UI.for.WinForms.AllControls.Net60/2023.2.718": {
         "type": "package",
         "dependencies": {
           "System.ComponentModel.Composition": "4.7.0",
           "System.Management": "4.7.0",
-          "System.Reflection.Emit": "4.7.0",
-          "Unofficial.Microsoft.mshtml.NetStandard": "7.0.3300"
+          "System.Reflection.Emit": "4.7.0"
         },
         "compile": {
           "lib/net6.0-windows/MediaFoundation.dll": {},
@@ -225,6 +224,7 @@
           "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Dark.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Light.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2022.dll": {},
+          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows11.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.Windows7.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.Windows8.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.UI.dll": {
@@ -352,6 +352,7 @@
           "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Dark.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Light.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2022.dll": {},
+          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows11.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.Windows7.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.Themes.Windows8.dll": {},
           "lib/net6.0-windows/Telerik.WinControls.UI.dll": {
@@ -404,15 +405,6 @@
           "lib/net6.0-windows/TelerikExport.dll": {
             "related": ".xml"
           }
-        }
-      },
-      "Unofficial.Microsoft.mshtml.NetStandard/7.0.3300": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard1.0/Microsoft.mshtml.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.0/Microsoft.mshtml.dll": {}
         }
       }
     }
@@ -720,10 +712,10 @@
         "version.txt"
       ]
     },
-    "UI.for.WinForms.AllControls.Net60/2022.3.913": {
-      "sha512": "LgAU0KYTmPabRcfKNDLxBOZ5nui+5QgnSTVlmFelw7DDr2mhWLbWyWlR2h/0dveefyMriT9NmNsvI/Oyk/GyFg==",
+    "UI.for.WinForms.AllControls.Net60/2023.2.718": {
+      "sha512": "G0b9380TOpiZ/jGTQhryoj5G9Unwe+Wvjf9MuMlsadHT2tf4ag7X1kG8c9k2vDbM3mnAM+lHutVuuF2M1uOV4w==",
       "type": "package",
-      "path": "ui.for.winforms.allcontrols.net60/2022.3.913",
+      "path": "ui.for.winforms.allcontrols.net60/2023.2.718",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -823,6 +815,7 @@
         "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Dark.dll",
         "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Light.dll",
         "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2022.dll",
+        "lib/net6.0-windows/Telerik.WinControls.Themes.Windows11.dll",
         "lib/net6.0-windows/Telerik.WinControls.Themes.Windows7.dll",
         "lib/net6.0-windows/Telerik.WinControls.Themes.Windows8.dll",
         "lib/net6.0-windows/Telerik.WinControls.UI.XML",
@@ -860,27 +853,14 @@
         "lib/net6.0-windows/TelerikExport.dll",
         "lib/net6.0-windows/TelerikExport.xml",
         "tools/VisualStudioToolsManifest.xml",
-        "ui.for.winforms.allcontrols.net60.2022.3.913.nupkg.sha512",
+        "ui.for.winforms.allcontrols.net60.2023.2.718.nupkg.sha512",
         "ui.for.winforms.allcontrols.net60.nuspec"
-      ]
-    },
-    "Unofficial.Microsoft.mshtml.NetStandard/7.0.3300": {
-      "sha512": "mc6/+cXEA5a9yI//XOVaOgpmawV2Gbqg+dp1GZU7MlQEtUMfj4+8WKFVgUFvmn1xDTklcddsL/xlJvVDMV819g==",
-      "type": "package",
-      "path": "unofficial.microsoft.mshtml.netstandard/7.0.3300",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/Microsoft.mshtml.dll",
-        "lib/netstandard1.0/Microsoft.mshtml.dll",
-        "unofficial.microsoft.mshtml.netstandard.7.0.3300.nupkg.sha512",
-        "unofficial.microsoft.mshtml.netstandard.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
-    "net7.0-windows7.0": [
-      "UI.for.WinForms.AllControls.Net60 >= 2022.3.913"
+    "net6.0-windows7.0": [
+      "UI.for.WinForms.AllControls.Net60 >= 2023.2.718"
     ]
   },
   "packageFolders": {
@@ -906,16 +886,16 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net7.0-windows"
+        "net6.0-windows"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Progress\\Telerik UI for WinForms R3 2022\\Bin60\\NuGet": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Users\\HP\\Documents\\Telerik Collection NuGet Package R2 2023 SP2 Retail": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net7.0-windows7.0": {
-          "targetAlias": "net7.0-windows",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
           "projectReferences": {}
         }
       },
@@ -931,12 +911,12 @@
       }
     },
     "frameworks": {
-      "net7.0-windows7.0": {
-        "targetAlias": "net7.0-windows",
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
         "dependencies": {
           "UI.for.WinForms.AllControls.Net60": {
             "target": "Package",
-            "version": "[2022.3.913, )"
+            "version": "[2023.2.718, )"
           }
         },
         "imports": [

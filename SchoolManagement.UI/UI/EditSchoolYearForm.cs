@@ -153,6 +153,8 @@ namespace SchoolManagement.UI
             this.endSecondQuarterDateTimePicker.Value = DateTime.Now;
             this.startThirdQuarterDateTimePicker.Value = DateTime.Now;
             this.endThirdQuarterDateTimePicker.Value = DateTime.Now;
+            this.errorLabel.ForeColor = Color.Red;
+
         }
         private void InitEvent()
         {
@@ -166,7 +168,6 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
-            this.errorLabel.ForeColor = Color.Red;
             if (this.nameTextBox.Text.Length < 9 || this.nameTextBox.Text.Length > 9)
             {
                 this.errorLabel.Text = "Format incorrect! Exemple: 2019-2020";

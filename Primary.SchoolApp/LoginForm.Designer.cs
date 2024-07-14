@@ -33,10 +33,10 @@
             // 
             // LoginForm
             // 
-            AutoScaleBaseSize = new System.Drawing.Size(8, 20);
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleBaseSize = new System.Drawing.Size(7, 15);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(356, 349);
+            ClientSize = new System.Drawing.Size(325, 343);
             Name = "LoginForm";
             Text = "LoginForm";
             ((System.ComponentModel.ISupportInitialize)this).EndInit();

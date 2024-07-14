@@ -22,9 +22,9 @@ namespace SchoolManagement.Application.SchoolYears
         }
 
         //
-        public async Task<List<SchoolYear>> GetAllSchoolYears()
+        public async Task<List<SchoolYear>> GetSchoolYearList()
         {
-            return await readRepository.GetAllAsync();          
+            return await readRepository.GetListAsync();          
         }
 
         public async Task<bool> CreateSchoolYear(SchoolYear schoolYear)

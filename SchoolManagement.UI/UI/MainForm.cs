@@ -236,19 +236,19 @@ namespace SchoolManagement.UI
                     Icon = Resources.icon_pink;
                     break;
             }
-            timeTablePrintButton.ForeColor = ViewUtilities.MainThemeColor;
-            homeAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            homeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            cashFlowAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            cashFlowExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            disciplineExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            disciplineAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            studentNoteExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            studentNoteAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            settingExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            settingAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            employeeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            employeeAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            //timeTablePrintButton.ForeColor = ViewUtilities.MainThemeColor;
+            //homeAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            //homeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            //cashFlowAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            //cashFlowExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            //disciplineExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            //disciplineAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            //studentNoteExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            //studentNoteAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            //settingExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            //settingAddButton.ForeColor = ViewUtilities.MainThemeColor;
+            //employeeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
+            //employeeAddButton.ForeColor = ViewUtilities.MainThemeColor;
             homeMainListView.ListViewElement.SynchronizeVisualItems();
 
         }

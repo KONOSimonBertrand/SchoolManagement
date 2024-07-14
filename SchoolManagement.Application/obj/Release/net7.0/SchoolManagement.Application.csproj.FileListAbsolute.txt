@@ -1,0 +1,16 @@
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net7.0\SchoolManagement.Application.deps.json
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net7.0\SchoolManagement.Application.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net7.0\SchoolManagement.Application.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net7.0\SchoolManagement.Core.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net7.0\SchoolManagement.Core.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.csproj.AssemblyReference.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.AssemblyInfo.cs
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.sourcelink.json
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolMa.1175F4A4.Up2Date
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\refint\SchoolManagement.Application.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\SchoolManagement.Application.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net7.0\ref\SchoolManagement.Application.dll

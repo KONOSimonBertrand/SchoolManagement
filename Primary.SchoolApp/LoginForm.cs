@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.Utilities;
+using SchoolManagement.Application.Logs;
 using SchoolManagement.Application.Users;
 using SchoolManagement.Core.Model;
 using System;
+using Telerik.WinControls;
 
 
 namespace Primary.SchoolApp
@@ -9,14 +12,17 @@ namespace Primary.SchoolApp
     public partial class LoginForm : SchoolManagement.UI.LoginForm
     {
         private readonly ClientApp clientApp;
-        private readonly IUserReadService userReadService;
-        public LoginForm(ClientApp clientApp,IUserReadService userReadService)
+        private readonly IUserService userService;
+        private readonly ILogService logService;
+        public LoginForm(ClientApp clientApp,IUserService userService,ILogService logService)
         {
             InitializeComponent();
+            ThemeResolutionService.ApplicationThemeName = "Material";
             PictureLogo.Image=AppResource.logo;
-            //PictureLogo.SizeMode=System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            PictureLogo.SizeMode=System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.clientApp = clientApp;
-            this.userReadService = userReadService; 
+            this.userService = userService; 
+            this.logService = logService;
             InitEvents();
         }
         private void InitEvents()
@@ -24,7 +30,15 @@ namespace Primary.SchoolApp
             ConnectionButton.Click += ConnectionButton_Click;
             PasswordTextBox.TextChanged += PasswordTextBox_TextChanged;
             UserNameTextBox.TextChanged += UserNameTextBox_TextChanged;
+            this.Shown += OnShown;
         }
+
+        private void OnShown(object sender, EventArgs e)
+        {
+            this.UserNameTextBox.Focus();
+            
+        }
+
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (ErrorLabel.Text.Trim().Length > 0)
@@ -41,10 +55,27 @@ namespace Primary.SchoolApp
         }
         private void ConnectionButton_Click(object sender, EventArgs e) {
             if (this.IsValidData()) {
-                clientApp.Name = "Windows Form";
-                clientApp.ConnectionString = Program.ConnectionString;           
-                var user= userReadService.GetUserAsync(UserNameTextBox.Text.Trim(), PasswordTextBox.Text.Trim()).Result;
+              clientApp.Name = "Windows Form";
+                clientApp.ConnectionString = Program.ConnectionString;
+                User user=null;
+                try
+                {
+                    user = userService.GetUserAsync(UserNameTextBox.Text.Trim(), PasswordTextBox.Text.Trim()).Result;
+                    if (user != null) {
+                    Log log = new()
+                    {
+                        UserAction=" Connexion de l'utilisateur "+user.Username,
+                        UserId=user.Id
+                    };
+                    var logResult=logService.CreateLog(log).Result;
+                    }
+                }
+                catch (Exception ex) {
+                    AppUtilities.AddLog(ex.Message);
+                    AppUtilities.AddLog(ex.StackTrace);
+                }
                 if (user!=null) {
+
                     clientApp.UserConnected = user;
                     var mainForm = Program.ServiceProvider.GetService<MainForm>();
                     this.Hide();

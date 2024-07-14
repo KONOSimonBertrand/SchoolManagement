@@ -14,6 +14,7 @@ namespace SchoolManagement.Core.Model
 
 
         public int Sequence { get; set; }
+        public virtual ICollection<SchoolClass> Classes { get; set; }
         public override bool Equals(object? obj)
         {
             if(obj is not SchoolGroup other) return false;
