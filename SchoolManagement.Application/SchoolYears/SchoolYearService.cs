@@ -1,20 +1,17 @@
 ﻿using SchoolManagement.Core.Model;
 using Microsoft.Extensions.Configuration;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.SchoolYears
+namespace SchoolManagement.Application
 {
     public class SchoolYearService : ISchoolYearService
     {
         private readonly ISchoolYearReadRepository readRepository;
         private readonly ISchoolYearWriteRepository writeRepository;
-        private readonly ClientApp clientApp;
-        private readonly IConfiguration configuration;
-        public SchoolYearService(ISchoolYearRepository  repository, IConfiguration configuration , ClientApp clientApp)
+        public SchoolYearService(ISchoolYearRepository  repository)
         {
            readRepository=repository;
             writeRepository=repository;
-           this.clientApp = clientApp;
-           this.configuration = configuration;
         }
         public async Task<SchoolYear?> GetSchoolYear(string name)
         {
@@ -35,6 +32,11 @@ namespace SchoolManagement.Application.SchoolYears
         public async Task<bool> UpdateSchoolYear(SchoolYear schoolYear)
         {
             return await writeRepository.UpdateAsync(schoolYear);
+        }
+
+        public async Task<bool> ChangeSchoolYearStatus(SchoolYear schoolYear)
+        {
+            return await writeRepository.ChangeStatusAsync(schoolYear);
         }
     }
 }

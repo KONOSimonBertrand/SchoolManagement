@@ -36,7 +36,7 @@
             AutoScaleBaseSize = new System.Drawing.Size(7, 15);
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(325, 343);
+            ClientSize = new System.Drawing.Size(358, 439);
             Name = "LoginForm";
             Text = "LoginForm";
             ((System.ComponentModel.ISupportInitialize)this).EndInit();

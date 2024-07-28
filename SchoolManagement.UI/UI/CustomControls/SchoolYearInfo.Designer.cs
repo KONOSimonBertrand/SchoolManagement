@@ -102,7 +102,7 @@
             titleInfoLabel.Name = "titleInfoLabel";
             titleInfoLabel.Size = new Size(315, 62);
             titleInfoLabel.TabIndex = 1;
-            titleInfoLabel.Text = "INFOS SUR LA CLASSE";
+            titleInfoLabel.Text = "INFOS ";
             // 
             // editPanel
             // 
@@ -116,7 +116,7 @@
             editPanel.Location = new Point(0, 62);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(315, 380);
+            editPanel.Size = new Size(315, 226);
             editPanel.TabIndex = 21;
             // 
             // endDateTextBox
@@ -124,19 +124,19 @@
             endDateTextBox.AutoSize = false;
             endDateTextBox.Controls.Add(endDateSeparator);
             endDateTextBox.Dock = DockStyle.Top;
-            endDateTextBox.Location = new Point(0, 310);
+            endDateTextBox.Location = new Point(0, 170);
             endDateTextBox.Margin = new Padding(4, 5, 4, 5);
             endDateTextBox.Name = "endDateTextBox";
             endDateTextBox.ReadOnly = true;
-            endDateTextBox.Size = new Size(315, 62);
+            endDateTextBox.Size = new Size(315, 40);
             endDateTextBox.TabIndex = 10;
             // 
             // endDateSeparator
             // 
-            endDateSeparator.Location = new Point(15, 51);
+            endDateSeparator.Location = new Point(15, 32);
             endDateSeparator.Margin = new Padding(4, 5, 4, 5);
             endDateSeparator.Name = "endDateSeparator";
-            endDateSeparator.Size = new Size(345, 6);
+            endDateSeparator.Size = new Size(283, 4);
             endDateSeparator.TabIndex = 6;
             endDateSeparator.TabStop = false;
             // 
@@ -144,10 +144,10 @@
             // 
             endDateLabel.AutoSize = false;
             endDateLabel.Dock = DockStyle.Top;
-            endDateLabel.Location = new Point(0, 248);
+            endDateLabel.Location = new Point(0, 140);
             endDateLabel.Margin = new Padding(4, 5, 4, 5);
             endDateLabel.Name = "endDateLabel";
-            endDateLabel.Size = new Size(315, 62);
+            endDateLabel.Size = new Size(315, 30);
             endDateLabel.TabIndex = 9;
             endDateLabel.Text = "Fin:";
             // 
@@ -156,19 +156,19 @@
             startDateTextBox.AutoSize = false;
             startDateTextBox.Controls.Add(startDateSeparator);
             startDateTextBox.Dock = DockStyle.Top;
-            startDateTextBox.Location = new Point(0, 186);
+            startDateTextBox.Location = new Point(0, 100);
             startDateTextBox.Margin = new Padding(4, 5, 4, 5);
             startDateTextBox.Name = "startDateTextBox";
             startDateTextBox.ReadOnly = true;
-            startDateTextBox.Size = new Size(315, 62);
+            startDateTextBox.Size = new Size(315, 40);
             startDateTextBox.TabIndex = 8;
             // 
             // startDateSeparator
             // 
-            startDateSeparator.Location = new Point(15, 51);
+            startDateSeparator.Location = new Point(15, 32);
             startDateSeparator.Margin = new Padding(4, 5, 4, 5);
             startDateSeparator.Name = "startDateSeparator";
-            startDateSeparator.Size = new Size(345, 6);
+            startDateSeparator.Size = new Size(283, 4);
             startDateSeparator.TabIndex = 6;
             startDateSeparator.TabStop = false;
             // 
@@ -176,10 +176,10 @@
             // 
             startDateLabel.AutoSize = false;
             startDateLabel.Dock = DockStyle.Top;
-            startDateLabel.Location = new Point(0, 124);
+            startDateLabel.Location = new Point(0, 70);
             startDateLabel.Margin = new Padding(4, 5, 4, 5);
             startDateLabel.Name = "startDateLabel";
-            startDateLabel.Size = new Size(315, 62);
+            startDateLabel.Size = new Size(315, 30);
             startDateLabel.TabIndex = 7;
             startDateLabel.Text = "Début:";
             // 
@@ -188,19 +188,19 @@
             nameTextBox.AutoSize = false;
             nameTextBox.Controls.Add(nameSeparator);
             nameTextBox.Dock = DockStyle.Top;
-            nameTextBox.Location = new Point(0, 62);
+            nameTextBox.Location = new Point(0, 30);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.ReadOnly = true;
-            nameTextBox.Size = new Size(315, 62);
+            nameTextBox.Size = new Size(315, 40);
             nameTextBox.TabIndex = 6;
             // 
             // nameSeparator
             // 
-            nameSeparator.Location = new Point(15, 51);
+            nameSeparator.Location = new Point(15, 32);
             nameSeparator.Margin = new Padding(4, 5, 4, 5);
             nameSeparator.Name = "nameSeparator";
-            nameSeparator.Size = new Size(345, 6);
+            nameSeparator.Size = new Size(283, 4);
             nameSeparator.TabIndex = 6;
             nameSeparator.TabStop = false;
             // 
@@ -211,7 +211,7 @@
             nameLabel.Location = new Point(0, 0);
             nameLabel.Margin = new Padding(4, 5, 4, 5);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(315, 62);
+            nameLabel.Size = new Size(315, 30);
             nameLabel.TabIndex = 5;
             nameLabel.Text = "Désignation:";
             // 
@@ -223,7 +223,7 @@
             Controls.Add(headerPanel);
             Margin = new Padding(2);
             Name = "SchoolYearInfo";
-            Size = new Size(315, 445);
+            Size = new Size(315, 305);
             ((System.ComponentModel.ISupportInitialize)headerPanel).EndInit();
             headerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)editButton).EndInit();

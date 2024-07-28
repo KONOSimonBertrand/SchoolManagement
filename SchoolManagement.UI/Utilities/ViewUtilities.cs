@@ -23,5 +23,32 @@ namespace SchoolManagement.UI.Utilities
             }
             return res;
         }
+
+        public static List<string> Religions()
+        {
+            List<string> religions = new()
+            {
+                "Inonnue",
+                "Christianisme",
+                "Christianisme-Catholicisme",
+                "Christianisme-Protestantisme",
+                "Christianisme-Orthodoxe",
+                "Judaïsme",
+                "Islam",
+                "Islam-Sunnisme",
+                "Islam-Chiisme",
+                "Islam-Ahmadisme",
+                "Bahaïsme",
+                "Hindouisme",
+                "Bouddhisme",
+                "Taoïsme",
+                "Jaïnisme",
+                "Sikhisme"
+            };
+
+            return religions;
+
+        }
+
     }
 }

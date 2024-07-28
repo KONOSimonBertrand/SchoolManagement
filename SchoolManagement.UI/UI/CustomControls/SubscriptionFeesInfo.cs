@@ -2,6 +2,8 @@
 
 using MediaFoundation;
 using SchoolManagement.UI.Utilities;
+using System.CodeDom;
+using System.Xml;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -23,6 +25,7 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponent();
             InitEvents();
+            InitLanguage();
         }
 
         private void InitComponent()
@@ -105,6 +108,12 @@ namespace SchoolManagement.UI.CustomControls
         private void CloseButton_Click(object sender, EventArgs e)
         {
            this.Hide();
+        }
+        private void InitLanguage()
+        {
+            schoolYearLabel.Text = Languages.Language.labelSchoolYear;
+             this.AmountLabel.Text = Languages.Language.labelAmount;
+            this.subscriptionTypeLabel.Text = Languages.Language.labelSubscription;
         }
     }
 }

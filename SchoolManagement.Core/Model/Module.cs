@@ -12,6 +12,7 @@ namespace SchoolManagement.Core.Model
         public string? Name { get; set; }
         public string? Description { get; set; }
         public int MenuGroup{ get; set; }
-        public ICollection<User>? Users { get; set; }
+        public virtual ICollection<UserModule> Modules { get; set; }
+
     }
 }

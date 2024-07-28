@@ -1,7 +1,7 @@
 ﻿
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.SubscriptionFees
+namespace SchoolManagement.Application
 {
     public interface ISubscriptionFeeService
     {

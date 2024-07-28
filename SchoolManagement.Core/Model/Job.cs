@@ -3,7 +3,7 @@
 namespace SchoolManagement.Core.Model
 {
   /// <summary>
-      /// Cette classe represente une fonction
+      /// Cette classe represente une fonction ou un poste
       /// Exemple Enseignant
   /// </summary>
     public class Job 
@@ -11,9 +11,7 @@ namespace SchoolManagement.Core.Model
 
         public int Id { get; set; }
         public string? Name { get; set; }
-        public int UserId {  get; set; }
-        public User User { get; set; }
-       
+        public virtual ICollection<Employee> Employees { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not Job other) return false;

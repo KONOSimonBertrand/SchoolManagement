@@ -1,5 +1,7 @@
 ﻿
 
+using System.Diagnostics.SymbolStore;
+
 namespace SchoolManagement.Core.Model
 {
     /// <summary>
@@ -16,13 +18,13 @@ namespace SchoolManagement.Core.Model
             {
                 if (Type == "in")
                 {
-                    return "Flux d'entrée";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB"?"Input":"Flux d'entrée";
                 }
                 if (Type == "out")
                 {
-                    return "Flux de sortie";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "Out":"Flux de sortie";
                 }
-                return "Inconnu";
+                return string.Empty;
             }
         }
         public string? Category { get; set; }

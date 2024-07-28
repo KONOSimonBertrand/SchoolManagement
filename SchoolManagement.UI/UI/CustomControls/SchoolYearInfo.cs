@@ -14,7 +14,7 @@ namespace SchoolManagement.UI.CustomControls
         public RadButton EditButton { get => editButton; }
         public RadButton CloseButton { get => closeButton; }
         public RadTextBox NameTextBox { get => nameTextBox; }
-        public RadTextBox StartDateTextBox {  get => startDateTextBox; }
+        public RadTextBox StartDateTextBox { get => startDateTextBox; }
         public RadTextBox EndDateTextBox { get => endDateTextBox; }
         #endregion
 
@@ -24,6 +24,7 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponents();
             InitEvents();
+            InitLanguage();
         }
         private void InitComponents()
         {
@@ -89,6 +90,12 @@ namespace SchoolManagement.UI.CustomControls
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.startDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.endDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+        }
+        private void InitLanguage()
+        {
+            nameLabel.Text = Languages.Language.labelDesignation;
+            this.startDateLabel.Text = Languages.Language.labelStart;
+            this.endDateLabel.Text = Languages.Language.labelEnd;
         }
         private void InitEvents()
         {

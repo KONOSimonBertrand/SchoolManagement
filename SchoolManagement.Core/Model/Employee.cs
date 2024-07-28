@@ -14,9 +14,25 @@
         {
             get { return LastName + " " + FirstName; }
         }
+        public string? FullNameWithIdNumber
+        {
+            get { return IdNumber + "-" + FullName; }
+        }
+        public DateTime Birthday {  get; set; }
+        public string? Phone { get; set; }
+        public string? Email {  get; set; }
+        public string? Address { get; set; }
+        public string? IdCard { get; set; }
+        public string? Religion { get; set; }
+        public string? Sex { get; set; }
+        public string? Nationality { get; set; }
         public int JobId { get; set; }
-        public Job Job { get; set; }
-        
+        public virtual Job? Job { get; set; }
+        public int? GroupId {  get; set; }
+        public virtual EmployeeGroup? Group { get; set; }
+        public DateTime HiringDate { get; set; }
+        public double? Salary { get; set; }
+        public virtual User? User { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not Employee other) return false;

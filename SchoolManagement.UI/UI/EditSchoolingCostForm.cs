@@ -1,5 +1,6 @@
 ﻿
 
+using SchoolManagement.UI.Languages;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -26,8 +27,20 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitEvent();
+            InitLanguage();
         }
-
+        private void InitLanguage()
+        {
+            this.schoolYearLabel.Text = Language.labelSchoolYear;
+            this.classLabel.Text = Language.labelClass;
+            this.costTypeLabel.Text = Language.labelFeeType;
+            this.costPayableLabel.Text = Language.labelExigible;
+            this.amountLabel.Text = Language.labelAmount;
+            this.trancheNumberLabel.Text = Language.labelInstallmentCount;
+            this.tranchesGroupBox.Text = Language.labelInstallments;
+            this.saveButton.Text = Language.labelSave;
+            this.closeButton.Text = Language.labelCancel;
+        }
         private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;

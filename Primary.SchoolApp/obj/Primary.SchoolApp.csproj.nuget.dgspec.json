@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "System.Resources.ResourceManager": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
             "UI.for.WinForms.AllControls.Net60": {
               "target": "Package",
               "version": "[2023.2.718, )"
@@ -125,6 +129,9 @@
             "projectReferences": {
               "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\SchoolManagement.Core.csproj": {
                 "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\SchoolManagement.Core.csproj"
+              },
+              "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj"
               }
             }
           }
@@ -151,6 +158,10 @@
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Localization.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.20, )"
             }
           },
           "imports": [
@@ -269,8 +280,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\SchoolManagement.Application.csproj": {
-                "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\SchoolManagement.Application.csproj"
+              "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\SchoolManagement.Core.csproj": {
+                "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\SchoolManagement.Core.csproj"
               }
             }
           }

@@ -9,7 +9,7 @@ namespace SchoolManagement.Core.Model
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-
+        public virtual ICollection<Employee> Employees { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not EmployeeGroup other) return false;

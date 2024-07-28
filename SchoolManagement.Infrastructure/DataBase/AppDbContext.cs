@@ -16,13 +16,17 @@ namespace SchoolManagement.Infrastructure.DataBase
         public DbSet<SubscriptionFee> SubscriptionFees { get; set; }
         public DbSet<SubjectGroup> SubjectGroups { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<EvaluationType> EvaluationTypes { get; set; }
+        public DbSet<EvaluationSession> EvaluationSessions { get; set; }
+        public DbSet<RatingSystem> RatingSystems { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<EmployeeGroup> EmployeeGroups { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<UserModule> UsersModules { get; set; }
         public DbSet<Log> Logs { get; set; }
-        public DbSet<Job> Jobs { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<ClassSubject> ClassSubjects { get; set; }
         private readonly ClientApp clientApp;
 
         public AppDbContext(DbContextOptions<AppDbContext> option, ClientApp clientApp) : base(option)
@@ -44,11 +48,13 @@ namespace SchoolManagement.Infrastructure.DataBase
                     entity =>
                     {
                         entity.HasKey("UserId", "ModuleId");
+                        entity.HasOne(u => u.Module).WithMany(u => u.Modules).HasForeignKey(u => u.ModuleId);
+                        entity.HasOne(u => u.User).WithMany(u => u.Modules).HasForeignKey(u => u.UserId);
                     });
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Modules)
-                .WithMany(u => u.Users)
-                .UsingEntity<UserModule>();
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasOne(u => u.Employee).WithOne(u => u.User);
+            });
             modelBuilder.Entity<SchoolGroup>(
                 entity =>
                 {
@@ -61,7 +67,7 @@ namespace SchoolManagement.Infrastructure.DataBase
                {
                    entity.HasKey(e => e.Id);
                    entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                   entity.HasOne(d => d.Group).WithMany(p => p.Classes);
+                   entity.HasOne(e => e.Group).WithMany(e => e.Classes).HasForeignKey(e=>e.GroupId);
                }
                );
             modelBuilder.Entity<SchoolRoom>(
@@ -69,7 +75,7 @@ namespace SchoolManagement.Infrastructure.DataBase
                {
                    entity.HasKey(e => e.Id);
                    entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                   entity.HasOne(d => d.SchoolClass).WithMany(p => p.Rooms);
+                   entity.HasOne(d => d.SchoolClass).WithMany(p => p.Rooms).HasForeignKey(e=>e.ClassId);
                }
                );
             modelBuilder.Entity<SchoolingCost>(entity =>
@@ -91,7 +97,6 @@ namespace SchoolManagement.Infrastructure.DataBase
                     .HasForeignKey(d => d.SchoolYearId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
-
             modelBuilder.Entity<SchoolingCostItem>(entity =>
             {
                 entity.HasKey(e => new { e.Id });
@@ -99,26 +104,29 @@ namespace SchoolManagement.Infrastructure.DataBase
                 .WithMany(e => e.SchoolingCostItems)
                  .HasForeignKey(d => d.SchoolingCostId);
             });
-
             modelBuilder.Entity<SubscriptionFee>(entity =>
             {
                 entity.HasKey(d => new { d.Id });
                 entity.HasOne(e => e.CashFlowType).WithMany(e => e.SubscriptionFees).HasForeignKey(e => e.CashFlowTypeId);
                 entity.HasOne(e => e.SchoolYear).WithMany(e => e.SubscriptionFees).HasForeignKey(e => e.SchoolYearId);
             });
-
             modelBuilder.Entity<Subject>(entity =>
             {
                 entity.HasKey(e => new { e.Id });
             });
-
             modelBuilder.Entity<SubjectGroup>(entity => { 
                 entity.HasKey(e => new { e.Id });
             });
-            modelBuilder.Entity<EvaluationType>(entity => {
+            modelBuilder.Entity<EvaluationSession>(entity => {
                 entity.HasKey(e => new { e.Id });
             });
-
+            modelBuilder.Entity<Employee>(entity => 
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                entity.HasOne(e => e.Group).WithMany(e=>e.Employees).HasForeignKey(e=>e.GroupId);
+                entity.HasOne(e=>e.Job).WithMany(e=>e.Employees).HasForeignKey(e=>e.JobId);   
+            });
         }
     }
 

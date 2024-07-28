@@ -1,8 +1,11 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.UI;
 using Primary.SchoolApp.UI.CustomControls;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Languages;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,6 +28,11 @@ namespace Primary.SchoolApp
         private SubscriptionFeeInfo subscriptionFeeInfo;
         private SubjectGroupInfo subjectGroupInfo;
         private SubjectInfo subjectInfo;
+        private EvaluationSessionInfo evaluationSessionInfo;
+        private RatingSystemInfo ratingSystemInfo;
+        private JobInfo jobInfo;
+        private EmployeeGroupInfo employeeGroupInfo;
+        private UserInfo userInfo;
         private bool isFirstLoadingBasicData = false;//  détermine si c'est le premier chargement des données de base
         private readonly List<UserControl> settingPageUserControlList = new();
         private void InitSettingPage()
@@ -37,7 +45,6 @@ namespace Primary.SchoolApp
         //initialisation des composantes de la page setting
         private void InitSettingPageComponents()
         {
-            SettingAddButton.Enabled = false;
             SettingExportToExcelButton.Enabled = false;
             SettingGridView.ReadOnly = true;
             SettingGridView.EnableFiltering = true;
@@ -50,90 +57,86 @@ namespace Primary.SchoolApp
         {
             ListViewDataItemGroup settingGroup = new()
             {
-                Text = "PARAMETRES"
+                Text = Language.labelSettings.ToUpper()
             };
             this.SettingLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { settingGroup });
             ListViewDataItem itemSchoolYear = new()
             {
                 Key = 1,
-                Value = "Années Scolaires"
+                Value = Language.labelSchoolYears
             };
             ListViewDataItem itemGroup = new()
             {
                 Key = 2,
-                Value = "Groupes de Classes"
+                Value = Language.labelClassGroups
             };
             ListViewDataItem itemClass = new()
             {
                 Key = 3,
-                Value = "Classes"
+                Value = Language.labelClasss
             };
             ListViewDataItem itemRoom = new()
             {
                 Key = 4,
-                Value = "Salles de Classe"
+                Value = Language.labelRooms
             };
             ListViewDataItem itemCashFlowSetting = new()
             {
                 Key = 5,
-                Value = "Types de Flux de Trésorerie"
+                Value = Language.labelCashFlowTypes
             };
             ListViewDataItem itemPaymentMean = new()
             {
                 Key = 6,
-                Value = "Moyens de Paiement"
+                Value = Language.labelPaymentMeans
             };
             ListViewDataItem itemSchoolingCost = new()
             {
                 Key = 7,
-                Value = "Frais Scolaires"
+                Value = Language.labelSchoolingFee
             };
             ListViewDataItem itemSubscriptionFees = new()
             {
                 Key = 8,
-                Value = "Frais d'Abonnement"
+                Value = Language.labelSubscriptionFee
             };
             ListViewDataItem itemSubjectGroup = new()
             {
                 Key = 9,
-                Value = "Groupes de Matières"
+                Value = Language.labelSubjectGroups
             };
             ListViewDataItem itemSubject = new()
             {
                 Key = 10,
-                Value = "Matières"
+                Value = Language.labelSubjects
             };
-            ListViewDataItem itemEvaluationType = new()
+            ListViewDataItem itemEvaluationSession = new()
             {
                 Key = 11,
-                Value = "Sessions d'Evaluation"
+                Value = Language.labelEvaluationSessions
             };
             ListViewDataItem itemEvaluationSystem = new()
             {
                 Key = 12,
-                Value = "Système d'Appréciation"
+                Value = Language.labelMarkSystems
             };
             ListViewDataItem itemJob = new()
             {
                 Key = 13,
-                Value = "Type de Fonction"
+                Value =Language.labelJobs
             };
             ListViewDataItem itemEmployeeGroup = new()
             {
                 Key = 14,
-                Value = "Groupes d'Employés"
+                Value = Language.labelEmployeeGroups
             };
             ListViewDataItem itemUser = new()
             {
                 Key = 15,
-                Value = "Utilisateurs"
-            };
-            ListViewDataItem itemOtherSetting = new()
-            {
-                Key = 16,
-                Value = "Autres Configurations"
+                Value = Language.labelUsers
             };
            
+
 
             itemSchoolYear.Group = settingGroup;
             itemGroup.Group = settingGroup;
@@ -143,12 +146,11 @@ namespace Primary.SchoolApp
             itemCashFlowSetting.Group = settingGroup;
             itemSubjectGroup.Group = settingGroup;
             itemSubject.Group = settingGroup;
-            itemEvaluationType.Group = settingGroup;
+            itemEvaluationSession.Group = settingGroup;
             itemEvaluationSystem.Group = settingGroup;
             itemJob.Group = settingGroup;
             itemEmployeeGroup.Group = settingGroup;
             itemUser.Group = settingGroup;
-            itemOtherSetting.Group = settingGroup;
             itemSubscriptionFees.Group = settingGroup;
             SettingLeftListView.Items.Add(itemSchoolYear);
             SettingLeftListView.Items.Add(itemGroup);
@@ -160,12 +162,11 @@ namespace Primary.SchoolApp
             SettingLeftListView.Items.Add(itemSubscriptionFees);
             SettingLeftListView.Items.Add(itemSubjectGroup);
             SettingLeftListView.Items.Add(itemSubject);
-            SettingLeftListView.Items.Add(itemEvaluationType);
+            SettingLeftListView.Items.Add(itemEvaluationSession);
             SettingLeftListView.Items.Add(itemEvaluationSystem);
             SettingLeftListView.Items.Add(itemJob);
             SettingLeftListView.Items.Add(itemEmployeeGroup);
             SettingLeftListView.Items.Add(itemUser);
-            SettingLeftListView.Items.Add(itemOtherSetting);
 
             SettingSearchModuleDropDownList.Items.Add(itemGroup.Text);
             SettingSearchModuleDropDownList.Items.Add(itemClass.Text);
@@ -175,16 +176,15 @@ namespace Primary.SchoolApp
             SettingSearchModuleDropDownList.Items.Add(itemSubscriptionFees.Text);
             SettingSearchModuleDropDownList.Items.Add(itemCashFlowSetting.Text);
             SettingSearchModuleDropDownList.Items.Add(itemSubject.Text);
-            SettingSearchModuleDropDownList.Items.Add(itemEvaluationType.Text);
+            SettingSearchModuleDropDownList.Items.Add(itemEvaluationSession.Text);
             SettingSearchModuleDropDownList.Items.Add(itemEvaluationSystem.Text);
             SettingSearchModuleDropDownList.Items.Add(itemJob.Text);
             SettingSearchModuleDropDownList.Items.Add(itemEmployeeGroup.Text);
             SettingSearchModuleDropDownList.Items.Add(itemUser.Text);
-            SettingSearchModuleDropDownList.Items.Add(itemOtherSetting.Text);
             SettingLeftListView.ShowCheckBoxes = false;
             SettingLeftListView.SelectedIndex = 0;
         }
-        //initialisation des contrôles personnalisés 
+        //initialisation des contrôles utilisateurs personnalisés 
         private void InitSettingPageCustomControls()
         {
 
@@ -233,7 +233,6 @@ namespace Primary.SchoolApp
             schoolClassInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(schoolClassInfo);
             settingPageUserControlList.Add(schoolClassInfo);
-
             schoolRoomInfo = new()
             {
                 Dock = DockStyle.Fill,
@@ -247,7 +246,6 @@ namespace Primary.SchoolApp
             schoolRoomInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(schoolRoomInfo);
             settingPageUserControlList.Add(schoolRoomInfo);
-
             cashFlowTypeInfo = new()
             {
                 Dock = DockStyle.Fill,
@@ -261,7 +259,6 @@ namespace Primary.SchoolApp
             cashFlowTypeInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(cashFlowTypeInfo);
             settingPageUserControlList.Add(cashFlowTypeInfo);
-
             paymentMeanInfo = new()
             {
                 Dock = DockStyle.Fill,
@@ -275,7 +272,6 @@ namespace Primary.SchoolApp
             paymentMeanInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(paymentMeanInfo);
             settingPageUserControlList.Add(paymentMeanInfo);
-
             schoolingCostInfo = new()
             {
                 Dock = DockStyle.Fill,
@@ -332,6 +328,76 @@ namespace Primary.SchoolApp
             subjectInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(subjectInfo);
             settingPageUserControlList.Add(subjectInfo);
+            //add evaluation type user control
+            evaluationSessionInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            evaluationSessionInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            evaluationSessionInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(evaluationSessionInfo);
+            settingPageUserControlList.Add(evaluationSessionInfo);
+            //add rating system user control
+            ratingSystemInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            ratingSystemInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            ratingSystemInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(ratingSystemInfo);
+            settingPageUserControlList.Add(ratingSystemInfo);
+            //add job info user control
+            jobInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            jobInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            jobInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(jobInfo);
+            settingPageUserControlList.Add(jobInfo);
+            //add employee group info user control
+            employeeGroupInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            employeeGroupInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            employeeGroupInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(employeeGroupInfo);
+            settingPageUserControlList.Add(employeeGroupInfo);
+            //add user info user control
+            userInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            userInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            userInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(userInfo);
+            settingPageUserControlList.Add(userInfo);
         }
         //initialise les évenements relatifs aux contrôles Windows Forms de la page setting
         private void InitSettingPageEvents()
@@ -341,17 +407,20 @@ namespace Primary.SchoolApp
             SettingGridView.CurrentRowChanged += SettingGridView_CurrentRowChanged;
             SettingGridView.CustomFiltering += SettingGridView_CustomFiltering;
             SettingSearchModuleDropDownList.SelectedIndexChanged += SettingSearchModuleDropDownList_SelectedIndexChanged;
+            SettingGridView.ContextMenuOpening += SettingGridView_ContextMenuOpening;
             SettingAddButton.Click += SettingAddButton_Click;
             //déclenche l'évenement  SettingLeftListView.SelectedItemChanged pour un premier affichage
             SettingLeftListView.SelectedItem = null;
             SettingLeftListView.SelectedItem = SettingLeftListView.Items.FirstOrDefault();
         }
 
+       
+
         #region Methodes
         // affiche les informations d'une année scolaire sur le contrôle personnalisé SchoolYearInfo
         private void LoadSelectedSchoolYearDetail(SchoolYear schoolYear)
         {
-            schoolYearInfo.TitleInfoLabel.Text = "INFOS SUR L'ANNEE SCOLAIRE";
+            schoolYearInfo.TitleInfoLabel.Text = "INFO ...";
             schoolYearInfo.StartDateTextBox.Text = schoolYear.StartFirstQuarter.ToString();
             schoolYearInfo.NameTextBox.Text = schoolYear.Name;
             schoolYearInfo.StartDateTextBox.Text = schoolYear.StartFirstQuarter?.ToString("dd-MM-yyyy");
@@ -360,22 +429,23 @@ namespace Primary.SchoolApp
         // affiche les info d'un group de classe
         private void LoadSelectedSchoolGroupDetail(SchoolGroup schoolGroup)
         {
-            schoolGroupInfo.TitleInfoLabel.Text = "INFOS SUR LE GROUP";
+            schoolGroupInfo.TitleInfoLabel.Text = "INFO ...";
             schoolGroupInfo.NameTextBox.Text = schoolGroup.Name;
 
         }
         // affiche les info d'une classe
         private void LoadSelectedSchoolClassDetail(SchoolClass schoolClass)
         {
-            schoolClassInfo.TitleInfoLabel.Text = "INFOS SUR LA CLASSE";
+            schoolClassInfo.TitleInfoLabel.Text = "INFO ...";
             schoolClassInfo.NameTextBox.Text = schoolClass.Name;
             schoolClassInfo.GroupTextBox.Text = schoolClass.Group.Name;
         }
         // affiche les info d'une salle classe
         private void LoadSelectedSchoolRoomDetail(SchoolRoom room)
         {
-            schoolRoomInfo.TitleInfoLabel.Text = "INFOS SUR LA SALLE DE CLASSE";
-            if (room != null) {
+            schoolRoomInfo.TitleInfoLabel.Text = "INFO ...";
+            if (room != null)
+            {
                 schoolRoomInfo.NameTextBox.Text = room.Name;
                 schoolRoomInfo.ClassTextBox.Text = room.SchoolClass.Name;
             }
@@ -383,7 +453,7 @@ namespace Primary.SchoolApp
         // affiche les info d'un type de trésorerie
         private void LoadSelectedCashFlowTypeDetail(CashFlowType cashFlowType)
         {
-            cashFlowTypeInfo.TitleInfoLabel.Text = "INFOS SUR LE TYPE FLUX DE TRESORERIE";
+            cashFlowTypeInfo.TitleInfoLabel.Text = "INFO";
             if (cashFlowType != null)
             {
                 cashFlowTypeInfo.NameTextBox.Text = cashFlowType.Name;
@@ -394,7 +464,7 @@ namespace Primary.SchoolApp
         // affiche les info d'un moyen de paiement
         private void LoadSelectedPaymentMeanDetail(PaymentMean paymentMean)
         {
-            paymentMeanInfo.TitleInfoLabel.Text = "INFOS SUR LE MOYEN DE PAIEMENT";
+            paymentMeanInfo.TitleInfoLabel.Text = "INFO ...";
             if (paymentMean != null)
             {
                 paymentMeanInfo.NameTextBox.Text = paymentMean.Name;
@@ -405,25 +475,25 @@ namespace Primary.SchoolApp
         // affiche les info d'un frais scolaire
         private void LoadSelectedSchoolingCostDetail(SchoolingCost cost)
         {
-            schoolingCostInfo.TitleInfoLabel.Text = "INFOS SUR FRAIS SCOLAIRE";
+            schoolingCostInfo.TitleInfoLabel.Text = "INFO ...";
             if (cost != null)
             {
                 var getData = schoolingCostService.GetSchoolingCostItems(cost.Id);
                 schoolingCostInfo.SchoolYearTextBox.Text = cost.SchoolYear.Name;
                 schoolingCostInfo.ClassTextBox.Text = cost.SchoolClass.Name;
                 schoolingCostInfo.CostTypeTextBox.Text = cost.CashFlowType.Name;
-                schoolingCostInfo.TrancheNumberTextBox.Text=cost.TrancheNumber.ToString();
+                schoolingCostInfo.TrancheNumberTextBox.Text = cost.TrancheNumber.ToString();
                 schoolingCostInfo.AmountTextBox.Text = cost.Amount.ToString();
                 int i = 1;
-                schoolingCostInfo.TrancheNumberTextBox.TextBoxElement.ToolTipText=string.Empty;
-                schoolingCostInfo.TranchesLabel.Text=string.Empty;
+                schoolingCostInfo.TrancheNumberTextBox.TextBoxElement.ToolTipText = string.Empty;
+                schoolingCostInfo.TranchesLabel.Text = string.Empty;
                 schoolingCostInfo.TranchesLabel.TextAlignment = ContentAlignment.TopCenter;
-                schoolingCostInfo.TranchesLabel.Text = "***********Tranches***********\n";
+                schoolingCostInfo.TranchesLabel.Text = $"***********{Language.labelInstallments}***********\n";
                 foreach (var line in getData.Result)
                 {
-                    schoolingCostInfo.TrancheNumberTextBox.TextBoxElement.ToolTipText  += "N°: " +
-                          i+"  Montant: "+line.Amount+ "  Délais: " + line.DeadLine.ToString("dd - MM - yyyy") +"\n";
-                    schoolingCostInfo.TranchesLabel.Text +=  i+"- "+ line.Amount + "  Délais: " + line.DeadLine.ToString("dd - MM - yyyy") + "\n";
+                    schoolingCostInfo.TrancheNumberTextBox.TextBoxElement.ToolTipText += "N°: " +
+                          i + " "+Language.labelAmount+": " + line.Amount + " "+ Language.labelDuration+": " + line.DeadLine.ToString("dd - MM - yyyy") + "\n";
+                    schoolingCostInfo.TranchesLabel.Text += i + "- " + line.Amount + " "+Language.labelDelay + ": " + line.DeadLine.ToString("dd - MM - yyyy") + "\n";
                     i++;
                 }
             }
@@ -431,12 +501,12 @@ namespace Primary.SchoolApp
         // affiche les info d'un frais d'abonnement
         private void LoadSelectedSubscriptionFeeDetail(SubscriptionFee subscriptionFee)
         {
-            subscriptionFeeInfo.TitleInfoLabel.Text = "INFOS SUR FRAIS D'ABONNEMENT";
+            subscriptionFeeInfo.TitleInfoLabel.Text = "INFO..." ;
             if (subscriptionFee != null)
             {
                 subscriptionFeeInfo.SchoolYearTextBox.Text = subscriptionFee.SchoolYear.Name;
                 subscriptionFeeInfo.SubscriptionTypeTextBox.Text = subscriptionFee.CashFlowType.Name;
-                subscriptionFeeInfo.AmountTextBox.Text= subscriptionFee.Amount.ToString();
+                subscriptionFeeInfo.AmountTextBox.Text = subscriptionFee.Amount.ToString();
             }
         }
         // affiche les info d'un groupe de matières
@@ -444,6 +514,7 @@ namespace Primary.SchoolApp
         {
             if (subjectGroup != null)
             {
+                subjectGroupInfo.TitleInfoLabel.Text = "INFO...";
                 subjectGroupInfo.NameTextBox.Text = subjectGroup.DefaultName;
             }
         }
@@ -452,7 +523,60 @@ namespace Primary.SchoolApp
         {
             if (subject != null)
             {
+                subjectInfo.TitleInfoLabel.Text = "INFO...";
                 subjectInfo.NameTextBox.Text = subject.DefaultName;
+            }
+        }
+        // affiche les info d'une session d'évaluation
+        private void LoadSelectedEvaluationSesssionDetail(EvaluationSession evaluationSession)
+        {
+            if (evaluationSession != null)
+            {
+                evaluationSessionInfo.TitleInfoLabel.Text = "INFO...";
+                evaluationSessionInfo.NameTextBox.Text = evaluationSession.DefaultName;
+            }
+        }
+        // affiche les info d'un système d'appréciation
+        private void LoadSelectedRatingSystemDetail(RatingSystem ratingSystem)
+        {
+            if (ratingSystem != null)
+            {
+                ratingSystemInfo.TitleInfoLabel.Text = "INFO...";
+                ratingSystemInfo.NameTextBox.Text = ratingSystem.DefaultName;
+                ratingSystemInfo.MaxNoteTextBox.Text = ratingSystem.MaxNote.ToString();
+                ratingSystemInfo.MinNoteTextBox.Text = ratingSystem.MinNote.ToString();
+            }
+        }
+        // affiche les info d'une fonction employé
+        private void LoadSelectedJobDetail(Job job)
+        {
+            if (job != null)
+            {
+                jobInfo.TitleInfoLabel.Text = "INFO...";
+                jobInfo.NameTextBox.Text = job.Name;
+            }
+        }
+        // affiche les info d'un groupe employé
+        private void LoadSelectedEmployeeGroupDetail(EmployeeGroup group)
+        {
+            if (group != null)
+            {
+                employeeGroupInfo.TitleInfoLabel.Text = "INFO...";
+                employeeGroupInfo.NameTextBox.Text = group.Name;
+            }
+        }
+        // affiche les info d'un utilisateur 
+        private void LoadSelectedUserDetail(User user)
+        {
+            if (user != null)
+            {
+                userInfo.TitleInfoLabel.Text = "INFO...";
+                userInfo.NameTextBox.Text = user.Name;
+                userInfo.LoginTextBox.Text = user.UserName;
+                var modules = userService.GetUserModuleList(user.Id).Result;
+                var defautModule = modules.FirstOrDefault(m => m.IsDefault == true);
+                userInfo.DefaultModuleTextBox.Text = defautModule != null ? defautModule.Module.Name : string.Empty;
+                userInfo.ModuleCount.Text = $"{userInfo.ModuleCount.Text} :{modules.Count.ToString()}";
             }
         }
         //chargement la liste des années scolaires dans le datagridview de la page setting
@@ -492,14 +616,14 @@ namespace Primary.SchoolApp
             endThirdQuarterColum.Format = DateTimePickerFormat.Custom;
             endThirdQuarterColum.CustomFormat = "dd-MM-yyyy";
             endThirdQuarterColum.FormatString = "{0:dd-MM-yyyy}";
-            yearNameColum.HeaderText = "Désignation";
-            startFirstQuarterColum.HeaderText = "Début 1ᵉʳ trimestre";
-            endFirstQuarterColum.HeaderText = "Fin 1ᵉʳ trimestre";
-            startSecondQuarterColum.HeaderText = "Début 2ᵉ trimestre";
-            endSecondQuarterColum.HeaderText = "Fin 2ᵉ trimestre";
-            startThirdQuarterColum.HeaderText = "Début 3ᵉ trimestre";
-            endThirdQuarterColum.HeaderText = "Fin 3ᵉ trimestre";
-            yearStateColum.HeaderText = "Etat";
+            yearNameColum.HeaderText = Language.labelDesignation;
+            startFirstQuarterColum.HeaderText = Language.labelStartFirstQuarter;
+            endFirstQuarterColum.HeaderText = Language.labelEndFirstQuarter;
+            startSecondQuarterColum.HeaderText = Language.labelStartSecondQuarter;
+            endSecondQuarterColum.HeaderText = Language.labelEndSecondQuarter;
+            startThirdQuarterColum.HeaderText = Language.labelStartThirdQuarter;
+            endThirdQuarterColum.HeaderText = Language.labelEndThirdQuarter;
+            yearStateColum.HeaderText = Language.labelStatut;
             SettingGridView.Columns.Add(yearNameColum);
             SettingGridView.Columns.Add(startFirstQuarterColum);
             SettingGridView.Columns.Add(endFirstQuarterColum);
@@ -523,8 +647,8 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColum = new("Name");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
-            nameColum.HeaderText = "Désignation";
-            sequenceColum.HeaderText = "Séquence";
+            nameColum.HeaderText = Language.labelDesignation;
+            sequenceColum.HeaderText = Language.labelSequence;
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(sequenceColum);
         }
@@ -544,10 +668,10 @@ namespace Primary.SchoolApp
             GridViewTextBoxColumn groupColum = new("Group.Name");
             GridViewTextBoxColumn bookColum = new("BookTypeName");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
-            nameColum.HeaderText = "Désignation";
-            groupColum.HeaderText = "Groupe";
-            bookColum.HeaderText = "Modèle de bulletin";
-            sequenceColum.HeaderText = "Séquence";
+            nameColum.HeaderText = Language.labelDesignation;
+            groupColum.HeaderText = Language.labelGroup;
+            bookColum.HeaderText = Language.labelBookModel;
+            sequenceColum.HeaderText = Language.labelSequence;
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(groupColum);
             SettingGridView.Columns.Add(bookColum);
@@ -564,16 +688,18 @@ namespace Primary.SchoolApp
         }
         private void CreateSchoolRoomColumnsForSettingGridView()
         {
+            SettingGridView.MasterTemplate.Reset();
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColum = new("Name");
             GridViewTextBoxColumn classColum = new("SchoolClass.Name");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
-            nameColum.HeaderText = "Désignation";
-            classColum.HeaderText = "Classe";
-            sequenceColum.HeaderText = "Séquence";
+            nameColum.HeaderText = Language.labelDesignation;
+            classColum.HeaderText = Language.labelClass;
+            sequenceColum.HeaderText = Language.labelSequence;
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(classColum);
             SettingGridView.Columns.Add(sequenceColum);
+
         }
         //chargement des  types de flux de tresorerie dans le datagridview de la page setting
         private async void LoadCashFlowTypeListToSettingGridView()
@@ -591,10 +717,10 @@ namespace Primary.SchoolApp
             GridViewTextBoxColumn classColum = new("CategoryName");
             GridViewTextBoxColumn typeColum = new("TypeName");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
-            nameColum.HeaderText = "Désignation";
-            classColum.HeaderText = "Catégorie";
-            typeColum.HeaderText = "Type";
-            sequenceColum.HeaderText = "Séquence";
+            nameColum.HeaderText = Language.labelDesignation;
+            classColum.HeaderText = Language.labelCategory;
+            typeColum.HeaderText = Language.labelType;
+            sequenceColum.HeaderText = Language.labelSequence;
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(classColum);
             SettingGridView.Columns.Add(typeColum);
@@ -614,12 +740,12 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColum = new("Name");
             GridViewTextBoxColumn accountColum = new("Account");
-            GridViewTextBoxColumn typeColum = new("Type");
+            GridViewTextBoxColumn typeColum = new(Language.labelType);
             GridViewTextBoxColumn sequenceColum = new("Sequence");
-            nameColum.HeaderText = "Désignation";
-            accountColum.HeaderText = "Compte";
-            typeColum.HeaderText = "Type";
-            sequenceColum.HeaderText = "Séquence";
+            nameColum.HeaderText = Language.labelDesignation;
+            accountColum.HeaderText = Language.labelAccount;
+            typeColum.HeaderText = Language.labelType;
+            sequenceColum.HeaderText = Language.labelSequence;
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(accountColum);
             SettingGridView.Columns.Add(typeColum);
@@ -643,12 +769,12 @@ namespace Primary.SchoolApp
             GridViewDecimalColumn trancheNumberColumn = new("TrancheNumber");
             GridViewCheckBoxColumn payableColumn = new("IsPayable");
             GridViewTextBoxColumn yearColumn = new("SchoolYear.Name");
-            classColumn.HeaderText = "Classe";
-            costTypeColumn.HeaderText = "Type de frais";
-            amountColumn.HeaderText = "Montant";
-            trancheNumberColumn.HeaderText = "Nbre de tranches";
-            payableColumn.HeaderText = "Exigible";
-            yearColumn.HeaderText = "Année scolaire";
+            classColumn.HeaderText = Language.labelClass;
+            costTypeColumn.HeaderText =Language.labelFeeType;
+            amountColumn.HeaderText = Language.labelAmount;
+            trancheNumberColumn.HeaderText = Language.labelTrancheNumber;
+            payableColumn.HeaderText = Language.labelExigible;
+            yearColumn.HeaderText = Language.labelSchoolYear;
             SettingGridView.Columns.Add(classColumn);
             SettingGridView.Columns.Add(costTypeColumn);
             SettingGridView.Columns.Add(amountColumn);
@@ -672,10 +798,10 @@ namespace Primary.SchoolApp
             GridViewDecimalColumn amountColumn = new("Amount");
             GridViewDecimalColumn durationColumn = new("Duration");
             GridViewTextBoxColumn yearColumn = new("SchoolYear.Name");
-            subscriptionTypeColumn.HeaderText = "Abonnement";
-            amountColumn.HeaderText = "Montant";
-            durationColumn.HeaderText = "Durée";
-            yearColumn.HeaderText = "Année scolaire";
+            subscriptionTypeColumn.HeaderText = Language.labelSubscription;
+            amountColumn.HeaderText = Language.labelAmount;
+            durationColumn.HeaderText = Language.labelDuration;
+            yearColumn.HeaderText = Language.labelSchoolYear;
             SettingGridView.Columns.Add(subscriptionTypeColumn);
             SettingGridView.Columns.Add(amountColumn);
             SettingGridView.Columns.Add(durationColumn);
@@ -693,14 +819,11 @@ namespace Primary.SchoolApp
         private void CreateSubjectGroupColumnsForSettingGridView()
         {
             SettingGridView.Columns.Clear();
-            GridViewTextBoxColumn frenchNameColumn = new("FrenchName");
-            GridViewTextBoxColumn englishNameColumn = new("EnglishName");
+            GridViewTextBoxColumn nameColumn = new(Language.fieldName);
             GridViewTextBoxColumn sequenceColumn = new("Sequence");
-            frenchNameColumn.HeaderText = "Désignation FR";
-            englishNameColumn.HeaderText = "Désignation EN";
-            sequenceColumn.HeaderText = "Séquence";
-            SettingGridView.Columns.Add(frenchNameColumn);
-            SettingGridView.Columns.Add(englishNameColumn);
+            nameColumn.HeaderText = Language.labelDesignation;
+            sequenceColumn.HeaderText = Language.labelSequence;
+            SettingGridView.Columns.Add(nameColumn);
             SettingGridView.Columns.Add(sequenceColumn);
         }
         //chargement des matières dans le datagridview de la page setting
@@ -715,15 +838,144 @@ namespace Primary.SchoolApp
         private void CreateSubjectColumnsForSettingGridView()
         {
             SettingGridView.Columns.Clear();
-            GridViewTextBoxColumn frenchNameColumn = new("FrenchName");
-            GridViewTextBoxColumn englishNameColumn = new("EnglishName");
+            GridViewTextBoxColumn nameColumn = new(Language.fieldName);
             GridViewTextBoxColumn sequenceColumn = new("Sequence");
-            frenchNameColumn.HeaderText = "Désignation FR";
-            englishNameColumn.HeaderText = "Désignation EN";
-            sequenceColumn.HeaderText = "Séquence";
-            SettingGridView.Columns.Add(frenchNameColumn);
-            SettingGridView.Columns.Add(englishNameColumn);
+            nameColumn.HeaderText = Language.labelDesignation;
+            sequenceColumn.HeaderText = Language.labelSequence;
+            SettingGridView.Columns.Add(nameColumn);
             SettingGridView.Columns.Add(sequenceColumn);
+        }
+        //chargement des sessions d'évaluation dans le datagridview de la page setting
+        private async void LoadEvaluationSessionListToSettingGridView()
+        {
+            var getData = evaluationSessionService.GetEvaluationSessionList();
+            CreateEvaluationSessionColumnsForSettingGridView();
+            Program.EvaluationSessionList = await getData;
+            SplitEvaluationSessionList();
+            SettingGridView.MasterTemplate.DataSource = Program.EvaluationSessionParentList;
+            SettingGridView.Templates[0].DataSource = Program.EvaluationSessionChildList;
+            SettingGridView.Refresh();
+            SettingGridView.BestFitColumns();
+            SettingGridView.Templates[0].BestFitColumns();
+
+
+        }
+        private void CreateEvaluationSessionColumnsForSettingGridView()
+        {
+            using (SettingGridView.DeferRefresh())
+            {
+                SettingGridView.Columns.Clear();
+                SettingGridView.Templates.Clear();
+                SettingGridView.Relations.Clear();
+                GridViewTextBoxColumn codeColumn = new("Code");
+                GridViewTextBoxColumn nameColumn = new(Language.fieldName);
+                GridViewTextBoxColumn sequenceColumn = new("Sequence");
+                nameColumn.HeaderText = Language.labelDesignation;
+                codeColumn.HeaderText = Language.labelCode;
+                sequenceColumn.HeaderText = Language.labelSequence;
+                codeColumn.IsVisible = false;
+                SettingGridView.Columns.Add(codeColumn);
+                SettingGridView.Columns.Add(nameColumn);
+                SettingGridView.Columns.Add(sequenceColumn);
+
+                //
+                GridViewTemplate template = new GridViewTemplate();
+                GridViewTextBoxColumn parentCodeColumn = new("ParentCode");
+                GridViewTextBoxColumn childNameColumn = new(Language.fieldName);
+                GridViewTextBoxColumn sequenceTColumn = new("Sequence");
+                parentCodeColumn.HeaderText = Language.labelCode;
+                childNameColumn.HeaderText = Language.labelDesignation;
+                sequenceTColumn.HeaderText = Language.labelSequence;
+                parentCodeColumn.IsVisible = false;
+                template.Columns.Add(parentCodeColumn);
+                template.Columns.Add(childNameColumn);
+                template.Columns.Add(sequenceTColumn);
+                SettingGridView.Templates.Add(template);
+
+                GridViewRelation relation = new GridViewRelation(SettingGridView.MasterTemplate, template);
+                relation.RelationName = "ParentChild";
+                relation.ParentColumnNames.Add("Code");
+                relation.ChildColumnNames.Add("ParentCode");
+                this.SettingGridView.Relations.Add(relation);
+            }
+
+        }
+        //chargement des systèmes d'appréciations dans le datagridview de la page setting
+        private async void LoadRatingSystemListToSettingGridView()
+        {
+            var getData = ratingSystemService.GetRatingSystemList();
+            CreateRatingSystemColumnsForSettingGridView();
+            Program.RatingSystemList = await getData;
+            SettingGridView.DataSource = Program.RatingSystemList;
+            SettingGridView.BestFitColumns();
+        }
+        private void CreateRatingSystemColumnsForSettingGridView()
+        {
+            using (SettingGridView.DeferRefresh())
+            {
+                SettingGridView.Columns.Clear();
+                GridViewTextBoxColumn nameColumn = new(Language.fieldName);
+                GridViewTextBoxColumn descriptionColumn = new(Language.fieldDescription);
+                GridViewDecimalColumn maxNoteColumn = new("MaxNote");
+                GridViewDecimalColumn minNoteColumn = new("MinNote");
+                nameColumn.HeaderText = Language.labelAppreciation;
+                descriptionColumn.HeaderText = Language.labelDescription;
+                maxNoteColumn.HeaderText = Language.labelMaxNote;
+                minNoteColumn.HeaderText = Language.labelMinNote;
+                SettingGridView.Columns.Add(nameColumn);
+                SettingGridView.Columns.Add(descriptionColumn);
+                SettingGridView.Columns.Add(maxNoteColumn);
+                SettingGridView.Columns.Add(minNoteColumn);
+            }
+
+        }
+        //chargement la liste des fonctions employé dans le datagridview de la page setting
+        private async void LoadJobListToSettingGridView()
+        {
+            var getData = jobService.GetJobList();
+            CreateJobColumnsForSettingGridView();
+            //chargement des données
+            Program.JobList = await getData;
+            SettingGridView.DataSource = Program.JobList;
+        }
+        private void CreateJobColumnsForSettingGridView()
+        {
+            GridViewTextBoxColumn nameColumn = new("Name");
+            nameColumn.HeaderText = Language.labelDesignation;
+            SettingGridView.Columns.Add(nameColumn);
+        }
+        //chargement la liste des groupes employé dans le datagridview de la page setting
+        private async void LoadEmployeeGroupListToSettingGridView()
+        {
+            var getData = employeeGroupService.GetEmployeeGroupList();
+            CreateEmployeeGroupColumnsForSettingGridView();
+            //chargement des données
+            Program.EmployeeGroupList = await getData;
+            SettingGridView.DataSource = Program.EmployeeGroupList;
+        }
+        private void CreateEmployeeGroupColumnsForSettingGridView()
+        {
+            GridViewTextBoxColumn nameColumn = new("Name");
+            nameColumn.HeaderText = Language.labelDesignation;
+            SettingGridView.Columns.Add(nameColumn);
+        }
+        //chargement la liste des utilisateurs dans le datagridview de la page setting
+        private async void LoadUserListToSettingGridView()
+        {
+            var getData = userService.GetUserList();
+            CreateUserColumnsForSettingGridView();
+            //chargement des données
+            Program.UserList = await getData;
+            SettingGridView.DataSource = Program.UserList;
+        }
+        private void CreateUserColumnsForSettingGridView()
+        {
+            GridViewTextBoxColumn loginColumn = new("UserName");
+            GridViewTextBoxColumn nameColumn = new("Name");
+            loginColumn.HeaderText = Language.labelUser;
+            nameColumn.HeaderText = Language.labelName;
+            SettingGridView.Columns.Add(loginColumn);
+            SettingGridView.Columns.Add(nameColumn);
         }
         // show school year UI for edit
         private void ShowSchoolYearEditForm(SchoolYear schoolYear)
@@ -755,7 +1007,7 @@ namespace Primary.SchoolApp
                 SettingGridView.DataSource = Program.SchoolYearList;
             }
         }
-        // show school grou UI for edit
+        // show school group UI for edit
         private void ShowSchoolGroupEditForm(SchoolGroup schoolGroup)
         {
             if (schoolGroup != null)
@@ -878,7 +1130,6 @@ namespace Primary.SchoolApp
                 SettingGridView.DataSource = Program.CashFlowTypeList;
             }
         }
-
         // show PaymentMean UI for edit
         private void ShowPaymentMeanEditForm(PaymentMean item)
         {
@@ -1037,6 +1288,152 @@ namespace Primary.SchoolApp
                 SettingGridView.DataSource = Program.SubjectList;
             }
         }
+        // show evaluation type UI for edit
+        private void ShowEvaluationSessionEditForm(EvaluationSession item)
+        {
+            if (item != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditEvaluationSessionForm>();
+                form.Init(item);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.MasterTemplate.DataSource = new List<EvaluationSession>();
+                    SettingGridView.Templates[0].DataSource = new List<EvaluationSessionChild>();
+                    SettingGridView.MasterTemplate.DataSource = Program.EvaluationSessionParentList;
+                    SettingGridView.Templates[0].DataSource = Program.EvaluationSessionChildList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show("Session inconnue");
+            }
+        }
+        // show Rating system UI for add new
+        private void ShowRatingSystemAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddRatingSystemForm>();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var data = ratingSystemService.GetRatingSystem(form.FrenchNameDropDownList.Text).Result;
+                Program.RatingSystemList.Add(data);
+                SettingGridView.DataSource = new List<RatingSystem>();
+                SettingGridView.DataSource = Program.RatingSystemList;
+            }
+        }
+        // show  Rating system UI for edit
+        private void ShowRatingSystemEditForm(RatingSystem ratingSystem)
+        {
+            if (ratingSystem != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditRatingSystemForm>();
+                form.Init(ratingSystem);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.DataSource = new List<RatingSystem>();
+                    SettingGridView.DataSource = Program.RatingSystemList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show("Système inconnu");
+            }
+        }
+        // show job UI for add
+        private void ShowJobAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddJobForm>();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var data = jobService.GetJob(form.NameTextBox.Text).Result;
+                Program.JobList.Add(data);
+                SettingGridView.DataSource = new List<Job>();
+                SettingGridView.DataSource = Program.JobList;
+            }
+
+        }
+        // show job UI for edit
+        private void ShowJobEditForm(Job job)
+        {
+            if (job != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditJobForm>();
+                form.Init(job);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.DataSource = new List<Job>();
+                    SettingGridView.DataSource = Program.JobList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show("Fonction inconnue");
+            }
+
+        }
+        // show employee group UI for add
+        private void ShowEmployeeGroupAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddEmployeeGroupForm>();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var data = employeeGroupService.GetEmployeeGroup(form.NameTextBox.Text).Result;
+                Program.EmployeeGroupList.Add(data);
+                SettingGridView.DataSource = new List<EmployeeGroup>();
+                SettingGridView.DataSource = Program.EmployeeGroupList;
+            }
+
+        }
+        // show employee group UI for edit
+        private void ShowEmployeeGroupEditForm(EmployeeGroup group)
+        {
+            if (group != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditEmployeeGroupForm>();
+                form.Init(group);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.DataSource = new List<EmployeeGroup>();
+                    SettingGridView.DataSource = Program.EmployeeGroupList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show("Fonction inconnue");
+            }
+
+        }
+        // show user UI for add
+        private void ShowUserAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddUserForm>();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                var data = userService.GetUser(form.LoginTextBox.Text).Result;
+                Program.UserList.Add(data);
+                SettingGridView.DataSource = new List<User>();
+                SettingGridView.DataSource = Program.UserList;
+            }
+
+        }
+        // show user UI for edit
+        private void ShowUserEditForm(User user)
+        {
+            if (user != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditUserForm>();
+                form.Init(user);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.DataSource = new List<User>();
+                    SettingGridView.DataSource = Program.UserList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show("Utilisateur  inconnu");
+            }
+
+        }
         // rend visible le user control selectionnee, les autre invisible
         private void SetVisibleSelectedSettingPageUserControl(UserControl userControl)
         {
@@ -1066,26 +1463,332 @@ namespace Primary.SchoolApp
             var getSchoolYearList = schoolYearService.GetSchoolYearList();
             var getSchoolGroupList = schoolGroupService.GetSchoolGroupList();
             var getClassList = schoolClassService.GetSchoolClassList();
-            var getRoomList= schoolRoomService.GetSchoolRoomList();
-            var getCashflowTypeList=cashFlowTypeService.GetCashFlowTypeList();
-            var getPaymenMeantList=paymentMeanService.GetPaymentMeanList();
-            var getSchoolingCostList = schoolingCostService.GetSchoolingCostList ();
-            var getSubscripFeetionList=subscriptionFeeService.GetSubscriptionFeeList();
-            var getSubjectGroupList= subjectGroupService.GetSubjectGroupList();
-            var getSubjectList=subjectService.GetSubjectList();
+            var getRoomList = schoolRoomService.GetSchoolRoomList();
+            var getCashflowTypeList = cashFlowTypeService.GetCashFlowTypeList();
+            var getPaymenMeantList = paymentMeanService.GetPaymentMeanList();
+            var getSchoolingCostList = schoolingCostService.GetSchoolingCostList();
+            var getSubscripFeetionList = subscriptionFeeService.GetSubscriptionFeeList();
+            var getSubjectGroupList = subjectGroupService.GetSubjectGroupList();
+            var getSubjectList = subjectService.GetSubjectList();
+            var getEvaluationSessionList = evaluationSessionService.GetEvaluationSessionList();
+            var getRatingSystemList = ratingSystemService.GetRatingSystemList();
+            var getJobList = jobService.GetJobList();
+            var getEmployeeGroupList = employeeGroupService.GetEmployeeGroupList();
+            var getModuleList = moduleService.GetModuleList();
+            var getUserList = userService.GetUserList();
+            var getEmployeeList = employeeService.GetEmployeeList();
+            var getCountryList = countryService.GetCountryList();
             Program.SchoolYearList = await getSchoolYearList;
             Program.SchoolGroupList = await getSchoolGroupList;
             Program.SchoolClassList = await getClassList;
             Program.SchoolRoomList = await getRoomList;
             Program.CashFlowTypeList = await getCashflowTypeList;
-            Program.PaymentMeanList= await getPaymenMeantList;
+            Program.PaymentMeanList = await getPaymenMeantList;
             Program.SchoolingCostList = await getSchoolingCostList;
-            Program.SubscriptionFeeList=await getSubscripFeetionList;
+            Program.SubscriptionFeeList = await getSubscripFeetionList;
             Program.SubjectGroupList = await getSubjectGroupList;
-            Program.SubjectList= await getSubjectList;
+            Program.SubjectList = await getSubjectList;
+            Program.EvaluationSessionList = await getEvaluationSessionList;
+            Program.RatingSystemList = await getRatingSystemList;
+            Program.JobList = await getJobList;
+            Program.EmployeeGroupList = await getEmployeeGroupList;
+            Program.UserList = await getUserList;
+            Program.EmployeeList = await getEmployeeList;
+            Program.ModuleList = await getModuleList;
+            Program.CountryList = await getCountryList;
+            //sépare les sessions d'évaluation en mère-fille
+            SplitEvaluationSessionList();
             isFirstLoadingBasicData = true;
             PopulateSchoolYearOnDropDownList();
         }
+        //sépare les sessions d'évaluation en mère-fille
+        private void SplitEvaluationSessionList()
+        {
+            Program.EvaluationSessionChildList = new List<EvaluationSessionChild>();
+            Program.EvaluationSessionParentList = new List<EvaluationSession>();
+            foreach (var item in Program.EvaluationSessionList)
+            {
+                if (item.Code != "TERM01" && item.Code != "TERM02" && item.Code != "TERM03")
+                {
+                    Program.EvaluationSessionChildList.Add(item.ToEvaluationSessionChild());
+                }
+                else
+                {
+                    Program.EvaluationSessionParentList.Add(item);
+                }
+            }
+        }
+        //génère les sessions d'évaluation manquantes
+        private void GenerateEvaluationSessions()
+        {
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "TERM01") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "TERM01",
+                    FrenchName = "Premier Trimestre",
+                    EnglishName = "First Trimester",
+                    Sequence = 1
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "TERM02") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "TERM02",
+                    FrenchName = "Deuxième Trimestre",
+                    EnglishName = "Second Trimester",
+                    Sequence = 2
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "TERM01") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "TERM03",
+                    FrenchName = "Troisième Trimestre",
+                    EnglishName = "Third Trimester",
+                    Sequence = 3
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL01") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL01",
+                    FrenchName = "EVALUATION N°1",
+                    EnglishName = "EVALUATION N°1",
+                    Sequence = 1
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL02") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+
+                    Code = "EVAL02",
+                    FrenchName = "EVALUATION N°2",
+                    EnglishName = "EVALUATION N°2",
+                    Sequence = 2
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL03") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL03",
+                    FrenchName = "EVALUATION N°3",
+                    EnglishName = "EVALUATION N°3",
+                    Sequence = 3
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL04") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL04",
+                    FrenchName = "EVALUATION N°4",
+                    EnglishName = "EVALUATION N°4",
+                    Sequence = 1
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL05") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL05",
+                    FrenchName = "EVALUATION N°5",
+                    EnglishName = "EVALUATION N°5",
+                    Sequence = 2
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL06") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL06",
+                    FrenchName = "EVALUATION N°6",
+                    EnglishName = "EVALUATION N°6",
+                    Sequence = 3
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL07") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL07",
+                    FrenchName = "EVALUATION N°7",
+                    EnglishName = "EVALUATION N°7",
+                    Sequence = 1
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL08") == null)
+            {
+                EvaluationSession type = new EvaluationSession()
+                {
+                    Code = "EVAL08",
+                    FrenchName = "EVALUATION N°8",
+                    EnglishName = "EVALUATION N°8",
+                    Sequence = 2
+                };
+                var isDone = evaluationSessionService.CreateEvaluationSession(type).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout  type d'évaluation {type.FrenchName}/{type.EnglishName} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show("Erreur d'enregistrement", "Enregistrement des données", MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+
+        }
+        
         #endregion
 
         #region Events
@@ -1094,11 +1797,14 @@ namespace Primary.SchoolApp
             SettingSearchTextBox.Text = string.Empty;
             if (SettingLeftListView.SelectedItem != null)
             {
+                SettingGridView.Relations.Clear();
+                SettingGridView.Templates.Clear();
                 SettingGridView.Columns.Clear();
                 SettingGridView.DataSource = null;
                 switch (SettingLeftListView.SelectedItem.Key)
                 {
                     case 1:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSchoolYear;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSchoolYearListToSettingGridView();
@@ -1108,10 +1814,10 @@ namespace Primary.SchoolApp
                             CreateSchoolYearColumnsForSettingGridView();
                             SettingGridView.DataSource = Program.SchoolYearList;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par Désignation";
                         SetVisibleSelectedSettingPageUserControl(schoolYearInfo);
                         break;
                     case 2:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddGroup;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSchoolGroupListToSettingGridView();
@@ -1122,10 +1828,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SchoolGroupList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par Désignation";
                         SetVisibleSelectedSettingPageUserControl(schoolGroupInfo);
                         break;
                     case 3:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddClass;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSchoolClassListToSettingGridView();
@@ -1136,10 +1842,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SchoolClassList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par Désignation ou par groupe";
                         SetVisibleSelectedSettingPageUserControl(schoolClassInfo);
                         break;
                     case 4:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddRoom;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSchoolRoomListToSettingGridView();
@@ -1150,10 +1856,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SchoolRoomList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par Désignation ou par classe";
                         SetVisibleSelectedSettingPageUserControl(schoolRoomInfo);
                         break;
                     case 5:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddCashflowType;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadCashFlowTypeListToSettingGridView();
@@ -1164,10 +1870,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.CashFlowTypeList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par Désignation ou par catégorie";
                         SetVisibleSelectedSettingPageUserControl(cashFlowTypeInfo);
                         break;
                     case 6:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddPaymentMean;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadPaymentMeanListToSettingGridView();
@@ -1178,10 +1884,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.PaymentMeanList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par Désignation, par compte et par type";
                         SetVisibleSelectedSettingPageUserControl(paymentMeanInfo);
                         break;
                     case 7:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSchoolingFee;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSchoolingCostListToSettingGridView();
@@ -1192,10 +1898,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SchoolingCostList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par classe, type de frais ou par année scolaire";
                         SetVisibleSelectedSettingPageUserControl(schoolingCostInfo);
                         break;
                     case 8:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSubscriptionFee;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSubscriptionFeeListToSettingGridView();
@@ -1206,10 +1912,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SubscriptionFeeList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par abonnement ou par année scolaire";
                         SetVisibleSelectedSettingPageUserControl(subscriptionFeeInfo);
                         break;
                     case 9:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddGroup;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSubjectGroupListToSettingGridView();
@@ -1220,10 +1926,10 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SubjectGroupList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par désignation";
                         SetVisibleSelectedSettingPageUserControl(subjectGroupInfo);
                         break;
                     case 10:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSubject;
                         if (!isFirstLoadingBasicData)
                         {
                             LoadSubjectListToSettingGridView();
@@ -1234,22 +1940,94 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SubjectList;
                             isFirstLoadingBasicData = false;
                         }
-                        SettingSearchTextBox.NullText = "Rechercher par désignation";
                         SetVisibleSelectedSettingPageUserControl(subjectInfo);
+                        break;
+                    case 11:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddEvaluationSession;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadEvaluationSessionListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateEvaluationSessionColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.EvaluationSessionParentList;
+                            SettingGridView.Templates[0].DataSource = Program.EvaluationSessionChildList;
+                            SettingGridView.Refresh();
+                            SettingGridView.BestFitColumns();
+                            SettingGridView.Templates[0].BestFitColumns();
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(evaluationSessionInfo);
+                        break;
+                    case 12:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddMarkSystem;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadRatingSystemListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateRatingSystemColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.RatingSystemList;
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(ratingSystemInfo);
+                        break;
+                    case 13:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddJob;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadJobListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateJobColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.JobList;
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(jobInfo);
+                        break;
+                    case 14:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddGroup;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadEmployeeGroupListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateEmployeeGroupColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.EmployeeGroupList;
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(employeeGroupInfo);
+                        break;
+                    case 15:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddUser;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadUserListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateUserColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.UserList;
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(userInfo);
                         break;
                     default:
                         SetVisibleSelectedSettingPageUserControl(null);
                         break;
+
                 }
                 SettingGridView.BestFitColumns();
                 if (SettingGridView.Rows.Count > 0)
                 {
-                    SettingAddButton.Enabled = true;
                     SettingExportToExcelButton.Enabled = true;
                 }
                 else
                 {
-                    SettingAddButton.Enabled = false;
                     SettingExportToExcelButton.Enabled = false;
                 }
             }
@@ -1287,7 +2065,7 @@ namespace Primary.SchoolApp
                         case 6:
                             e.Row.IsVisible = e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
                                 e.Row.Cells["Account"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
-                                e.Row.Cells["Type"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                                e.Row.Cells[Language.labelType].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                         case 7:
                             e.Row.IsVisible = e.Row.Cells["SchoolClass.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
@@ -1299,12 +2077,27 @@ namespace Primary.SchoolApp
                                 e.Row.Cells["SchoolYear.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                         case 9:
-                            e.Row.IsVisible = e.Row.Cells["FrenchName"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
-                                e.Row.Cells["EnglishName"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            e.Row.IsVisible = e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ;
                             break;
                         case 10:
-                            e.Row.IsVisible = e.Row.Cells["FrenchName"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
-                                e.Row.Cells["EnglishName"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            e.Row.IsVisible = e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ;
+                            break;
+                        case 11:
+                            e.Row.IsVisible = e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            break;
+                        case 12:
+                            e.Row.IsVisible = e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
+                                e.Row.Cells[Language.fieldDescription].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            break;
+                        case 13:
+                            e.Row.IsVisible = e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            break;
+                        case 14:
+                            e.Row.IsVisible = e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            break;
+                        case 15:
+                            e.Row.IsVisible = e.Row.Cells["UserName"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
+                                e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                     }
                 }
@@ -1403,6 +2196,41 @@ namespace Primary.SchoolApp
                             if (!subjectInfo.Visible) subjectInfo.Visible = true;
                         }
                         break;
+                    case 11:
+                        LoadSelectedEvaluationSesssionDetail(SettingGridView.CurrentRow.DataBoundItem as EvaluationSession);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!evaluationSessionInfo.Visible) evaluationSessionInfo.Visible = true;
+                        }
+                        break;
+                    case 12:
+                        LoadSelectedRatingSystemDetail(SettingGridView.CurrentRow.DataBoundItem as RatingSystem);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!ratingSystemInfo.Visible) ratingSystemInfo.Visible = true;
+                        }
+                        break;
+                    case 13:
+                        LoadSelectedJobDetail(SettingGridView.CurrentRow.DataBoundItem as Job);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!jobInfo.Visible) jobInfo.Visible = true;
+                        }
+                        break;
+                    case 14:
+                        LoadSelectedEmployeeGroupDetail(SettingGridView.CurrentRow.DataBoundItem as EmployeeGroup);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!employeeGroupInfo.Visible) employeeGroupInfo.Visible = true;
+                        }
+                        break;
+                    case 15:
+                        LoadSelectedUserDetail(SettingGridView.CurrentRow.DataBoundItem as User);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!userInfo.Visible) userInfo.Visible = true;
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -1447,6 +2275,22 @@ namespace Primary.SchoolApp
                 case 10:
                     ShowSubjectAddForm();
                     break;
+                case 11:
+                    GenerateEvaluationSessions();
+                    LoadEvaluationSessionListToSettingGridView();
+                    break;
+                case 12:
+                    ShowRatingSystemAddForm();
+                    break;
+                case 13:
+                    ShowJobAddForm();
+                    break;
+                case 14:
+                    ShowEmployeeGroupAddForm();
+                    break;
+                case 15:
+                    ShowUserAddForm();
+                    break;
                 default:
                     RadMessageBox.Show("Not Implemented");
                     break;
@@ -1487,6 +2331,21 @@ namespace Primary.SchoolApp
                 case 10:
                     ShowSubjectEditForm(SettingGridView.CurrentRow.DataBoundItem as Subject);
                     break;
+                case 11:
+                    ShowEvaluationSessionEditForm(SettingGridView.CurrentRow.DataBoundItem as EvaluationSession);
+                    break;
+                case 12:
+                    ShowRatingSystemEditForm(SettingGridView.CurrentRow.DataBoundItem as RatingSystem);
+                    break;
+                case 13:
+                    ShowJobEditForm(SettingGridView.CurrentRow.DataBoundItem as Job);
+                    break;
+                case 14:
+                    ShowEmployeeGroupEditForm(SettingGridView.CurrentRow.DataBoundItem as EmployeeGroup);
+                    break;
+                case 15:
+                    ShowUserEditForm(SettingGridView.CurrentRow.DataBoundItem as User);
+                    break;
                 default:
                     RadMessageBox.Show("En cours d'implementation");
                     break;
@@ -1498,6 +2357,65 @@ namespace Primary.SchoolApp
         {
             // fait appel à la méthode SettingGridView_CustomFiltering
             SettingGridView.MasterTemplate.Refresh();
+        }
+        private void SettingGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
+        {
+            RadMenuItem menuEdit = new(Language.labelEdit)
+            {
+                Image = AppResource.edit
+            };
+            menuEdit.Click += SettingEditButton_Click;
+            e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+            e.ContextMenu.Items.Add(menuEdit);
+            switch (SettingLeftListView.SelectedItem.Key)
+            {
+                case 1:
+                    var currentYear = SettingGridView.CurrentRow.DataBoundItem as SchoolYear;
+                    var message = currentYear.IsClosed == false ? Language.messageCloseSchoolYear : Language.messageActivateSchoolYear;
+                    RadMenuItem menuChangeSchoolYearStatus = new(message);
+                    menuChangeSchoolYearStatus.Image = currentYear.IsClosed == false ? AppResource.GlyphClose: AppResource.GlyphCheck_small;
+                    e.ContextMenu.Items.Add(menuChangeSchoolYearStatus);
+                    menuChangeSchoolYearStatus.Click += MenuChangeSchoolYearStatus_Click;                   
+                    break;
+                case 3:
+                    RadMenuItem menuShowSubjectToSchoolClass = new(Language.labelSubjectTaught);
+                    menuShowSubjectToSchoolClass.Image = AppResource.eye;
+                    menuShowSubjectToSchoolClass.ToolTipText = Language.messageClickToSee;
+                    menuShowSubjectToSchoolClass.Click += MenuShowSubjectToSchoolClass_Click;
+                    e.ContextMenu.Items.Add(menuShowSubjectToSchoolClass);
+                    break;
+               
+            }
+        }
+
+        private void MenuShowSubjectToSchoolClass_Click(object sender, EventArgs e)
+        {
+            var form = Program.ServiceProvider.GetService<ClassSubjectsForm>();
+            form.Icon = this.Icon;
+            var currentItem = SettingGridView.CurrentRow.DataBoundItem as SchoolClass;
+            form.Init(currentItem);
+            form.Show();
+        }
+
+        private void MenuChangeSchoolYearStatus_Click(object sender, EventArgs e)
+        {
+            var currentYear = SettingGridView.CurrentRow.DataBoundItem as SchoolYear;
+            var message = currentYear.IsClosed == false ? Language.messageAskCloseSchoolYear : Language.messageAskActivateSchoolYear;
+            var result = RadMessageBox.Show(this, message+" " + currentYear.Name, Language.labelSchoolYears.ToUpper(), MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
+            if (result == DialogResult.Yes)
+            {
+                if (schoolYearService.ChangeSchoolYearStatus(currentYear).Result)
+                {
+                    currentYear.IsClosed = !currentYear.IsClosed;
+                    var messageResult = currentYear.IsClosed == false ? Language.messageSuccesCloseSchoolYear : Language.messageSuccesActivateSchoolYear;
+                    RadMessageBox.Show(this, messageResult, Language.labelSchoolYears.ToUpper(), MessageBoxButtons.OK, RadMessageIcon.Info);
+                }
+                else
+                {
+                    RadMessageBox.Show(this, "Erreur...", Language.labelSchoolYears.ToUpper(), MessageBoxButtons.OK, RadMessageIcon.Error);
+
+                }
+            }
         }
         #endregion
 

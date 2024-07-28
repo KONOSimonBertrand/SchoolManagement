@@ -79,16 +79,16 @@
             closeButton.Size = new Size(45, 62);
             closeButton.TabIndex = 2;
             // 
-            // schoolGroupInfoLabel
+            // titleInfoLabel
             // 
             titleInfoLabel.AutoSize = false;
             titleInfoLabel.Dock = DockStyle.Fill;
             titleInfoLabel.Location = new Point(0, 0);
             titleInfoLabel.Margin = new Padding(4, 5, 4, 5);
-            titleInfoLabel.Name = "schoolGroupInfoLabel";
+            titleInfoLabel.Name = "titleInfoLabel";
             titleInfoLabel.Size = new Size(315, 62);
             titleInfoLabel.TabIndex = 1;
-            titleInfoLabel.Text = "INFOS SUR LA CLASSE";
+            titleInfoLabel.Text = "INFOS";
             // 
             // editPanel
             // 
@@ -98,7 +98,7 @@
             editPanel.Location = new Point(0, 62);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(315, 161);
+            editPanel.Size = new Size(315, 82);
             editPanel.TabIndex = 22;
             // 
             // nameTextBox
@@ -106,19 +106,19 @@
             nameTextBox.AutoSize = false;
             nameTextBox.Controls.Add(nameSeparator);
             nameTextBox.Dock = DockStyle.Top;
-            nameTextBox.Location = new Point(0, 62);
+            nameTextBox.Location = new Point(0, 30);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.ReadOnly = true;
-            nameTextBox.Size = new Size(315, 62);
+            nameTextBox.Size = new Size(315, 40);
             nameTextBox.TabIndex = 6;
             // 
             // nameSeparator
             // 
-            nameSeparator.Location = new Point(15, 51);
+            nameSeparator.Location = new Point(15, 32);
             nameSeparator.Margin = new Padding(4, 5, 4, 5);
             nameSeparator.Name = "nameSeparator";
-            nameSeparator.Size = new Size(345, 6);
+            nameSeparator.Size = new Size(286, 4);
             nameSeparator.TabIndex = 6;
             nameSeparator.TabStop = false;
             // 
@@ -129,7 +129,7 @@
             nameLabel.Location = new Point(0, 0);
             nameLabel.Margin = new Padding(4, 5, 4, 5);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(315, 62);
+            nameLabel.Size = new Size(315, 30);
             nameLabel.TabIndex = 5;
             nameLabel.Text = "Désignation:";
             // 
@@ -139,9 +139,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(editPanel);
             Controls.Add(headerPanel);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "SchoolGroupInfo";
-            Size = new Size(315, 230);
+            Size = new Size(315, 156);
             ((System.ComponentModel.ISupportInitialize)headerPanel).EndInit();
             headerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)editButton).EndInit();

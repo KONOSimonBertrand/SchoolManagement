@@ -1,8 +1,9 @@
 ﻿
 
 using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.Logs
+namespace SchoolManagement.Application
 {
     public class LogService : ILogService
     {

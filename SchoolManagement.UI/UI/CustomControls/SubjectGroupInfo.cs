@@ -20,6 +20,7 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponent();
             InitEvents();
+            InitLanguage();
         }
 
         private void InitComponent()
@@ -73,6 +74,10 @@ namespace SchoolManagement.UI.CustomControls
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+        private void InitLanguage()
+        {
+            nameLabel.Text = Languages.Language.labelDesignation;
         }
     }
 }

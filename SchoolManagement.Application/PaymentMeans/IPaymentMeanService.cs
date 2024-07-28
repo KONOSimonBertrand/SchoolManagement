@@ -2,7 +2,7 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.PaymentMeans
+namespace SchoolManagement.Application
 {
     public interface IPaymentMeanService
     {

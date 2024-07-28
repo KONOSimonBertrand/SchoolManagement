@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Bcpg;
 using SchoolManagement.Core.Model;
 using System.Data;
 

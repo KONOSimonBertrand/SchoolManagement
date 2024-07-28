@@ -102,7 +102,7 @@
             titleInfoLabel.Name = "titleInfoLabel";
             titleInfoLabel.Size = new Size(315, 62);
             titleInfoLabel.TabIndex = 1;
-            titleInfoLabel.Text = "INFOS SUR NIVEAU";
+            titleInfoLabel.Text = "INFOS SUR LE MOYEN";
             // 
             // editPanel
             // 
@@ -124,19 +124,19 @@
             typeTextBox.AutoSize = false;
             typeTextBox.Controls.Add(typeSeparator);
             typeTextBox.Dock = DockStyle.Top;
-            typeTextBox.Location = new Point(0, 310);
+            typeTextBox.Location = new Point(0, 170);
             typeTextBox.Margin = new Padding(4, 5, 4, 5);
             typeTextBox.Name = "typeTextBox";
             typeTextBox.ReadOnly = true;
-            typeTextBox.Size = new Size(315, 62);
+            typeTextBox.Size = new Size(315, 40);
             typeTextBox.TabIndex = 2;
             // 
             // typeSeparator
             // 
-            typeSeparator.Location = new Point(15, 51);
+            typeSeparator.Location = new Point(15, 33);
             typeSeparator.Margin = new Padding(4, 5, 4, 5);
             typeSeparator.Name = "typeSeparator";
-            typeSeparator.Size = new Size(345, 6);
+            typeSeparator.Size = new Size(285, 4);
             typeSeparator.TabIndex = 6;
             typeSeparator.TabStop = false;
             // 
@@ -144,10 +144,10 @@
             // 
             typeLabel.AutoSize = false;
             typeLabel.Dock = DockStyle.Top;
-            typeLabel.Location = new Point(0, 248);
+            typeLabel.Location = new Point(0, 140);
             typeLabel.Margin = new Padding(4, 5, 4, 5);
             typeLabel.Name = "typeLabel";
-            typeLabel.Size = new Size(315, 62);
+            typeLabel.Size = new Size(315, 30);
             typeLabel.TabIndex = 11;
             typeLabel.Text = "Catégorie:";
             // 
@@ -156,19 +156,19 @@
             accountTextBox.AutoSize = false;
             accountTextBox.Controls.Add(accountSeparator);
             accountTextBox.Dock = DockStyle.Top;
-            accountTextBox.Location = new Point(0, 186);
+            accountTextBox.Location = new Point(0, 100);
             accountTextBox.Margin = new Padding(4, 5, 4, 5);
             accountTextBox.Name = "accountTextBox";
             accountTextBox.ReadOnly = true;
-            accountTextBox.Size = new Size(315, 62);
+            accountTextBox.Size = new Size(315, 40);
             accountTextBox.TabIndex = 1;
             // 
             // accountSeparator
             // 
-            accountSeparator.Location = new Point(15, 51);
+            accountSeparator.Location = new Point(15, 33);
             accountSeparator.Margin = new Padding(4, 5, 4, 5);
             accountSeparator.Name = "accountSeparator";
-            accountSeparator.Size = new Size(345, 6);
+            accountSeparator.Size = new Size(285, 4);
             accountSeparator.TabIndex = 6;
             accountSeparator.TabStop = false;
             // 
@@ -176,10 +176,10 @@
             // 
             accountLabel.AutoSize = false;
             accountLabel.Dock = DockStyle.Top;
-            accountLabel.Location = new Point(0, 124);
+            accountLabel.Location = new Point(0, 70);
             accountLabel.Margin = new Padding(4, 5, 4, 5);
             accountLabel.Name = "accountLabel";
-            accountLabel.Size = new Size(315, 62);
+            accountLabel.Size = new Size(315, 30);
             accountLabel.TabIndex = 6;
             accountLabel.Text = "Compte:";
             // 
@@ -188,19 +188,19 @@
             nameTextBox.AutoSize = false;
             nameTextBox.Controls.Add(nameSeparator);
             nameTextBox.Dock = DockStyle.Top;
-            nameTextBox.Location = new Point(0, 62);
+            nameTextBox.Location = new Point(0, 30);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.ReadOnly = true;
-            nameTextBox.Size = new Size(315, 62);
+            nameTextBox.Size = new Size(315, 40);
             nameTextBox.TabIndex = 0;
             // 
             // nameSeparator
             // 
-            nameSeparator.Location = new Point(15, 51);
+            nameSeparator.Location = new Point(15, 33);
             nameSeparator.Margin = new Padding(4, 5, 4, 5);
             nameSeparator.Name = "nameSeparator";
-            nameSeparator.Size = new Size(345, 6);
+            nameSeparator.Size = new Size(285, 4);
             nameSeparator.TabIndex = 6;
             nameSeparator.TabStop = false;
             // 
@@ -211,7 +211,7 @@
             nameLabel.Location = new Point(0, 0);
             nameLabel.Margin = new Padding(4, 5, 4, 5);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(315, 62);
+            nameLabel.Size = new Size(315, 30);
             nameLabel.TabIndex = 5;
             nameLabel.Text = "Désignation:";
             // 
@@ -223,7 +223,7 @@
             Controls.Add(headerPanel);
             Margin = new Padding(2);
             Name = "PaymentMeanInfo";
-            Size = new Size(315, 425);
+            Size = new Size(315, 281);
             ((System.ComponentModel.ISupportInitialize)headerPanel).EndInit();
             headerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)editButton).EndInit();

@@ -1,19 +1,9 @@
 ﻿using Primary.SchoolApp.UI;
-using SchoolManagement.Application.SchoolYears;
+using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System.Windows.Forms;
 using Telerik.WinControls;
 using System.Linq;
-using SchoolManagement.Application.SchoolGroups;
-using SchoolManagement.Application.SchoolClasses;
-using SchoolManagement.Application.SchoolRooms;
-using SchoolManagement.Application.CashFlowTypes;
-using SchoolManagement.Application.PaymentMeans;
-using SchoolManagement.Application.SchoolingCosts;
-using SchoolManagement.Application.SubscriptionFees;
-using SchoolManagement.Application.SubjectGroups;
-using SchoolManagement.Application.Subjects;
-
 namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
@@ -29,10 +19,22 @@ namespace Primary.SchoolApp
         private readonly ISubscriptionFeeService subscriptionFeeService;
         private readonly ISubjectGroupService subjectGroupService;
         private readonly ISubjectService subjectService;
+        private readonly IEvaluationSessionService evaluationSessionService;
+        private readonly ClientApp clientApp;
+        private readonly ILogService logService;
+        private readonly IRatingSystemService ratingSystemService;
+        private readonly IJobService jobService;
+        private readonly IEmployeeGroupService employeeGroupService;
+        private readonly IUserService userService;
+        private readonly IEmployeeService employeeService;
+        private readonly IModuleService moduleService;
+        private readonly ICountryService countryService;
         public MainForm(ISchoolYearService schoolYearService,ISchoolGroupService schoolGroupService,
             ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
             ,IPaymentMeanService paymentMeanService, ISchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
-            , ISubjectGroupService subjectGroupService, ISubjectService subjectService
+            , ISubjectGroupService subjectGroupService, ISubjectService subjectService, IEvaluationSessionService evaluationSessionService, 
+            ClientApp clientApp, ILogService logService, IRatingSystemService ratingSystemService,IJobService jobService,IEmployeeGroupService employeeGroupService,
+            IUserService userService, IEmployeeService employeeService,IModuleService moduleService, ICountryService countryService
             ) 
         {
             InitializeComponent();
@@ -46,6 +48,16 @@ namespace Primary.SchoolApp
             this.subscriptionFeeService = subscriptionFeeService;
             this.subjectGroupService = subjectGroupService;
             this.subjectService = subjectService;
+            this.evaluationSessionService = evaluationSessionService;
+            this.ratingSystemService = ratingSystemService;
+            this.jobService = jobService;
+            this.clientApp = clientApp;
+            this.logService = logService;
+            this.employeeGroupService = employeeGroupService;
+            this.userService = userService;
+            this.employeeService = employeeService;
+            this.moduleService = moduleService;
+            this.countryService = countryService;
             LoadBasicData();
             InitSettingPage();
             InitMainEvents();

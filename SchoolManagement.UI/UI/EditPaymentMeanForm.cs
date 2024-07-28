@@ -1,7 +1,6 @@
 ﻿
 
-
-
+using SchoolManagement.UI.Languages;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -22,8 +21,17 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitEvent();
+            InitLanguage();
         }
-
+        private void InitLanguage()
+        {
+            this.nameLabel.Text = Language.labelDesignation;
+            this.accountLabel.Text = Language.labelAccount;
+            this.typeLabel.Text=Language.labelCategory;
+            this.levelLabel.Text=Language.labelSequence;
+            this.saveButton.Text = Language.labelSave;
+            this.closeButton.Text = Language.labelCancel;
+        }
         private void InitComponent()
         {
             this.nameLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;

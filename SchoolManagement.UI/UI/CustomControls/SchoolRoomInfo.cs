@@ -19,6 +19,7 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponent();
             InitEvents();
+            InitLanguage();
         }
         private void InitEvents()
         {
@@ -100,6 +101,12 @@ namespace SchoolManagement.UI.CustomControls
         private void Label_MouseMove(object sender, MouseEventArgs e)
         {
             Cursor.Current = Cursors.Hand;
+        }
+        private void InitLanguage()
+        {
+            nameLabel.Text = Languages.Language.labelDesignation;
+            classLabel.Text = Languages.Language.labelClass;
+            this.studentsCountLabel.Text = Languages.Language.labelStudentCount;
         }
     }
 }

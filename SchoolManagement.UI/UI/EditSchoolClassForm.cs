@@ -1,5 +1,6 @@
 ﻿
 
+using SchoolManagement.UI.Languages;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -20,8 +21,17 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitEvent();
+            InitLanguage();
         }
-
+        private void InitLanguage()
+        {
+            this.nameLabel.Text = Language.labelDesignation;
+            this.sequenceLabel.Text=Language.labelSequence;
+            this.groupLabel.Text=Language.labelGroup;
+            this.bookTypeLabel.Text=Language.labelBookModel;
+            this.saveButton.Text = Language.labelSave;
+            this.closeButton.Text = Language.labelCancel;
+        }
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;
@@ -50,11 +60,6 @@ namespace SchoolManagement.UI
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
             this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
-
-            this.bookModelLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
-            this.bookModelLabel.LabelElement.CustomFontSize = 10.5f;
-            this.bookModelLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            this.bookModelLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sequenceLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;

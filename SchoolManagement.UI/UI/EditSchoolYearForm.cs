@@ -1,4 +1,5 @@
-﻿using SchoolManagement.UI.Utilities;
+﻿using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -22,6 +23,20 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitEvent();
+            InitLanguage();
+
+        }
+        private void InitLanguage()
+        {
+            this.nameLabel.Text = Language.labelDescription;
+            this.startFirstQuarterLabel.Text = Language.labelStartFirstQuarter;
+            this.endFirstQuarterLabel.Text = Language.labelEndFirstQuarter;
+            this.startSecondQuarterLabel.Text = Language.labelStartSecondQuarter;
+            this.endSecondQuarterLabel.Text = Language.labelEndSecondQuarter;
+            this.startThirdQuarterLabel.Text = Language.labelStartThirdQuarter;
+            this.endThirdQuarterLabel.Text = Language.labelEndThirdQuarter;
+            this.saveButton.Text = Language.labelSave;
+            this.closeButton.Text = Language.labelCancel;
         }
         private void InitComponent()
         {

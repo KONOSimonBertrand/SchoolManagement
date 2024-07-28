@@ -2,7 +2,7 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.SchoolingCosts
+namespace SchoolManagement.Application
 {
     public  interface ISchoolingCostService
     {

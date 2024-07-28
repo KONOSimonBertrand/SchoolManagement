@@ -1,4 +1,4 @@
-﻿using MediaFoundation;
+﻿using SchoolManagement.UI.Languages;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -19,8 +19,16 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitEvent();
+            InitLanguage();
         }
-
+        private void InitLanguage()
+        {
+            this.nameLabel.Text = Language.labelDescription;
+            this.sequenceLabel.Text = Language.labelSequence;
+            this.classLabel.Text = Language.labelClass;
+            this.saveButton.Text = Language.labelSave;
+            this.closeButton.Text = Language.labelCancel;
+        }
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;

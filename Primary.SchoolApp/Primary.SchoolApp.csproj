@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
     <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2023.2.718" />
   </ItemGroup>
 

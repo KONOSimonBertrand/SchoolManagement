@@ -2,6 +2,7 @@
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using SchoolManagement.UI.Utilities;
+using SchoolManagement.UI.Languages;
 
 namespace SchoolManagement.UI
 {
@@ -9,8 +10,8 @@ namespace SchoolManagement.UI
     {
         RadButtonElement aboutButton = new();
         RadSplitButtonElement userSplitButtonElement = new();
-        RadMenuItem logoutMenuItem = new("Déconnexion");
-        RadMenuItem changePasswordMenuItem = new("Changer votre mot de passe");
+        RadMenuItem logoutMenuItem = new(Language.labelLogOut);
+        RadMenuItem changePasswordMenuItem = new(Language.messageChangePassword);
 
         #region Properties
         public RadButtonElement AboutButton { get => aboutButton; }
@@ -37,6 +38,7 @@ namespace SchoolManagement.UI
             InitReportsPage();
             InitEmployeePage();
             InitSettingPage();
+            InitLanguage();
             AdjustMainColor();
         }
 

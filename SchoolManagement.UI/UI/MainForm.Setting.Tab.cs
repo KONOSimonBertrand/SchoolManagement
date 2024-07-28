@@ -2,7 +2,7 @@
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SchoolManagement.UI.CustomControls;
-using System.Reflection.Metadata.Ecma335;
+using SchoolManagement.UI.Languages;
 
 
 namespace SchoolManagement.UI
@@ -91,5 +91,51 @@ namespace SchoolManagement.UI
             settingInfoRightPanel.RootElement.EnableElementShadow = false;
         }
 
+        private void InitLanguage()
+        {
+            
+            HomePage.Text=Language.labelHome.ToUpper();
+            CashFlowPage.Text = Language.labelCashFlow.ToUpper();
+            DisciplinePage.Text = Language.labelDiscipline.ToUpper();
+            StudentNotePage.Text=Language.labelStudentNotes.ToUpper();
+            DisciplinePage.Text=Language.labelDiscipline.ToUpper();
+            EmployeePage.Text=Language.labelAdministration.ToUpper();
+            ReportsPage.Text=Language.labelReports.ToUpper();
+            SettingPage.Text=Language.labelSettings.ToUpper();
+            TimeTablePage.Text=Language.labelTimeTable.ToUpper();
+            homeAddButton.Text = Language.labelEnroll;
+            homeSchoolYearLabel.Text = Language.labelSchoolYear;
+            homeExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;
+            homeExportToExcelButton.Text = Language.labelExport;
+            homeSearchTextBox.NullText = Language.messageResearch;
+            cashFlowAddButton.Text = Language.labelAdd;
+            cashFlowSchoolYearLabel.Text = Language.labelSchoolYear;
+            cashFlowExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;
+            cashFlowExportToExcelButton.Text = Language.labelExport;
+            cashFlowSearchTextBox.NullText = Language.messageResearch;
+            timeTableSchoolYearLabel.Text = Language.labelSchoolYear;
+            disciplineAddButton.Text = Language.labelAdd;
+            disciplineSchoolYearLabel.Text = Language.labelSchoolYear;
+            disciplineExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;
+            disciplineExportToExcelButton.Text = Language.labelExport;
+            disciplineSearchTextBox.NullText = Language.messageResearch;
+            studentNoteAddButton.Text = Language.labelAdd;
+            studentNoteSchoolYearLabel.Text = Language.labelSchoolYear;
+            studentNoteExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;
+            studentNoteExportToExcelButton.Text = Language.labelExport;
+            studentNoteSearchTextBox.NullText = Language.messageResearch;
+            reportSchoolYearLabel.Text = Language.labelSchoolYear;
+            reportSearchTextBox.NullText = Language.messageResearch;
+            employeeAddButton.Text = Language.labelAdd;
+            employeeSchoolYearLabel.Text = Language.labelSchoolYear;
+            employeeExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;
+            employeeExportToExcelButton.Text = Language.labelExport;
+            employeeSearchTextBox.NullText = Language.messageResearch;
+            settingAddButton.Text = Language.labelAdd;
+            settingExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;
+            settingExportToExcelButton.Text = Language.labelExport;
+            SettingSearchModuleDropDownList.NullText = Language.messageSearchModule;
+            settingSearchTextBox.NullText = Language.messageResearch;
+        }
     }
 }

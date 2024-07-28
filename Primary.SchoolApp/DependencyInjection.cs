@@ -29,6 +29,19 @@ namespace Primary.SchoolApp
             services.AddTransient<EditSubjectGroupForm>();
             services.AddTransient<AddSubjectForm>();
             services.AddTransient<EditSubjectForm>();
+            services.AddTransient<EditEvaluationSessionForm>();
+            services.AddTransient<AddRatingSystemForm>();
+            services.AddTransient<EditRatingSystemForm>();
+            services.AddTransient<AddJobForm>();
+            services.AddTransient<EditJobForm>();
+            services.AddTransient<AddEmployeeGroupForm>();
+            services.AddTransient<EditEmployeeGroupForm>();
+            services.AddTransient<AddUserForm>();
+            services.AddTransient<EditUserForm>();
+            services.AddTransient<AddEmployeeForm>();
+            services.AddTransient<EditEmployeeForm>();
+            services.AddTransient<ClassSubjectsForm>();
+
             return services;
         }
     }

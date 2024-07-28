@@ -1,8 +1,9 @@
 ﻿
 
 using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.SubjectGroups
+namespace SchoolManagement.Application
 {
     internal class SubjectGroupService : ISubjectGroupService
     {

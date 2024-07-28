@@ -21,12 +21,11 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponent();
             InitEvents();
-          
+            InitLanguage();
            
         }
         private void InitComponent() {
             this.headerPanel.RootElement.EnableElementShadow = false;
-            this.closeButton.Click += CloseButton_Click;
             this.titleInfoLabel.RootElement.EnableElementShadow = false;
             this.titleInfoLabel.LabelElement.CustomFont = ViewUtilities.MainFontMedium;
             this.titleInfoLabel.LabelElement.CustomFontSize = 10.5f;
@@ -64,6 +63,10 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+        }
+        private void InitLanguage()
+        {
+            nameLabel.Text = Languages.Language.labelDesignation;
         }
         private void InitEvents()
         {

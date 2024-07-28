@@ -2,6 +2,7 @@
 
 
 using SchoolManagement.UI.Utilities;
+using System.Xml;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -26,6 +27,7 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponent();
             InitEvents();
+            InitLanguage();
         }
 
         private void InitEvents()
@@ -148,8 +150,15 @@ namespace SchoolManagement.UI.CustomControls
             this.amountSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.trancheNumberSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
         }
-        
-        
+
+        private void InitLanguage()
+        {
+            schoolYearLabel.Text = Languages.Language.labelSchoolYear;
+            classLabel.Text = Languages.Language.labelClass;
+            this.amountLabel.Text = Languages.Language.labelAmount;
+            this.trancheNumberLabel.Text = Languages.Language.labelTrancheNumber;
+            this.costTypeLabel.Text = Languages.Language.labelFeeType;
+        }
 
     }
 }

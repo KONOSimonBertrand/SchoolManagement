@@ -2,7 +2,7 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.SchoolRooms
+namespace SchoolManagement.Application
 {
     public interface ISchoolRoomService
     {

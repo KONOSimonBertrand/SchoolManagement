@@ -12,6 +12,14 @@
         },
         "runtime": {
           "SchoolManagement.UI.dll": {}
+        },
+        "resources": {
+          "en-GB/SchoolManagement.UI.resources.dll": {
+            "locale": "en-GB"
+          },
+          "fr-FR/SchoolManagement.UI.resources.dll": {
+            "locale": "fr-FR"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/3.1.0": {},

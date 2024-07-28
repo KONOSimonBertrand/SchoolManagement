@@ -2,7 +2,7 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.Logs
+namespace SchoolManagement.Application
 {
     public  interface ILogService
     {

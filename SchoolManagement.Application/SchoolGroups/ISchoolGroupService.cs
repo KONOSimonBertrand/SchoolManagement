@@ -2,7 +2,7 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.SchoolGroups
+namespace SchoolManagement.Application
 {
     public  interface ISchoolGroupService
     {

@@ -1,6 +1,7 @@
 ﻿using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.SchoolGroups
+namespace SchoolManagement.Application
 {
     public class SchoolGroupService : ISchoolGroupService
     {

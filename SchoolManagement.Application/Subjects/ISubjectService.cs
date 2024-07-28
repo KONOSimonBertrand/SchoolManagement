@@ -2,7 +2,7 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.Subjects
+namespace SchoolManagement.Application
 {
     public interface ISubjectService
     {

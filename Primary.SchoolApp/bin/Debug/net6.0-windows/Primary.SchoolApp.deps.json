@@ -12,6 +12,7 @@
           "SchoolManagement.Application": "1.0.0",
           "SchoolManagement.Infrastructure": "1.0.0",
           "SchoolManagement.UI": "1.0.0",
+          "System.Resources.ResourceManager": "4.3.0",
           "UI.for.WinForms.AllControls.Net60": "2023.2.718"
         },
         "runtime": {
@@ -359,6 +360,14 @@
           }
         }
       },
+      "Microsoft.Extensions.Localization.Abstractions/7.0.20": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.2024.26907"
+          }
+        }
+      },
       "Microsoft.Extensions.Logging/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "8.0.0",
@@ -631,6 +640,13 @@
           "Microsoft.Win32.SystemEvents": "4.7.0"
         }
       },
+      "System.Globalization/4.3.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0",
+          "Microsoft.NETCore.Targets": "1.1.0",
+          "System.Runtime": "4.3.0"
+        }
+      },
       "System.IO/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -683,6 +699,15 @@
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
           "Microsoft.NETCore.Targets": "1.1.0",
+          "System.Runtime": "4.3.0"
+        }
+      },
+      "System.Resources.ResourceManager/4.3.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0",
+          "Microsoft.NETCore.Targets": "1.1.0",
+          "System.Globalization": "4.3.0",
+          "System.Reflection": "4.3.0",
           "System.Runtime": "4.3.0"
         }
       },
@@ -1047,7 +1072,9 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
-          "SchoolManagement.Core": "1.0.0"
+          "Microsoft.Extensions.Localization.Abstractions": "7.0.20",
+          "SchoolManagement.Core": "1.0.0",
+          "SchoolManagement.Infrastructure": "1.0.0"
         },
         "runtime": {
           "SchoolManagement.Application.dll": {}
@@ -1066,7 +1093,7 @@
           "Microsoft.Extensions.Logging.Console": "8.0.0",
           "MySql.Data": "8.4.0",
           "MySql.EntityFrameworkCore": "7.0.0",
-          "SchoolManagement.Application": "1.0.0"
+          "SchoolManagement.Core": "1.0.0"
         },
         "runtime": {
           "SchoolManagement.Infrastructure.dll": {}
@@ -1078,6 +1105,14 @@
         },
         "runtime": {
           "SchoolManagement.UI.dll": {}
+        },
+        "resources": {
+          "en-GB/SchoolManagement.UI.resources.dll": {
+            "locale": "en-GB"
+          },
+          "fr-FR/SchoolManagement.UI.resources.dll": {
+            "locale": "fr-FR"
+          }
         }
       }
     }
@@ -1291,6 +1326,13 @@
       "path": "microsoft.extensions.hosting.abstractions/8.0.0",
       "hashPath": "microsoft.extensions.hosting.abstractions.8.0.0.nupkg.sha512"
     },
+    "Microsoft.Extensions.Localization.Abstractions/7.0.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kXxF0jflcQJnwmWIjB48PEkerG2QH1WrXEgEUdxtSLgL7IqI+VhbKrE7sUg0iRU5fbm8UyEuPQzvBn45zBQ8rQ==",
+      "path": "microsoft.extensions.localization.abstractions/7.0.20",
+      "hashPath": "microsoft.extensions.localization.abstractions.7.0.20.nupkg.sha512"
+    },
     "Microsoft.Extensions.Logging/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1452,6 +1494,13 @@
       "path": "system.drawing.common/4.7.0",
       "hashPath": "system.drawing.common.4.7.0.nupkg.sha512"
     },
+    "System.Globalization/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kYdVd2f2PAdFGblzFswE4hkNANJBKRmsfa2X5LG2AcWE1c7/4t0pYae1L8vfZ5xvE2nK/R9JprtToA61OSHWIg==",
+      "path": "system.globalization/4.3.0",
+      "hashPath": "system.globalization.4.3.0.nupkg.sha512"
+    },
     "System.IO/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -1493,6 +1542,13 @@
       "sha512": "sha512-5RXItQz5As4xN2/YUDxdpsEkMhvw3e6aNveFXUn4Hl/udNTCNhnKp8lT9fnc3MhvGKh1baak5CovpuQUXHAlIA==",
       "path": "system.reflection.primitives/4.3.0",
       "hashPath": "system.reflection.primitives.4.3.0.nupkg.sha512"
+    },
+    "System.Resources.ResourceManager/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/zrcPkkWdZmI4F92gL/TPumP98AVDu/Wxr3CSJGQQ+XN6wbRZcyfSKVoPo17ilb3iOr0cCRqJInGwNMolqhS8A==",
+      "path": "system.resources.resourcemanager/4.3.0",
+      "hashPath": "system.resources.resourcemanager.4.3.0.nupkg.sha512"
     },
     "System.Runtime/4.3.0": {
       "type": "package",

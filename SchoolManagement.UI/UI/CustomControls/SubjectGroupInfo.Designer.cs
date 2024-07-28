@@ -141,7 +141,7 @@
             Controls.Add(headerPanel);
             Margin = new Padding(2);
             Name = "SubjectGroupInfo";
-            Size = new Size(315, 206);
+            Size = new Size(315, 152);
             ((System.ComponentModel.ISupportInitialize)headerPanel).EndInit();
             headerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)editButton).EndInit();

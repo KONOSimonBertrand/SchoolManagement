@@ -22,6 +22,7 @@ namespace SchoolManagement.UI.CustomControls
             InitializeComponent();
             InitComponent();
             InitEvents();
+            InitLanguage();
         }
 
         private void InitEvents()
@@ -96,6 +97,12 @@ namespace SchoolManagement.UI.CustomControls
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.accountSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.typeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+        }
+        private void InitLanguage()
+        {
+            nameLabel.Text = Languages.Language.labelDesignation;
+            accountLabel.Text=Languages.Language.labelAccount;
+            this.typeLabel.Text= Languages.Language.labelCategory;
         }
     }
 }

@@ -17,8 +17,10 @@ namespace SchoolManagement.UI.CustomControls
         #endregion
         public SubjectInfo()
         {
-            InitializeComponent(); InitComponent();
+            InitializeComponent();
+            InitComponent();
             InitEvents();
+            InitLanguage();
         }
 
         private void InitComponent()
@@ -62,7 +64,10 @@ namespace SchoolManagement.UI.CustomControls
             this.nameTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
         }
-
+        private void InitLanguage()
+        {
+            nameLabel.Text = Languages.Language.labelDesignation;
+        }
         private void InitEvents()
         {
             this.closeButton.Click += CloseButton_Click;

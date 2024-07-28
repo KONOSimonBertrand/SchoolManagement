@@ -1,5 +1,6 @@
 ﻿
 using MediaFoundation;
+using SchoolManagement.UI.Languages;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -21,8 +22,17 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitEvent();
+            InitLanguage();
         }
-
+        private void InitLanguage()
+        {
+            this.schoolYearLabel.Text = Language.labelSchoolYear;
+            this.subscriptionTypeLabel.Text = Language.labelSubscription;
+            this.amountLabel.Text = Language.labelAmount;
+            this.durationLabel.Text = Language.labelDuration;
+            this.saveButton.Text = Language.labelSave;
+            this.closeButton.Text = Language.labelCancel;
+        }
         private void InitComponent()
         {
 

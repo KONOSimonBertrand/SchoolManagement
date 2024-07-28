@@ -1,11 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Primary.SchoolApp.DTO;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Primary.SchoolApp
@@ -25,6 +28,16 @@ namespace Primary.SchoolApp
         public static IList<SubscriptionFee> SubscriptionFeeList;
         public static IList<SubjectGroup> SubjectGroupList;
         public static IList<Subject> SubjectList;
+        public static IList<EvaluationSession> EvaluationSessionList;
+        public static IList<EvaluationSession> EvaluationSessionParentList;
+        public static IList<EvaluationSessionChild> EvaluationSessionChildList;
+        public static IList<RatingSystem> RatingSystemList;
+        public static IList<Job> JobList;
+        public static IList<EmployeeGroup> EmployeeGroupList;
+        public static IList<User> UserList;
+        public static IList<Employee> EmployeeList;
+        public static IList<Module> ModuleList;
+        public static IList<Country> CountryList;
         public static IServiceProvider ServiceProvider { get; private set; }
         public static  string ConnectionString {  get; private set; }
         [STAThread]
@@ -33,7 +46,6 @@ namespace Primary.SchoolApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ConnectionString = ConfigurationManager.ConnectionStrings["school_data_base"].ConnectionString;
-           
             #region Définition des dépendances
             var hostBuilder = new HostBuilder()
                .ConfigureServices(services =>

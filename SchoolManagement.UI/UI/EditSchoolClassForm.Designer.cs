@@ -41,7 +41,6 @@
             groupLabel = new Telerik.WinControls.UI.RadLabel();
             nameLabel = new Telerik.WinControls.UI.RadLabel();
             sequenceLabel = new Telerik.WinControls.UI.RadLabel();
-            bookModelLabel = new Telerik.WinControls.UI.RadLabel();
             bookTypeLabel = new Telerik.WinControls.UI.RadLabel();
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
@@ -60,7 +59,6 @@
             ((System.ComponentModel.ISupportInitialize)groupLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bookModelLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bookTypeLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
@@ -82,7 +80,6 @@
             editPanel.Controls.Add(groupLabel);
             editPanel.Controls.Add(nameLabel);
             editPanel.Controls.Add(sequenceLabel);
-            editPanel.Controls.Add(bookModelLabel);
             editPanel.Controls.Add(bookTypeLabel);
             editPanel.Dock = DockStyle.Top;
             editPanel.Location = new Point(0, 0);
@@ -223,16 +220,6 @@
             sequenceLabel.TabIndex = 82;
             sequenceLabel.Text = "Séquence:";
             // 
-            // bookModelLabel
-            // 
-            bookModelLabel.AutoSize = false;
-            bookModelLabel.Location = new Point(355, 67);
-            bookModelLabel.Margin = new Padding(4, 5, 4, 5);
-            bookModelLabel.Name = "bookModelLabel";
-            bookModelLabel.Size = new Size(328, 30);
-            bookModelLabel.TabIndex = 76;
-            bookModelLabel.Text = "Model de bulletin trimestriel:";
-            // 
             // bookTypeLabel
             // 
             bookTypeLabel.AutoSize = false;
@@ -299,7 +286,6 @@
             ((System.ComponentModel.ISupportInitialize)groupLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bookModelLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookTypeLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
@@ -323,7 +309,6 @@
         private Telerik.WinControls.UI.RadLabel groupLabel;
         private Telerik.WinControls.UI.RadLabel nameLabel;
         private Telerik.WinControls.UI.RadLabel sequenceLabel;
-        private Telerik.WinControls.UI.RadLabel bookModelLabel;
         private Telerik.WinControls.UI.RadLabel bookTypeLabel;
         private Telerik.WinControls.UI.RadLabel errorLabel;
         private Telerik.WinControls.UI.RadButton closeButton;

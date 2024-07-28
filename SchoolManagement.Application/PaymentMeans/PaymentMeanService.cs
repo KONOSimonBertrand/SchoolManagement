@@ -2,8 +2,9 @@
 
 
 using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.PaymentMeans
+namespace SchoolManagement.Application
 {
     internal class PaymentMeanService : IPaymentMeanService
     {

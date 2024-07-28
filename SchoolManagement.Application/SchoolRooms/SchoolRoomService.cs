@@ -1,8 +1,9 @@
 ﻿
 
 using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.SchoolRooms
+namespace SchoolManagement.Application
 {
     public class SchoolRoomService : ISchoolRoomService
     {

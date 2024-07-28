@@ -19,7 +19,15 @@
         {
             get
             {
-                return IsClosed ? "Clôturée" : "Ouverte";              
+                if (Thread.CurrentThread.CurrentUICulture.Name== "en-GB")
+                {
+                    return IsClosed ? "Closed" : "Opened";
+                }
+                else
+                {
+                    return IsClosed ? "Clôturée" : "Ouverte";
+                }
+                           
             }
         }
         public virtual ICollection<SchoolingCost> SchoolingCosts { get; set; }

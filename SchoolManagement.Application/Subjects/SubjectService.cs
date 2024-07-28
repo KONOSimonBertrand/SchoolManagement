@@ -1,8 +1,9 @@
 ﻿
 
 using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.Subjects
+namespace SchoolManagement.Application
 {
     internal class SubjectService:ISubjectService
     {

@@ -110,17 +110,17 @@
             editPanel.Location = new Point(0, 62);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(359, 348);
+            editPanel.Size = new Size(359, 176);
             editPanel.TabIndex = 18;
             // 
             // subjectsCountLabel
             // 
             subjectsCountLabel.AutoSize = false;
             subjectsCountLabel.Dock = DockStyle.Top;
-            subjectsCountLabel.Location = new Point(0, 248);
+            subjectsCountLabel.Location = new Point(0, 140);
             subjectsCountLabel.Margin = new Padding(4, 5, 4, 5);
             subjectsCountLabel.Name = "subjectsCountLabel";
-            subjectsCountLabel.Size = new Size(359, 62);
+            subjectsCountLabel.Size = new Size(359, 30);
             subjectsCountLabel.TabIndex = 59;
             subjectsCountLabel.Text = "Matières enseignées ";
             // 
@@ -129,19 +129,19 @@
             groupTextBox.AutoSize = false;
             groupTextBox.Controls.Add(groupSeparator);
             groupTextBox.Dock = DockStyle.Top;
-            groupTextBox.Location = new Point(0, 186);
+            groupTextBox.Location = new Point(0, 100);
             groupTextBox.Margin = new Padding(4, 5, 4, 5);
             groupTextBox.Name = "groupTextBox";
             groupTextBox.ReadOnly = true;
-            groupTextBox.Size = new Size(359, 62);
+            groupTextBox.Size = new Size(359, 40);
             groupTextBox.TabIndex = 58;
             // 
             // groupSeparator
             // 
-            groupSeparator.Location = new Point(15, 51);
+            groupSeparator.Location = new Point(15, 32);
             groupSeparator.Margin = new Padding(4, 5, 4, 5);
             groupSeparator.Name = "groupSeparator";
-            groupSeparator.Size = new Size(345, 6);
+            groupSeparator.Size = new Size(331, 4);
             groupSeparator.TabIndex = 12;
             groupSeparator.TabStop = false;
             // 
@@ -149,10 +149,10 @@
             // 
             groupLabel.AutoSize = false;
             groupLabel.Dock = DockStyle.Top;
-            groupLabel.Location = new Point(0, 124);
+            groupLabel.Location = new Point(0, 70);
             groupLabel.Margin = new Padding(4, 5, 4, 5);
             groupLabel.Name = "groupLabel";
-            groupLabel.Size = new Size(359, 62);
+            groupLabel.Size = new Size(359, 30);
             groupLabel.TabIndex = 57;
             groupLabel.Text = "Groupe:";
             // 
@@ -161,19 +161,19 @@
             nameTextBox.AutoSize = false;
             nameTextBox.Controls.Add(nameSeparator);
             nameTextBox.Dock = DockStyle.Top;
-            nameTextBox.Location = new Point(0, 62);
+            nameTextBox.Location = new Point(0, 30);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
             nameTextBox.ReadOnly = true;
-            nameTextBox.Size = new Size(359, 62);
+            nameTextBox.Size = new Size(359, 40);
             nameTextBox.TabIndex = 6;
             // 
             // nameSeparator
             // 
-            nameSeparator.Location = new Point(15, 51);
+            nameSeparator.Location = new Point(15, 32);
             nameSeparator.Margin = new Padding(4, 5, 4, 5);
             nameSeparator.Name = "nameSeparator";
-            nameSeparator.Size = new Size(345, 6);
+            nameSeparator.Size = new Size(331, 4);
             nameSeparator.TabIndex = 6;
             nameSeparator.TabStop = false;
             // 
@@ -184,7 +184,7 @@
             nameLabel.Location = new Point(0, 0);
             nameLabel.Margin = new Padding(4, 5, 4, 5);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(359, 62);
+            nameLabel.Size = new Size(359, 30);
             nameLabel.TabIndex = 5;
             nameLabel.Text = "Désignation:";
             // 
@@ -196,7 +196,7 @@
             Controls.Add(headerPanel);
             Margin = new Padding(3, 4, 3, 4);
             Name = "SchoolClassInfo";
-            Size = new Size(359, 434);
+            Size = new Size(359, 251);
             ((System.ComponentModel.ISupportInitialize)headerPanel).EndInit();
             headerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)editButton).EndInit();

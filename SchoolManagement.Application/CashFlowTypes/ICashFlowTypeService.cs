@@ -1,7 +1,7 @@
 ﻿
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.CashFlowTypes
+namespace SchoolManagement.Application
 {
     public interface ICashFlowTypeService
     {

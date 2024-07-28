@@ -2,12 +2,15 @@
 
 using SchoolManagement.Core.Model;
 
-namespace SchoolManagement.Application.Users
+namespace SchoolManagement.Application
 {
     public interface IUserService
     {
-        Task<User?> GetUserAsync(string userName,string userPassword);
-        Task<List<User>> GetUsersAsync();
-        Task<bool> LoginAsync(string userName, string userPassword);
+        public Task<bool> CreateUser(User user);
+        public Task<bool> UpdateUser(User user);
+        public Task<IList<UserModule>> GetUserModuleList(int userId);
+        Task<User?> GetUser(string userName,string userPassword);
+        Task<User?> GetUser(string userName);
+        Task<IList<User>> GetUserList();
     }
 }

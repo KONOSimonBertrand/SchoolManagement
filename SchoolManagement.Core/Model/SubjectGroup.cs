@@ -8,7 +8,8 @@ namespace SchoolManagement.Core.Model
         public string? FrenchName { get; set; }
         public string? EnglishName { get; set; }
         public int Sequence {  get; set; }
-        public virtual string DefaultName { get=>FrenchName+"/"+EnglishName; }
+        public virtual string DefaultName {get=> Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? EnglishName : FrenchName; }
+            
         public override bool Equals(object? obj)
         {
             if(obj is not SubjectGroup other) return false;

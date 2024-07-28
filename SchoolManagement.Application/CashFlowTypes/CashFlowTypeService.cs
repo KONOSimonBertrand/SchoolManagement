@@ -1,7 +1,8 @@
 ﻿
 using SchoolManagement.Core.Model;
+using SchoolManagement.Infrastructure.Repositories;
 
-namespace SchoolManagement.Application.CashFlowTypes
+namespace SchoolManagement.Application
 {
     public class CashFlowTypeService : ICashFlowTypeService
     {
