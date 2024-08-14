@@ -1,8 +1,9 @@
-﻿using SchoolManagement.UI.Languages;
+﻿using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using System.Globalization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
+using Telerik.WinControls.UI.Localization;
 
 namespace SchoolManagement.UI
 {
@@ -35,6 +36,22 @@ namespace SchoolManagement.UI
         {
             
             InitLanguage();
+            if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
+            {
+                RadGridLocalizationProvider.CurrentProvider = new FrenchRadGridLocalizationProvider();
+                RadMessageLocalizationProvider.CurrentProvider = new FrenchRadMessageLocalizationProvider();
+                RadSchedulerLocalizationProvider.CurrentProvider = new FrenchSchedulerLocalizationProvider();
+                CommandBarLocalizationProvider.CurrentProvider = new FrenchCommandBarLocalizationProvider();
+                PrintDialogsLocalizationProvider.CurrentProvider = new FrenchPrintDialogsLocalizationProvider();
+            }
+            else
+            {
+                RadGridLocalizationProvider.CurrentProvider = new RadGridLocalizationProvider();
+                RadMessageLocalizationProvider.CurrentProvider = new RadMessageLocalizationProvider();
+                RadSchedulerLocalizationProvider.CurrentProvider = new RadSchedulerLocalizationProvider();
+                CommandBarLocalizationProvider.CurrentProvider = new CommandBarLocalizationProvider();
+                PrintDialogsLocalizationProvider.CurrentProvider = new PrintDialogsLocalizationProvider();
+            }
         }
 
         private void InitComponent()
@@ -96,6 +113,7 @@ namespace SchoolManagement.UI
             this.cancelButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             languageDropDownList.SelectedIndex = 0;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(LanguageDropDownList.SelectedValue.ToString());
+           
 
         }
         private void InitTheme()
@@ -131,13 +149,13 @@ namespace SchoolManagement.UI
             this.errorLabel.ForeColor = Color.Red;
             if (this.userNameTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie du nom utilisateur est requise!";
+                this.errorLabel.Text = Language.messageFillField;
                 this.userNameTextBox.Focus();
                 return false;
             }
             if (this.passwordTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie du mot de passe est requise!";
+                this.errorLabel.Text = Language.messageFillField;
                 this.passwordTextBox.Focus();
                 return false;
             }
@@ -151,8 +169,8 @@ namespace SchoolManagement.UI
             passwordLabel.Text = Language.labelPassword;
             userNameLabel.Text = Language.labelUserName;
             OutButton.Text = Language.labelCancel;
-            connectionButton.Text = Language.labelConnection;
-            
+            connectionButton.Text = Language.labelLogIn;
+            this.Text = Language.labelSignIn;
             if (languageDropDownList.SelectedIndex == 0)
             {
                 frenchLanguage.Text = "Français";

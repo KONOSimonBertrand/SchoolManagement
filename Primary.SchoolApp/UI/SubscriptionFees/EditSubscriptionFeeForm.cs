@@ -3,13 +3,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using Telerik.WinControls;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditSubscriptionFeeForm : SchoolManagement.UI.EditSubscriptionFeeForm
+    internal class EditSubscriptionFeeForm : SchoolManagement.UI.EditSubscriptionFeeForm
     {
         private readonly ISubscriptionFeeService subscriptionFeeService;
         private readonly ILogService logService;
@@ -23,10 +24,9 @@ namespace Primary.SchoolApp.UI
             public int SchoolYearId { get; set; }
         }
         SubscriptionFeeTracker subscriptionFeeTracker;
-        public EditSubscriptionFeeForm(ISubscriptionFeeService subscriptionFeeService, ILogService logService, 
+        public EditSubscriptionFeeForm(ISubscriptionFeeService subscriptionFeeService, ILogService logService,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.subscriptionFeeService = subscriptionFeeService;
             this.logService = logService;
             this.clientApp = clientApp;
@@ -35,7 +35,7 @@ namespace Primary.SchoolApp.UI
             SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "AB");
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
             InitEvents();
-            this.Text = "MODIFICARION:.FRAIS SCOLARITE";
+            this.Text = Language.titleSubscriptionFeesUpdate.ToUpper();
         }
 
         private void InitEvents()
@@ -54,7 +54,7 @@ namespace Primary.SchoolApp.UI
                 SchoolYearDropDownList.SelectedValue = subscriptionFee.SchoolYear.Id;
                 SubscriptionTypeDropDownList.SelectedValue = subscriptionFee.CashFlowType.Id;
                 AmountTextBox.Text = subscriptionFee.Amount.ToString();
-                DurationSpinEditor.Value=subscriptionFee.Duration;
+                DurationSpinEditor.Value = subscriptionFee.Duration;
                 subscriptionFeeTracker.SchoolYearId = subscriptionFee.SchoolYearId;
                 subscriptionFeeTracker.CashFlowTypeId = subscriptionFee.CashFlowTypeId;
             }
@@ -74,7 +74,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Type inconnu");
+                    RadMessageBox.Show(Language.messageUnknowCashflow);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Année scolaire inconnue");
+                    RadMessageBox.Show(Language.messageUnknowSchoolYear);
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace Primary.SchoolApp.UI
 
                         SaveButton.Enabled = false;
                         AddSchoolYearButton.Enabled = false;
-                        ErrorLabel.Text = "Cette année scolaire est clôturée";
+                        ErrorLabel.Text = Language.messageSchoolYearClosed;
                     }
                     else
                     {
@@ -125,16 +125,16 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(883, 293);
             SchoolYearDropDownList.Focus();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (IsValidData()) {
+            if (IsValidData())
+            {
 
-                int yearId= int.Parse(SchoolYearDropDownList.SelectedValue.ToString());
-                int typeId= int.Parse(SubscriptionTypeDropDownList.SelectedValue.ToString());
+                int yearId = int.Parse(SchoolYearDropDownList.SelectedValue.ToString());
+                int typeId = int.Parse(SubscriptionTypeDropDownList.SelectedValue.ToString());
 
                 if (!SubscriptionFeeExist(typeId, yearId))
                 {
@@ -144,7 +144,7 @@ namespace Primary.SchoolApp.UI
                     subscriptionFee.CashFlowTypeId = subscriptionFee.CashFlowType.Id;
                     subscriptionFee.Duration = int.Parse(DurationSpinEditor.Value.ToString());
                     subscriptionFee.Amount = double.Parse(AmountTextBox.Text);
-                    var isDone=subscriptionFeeService.UpdateSubscriptionFee(subscriptionFee).Result;
+                    var isDone = subscriptionFeeService.UpdateSubscriptionFee(subscriptionFee).Result;
                     if (isDone == true)
                     {
                         Log log = new()
@@ -158,12 +158,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ces frais d'abonnement existent déjà";
+                    this.ErrorLabel.Text = Language.messageSubscriptionFeesExist;
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowSchoolYear);
             }
 
         }
@@ -201,8 +201,8 @@ namespace Primary.SchoolApp.UI
                 SchoolYearDropDownList.SelectedValue = data;
             }
         }
-       
-      
+
+
         // show CashFlowType UI for edit
         private void ShowCashFlowTypeEditForm(CashFlowType cashFlowType)
         {
@@ -220,7 +220,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowCashflow);
             }
 
         }
@@ -237,16 +237,17 @@ namespace Primary.SchoolApp.UI
                 SubscriptionTypeDropDownList.SelectedValue = data;
             }
         }
-    
-    private bool SubscriptionFeeExist(int cashFlowTypeId,int schoolYearId)
+
+        private bool SubscriptionFeeExist(int cashFlowTypeId, int schoolYearId)
         {
-            if (subscriptionFeeTracker.CashFlowTypeId == cashFlowTypeId && subscriptionFeeTracker.SchoolYearId==schoolYearId) {
+            if (subscriptionFeeTracker.CashFlowTypeId == cashFlowTypeId && subscriptionFeeTracker.SchoolYearId == schoolYearId)
+            {
                 return false;
             }
             var item = Program.SubscriptionFeeList.FirstOrDefault(x => x.CashFlowTypeId == cashFlowTypeId && x.SchoolYearId == schoolYearId);
             if (item != null) return true;
-            return subscriptionFeeService.GetSubscriptionFee(cashFlowTypeId, schoolYearId).Result!=null;
+            return subscriptionFeeService.GetSubscriptionFee(cashFlowTypeId, schoolYearId).Result != null;
         }
-    
+
     }
 }

@@ -1,12 +1,32 @@
 ﻿using SchoolManagement.UI.Utilities;
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
+using System.ComponentModel;
+using Telerik.WinControls.Data;
 
 namespace SchoolManagement.UI
 {
     public partial class MainForm
     {
+        public RadDropDownList EmployeeSchoolYearDropDownList { get => employeeSchoolYearDropDownList; }
+        public RadButton EmployeeEnrollingAddButton { get => employeeAddButton; }
+        public RadButton EmployeeExportToExcelButton { get => employeeExportToExcelButton; }
+        public RadToggleButton EmployeeIconViewToggleButton { get => employeeIconViewToggleButton; }
+        public RadToggleButton EmployeeListViewToggleButton { get => employeeListViewToggleButton; }
+        public CustomControls.SearchTextBox EmployeeSearchTextBox { get => employeeSearchTextBox; }
+        public RadListView EmployeeLeftListView { get => employeeLeftListView; }
+        public RadListView EmployeeMainListView { get => employeeMainListView; }
+        public RadPanel EmployeeInfoRightPanel { get => employeeInfoRightPanel; }
+        public RadGridView EmployeeGridView { get => employeeGridView; }
         private void InitEmployeePage()
+        {
+            InitComponentEmployeePage();
+
+            InitEventsEmployeePage();
+
+        }
+
+        private void InitComponentEmployeePage()
         {
             employeeMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             employeeMainPanel.BackgroundImage = Resources.Background;
@@ -18,7 +38,7 @@ namespace SchoolManagement.UI
             employeeNavigationPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             employeeNavigationPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             employeeNavigationPanel.PanelElement.PanelFill.GradientStyle = GradientStyles.Solid;
-           
+
             employeeSearchPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             employeeSearchPanel.BackColor = Color.Transparent;
             employeeSearchPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
@@ -96,12 +116,53 @@ namespace SchoolManagement.UI
             employeeMainListView.ListViewElement.DrawFill = false;
             employeeMainListView.ListViewElement.ViewElement.BackColor = Color.Transparent;
             employeeMainListView.ListViewElement.Padding = new Padding(-9, 0, 0, 0);
-            employeeMainListView.RootElement.EnableElementShadow = false;
+            employeeMainListView.RootElement.EnableElementShadow = false;         
 
             employeeInfoRightPanel.RootElement.EnableElementShadow = false;
             employeeEmptyPanel.RootElement.EnableElementShadow = false;
-
-
         }
+
+        private void InitEventsEmployeePage()
+        {
+            employeeMainListView.VisualItemFormatting += EmployeeMainListView_VisualItemFormatting;
+        }     
+        private void EmployeeMainListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
+        {
+            IconListViewGroupVisualItem groupItem = e.VisualItem as IconListViewGroupVisualItem;
+            try
+            {
+                if (groupItem != null)
+                {
+                    if (groupItem.HasVisibleItems())
+                    {
+                        groupItem.Visibility = ElementVisibility.Visible;
+                    }
+                    else
+                    {
+                        groupItem.Visibility = ElementVisibility.Collapsed;
+                    }
+                    e.VisualItem.CustomFont = ViewUtilities.MainFont;
+                    e.VisualItem.CustomFontSize = 15;
+                    e.VisualItem.CustomFontStyle = FontStyle.Regular;
+                    groupItem.ToggleElement.Visibility = ElementVisibility.Collapsed;
+                    e.VisualItem.ShowHorizontalLine = false;
+                    e.VisualItem.Padding = new Padding(20, 0, 0, 0);
+                    e.VisualItem.TextAlignment = ContentAlignment.BottomLeft;
+                    e.VisualItem.EnableElementShadow = false;
+                }
+                else
+                {
+                    e.VisualItem.EnableElementShadow = true;
+                    e.VisualItem.ShadowDepth = 1;
+                    e.VisualItem.Padding = new Padding(0);
+                    e.VisualItem.ResetValue(LightVisualElement.TextAlignmentProperty, Telerik.WinControls.ValueResetFlags.Local);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
     }
 }

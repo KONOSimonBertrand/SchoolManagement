@@ -1,11 +1,12 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditEvaluationSessionForm : SchoolManagement.UI.EditEvaluationSessionForm
+    internal class EditEvaluationSessionForm : SchoolManagement.UI.EditEvaluationSessionForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
@@ -14,13 +15,12 @@ namespace Primary.SchoolApp.UI
         private EvaluationSession evaluationType;
         public EditEvaluationSessionForm(IEvaluationSessionService evaluationTypeService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.evaluationTypeService = evaluationTypeService;
             this.logService = logService;
             this.clientApp = clientApp;
             evaluationTypeNameTracker = string.Empty;
             InitEvents();
-            this.Text = "MODIFICATION:.SESSION EVALUATION";
+            this.Text = Language.titleEvaluationUpdate.ToUpper();
         }
 
         private void InitEvents()
@@ -30,7 +30,6 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(730, 275);
             FrenchNameTextBox.Focus();
         }
         internal void Init(EvaluationSession evaluationType)
@@ -67,12 +66,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Cette matière existe déjà";
+                    this.ErrorLabel.Text = Language.messageEvaluationExist;
                 }
 
             }

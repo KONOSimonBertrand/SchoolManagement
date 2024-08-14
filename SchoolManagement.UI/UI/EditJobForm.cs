@@ -2,7 +2,7 @@
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SchoolManagement.UI.Utilities;
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 
 namespace SchoolManagement.UI
 {

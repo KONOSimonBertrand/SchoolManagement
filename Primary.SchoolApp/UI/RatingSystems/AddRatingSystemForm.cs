@@ -1,24 +1,24 @@
 ﻿
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddRatingSystemForm : SchoolManagement.UI.EditRatingSystemForm
+    internal class AddRatingSystemForm : SchoolManagement.UI.EditRatingSystemForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly IRatingSystemService ratingSystemService;
         public AddRatingSystemForm(IRatingSystemService ratingSystemService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.ratingSystemService = ratingSystemService;
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = "AJOUT:.SYSTEME APPRECIATION";
+            this.Text = Language.titleRatingSystemAdd.ToUpper();
         }
 
         private void InitEvents()
@@ -29,7 +29,6 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(967, 361);
             FrenchNameDropDownList.Focus();
         }
 
@@ -62,12 +61,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ce système existe déjà ";
+                    this.ErrorLabel.Text = Language.messageRatingSystemExist;
                 }
             }
 

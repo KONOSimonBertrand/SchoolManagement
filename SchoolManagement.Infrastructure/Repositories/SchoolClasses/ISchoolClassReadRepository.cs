@@ -7,5 +7,6 @@ namespace SchoolManagement.Infrastructure.Repositories
         public Task<IList<SchoolClass>>GetListAsync();
         public Task<SchoolClass?> GetAsync(string name);
         public Task<IList<ClassSubject>> GetSubjectListAsync(int classId);
+        public Task<ClassSubject> GetSubjectAsync(int classId,int subjectId, int bookId);
     }
 }

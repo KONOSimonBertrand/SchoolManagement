@@ -1,12 +1,13 @@
 ﻿
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditCashFlowTypeForm : SchoolManagement.UI.EditCashFlowTypeForm
+    public class EditCashFlowTypeForm : SchoolManagement.UI.EditCashFlowTypeForm
     {
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ILogService logService;
@@ -16,13 +17,12 @@ namespace Primary.SchoolApp.UI
 
         public EditCashFlowTypeForm(ICashFlowTypeService cashFlowTypeService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.cashFlowTypeService = cashFlowTypeService;
             this.logService = logService;
             this.clientApp = clientApp;
-            cashFlowTypeNameTracker=string.Empty;
+            cashFlowTypeNameTracker = string.Empty;
             InitEvents();
-            this.Text = "MODIFICATION:.TYPE DE FLUX DE TRESORERIE";
+            this.Text = Language.titleCashflowUpdate.ToUpper();
         }
 
         private void InitEvents()
@@ -33,7 +33,7 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(778, 444);
+
             this.NameTextBox.Focus();
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         }
@@ -42,7 +42,8 @@ namespace Primary.SchoolApp.UI
         {
             if (IsValidData())
             {
-                if (!CashFlowTypeExist(NameTextBox.Text)) {
+                if (!CashFlowTypeExist(NameTextBox.Text))
+                {
                     cashFlowType.Name = NameTextBox.Text;
                     cashFlowType.Category = CategoryDropDownList.SelectedValue.ToString();
                     cashFlowType.Domain = DomainDropDownList.SelectedValue.ToString();
@@ -63,26 +64,28 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Un type de flux de trésorerie potant le même nom existe déjà! ";
+                    ErrorLabel.Text = Language.messageCashFlowExist;
 
                 }
 
             }
-            
+
         }
         internal void Init(CashFlowType cashFlowType)
         {
-            if (cashFlowType != null) { 
+
+            if (cashFlowType != null)
+            {
                 this.cashFlowType = cashFlowType;
                 cashFlowTypeNameTracker = cashFlowType.Name;
                 NameTextBox.Text = cashFlowType.Name;
                 CategoryDropDownList.SelectedValue = cashFlowType.Category;
-                DomainDropDownList.SelectedValue= cashFlowType.Domain;
+                DomainDropDownList.SelectedValue = cashFlowType.Domain;
                 DescriptionTextBox.Text = cashFlowType.Description;
                 SequenceSpinEditor.Value = cashFlowType.Sequence;
             }

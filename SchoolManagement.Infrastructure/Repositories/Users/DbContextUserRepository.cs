@@ -53,12 +53,12 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<UserModule>> GetModuleListAsync(int userId)
         {
-            var result = appDbContext.UsersModules.Include(x=>x.Module).Where(x => x.UserId == userId).ToList();
+            var result = appDbContext.UsersModules.Include(x => x.Module).Where(x => x.UserId == userId).ToList();
             await Task.Delay(0);
             return result;
         }
 
-        private  async Task<bool> AddModuleAsync(UserModule module)
+        private async Task<bool> AddModuleAsync(UserModule module)
         {
             appDbContext.ChangeTracker.Clear();
             module.Module = appDbContext.Modules.FirstOrDefault(x => x.Id == module.ModuleId);
@@ -76,16 +76,16 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
-        public async Task<bool> AddModuleListAsync(User user)
+        public async Task<bool> AddModuleListAsync(int userId, IList<UserModule> modules)
         {
 
-            var modulesToDelete = await GetModuleListAsync(user.Id);
-            foreach(var module in modulesToDelete)
+            var modulesToDelete = await GetModuleListAsync(userId);
+            foreach (var module in modulesToDelete)
             {
                 await DeleteModuleAsync(module);
             }
             int recordCount = 0;
-                foreach (var module in user.Modules)
+            foreach (var module in modules)
             {
                 if (await AddModuleAsync(module) == true)
                 {
@@ -93,7 +93,61 @@ namespace SchoolManagement.Infrastructure.Repositories
                 }
             }
             await Task.Delay(0);
-            return recordCount > 0;
+            return recordCount == modules.Count;
+        }
+
+        public async Task<IList<UserRoom>> GetRoomListAsync(int userId)
+        {
+            var result = appDbContext.UsersRooms.Include(x => x.Room).Where(x => x.UserId == userId).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+
+        public async Task<bool> AddRoomListAsync(int userId, IList<UserRoom> rooms)
+        {
+            var roomsToDelete = await GetRoomListAsync(userId);
+            foreach (var room in roomsToDelete)
+            {
+                await DeleteRoomAsync(room);
+            }
+            int recordCount = 0;
+            foreach (var room in rooms)
+            {
+                if (await AddRoomAsync(room) == true)
+                {
+                    recordCount++;
+                }
+            }
+            await Task.Delay(0);
+            return recordCount == rooms.Count;
+        }
+        private async Task<bool> AddRoomAsync(UserRoom room)
+        {
+            appDbContext.ChangeTracker.Clear();
+            room.Room = appDbContext.ShoolRooms.FirstOrDefault(x => x.Id == room.RoomId);
+            room.User = appDbContext.Users.FirstOrDefault(x => x.Id == room.UserId);
+            appDbContext.UsersRooms.Add(room);
+            var result = appDbContext.SaveChanges();
+            await Task.Delay(0);
+            return result > 0;
+        }
+        private async Task<bool> DeleteRoomAsync(UserRoom room)
+        {
+            appDbContext.ChangeTracker.Clear();
+            appDbContext.UsersRooms.Remove(room);
+            var result = appDbContext.SaveChanges();
+            await Task.Delay(0);
+            return result > 0;
+        }
+
+        public async Task<bool> ChangePasswordAsync(int userId, string password)
+        {
+            appDbContext.ChangeTracker.Clear();
+            var user = await appDbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            user.Password = password;
+            var result = appDbContext.SaveChanges();
+            await Task.Delay(0);
+            return result > 0;
         }
     }
 }

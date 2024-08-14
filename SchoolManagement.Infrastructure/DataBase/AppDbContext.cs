@@ -23,6 +23,7 @@ namespace SchoolManagement.Infrastructure.DataBase
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<UserModule> UsersModules { get; set; }
+        public DbSet<UserRoom> UsersRooms { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -50,6 +51,13 @@ namespace SchoolManagement.Infrastructure.DataBase
                         entity.HasKey("UserId", "ModuleId");
                         entity.HasOne(u => u.Module).WithMany(u => u.Modules).HasForeignKey(u => u.ModuleId);
                         entity.HasOne(u => u.User).WithMany(u => u.Modules).HasForeignKey(u => u.UserId);
+                    });
+            modelBuilder.Entity<UserRoom>(
+                    entity =>
+                    {
+                        entity.HasKey("UserId", "RoomId");
+                        entity.HasOne(u => u.Room).WithMany(u => u.Rooms).HasForeignKey(u => u.RoomId);
+                        entity.HasOne(u => u.User).WithMany(u => u.Rooms).HasForeignKey(u => u.RoomId);
                     });
             modelBuilder.Entity<User>(entity =>
             {
@@ -124,8 +132,7 @@ namespace SchoolManagement.Infrastructure.DataBase
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
-                entity.HasOne(e => e.Group).WithMany(e=>e.Employees).HasForeignKey(e=>e.GroupId);
-                entity.HasOne(e=>e.Job).WithMany(e=>e.Employees).HasForeignKey(e=>e.JobId);   
+                 
             });
         }
     }

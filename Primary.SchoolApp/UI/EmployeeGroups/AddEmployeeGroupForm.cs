@@ -1,24 +1,23 @@
 ﻿
-
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System.Linq;
 using System;
+using SchoolManagement.UI.Localization;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddEmployeeGroupForm : SchoolManagement.UI.EditEmployeeGroupForm
+    internal class AddEmployeeGroupForm : SchoolManagement.UI.EditEmployeeGroupForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly IEmployeeGroupService employeeGroupService;
         public AddEmployeeGroupForm(IEmployeeGroupService employeeGroupService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.employeeGroupService = employeeGroupService;
             this.logService = logService;
             this.clientApp = clientApp;
-            this.Text = "AJOUT:.GROUPE";
+            this.Text = Language.titleGroupAdd;
             InitEvents();
         }
         private void InitEvents()
@@ -28,9 +27,9 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(546, 182);
             NameTextBox.Focus();
         }
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData())
@@ -53,12 +52,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ce groupe existe déjà";
+                    this.ErrorLabel.Text = Language.messageGroupExist;
                 }
             }
         }

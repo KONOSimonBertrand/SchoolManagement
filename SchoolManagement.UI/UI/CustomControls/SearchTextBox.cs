@@ -1,7 +1,4 @@
 ﻿using SchoolManagement.UI.Utilities;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 using Telerik.WinControls.Layouts;
 using Telerik.WinControls.UI;
 

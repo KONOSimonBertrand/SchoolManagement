@@ -30,7 +30,6 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
-
         private async Task<bool> AddModuleAsync(UserModule module)
         {
             var connection = dbConnectionFactoty.CreateConnection();
@@ -51,31 +50,30 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
-        private async Task<bool> DeleteModuleListAsync(User user)
+        private async Task<bool> DeleteModuleListAsync(int userId)
         {
             var connection = dbConnectionFactoty.CreateConnection();
-            string query = @"DELETE FROM UsersModules WERE UserId=@userId ;";
+            string query = @"DELETE FROM UsersModules WHERE UserId=@userId ;";
             var result = connection.Execute(query, new
             {
-                userId = user.Id
+                userId 
             });
             await Task.Delay(0);
             return result > 0;
         }
-        public async Task<bool> AddModuleListAsync(User user)
+        public async Task<bool> AddModuleListAsync(int userId, IList<UserModule> modules)
         {
-            await DeleteModuleListAsync(user);
+            await DeleteModuleListAsync(userId);
             int recordCount = 0;
-            foreach (var module in user.Modules)
+            foreach (var module in modules)
             {
                 if (await AddModuleAsync(module) == true)
                 {
                     recordCount++;
                 }
             }
-            return recordCount > 0;
+            return recordCount== modules.Count;
         }
-
         public async Task<User?> GetAsync(string userName, string password)
         {
             var connection = dbConnectionFactoty.CreateConnection();
@@ -115,7 +113,6 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-
         public async Task<IList<UserModule>> GetModuleListAsync(int userId)
         {
             var connection = dbConnectionFactoty.CreateConnection();
@@ -134,7 +131,6 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-
         public async Task<bool> UpdateAsync(User user)
         {
             var connection = dbConnectionFactoty.CreateConnection();
@@ -148,6 +144,74 @@ namespace SchoolManagement.Infrastructure.Repositories
                 email = user.Email,
                 employeeId = user.EmployeeId,
                 id = user.Id
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+        public async  Task<IList<UserRoom>> GetRoomListAsync(int userId)
+        {
+            var connection = dbConnectionFactoty.CreateConnection();
+            string query = @"SELECT * FROM UsersRooms A 
+                           INNER JOIN Users B ON A.UserId=B.Id
+                           INNER JOIN SchoolRooms C ON A.RoomId=C.Id
+                           WHERE A.UserId=@userId  ;";
+            var result = connection.Query<UserRoom, User, SchoolRoom, UserRoom>(query,
+                (userRoom, user, room) =>
+                {
+                    userRoom.User = user;
+                    userRoom.Room = room;
+                    return userRoom;
+                }
+                , new { userId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+        public async Task<bool> AddRoomListAsync(int userId, IList<UserRoom> rooms)
+        {
+            await DeleteRoomListAsync(userId);
+            int recordCount = 0;
+            foreach (var room in rooms)
+            {
+                if (await AddRoomAsync(room) == true)
+                {
+                    recordCount++;
+                }
+            }
+            return recordCount == rooms.Count;
+        }
+        private async Task<bool> AddRoomAsync(UserRoom room)
+        {
+            var connection = dbConnectionFactoty.CreateConnection();
+            string query = @"INSERT INTO UsersRooms(UserId,RoomId) 
+                           VALUES(@userId,@roomId) ;";
+            var result = connection.Execute(query, new
+            {
+                userId = room.UserId,
+                roomId = room.RoomId,
+               
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+        private async Task<bool> DeleteRoomListAsync(int userId)
+        {
+            var connection = dbConnectionFactoty.CreateConnection();
+            string query = @"DELETE FROM UsersRooms WHERE UserId=@userId ;";
+            var result = connection.Execute(query, new
+            {
+                userId
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+        public async Task<bool> ChangePasswordAsync(int userId, string password)
+        {
+            var connection = dbConnectionFactoty.CreateConnection();
+            string query = @"UPDATE Users SET Password=@password WHERE Id=@userId ;";                             
+            var result = connection.Execute(query, new
+            {
+                password ,
+                userId
             });
             await Task.Delay(0);
             return result > 0;

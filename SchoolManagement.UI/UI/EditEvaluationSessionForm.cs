@@ -2,7 +2,7 @@
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SchoolManagement.UI.Utilities;
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 
 namespace SchoolManagement.UI
 {
@@ -63,6 +63,7 @@ namespace SchoolManagement.UI
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
             this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+            this.sequenceSpinEditor.SpinElement.ShowBorder = false;
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
@@ -82,12 +83,10 @@ namespace SchoolManagement.UI
             this.nameEnTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.codeTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
 
-            this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.nameFrSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.nameEnSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.codeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);

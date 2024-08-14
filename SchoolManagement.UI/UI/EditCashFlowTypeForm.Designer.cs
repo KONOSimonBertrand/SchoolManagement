@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             descriptionSeparator = new Telerik.WinControls.UI.RadSeparator();
             descriptionTextBox = new Telerik.WinControls.UI.RadTextBox();
             descriptionLabel = new Telerik.WinControls.UI.RadLabel();
             domainSeparator = new Telerik.WinControls.UI.RadSeparator();
             domainDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             domainLabel = new Telerik.WinControls.UI.RadLabel();
-            sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             sequenceLabel = new Telerik.WinControls.UI.RadLabel();
-            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             typeSeparator = new Telerik.WinControls.UI.RadSeparator();
             categoryDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             nameSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -47,17 +46,17 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
+            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)descriptionSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)descriptionTextBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)descriptionLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)domainSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)domainDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)domainLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)typeSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)categoryDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameSeparator).BeginInit();
@@ -67,20 +66,21 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
             // editPanel
             // 
+            editPanel.Controls.Add(sequenceSeparator);
+            editPanel.Controls.Add(sequenceSpinEditor);
             editPanel.Controls.Add(descriptionSeparator);
             editPanel.Controls.Add(descriptionTextBox);
             editPanel.Controls.Add(descriptionLabel);
             editPanel.Controls.Add(domainSeparator);
             editPanel.Controls.Add(domainDropDownList);
             editPanel.Controls.Add(domainLabel);
-            editPanel.Controls.Add(sequenceSpinEditor);
             editPanel.Controls.Add(sequenceLabel);
-            editPanel.Controls.Add(sequenceSeparator);
             editPanel.Controls.Add(typeSeparator);
             editPanel.Controls.Add(categoryDropDownList);
             editPanel.Controls.Add(nameSeparator);
@@ -91,8 +91,20 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(772, 277);
+            editPanel.Size = new Size(617, 277);
             editPanel.TabIndex = 28;
+            // 
+            // sequenceSpinEditor
+            // 
+            sequenceSpinEditor.Location = new Point(466, 97);
+            sequenceSpinEditor.MinimumSize = new Size(0, 30);
+            sequenceSpinEditor.Name = "sequenceSpinEditor";
+            // 
+            // 
+            // 
+            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
+            sequenceSpinEditor.Size = new Size(136, 30);
+            sequenceSpinEditor.TabIndex = 92;
             // 
             // descriptionSeparator
             // 
@@ -125,7 +137,7 @@
             // 
             // domainSeparator
             // 
-            domainSeparator.Location = new Point(307, 127);
+            domainSeparator.Location = new Point(307, 128);
             domainSeparator.Margin = new Padding(4, 5, 4, 5);
             domainSeparator.Name = "domainSeparator";
             domainSeparator.Size = new Size(152, 4);
@@ -157,21 +169,9 @@
             domainLabel.Location = new Point(307, 67);
             domainLabel.Margin = new Padding(4, 5, 4, 5);
             domainLabel.Name = "domainLabel";
-            domainLabel.Size = new Size(152, 30);
+            domainLabel.Size = new Size(151, 30);
             domainLabel.TabIndex = 87;
             domainLabel.Text = "domaine:";
-            // 
-            // sequenceSpinEditor
-            // 
-            sequenceSpinEditor.Location = new Point(466, 97);
-            sequenceSpinEditor.MinimumSize = new Size(0, 30);
-            sequenceSpinEditor.Name = "sequenceSpinEditor";
-            // 
-            // 
-            // 
-            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
-            sequenceSpinEditor.Size = new Size(135, 30);
-            sequenceSpinEditor.TabIndex = 3;
             // 
             // sequenceLabel
             // 
@@ -179,22 +179,13 @@
             sequenceLabel.Location = new Point(466, 67);
             sequenceLabel.Margin = new Padding(4, 5, 4, 5);
             sequenceLabel.Name = "sequenceLabel";
-            sequenceLabel.Size = new Size(135, 30);
+            sequenceLabel.Size = new Size(136, 30);
             sequenceLabel.TabIndex = 80;
             sequenceLabel.Text = "Séquence:";
             // 
-            // sequenceSeparator
-            // 
-            sequenceSeparator.Location = new Point(466, 127);
-            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
-            sequenceSeparator.Name = "sequenceSeparator";
-            sequenceSeparator.Size = new Size(135, 3);
-            sequenceSeparator.TabIndex = 79;
-            sequenceSeparator.TabStop = false;
-            // 
             // typeSeparator
             // 
-            typeSeparator.Location = new Point(4, 127);
+            typeSeparator.Location = new Point(4, 128);
             typeSeparator.Margin = new Padding(4, 5, 4, 5);
             typeSeparator.Name = "typeSeparator";
             typeSeparator.Size = new Size(295, 4);
@@ -285,13 +276,22 @@
             saveButton.TabIndex = 5;
             saveButton.Text = "Enregistrer";
             // 
+            // sequenceSeparator
+            // 
+            sequenceSeparator.Location = new Point(466, 128);
+            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
+            sequenceSeparator.Name = "sequenceSeparator";
+            sequenceSeparator.Size = new Size(136, 4);
+            sequenceSeparator.TabIndex = 93;
+            sequenceSeparator.TabStop = false;
+            // 
             // EditCashFlowTypeForm
             // 
             AcceptButton = saveButton;
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 350);
+            ClientSize = new Size(617, 350);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -301,15 +301,14 @@
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)descriptionSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)descriptionTextBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)descriptionLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)domainSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)domainDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)domainLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)typeSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)categoryDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameSeparator).EndInit();
@@ -319,6 +318,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -335,14 +335,14 @@
         private Telerik.WinControls.UI.RadLabel errorLabel;
         private Telerik.WinControls.UI.RadButton closeButton;
         private Telerik.WinControls.UI.RadButton saveButton;
-        private Telerik.WinControls.UI.RadSpinEditor sequenceSpinEditor;
         private Telerik.WinControls.UI.RadLabel sequenceLabel;
-        private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
         private Telerik.WinControls.UI.RadSeparator domainSeparator;
         private Telerik.WinControls.UI.RadDropDownList domainDropDownList;
         private Telerik.WinControls.UI.RadLabel domainLabel;
         private Telerik.WinControls.UI.RadLabel descriptionLabel;
         private Telerik.WinControls.UI.RadTextBox descriptionTextBox;
         private Telerik.WinControls.UI.RadSeparator descriptionSeparator;
+        private Telerik.WinControls.UI.RadSpinEditor sequenceSpinEditor;
+        private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
     }
 }

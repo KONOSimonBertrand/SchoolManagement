@@ -35,6 +35,16 @@ namespace SchoolManagement.Infrastructure.Repositories
             return resut > 0;
         }
 
+        public async Task<bool> DeleteSubjectAsync(int classId, int subjectId, int bookId)
+        {
+            appDbContext.ChangeTracker.Clear();
+            var subject=appDbContext.ClassSubjects.FirstOrDefault(x=>x.ClassId == classId && x.SubjectId==subjectId && x.BookId==bookId);
+            appDbContext.ClassSubjects.Remove(subject);
+            var resut = appDbContext.SaveChanges();
+            await Task.Delay(0);
+            return resut > 0;
+        }
+
         public async Task<SchoolClass?> GetAsync(string name)
         {
             var result = appDbContext.SchoolClasses.Include(g => g.Group).FirstOrDefault(c => c.Name == name);
@@ -47,6 +57,13 @@ namespace SchoolManagement.Infrastructure.Repositories
             var result = appDbContext.SchoolClasses.Include(g => g.Group).ToList();
             await Task.Delay(0);
             return result;
+        }
+
+        public async Task<ClassSubject> GetSubjectAsync(int classId, int subjectId, int bookId)
+        {
+            var result= appDbContext.ClassSubjects.FirstOrDefault(x => x.ClassId == classId && x.SubjectId == subjectId && x.BookId == bookId);
+            await Task.Delay(0);
+            return result ;
         }
 
         public async Task<IList<ClassSubject>> GetSubjectListAsync(int classId)
@@ -72,6 +89,11 @@ namespace SchoolManagement.Infrastructure.Repositories
             }
             await Task.Delay(0);
             return isDone;
+        }
+
+        public Task<bool> UpdateSubjectAsync(ClassSubject classSubject)
+        {
+            throw new NotImplementedException();
         }
     }
 }

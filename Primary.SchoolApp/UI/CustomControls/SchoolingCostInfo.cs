@@ -1,12 +1,7 @@
 ﻿
-
 namespace Primary.SchoolApp.UI.CustomControls
 {
-    public partial class SchoolingCostInfo : SchoolManagement.UI.CustomControls.SchoolingCostInfo
+    internal class SchoolingCostInfo : SchoolManagement.UI.CustomControls.SchoolingCostInfo
     {
-        public SchoolingCostInfo()
-        {
-            InitializeComponent();
-        }
     }
 }

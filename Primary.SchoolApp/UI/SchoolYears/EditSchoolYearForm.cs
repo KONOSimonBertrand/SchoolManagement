@@ -1,5 +1,6 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
@@ -7,41 +8,41 @@ using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditSchoolYearForm : SchoolManagement.UI.EditSchoolYearForm
+    internal class EditSchoolYearForm : SchoolManagement.UI.EditSchoolYearForm
     {
         private readonly ISchoolYearService schoolYearService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private SchoolYear schoolYear;
         private string schoolYearNameTracker;//permet de vérifier si le nom a changé
-        public EditSchoolYearForm(ISchoolYearService schoolYearReadService,ILogService logService,ClientApp clientApp)
+        public EditSchoolYearForm(ISchoolYearService schoolYearReadService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             InitEvents();
             this.schoolYearService = schoolYearReadService;
             this.logService = logService;
             this.clientApp = clientApp;
-            schoolYearNameTracker=string.Empty;
-            this.Text = "MODIFICATION:.ANNEE SCOLAIRE";
+            schoolYearNameTracker = string.Empty;
+            this.Text = Language.titleSchoolYearUpdate.ToUpper();
         }
-        private void InitEvents() {
+        private void InitEvents()
+        {
             SaveButton.Click += SaveButton_Click;
             this.Shown += OnShown;
         }
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(549, 453);
             NameTextBox.Focus();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e)
-        {      
-            if (IsValidData()) {
-                
+        {
+            if (IsValidData())
+            {
+
                 if (!SchoolYearExist(NameTextBox.Text))
                 {
-                    schoolYearNameTracker= NameTextBox.Text; 
+                    schoolYearNameTracker = NameTextBox.Text;
                     schoolYear.Name = NameTextBox.Text;
                     schoolYear.StartFirstQuarter = StartFirstQuarter.Value;
                     schoolYear.EndFirstQuarter = EndFirstQuarter.Value;
@@ -64,37 +65,43 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Une année scolaire portant le même nom existe déjà!";
-                }               
+                    ErrorLabel.Text = Language.messageSchoolYearExist;
+                }
             }
         }
 
-        internal void Init(SchoolYear schoolYear) {
-            if (schoolYear != null) { 
-                this.schoolYear=schoolYear;
-                NameTextBox.Text=schoolYear.Name;
+        internal void Init(SchoolYear schoolYear)
+        {
+
+            if (schoolYear != null)
+            {
+                this.schoolYear = schoolYear;
+                NameTextBox.Text = schoolYear.Name;
                 schoolYearNameTracker = schoolYear.Name;
-                if (schoolYear.StartFirstQuarter != null) {
+                if (schoolYear.StartFirstQuarter != null)
+                {
                     StartFirstQuarter.Value = schoolYear.StartFirstQuarter.Value;
                 }
                 else
                 {
                     StartFirstQuarter.SetToNullValue();
                 }
-                if (schoolYear.EndFirstQuarter != null) {
+                if (schoolYear.EndFirstQuarter != null)
+                {
                     EndFirstQuarter.Value = schoolYear.EndFirstQuarter.Value;
                 }
                 else
                 {
                     EndFirstQuarter.SetToNullValue();
                 }
-                if(schoolYear.StartSecondQuarter != null) { 
-                    StartSecondQuarter.Value = schoolYear.StartSecondQuarter.Value; 
+                if (schoolYear.StartSecondQuarter != null)
+                {
+                    StartSecondQuarter.Value = schoolYear.StartSecondQuarter.Value;
                 }
                 else
                 {
@@ -108,27 +115,29 @@ namespace Primary.SchoolApp.UI
                 {
                     EndSecondQuarter.SetToNullValue();
                 }
-                if (schoolYear.StartThirdQuarter != null) {
-                    StartThirdQuarter.Value = schoolYear.StartThirdQuarter.Value; 
+                if (schoolYear.StartThirdQuarter != null)
+                {
+                    StartThirdQuarter.Value = schoolYear.StartThirdQuarter.Value;
                 }
                 else
                 {
                     StartThirdQuarter.SetToNullValue();
                 }
-                if(schoolYear.EndThirdQuarter != null) { 
-                    EndThirdQuarter.Value = schoolYear.EndThirdQuarter.Value; 
+                if (schoolYear.EndThirdQuarter != null)
+                {
+                    EndThirdQuarter.Value = schoolYear.EndThirdQuarter.Value;
                 }
                 else
                 {
                     EndThirdQuarter.SetToNullValue();
                 }
-               
+
             }
         }
-    
-    private bool SchoolYearExist(string name)
+
+        private bool SchoolYearExist(string name)
         {
-            if(schoolYearNameTracker==name) return false;
+            if (schoolYearNameTracker == name) return false;
             var item = Program.SchoolYearList.FirstOrDefault(x => x.Name == name);
             if (item != null) return true;
             return schoolYearService.GetSchoolYear(name).Result != null;

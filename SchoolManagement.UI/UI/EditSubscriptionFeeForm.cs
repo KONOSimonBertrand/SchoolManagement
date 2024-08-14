@@ -1,6 +1,6 @@
 ﻿
 using MediaFoundation;
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -66,6 +66,7 @@ namespace SchoolManagement.UI
             this.durationSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.durationSpinEditor.SpinElement.CustomFontSize = 10.5f;
             this.durationSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+            this.durationSpinEditor.SpinElement.ShowBorder = false;
 
             this.schoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
@@ -88,11 +89,10 @@ namespace SchoolManagement.UI
 
             this.amountTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
 
-
+            this.durationSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.schoolYearSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.subscriptionTypeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.amountSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-            this.durationSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
@@ -131,12 +131,12 @@ namespace SchoolManagement.UI
         {
             if (subscriptionTypeDropDownList.SelectedIndex < 0)
             {
-                addSubscriptionTypeButton.Image = Resources.plus;
+                addSubscriptionTypeButton.Image = Utilities.ViewUtilities.GetImage("Add");
                 addSubscriptionTypeButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer un nouveau type d'abonnement";
             }
             else
             {
-                addSubscriptionTypeButton.Image = Resources.edit;
+                addSubscriptionTypeButton.Image = Utilities.ViewUtilities.GetImage("Edit");
                 addSubscriptionTypeButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de l'abonnement";
             }
         }
@@ -145,12 +145,12 @@ namespace SchoolManagement.UI
         {
             if (schoolYearDropDownList.SelectedIndex < 0)
             {
-                addSchoolYearButton.Image = Resources.plus;
+                addSchoolYearButton.Image = Utilities.ViewUtilities.GetImage("Add");
                 addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer une nouvelle année scolaire";
             }
             else
             {
-                addSchoolYearButton.Image = Resources.edit;
+                addSchoolYearButton.Image = Utilities.ViewUtilities.GetImage("Edit");
                 addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de l'année scolaire";
             }
         }

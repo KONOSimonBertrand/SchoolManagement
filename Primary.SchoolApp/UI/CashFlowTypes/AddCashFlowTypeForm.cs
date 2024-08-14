@@ -1,11 +1,12 @@
 ﻿
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddCashFlowTypeForm : SchoolManagement.UI.EditCashFlowTypeForm
+    public class AddCashFlowTypeForm : SchoolManagement.UI.EditCashFlowTypeForm
     {
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ILogService logService;
@@ -13,24 +14,22 @@ namespace Primary.SchoolApp.UI
         CashFlowType cashFlowType;
         public AddCashFlowTypeForm(ICashFlowTypeService cashFlowTypeService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.cashFlowTypeService = cashFlowTypeService;
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = "AJOUT:.TYPE DE FLUX DE TRESORERIE";
+            this.Text = Language.titleCashflowAdd.ToUpper();
         }
 
         private void InitEvents()
         {
             SaveButton.Click += SaveButton_Click;
             this.Shown += OnShown;
-           
+
         }
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(778, 444);
             this.NameTextBox.Focus();
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         }
@@ -39,7 +38,8 @@ namespace Primary.SchoolApp.UI
         {
             if (IsValidData())
             {
-                if (!CashFlowTypeExist(NameTextBox.Text)) {
+                if (!CashFlowTypeExist(NameTextBox.Text))
+                {
                     cashFlowType = new CashFlowType();
                     cashFlowType.Name = NameTextBox.Text;
                     cashFlowType.Category = CategoryDropDownList.SelectedValue.ToString();
@@ -60,12 +60,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Un type de flux de trésorerie potant le même nom existe déjà! ";
+                    ErrorLabel.Text = Language.messageCashFlowExist;
                 }
             }
         }
@@ -75,5 +75,6 @@ namespace Primary.SchoolApp.UI
             if (item != null) return true;
             return cashFlowTypeService.GetCashFlowType(name).Result != null;
         }
+
     }
 }

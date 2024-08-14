@@ -1,4 +1,5 @@
-﻿using SchoolManagement.UI.Utilities;
+﻿using SchoolManagement.UI.Localization;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -15,6 +16,7 @@ namespace SchoolManagement.UI.CustomControls
         public RadTextBox LoginTextBox { get => loginTextBox; }
         public RadTextBox DefaultModuleTextBox { get => defaultModuleTextBox; }
         public RadLabel ModuleCount { get=>moduleCountLabel; }
+        public RadLabel RoomCount { get => roomCountLabel; }
         #endregion
         public UserInfo()
         {
@@ -27,7 +29,6 @@ namespace SchoolManagement.UI.CustomControls
         private void InitComponent()
         {
             this.headerPanel.RootElement.EnableElementShadow = false;
-            this.closeButton.Click += CloseButton_Click;
             this.titleInfoLabel.RootElement.EnableElementShadow = false;
             this.titleInfoLabel.LabelElement.CustomFont = ViewUtilities.MainFontMedium;
             this.titleInfoLabel.LabelElement.CustomFontSize = 10.5f;
@@ -48,10 +49,18 @@ namespace SchoolManagement.UI.CustomControls
             this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.moduleCountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+
+            this.moduleCountLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.moduleCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.moduleCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
+            this.moduleCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.moduleCountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.moduleCountLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            this.moduleCountLabel.TextAlignment = ContentAlignment.BottomLeft;
+
+            this.roomCountLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.roomCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.roomCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
+            this.roomCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
+            this.roomCountLabel.LabelElement.CustomFontSize = 10.5f;
 
 
             this.loginTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -102,7 +111,8 @@ namespace SchoolManagement.UI.CustomControls
         private void InitEvents()
         {
             this.closeButton.Click += CloseButton_Click;
-
+            moduleCountLabel.MouseMove += Label_MouseMove;
+            roomCountLabel.MouseMove += Label_MouseMove;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -111,11 +121,15 @@ namespace SchoolManagement.UI.CustomControls
         }
         private void InitLanguage()
         {
-            nameLabel.Text = Languages.Language.labelName;
-            this.loginLabel.Text = Languages.Language.labelUserName;
-            this.moduleCountLabel.Text = Languages.Language.labelTotalModule;
-            this.defaultModuleLabel.Text = Languages.Language.labelDefaultModule;
-            this.ModuleCount.Text= Languages.Language.labelTotalModule;
+            nameLabel.Text = Language.labelName;
+            this.loginLabel.Text = Language.labelUserName;
+            this.moduleCountLabel.Text = Language.labelModules;
+            this.defaultModuleLabel.Text = Language.labelDefaultModule;
+            this.roomCountLabel.Text = Language.labelRooms;
+        }
+        private void Label_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor.Current = Cursors.Hand;
         }
     }
 }

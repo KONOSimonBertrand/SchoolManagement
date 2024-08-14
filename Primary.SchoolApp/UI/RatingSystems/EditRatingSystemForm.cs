@@ -1,28 +1,27 @@
 ﻿
-
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditRatingSystemForm : SchoolManagement.UI.EditRatingSystemForm
+    internal class EditRatingSystemForm : SchoolManagement.UI.EditRatingSystemForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private string ratingSystemNameTracker;
         private readonly IRatingSystemService ratingSystemService;
         private RatingSystem ratingSystem;
-        public EditRatingSystemForm(IRatingSystemService ratingSystemService, ILogService logService,ClientApp clientApp)
+        public EditRatingSystemForm(IRatingSystemService ratingSystemService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.ratingSystemService = ratingSystemService;
             this.logService = logService;
             this.clientApp = clientApp;
             ratingSystemNameTracker = string.Empty;
             InitEvents();
-            this.Text = "MODIFICATION:.SYSTEME APPRECIATION";
+            this.Text = Language.titleRatingSystemUpdate.ToUpper();
         }
 
         private void InitEvents()
@@ -33,34 +32,36 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(967, 361);
             FrenchNameDropDownList.Focus();
         }
-        internal void Init(RatingSystem ratingSystem) { 
-            this.ratingSystem=ratingSystem;
-            ratingSystemNameTracker= ratingSystem.FrenchName;
+        internal void Init(RatingSystem ratingSystem)
+        {
+            this.ratingSystem = ratingSystem;
+            ratingSystemNameTracker = ratingSystem.FrenchName;
             FrenchNameDropDownList.Text = ratingSystem.FrenchName;
             EnglishNameDropDownList.Text = ratingSystem.EnglishName;
             FrenchDescriptionDropDownList.Text = ratingSystem.FrenchDescription;
             EnglishDescriptionDropDownList.Text = ratingSystem.EnglishDescription;
-            MaxNoteTextBox.Text=ratingSystem.MaxNote.ToString();
+            MaxNoteTextBox.Text = ratingSystem.MaxNote.ToString();
             MinNoteTextBox.Text = ratingSystem.MinNote.ToString();
             DomainDropDownList.SelectedValue = ratingSystem.Domain;
+
 
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData())
             {
-                if (!RatingSystemExist(FrenchNameDropDownList.Text)) {
+                if (!RatingSystemExist(FrenchNameDropDownList.Text))
+                {
                     ratingSystem.FrenchName = FrenchNameDropDownList.Text;
                     ratingSystem.EnglishName = FrenchNameDropDownList.Text;
                     ratingSystem.FrenchDescription = FrenchNameDropDownList.Text;
                     ratingSystem.EnglishDescription = FrenchNameDropDownList.Text;
-                    ratingSystem.MinNote=double.Parse(MinNoteTextBox.Text);
+                    ratingSystem.MinNote = double.Parse(MinNoteTextBox.Text);
                     ratingSystem.MaxNote = double.Parse(MaxNoteTextBox.Text);
-                    ratingSystem.Domain=DomainDropDownList.Text;
-                    var isDone=ratingSystemService.UpdateRatingSystem(ratingSystem).Result;
+                    ratingSystem.Domain = DomainDropDownList.Text;
+                    var isDone = ratingSystemService.UpdateRatingSystem(ratingSystem).Result;
                     if (isDone)
                     {
                         Log log = new()
@@ -74,12 +75,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ce système existe déjà ";
+                    this.ErrorLabel.Text = Language.messageRatingSystemExist;
                 }
             }
         }

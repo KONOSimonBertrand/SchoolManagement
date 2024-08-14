@@ -1,0 +1,22 @@
+-blue crey:#436175
+-teal: #219C90
+-pink: #FF0080
+-blue:#4B70F5
+
+
+-red:EF5A6F
+
+
+
+ <PackageReference Include="Telerik.ReportViewer.WinForms" Version="17.1.23.718"/>
+  <PackageReference Include="Telerik.Reporting" Version="17.1.23.718"/>
+  <PackageReference Include="System.Data.SqlClient" Version="4.8.6"/>
+ <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2023.2.718" />
+ Telerik.Reporting.17.1.23.718
+ 
+ Telerik.ReportViewer.WinForms.17.1.23.718
+ System.Data.SqlClient
+ 
+ 
+ Gravité	Code	Description	Projet	Fichier	Ligne	État de la suppression
+Erreur (active)	NU1100	Impossible de résoudre 'System.Data.SqlClient (>= 4.6.0)' pour 'net6.0-windows7.0'. PackageSourceMapping est activé, les sources suivantes n'ont pas été prises en compte : C:\Program Files\dotnet\library-packs, nuget.org, Telerik 2023.	Primary.SchoolApp	C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\Primary.SchoolApp.csproj	1	

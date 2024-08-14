@@ -1,14 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
+using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
-using System.Globalization;
-using System.Threading;
 using System.Windows.Forms;
 using Telerik.WinControls;
-
-
 namespace Primary.SchoolApp
 {
     public partial class LoginForm : SchoolManagement.UI.LoginForm
@@ -16,16 +14,17 @@ namespace Primary.SchoolApp
         private readonly ClientApp clientApp;
         private readonly IUserService userService;
         private readonly ILogService logService;
-        public LoginForm(ClientApp clientApp,IUserService userService,ILogService logService)
+        public LoginForm(ClientApp clientApp, IUserService userService, ILogService logService)
         {
-            InitializeComponent();
             ThemeResolutionService.ApplicationThemeName = "Material";
-            PictureLogo.Image=AppResource.logo;
-            PictureLogo.SizeMode=System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            PictureLogo.Image = Resources.logo;
+            PictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.clientApp = clientApp;
-            this.userService = userService; 
+            this.userService = userService;
             this.logService = logService;
             InitEvents();
+            this.Text = Language.labelSignIn;
+            ConnectionButton.Text = Language.labelLogIn;
         }
         private void InitEvents()
         {
@@ -34,16 +33,17 @@ namespace Primary.SchoolApp
             PasswordTextBox.TextChanged += PasswordTextBox_TextChanged;
             UserNameTextBox.TextChanged += UserNameTextBox_TextChanged;
             this.Shown += OnShown;
+
         }
 
-      
+
 
         private void OnShown(object sender, EventArgs e)
         {
             this.UserNameTextBox.Focus();
-            
+
         }
-      
+
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (ErrorLabel.Text.Trim().Length > 0)
@@ -58,11 +58,13 @@ namespace Primary.SchoolApp
                 ErrorLabel.Text = string.Empty;
             }
         }
-        private void ConnectionButton_Click(object sender, EventArgs e) {
-            if (this.IsValidData()) {
-              clientApp.Name = "Windows Form";
+        private void ConnectionButton_Click(object sender, EventArgs e)
+        {
+            if (this.IsValidData())
+            {
+                clientApp.Name = "Windows Form";
                 clientApp.ConnectionString = Program.ConnectionString;
-                User user=null;
+                User user = null;
                 try
                 {
                     user = userService.GetUser(UserNameTextBox.Text.Trim(), PasswordTextBox.Text.Trim()).Result;
@@ -91,7 +93,7 @@ namespace Primary.SchoolApp
                 }
                 else
                 {
-                    ErrorLabel.Text = "Nom utilisateur ou mot de passe incorrect !";
+                    ErrorLabel.Text = Language.messageBaduserBadPassword;
                     PasswordTextBox.Focus();
                 }
             }
@@ -99,7 +101,7 @@ namespace Primary.SchoolApp
         }
         private void OutButton_Click(object sender, EventArgs e)
         {
-           Application.Exit();
+            Application.Exit();
         }
     }
 }

@@ -3,6 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSchoolingCostForm : SchoolManagement.UI.EditSchoolingCostForm
+    internal class AddSchoolingCostForm : SchoolManagement.UI.EditSchoolingCostForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
@@ -20,25 +21,24 @@ namespace Primary.SchoolApp.UI
         private readonly ISchoolYearService schoolYearService;
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ISchoolClassService schoolClassService;
-        bool flag=false;
+        bool flag = false;
         public AddSchoolingCostForm(ISchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ISchoolClassService schoolClassService
             )
         {
-            InitializeComponent();
             this.schoolingCostService = schoolingCostService;
             this.schoolYearService = schoolYearService;
-            this.cashFlowTypeService = cashFlowTypeService; 
+            this.cashFlowTypeService = cashFlowTypeService;
             this.schoolClassService = schoolClassService;
             this.logService = logService;
             this.clientApp = clientApp;
             ClassDropDownList.DataSource = Program.SchoolClassList;
-            CostTypeDropDownList.DataSource=Program.CashFlowTypeList.Where(x => x.Category == "FS");
-            SchoolYearDropDownList.DataSource=Program.SchoolYearList;
+            CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+            SchoolYearDropDownList.DataSource = Program.SchoolYearList;
             InitTranchesGridView();
             InitEvents();
             TrancheNumberTextBox.Text = "0";
-            this.Text = "Ajout:.FRAIS SCOLARITE";
+            this.Text = Language.titleSchoolFeesAdd.ToUpper();
 
         }
 
@@ -68,7 +68,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Type inconnu");
+                    RadMessageBox.Show(Language.messageUnknowType);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Année scolaire inconnue");
+                    RadMessageBox.Show(Language.messageUnknowSchoolYear);
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Classe inconnue");
+                    RadMessageBox.Show(Language.messageUnknowClass);
                 }
             }
         }
@@ -140,16 +140,16 @@ namespace Primary.SchoolApp.UI
 
                         SaveButton.Enabled = false;
                         AddSchoolYearButton.Enabled = false;
-                        ErrorLabel.Text = "Cette année scolaire est clôturée";
+                        ErrorLabel.Text = Language.messageSchoolYearClosed;
                     }
                     else
                     {
                         ErrorLabel.Text = string.Empty;
                         SaveButton.Enabled = true;
-                        AddSchoolYearButton.Enabled= true;
+                        AddSchoolYearButton.Enabled = true;
                     }
                 }
-            }          
+            }
         }
         private void TrancheNumberTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -158,7 +158,7 @@ namespace Primary.SchoolApp.UI
                 int trancheNumber = int.Parse(TrancheNumberTextBox.Text);
                 if (trancheNumber > 3)
                 {
-                    ErrorLabel.Text = "Nombre de tranches ne doit pas être supérieur à trois (3)";
+                    ErrorLabel.Text = Language.messageBadTrancheNumber;
                     TrancheNumberTextBox.Text = "3";
                     TrancheNumberTextBox.Focus();
                     return;
@@ -188,13 +188,12 @@ namespace Primary.SchoolApp.UI
         //création des colonnes du gridView
         private void InitTranchesGridView()
         {
-
             GridViewDecimalColumn idColumn = new("Id");
             GridViewDecimalColumn amounColumn = new("Amount");
             GridViewDateTimeColumn deadLineColumn = new("DeadLine");
             idColumn.HeaderText = "N°";
-            amounColumn.HeaderText = "Montant";
-            deadLineColumn.HeaderText = "Délais";
+            amounColumn.HeaderText = Language.labelAmount;
+            deadLineColumn.HeaderText = Language.labelDelay;
             idColumn.Width = 50;
             amounColumn.Width = 150;
             deadLineColumn.Width = 250;
@@ -214,9 +213,9 @@ namespace Primary.SchoolApp.UI
             TranchesGridView.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
             TranchesGridView.MasterView.SummaryRows[0].Height = 40;
         }
+
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(715, 637);
             SchoolYearDropDownList.Focus();
         }
         private void SaveButton_Click(object sender, EventArgs e)
@@ -236,14 +235,14 @@ namespace Primary.SchoolApp.UI
                     cost.TrancheNumber = int.Parse(TrancheNumberTextBox.Text);
                     cost.Amount = double.Parse(AmountTextBox.Text);
                     cost.SchoolingCostItems = new List<SchoolingCostItem>();
-                    for(int i = 0; i < cost.TrancheNumber; i++)
+                    for (int i = 0; i < cost.TrancheNumber; i++)
                     {
                         var item = TranchesGridView.Rows[i].DataBoundItem as SchoolingCostItem;
                         cost.SchoolingCostItems.Add(
                             new SchoolingCostItem()
                             {
-                               Amount= item.Amount,
-                               DeadLine= item.DeadLine,                             
+                                Amount = item.Amount,
+                                DeadLine = item.DeadLine,
                             }
                             );
                     }
@@ -263,18 +262,18 @@ namespace Primary.SchoolApp.UI
                         }
                         else
                         {
-                            this.ErrorLabel.Text = "Erreur d'enregistrement";
+                            this.ErrorLabel.Text = Language.messageAddError;
                         }
                     }
-                   
+
                     else
                     {
-                        this.ErrorLabel.Text = "Ces frais de scolarité existent déjà";
+                        this.ErrorLabel.Text = Language.messageFeesExist;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "La valeur d'une tranche n'est pas bonne!";
+                    ErrorLabel.Text = Language.messageBadInstalment;
                     TranchesGridView.Focus();
                 }
 
@@ -298,7 +297,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowSchoolYear);
             }
 
         }
@@ -322,6 +321,8 @@ namespace Primary.SchoolApp.UI
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
                 form.Init(schoolClass);
+                form.Icon = this.Icon;
+                form.ClientSize = new System.Drawing.Size(700, 210);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;
@@ -332,7 +333,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowClass);
             }
 
         }
@@ -366,7 +367,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowCashflow);
             }
 
         }

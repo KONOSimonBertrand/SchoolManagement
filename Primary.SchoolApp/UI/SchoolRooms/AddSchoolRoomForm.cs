@@ -2,28 +2,28 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using Telerik.WinControls;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSchoolRoomForm : SchoolManagement.UI.EditSchoolRoomForm
+    internal class AddSchoolRoomForm : SchoolManagement.UI.EditSchoolRoomForm
     {
         private readonly ILogService logService;
         private readonly ISchoolRoomService schoolRoomService;
         private readonly ISchoolClassService schoolClassService;
         private readonly ClientApp clientApp;
-        public AddSchoolRoomForm(ISchoolRoomService schoolRoomService,ILogService logService,ClientApp clientApp, ISchoolClassService schoolClassService)
+        public AddSchoolRoomForm(ISchoolRoomService schoolRoomService, ILogService logService, ClientApp clientApp, ISchoolClassService schoolClassService)
         {
-            InitializeComponent();
             this.clientApp = clientApp;
             this.schoolRoomService = schoolRoomService;
             this.schoolClassService = schoolClassService;
             this.logService = logService;
             ClassDropDownList.DataSource = Program.SchoolClassList;
             InitEvents();
-            this.Text = "AJOUT:.SALLE DE CLASSE";
+            this.Text = Language.titleSchoolRoomAdd.ToUpper();
 
         }
         private void InitEvents()
@@ -36,13 +36,13 @@ namespace Primary.SchoolApp.UI
         private void OnShown(object sender, EventArgs e)
         {
 
-            ClientSize = new System.Drawing.Size(924, 280);
             NameTextBox.Focus();
         }
 
         private void AddClassButton_Click(object sender, EventArgs e)
         {
-            if (ClassDropDownList.SelectedItem == null) {
+            if (ClassDropDownList.SelectedItem == null)
+            {
                 ShowSchoolClassAddForm();
             }
             else
@@ -55,7 +55,8 @@ namespace Primary.SchoolApp.UI
         {
             if (IsValidData())
             {
-                if (!SchoolRomExist(NameTextBox.Text)) {
+                if (!SchoolRomExist(NameTextBox.Text))
+                {
                     SchoolRoom room = new();
                     room.Name = NameTextBox.Text;
                     room.SchoolClass = ClassDropDownList.SelectedItem.DataBoundItem as SchoolClass;
@@ -75,12 +76,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Une salle de classe portant le même nom existe déjà";
+                    ErrorLabel.Text = Language.messageRoomExist;
                 }
             }
         }
@@ -102,7 +103,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Salle de Classe inconnue");
+                RadMessageBox.Show(Language.messageUnknowClass);
             }
         }
         // show school class UI to add new 

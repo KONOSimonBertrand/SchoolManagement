@@ -1,4 +1,5 @@
 ﻿
+using SchoolManagement.UI.Localization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -61,12 +62,11 @@ namespace SchoolManagement.UI.CustomControls
             this.groupTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.groupTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.subjectsCountLabel.Image = Resources.eye;
+            this.subjectsCountLabel.Image =Utilities.ViewUtilities.GetImage("Eye");
             this.subjectsCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.subjectsCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.subjectsCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.subjectsCountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subjectsCountLabel.ForeColor = Utilities.ViewUtilities.MainThemeColor;
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -97,7 +97,7 @@ namespace SchoolManagement.UI.CustomControls
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.groupSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
 
-            subjectsCountLabel.LabelElement.ToolTipText = "Cliquer ici pour consulter les matières enseignées";
+            subjectsCountLabel.LabelElement.ToolTipText = Language.messageDoubleClickToSee;
         }
 
         private void Label_MouseMove(object sender, MouseEventArgs e)
@@ -107,8 +107,8 @@ namespace SchoolManagement.UI.CustomControls
 
        private void InitLanguage()
         {
-            nameLabel.Text = Languages.Language.labelDesignation;
-            groupLabel.Text = Languages.Language.labelGroup;
+            nameLabel.Text = Language.labelDesignation;
+            groupLabel.Text = Language.labelGroup;
         }
     }
 }

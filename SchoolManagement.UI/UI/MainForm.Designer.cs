@@ -317,7 +317,7 @@ namespace SchoolManagement.UI
             mainPageView.Dock = DockStyle.Fill;
             mainPageView.Location = new Point(0, 0);
             mainPageView.Name = "mainPageView";
-            mainPageView.SelectedPage = SettingPage;
+            mainPageView.SelectedPage = EmployeePage;
             mainPageView.Size = new Size(1548, 395);
             mainPageView.TabIndex = 1;
             // 
@@ -328,7 +328,7 @@ namespace SchoolManagement.UI
             HomePage.ItemSize = new SizeF(62F, 29F);
             HomePage.Location = new Point(6, 36);
             HomePage.Name = "HomePage";
-            HomePage.Size = new Size(1536, 557);
+            HomePage.Size = new Size(1536, 353);
             HomePage.Text = "ACCUEIL";
             // 
             // homeMainPanel
@@ -341,7 +341,7 @@ namespace SchoolManagement.UI
             homeMainPanel.Location = new Point(0, 65);
             homeMainPanel.Margin = new Padding(0);
             homeMainPanel.Name = "homeMainPanel";
-            homeMainPanel.Size = new Size(1536, 492);
+            homeMainPanel.Size = new Size(1536, 288);
             homeMainPanel.TabIndex = 3;
             // 
             // homeMainListView
@@ -354,7 +354,7 @@ namespace SchoolManagement.UI
             homeMainListView.Location = new Point(253, 0);
             homeMainListView.Margin = new Padding(0);
             homeMainListView.Name = "homeMainListView";
-            homeMainListView.Size = new Size(1064, 492);
+            homeMainListView.Size = new Size(1064, 288);
             homeMainListView.TabIndex = 3;
             // 
             // homeGridView
@@ -367,7 +367,7 @@ namespace SchoolManagement.UI
             // 
             homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             homeGridView.Name = "homeGridView";
-            homeGridView.Size = new Size(1064, 492);
+            homeGridView.Size = new Size(1064, 288);
             homeGridView.TabIndex = 5;
             // 
             // homeLeftListView
@@ -379,7 +379,7 @@ namespace SchoolManagement.UI
             homeLeftListView.Location = new Point(0, 0);
             homeLeftListView.Margin = new Padding(0);
             homeLeftListView.Name = "homeLeftListView";
-            homeLeftListView.Size = new Size(253, 492);
+            homeLeftListView.Size = new Size(253, 288);
             homeLeftListView.TabIndex = 1;
             // 
             // homeInfoRightPanel
@@ -388,7 +388,7 @@ namespace SchoolManagement.UI
             homeInfoRightPanel.Location = new Point(1317, 0);
             homeInfoRightPanel.Margin = new Padding(4);
             homeInfoRightPanel.Name = "homeInfoRightPanel";
-            homeInfoRightPanel.Size = new Size(219, 492);
+            homeInfoRightPanel.Size = new Size(219, 288);
             homeInfoRightPanel.TabIndex = 3;
             // 
             // homeNavigationPanel
@@ -1158,7 +1158,7 @@ namespace SchoolManagement.UI
             EmployeePage.ItemSize = new SizeF(115F, 29F);
             EmployeePage.Location = new Point(6, 36);
             EmployeePage.Name = "EmployeePage";
-            EmployeePage.Size = new Size(1299, 287);
+            EmployeePage.Size = new Size(1536, 353);
             EmployeePage.Text = "ADMINISTRATION";
             // 
             // employeeMainPanel
@@ -1171,7 +1171,7 @@ namespace SchoolManagement.UI
             employeeMainPanel.Location = new Point(0, 65);
             employeeMainPanel.Margin = new Padding(0);
             employeeMainPanel.Name = "employeeMainPanel";
-            employeeMainPanel.Size = new Size(1299, 222);
+            employeeMainPanel.Size = new Size(1536, 288);
             employeeMainPanel.TabIndex = 4;
             // 
             // employeeMainListView
@@ -1181,23 +1181,23 @@ namespace SchoolManagement.UI
             employeeMainListView.GroupItemSize = new Size(250, 35);
             employeeMainListView.HeaderHeight = 43.75F;
             employeeMainListView.ItemSize = new Size(250, 35);
-            employeeMainListView.Location = new Point(253, 0);
+            employeeMainListView.Location = new Point(300, 0);
             employeeMainListView.Margin = new Padding(0);
             employeeMainListView.Name = "employeeMainListView";
-            employeeMainListView.Size = new Size(827, 222);
+            employeeMainListView.Size = new Size(878, 288);
             employeeMainListView.TabIndex = 3;
             // 
             // employeeGridView
             // 
             employeeGridView.Dock = DockStyle.Fill;
-            employeeGridView.Location = new Point(253, 0);
+            employeeGridView.Location = new Point(300, 0);
             employeeGridView.Margin = new Padding(4);
             // 
             // 
             // 
             employeeGridView.MasterTemplate.ViewDefinition = tableViewDefinition5;
             employeeGridView.Name = "employeeGridView";
-            employeeGridView.Size = new Size(827, 222);
+            employeeGridView.Size = new Size(878, 288);
             employeeGridView.TabIndex = 5;
             // 
             // employeeLeftListView
@@ -1209,16 +1209,16 @@ namespace SchoolManagement.UI
             employeeLeftListView.Location = new Point(0, 0);
             employeeLeftListView.Margin = new Padding(0);
             employeeLeftListView.Name = "employeeLeftListView";
-            employeeLeftListView.Size = new Size(253, 222);
+            employeeLeftListView.Size = new Size(300, 288);
             employeeLeftListView.TabIndex = 1;
             // 
             // employeeInfoRightPanel
             // 
             employeeInfoRightPanel.Dock = DockStyle.Right;
-            employeeInfoRightPanel.Location = new Point(1080, 0);
+            employeeInfoRightPanel.Location = new Point(1178, 0);
             employeeInfoRightPanel.Margin = new Padding(4);
             employeeInfoRightPanel.Name = "employeeInfoRightPanel";
-            employeeInfoRightPanel.Size = new Size(219, 222);
+            employeeInfoRightPanel.Size = new Size(358, 288);
             employeeInfoRightPanel.TabIndex = 3;
             // 
             // employeeNavigationPanel
@@ -1234,7 +1234,7 @@ namespace SchoolManagement.UI
             employeeNavigationPanel.Location = new Point(0, 0);
             employeeNavigationPanel.Margin = new Padding(0);
             employeeNavigationPanel.Name = "employeeNavigationPanel";
-            employeeNavigationPanel.Size = new Size(1299, 65);
+            employeeNavigationPanel.Size = new Size(1536, 65);
             employeeNavigationPanel.TabIndex = 1;
             // 
             // employeeSearchPanel
@@ -1242,7 +1242,7 @@ namespace SchoolManagement.UI
             employeeSearchPanel.Controls.Add(employeeSearchTextBox);
             employeeSearchPanel.Controls.Add(employeeEmptyPanel);
             employeeSearchPanel.Dock = DockStyle.Right;
-            employeeSearchPanel.Location = new Point(723, 0);
+            employeeSearchPanel.Location = new Point(960, 0);
             employeeSearchPanel.Margin = new Padding(4);
             employeeSearchPanel.Name = "employeeSearchPanel";
             employeeSearchPanel.Size = new Size(576, 65);
@@ -1346,14 +1346,14 @@ namespace SchoolManagement.UI
             // settingGridView
             // 
             settingGridView.Dock = DockStyle.Fill;
-            settingGridView.Location = new Point(253, 0);
+            settingGridView.Location = new Point(300, 0);
             settingGridView.Margin = new Padding(4);
             // 
             // 
             // 
             settingGridView.MasterTemplate.ViewDefinition = tableViewDefinition6;
             settingGridView.Name = "settingGridView";
-            settingGridView.Size = new Size(1019, 288);
+            settingGridView.Size = new Size(936, 288);
             settingGridView.TabIndex = 5;
             // 
             // settingLeftListView
@@ -1365,16 +1365,16 @@ namespace SchoolManagement.UI
             settingLeftListView.Location = new Point(0, 0);
             settingLeftListView.Margin = new Padding(0);
             settingLeftListView.Name = "settingLeftListView";
-            settingLeftListView.Size = new Size(253, 288);
+            settingLeftListView.Size = new Size(300, 288);
             settingLeftListView.TabIndex = 1;
             // 
             // settingInfoRightPanel
             // 
             settingInfoRightPanel.Dock = DockStyle.Right;
-            settingInfoRightPanel.Location = new Point(1272, 0);
+            settingInfoRightPanel.Location = new Point(1236, 0);
             settingInfoRightPanel.Margin = new Padding(4);
             settingInfoRightPanel.Name = "settingInfoRightPanel";
-            settingInfoRightPanel.Size = new Size(264, 288);
+            settingInfoRightPanel.Size = new Size(300, 288);
             settingInfoRightPanel.TabIndex = 3;
             // 
             // settingNavigationPanel
@@ -1458,6 +1458,7 @@ namespace SchoolManagement.UI
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "SchoolApp";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)timeTableScheduler).EndInit();
             ((System.ComponentModel.ISupportInitialize)mainPageView).EndInit();
             mainPageView.ResumeLayout(false);
@@ -1701,8 +1702,6 @@ namespace SchoolManagement.UI
         private RadPanel reportNavigationPanel;
         private RadDropDownList reportSchoolYearDropDownList;
         private RadLabel reportSchoolYearLabel;
-        private RadButton radButton1;
-        private RadButton radButton2;
         private RadPanel reportSearchPanel;
         private CustomControls.SearchTextBox reportSearchTextBox;
         private RadPanel reportEmptyPanel;
@@ -1725,10 +1724,8 @@ namespace SchoolManagement.UI
         private RadListView employeeLeftListView;
         private RadPanel employeeInfoRightPanel;
         private RadPanel settingNavigationPanel;
-        private RadLabel radLabel1;
         private RadButton settingAddButton;
         private RadButton settingExportToExcelButton;
-        private RadPanel radPanel2;
         private CustomControls.SearchTextBox settingSearchTextBox;
         private RadPanel settingEmptyPanel;
         private RadPanel settingMainPanel;

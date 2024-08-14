@@ -1,4 +1,4 @@
-﻿using SchoolManagement.UI.Languages;
+﻿using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -71,8 +71,10 @@ namespace SchoolManagement.UI
             this.sequenceSpinEditor.SpinElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
             this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-            this.classDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            this.sequenceSpinEditor.SpinElement.ShowBorder = false;
             this.editPanel.RootElement.EnableElementShadow = false;
+
+            this.classDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
             foreach (RadControl c in this.editPanel.Controls)
             {
                 c.RootElement.EnableElementShadow = false;
@@ -92,7 +94,7 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             addClassButton.RootElement.ToolTipText = "Cliquer ici pour ajouter une nouvelle classe";
-            addClassButton.Image = Resources.plus;
+            addClassButton.Image = ViewUtilities.GetImage("Add");
             addClassButton.ImageAlignment = ContentAlignment.MiddleCenter;
             addClassButton.ButtonElement.Padding = new Padding(0);
 
@@ -107,7 +109,7 @@ namespace SchoolManagement.UI
             this.errorLabel.Text = "";
             if (this.nameTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
+                this.errorLabel.Text = Language.messageFillField;
                 this.nameTextBox.Focus();
                 return false;
             }
@@ -115,7 +117,7 @@ namespace SchoolManagement.UI
 
             if (this.classDropDownList.SelectedIndex < 0)
             {
-                this.errorLabel.Text = "La sélection de la salle est requise!";
+                this.errorLabel.Text = Language.messageFillField; 
                 this.classDropDownList.Focus();
                 return false;
             }
@@ -128,15 +130,15 @@ namespace SchoolManagement.UI
            
             if (classDropDownList.SelectedIndex < 0)
             {
-                addClassButton.Image = Resources.plus;
-                addClassButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer une nouvelle classe";
+                addClassButton.Image = Utilities.ViewUtilities.GetImage("Add");
+                addClassButton.RootElement.ToolTipText = Language.messageClickToAddClass;
             }
             else
             {
-                addClassButton.Image = Resources.edit;
-                addClassButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de la classe";
+                addClassButton.Image = Utilities.ViewUtilities.GetImage("Edit");
+                addClassButton.RootElement.ToolTipText = Language.messageClickToEdit;
             }
         }
-
+       
     }
 }

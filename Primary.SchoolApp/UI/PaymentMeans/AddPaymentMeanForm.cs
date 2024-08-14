@@ -1,33 +1,31 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddPaymentMeanForm : SchoolManagement.UI.EditPaymentMeanForm
+    internal class AddPaymentMeanForm : SchoolManagement.UI.EditPaymentMeanForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly IPaymentMeanService paymentMeanService;
         public AddPaymentMeanForm(IPaymentMeanService paymentMeanService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.paymentMeanService = paymentMeanService;
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = "AJOUT:.MOYEN DE PAIEMENT";
+            this.Text = Language.titlePaymentMeanAdd;
         }
         private void InitEvents()
         {
             SaveButton.Click += SaveButton_Click;
             this.Shown += OnShown;
         }
-
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(1110, 319);
             NameTextBox.Focus();
         }
         private void SaveButton_Click(object sender, EventArgs e)
@@ -36,7 +34,8 @@ namespace Primary.SchoolApp.UI
 
             if (IsValidData())
             {
-                if (!PaymentMeanExist(NameTextBox.Text)) {
+                if (!PaymentMeanExist(NameTextBox.Text))
+                {
                     PaymentMean paymentMean = new();
                     paymentMean.Name = NameTextBox.Text;
                     paymentMean.Account = AccountTextBox.Text;
@@ -57,12 +56,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Un moyen de paiement portant le même nom existe déjà!";
+                    ErrorLabel.Text = Language.messagePaymentMeanExist;
                 }
 
             }

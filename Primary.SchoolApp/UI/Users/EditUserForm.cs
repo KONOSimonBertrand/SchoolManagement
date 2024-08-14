@@ -1,8 +1,7 @@
-﻿
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using Telerik.WinControls;
@@ -15,11 +14,10 @@ namespace Primary.SchoolApp.UI
         private readonly ClientApp clientApp;
         private readonly IUserService userService;
         private readonly IEmployeeService employeeService;
-        private User user;
+        private User selectedUser;
         private string userLoginTracker;
         public EditUserForm(IUserService userService, ILogService logService, IEmployeeService employeeService, ClientApp clientApp)
         {
-            InitializeComponent();
             InitEvents();
             this.userService = userService;
             this.logService = logService;
@@ -27,7 +25,7 @@ namespace Primary.SchoolApp.UI
             this.employeeService = employeeService;
             this.Text = "MODIFICATION:.UTILISATEUR";
             this.userService = userService;
-            EmployeeDropDownList.DataSource=Program.EmployeeList;
+            EmployeeDropDownList.DataSource = Program.EmployeeList;
         }
 
         private void InitEvents()
@@ -38,46 +36,46 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(957, 390);
             EmployeeDropDownList.Focus();
         }
 
         internal void Init(User user)
         {
-            this.user = user;
+            this.selectedUser = user;
             NameTextBox.Text = user.Name;
             LoginTextBox.Text = user.UserName;
             EmailTextBox.Text = user.Email;
             PasswordTextBox.Text = user.Password;
             if (user.Employee != null) EmployeeDropDownList.SelectedValue = user.EmployeeId;
             EmployeeDropDownList.SelectedValue = user.EmployeeId;
-            userLoginTracker=user.UserName;
+            userLoginTracker = user.UserName;
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if ( IsValidData()) {
+            if (IsValidData())
+            {
                 if (!UserExist(LoginTextBox.Text))
                 {
-                    if(EmployeeDropDownList.SelectedItem!=null)
+                    if (EmployeeDropDownList.SelectedItem != null)
                     {
-                        user.Employee = EmployeeDropDownList.SelectedItem. DataBoundItem as Employee;
-                        user.EmployeeId= user.Employee.Id;
+                        selectedUser.Employee = EmployeeDropDownList.SelectedItem.DataBoundItem as Employee;
+                        selectedUser.EmployeeId = selectedUser.Employee.Id;
                     }
                     else
                     {
-                        user.Employee = null;
-                        user.EmployeeId = null;
+                        selectedUser.Employee = null;
+                        selectedUser.EmployeeId = null;
                     }
-                    user.UserName= LoginTextBox.Text;
-                    user.Name = NameTextBox.Text;
-                    user.Email = EmailTextBox.Text;
-                    user.Password = PasswordTextBox.Text;
-                    var isDone=userService.UpdateUser(user).Result;
+                    selectedUser.UserName = LoginTextBox.Text;
+                    selectedUser.Name = NameTextBox.Text;
+                    selectedUser.Email = EmailTextBox.Text;
+                    selectedUser.Password = PasswordTextBox.Text;
+                    var isDone = userService.UpdateUser(selectedUser).Result;
                     if (isDone == true)
                     {
                         Log log = new()
                         {
-                            UserAction = $"Mise à jour de l'utilisateur {user.UserName}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                            UserAction = $"Mise à jour de l'utilisateur {selectedUser.UserName}  par l'utisateur  {clientApp.UserConnected.Name} ",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
@@ -86,12 +84,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Ce compte utilisateur existe déjà";
+                    ErrorLabel.Text = Language.messageUserExist;
                 }
             }
         }
@@ -131,7 +129,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Employé inconnue");
+                RadMessageBox.Show(Language.messageUnknowEmployee);
             }
         }
         private void ShowEmployeeAddForm()
@@ -146,8 +144,5 @@ namespace Primary.SchoolApp.UI
                 EmployeeDropDownList.SelectedValue = data;
             }
         }
-
-
-
     }
 }

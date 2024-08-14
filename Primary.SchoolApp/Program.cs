@@ -7,8 +7,6 @@ using SchoolManagement.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Primary.SchoolApp
@@ -38,11 +36,14 @@ namespace Primary.SchoolApp
         public static IList<Employee> EmployeeList;
         public static IList<Module> ModuleList;
         public static IList<Country> CountryList;
+        public static IList<EmployeeEnrolling> EmployeeEnrollingList;
         public static IServiceProvider ServiceProvider { get; private set; }
-        public static  string ConnectionString {  get; private set; }
+        public static string ConnectionString { get; private set; }
+        public static SchoolYear CurrentSchoolYear;
         [STAThread]
         static void Main()
         {
+          
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ConnectionString = ConfigurationManager.ConnectionStrings["school_data_base"].ConnectionString;
@@ -65,6 +66,6 @@ namespace Primary.SchoolApp
         }
 
 
-       
+
     }
 }

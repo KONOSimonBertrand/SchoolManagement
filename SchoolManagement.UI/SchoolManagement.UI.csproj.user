@@ -11,6 +11,9 @@
     <Compile Update="UI\CustomControls\DateNavigator.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\EmployeeEnrollingInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\EmployeeGroupInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -59,7 +62,13 @@
     <Compile Update="UI\EditCashFlowTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\EditEmployeeForm.cs">
+    <Compile Update="UI\Employee\EditEmployeeAttendanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employee\EditEmployeeEnrollingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employee\EditEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EditEmployeeGroupForm.cs">
@@ -89,6 +98,9 @@
     <Compile Update="UI\EditSchoolYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\EditClassSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\EditSubjectGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +111,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EditUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditUserPasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employee\EmployeeItemsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\LoginForm.cs">
@@ -129,6 +147,15 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EditSchoolRoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\UploadPictureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\UserModulesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\UserRoomsForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

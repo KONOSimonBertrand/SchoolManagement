@@ -1,9 +1,5 @@
-﻿using MediaFoundation;
-using System.ComponentModel;
-using Telerik.WinControls.UI;
+﻿using Telerik.WinControls.UI;
 using Telerik.WinControls;
-using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
-using System.Reflection;
 using SchoolManagement.UI.Utilities;
 
 namespace SchoolManagement.UI

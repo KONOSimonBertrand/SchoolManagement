@@ -1,23 +1,23 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSchoolGroupForm : SchoolManagement.UI.EditSchoolGroupForm
+    internal class AddSchoolGroupForm : SchoolManagement.UI.EditSchoolGroupForm
     {
 
         private readonly ISchoolGroupService schoolGroupService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
-        public AddSchoolGroupForm(ISchoolGroupService schoolGroupService,ILogService logService,ClientApp clientApp)
+        public AddSchoolGroupForm(ISchoolGroupService schoolGroupService, ILogService logService, ClientApp clientApp)
         {
             this.schoolGroupService = schoolGroupService;
             this.logService = logService;
             this.clientApp = clientApp;
-            InitializeComponent();
             InitEvents();
-            this.Text = "AJOUT:.GROUPE DE CLASSES";
+            this.Text = Language.titleGroupAdd.ToUpper();
         }
 
         private void InitEvents()
@@ -25,10 +25,8 @@ namespace Primary.SchoolApp.UI
             SaveButton.Click += SaveButton_Click;
             this.Shown += OnShown;
         }
-
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(788, 192);
             NameTextBox.Focus();
         }
 
@@ -36,7 +34,8 @@ namespace Primary.SchoolApp.UI
         {
             if (IsValidData())
             {
-                if (!SchoolGroupExist(NameTextBox.Text)) {
+                if (!SchoolGroupExist(NameTextBox.Text))
+                {
                     SchoolGroup schoolGroup = new()
                     {
                         Name = NameTextBox.Text,
@@ -56,12 +55,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Un groupe portant le même nom existe déjà!";
+                    ErrorLabel.Text = Language.messageGroupExist;
                 }
             }
         }

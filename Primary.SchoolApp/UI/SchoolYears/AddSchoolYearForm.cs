@@ -1,25 +1,25 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSchoolYearForm :  SchoolManagement.UI.EditSchoolYearForm
+    internal class AddSchoolYearForm : SchoolManagement.UI.EditSchoolYearForm
     {
         private readonly ISchoolYearService schoolYearService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private SchoolYear schoolYear;
-        public AddSchoolYearForm(ISchoolYearService schoolYearReadService, ILogService logService,ClientApp clientApp)
+        public AddSchoolYearForm(ISchoolYearService schoolYearReadService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             InitEvents();
             this.schoolYearService = schoolYearReadService;
             this.logService = logService;
             this.clientApp = clientApp;
             ClearData();
-            this.Text = "AJOUT:.ANNEE SCOLAIRE";
+            this.Text = Language.titleSchoolYearAdd.ToUpper();
         }
         private void InitEvents()
         {
@@ -29,7 +29,6 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(549, 453);
             NameTextBox.Focus();
         }
 
@@ -59,29 +58,29 @@ namespace Primary.SchoolApp.UI
                         logService.CreateLog(log);
                         this.DialogResult = System.Windows.Forms.DialogResult.OK;
                         this.Close();
-                    }                    
+                    }
                     else
                     {
 
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Une année scolaire portant le même nom existe déjà!";
+                    ErrorLabel.Text = Language.messageSchoolYearExist;
                 }
 
             }
         }
-    
+
         private void ClearData()
         {
-            this.NameTextBox.Text=string.Empty;
+            this.NameTextBox.Text = string.Empty;
             this.StartFirstQuarter.SetToNullValue();
             this.EndFirstQuarter.SetToNullValue();
             this.StartSecondQuarter.SetToNullValue();
             this.EndSecondQuarter.SetToNullValue();
-            this.StartThirdQuarter.SetToNullValue(); 
+            this.StartThirdQuarter.SetToNullValue();
             this.EndThirdQuarter.SetToNullValue();
 
         }

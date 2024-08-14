@@ -1,0 +1,924 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="fieldDescription" xml:space="preserve">
+    <value>FrenchDescription</value>
+  </data>
+  <data name="fieldGroupName" xml:space="preserve">
+    <value>Group.FrenchName</value>
+  </data>
+  <data name="fieldName" xml:space="preserve">
+    <value>FrenchName</value>
+  </data>
+  <data name="fieldSubjectName" xml:space="preserve">
+    <value>Subject.FrenchName</value>
+  </data>
+  <data name="labelAccount" xml:space="preserve">
+    <value>Compte</value>
+  </data>
+  <data name="labelAdd" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="labelAdddress" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="labelAdding" xml:space="preserve">
+    <value>Ajout</value>
+  </data>
+  <data name="labelAddPicture" xml:space="preserve">
+    <value>Ajouter une photo</value>
+  </data>
+  <data name="labelAdministration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="labelAmount" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="labelAppreciation" xml:space="preserve">
+    <value>Appréciation</value>
+  </data>
+  <data name="labelAssign" xml:space="preserve">
+    <value>Assigner</value>
+  </data>
+  <data name="labelAttendances" xml:space="preserve">
+    <value>Présences</value>
+  </data>
+  <data name="labelBirthDate" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="labelBookModel" xml:space="preserve">
+    <value>Modèle de bulletin</value>
+  </data>
+  <data name="labelCancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="labelCashFlow" xml:space="preserve">
+    <value>Flux de trésorerie</value>
+  </data>
+  <data name="labelCashFlowType" xml:space="preserve">
+    <value>Type de flux de trésorerie</value>
+  </data>
+  <data name="labelCashFlowTypes" xml:space="preserve">
+    <value>Types de flux de trésorerie</value>
+  </data>
+  <data name="labelCategory" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="labelCheckAll" xml:space="preserve">
+    <value>Cocher tout</value>
+  </data>
+  <data name="labelClass" xml:space="preserve">
+    <value>Classe</value>
+  </data>
+  <data name="labelClassGroup" xml:space="preserve">
+    <value>Groupe de classes</value>
+  </data>
+  <data name="labelClassGroups" xml:space="preserve">
+    <value>Groupes de classes</value>
+  </data>
+  <data name="labelClasss" xml:space="preserve">
+    <value>Classes</value>
+  </data>
+  <data name="labelClosed" xml:space="preserve">
+    <value>Clôturée</value>
+  </data>
+  <data name="labelCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="labelCoefficient" xml:space="preserve">
+    <value>Coefficient</value>
+  </data>
+  <data name="labelConnection" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="labelDefaultModule" xml:space="preserve">
+    <value>Module par défaut</value>
+  </data>
+  <data name="labelDelay" xml:space="preserve">
+    <value>Délais</value>
+  </data>
+  <data name="labelDelete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="labelDeletion" xml:space="preserve">
+    <value>Suppression</value>
+  </data>
+  <data name="labelDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="labelDesignation" xml:space="preserve">
+    <value>Désignation</value>
+  </data>
+  <data name="labelDiscipline" xml:space="preserve">
+    <value>Discipline</value>
+  </data>
+  <data name="labelDomain" xml:space="preserve">
+    <value>Domaine</value>
+  </data>
+  <data name="labelDuplicateForCurrentYear" xml:space="preserve">
+    <value>Dupliquer pour l'année en cours</value>
+  </data>
+  <data name="labelDuration" xml:space="preserve">
+    <value>Durée</value>
+  </data>
+  <data name="labelEdit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="labelEmployee" xml:space="preserve">
+    <value>Employé</value>
+  </data>
+  <data name="labelEmployeeAccount" xml:space="preserve">
+    <value>Compte de l'employé</value>
+  </data>
+  <data name="labelEmployeeGroup" xml:space="preserve">
+    <value>Groupe d'employés</value>
+  </data>
+  <data name="labelEmployeeGroups" xml:space="preserve">
+    <value>Groupes d'employés</value>
+  </data>
+  <data name="labelEmployeeId" xml:space="preserve">
+    <value>Matricule</value>
+  </data>
+  <data name="labelEnd" xml:space="preserve">
+    <value>Fin</value>
+  </data>
+  <data name="labelEndFirstQuarter" xml:space="preserve">
+    <value>Fin 1ᵉʳ trimestre</value>
+  </data>
+  <data name="labelEndHour" xml:space="preserve">
+    <value>Heure fin</value>
+  </data>
+  <data name="labelEndSecondQuarter" xml:space="preserve">
+    <value>Fin 2ᵉ trimestre</value>
+  </data>
+  <data name="labelEndThirdQuarter" xml:space="preserve">
+    <value>Fin 3ᵉ trimestre</value>
+  </data>
+  <data name="labelEnglishAppreciation" xml:space="preserve">
+    <value>Appréciation anglaise</value>
+  </data>
+  <data name="labelEnglishDescription" xml:space="preserve">
+    <value>Description englaise</value>
+  </data>
+  <data name="labelEnglishName" xml:space="preserve">
+    <value>Désignation englaise</value>
+  </data>
+  <data name="labelEnroll" xml:space="preserve">
+    <value>Inscrire</value>
+  </data>
+  <data name="labelEvaluationSession" xml:space="preserve">
+    <value>Session d'évaluation</value>
+  </data>
+  <data name="labelEvaluationSessions" xml:space="preserve">
+    <value>Sessions d'évaluation</value>
+  </data>
+  <data name="labelExigible" xml:space="preserve">
+    <value>Exigible</value>
+  </data>
+  <data name="labelExport" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="labelFeePayable" xml:space="preserve">
+    <value>Frais exigible</value>
+  </data>
+  <data name="labelFeeType" xml:space="preserve">
+    <value>Type de frais</value>
+  </data>
+  <data name="labelFirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="labelFrenchAppreciation" xml:space="preserve">
+    <value>Appréciation anglaise</value>
+  </data>
+  <data name="labelFrenchDescription" xml:space="preserve">
+    <value>Description française</value>
+  </data>
+  <data name="labelFrenchName" xml:space="preserve">
+    <value>Désignation française</value>
+  </data>
+  <data name="labelFullName" xml:space="preserve">
+    <value>Nom complet</value>
+  </data>
+  <data name="labelGenerateEmptyClassReport" xml:space="preserve">
+    <value>Générer un relevé de notes vide</value>
+  </data>
+  <data name="labelGroup" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="labelHiredOn" xml:space="preserve">
+    <value>Embauché le</value>
+  </data>
+  <data name="labelHiringDate" xml:space="preserve">
+    <value>Date d'embauche</value>
+  </data>
+  <data name="labelHome" xml:space="preserve">
+    <value>Acceuil</value>
+  </data>
+  <data name="labelIdCard" xml:space="preserve">
+    <value>CNI</value>
+  </data>
+  <data name="labelImport" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="labelInput" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="labelInstallmentCount" xml:space="preserve">
+    <value>Nombre de Tranches</value>
+  </data>
+  <data name="labelInstallments" xml:space="preserve">
+    <value>Versements</value>
+  </data>
+  <data name="labelJob" xml:space="preserve">
+    <value>Fonction</value>
+  </data>
+  <data name="labelJobs" xml:space="preserve">
+    <value>Fonctions</value>
+  </data>
+  <data name="labelLangue" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="labelLastName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="labelLogIn" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="labelLogOut" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="labelMail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="labelMarkSystem" xml:space="preserve">
+    <value>Système de notation</value>
+  </data>
+  <data name="labelMarkSystems" xml:space="preserve">
+    <value>Systèmes de notation</value>
+  </data>
+  <data name="labelMasterTeacher" xml:space="preserve">
+    <value>Enseigant principal</value>
+  </data>
+  <data name="labelMaxNote" xml:space="preserve">
+    <value>Note max</value>
+  </data>
+  <data name="labelMinNote" xml:space="preserve">
+    <value>Note Min</value>
+  </data>
+  <data name="labelModule" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="labelModules" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="labelName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="labelNativeCountry" xml:space="preserve">
+    <value>Pay d'origine</value>
+  </data>
+  <data name="labelNewPasswors" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="labelNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="labelNotedOn" xml:space="preserve">
+    <value>Noté sur</value>
+  </data>
+  <data name="labelNotes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="labelOldPassword" xml:space="preserve">
+    <value>Ancien mot de passe</value>
+  </data>
+  <data name="labelOpened" xml:space="preserve">
+    <value>Ouverte</value>
+  </data>
+  <data name="labelOutput" xml:space="preserve">
+    <value>Sortie</value>
+  </data>
+  <data name="labelPassword" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="labelPaymentMean" xml:space="preserve">
+    <value>Moyen de paiement</value>
+  </data>
+  <data name="labelPaymentMeans" xml:space="preserve">
+    <value>Moyens de paiement</value>
+  </data>
+  <data name="labelPhone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="labelPopulationByGroup" xml:space="preserve">
+    <value>Effectif par group</value>
+  </data>
+  <data name="labelPrint" xml:space="preserve">
+    <value>Imprimer</value>
+  </data>
+  <data name="labelPrinting" xml:space="preserve">
+    <value>Impression</value>
+  </data>
+  <data name="labelRead" xml:space="preserve">
+    <value>Lecture</value>
+  </data>
+  <data name="labelReason" xml:space="preserve">
+    <value>Motif</value>
+  </data>
+  <data name="labelReligion" xml:space="preserve">
+    <value>Religion</value>
+  </data>
+  <data name="labelReports" xml:space="preserve">
+    <value>Rapports</value>
+  </data>
+  <data name="labelRoom" xml:space="preserve">
+    <value>Salle de classe</value>
+  </data>
+  <data name="labelRooms" xml:space="preserve">
+    <value>Salles de classe</value>
+  </data>
+  <data name="labelSalary" xml:space="preserve">
+    <value>Salaire</value>
+  </data>
+  <data name="labelSave" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="labelSchoolingFee" xml:space="preserve">
+    <value>Frais de scolarité</value>
+  </data>
+  <data name="labelSchoolYear" xml:space="preserve">
+    <value>Année scolaire</value>
+  </data>
+  <data name="labelSchoolYears" xml:space="preserve">
+    <value>Années scolaires</value>
+  </data>
+  <data name="labelSection" xml:space="preserve">
+    <value>Section</value>
+  </data>
+  <data name="labelSelectAll" xml:space="preserve">
+    <value>Sélectionner tout</value>
+  </data>
+  <data name="labelSequence" xml:space="preserve">
+    <value>Séquence</value>
+  </data>
+  <data name="labelSettings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="labelSex" xml:space="preserve">
+    <value>Sexe</value>
+  </data>
+  <data name="labelSignIn" xml:space="preserve">
+    <value>Connexion au système</value>
+  </data>
+  <data name="labelStart" xml:space="preserve">
+    <value>Début</value>
+  </data>
+  <data name="labelStartFirstQuarter" xml:space="preserve">
+    <value>Début 1ᵉʳ trimestre</value>
+  </data>
+  <data name="labelStartHour" xml:space="preserve">
+    <value>Heure début</value>
+  </data>
+  <data name="labelStartSecondQuarter" xml:space="preserve">
+    <value>Début 2ᵉ trimestre</value>
+  </data>
+  <data name="labelStartThirdQuarter" xml:space="preserve">
+    <value>Début 3ᵉ trimestre</value>
+  </data>
+  <data name="labelStatut" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="labelStudent" xml:space="preserve">
+    <value>Elève</value>
+  </data>
+  <data name="labelStudentAccount" xml:space="preserve">
+    <value>Compte de l'élève</value>
+  </data>
+  <data name="labelStudentCount" xml:space="preserve">
+    <value>Nombre d'élèves</value>
+  </data>
+  <data name="labelStudentId" xml:space="preserve">
+    <value>Matricule</value>
+  </data>
+  <data name="labelStudentNotes" xml:space="preserve">
+    <value>Notes scolaires</value>
+  </data>
+  <data name="labelStudents" xml:space="preserve">
+    <value>Elèves</value>
+  </data>
+  <data name="labelSubject" xml:space="preserve">
+    <value>Matière</value>
+  </data>
+  <data name="labelSubjectGroup" xml:space="preserve">
+    <value>Groupe de matières</value>
+  </data>
+  <data name="labelSubjectGroups" xml:space="preserve">
+    <value>Groupes de matières</value>
+  </data>
+  <data name="labelSubjects" xml:space="preserve">
+    <value>Matières</value>
+  </data>
+  <data name="labelSubjectTaught" xml:space="preserve">
+    <value>Matières enseignées</value>
+  </data>
+  <data name="labelSubscription" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="labelSubscriptionFee" xml:space="preserve">
+    <value>Frais d'abonnement</value>
+  </data>
+  <data name="labelTimesheet" xml:space="preserve">
+    <value>Fiche de présences</value>
+  </data>
+  <data name="labelTimeTable" xml:space="preserve">
+    <value>Emploi du temps</value>
+  </data>
+  <data name="labelTotalModule" xml:space="preserve">
+    <value>Nbre de modules</value>
+  </data>
+  <data name="labelTrancheNumber" xml:space="preserve">
+    <value>Nbre de tranches</value>
+  </data>
+  <data name="labelType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="labelTypeJob" xml:space="preserve">
+    <value>Type de fonction employé</value>
+  </data>
+  <data name="labelTypeJobs" xml:space="preserve">
+    <value>Types de fonction employé</value>
+  </data>
+  <data name="labelUnCheckAll" xml:space="preserve">
+    <value>Décocher tout</value>
+  </data>
+  <data name="labelUpdate" xml:space="preserve">
+    <value>Mise à jour</value>
+  </data>
+  <data name="labelUser" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="labelUserModule" xml:space="preserve">
+    <value>Modules alloués</value>
+  </data>
+  <data name="labelUserName" xml:space="preserve">
+    <value>Nom utilisateur</value>
+  </data>
+  <data name="labelUserRoom" xml:space="preserve">
+    <value>Salles de classe allouées</value>
+  </data>
+  <data name="labelUsers" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="labelYearOfService" xml:space="preserve">
+    <value>an(s) d'ancienneté</value>
+  </data>
+  <data name="messageActivateSchoolYear" xml:space="preserve">
+    <value>Activer l'année scolaire</value>
+  </data>
+  <data name="messageAddError" xml:space="preserve">
+    <value>Erreur d'enregistrement...</value>
+  </data>
+  <data name="messageAskActivateSchoolYear" xml:space="preserve">
+    <value>Voulez-vous activer l'année scolaire</value>
+  </data>
+  <data name="messageAskCloseSchoolYear" xml:space="preserve">
+    <value>Voulez-vous clôturer l'année scolaire</value>
+  </data>
+  <data name="messageBadInstalment" xml:space="preserve">
+    <value>La valeur d'une tranche n'est pas bonne!</value>
+  </data>
+  <data name="messageBadOldPassword" xml:space="preserve">
+    <value>Ancien mot de passe incorrect</value>
+  </data>
+  <data name="messageBadSection" xml:space="preserve">
+    <value>Si c'est une classe bilingue 0=section franchophone et 1=section anglophone. Sinon la section=0</value>
+  </data>
+  <data name="messageBadTrancheNumber" xml:space="preserve">
+    <value>Nombre de tranches ne doit pas être supérieur à trois (3)</value>
+  </data>
+  <data name="messageBaduserBadPassword" xml:space="preserve">
+    <value>Nom utilisateur ou mot de passe incorrect</value>
+  </data>
+  <data name="messageCashFlowExist" xml:space="preserve">
+    <value>Un type de flux de trésorerie potant le même nom existe déjà!</value>
+  </data>
+  <data name="messageChangePassword" xml:space="preserve">
+    <value>Changer de mot de passe</value>
+  </data>
+  <data name="messageClassExist" xml:space="preserve">
+    <value>Une classe portant le même nom existe déjà!</value>
+  </data>
+  <data name="messageClickToAdd" xml:space="preserve">
+    <value>Cliquez ici pour ajouter</value>
+  </data>
+  <data name="messageClickToAddCashflowType" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un type de flux de trésorerie</value>
+  </data>
+  <data name="messageClickToAddClass" xml:space="preserve">
+    <value>CLiquez ici pour ajouter une classe</value>
+  </data>
+  <data name="messageClickToAddEmployee" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un employé</value>
+  </data>
+  <data name="messageClickToAddEvaluationSession" xml:space="preserve">
+    <value>Cliquez ici pour ajouter une session d'évaluation</value>
+  </data>
+  <data name="messageClickToAddGroup" xml:space="preserve">
+    <value>CLiquez ici pour ajouter un groupe</value>
+  </data>
+  <data name="messageClickToAddJob" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un poste ou une fonction relatif à un employé</value>
+  </data>
+  <data name="messageClickToAddMarkSystem" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un système de notation</value>
+  </data>
+  <data name="messageClickToAddPaymentMean" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un moyen de paiement</value>
+  </data>
+  <data name="messageClickToAddRoom" xml:space="preserve">
+    <value>CLiquez ici pour ajouter une salle classe</value>
+  </data>
+  <data name="messageClickToAddSchoolingFee" xml:space="preserve">
+    <value>Cliquez ici pour ajouter les frais scolaires</value>
+  </data>
+  <data name="messageClickToAddSchoolYear" xml:space="preserve">
+    <value>CLiquez ici pour ajouter une année scolaire</value>
+  </data>
+  <data name="messageClickToAddStudent" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un élève</value>
+  </data>
+  <data name="messageClickToAddSubject" xml:space="preserve">
+    <value>CLiquez ici pour ajouter une matière</value>
+  </data>
+  <data name="messageClickToAddSubscriptionFee" xml:space="preserve">
+    <value>Cliquez ici pour ajouter les frais d'abonnement</value>
+  </data>
+  <data name="messageClickToAddUser" xml:space="preserve">
+    <value>Cliquez ici pour ajouter un utilisateur</value>
+  </data>
+  <data name="messageClickToEdit" xml:space="preserve">
+    <value>Cliquez ici pour modifier</value>
+  </data>
+  <data name="messageClickToExport" xml:space="preserve">
+    <value>Cliquez ici pour exporter</value>
+  </data>
+  <data name="messageClickToHidePassword" xml:space="preserve">
+    <value>Cliquez ici pour cacher le mot de passe</value>
+  </data>
+  <data name="messageClickToPrint" xml:space="preserve">
+    <value>Cliquez ici pour imprimer</value>
+  </data>
+  <data name="messageClickToSave" xml:space="preserve">
+    <value>Cliquez ici pour enregistrer</value>
+  </data>
+  <data name="messageClickToSee" xml:space="preserve">
+    <value>Cliquez ici pour visualiser</value>
+  </data>
+  <data name="messageClickToSeePassword" xml:space="preserve">
+    <value>Cliquez ici pour afficher le mot de passe</value>
+  </data>
+  <data name="messageCloseSchoolYear" xml:space="preserve">
+    <value>Clôturez l'année scolaire</value>
+  </data>
+  <data name="messageConfirmDelete" xml:space="preserve">
+    <value>Voulez-vous supprimer?</value>
+  </data>
+  <data name="messageConfirmeDuplicateFee" xml:space="preserve">
+    <value>Voulez-vous dupliquer ces frais pour</value>
+  </data>
+  <data name="messageDeleteError" xml:space="preserve">
+    <value>Erreur de suppression...</value>
+  </data>
+  <data name="messageDoubleClickToSee" xml:space="preserve">
+    <value>Double-cliquez ici pour visualiser</value>
+  </data>
+  <data name="messageEndDateGreaterThanStartDate" xml:space="preserve">
+    <value>La date de fin doit être supérieure à la date de début</value>
+  </data>
+  <data name="messageEndGreaterThanStart" xml:space="preserve">
+    <value>La fin doit être supérieure àu début</value>
+  </data>
+  <data name="messageEndHourGreaterThanStartHour" xml:space="preserve">
+    <value>L'heure de fin doit être supérieure à l'heure de début</value>
+  </data>
+  <data name="messageEvaluationExist" xml:space="preserve">
+    <value>Cette évaluation  existe déjà</value>
+  </data>
+  <data name="messageFeeAlreadyExist" xml:space="preserve">
+    <value>Ces frais existent déjà</value>
+  </data>
+  <data name="messageFeesExist" xml:space="preserve">
+    <value>Ces frais existent déjà</value>
+  </data>
+  <data name="messageFillField" xml:space="preserve">
+    <value>Veuillez remplir ce champ</value>
+  </data>
+  <data name="messageGroupExist" xml:space="preserve">
+    <value>Ce groupe existe déjà</value>
+  </data>
+  <data name="messageIdNumberlreadyExist" xml:space="preserve">
+    <value>Ce matricule est déjà attribué</value>
+  </data>
+  <data name="messageJobExist" xml:space="preserve">
+    <value>Cette fonction existe déjà</value>
+  </data>
+  <data name="messageNoActionWithClosedYear" xml:space="preserve">
+    <value>Vous ne pouvez pas effectuer d’action avec une année scolaire clôturée</value>
+  </data>
+  <data name="messagePaymentMeanExist" xml:space="preserve">
+    <value>Un moyen de paiement portant le même nom existe déjà!</value>
+  </data>
+  <data name="messageRatingSystemExist" xml:space="preserve">
+    <value>Ce système d'appréciation existe déjà</value>
+  </data>
+  <data name="messageRecordExist" xml:space="preserve">
+    <value>Ce enregistrement existe déjà</value>
+  </data>
+  <data name="messageRequireOpenYear" xml:space="preserve">
+    <value>Une année scolaire ouverte est requise!</value>
+  </data>
+  <data name="messageResearch" xml:space="preserve">
+    <value>Rechercher ...</value>
+  </data>
+  <data name="messageRoomExist" xml:space="preserve">
+    <value>Une salle de classe portant le même nom existe déjà</value>
+  </data>
+  <data name="messageSchoolYearClosed" xml:space="preserve">
+    <value>Cette année scolaire est clôturée</value>
+  </data>
+  <data name="messageSchoolYearExist" xml:space="preserve">
+    <value>Une année scolaire portant le même nom existe déjà!</value>
+  </data>
+  <data name="messageSearchModule" xml:space="preserve">
+    <value>Rechercher un module ...</value>
+  </data>
+  <data name="messageSubjectExist" xml:space="preserve">
+    <value>Cette matière existe Déjà!</value>
+  </data>
+  <data name="messageSubscriptionFeesExist" xml:space="preserve">
+    <value>Ces frais d'abonnement existent déjà</value>
+  </data>
+  <data name="messageSuccesActivateSchoolYear" xml:space="preserve">
+    <value>Activation effectuée avec succès</value>
+  </data>
+  <data name="messageSuccesCloseSchoolYear" xml:space="preserve">
+    <value>Clôture effectuée avec succès</value>
+  </data>
+  <data name="messageTakeSelectPicture" xml:space="preserve">
+    <value>Sélectionnez ou prennez une photo</value>
+  </data>
+  <data name="messageTaskSuccessfully" xml:space="preserve">
+    <value>Opération effectuée avec succès</value>
+  </data>
+  <data name="messageUnknowCashflow" xml:space="preserve">
+    <value>Flux de trésorerie inconnu</value>
+  </data>
+  <data name="messageUnknowClass" xml:space="preserve">
+    <value>Classe inconnue</value>
+  </data>
+  <data name="messageUnknowGroup" xml:space="preserve">
+    <value>Groupe inconnu</value>
+  </data>
+  <data name="messageUnknowSchoolYear" xml:space="preserve">
+    <value>Année scolaire inconnue</value>
+  </data>
+  <data name="messageUnknowSubject" xml:space="preserve">
+    <value>Matière inconnue</value>
+  </data>
+  <data name="messageUnknowType" xml:space="preserve">
+    <value>Type inconnu</value>
+  </data>
+  <data name="messageUpdateError" xml:space="preserve">
+    <value>Erreur de mise à jour...</value>
+  </data>
+  <data name="messageUserExist" xml:space="preserve">
+    <value>Ce compte utilisateur existe déjà</value>
+  </data>
+  <data name="titleAttendanceAdd" xml:space="preserve">
+    <value>Ajout:... Présence</value>
+  </data>
+  <data name="titleAttendanceUpdate" xml:space="preserve">
+    <value>Mise à jour:... Présence</value>
+  </data>
+  <data name="titleCashflowAdd" xml:space="preserve">
+    <value>Ajout:... Flux de trésorerie</value>
+  </data>
+  <data name="titleCashflowUpdate" xml:space="preserve">
+    <value>Mise à jour:... Flux de trésorerie</value>
+  </data>
+  <data name="titleClassAdd" xml:space="preserve">
+    <value>Ajout:.. Classe</value>
+  </data>
+  <data name="titleClassUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Classe</value>
+  </data>
+  <data name="titleEmployeeAdd" xml:space="preserve">
+    <value>Ajout:.. Employé</value>
+  </data>
+  <data name="titleEmployeeUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Employé</value>
+  </data>
+  <data name="titleEnrollingAdd" xml:space="preserve">
+    <value>Ajout:.. Inscription</value>
+  </data>
+  <data name="titleEnrollingUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Inscription</value>
+  </data>
+  <data name="titleEvaluationAdd" xml:space="preserve">
+    <value>Ajout:.. Evaluation</value>
+  </data>
+  <data name="titleEvaluationUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Evaluation</value>
+  </data>
+  <data name="titleGroupAdd" xml:space="preserve">
+    <value>Ajout:.. Groupe</value>
+  </data>
+  <data name="titleGroupUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Groupe</value>
+  </data>
+  <data name="titleJobAdd" xml:space="preserve">
+    <value>Ajout.. Fonction</value>
+  </data>
+  <data name="titleJobUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Fonction</value>
+  </data>
+  <data name="titlePasswordUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Mot de passe</value>
+  </data>
+  <data name="titlePaymentMeanAdd" xml:space="preserve">
+    <value>Ajout:.. moyen de paiement</value>
+  </data>
+  <data name="titlePaymentMeanUpdate" xml:space="preserve">
+    <value>Mise à jour:.. moyen de paiement</value>
+  </data>
+  <data name="titleRatingSystemAdd" xml:space="preserve">
+    <value>Ajout:.. Système d'appréciation</value>
+  </data>
+  <data name="titleRatingSystemUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Système d'appréciation</value>
+  </data>
+  <data name="titleRoomList" xml:space="preserve">
+    <value>Liste des salles de classe</value>
+  </data>
+  <data name="titleSchoolFees" xml:space="preserve">
+    <value>Frais de scolarité</value>
+  </data>
+  <data name="titleSchoolFeesAdd" xml:space="preserve">
+    <value>Ajout:... Frais de scolarité</value>
+  </data>
+  <data name="titleSchoolFeesUpdate" xml:space="preserve">
+    <value>Mise à jour::... Frais de scolarité</value>
+  </data>
+  <data name="titleSchoolRoomAdd" xml:space="preserve">
+    <value>Ajout:... Salle de classe</value>
+  </data>
+  <data name="titleSchoolRoomUpdate" xml:space="preserve">
+    <value>Mise à jour:... Salle de classe</value>
+  </data>
+  <data name="titleSchoolYearAdd" xml:space="preserve">
+    <value>Ajout:... Année scolaire</value>
+  </data>
+  <data name="titleSchoolYearUpdate" xml:space="preserve">
+    <value>Mise à jour:... Année scolaire</value>
+  </data>
+  <data name="titleStudentList" xml:space="preserve">
+    <value>Liste des élèves</value>
+  </data>
+  <data name="titleSubjectAdd" xml:space="preserve">
+    <value>Ajout:.. Matière</value>
+  </data>
+  <data name="titleSubjectList" xml:space="preserve">
+    <value>Liste des matières</value>
+  </data>
+  <data name="titleSubjectUpdate" xml:space="preserve">
+    <value>Mise à jour:.. Mqtière</value>
+  </data>
+  <data name="titleSubscriptionFeesAdd" xml:space="preserve">
+    <value>Ajout:... Frais d'abonnement</value>
+  </data>
+  <data name="titleSubscriptionFeesUpdate" xml:space="preserve">
+    <value>Mise à jour:... Frais d'abonnement</value>
+  </data>
+  <data name="titleUserAdd" xml:space="preserve">
+    <value>Ajout.. Utilisateur</value>
+  </data>
+  <data name="titleUserUpdate" xml:space="preserve">
+    <value>Mise à jour::.. Utilisateur</value>
+  </data>
+</root>

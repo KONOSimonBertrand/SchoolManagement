@@ -1,0 +1,2 @@
+-extraire les donnees de la table grade_book_subject pour la table classsubjects
+-extraire les donnees de la table class_subject pour la table classsubjects

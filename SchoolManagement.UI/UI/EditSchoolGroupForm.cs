@@ -1,4 +1,4 @@
-﻿using SchoolManagement.UI.Languages;
+﻿using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -57,8 +57,7 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-            this.levelSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-
+            this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);

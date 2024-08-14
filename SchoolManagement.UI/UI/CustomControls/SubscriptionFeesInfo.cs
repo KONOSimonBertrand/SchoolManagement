@@ -1,6 +1,7 @@
 ﻿
 
 using MediaFoundation;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using System.CodeDom;
 using System.Xml;
@@ -111,9 +112,9 @@ namespace SchoolManagement.UI.CustomControls
         }
         private void InitLanguage()
         {
-            schoolYearLabel.Text = Languages.Language.labelSchoolYear;
-             this.AmountLabel.Text = Languages.Language.labelAmount;
-            this.subscriptionTypeLabel.Text = Languages.Language.labelSubscription;
+            schoolYearLabel.Text = Language.labelSchoolYear;
+             this.AmountLabel.Text = Language.labelAmount;
+            this.subscriptionTypeLabel.Text = Language.labelSubscription;
         }
     }
 }

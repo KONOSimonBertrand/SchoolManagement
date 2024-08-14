@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using Telerik.WinControls;
@@ -16,13 +17,12 @@ namespace Primary.SchoolApp.UI
         private readonly IEmployeeService employeeService;
         public AddUserForm(IUserService userService, ILogService logService, IEmployeeService employeeService, ClientApp clientApp)
         {
-            InitializeComponent();
             InitEvents();
             this.userService = userService;
             this.logService = logService;
             this.clientApp = clientApp;
             this.employeeService = employeeService;
-            this.Text = "AJOUT:.UTILISATEUR";
+            this.Text = Language.titleUserAdd;
             this.userService = userService;
             EmployeeDropDownList.DataSource = Program.EmployeeList;
             EmployeeDropDownList.SelectedIndex = -1;
@@ -35,7 +35,6 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(957, 390);
             EmployeeDropDownList.Focus();
         }
 
@@ -48,7 +47,7 @@ namespace Primary.SchoolApp.UI
                     User user = new();
                     if (EmployeeDropDownList.SelectedItem != null)
                     {
-                       
+
                         user.Employee = EmployeeDropDownList.SelectedItem.DataBoundItem as Employee;
                         user.EmployeeId = user.Employee.Id;
                     }
@@ -60,7 +59,7 @@ namespace Primary.SchoolApp.UI
                     user.UserName = LoginTextBox.Text;
                     user.Name = NameTextBox.Text;
                     user.Email = EmailTextBox.Text;
-                    user.Password= PasswordTextBox.Text;
+                    user.Password = PasswordTextBox.Text;
                     var isDone = userService.CreateUser(user).Result;
                     if (isDone == true)
                     {
@@ -108,6 +107,8 @@ namespace Primary.SchoolApp.UI
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeForm>();
                 form.Init(employee);
+                form.Icon = this.Icon;
+                form.ClientSize = new System.Drawing.Size(800, 450);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = employeeService.GetEmployee(form.IdNumberTextBox.Text).Result;
@@ -124,6 +125,8 @@ namespace Primary.SchoolApp.UI
         private void ShowEmployeeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeForm>();
+            form.Icon = this.Icon;
+            form.ClientSize = new System.Drawing.Size(800, 450);
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = employeeService.GetEmployee(form.IdNumberTextBox.Text).Result;

@@ -8,7 +8,16 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MainForm.Employee.Tab.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainForm.SettingsTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\ClassNoteReportEmpty.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\AboutAppForm.cs">
@@ -21,6 +30,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\CashFlowTypeInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\EmployeeEnrollingInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\EmployeeGroupInfo.cs">
@@ -59,7 +71,7 @@
     <Compile Update="UI\CustomControls\SubjectInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UI\CustomControls\SubscriptionFeeInfo.cs">
+    <Compile Update="UI\CustomControls\SubscriptionFeesInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\UserInfo.cs">
@@ -71,10 +83,34 @@
     <Compile Update="UI\EmployeeGroups\EditEmployeeGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Employees\AddEmployeeEnrollingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Employees\AddEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Employees\AddEmployeeAttendanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employees\EditEmployeeAttendanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employees\EditEmployeeEnrollingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Employees\EditEmployeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employees\EmployeeAttendancesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employees\EmployeeRoomsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employees\EmployeeSubjectsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employees\UploadEmployeePictureForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EvaluationSessions\EditEvaluationSessionForm.cs">
@@ -98,10 +134,16 @@
     <Compile Update="UI\RatingSystems\EditRatingSystemForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\SchoolClasses\AddClassSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\SchoolClasses\AddSchoolClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SchoolClasses\ClassSubjectsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolClasses\EditClassSubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SchoolClasses\EditSchoolClassForm.cs">
@@ -153,6 +195,15 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Users\EditUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Users\EditUserPasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Users\UserModulesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Users\UserRoomsForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

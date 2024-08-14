@@ -3,13 +3,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using Telerik.WinControls;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditSchoolRoomForm : SchoolManagement.UI.EditSchoolRoomForm
+    internal class EditSchoolRoomForm : SchoolManagement.UI.EditSchoolRoomForm
     {
         private readonly ILogService logService;
         private readonly ISchoolRoomService schoolRoomService;
@@ -19,14 +20,13 @@ namespace Primary.SchoolApp.UI
         private string schoolRoomNameTracker;
         public EditSchoolRoomForm(ISchoolRoomService schoolRoomService, ILogService logService, ClientApp clientApp, ISchoolClassService schoolClassService)
         {
-            InitializeComponent();
             this.schoolRoomService = schoolRoomService;
             this.schoolClassService = schoolClassService;
             this.logService = logService;
-            this.clientApp = clientApp; 
-            schoolRoomNameTracker =string.Empty;
+            this.clientApp = clientApp;
+            schoolRoomNameTracker = string.Empty;
             InitEvents();
-            this.Text = "MODIFICATION:.SALLE DE CLASSE";
+            this.Text = Language.titleSchoolRoomUpdate.ToUpper();
         }
         private void InitEvents()
         {
@@ -37,13 +37,13 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(924, 280);
             NameTextBox.Focus();
         }
 
         private void AddClassButton_Click(object sender, EventArgs e)
         {
-            if (ClassDropDownList.SelectedItem == null) {
+            if (ClassDropDownList.SelectedItem == null)
+            {
                 ShowSchoolClassAddForm();
             }
             else
@@ -76,11 +76,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
-                else {
-                    ErrorLabel.Text = "Une salle de classe portant le même nom existe déjà";
+                else
+                {
+                    ErrorLabel.Text = Language.messageRoomExist;
                 }
 
             }
@@ -96,8 +97,7 @@ namespace Primary.SchoolApp.UI
                 NameTextBox.Text = schoolRoom.Name;
                 SequenceSpinEditor.Value = schoolRoom.Sequence;
                 ClassDropDownList.SelectedValue = schoolRoom.ClassId;
-               SequenceSpinEditor.Value = schoolRoom.Sequence;
-
+                SequenceSpinEditor.Value = schoolRoom.Sequence;
             }
         }
 
@@ -118,7 +118,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Salle de Classe inconnue");
+                RadMessageBox.Show(Language.messageUnknowClass);
             }
         }
         // show school class UI to add new 
@@ -136,7 +136,7 @@ namespace Primary.SchoolApp.UI
         }
         private bool SchoolRomExist(string name)
         {
-            if(schoolRoomNameTracker==name) return false;
+            if (schoolRoomNameTracker == name) return false;
             var item = Program.SchoolRoomList.FirstOrDefault(x => x.Name == name);
             if (item != null) return true;
             return schoolRoomService.GetSchoolRoom(name).Result != null;

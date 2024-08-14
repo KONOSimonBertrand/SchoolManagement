@@ -2,12 +2,13 @@
 
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditJobForm : SchoolManagement.UI.EditJobForm
+    internal class EditJobForm : SchoolManagement.UI.EditJobForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
@@ -16,12 +17,11 @@ namespace Primary.SchoolApp.UI
         private Job job;
         public EditJobForm(IJobService jobService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.jobService = jobService;
             this.clientApp = clientApp;
             this.logService = logService;
-            this.Text = "MODIFICATION:.FONCTION";
-            jobNameTracker=string.Empty;
+            this.Text = Language.titleJobUpdate.ToUpper();
+            jobNameTracker = string.Empty;
             InitEvents();
         }
         private void InitEvents()
@@ -31,10 +31,10 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(546, 182);
             NameTextBox.Focus();
         }
-        internal void Init(Job job) { 
+        internal void Init(Job job)
+        {
             this.job = job;
             jobNameTracker = job.Name;
             NameTextBox.Text = job.Name;
@@ -60,12 +60,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Cette fonction existe déjà";
+                    this.ErrorLabel.Text = Language.messageJobExist;
                 }
             }
         }

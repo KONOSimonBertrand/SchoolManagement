@@ -1,6 +1,6 @@
 ﻿
 
-using MediaFoundation;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -83,14 +83,14 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.editButton.Image = Resources.edit;
+            this.editButton.Image = ViewUtilities.GetImage("Edit");
             this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
 
             this.closeButton.RootElement.EnableElementShadow = false;
             this.closeButton.ButtonElement.Padding = new Padding(0);
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.closeButton.Image = Resources.not_clean;
+            this.closeButton.Image = ViewUtilities.GetImage("Close");
             this.closeButton.RootElement.ToolTipText = "Cliquer ici pour fermer";
 
             this.nameLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
@@ -106,9 +106,9 @@ namespace SchoolManagement.UI.CustomControls
         }
         private void InitLanguage()
         {
-            nameLabel.Text = Languages.Language.labelDesignation;
-            categoryLabel.Text = Languages.Language.labelCategory;
-            typeLabel.Text = Languages.Language.labelType;
+            nameLabel.Text = Language.labelDesignation;
+            categoryLabel.Text = Language.labelCategory;
+            typeLabel.Text = Language.labelType;
         }
     }
 }

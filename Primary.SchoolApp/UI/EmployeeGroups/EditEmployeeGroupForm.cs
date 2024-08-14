@@ -4,24 +4,24 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System.Linq;
 using System;
+using SchoolManagement.UI.Localization;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditEmployeeGroupForm : SchoolManagement.UI.EditEmployeeGroupForm
+    internal class EditEmployeeGroupForm : SchoolManagement.UI.EditEmployeeGroupForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly IEmployeeGroupService employeeGroupService;
-        private EmployeeGroup  employeeGroup;
+        private EmployeeGroup employeeGroup;
         private string employeeGroupNameTracker;
         public EditEmployeeGroupForm(IEmployeeGroupService employeeGroupService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.employeeGroupService = employeeGroupService;
             this.logService = logService;
             this.clientApp = clientApp;
-            employeeGroupNameTracker= string.Empty;
-            this.Text = "MODIFICATION:.GROUPE";
+            employeeGroupNameTracker = string.Empty;
+            this.Text = Language.titleGroupUpdate;
             InitEvents();
         }
         private void InitEvents()
@@ -31,12 +31,11 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(546, 182);
             NameTextBox.Focus();
         }
         internal void Init(EmployeeGroup group)
         {
-            this.employeeGroup= group;
+            this.employeeGroup = group;
             employeeGroupNameTracker = group.Name;
             NameTextBox.Text = group.Name;
         }
@@ -61,12 +60,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageUpdateError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ce groupe existe déjà";
+                    this.ErrorLabel.Text = Language.messageGroupExist;
                 }
             }
         }

@@ -2,6 +2,7 @@
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SchoolManagement.UI.Utilities;
+using SchoolManagement.UI.Localization;
 
 namespace SchoolManagement.UI.CustomControls
 {
@@ -93,9 +94,9 @@ namespace SchoolManagement.UI.CustomControls
         }
         private void InitLanguage()
         {
-            nameLabel.Text = Languages.Language.labelDesignation;
-            this.startDateLabel.Text = Languages.Language.labelStart;
-            this.endDateLabel.Text = Languages.Language.labelEnd;
+            nameLabel.Text = Language.labelDesignation;
+            this.startDateLabel.Text = Language.labelStart;
+            this.endDateLabel.Text = Language.labelEnd;
         }
         private void InitEvents()
         {

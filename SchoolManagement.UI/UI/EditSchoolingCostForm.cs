@@ -1,6 +1,6 @@
 ﻿
 
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -247,12 +247,12 @@ namespace SchoolManagement.UI
             
             if (schoolYearDropDownList.SelectedIndex < 0)
             {
-                addSchoolYearButton.Image = Resources.plus;
+                addSchoolYearButton.Image = Utilities.ViewUtilities.GetImage("Add");
                 addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer une nouvelle année scolaire";
             }
             else
             {
-                addSchoolYearButton.Image = Resources.edit;
+                addSchoolYearButton.Image = Utilities.ViewUtilities.GetImage("Edit");
                 addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de l'année scolaire";
             }
         }
@@ -261,12 +261,12 @@ namespace SchoolManagement.UI
             
             if (classDropDownList.SelectedIndex < 0)
             {
-                addClassButton.Image = Resources.plus;
+                addClassButton.Image = Utilities.ViewUtilities.GetImage("Add");
                 addClassButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer ue nouvelle classe";
             }
             else
             {
-                addClassButton.Image = Resources.edit;
+                addClassButton.Image = Utilities.ViewUtilities.GetImage("Edit");
                 addClassButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de la classe";
             }
         }
@@ -275,12 +275,12 @@ namespace SchoolManagement.UI
            
             if (costTypeDropDownList.SelectedIndex < 0)
             {
-                addCostTypeButton.Image = Resources.plus;
+                addCostTypeButton.Image = Utilities.ViewUtilities.GetImage("Add");
                 addCostTypeButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer un nouveau type de frais";
             }
             else
             {
-                addCostTypeButton.Image = Resources.edit;
+                addCostTypeButton.Image = Utilities.ViewUtilities.GetImage("Edit");
                 addCostTypeButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations du type de frais";
             }
         }

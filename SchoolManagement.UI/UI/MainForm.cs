@@ -2,7 +2,7 @@
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using SchoolManagement.UI.Utilities;
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 
 namespace SchoolManagement.UI
 {
@@ -12,7 +12,7 @@ namespace SchoolManagement.UI
         RadSplitButtonElement userSplitButtonElement = new();
         RadMenuItem logoutMenuItem = new(Language.labelLogOut);
         RadMenuItem changePasswordMenuItem = new(Language.messageChangePassword);
-
+        RadDropDownListElement themesDropDown = new RadDropDownListElement();
         #region Properties
         public RadButtonElement AboutButton { get => aboutButton; }
         public RadMenuItem LogOutMenu { get => logoutMenuItem; }
@@ -23,7 +23,7 @@ namespace SchoolManagement.UI
         public RadDropDownList DisciplineSchoolYearDropDownList { get=>disciplineSchoolYearDropDownList;}
         public RadDropDownList StudentNoteSchoolYearDropDownList { get=>studentNoteSchoolYearDropDownList; }
         public RadDropDownList ReportSchoolYearDropDownList { get => reportSchoolYearDropDownList; }
-        public RadDropDownList EmployeeSchoolYearDropDownList { get => employeeSchoolYearDropDownList;}
+        public RadDropDownListElement ThemesDropDownList { get => themesDropDown; }
         #endregion
 
         public MainForm()
@@ -48,7 +48,7 @@ namespace SchoolManagement.UI
             StartPosition = FormStartPosition.CenterScreen;
 
             RadPageViewStripElement stripElement = mainPageView.ViewElement as RadPageViewStripElement;
-            RadDropDownListElement themesDropDown = new RadDropDownListElement();
+           
 
             stripElement.StripButtons = ~StripViewButtons.All;
             stripElement.ItemContainer.ButtonsPanel.Children.Add(themesDropDown);
@@ -238,21 +238,6 @@ namespace SchoolManagement.UI
                     Icon = Resources.icon_pink;
                     break;
             }
-            //timeTablePrintButton.ForeColor = ViewUtilities.MainThemeColor;
-            //homeAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            //homeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            //cashFlowAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            //cashFlowExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            //disciplineExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            //disciplineAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            //studentNoteExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            //studentNoteAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            //settingExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            //settingAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            //employeeExportToExcelButton.ForeColor = ViewUtilities.MainThemeColor;
-            //employeeAddButton.ForeColor = ViewUtilities.MainThemeColor;
-            homeMainListView.ListViewElement.SynchronizeVisualItems();
-
         }
 
         

@@ -9,7 +9,14 @@ namespace SchoolManagement.Core.Model
         public string? FrenchName { get; set; }
         public string? EnglishName { get; set; }
         public int Sequence { get; set; }
-        public virtual string DefaultName { get => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? EnglishName : FrenchName; }
+        public virtual string FullName { get => FrenchName+"/"+EnglishName; }
+        public virtual double Coefficient {  get; set; }
+        public virtual double Coefficient2 { get; set; } //reservé pour les classes bilingues
+        public virtual double NotedOn {  get; set; }
+        public virtual double NotedOn2 { get; set; } //reservé pour les classes bilingues
+        public virtual int GroupId { get; set; }
+        public virtual SubjectGroup Group { get; set; }
+
 
         public override bool Equals(object? obj)
         {
@@ -22,7 +29,7 @@ namespace SchoolManagement.Core.Model
         }
         public override string ToString()
         {
-            return DefaultName ?? string.Empty;
+            return FullName ?? string.Empty;
         }
     }
 }

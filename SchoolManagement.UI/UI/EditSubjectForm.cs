@@ -1,6 +1,6 @@
 ﻿
 
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -53,7 +53,7 @@ namespace SchoolManagement.UI
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
             this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-
+            this.sequenceSpinEditor.SpinElement.ShowBorder = false;
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
             this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
@@ -67,7 +67,7 @@ namespace SchoolManagement.UI
 
             this.nameFrTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.nameEnTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
-            this.sequenceSpinEditor.SpinElement.ShowBorder = false;
+            
             this.nameFrSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.nameEnSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);

@@ -94,7 +94,7 @@
             sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
             sequenceSeparator.Name = "sequenceSeparator";
             sequenceSeparator.Size = new Size(328, 4);
-            sequenceSeparator.TabIndex = 113;
+            sequenceSeparator.TabIndex = 112;
             sequenceSeparator.TabStop = false;
             // 
             // sequenceSpinEditor
@@ -297,7 +297,6 @@
         #endregion
 
         private Telerik.WinControls.UI.RadPanel editPanel;
-        private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
         private Telerik.WinControls.UI.RadSpinEditor sequenceSpinEditor;
         private Telerik.WinControls.UI.RadSeparator codeSeparator;
         private Telerik.WinControls.UI.RadSeparator bookTypeSeparator;
@@ -313,5 +312,6 @@
         private Telerik.WinControls.UI.RadLabel errorLabel;
         private Telerik.WinControls.UI.RadButton closeButton;
         private Telerik.WinControls.UI.RadButton saveButton;
+        private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
     }
 }

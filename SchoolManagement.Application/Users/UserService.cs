@@ -11,6 +11,21 @@ namespace SchoolManagement.Application
         this.userRepository = userRepository;
         }
 
+        public async Task<bool> AddModuleList(int userId,IList<UserModule> modules)
+        {
+            return await userRepository.AddModuleListAsync(userId,modules);
+        }
+
+        public async Task<bool> AddRoomList(int userId,IList<UserRoom> rooms)
+        {
+           return await userRepository.AddRoomListAsync(userId,rooms);
+        }
+
+        public async Task<bool> ChangePassword(int userId, string password)
+        {
+            return await userRepository.ChangePasswordAsync(userId,password);
+        }
+
         public async Task<bool> CreateUser(User user)
         {
             return await userRepository.AddAsync(user);
@@ -34,6 +49,11 @@ namespace SchoolManagement.Application
         public async Task<IList<UserModule>> GetUserModuleList(int userId)
         {
             return await userRepository.GetModuleListAsync(userId);
+        }
+
+        public async Task<IList<UserRoom>> GetUserRoomList(int userId)
+        {
+            return await userRepository.GetRoomListAsync(userId);
         }
 
         public async Task<bool> UpdateUser(User user)

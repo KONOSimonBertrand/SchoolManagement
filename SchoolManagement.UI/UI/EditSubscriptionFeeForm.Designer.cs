@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            durationSeparator = new Telerik.WinControls.UI.RadSeparator();
             subscriptionTypeSeparator = new Telerik.WinControls.UI.RadSeparator();
             durationSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             durationLabel = new Telerik.WinControls.UI.RadLabel();
-            durationSeparator = new Telerik.WinControls.UI.RadSeparator();
             subscriptionTypeLabel = new Telerik.WinControls.UI.RadLabel();
             schoolYearSeparator = new Telerik.WinControls.UI.RadSeparator();
             amountSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -48,10 +48,10 @@
             saveButton = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)durationSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)subscriptionTypeSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)durationSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)durationLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)durationSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)subscriptionTypeLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)schoolYearSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)amountSeparator).BeginInit();
@@ -70,10 +70,10 @@
             // 
             // editPanel
             // 
+            editPanel.Controls.Add(durationSeparator);
             editPanel.Controls.Add(subscriptionTypeSeparator);
             editPanel.Controls.Add(durationSpinEditor);
             editPanel.Controls.Add(durationLabel);
-            editPanel.Controls.Add(durationSeparator);
             editPanel.Controls.Add(subscriptionTypeLabel);
             editPanel.Controls.Add(schoolYearSeparator);
             editPanel.Controls.Add(amountSeparator);
@@ -88,8 +88,17 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(703, 144);
+            editPanel.Size = new Size(686, 144);
             editPanel.TabIndex = 21;
+            // 
+            // durationSeparator
+            // 
+            durationSeparator.Location = new Point(169, 130);
+            durationSeparator.Margin = new Padding(4, 5, 4, 5);
+            durationSeparator.Name = "durationSeparator";
+            durationSeparator.Size = new Size(135, 4);
+            durationSeparator.TabIndex = 84;
+            durationSeparator.TabStop = false;
             // 
             // subscriptionTypeSeparator
             // 
@@ -121,15 +130,6 @@
             durationLabel.Size = new Size(135, 30);
             durationLabel.TabIndex = 83;
             durationLabel.Text = "Durée:";
-            // 
-            // durationSeparator
-            // 
-            durationSeparator.Location = new Point(169, 130);
-            durationSeparator.Margin = new Padding(4, 5, 4, 5);
-            durationSeparator.Name = "durationSeparator";
-            durationSeparator.Size = new Size(135, 3);
-            durationSeparator.TabIndex = 82;
-            durationSeparator.TabStop = false;
             // 
             // subscriptionTypeLabel
             // 
@@ -248,13 +248,13 @@
             errorLabel.Location = new Point(5, 195);
             errorLabel.Margin = new Padding(4, 5, 4, 5);
             errorLabel.Name = "errorLabel";
-            errorLabel.Size = new Size(689, 30);
+            errorLabel.Size = new Size(663, 30);
             errorLabel.TabIndex = 116;
             // 
             // closeButton
             // 
             closeButton.DialogResult = DialogResult.Cancel;
-            closeButton.Location = new Point(577, 155);
+            closeButton.Location = new Point(545, 155);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 30);
@@ -263,7 +263,7 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(452, 155);
+            saveButton.Location = new Point(420, 155);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 30);
@@ -277,7 +277,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(703, 228);
+            ClientSize = new Size(686, 228);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -287,10 +287,10 @@
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)durationSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)subscriptionTypeSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)durationSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)durationLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)durationSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)subscriptionTypeLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)schoolYearSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)amountSeparator).EndInit();

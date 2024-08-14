@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
-            levelSeparator = new Telerik.WinControls.UI.RadSeparator();
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             shortNameSeparator = new Telerik.WinControls.UI.RadSeparator();
             accountTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -44,9 +43,9 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
+            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)levelSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)shortNameSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)accountTextBox).BeginInit();
@@ -61,12 +60,13 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
             // editPanel
             // 
-            editPanel.Controls.Add(levelSeparator);
+            editPanel.Controls.Add(sequenceSeparator);
             editPanel.Controls.Add(sequenceSpinEditor);
             editPanel.Controls.Add(shortNameSeparator);
             editPanel.Controls.Add(accountTextBox);
@@ -82,74 +82,65 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(5, 6, 5, 6);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(929, 171);
+            editPanel.Size = new Size(888, 147);
             editPanel.TabIndex = 27;
-            // 
-            // levelSeparator
-            // 
-            levelSeparator.Location = new Point(525, 159);
-            levelSeparator.Margin = new Padding(5, 6, 5, 6);
-            levelSeparator.Name = "levelSeparator";
-            levelSeparator.Size = new Size(341, 5);
-            levelSeparator.TabIndex = 108;
-            levelSeparator.TabStop = false;
             // 
             // sequenceSpinEditor
             // 
-            sequenceSpinEditor.Location = new Point(525, 121);
+            sequenceSpinEditor.Location = new Point(525, 97);
             sequenceSpinEditor.Margin = new Padding(4);
-            sequenceSpinEditor.MinimumSize = new Size(0, 38);
+            sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
             // 
             // 
             // 
             sequenceSpinEditor.RootElement.MinSize = new Size(0, 38);
-            sequenceSpinEditor.Size = new Size(341, 38);
+            sequenceSpinEditor.Size = new Size(341, 30);
             sequenceSpinEditor.TabIndex = 107;
             // 
             // shortNameSeparator
             // 
-            shortNameSeparator.Location = new Point(525, 75);
+            shortNameSeparator.Location = new Point(525, 60);
             shortNameSeparator.Margin = new Padding(5, 6, 5, 6);
             shortNameSeparator.Name = "shortNameSeparator";
-            shortNameSeparator.Size = new Size(341, 5);
+            shortNameSeparator.Size = new Size(341, 4);
             shortNameSeparator.TabIndex = 106;
             shortNameSeparator.TabStop = false;
             // 
             // accountTextBox
             // 
             accountTextBox.AutoSize = false;
-            accountTextBox.Location = new Point(525, 38);
+            accountTextBox.Location = new Point(525, 30);
             accountTextBox.Margin = new Padding(5, 6, 5, 6);
             accountTextBox.Name = "accountTextBox";
-            accountTextBox.Size = new Size(341, 38);
+            accountTextBox.Size = new Size(341, 30);
             accountTextBox.TabIndex = 1;
             // 
             // nameSeparator
             // 
-            nameSeparator.Location = new Point(0, 75);
+            nameSeparator.Location = new Point(0, 60);
             nameSeparator.Margin = new Padding(5, 6, 5, 6);
             nameSeparator.Name = "nameSeparator";
-            nameSeparator.Size = new Size(515, 5);
+            nameSeparator.Size = new Size(515, 4);
             nameSeparator.TabIndex = 105;
             nameSeparator.TabStop = false;
             // 
             // levelLabel
             // 
             levelLabel.AutoSize = false;
-            levelLabel.Location = new Point(525, 84);
+            levelLabel.Location = new Point(525, 67);
             levelLabel.Margin = new Padding(5, 6, 5, 6);
             levelLabel.Name = "levelLabel";
-            levelLabel.Size = new Size(341, 38);
+            levelLabel.Size = new Size(341, 30);
             levelLabel.TabIndex = 104;
             levelLabel.Text = "Séquence:";
             // 
             // typeSeparator
             // 
-            typeSeparator.Location = new Point(0, 159);
+            typeSeparator.Location = new Point(0, 128);
             typeSeparator.Margin = new Padding(5, 6, 5, 6);
             typeSeparator.Name = "typeSeparator";
-            typeSeparator.Size = new Size(515, 5);
+            typeSeparator.Size = new Size(515, 4);
             typeSeparator.TabIndex = 102;
             typeSeparator.TabStop = false;
             // 
@@ -160,11 +151,11 @@
             typeDropDownList.DropDownHeight = 199;
             typeDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             typeDropDownList.ItemHeight = 30;
-            typeDropDownList.Location = new Point(0, 121);
+            typeDropDownList.Location = new Point(0, 97);
             typeDropDownList.Margin = new Padding(5, 6, 5, 6);
-            typeDropDownList.MinimumSize = new Size(0, 38);
+            typeDropDownList.MinimumSize = new Size(0, 30);
             typeDropDownList.Name = "typeDropDownList";
-            typeDropDownList.Size = new Size(515, 38);
+            typeDropDownList.Size = new Size(515, 30);
             typeDropDownList.TabIndex = 2;
             ((Telerik.WinControls.UI.RadDropDownListElement)typeDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)typeDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -176,10 +167,10 @@
             // typeLabel
             // 
             typeLabel.AutoSize = false;
-            typeLabel.Location = new Point(0, 84);
+            typeLabel.Location = new Point(0, 67);
             typeLabel.Margin = new Padding(5, 6, 5, 6);
             typeLabel.Name = "typeLabel";
-            typeLabel.Size = new Size(515, 38);
+            typeLabel.Size = new Size(515, 30);
             typeLabel.TabIndex = 77;
             typeLabel.Text = "Catégorie:";
             // 
@@ -189,17 +180,17 @@
             accountLabel.Location = new Point(525, 0);
             accountLabel.Margin = new Padding(5, 6, 5, 6);
             accountLabel.Name = "accountLabel";
-            accountLabel.Size = new Size(341, 38);
+            accountLabel.Size = new Size(341, 30);
             accountLabel.TabIndex = 6;
             accountLabel.Text = "Compte:";
             // 
             // nameTextBox
             // 
             nameTextBox.AutoSize = false;
-            nameTextBox.Location = new Point(0, 38);
+            nameTextBox.Location = new Point(0, 30);
             nameTextBox.Margin = new Padding(5, 6, 5, 6);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new Size(515, 38);
+            nameTextBox.Size = new Size(515, 30);
             nameTextBox.TabIndex = 0;
             // 
             // nameLabel
@@ -208,14 +199,14 @@
             nameLabel.Location = new Point(0, 0);
             nameLabel.Margin = new Padding(5, 6, 5, 6);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(515, 38);
+            nameLabel.Size = new Size(515, 30);
             nameLabel.TabIndex = 5;
             nameLabel.Text = "Désignation:";
             // 
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(0, 221);
+            errorLabel.Location = new Point(0, 203);
             errorLabel.Margin = new Padding(5, 6, 5, 6);
             errorLabel.Name = "errorLabel";
             errorLabel.Size = new Size(871, 38);
@@ -223,7 +214,7 @@
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(725, 176);
+            closeButton.Location = new Point(725, 158);
             closeButton.Margin = new Padding(5, 6, 5, 6);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(146, 38);
@@ -232,12 +223,21 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(569, 176);
+            saveButton.Location = new Point(569, 158);
             saveButton.Margin = new Padding(5, 6, 5, 6);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(146, 38);
             saveButton.TabIndex = 111;
             saveButton.Text = "Enregistrer";
+            // 
+            // sequenceSeparator
+            // 
+            sequenceSeparator.Location = new Point(525, 128);
+            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
+            sequenceSeparator.Name = "sequenceSeparator";
+            sequenceSeparator.Size = new Size(341, 4);
+            sequenceSeparator.TabIndex = 108;
+            sequenceSeparator.TabStop = false;
             // 
             // EditPaymentMeanForm
             // 
@@ -245,7 +245,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(929, 252);
+            ClientSize = new Size(888, 247);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -255,7 +255,6 @@
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)levelSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)shortNameSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)accountTextBox).EndInit();
@@ -270,6 +269,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -277,7 +277,6 @@
         #endregion
 
         private Telerik.WinControls.UI.RadPanel editPanel;
-        private Telerik.WinControls.UI.RadSeparator levelSeparator;
         private Telerik.WinControls.UI.RadSpinEditor sequenceSpinEditor;
         private Telerik.WinControls.UI.RadSeparator shortNameSeparator;
         private Telerik.WinControls.UI.RadTextBox accountTextBox;
@@ -292,5 +291,6 @@
         private Telerik.WinControls.UI.RadLabel errorLabel;
         private Telerik.WinControls.UI.RadButton closeButton;
         private Telerik.WinControls.UI.RadButton saveButton;
+        private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
     }
 }

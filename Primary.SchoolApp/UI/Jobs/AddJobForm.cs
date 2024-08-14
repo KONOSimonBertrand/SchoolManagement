@@ -1,22 +1,22 @@
 ﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddJobForm : SchoolManagement.UI.EditJobForm
+    internal class AddJobForm : SchoolManagement.UI.EditJobForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly IJobService jobService;
         public AddJobForm(IJobService jobService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.jobService = jobService;
             this.clientApp = clientApp;
             this.logService = logService;
-            this.Text = "AJOUT:.FONCTION";
+            this.Text = Language.titleJobAdd.ToUpper();
             InitEvents();
         }
         private void InitEvents()
@@ -26,17 +26,17 @@ namespace Primary.SchoolApp.UI
         }
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(546, 182);
             NameTextBox.Focus();
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (IsValidData()) {
+            if (IsValidData())
+            {
                 if (!JobExist(NameTextBox.Text))
                 {
                     Job job = new Job();
                     job.Name = NameTextBox.Text;
-                    var isDone=jobService.CreateJob(job).Result;
+                    var isDone = jobService.CreateJob(job).Result;
                     if (isDone)
                     {
                         Log log = new()
@@ -50,12 +50,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Cette fonction existe déjà";
+                    this.ErrorLabel.Text = Language.messageJobExist;
                 }
             }
         }

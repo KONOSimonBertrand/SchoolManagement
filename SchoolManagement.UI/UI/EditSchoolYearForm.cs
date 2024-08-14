@@ -1,4 +1,4 @@
-﻿using SchoolManagement.UI.Languages;
+﻿using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -205,42 +205,64 @@ namespace SchoolManagement.UI
             }
             if (this.nameTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
+                this.errorLabel.Text = Language.messageFillField;
                 this.nameTextBox.Focus();
                 return false;
             }
             if (this.startFirstQuarterDateTimePicker.Text == string.Empty)
             {
-                this.errorLabel.Text = "La saisie de la date de début est requise!";
+                this.errorLabel.Text = Language.messageFillField;
                 this.startFirstQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endFirstQuarterDateTimePicker.Text == string.Empty)
             {
-                this.errorLabel.Text = "La saisie de la date de fin est requise!";
+                this.errorLabel.Text = Language.messageFillField;
                 this.endFirstQuarterDateTimePicker.Focus();
+                return false;
+            }
+            if (this.startSecondQuarterDateTimePicker.Text == string.Empty)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.startSecondQuarterDateTimePicker.Focus();
+                return false;
+            }
+            if (this.endSecondQuarterDateTimePicker.Text == string.Empty)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.endSecondQuarterDateTimePicker.Focus();
+                return false;
+            }
+            if (this.startThirdQuarterDateTimePicker.Text == string.Empty)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.startThirdQuarterDateTimePicker.Focus();
+                return false;
+            }
+            if (this.endThirdQuarterDateTimePicker.Text == string.Empty)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.endThirdQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endFirstQuarterDateTimePicker.Value < this.startFirstQuarterDateTimePicker.Value)
             {
-                this.errorLabel.Text = "La date de fin est inférieure à la date de début!";
+                this.errorLabel.Text = Language.messageEndDateGreaterThanStartDate;
                 this.endFirstQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endSecondQuarterDateTimePicker.Value < this.startSecondQuarterDateTimePicker.Value)
             {
-                this.errorLabel.Text = "La date de fin est inférieure à la date de début!";
+                this.errorLabel.Text = Language.messageEndDateGreaterThanStartDate;
                 this.endSecondQuarterDateTimePicker.Focus();
                 return false;
             }
-
             if (this.endThirdQuarterDateTimePicker.Value < this.startThirdQuarterDateTimePicker.Value)
             {
-                this.errorLabel.Text = "La date de fin est inférieure à la date de début!";
+                this.errorLabel.Text = Language.messageEndDateGreaterThanStartDate;
                 this.endThirdQuarterDateTimePicker.Focus();
                 return false;
             }
-
 
             return true;
         }

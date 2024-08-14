@@ -1,4 +1,5 @@
 ﻿
+using SchoolManagement.UI.Localization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -13,6 +14,7 @@ namespace SchoolManagement.UI.CustomControls
         public RadButton CloseButton { get => closeButton; }
         public RadTextBox NameTextBox { get => nameTextBox; }
         public RadTextBox ClassTextBox { get => classTextBox; }
+        public RadLabel StudentsCountLabel {  get => studentsCountLabel; }
         #endregion
         public SchoolRoomInfo()
         {
@@ -59,12 +61,11 @@ namespace SchoolManagement.UI.CustomControls
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.studentsCountLabel.Image = Resources.eye;
+            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
             this.studentsCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.studentsCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.studentsCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.studentsCountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentsCountLabel.ForeColor = Utilities.ViewUtilities.MainThemeColor;
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -104,9 +105,9 @@ namespace SchoolManagement.UI.CustomControls
         }
         private void InitLanguage()
         {
-            nameLabel.Text = Languages.Language.labelDesignation;
-            classLabel.Text = Languages.Language.labelClass;
-            this.studentsCountLabel.Text = Languages.Language.labelStudentCount;
+            nameLabel.Text = Language.labelDesignation;
+            classLabel.Text = Language.labelClass;
+            this.studentsCountLabel.Text = Language.labelStudentCount;
         }
     }
 }

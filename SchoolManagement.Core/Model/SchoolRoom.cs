@@ -16,6 +16,7 @@ namespace SchoolManagement.Core.Model
 
         public int Sequence {  get; set; }  
 
+        public virtual ICollection<UserRoom> Rooms { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not SchoolRoom other) return false;

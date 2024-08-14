@@ -18,10 +18,10 @@ namespace SchoolManagement.Core.Model
         {
             get
             {
-                if (this.BookTypeId == 0) return "Français uniquement";
-                if (this.BookTypeId == 1) return "Aglais uniquement";
-                if (this.BookTypeId == 2) return "Français & Anglais";
-                return "Inconnu";
+                if (this.BookTypeId == 0) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB"? "Français uniquement":"French only";
+                if (this.BookTypeId == 1) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Anglais uniquement" : "English only";
+                if (this.BookTypeId == 2) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Français & Anglais" : "French & English";
+                return string.Empty;
             }
         }
         public int Sequence { get; set; }

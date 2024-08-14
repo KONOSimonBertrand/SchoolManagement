@@ -1,5 +1,5 @@
 ﻿
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;

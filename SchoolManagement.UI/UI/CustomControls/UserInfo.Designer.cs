@@ -33,6 +33,7 @@
             closeButton = new Telerik.WinControls.UI.RadButton();
             titleInfoLabel = new Telerik.WinControls.UI.RadLabel();
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            roomCountLabel = new Telerik.WinControls.UI.RadLabel();
             moduleCountLabel = new Telerik.WinControls.UI.RadLabel();
             defaultModuleTextBox = new Telerik.WinControls.UI.RadTextBox();
             defaultModuleSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -50,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)titleInfoLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)roomCountLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)moduleCountLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)defaultModuleTextBox).BeginInit();
             defaultModuleTextBox.SuspendLayout();
@@ -108,6 +110,7 @@
             // 
             // editPanel
             // 
+            editPanel.Controls.Add(roomCountLabel);
             editPanel.Controls.Add(moduleCountLabel);
             editPanel.Controls.Add(defaultModuleTextBox);
             editPanel.Controls.Add(defaultModuleLabel);
@@ -121,6 +124,17 @@
             editPanel.Name = "editPanel";
             editPanel.Size = new Size(315, 406);
             editPanel.TabIndex = 20;
+            // 
+            // roomCountLabel
+            // 
+            roomCountLabel.AutoSize = false;
+            roomCountLabel.Dock = DockStyle.Top;
+            roomCountLabel.Location = new Point(0, 240);
+            roomCountLabel.Margin = new Padding(4, 5, 4, 5);
+            roomCountLabel.Name = "roomCountLabel";
+            roomCountLabel.Size = new Size(315, 30);
+            roomCountLabel.TabIndex = 66;
+            roomCountLabel.Text = "Classes:";
             // 
             // moduleCountLabel
             // 
@@ -245,6 +259,7 @@
             ((System.ComponentModel.ISupportInitialize)titleInfoLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)roomCountLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)moduleCountLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)defaultModuleTextBox).EndInit();
             defaultModuleTextBox.ResumeLayout(false);
@@ -281,5 +296,6 @@
         private Telerik.WinControls.UI.RadSeparator loginSeparator;
         private Telerik.WinControls.UI.RadLabel loginLabel;
         private Telerik.WinControls.UI.RadLabel moduleCountLabel;
+        private Telerik.WinControls.UI.RadLabel roomCountLabel;
     }
 }

@@ -1,6 +1,6 @@
 ﻿
 
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -143,12 +143,12 @@ namespace SchoolManagement.UI
 
             if (groupDropDownList.SelectedIndex < 0)
             {
-                addGroupButton.Image = Resources.plus;
+                addGroupButton.Image = Utilities.ViewUtilities.GetImage("Add");
                 addGroupButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer une nouveau groupe";
             }
             else
             {
-                addGroupButton.Image = Resources.edit;
+                addGroupButton.Image = Utilities.ViewUtilities.GetImage("Edit");
                 addGroupButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations du groupe";
             }
         }

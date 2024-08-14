@@ -23,6 +23,16 @@ namespace SchoolManagement.Application
            return await classWriteRepository.AddAsync(schoolClass);
         }
 
+        public async Task<bool> DeleteClassSubject(int classId, int subjectId, int bookId)
+        {
+            return await classWriteRepository.DeleteSubjectAsync(classId, subjectId,bookId);
+        }
+
+        public async Task<ClassSubject?> GetClassSubject(int classId, int subjectId, int bookId)
+        {
+            return await classReadRepository.GetSubjectAsync(classId, subjectId, bookId);
+        }
+
         public async Task<IList<ClassSubject>> GetClassSubjectList(int classId)
         {
             return await classReadRepository.GetSubjectListAsync(classId);
@@ -36,6 +46,11 @@ namespace SchoolManagement.Application
         public async Task<IList<SchoolClass>> GetSchoolClassList()
         {
             return await classReadRepository.GetListAsync();
+        }
+
+        public async Task<bool> UpdateClassSubject(ClassSubject ClassSubject)
+        {
+           return await classWriteRepository.UpdateSubjectAsync(ClassSubject);
         }
 
         public async Task<bool> UpdateSchoolClass(SchoolClass schoolClass)

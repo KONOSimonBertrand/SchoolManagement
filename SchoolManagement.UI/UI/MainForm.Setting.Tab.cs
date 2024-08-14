@@ -2,7 +2,8 @@
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SchoolManagement.UI.CustomControls;
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
+using Telerik.WinControls.UI.Localization;
 
 
 namespace SchoolManagement.UI
@@ -136,6 +137,15 @@ namespace SchoolManagement.UI
             settingExportToExcelButton.Text = Language.labelExport;
             SettingSearchModuleDropDownList.NullText = Language.messageSearchModule;
             settingSearchTextBox.NullText = Language.messageResearch;
+            if(Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
+            {
+                RadGridLocalizationProvider.CurrentProvider = new FrenchRadGridLocalizationProvider();
+                RadMessageLocalizationProvider.CurrentProvider = new FrenchRadMessageLocalizationProvider();
+                RadSchedulerLocalizationProvider.CurrentProvider = new FrenchSchedulerLocalizationProvider();
+                CommandBarLocalizationProvider.CurrentProvider = new FrenchCommandBarLocalizationProvider();
+                PrintDialogsLocalizationProvider.CurrentProvider=new FrenchPrintDialogsLocalizationProvider();
+            }
+           
         }
     }
 }

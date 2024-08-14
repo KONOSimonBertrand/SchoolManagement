@@ -3,13 +3,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using Telerik.WinControls;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSubscriptionFeeForm : SchoolManagement.UI.EditSubscriptionFeeForm
+    internal class AddSubscriptionFeeForm : SchoolManagement.UI.EditSubscriptionFeeForm
     {
         private readonly ISubscriptionFeeService subscriptionFeeService;
         private readonly ILogService logService;
@@ -19,7 +20,6 @@ namespace Primary.SchoolApp.UI
         public AddSubscriptionFeeForm(ISubscriptionFeeService subscriptionFeeService, ILogService logService,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.subscriptionFeeService = subscriptionFeeService;
             this.logService = logService;
             this.clientApp = clientApp;
@@ -28,7 +28,7 @@ namespace Primary.SchoolApp.UI
             SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "AB");
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
             InitEvents();
-            this.Text = "AJOUT:.FRAIS SCOLARITE";
+            this.Text = Language.titleSubscriptionFeesAdd.ToUpper();
         }
 
         private void InitEvents()
@@ -54,7 +54,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Type inconnu");
+                    RadMessageBox.Show(Language.messageUnknowType);
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Année scolaire inconnue");
+                    RadMessageBox.Show(Language.messageUnknowSchoolYear);
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace Primary.SchoolApp.UI
 
                         SaveButton.Enabled = false;
                         AddSchoolYearButton.Enabled = false;
-                        ErrorLabel.Text = "Cette année scolaire est clôturée";
+                        ErrorLabel.Text = Language.messageSchoolYearClosed;
                     }
                     else
                     {
@@ -105,7 +105,6 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(883, 293);
             SchoolYearDropDownList.Focus();
         }
 
@@ -119,7 +118,7 @@ namespace Primary.SchoolApp.UI
                 subscriptionFee.CashFlowType = SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
                 subscriptionFee.CashFlowTypeId = subscriptionFee.CashFlowType.Id;
                 subscriptionFee.Duration = int.Parse(DurationSpinEditor.Value.ToString());
-                subscriptionFee.Amount = double.Parse(AmountTextBox.Text);                
+                subscriptionFee.Amount = double.Parse(AmountTextBox.Text);
                 if (!SubscriptionFeeExist(subscriptionFee.CashFlowTypeId, subscriptionFee.SchoolYearId))
                 {
                     var isDone = subscriptionFeeService.CreateSubscriptionFee(subscriptionFee).Result;
@@ -136,12 +135,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ces frais d'abonnement existent déjà";
+                    this.ErrorLabel.Text = Language.messageSubscriptionFeesExist;
                 }
             }
         }
@@ -162,7 +161,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowSchoolYear);
             }
 
         }
@@ -198,7 +197,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowCashflow);
             }
 
         }

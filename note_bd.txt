@@ -1,0 +1,6 @@
+*************CashflowTypes*************
+Cette table contient les enregistrements des types de flux à savoir :
+- la pension,
+- l'abonnement
+*************EnrollingEmployees*******************
+cette contient des inscriptions des employés effectuées chaque année scolaire

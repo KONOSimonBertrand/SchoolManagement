@@ -5,11 +5,12 @@ using Primary.SchoolApp.UI;
 using Primary.SchoolApp.UI.CustomControls;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Core.Model;
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -25,7 +26,7 @@ namespace Primary.SchoolApp
         private CashFlowTypeInfo cashFlowTypeInfo;
         private PaymentMeanInfo paymentMeanInfo;
         private SchoolingCostInfo schoolingCostInfo;
-        private SubscriptionFeeInfo subscriptionFeeInfo;
+        private SubscriptionFeesInfo subscriptionFeeInfo;
         private SubjectGroupInfo subjectGroupInfo;
         private SubjectInfo subjectInfo;
         private EvaluationSessionInfo evaluationSessionInfo;
@@ -35,6 +36,7 @@ namespace Primary.SchoolApp
         private UserInfo userInfo;
         private bool isFirstLoadingBasicData = false;//  détermine si c'est le premier chargement des données de base
         private readonly List<UserControl> settingPageUserControlList = new();
+       
         private void InitSettingPage()
         {
             InitSettingPageComponents();
@@ -123,7 +125,7 @@ namespace Primary.SchoolApp
             ListViewDataItem itemJob = new()
             {
                 Key = 13,
-                Value =Language.labelJobs
+                Value =Language.labelTypeJobs
             };
             ListViewDataItem itemEmployeeGroup = new()
             {
@@ -226,6 +228,7 @@ namespace Primary.SchoolApp
                 Location = new Point(0, 0),
                 Margin = new Padding(2, 2, 2, 2)
             };
+            schoolClassInfo.SubjectsCountLabel.DoubleClick += MenuShowSubjectOfClass_Click;
             schoolClassInfo.CloseButton.Click += delegate (object sender, EventArgs e)
             {
                 SettingInfoRightPanel.Visible = false;
@@ -396,6 +399,8 @@ namespace Primary.SchoolApp
                 SettingInfoRightPanel.Visible = false;
             };
             userInfo.EditButton.Click += SettingEditButton_Click;
+            userInfo.ModuleCount.DoubleClick += MenuShowUserModule_Click;
+            userInfo.RoomCount.DoubleClick += MenuShowUserRoom_Click;
             SettingInfoRightPanel.Controls.Add(userInfo);
             settingPageUserControlList.Add(userInfo);
         }
@@ -413,8 +418,6 @@ namespace Primary.SchoolApp
             SettingLeftListView.SelectedItem = null;
             SettingLeftListView.SelectedItem = SettingLeftListView.Items.FirstOrDefault();
         }
-
-       
 
         #region Methodes
         // affiche les informations d'une année scolaire sur le contrôle personnalisé SchoolYearInfo
@@ -439,6 +442,7 @@ namespace Primary.SchoolApp
             schoolClassInfo.TitleInfoLabel.Text = "INFO ...";
             schoolClassInfo.NameTextBox.Text = schoolClass.Name;
             schoolClassInfo.GroupTextBox.Text = schoolClass.Group.Name;
+            schoolClassInfo.SubjectsCountLabel.Text =  Language.labelSubjectTaught+": "+ schoolClassService.GetClassSubjectList(schoolClass.Id).Result.Count;
         }
         // affiche les info d'une salle classe
         private void LoadSelectedSchoolRoomDetail(SchoolRoom room)
@@ -515,7 +519,7 @@ namespace Primary.SchoolApp
             if (subjectGroup != null)
             {
                 subjectGroupInfo.TitleInfoLabel.Text = "INFO...";
-                subjectGroupInfo.NameTextBox.Text = subjectGroup.DefaultName;
+                subjectGroupInfo.NameTextBox.Text = subjectGroup.FullName;
             }
         }
         // affiche les info d'une de matière
@@ -524,7 +528,7 @@ namespace Primary.SchoolApp
             if (subject != null)
             {
                 subjectInfo.TitleInfoLabel.Text = "INFO...";
-                subjectInfo.NameTextBox.Text = subject.DefaultName;
+                subjectInfo.NameTextBox.Text = subject.FullName;
             }
         }
         // affiche les info d'une session d'évaluation
@@ -574,9 +578,13 @@ namespace Primary.SchoolApp
                 userInfo.NameTextBox.Text = user.Name;
                 userInfo.LoginTextBox.Text = user.UserName;
                 var modules = userService.GetUserModuleList(user.Id).Result;
+                var rooms = userService.GetUserRoomList(user.Id).Result;
                 var defautModule = modules.FirstOrDefault(m => m.IsDefault == true);
                 userInfo.DefaultModuleTextBox.Text = defautModule != null ? defautModule.Module.Name : string.Empty;
-                userInfo.ModuleCount.Text = $"{userInfo.ModuleCount.Text} :{modules.Count.ToString()}";
+                userInfo.ModuleCount.Text = $"{Language.labelModules}: {modules.Count.ToString()}/ {Program.ModuleList.Count}";
+                userInfo.ModuleCount.Image = Utilities.AppUtilities.GetImage("Eye");
+                userInfo.RoomCount.Text = $"{Language.labelRooms}: {rooms.Count.ToString()}/{Program.SchoolRoomList.Count}";
+                userInfo.RoomCount.Image = Utilities.AppUtilities.GetImage("Eye");
             }
         }
         //chargement la liste des années scolaires dans le datagridview de la page setting
@@ -820,10 +828,13 @@ namespace Primary.SchoolApp
         {
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColumn = new(Language.fieldName);
+            GridViewTextBoxColumn fullNameColumn = new GridViewTextBoxColumn("FullName");
             GridViewTextBoxColumn sequenceColumn = new("Sequence");
             nameColumn.HeaderText = Language.labelDesignation;
+            fullNameColumn.HeaderText = Language.labelFullName;
             sequenceColumn.HeaderText = Language.labelSequence;
             SettingGridView.Columns.Add(nameColumn);
+            SettingGridView.Columns.Add(fullNameColumn);
             SettingGridView.Columns.Add(sequenceColumn);
         }
         //chargement des matières dans le datagridview de la page setting
@@ -839,10 +850,13 @@ namespace Primary.SchoolApp
         {
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColumn = new(Language.fieldName);
+            GridViewTextBoxColumn fullNameColumn = new GridViewTextBoxColumn("FullName");
             GridViewTextBoxColumn sequenceColumn = new("Sequence");
             nameColumn.HeaderText = Language.labelDesignation;
             sequenceColumn.HeaderText = Language.labelSequence;
+            fullNameColumn.HeaderText = Language.labelFullName;
             SettingGridView.Columns.Add(nameColumn);
+            SettingGridView.Columns.Add(fullNameColumn);
             SettingGridView.Columns.Add(sequenceColumn);
         }
         //chargement des sessions d'évaluation dans le datagridview de la page setting
@@ -983,6 +997,7 @@ namespace Primary.SchoolApp
             if (schoolYear != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolYearForm>();
+                form.Icon = this.Icon;
                 form.Init(schoolYear);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
@@ -999,6 +1014,7 @@ namespace Primary.SchoolApp
         private void ShowSchoolYearAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolYearForm>();
+            form.Icon=this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
@@ -1013,6 +1029,7 @@ namespace Primary.SchoolApp
             if (schoolGroup != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
+                form.Icon = this.Icon;
                 form.Init(schoolGroup);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
@@ -1030,6 +1047,7 @@ namespace Primary.SchoolApp
         private void ShowSchoolGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolGroupForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = schoolGroupService.GetSchoolGroup(form.NameTextBox.Text).Result;
@@ -1045,6 +1063,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
                 form.Init(schoolClass);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<SchoolClass>();
@@ -1060,6 +1079,7 @@ namespace Primary.SchoolApp
         private void ShowSchoolClassAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolClassForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;
@@ -1074,8 +1094,8 @@ namespace Primary.SchoolApp
             if (room != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolRoomForm>();
+                form.Icon=this.Icon;
                 form.Init(room);
-                form.ClientSize = new System.Drawing.Size(915, 280);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<SchoolRoom>();
@@ -1091,7 +1111,8 @@ namespace Primary.SchoolApp
         private void ShowSchoolRoomAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolRoomForm>();
-            form.ClientSize = new System.Drawing.Size(915, 280);
+            form.Icon=this.Icon;
+            
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = schoolRoomService.GetSchoolRoom(form.NameTextBox.Text).Result;
@@ -1107,6 +1128,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
                 form.Init(type);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<CashFlowType>();
@@ -1122,6 +1144,7 @@ namespace Primary.SchoolApp
         private void ShowCashFlowTypeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddCashFlowTypeForm>();
+            form.Icon=this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
@@ -1137,6 +1160,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditPaymentMeanForm>();
                 form.Init(item);
+                form.Icon=this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<PaymentMean>();
@@ -1152,6 +1176,7 @@ namespace Primary.SchoolApp
         private void ShowPaymentMeanAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddPaymentMeanForm>();
+            form.Icon = this.Icon;           
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = paymentMeanService.GetPaymentMean(form.NameTextBox.Text).Result;
@@ -1168,6 +1193,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolingCostForm>();
                 form.Init(item);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<SchoolingCost>();
@@ -1183,6 +1209,7 @@ namespace Primary.SchoolApp
         private void ShowSchoolingCostAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolingCostForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 int classId = int.Parse(form.ClassDropDownList.SelectedValue.ToString());
@@ -1201,6 +1228,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditSubscriptionFeeForm>();
                 form.Init(item);
+                form.Icon=this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<SubscriptionFee>();
@@ -1216,6 +1244,7 @@ namespace Primary.SchoolApp
         private void ShowSubscriptionFeeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubscriptionFeeForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 int schoolYearId = int.Parse(form.SchoolYearDropDownList.SelectedValue.ToString());
@@ -1233,6 +1262,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditSubjectGroupForm>();
                 form.Init(item);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<SubjectGroup>();
@@ -1248,6 +1278,7 @@ namespace Primary.SchoolApp
         private void ShowSubjectGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubjectGroupForm>();
+            form.Icon= this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 string name = form.FrenchNameTextBox.Text;
@@ -1264,6 +1295,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditSubjectForm>();
                 form.Init(item);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<Subject>();
@@ -1279,6 +1311,7 @@ namespace Primary.SchoolApp
         private void ShowSubjectAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubjectForm>();
+            form.Icon=this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 string name = form.FrenchNameTextBox.Text;
@@ -1295,6 +1328,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditEvaluationSessionForm>();
                 form.Init(item);
+                form.Icon= this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.MasterTemplate.DataSource = new List<EvaluationSession>();
@@ -1312,6 +1346,7 @@ namespace Primary.SchoolApp
         private void ShowRatingSystemAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddRatingSystemForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = ratingSystemService.GetRatingSystem(form.FrenchNameDropDownList.Text).Result;
@@ -1327,6 +1362,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditRatingSystemForm>();
                 form.Init(ratingSystem);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<RatingSystem>();
@@ -1342,6 +1378,7 @@ namespace Primary.SchoolApp
         private void ShowJobAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddJobForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = jobService.GetJob(form.NameTextBox.Text).Result;
@@ -1358,6 +1395,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditJobForm>();
                 form.Init(job);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<Job>();
@@ -1374,6 +1412,7 @@ namespace Primary.SchoolApp
         private void ShowEmployeeGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeGroupForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = employeeGroupService.GetEmployeeGroup(form.NameTextBox.Text).Result;
@@ -1389,6 +1428,7 @@ namespace Primary.SchoolApp
             if (group != null)
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeGroupForm>();
+                form.Icon = this.Icon;
                 form.Init(group);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
@@ -1406,6 +1446,7 @@ namespace Primary.SchoolApp
         private void ShowUserAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddUserForm>();
+            form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = userService.GetUser(form.LoginTextBox.Text).Result;
@@ -1422,6 +1463,7 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditUserForm>();
                 form.Init(user);
+                form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<User>();
@@ -1788,7 +1830,25 @@ namespace Primary.SchoolApp
             }
 
         }
-        
+        //affiche la liste matières d'une classe
+        private void ShowSubjectsOfClass()
+        {
+            var form = Program.ServiceProvider.GetService<ClassSubjectsForm>();
+            form.Icon = this.Icon;
+            var currentItem = SettingGridView.CurrentRow.DataBoundItem as SchoolClass;
+            form.Init(currentItem);
+            form.Show();
+        }
+        //génère un relevé de note vide
+        private async void GenerateEmptyClassReport(SchoolRoom selectedRoom, SchoolYear selectedYear, string language)
+        {
+            var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+            form.GenerateEmptyReportClassNote(selectedRoom, selectedYear, language);
+            form.Icon = this.Icon;
+            form.Text = selectedRoom.Name + ":.TEMPLATE RELEVE DE NOTES";
+            form.Show();
+            await Task.Delay(0);
+        }
         #endregion
 
         #region Events
@@ -1815,6 +1875,8 @@ namespace Primary.SchoolApp
                             SettingGridView.DataSource = Program.SchoolYearList;
                         }
                         SetVisibleSelectedSettingPageUserControl(schoolYearInfo);
+                        schoolYearInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolYearInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 2:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddGroup;
@@ -1829,6 +1891,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(schoolGroupInfo);
+                        schoolGroupInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolGroupInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 3:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddClass;
@@ -1843,6 +1907,9 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(schoolClassInfo);
+                        schoolClassInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolClassInfo.EditButton.Image = AppUtilities.GetImage("Edit");
+                        schoolClassInfo.SubjectsCountLabel.Image = AppUtilities.GetImage("Eye");
                         break;
                     case 4:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddRoom;
@@ -1857,6 +1924,9 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(schoolRoomInfo);
+                        schoolRoomInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolRoomInfo.EditButton.Image = AppUtilities.GetImage("Edit");
+                        schoolRoomInfo.StudentsCountLabel.Image = AppUtilities.GetImage("Eye");
                         break;
                     case 5:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddCashflowType;
@@ -1871,6 +1941,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(cashFlowTypeInfo);
+                        cashFlowTypeInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        cashFlowTypeInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 6:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddPaymentMean;
@@ -1885,6 +1957,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(paymentMeanInfo);
+                        paymentMeanInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        paymentMeanInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 7:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSchoolingFee;
@@ -1899,6 +1973,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(schoolingCostInfo);
+                        schoolingCostInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolingCostInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 8:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSubscriptionFee;
@@ -1913,6 +1989,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(subscriptionFeeInfo);
+                        subscriptionFeeInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        subscriptionFeeInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 9:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddGroup;
@@ -1927,6 +2005,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(subjectGroupInfo);
+                        subjectGroupInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        subjectGroupInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 10:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSubject;
@@ -1941,6 +2021,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(subjectInfo);
+                        subjectInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        subjectInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 11:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddEvaluationSession;
@@ -1959,6 +2041,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(evaluationSessionInfo);
+                        evaluationSessionInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        evaluationSessionInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 12:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddMarkSystem;
@@ -1973,6 +2057,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(ratingSystemInfo);
+                        ratingSystemInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        ratingSystemInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 13:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddJob;
@@ -1987,6 +2073,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(jobInfo);
+                        jobInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        jobInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 14:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddGroup;
@@ -2001,6 +2089,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(employeeGroupInfo);
+                        employeeGroupInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        employeeGroupInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     case 15:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddUser;
@@ -2015,6 +2105,8 @@ namespace Primary.SchoolApp
                             isFirstLoadingBasicData = false;
                         }
                         SetVisibleSelectedSettingPageUserControl(userInfo);
+                        userInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        userInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     default:
                         SetVisibleSelectedSettingPageUserControl(null);
@@ -2360,42 +2452,254 @@ namespace Primary.SchoolApp
         }
         private void SettingGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
         {
-            RadMenuItem menuEdit = new(Language.labelEdit)
+            if (!e.ContextMenuProvider.ToString().Contains("Header"))
             {
-                Image = AppResource.edit
-            };
-            menuEdit.Click += SettingEditButton_Click;
-            e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-            e.ContextMenu.Items.Add(menuEdit);
-            switch (SettingLeftListView.SelectedItem.Key)
+                RadMenuItem menuEdit = new(Language.labelEdit)
+                {
+                    Image = AppUtilities.GetImage("Edit")
+                };
+                menuEdit.Click += SettingEditButton_Click;
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuEdit);
+                switch (SettingLeftListView.SelectedItem.Key)
+                {
+                    case 1:
+                        var currentYear = SettingGridView.CurrentRow.DataBoundItem as SchoolYear;
+                        var message = currentYear.IsClosed == false ? Language.messageCloseSchoolYear : Language.messageActivateSchoolYear;
+                        RadMenuItem menuChangeSchoolYearStatus = new(message);
+                        menuChangeSchoolYearStatus.Image = currentYear.IsClosed == false ? AppUtilities.GetImage("Lock") : AppUtilities.GetImage("Unlock");
+                        e.ContextMenu.Items.Add(menuChangeSchoolYearStatus);
+                        menuChangeSchoolYearStatus.Click += MenuChangeSchoolYearStatus_Click;
+                        break;
+                    case 3:
+                        RadMenuItem menuShowSubjectOfClass = new(Language.labelSubjectTaught);
+                        menuShowSubjectOfClass.Image = AppUtilities.GetImage("Eye");
+                        menuShowSubjectOfClass.ToolTipText = Language.messageClickToSee;
+                        menuShowSubjectOfClass.Click += MenuShowSubjectOfClass_Click;
+                        RadMenuItem menuGenerateEmptyClassReport = new(Language.labelGenerateEmptyClassReport);
+                        menuGenerateEmptyClassReport.Image = AppUtilities.GetImage("File");
+                        menuGenerateEmptyClassReport.Click += MenuGenerateEmptyClassReport_Click;
+                        e.ContextMenu.Items.Add(menuShowSubjectOfClass);
+                        e.ContextMenu.Items.Add(menuGenerateEmptyClassReport);
+                        break;
+                    case 4:
+                        RadMenuItem menuShowStudentOfClass = new(Language.titleStudentList);
+                        menuShowStudentOfClass.Image = AppUtilities.GetImage("Eye");
+                        menuShowStudentOfClass.ToolTipText = Language.messageClickToSee;
+                        menuShowStudentOfClass.Click += MenuShowStudentOfClass_Click; ;
+                        RadMenuItem menuGenerateEmptyRoomReport = new(Language.labelGenerateEmptyClassReport);
+                        menuGenerateEmptyRoomReport.Image = AppUtilities.GetImage("File");
+                        menuGenerateEmptyRoomReport.Click += MenuGenerateEmptyClassReport_Click;
+                        e.ContextMenu.Items.Add(menuShowStudentOfClass);
+                        e.ContextMenu.Items.Add(menuGenerateEmptyRoomReport);
+                        break;
+                    case 7:
+                        RadMenuItem menuDuplicateSchoolingFee = new(Language.labelDuplicateForCurrentYear);
+                        menuDuplicateSchoolingFee.Image = AppUtilities.GetImage("Duplicate");
+                        menuDuplicateSchoolingFee.Click += MenuDuplicateSchoolingFee_Click;
+                        e.ContextMenu.Items.Add(menuDuplicateSchoolingFee);
+                        break;
+                    case 8:
+                        RadMenuItem menuDuplicateSubscriptionFee = new(Language.labelDuplicateForCurrentYear);
+                        menuDuplicateSubscriptionFee.Image = AppUtilities.GetImage("Duplicate");
+                        menuDuplicateSubscriptionFee.Click += MenuDuplicateSubscriptionFee_Click;
+                        e.ContextMenu.Items.Add(menuDuplicateSubscriptionFee);
+                        break;
+                    case 15:
+                        RadMenuItem menuShowUserModule = new(Language.labelUserModule);
+                        menuShowUserModule.Image = AppUtilities.GetImage("Eye");
+                        menuShowUserModule.ToolTipText = Language.messageClickToSee;
+                        menuShowUserModule.Click += MenuShowUserModule_Click;
+                        RadMenuItem menuShowUserRoom = new(Language.labelUserRoom);
+                        menuShowUserRoom.Image = AppUtilities.GetImage("Eye");
+                        menuShowUserRoom.ToolTipText = Language.messageClickToSee;
+                        menuShowUserRoom.Click += MenuShowUserRoom_Click;
+                        e.ContextMenu.Items.Add(menuShowUserModule);
+                        e.ContextMenu.Items.Add(menuShowUserRoom);
+                        break;
+
+                }
+            }
+                
+        }
+        //dupiquer les frais d'abonnement pour l'année en cours
+        private void MenuDuplicateSubscriptionFee_Click(object sender, EventArgs e)
+        {
+            var openYear = Program.CurrentSchoolYear;
+            if (openYear.IsClosed == false)
             {
-                case 1:
-                    var currentYear = SettingGridView.CurrentRow.DataBoundItem as SchoolYear;
-                    var message = currentYear.IsClosed == false ? Language.messageCloseSchoolYear : Language.messageActivateSchoolYear;
-                    RadMenuItem menuChangeSchoolYearStatus = new(message);
-                    menuChangeSchoolYearStatus.Image = currentYear.IsClosed == false ? AppResource.GlyphClose: AppResource.GlyphCheck_small;
-                    e.ContextMenu.Items.Add(menuChangeSchoolYearStatus);
-                    menuChangeSchoolYearStatus.Click += MenuChangeSchoolYearStatus_Click;                   
-                    break;
-                case 3:
-                    RadMenuItem menuShowSubjectToSchoolClass = new(Language.labelSubjectTaught);
-                    menuShowSubjectToSchoolClass.Image = AppResource.eye;
-                    menuShowSubjectToSchoolClass.ToolTipText = Language.messageClickToSee;
-                    menuShowSubjectToSchoolClass.Click += MenuShowSubjectToSchoolClass_Click;
-                    e.ContextMenu.Items.Add(menuShowSubjectToSchoolClass);
-                    break;
-               
+                if (SettingGridView.CurrentRow.DataBoundItem is SubscriptionFee selectedRecord)
+                {
+                    var result = RadMessageBox.Show(this, Language.messageConfirmeDuplicateFee + " " + openYear.Name, Language.labelSchoolingFee, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
+                    if (result == DialogResult.Yes)
+                    {
+                        var newRecord = new SubscriptionFee
+                        {
+                            SchoolYear = openYear,
+                            SchoolYearId = openYear.Id,
+                            Duration= selectedRecord.Duration,
+                            CashFlowType= selectedRecord.CashFlowType,
+                            CashFlowTypeId= selectedRecord.CashFlowTypeId,
+                            Amount = selectedRecord.Amount,
+                        };
+                        //vérification de l'existance si trouvé pas d'enregistrement
+                        if (subscriptionFeeService.GetSubscriptionFee(newRecord.CashFlowTypeId, newRecord.SchoolYearId).Result == null)
+                        {
+                            bool isDone = subscriptionFeeService.CreateSubscriptionFee(newRecord).Result;
+                            if (isDone == true)
+                            {
+                                Log log = new()
+                                {
+                                    UserAction = $"Ajout  des frais d'abonnement {newRecord.CashFlowType.Name} pour l'année scolaire {newRecord.SchoolYear.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                logService.CreateLog(log);
+
+                                // récupération de nouvel enregistrement pour editer
+                                newRecord.Id = subscriptionFeeService.GetSubscriptionFee(newRecord.CashFlowTypeId, newRecord.SchoolYearId).Result.Id;
+                                Program.SubscriptionFeeList.Add(newRecord);
+                                ShowSubscriptionFeeEditForm(newRecord);
+                            }
+                            else
+                            {
+                                RadMessageBox.Show(Language.messageAddError);
+                            }
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(this, Language.messageFeeAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageRequireOpenYear, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
             }
         }
 
-        private void MenuShowSubjectToSchoolClass_Click(object sender, EventArgs e)
+        // duplique les frais de scolarité pour l'année en cours
+        private void MenuDuplicateSchoolingFee_Click(object sender, EventArgs e)
         {
-            var form = Program.ServiceProvider.GetService<ClassSubjectsForm>();
-            form.Icon = this.Icon;
-            var currentItem = SettingGridView.CurrentRow.DataBoundItem as SchoolClass;
-            form.Init(currentItem);
-            form.Show();
+            var openYear = Program.CurrentSchoolYear;
+            if (openYear.IsClosed == false)
+            {
+               if (SettingGridView.CurrentRow.DataBoundItem is SchoolingCost selectedRecord)
+                {
+                    var result = RadMessageBox.Show(this, Language.messageConfirmeDuplicateFee+" " + openYear.Name, Language.labelSchoolingFee, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
+                    if (result == DialogResult.Yes)
+                    {
+                        var newRecord = new SchoolingCost
+                        {
+                            SchoolYear = openYear,
+                            SchoolYearId = openYear.Id,
+                            SchoolClass = selectedRecord.SchoolClass,
+                            SchoolClassId = selectedRecord.SchoolClassId,
+                            CashFlowType = selectedRecord.CashFlowType,
+                            CashFlowTypeId = selectedRecord.CashFlowTypeId,
+                            IsPayable = selectedRecord.IsPayable,
+                            TrancheNumber = selectedRecord.TrancheNumber,
+                            Amount = selectedRecord.Amount,
+                            SchoolingCostItems= schoolingCostService.GetSchoolingCostItems(selectedRecord.Id).Result
+                        };
+                        //vérification de l'existance si trouvé pas d'enregistrement
+                        if(schoolingCostService.GetSchoolingCost(newRecord.SchoolClassId, newRecord.CashFlowTypeId, newRecord.SchoolYearId).Result == null)
+                        {
+                            bool isDone = schoolingCostService.CreateSchoolingCost(newRecord).Result;
+                            if (isDone == true)
+                            {
+                                Log log = new()
+                                {
+                                    UserAction = $"Ajout  des frais scolaires {newRecord.CashFlowType.Name} pour la classe {newRecord.SchoolClass.Name} pour l'année scolaire {newRecord.SchoolYear.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                logService.CreateLog(log);
+
+                                // récupération de nouvel enregistrement pour editer
+                                newRecord.Id = schoolingCostService.GetSchoolingCost(newRecord.SchoolClassId, newRecord.CashFlowTypeId, newRecord.SchoolYearId).Result.Id;
+                                Program.SchoolingCostList.Add(newRecord);
+                                ShowSchoolingCostEditForm(newRecord);
+                            }
+                            else
+                            {
+                                RadMessageBox.Show(Language.messageAddError);
+                            }
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(this, Language.messageFeeAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageRequireOpenYear, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
         }
+
+        private void MenuShowUserRoom_Click(object sender, EventArgs e)
+        {
+            if (SettingGridView.CurrentRow.DataBoundItem is User user)
+            {
+                var form = Program.ServiceProvider.GetService<UserRoomsForm>();
+                form.Icon = this.Icon;
+                form.Init(user);
+                form.ShowDialog(this);
+            }
+        }
+
+        private void MenuShowUserModule_Click(object sender, EventArgs e)
+        {
+           
+            if(SettingGridView.CurrentRow.DataBoundItem is User user)
+            {
+                var form = Program.ServiceProvider.GetService<UserModulesForm>();
+                form.Icon=this.Icon;
+                form.Init(user);
+                form.ShowDialog(this);
+            }
+        }
+
+        private void MenuShowStudentOfClass_Click(object sender, EventArgs e)
+        {
+            RadMessageBox.Show("En cous d'implémentation");
+        }
+
+        //génère un relevé de note vide
+        private void MenuGenerateEmptyClassReport_Click(object sender, EventArgs e)
+        {
+            
+            switch (SettingLeftListView.SelectedItem.Key)
+            {
+                case 3:
+                    if (SettingGridView.CurrentRow.DataBoundItem is SchoolClass selectedClass)
+                    {
+                        foreach (var room in Program.SchoolRoomList)
+                        {
+                            if (room.ClassId == selectedClass.Id)
+                            {
+                                GenerateEmptyClassReport(room, Program.CurrentSchoolYear, "FR");
+                            }
+                        }
+                    }
+                    break; 
+                case 4:
+                    if (SettingGridView.CurrentRow.DataBoundItem is SchoolRoom selectedRoom)
+                    {
+                        GenerateEmptyClassReport(selectedRoom, Program.CurrentSchoolYear, "FR");
+                    }
+                    break;
+            }
+
+        }        
+
+        private void MenuShowSubjectOfClass_Click(object sender, EventArgs e)
+        {
+            ShowSubjectsOfClass();
+        }      
 
         private void MenuChangeSchoolYearStatus_Click(object sender, EventArgs e)
         {
@@ -2406,8 +2710,7 @@ namespace Primary.SchoolApp
             {
                 if (schoolYearService.ChangeSchoolYearStatus(currentYear).Result)
                 {
-                    currentYear.IsClosed = !currentYear.IsClosed;
-                    var messageResult = currentYear.IsClosed == false ? Language.messageSuccesCloseSchoolYear : Language.messageSuccesActivateSchoolYear;
+                    var messageResult = currentYear.IsClosed == true ? Language.messageSuccesCloseSchoolYear : Language.messageSuccesActivateSchoolYear;
                     RadMessageBox.Show(this, messageResult, Language.labelSchoolYears.ToUpper(), MessageBoxButtons.OK, RadMessageIcon.Info);
                 }
                 else
@@ -2418,7 +2721,7 @@ namespace Primary.SchoolApp
             }
         }
         #endregion
-
+        //get images in file ressource
 
     }
 }

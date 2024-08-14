@@ -3,6 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class EditSchoolingCostForm : SchoolManagement.UI.EditSchoolingCostForm
+    internal class EditSchoolingCostForm : SchoolManagement.UI.EditSchoolingCostForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
@@ -21,16 +22,16 @@ namespace Primary.SchoolApp.UI
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ISchoolClassService schoolClassService;
         private SchoolingCost schoolingCost;
-        private struct SchoolingCostTracker {
-            public int ClassId {  get; set; }
-           public  int CostTypeId {  get; set; }
-            public int SchoolYearId {  get; set; }
+        private struct SchoolingCostTracker
+        {
+            public int ClassId { get; set; }
+            public int CostTypeId { get; set; }
+            public int SchoolYearId { get; set; }
         }
         private SchoolingCostTracker schoolingCostTracker;
         public EditSchoolingCostForm(ISchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ISchoolClassService schoolClassService)
         {
-            InitializeComponent();
             this.logService = logService;
             this.clientApp = clientApp;
             this.schoolingCostService = schoolingCostService;
@@ -38,12 +39,12 @@ namespace Primary.SchoolApp.UI
             this.cashFlowTypeService = cashFlowTypeService;
             this.schoolClassService = schoolClassService;
             ClassDropDownList.DataSource = Program.SchoolClassList;
-            CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category=="FS");
+            CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
-            schoolingCostTracker=new SchoolingCostTracker();
+            schoolingCostTracker = new SchoolingCostTracker();
             InitTranchesGridView();
             InitEvents();
-            this.Text= "MODIFICATION:.FRAIS SCOLARITE";
+            this.Text = Language.titleSchoolFeesUpdate.ToUpper();
         }
         private void InitEvents()
         {
@@ -70,7 +71,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Type inconnu");
+                    RadMessageBox.Show(Language.messageUnknowCashflow);
                 }
             }
         }
@@ -90,7 +91,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Année scolaire inconnue");
+                    RadMessageBox.Show(Language.messageUnknowSchoolYear);
                 }
             }
         }
@@ -110,7 +111,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    RadMessageBox.Show("Classe inconnue");
+                    RadMessageBox.Show(Language.messageUnknowClass);
                 }
             }
         }
@@ -118,16 +119,17 @@ namespace Primary.SchoolApp.UI
         {
             this.schoolingCost = schoolingCost;
             ClassDropDownList.SelectedValue = schoolingCost.SchoolClassId;
-            SchoolYearDropDownList.SelectedValue= schoolingCost.SchoolYearId;
+            SchoolYearDropDownList.SelectedValue = schoolingCost.SchoolYearId;
             CostTypeDropDownList.SelectedValue = schoolingCost.CashFlowTypeId;
-            CostPayableDropDownList.SelectedValue=schoolingCost.IsPayable.ToString();
+            CostPayableDropDownList.SelectedValue = schoolingCost.IsPayable.ToString();
             AmountTextBox.Text = schoolingCost.Amount.ToString();
             schoolingCostTracker.SchoolYearId = schoolingCost.SchoolYearId;
             schoolingCostTracker.ClassId = schoolingCost.SchoolClassId;
             schoolingCostTracker.CostTypeId = schoolingCost.CashFlowTypeId;
-            TrancheNumberTextBox.Text=schoolingCost.TrancheNumber.ToString();
+            TrancheNumberTextBox.Text = schoolingCost.TrancheNumber.ToString();
             PopulateTranchesGridView(schoolingCost);
             TrancheNumberTextBox.TextChanged += TrancheNumberTextBox_TextChanged;
+
         }
 
         private void TrancheNumberTextBox_TextChanged(object sender, EventArgs e)
@@ -137,7 +139,7 @@ namespace Primary.SchoolApp.UI
                 int trancheNumber = int.Parse(TrancheNumberTextBox.Text);
                 if (trancheNumber > 3)
                 {
-                    ErrorLabel.Text = "Nombre de tranches ne doit pas être supérieur à trois (3)";
+                    ErrorLabel.Text = Language.messageBadTrancheNumber;
                     TrancheNumberTextBox.Text = "3";
                     TrancheNumberTextBox.Focus();
                     return;
@@ -164,7 +166,7 @@ namespace Primary.SchoolApp.UI
                 }
             }
         }
-      
+
         private void SchoolYearDropDownList_SelectedValueChanged(object sender, EventArgs e)
         {
             if (SchoolYearDropDownList.SelectedIndex >= 0)
@@ -177,7 +179,7 @@ namespace Primary.SchoolApp.UI
 
                         SaveButton.Enabled = false;
                         AddSchoolYearButton.Enabled = false;
-                        ErrorLabel.Text = "Cette année scolaire est clôturée";
+                        ErrorLabel.Text = Language.messageSchoolYearClosed;
                     }
                     else
                     {
@@ -191,7 +193,6 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(715, 637);
             SchoolYearDropDownList.Focus();
         }
         //Vériffie si somme des montants du GridView est égale au montant des frais scolaire
@@ -201,7 +202,7 @@ namespace Primary.SchoolApp.UI
             for (int i = 0; i < TranchesGridView.Rows.Count; i++)
             {
                 var item = TranchesGridView.Rows[i].DataBoundItem as SchoolingCostItem;
-                totalAmount = totalAmount + item.Amount;              
+                totalAmount = totalAmount + item.Amount;
             }
             if (totalAmount != double.Parse(AmountTextBox.Text))
             {
@@ -217,8 +218,8 @@ namespace Primary.SchoolApp.UI
             GridViewDecimalColumn amounColumn = new("Amount");
             GridViewDateTimeColumn deadLineColumn = new("DeadLine");
             idColumn.HeaderText = "N°";
-            amounColumn.HeaderText = "Montant";
-            deadLineColumn.HeaderText = "Délais";
+            amounColumn.HeaderText = Language.labelAmount;
+            deadLineColumn.HeaderText = Language.labelDelay;
             idColumn.Width = 50;
             amounColumn.Width = 150;
             deadLineColumn.Width = 250;
@@ -244,13 +245,14 @@ namespace Primary.SchoolApp.UI
             var getData = await schoolingCostService.GetSchoolingCostItems(schoolingCost.Id);
             IList<SchoolingCostItem> listToLoad = new List<SchoolingCostItem>();
             int i = 1;
-            foreach (var item in getData) {
+            foreach (var item in getData)
+            {
                 listToLoad.Add(
                     new SchoolingCostItem()
                     {
-                        Id=i,
-                        Amount=item.Amount,
-                        DeadLine=item.DeadLine,
+                        Id = i,
+                        Amount = item.Amount,
+                        DeadLine = item.DeadLine,
                     }
                     );
                 i++;
@@ -309,17 +311,17 @@ namespace Primary.SchoolApp.UI
                         }
                         else
                         {
-                            this.ErrorLabel.Text = "Erreur d'enregistrement";
+                            this.ErrorLabel.Text = Language.messageUpdateError;
                         }
-                    }                  
+                    }
                     else
                     {
-                        this.ErrorLabel.Text = "Ces frais de scolarité existent déjà";
+                        this.ErrorLabel.Text = Language.messageFeeAlreadyExist;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "La valeur d'une tranche n'est pas bonne!";
+                    ErrorLabel.Text = Language.messageBadInstalment;
                     TranchesGridView.Focus();
                 }
             }
@@ -341,7 +343,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowSchoolYear);
             }
 
         }
@@ -375,7 +377,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowClass);
             }
 
         }
@@ -409,7 +411,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowCashflow);
             }
 
         }
@@ -426,9 +428,9 @@ namespace Primary.SchoolApp.UI
                 CostTypeDropDownList.SelectedValue = data;
             }
         }
-        private bool SchoolingCostExist(int classId,int cashFlowTypeId, int schoolYearId)
+        private bool SchoolingCostExist(int classId, int cashFlowTypeId, int schoolYearId)
         {
-            if (schoolingCostTracker.ClassId == classId && schoolingCostTracker.CostTypeId== cashFlowTypeId && schoolingCostTracker.SchoolYearId==schoolYearId) return false;
+            if (schoolingCostTracker.ClassId == classId && schoolingCostTracker.CostTypeId == cashFlowTypeId && schoolingCostTracker.SchoolYearId == schoolYearId) return false;
             var item = Program.SchoolingCostList.FirstOrDefault(x => x.SchoolClassId == classId && x.CashFlowTypeId == cashFlowTypeId && x.SchoolYearId == schoolYearId);
             if (item != null) return true;
             return schoolingCostService.GetSchoolingCost(classId, cashFlowTypeId, schoolYearId).Result != null;

@@ -9,5 +9,6 @@ namespace SchoolManagement.Infrastructure.Repositories
         public Task<User?> GetAsync(string userName, string password);
         public Task<User?> GetAsync(string userName);
         public Task<IList<UserModule>> GetModuleListAsync(int userId);
+        public Task<IList<UserRoom>> GetRoomListAsync(int userId);
     }
 }

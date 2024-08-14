@@ -4,22 +4,22 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System.Linq;
 using System;
+using SchoolManagement.UI.Localization;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSubjectForm :  SchoolManagement.UI.EditSubjectForm
+    internal class AddSubjectForm : SchoolManagement.UI.EditSubjectForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly ISubjectService subjectService;
         public AddSubjectForm(ISubjectService subjectService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.subjectService = subjectService;
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = "AJOUT:.MATIERE";
+            this.Text = Language.titleSubjectAdd.ToUpper();
         }
 
         private void InitEvents()
@@ -52,19 +52,18 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageSubjectExist;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Cette matière exist déjà";
+                    this.ErrorLabel.Text = "";
                 }
             }
         }
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(854, 355);
             FrenchNameTextBox.Focus();
         }
         private bool SubjectExist(string frenchName)

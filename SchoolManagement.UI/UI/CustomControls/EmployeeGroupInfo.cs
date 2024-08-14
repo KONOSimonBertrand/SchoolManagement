@@ -1,5 +1,6 @@
 ﻿
 
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -74,7 +75,7 @@ namespace SchoolManagement.UI.CustomControls
 
         private void InitLanguage()
         {
-            nameLabel.Text = Languages.Language.labelDesignation;
+            nameLabel.Text = Language.labelDesignation;
         }
     }
 }

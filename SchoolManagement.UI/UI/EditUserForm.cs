@@ -1,5 +1,5 @@
 ﻿
-using SchoolManagement.UI.Languages;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -124,7 +124,7 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            this.saveButton.Text=Languages.Language.labelSave;
+            this.saveButton.Text=Language.labelSave;
         }
 
         private void InitEvent()

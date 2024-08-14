@@ -66,10 +66,10 @@
             // 
             // connectionButton
             // 
-            connectionButton.Location = new Point(94, 370);
+            connectionButton.Location = new Point(4, 370);
             connectionButton.Margin = new Padding(10);
             connectionButton.Name = "connectionButton";
-            connectionButton.Size = new Size(118, 30);
+            connectionButton.Size = new Size(160, 30);
             connectionButton.TabIndex = 2;
             connectionButton.Text = "Connexion";
             // 
@@ -189,10 +189,10 @@
             // 
             // cancelButton
             // 
-            cancelButton.Location = new Point(220, 370);
+            cancelButton.Location = new Point(172, 370);
             cancelButton.Margin = new Padding(10);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(118, 30);
+            cancelButton.Size = new Size(160, 30);
             cancelButton.TabIndex = 69;
             cancelButton.Text = "Annuler";
             // 

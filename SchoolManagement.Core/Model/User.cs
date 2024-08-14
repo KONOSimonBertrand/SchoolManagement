@@ -15,7 +15,8 @@ namespace SchoolManagement.Core.Model
         public string? Email { get; set; }
         public int? EmployeeId { get; set; }
         public virtual Employee? Employee { get; set; }
-        public virtual ICollection<UserModule> Modules { get; set; }=new List<UserModule>();      
+        public virtual ICollection<UserModule> Modules { get; set; }=new List<UserModule>(); 
+        public virtual ICollection<UserRoom> Rooms { get; set; } =new List<UserRoom>();
         public override bool Equals(object obj)
         {
             if (obj is not User other)

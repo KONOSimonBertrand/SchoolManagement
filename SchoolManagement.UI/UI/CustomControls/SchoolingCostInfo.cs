@@ -1,6 +1,7 @@
 ﻿
 
 
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using System.Xml;
 using Telerik.WinControls;
@@ -153,11 +154,11 @@ namespace SchoolManagement.UI.CustomControls
 
         private void InitLanguage()
         {
-            schoolYearLabel.Text = Languages.Language.labelSchoolYear;
-            classLabel.Text = Languages.Language.labelClass;
-            this.amountLabel.Text = Languages.Language.labelAmount;
-            this.trancheNumberLabel.Text = Languages.Language.labelTrancheNumber;
-            this.costTypeLabel.Text = Languages.Language.labelFeeType;
+            schoolYearLabel.Text = Language.labelSchoolYear;
+            classLabel.Text = Language.labelClass;
+            this.amountLabel.Text = Language.labelAmount;
+            this.trancheNumberLabel.Text = Language.labelTrancheNumber;
+            this.costTypeLabel.Text = Language.labelFeeType;
         }
 
     }

@@ -2,24 +2,24 @@
 
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 
 namespace Primary.SchoolApp.UI
 {
-    public partial class AddSubjectGroupForm : SchoolManagement.UI.EditSubjectGroupForm
+    internal class AddSubjectGroupForm : SchoolManagement.UI.EditSubjectGroupForm
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly ISubjectGroupService subjectGroupService;
         public AddSubjectGroupForm(ISubjectGroupService subjectGroupService, ILogService logService, ClientApp clientApp)
         {
-            InitializeComponent();
             this.subjectGroupService = subjectGroupService;
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = "AJOUT:.GROUPE DE MATIERES";
+            this.Text = Language.titleGroupAdd;
         }
 
         private void InitEvents()
@@ -33,7 +33,7 @@ namespace Primary.SchoolApp.UI
             if (IsValidData())
             {
                 SubjectGroup subjectGroup = new();
-                subjectGroup.FrenchName=FrenchNameTextBox.Text;
+                subjectGroup.FrenchName = FrenchNameTextBox.Text;
                 subjectGroup.EnglishName = EnglishhNameTextBox.Text;
                 subjectGroup.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                 if (!SubjectGroupExist(subjectGroup.FrenchName))
@@ -52,24 +52,24 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    this.ErrorLabel.Text = "Ce groupe exist déjà";
+                    this.ErrorLabel.Text = Language.messageGroupExist;
                 }
             }
         }
 
         private void OnShown(object sender, EventArgs e)
         {
-            ClientSize = new System.Drawing.Size(854, 355);
-            FrenchNameTextBox.Focus() ;
+            FrenchNameTextBox.Focus();
         }
+
         private bool SubjectGroupExist(string frenchName)
         {
-            var item = Program.SubjectGroupList.FirstOrDefault(x => x.FrenchName==frenchName);
+            var item = Program.SubjectGroupList.FirstOrDefault(x => x.FrenchName == frenchName);
             if (item != null) return true;
             return subjectGroupService.GetSubjectGroup(frenchName).Result != null;
         }
