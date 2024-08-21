@@ -28,7 +28,11 @@ namespace SchoolManagement.Application
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IModuleService, ModuleService>();
             services.AddTransient<ICountryService, CountryService>();
+            services.AddTransient<IGenerateIdNumberService, GenerateIdNumberService>();
+            services.AddTransient<ITimeTableService, TimeTableService>();
             services.AddSingleton<ClientApp>();
+            services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IStudentEnrollingService, StudentEnrollingService>();
             return services;
         }
     }

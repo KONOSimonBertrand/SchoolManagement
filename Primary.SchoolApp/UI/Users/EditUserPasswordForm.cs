@@ -18,7 +18,6 @@ namespace Primary.SchoolApp.UI
             this.userService = userService;
             this.logService = logService;
             this.clientApp = clientApp;
-            this.Text = Language.titlePasswordUpdate;
             this.userService = userService;
         }
 

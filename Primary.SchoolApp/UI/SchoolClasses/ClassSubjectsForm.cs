@@ -119,10 +119,10 @@ namespace Primary.SchoolApp.UI
 
         private void MenuEdit_Click(object sender, EventArgs e)
         {
-            var record = DataGridView.CurrentRow.DataBoundItem as ClassSubject;
-            if (record != null)
+           if (DataGridView.CurrentRow.DataBoundItem is ClassSubject record)
             {
                 var form = Program.ServiceProvider.GetService<EditClassSubjectForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelSubject;
                 form.Icon = this.Icon;
                 form.Init(selectedClass, record);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -130,11 +130,13 @@ namespace Primary.SchoolApp.UI
                     LoadDataToGridView();
                 }
             }
+            
         }
 
         private void AddSubjectButton_Click(object sender, EventArgs e)
         {
             var form = Program.ServiceProvider.GetService<AddClassSubjectForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelSubject;
             form.Icon = this.Icon;
             form.Init(selectedClass);
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)

@@ -136,3 +136,9 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.UploadPictureForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EmployeeItemsForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditEmployeeAttendanceForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditEmployeeNoteForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditEmployeeAccountTransactionForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditTimeTableForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.CustomControls.StudentEnrollingInfo.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditStudentEnrollingForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditStudentForm.resources

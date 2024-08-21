@@ -55,6 +55,13 @@ namespace Primary.SchoolApp
             services.AddTransient<EmployeeAttendancesForm>();
             services.AddTransient<AddEmployeeAttendanceForm>();
             services.AddTransient<EditEmployeeAttendanceForm>();
+            services.AddTransient<EmployeeNotesForm>();
+            services.AddTransient<AddEmployeeNoteForm>();
+            services.AddTransient<EditEmployeeNoteForm>();
+            services.AddTransient<EmployeeAccountTransactionsForm>();
+            services.AddTransient<AddEmployeeAccountTransactionForm>();
+            services.AddTransient<EditTimeTableForm>();
+
             return services;
         }
     }

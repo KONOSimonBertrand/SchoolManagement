@@ -1,10 +1,14 @@
 ﻿
 
-using System.Xml.Linq;
+
 
 namespace SchoolManagement.Core.Model
 {
-    public  class Student
+    /// <summary>
+    /// Cette classe represente un élève
+    /// Exemple KONO Simon Bertrand
+    /// </summary>
+    public class Student
     {
         public int Id { get; set; }
         public string IdNumber { get; set; }
@@ -14,7 +18,7 @@ namespace SchoolManagement.Core.Model
         {
             get { return LastName.Trim() + " " + FirstName.Trim(); }
         }
-        public virtual string FullNameWithReference
+        public virtual string FullNameWithIdNumber
         {
             get
             {
@@ -25,14 +29,13 @@ namespace SchoolManagement.Core.Model
         public string BirthPlace { get; set; }
         public string Sex { get; set; }
         public string Nationality { get; set; }
+        public string? IdCard { get; set; }
         public string Religion { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public string FatherName { get; set; }
-        public string MotherName { get; set; }
-        public string DoctorName { get; set; }
-        public string DoctorPhone { get; set; }
+        public int Health {  get; set; }
+        public string? PictureUrl { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not Student other) return false;

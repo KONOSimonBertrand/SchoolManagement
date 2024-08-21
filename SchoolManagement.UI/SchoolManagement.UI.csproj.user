@@ -47,6 +47,9 @@
     <Compile Update="UI\CustomControls\SearchTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\StudentEnrollingInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\SubjectGroupInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -60,6 +63,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\EditCashFlowTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditTimeTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Employee\EditEmployeeAccountTransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Employee\EditEmployeeAttendanceForm.cs">
@@ -110,10 +119,19 @@
     <Compile Update="UI\EditSubscriptionFeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\EditUserForm.cs">
+    <Compile Update="UI\Employee\EditEmployeeNoteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\EditUserPasswordForm.cs">
+    <Compile Update="UI\Student\EditStudentEnrollingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\User\EditUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\User\EditUserPasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Employee\EmployeeItemsForm.cs">
@@ -152,10 +170,10 @@
     <Compile Update="UI\UploadPictureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\UserModulesForm.cs">
+    <Compile Update="UI\User\UserModulesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\UserRoomsForm.cs">
+    <Compile Update="UI\User\UserRoomsForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

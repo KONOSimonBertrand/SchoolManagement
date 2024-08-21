@@ -2,12 +2,11 @@
 using SchoolManagement.UI.Localization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
-using Telerik.WinControls.UI.Export;
 
 namespace SchoolManagement.UI
 {/// <summary>
  /// Interface utilisateur de la gestion des matières d'une classe
- /// Ajout des matières, des coeficients des notes max
+ /// Ajout des matières, avec coeficient et note max
  /// </summary>
     public partial class ClassSubjectsForm : RadForm
     {

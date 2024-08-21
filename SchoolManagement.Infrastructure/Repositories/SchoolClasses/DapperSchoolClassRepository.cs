@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperSchoolClassRepository : ISchoolClassRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperSchoolClassRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSchoolClassRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(SchoolClass schoolClass)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SchoolClasses(Name,GroupId,BookTypeId,Sequence) VALUES(@name,@groupId,@bookTypeId,@sequence);";
             var result = connection.Execute(query, new
             {
@@ -31,7 +31,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> AddSubjectAsync(ClassSubject classSubject)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO ClassSubjects(ClassId,SubjectId,BookId,GroupId,NotedOn,Coefficient,Sequence) 
                                                   VALUES(@classId,@subjectId,@bookId,@groupId,@notedOn,@coefficient,@sequence);";
             var result = connection.Execute(query, new
@@ -50,7 +50,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> DeleteSubjectAsync(int classId, int subjectId,int bookId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"DELETE FROM ClassSubjects WHERE ClassId=@classId AND SubjectId=@subjectId AND BookId=@bookId ;";
             var result = connection.Execute(query, new
             {
@@ -64,7 +64,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<SchoolClass?> GetAsync(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolClasses AS A 
                              INNER JOIN SchoolGroups AS B ON A.GroupId=B.Id
                              WHERE A.Name=@name; ";
@@ -81,7 +81,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<SchoolClass>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolClasses AS A  
                            INNER JOIN SchoolGroups AS B ON A.GroupId=B.Id;";
             var result = connection.Query<SchoolClass, SchoolGroup, SchoolClass>(query,
@@ -97,7 +97,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<ClassSubject> GetSubjectAsync(int classId, int subjectId, int bookId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM ClassSubjects AS A  
                            INNER JOIN Subjects AS B ON A.subjectId=B.Id  
                            INNER JOIN SubjectGroups AS C ON A.GroupId=C.Id  
@@ -118,7 +118,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<ClassSubject>> GetSubjectListAsync(int classId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM ClassSubjects AS A  
                            INNER JOIN Subjects AS B ON A.subjectId=B.Id  
                            INNER JOIN SubjectGroups AS C ON A.GroupId=C.Id
@@ -139,7 +139,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(SchoolClass schoolClass)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE SchoolClasses SET Name=@name,GroupId=@groupId,BookTypeId=@bookTypeId,Sequence=@sequence WHERE Id=@id ;";
             var result = connection.Execute(query, new
             {
@@ -155,7 +155,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateSubjectAsync(ClassSubject classSubject)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE ClassSubjects SET GroupId=@groupId,NotedOn=@notedOn,Coefficient=@coefficient,Sequence=@sequence  
                                                   WHERE ClassId=@classId AND SubjectId=@subjectId";
             var result = connection.Execute(query, new

@@ -7,15 +7,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperRatingSystemRepository : IRatingSystemRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperRatingSystemRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperRatingSystemRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(RatingSystem ratingSystem)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO RatingSystems(FrenchName,EnglishName,FrenchDescription,EnglishDescription,MinNote,MaxNote,Domain)  
                                                 VALUES(@frenchName,@englishName,@frenchDescription,@englishDescription,@minNote,@maxNote,@domain) ;";
             var result = connection.Execute(query, new
@@ -34,7 +34,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<RatingSystem?> GetAsync(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM RatingSystems WHERE FrenchName=@name ;";
             var result = connection.Query<RatingSystem>(query, new { name }).FirstOrDefault();
             await Task.Delay(0);
@@ -43,7 +43,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<RatingSystem>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM RatingSystems ;";
             var result = connection.Query<RatingSystem>(query).ToList();
             await Task.Delay(0);
@@ -52,7 +52,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(RatingSystem ratingSystem)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE RatingSystems SET FrenchName=@frenchName,EnglishName=@englishName,FrenchDescription=@frenchDescription,
                                                  EnglishDescription=@englishDescription,MinNote=@minNote,MaxNote=@maxNote,Domain=@domain  WHERE Id=@id ;";
             var result = connection.Execute(query, new

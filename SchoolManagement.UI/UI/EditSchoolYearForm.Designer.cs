@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            startFirstQuarterDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
             endThirdQuarterSeparator = new Telerik.WinControls.UI.RadSeparator();
             startThirdQuarterSeparator = new Telerik.WinControls.UI.RadSeparator();
             endThirdQuarterDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
@@ -45,7 +46,6 @@
             startFirstQuarterSeparator = new Telerik.WinControls.UI.RadSeparator();
             endFirstQuarterDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
             endFirstQuarterLabel = new Telerik.WinControls.UI.RadLabel();
-            startFirstQuarterDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
             startFirstQuarterLabel = new Telerik.WinControls.UI.RadLabel();
             nameSeparator = new Telerik.WinControls.UI.RadSeparator();
             nameTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -54,6 +54,7 @@
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)startFirstQuarterDateTimePicker).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)endThirdQuarterSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)startThirdQuarterSeparator).BeginInit();
@@ -71,7 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)startFirstQuarterSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)endFirstQuarterDateTimePicker).BeginInit();
             ((System.ComponentModel.ISupportInitialize)endFirstQuarterLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)startFirstQuarterDateTimePicker).BeginInit();
             ((System.ComponentModel.ISupportInitialize)startFirstQuarterLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameTextBox).BeginInit();
@@ -84,6 +84,23 @@
             // 
             // editPanel
             // 
+            // 
+            // startFirstQuarterDateTimePicker
+            // 
+            startFirstQuarterDateTimePicker.AutoSize = false;
+            startFirstQuarterDateTimePicker.CalendarSize = new Size(290, 320);
+            startFirstQuarterDateTimePicker.Location = new Point(0, 98);
+            startFirstQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
+            startFirstQuarterDateTimePicker.Name = "startFirstQuarterDateTimePicker";
+            // 
+            // 
+            // 
+            startFirstQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
+            startFirstQuarterDateTimePicker.Size = new Size(203, 30);
+            startFirstQuarterDateTimePicker.TabIndex = 1;
+            startFirstQuarterDateTimePicker.TabStop = false;
+            startFirstQuarterDateTimePicker.Text = "lundi 29 janvier 2018";
+            startFirstQuarterDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
             editPanel.Controls.Add(endThirdQuarterSeparator);
             editPanel.Controls.Add(startThirdQuarterSeparator);
             editPanel.Controls.Add(endThirdQuarterDateTimePicker);
@@ -301,23 +318,6 @@
             endFirstQuarterLabel.TabIndex = 50;
             endFirstQuarterLabel.Text = "Fin 1ᵉʳ trimestre:";
             // 
-            // startFirstQuarterDateTimePicker
-            // 
-            startFirstQuarterDateTimePicker.AutoSize = false;
-            startFirstQuarterDateTimePicker.CalendarSize = new Size(290, 320);
-            startFirstQuarterDateTimePicker.Location = new Point(0, 98);
-            startFirstQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
-            startFirstQuarterDateTimePicker.Name = "startFirstQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            startFirstQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
-            startFirstQuarterDateTimePicker.Size = new Size(203, 30);
-            startFirstQuarterDateTimePicker.TabIndex = 1;
-            startFirstQuarterDateTimePicker.TabStop = false;
-            startFirstQuarterDateTimePicker.Text = "lundi 29 janvier 2018";
-            startFirstQuarterDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
-            // 
             // startFirstQuarterLabel
             // 
             startFirstQuarterLabel.AutoSize = false;
@@ -396,6 +396,7 @@
             Controls.Add(editPanel);
             Name = "EditSchoolYearForm";
             Text = "EditSchoolYearForm";
+            ((System.ComponentModel.ISupportInitialize)startFirstQuarterDateTimePicker).EndInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)endThirdQuarterSeparator).EndInit();
@@ -414,7 +415,6 @@
             ((System.ComponentModel.ISupportInitialize)startFirstQuarterSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)endFirstQuarterDateTimePicker).EndInit();
             ((System.ComponentModel.ISupportInitialize)endFirstQuarterLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)startFirstQuarterDateTimePicker).EndInit();
             ((System.ComponentModel.ISupportInitialize)startFirstQuarterLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameTextBox).EndInit();

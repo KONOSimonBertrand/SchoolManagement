@@ -8,6 +8,8 @@ namespace SchoolManagement.Application
         public Task<bool> UpdateEmploye(Employee employee);
         public Task<string> GenerateEmployeeIdNumber();
         public Task<Employee?> GetEmployee(string IdNumber);
+        public Task<Employee?> GetLastEmployee();
+        public Task<int> GetTotalEmployee();
         public Task<IList<Employee>> GetEmployeeList();
         public Task<bool> CreateEmployeeEnrolling(EmployeeEnrolling employeeEnrolling);
         public Task<bool> UpdateEmployeeEnrolling(EmployeeEnrolling employeeEnrolling);
@@ -23,5 +25,14 @@ namespace SchoolManagement.Application
         public Task<bool> UpdateAttendance(EmployeeAttendance attendance);
         public Task<bool> DeleteAttendance(int attendanceId);
         public Task<IList<EmployeeAttendance>> GetAttendanceList(int enrollingId);
+        public Task<bool> AddNote(EmployeeNote note);
+        public Task<bool> UpdateNote(EmployeeNote note);
+        public Task<bool> DeleteNote(int noteId);
+        public Task<IList<EmployeeNote>> GetNoteList(int enrollingId);
+        public Task<string> GenerateAccountTransactionIdNumber();
+        public Task<bool> AddAccountTransaction(EmployeeAccountTransaction transaction);
+        public Task<IList<EmployeeAccountTransaction>> GetAccountTransactionList(int enrollingId);
+        public Task<EmployeeAccountTransaction?> GetLastAccountTransaction();
+        public Task<int> GetTotalAccountTransaction();
     }
 }

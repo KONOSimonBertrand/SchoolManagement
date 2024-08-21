@@ -15,28 +15,38 @@ namespace SchoolManagement.Application
         }
         public async Task<SchoolYear?> GetSchoolYear(string name)
         {
-            return await readRepository.GetAsync(name);
+            return await readRepository.GetSchoolYearAsync(name);
         }
 
         //
         public async Task<List<SchoolYear>> GetSchoolYearList()
         {
-            return await readRepository.GetListAsync();          
+            return await readRepository.GetSchoolYearListAsync();          
         }
 
         public async Task<bool> CreateSchoolYear(SchoolYear schoolYear)
         {
-            return await writeRepository.AddAsync(schoolYear);
+            return await writeRepository.AddSchoolYearAsync(schoolYear);
         }
 
         public async Task<bool> UpdateSchoolYear(SchoolYear schoolYear)
         {
-            return await writeRepository.UpdateAsync(schoolYear);
+            return await writeRepository.UpdateSchoolYearAsync(schoolYear);
         }
 
         public async Task<bool> ChangeSchoolYearStatus(SchoolYear schoolYear)
         {
-            return await writeRepository.ChangeStatusAsync(schoolYear);
+            return await writeRepository.ChangeSchoolYearStatusAsync(schoolYear);
+        }
+
+        public async Task<SchoolYear?> GetLastSchoolYear()
+        {
+            return await readRepository.GetLastSchoolYearAsync();
+        }
+
+        public async Task<int> GetTotalSchoolYear()
+        {
+            return await readRepository.GetTotalSchoolYearAsync();
         }
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using SchoolManagement.Infrastructure.DataBase;
 using SchoolManagement.Infrastructure.Repositories;
+using SchoolManagement.Infrastructure.Repositories.Students;
+using SchoolManagement.Infrastructure.Repositories.TimeTables;
 
 namespace SchoolManagement.Infrastructure
 {
@@ -9,7 +11,7 @@ namespace SchoolManagement.Infrastructure
     {
         public static IServiceCollection AddInfrastructureDependency(this IServiceCollection services)
         {
-            services.AddTransient<IDbConnectionFactoty, MySqlConnectionFactory>();
+            services.AddTransient<IDbConnectionFactory, MySqlConnectionFactory>();
             services.AddTransient<ISchoolYearRepository, DapperSchoolYearRepository>();
             services.AddTransient<ISchoolGroupRepository, DapperSchoolGroupRepository>();
             services.AddTransient<IUserRepository, DapperUserRepository>();
@@ -30,7 +32,9 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<IUserRepository, DapperUserRepository>();
             services.AddTransient<ICountryRepository, DapperCountryRepository>();
             services.AddTransient<IEmployeeRepository, DapperEmployeeRepository>();
-
+            services.AddTransient<ITimeTableServiceRepository, DapperTimeTableServiceRepository>();
+            services.AddTransient<IStudentRepository,DapperStudentRepository>();
+            services.AddTransient<IStudentEnrollingRepository, DapperStudentEnrollingRepository>();
             services.AddDbContext<AppDbContext>();
             services.AddLogging(builder => builder.AddConsole());
             return services;

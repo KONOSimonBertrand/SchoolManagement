@@ -30,10 +30,6 @@
         {
             connectionButton = new Telerik.WinControls.UI.RadButton();
             errorLabel = new Telerik.WinControls.UI.RadLabel();
-            materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
-            materialBlueGreyTheme1 = new Telerik.WinControls.Themes.MaterialBlueGreyTheme();
-            materialPinkTheme1 = new Telerik.WinControls.Themes.MaterialPinkTheme();
-            materialTealTheme1 = new Telerik.WinControls.Themes.MaterialTealTheme();
             pictureLogo = new PictureBox();
             editPanel = new Telerik.WinControls.UI.RadPanel();
             passwordLabel = new Telerik.WinControls.UI.RadLabel();
@@ -45,6 +41,10 @@
             userNameSeparator = new Telerik.WinControls.UI.RadSeparator();
             userNameLabel = new Telerik.WinControls.UI.RadLabel();
             cancelButton = new Telerik.WinControls.UI.RadButton();
+            materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
+            materialTealTheme1 = new Telerik.WinControls.Themes.MaterialTealTheme();
+            materialPinkTheme1 = new Telerik.WinControls.Themes.MaterialPinkTheme();
+            materialBlueGreyTheme1 = new Telerik.WinControls.Themes.MaterialBlueGreyTheme();
             ((System.ComponentModel.ISupportInitialize)connectionButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureLogo).BeginInit();
@@ -240,10 +240,6 @@
         #endregion
         private Telerik.WinControls.UI.RadButton connectionButton;
         private Telerik.WinControls.UI.RadLabel errorLabel;
-        private Telerik.WinControls.Themes.MaterialTheme materialTheme1;
-        private Telerik.WinControls.Themes.MaterialBlueGreyTheme materialBlueGreyTheme1;
-        private Telerik.WinControls.Themes.MaterialPinkTheme materialPinkTheme1;
-        private Telerik.WinControls.Themes.MaterialTealTheme materialTealTheme1;
         private System.Windows.Forms.PictureBox pictureLogo;
         private Telerik.WinControls.UI.RadPanel editPanel;
         private Telerik.WinControls.UI.RadTextBox userNameTextBox;
@@ -255,5 +251,9 @@
         private Telerik.WinControls.UI.RadDropDownList languageDropDownList;
         private Telerik.WinControls.UI.RadLabel passwordLabel;
         private Telerik.WinControls.UI.RadButton cancelButton;
+        private Telerik.WinControls.Themes.MaterialTheme materialTheme1;
+        private Telerik.WinControls.Themes.MaterialTealTheme materialTealTheme1;
+        private Telerik.WinControls.Themes.MaterialPinkTheme materialPinkTheme1;
+        private Telerik.WinControls.Themes.MaterialBlueGreyTheme materialBlueGreyTheme1;
     }
 }

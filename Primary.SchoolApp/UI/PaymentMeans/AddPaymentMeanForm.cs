@@ -17,7 +17,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = Language.titlePaymentMeanAdd;
         }
         private void InitEvents()
         {

@@ -29,7 +29,6 @@ namespace Primary.SchoolApp.UI
             GroupDropDownList.SelectedIndex = -1;
             JobDropDownList.SelectedIndex = -1;
             InitEvents();
-            this.Text = Language.titleEnrollingAdd.ToUpper();
         }
 
         private void InitEvents()
@@ -89,6 +88,7 @@ namespace Primary.SchoolApp.UI
         private void ShowJobAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddJobForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelJob;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = jobService.GetJob(form.NameTextBox.Text).Result;
@@ -102,6 +102,7 @@ namespace Primary.SchoolApp.UI
         private void ShowEmployeeGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeGroupForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelEmployeeGroup;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = employeeGroupService.GetEmployeeGroup(form.NameTextBox.Text).Result;
@@ -117,9 +118,9 @@ namespace Primary.SchoolApp.UI
             if (item != null)
             {
                 var form = Program.ServiceProvider.GetService<EditJobForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelJob;
                 form.Init(item);
                 form.Icon = this.Icon;
-                form.ClientSize = new System.Drawing.Size(546, 182);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = jobService.GetJob(form.NameTextBox.Text).Result;
@@ -139,6 +140,7 @@ namespace Primary.SchoolApp.UI
             if (item != null)
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeGroupForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelEmployeeGroup;
                 form.Init(item);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -158,9 +160,9 @@ namespace Primary.SchoolApp.UI
             if (employee != null)
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelEmployee;
                 form.Init(employee);
                 form.Icon = this.Icon;
-                form.ClientSize = new System.Drawing.Size(800, 450);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = employeeService.GetEmployee(form.IdNumberTextBox.Text).Result;
@@ -177,8 +179,8 @@ namespace Primary.SchoolApp.UI
         private void ShowEmployeeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelEmployee;
             form.Icon = this.Icon;
-            form.ClientSize = new System.Drawing.Size(800, 450);
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = employeeService.GetEmployee(form.IdNumberTextBox.Text).Result;

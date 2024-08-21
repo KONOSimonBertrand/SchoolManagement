@@ -26,7 +26,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             schoolRoomNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleSchoolRoomUpdate.ToUpper();
         }
         private void InitEvents()
         {
@@ -107,6 +106,7 @@ namespace Primary.SchoolApp.UI
             if (item != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelClass;
                 form.Init(item);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -125,6 +125,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSchoolClassAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolClassForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelClass;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;

@@ -37,15 +37,19 @@ namespace Primary.SchoolApp
         public static IList<Module> ModuleList;
         public static IList<Country> CountryList;
         public static IList<EmployeeEnrolling> EmployeeEnrollingList;
+        public static IList<StudentEnrollingDTO> StudentEnrollingList;
+        public static User UserConnected;
         public static IServiceProvider ServiceProvider { get; private set; }
         public static string ConnectionString { get; private set; }
+        public static DateTime ScheduleDate { get; internal set; }
+
         public static SchoolYear CurrentSchoolYear;
         [STAThread]
         static void Main()
         {
           
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
             ConnectionString = ConfigurationManager.ConnectionStrings["school_data_base"].ConnectionString;
             #region Définition des dépendances
             var hostBuilder = new HostBuilder()

@@ -115,7 +115,7 @@ namespace SchoolManagement.UI
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
             this.startDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.endDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.dateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.dateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.startDateTimePicker.CustomFormat = "HH:mm";
             this.endDateTimePicker.CustomFormat = "HH:mm";
             this.startDateTimePicker.ShowUpDown=true;

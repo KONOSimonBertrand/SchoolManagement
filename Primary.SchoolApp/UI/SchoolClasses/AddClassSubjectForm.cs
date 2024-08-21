@@ -29,7 +29,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             GroupDropDownList.DataSource = Program.SubjectGroupList;
             SubjectDropDownList.DataSource = Program.SubjectList;
-            this.Text = Language.titleSubjectAdd.ToUpper();
             InitEvents();
         }
         private void InitEvents()
@@ -166,6 +165,7 @@ namespace Primary.SchoolApp.UI
             if (subject != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSubjectForm>();
+                form.Text = Language.labelAdd + ":.. " + Language.labelSubject;
                 form.Icon = this.Icon;
                 form.Init(subject);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -186,6 +186,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSubjectAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubjectForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelSubject;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = subjectService.GetSubject(form.FrenchNameTextBox.Text).Result;
@@ -201,6 +202,7 @@ namespace Primary.SchoolApp.UI
             if (group != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSubjectGroupForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelSubjectGroup;
                 form.Icon = this.Icon;
                 form.Init(group);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -221,6 +223,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSubjectGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubjectGroupForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelSubjectGroup;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = subjectGroupService.GetSubjectGroup(form.FrenchNameTextBox.Text).Result;

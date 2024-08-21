@@ -85,7 +85,7 @@ namespace SchoolManagement.UI
             this.startFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startFirstQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.startFirstQuarterDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.startFirstQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
@@ -95,7 +95,7 @@ namespace SchoolManagement.UI
             this.endFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endFirstQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.endFirstQuarterDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.endFirstQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
@@ -105,7 +105,7 @@ namespace SchoolManagement.UI
             this.startSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startSecondQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.startSecondQuarterDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.startSecondQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
@@ -115,7 +115,7 @@ namespace SchoolManagement.UI
             this.endSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endSecondQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.endSecondQuarterDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.endSecondQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
@@ -125,7 +125,7 @@ namespace SchoolManagement.UI
             this.startThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startThirdQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.startThirdQuarterDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.startThirdQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
@@ -135,7 +135,7 @@ namespace SchoolManagement.UI
             this.endThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endThirdQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.endThirdQuarterDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.endThirdQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.endThirdQuarterDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.endThirdQuarterDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.endThirdQuarterDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);

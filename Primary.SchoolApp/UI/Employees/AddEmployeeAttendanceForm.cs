@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
@@ -7,6 +8,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Telerik.WinControls;
 
 namespace Primary.SchoolApp.UI
 {
@@ -15,13 +17,18 @@ namespace Primary.SchoolApp.UI
         private readonly ILogService logService;
         private readonly IEmployeeService employeeService;
         private readonly ISchoolClassService schoolClassService;
+        private readonly ISchoolRoomService schoolRoomService;
+        private readonly ISubjectService subjectService;
         private readonly ClientApp clientApp;
         private EmployeeEnrolling selectedEnrolling;
-        public AddEmployeeAttendanceForm(ILogService logService, IEmployeeService employeeService, ClientApp clientApp, ISchoolClassService schoolClassService)
+        public AddEmployeeAttendanceForm(ILogService logService, IEmployeeService employeeService, ClientApp clientApp,
+            ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ISubjectService subjectService)
         {
             this.logService = logService;
             this.employeeService = employeeService;
             this.schoolClassService = schoolClassService;
+            this.subjectService = subjectService;
+            this.schoolRoomService = schoolRoomService;
             this.clientApp = clientApp;
             RoomDropDownList.DataSource = Program.SchoolRoomList;
             RoomDropDownList.SelectedIndex = -1;
@@ -35,6 +42,32 @@ namespace Primary.SchoolApp.UI
             AttendanceDateTimePicker.ValueChanged += AttendanceDateTimePicker_ValueChanged;
             SubjectDropDownList.ToolTipTextNeeded += SubjectDropDownList_ToolTipTextNeeded;
             RoomDropDownList.SelectedValueChanged += RoomDropDownList_SelectedValueChanged;
+            SubjectAddButton.Click += SubjectAddButton_Click;
+            RoomAddButton.Click += RoomAddButton_Click;
+        }
+
+        private void RoomAddButton_Click(object sender, EventArgs e)
+        {
+            if (RoomDropDownList.SelectedItem == null)
+            {
+                ShowSchoolRoomAddForm();
+            }
+            else
+            {
+                ShowSchoolRoomEditForm(RoomDropDownList.SelectedItem.DataBoundItem as SchoolRoom);
+            }
+        }
+
+        private void SubjectAddButton_Click(object sender, EventArgs e)
+        {
+            if (SubjectDropDownList.SelectedItem == null)
+            {
+                ShowSubjectAddForm();
+            }
+            else
+            {
+                ShowSubjectEditForm(SubjectDropDownList.SelectedItem.DataBoundItem as Subject);
+            }
         }
 
         private void RoomDropDownList_SelectedValueChanged(object sender, EventArgs e)
@@ -130,5 +163,78 @@ namespace Primary.SchoolApp.UI
             }
             return false;
         }
+        // show school room UI for edit
+        private void ShowSchoolRoomEditForm(SchoolRoom item)
+        {
+            if (item != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditSchoolRoomForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelRoom;
+                form.Init(item);
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    var data = schoolRoomService.GetSchoolRoom(form.NameTextBox.Text).Result;
+                    RoomDropDownList.DataSource = null;
+                    RoomDropDownList.DataSource = Program.SchoolRoomList;
+                    RoomDropDownList.SelectedValue = data;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(Language.messageUnknowClass);
+            }
+        }
+        // show school room UI to add new 
+        private void ShowSchoolRoomAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddSchoolRoomForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelRoom;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                var data = schoolRoomService.GetSchoolRoom(form.NameTextBox.Text).Result;
+                Program.SchoolRoomList.Add(data);
+                RoomDropDownList.DataSource = null;
+                RoomDropDownList.DataSource = Program.SchoolRoomList;
+                RoomDropDownList.SelectedValue = data;
+            }
+        }
+        // show subject UI for edit
+        private void ShowSubjectEditForm(Subject subject)
+        {
+            if (subject != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditSubjectForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelSubject;
+                form.Icon = this.Icon;
+                form.Init(subject);
+                if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    var data = subjectService.GetSubject(form.FrenchNameTextBox.Text).Result;
+                    SubjectDropDownList.DataSource = null;
+                    SubjectDropDownList.DataSource = Program.SubjectList;
+                    SubjectDropDownList.SelectedValue = data;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(Language.messageUnknowGroup);
+            }
+
+        }
+        // show subject UI for add new
+        private void ShowSubjectAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddSubjectForm>();
+            form.Text = Language.labelAdd+ ":.. " + Language.labelSubject;
+            if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                var data = subjectService.GetSubject(form.FrenchNameTextBox.Text).Result;
+                Program.SubjectList.Add(data);
+                SubjectDropDownList.DataSource = null;
+                SubjectDropDownList.DataSource = Program.SubjectList;
+                SubjectDropDownList.SelectedValue = data;
+            }
+        }
+
     }
 }

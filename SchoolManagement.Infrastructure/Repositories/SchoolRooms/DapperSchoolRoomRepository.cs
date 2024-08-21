@@ -7,15 +7,15 @@ namespace SchoolManagement.Infrastructure.Repositories
     public class DapperSchoolRoomRepository : ISchoolRoomRepository
     {
 
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperSchoolRoomRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSchoolRoomRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(SchoolRoom room)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SchoolRooms(Name,ClassId,Sequence) VALUES(@name,@classId,@sequence) ;";
             var result = connection.Execute(query, new
             {
@@ -30,7 +30,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<SchoolRoom?> GetAsync(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolRooms AS A 
                             INNER JOIN SchoolClasses B ON A.ClassId=B.Id 
                             WHERE A.Name=@name";
@@ -48,7 +48,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<SchoolRoom>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolRooms AS A 
                             INNER JOIN SchoolClasses B ON A.ClassId=B.Id  ;";
             var result = connection.Query<SchoolRoom, SchoolClass, SchoolRoom>(query,
@@ -65,7 +65,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(SchoolRoom room)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE SchoolRooms SET Name=@name,ClassId=@classId,Sequence=@sequence
                               WHERE Id=@id";
             var result = connection.Execute(query, new

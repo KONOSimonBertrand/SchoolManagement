@@ -17,7 +17,6 @@ namespace Primary.SchoolApp.UI
             this.employeeGroupService = employeeGroupService;
             this.logService = logService;
             this.clientApp = clientApp;
-            this.Text = Language.titleGroupAdd;
             InitEvents();
         }
         private void InitEvents()

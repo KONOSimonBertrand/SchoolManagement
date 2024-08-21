@@ -14,7 +14,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             this.appDbContext = appDbContext;
         }
 
-        public async Task<List<SchoolYear>> GetListAsync()
+        public async Task<List<SchoolYear>> GetSchoolYearListAsync()
         {
             var result = appDbContext.SchoolYears
                 .OrderByDescending(x => x.Id)
@@ -22,7 +22,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-        public async Task<bool> AddAsync(SchoolYear schoolYear)
+        public async Task<bool> AddSchoolYearAsync(SchoolYear schoolYear)
         {
             appDbContext.ChangeTracker.Clear();
             appDbContext.SchoolYears.Add(schoolYear);
@@ -31,7 +31,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async Task<bool> UpdateAsync(SchoolYear schoolYear)
+        public async Task<bool> UpdateSchoolYearAsync(SchoolYear schoolYear)
         {
             bool isDone = false;
             var item = appDbContext.SchoolYears.FirstOrDefault(s => s.Id == schoolYear.Id);
@@ -53,14 +53,14 @@ namespace SchoolManagement.Infrastructure.Repositories
             return isDone;
         }
 
-        public async Task<SchoolYear?> GetAsync(string name)
+        public async Task<SchoolYear?> GetSchoolYearAsync(string name)
         {
             var result = appDbContext.SchoolYears.FirstOrDefault(s => s.Name == name);
             await Task.Delay(0);
             return result;
         }
 
-        public async Task<bool> ChangeStatusAsync(SchoolYear schoolYear)
+        public async Task<bool> ChangeSchoolYearStatusAsync(SchoolYear schoolYear)
         {
             bool isDone = false;
             var item = appDbContext.SchoolYears.FirstOrDefault(s => s.Id == schoolYear.Id);
@@ -73,6 +73,16 @@ namespace SchoolManagement.Infrastructure.Repositories
             }
             await Task.Delay(0);
             return isDone;
+        }
+
+        public Task<SchoolYear?> GetLastSchoolYearAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetTotalSchoolYearAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

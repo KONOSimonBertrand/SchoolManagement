@@ -7,15 +7,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperJobRepository : IJobRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperJobRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperJobRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(Job job)
         {
-            var connection=dbConnectionFactoty.CreateConnection();
+            var connection=dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO Jobs(Name) VALUES(@name) ;";
             var result = connection.Execute(query, new {name=job.Name});
             await Task.Delay(0);
@@ -24,7 +24,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<Job?> GetAsync(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Jobs WHERE Name=@name ;";
             var result = connection.Query<Job>(query, new {name}).FirstOrDefault();
             await Task.Delay(0);
@@ -33,7 +33,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<Job>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Jobs ;";
             var result = connection.Query<Job>(query).ToList();
             await Task.Delay(0);
@@ -42,7 +42,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async  Task<bool> UpdateAsync(Job job)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE Jobs SET Name=@name WHERE Id=@id  ;";
             var result = connection.Execute(query, new { name = job.Name, id = job.Id });
             await Task.Delay(0);

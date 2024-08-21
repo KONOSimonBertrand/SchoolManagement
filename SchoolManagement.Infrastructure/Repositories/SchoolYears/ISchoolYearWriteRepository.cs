@@ -4,8 +4,8 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public  interface ISchoolYearWriteRepository
     {
-        public Task<bool> AddAsync(SchoolYear schoolYear);
-        public Task<bool> UpdateAsync(SchoolYear schoolYear);
-        public Task<bool> ChangeStatusAsync(SchoolYear schoolYear); //close or open
+        public Task<bool> AddSchoolYearAsync(SchoolYear schoolYear);
+        public Task<bool> UpdateSchoolYearAsync(SchoolYear schoolYear);
+        public Task<bool> ChangeSchoolYearStatusAsync(SchoolYear schoolYear); //close or open
     }
 }

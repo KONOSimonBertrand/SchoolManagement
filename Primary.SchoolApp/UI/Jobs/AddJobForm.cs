@@ -16,7 +16,6 @@ namespace Primary.SchoolApp.UI
             this.jobService = jobService;
             this.clientApp = clientApp;
             this.logService = logService;
-            this.Text = Language.titleJobAdd.ToUpper();
             InitEvents();
         }
         private void InitEvents()

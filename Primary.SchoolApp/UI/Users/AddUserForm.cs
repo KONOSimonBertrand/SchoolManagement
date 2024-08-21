@@ -22,7 +22,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             this.employeeService = employeeService;
-            this.Text = Language.titleUserAdd;
             this.userService = userService;
             EmployeeDropDownList.DataSource = Program.EmployeeList;
             EmployeeDropDownList.SelectedIndex = -1;
@@ -74,12 +73,12 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = "Erreur d'enregistrement";
+                        this.ErrorLabel.Text = Language.messageAddError;
                     }
                 }
                 else
                 {
-                    ErrorLabel.Text = "Ce compte utilisateur existe déjà";
+                    ErrorLabel.Text = Language.messageUserExist;
                 }
             }
         }
@@ -106,9 +105,9 @@ namespace Primary.SchoolApp.UI
             if (employee != null)
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelEmployee;
                 form.Init(employee);
                 form.Icon = this.Icon;
-                form.ClientSize = new System.Drawing.Size(800, 450);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = employeeService.GetEmployee(form.IdNumberTextBox.Text).Result;
@@ -119,14 +118,14 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Employé inconnue");
+                RadMessageBox.Show(Language.messageUnknowEmployee);
             }
         }
         private void ShowEmployeeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeForm>();
+            form.Text = Language.labelAdd+ ":.. " + Language.labelEmployee;
             form.Icon = this.Icon;
-            form.ClientSize = new System.Drawing.Size(800, 450);
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = employeeService.GetEmployee(form.IdNumberTextBox.Text).Result;

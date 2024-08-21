@@ -29,7 +29,6 @@ namespace Primary.SchoolApp.UI
             GroupDropDownList.SelectedIndex = -1;
             JobDropDownList.SelectedIndex = -1;
             InitEvents();
-            this.Text = Language.titleEnrollingUpdate.ToUpper();
         }
 
         private void InitEvents()
@@ -99,6 +98,7 @@ namespace Primary.SchoolApp.UI
         private void ShowJobAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddJobForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelJob;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = jobService.GetJob(form.NameTextBox.Text).Result;
@@ -112,6 +112,7 @@ namespace Primary.SchoolApp.UI
         private void ShowEmployeeGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeGroupForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelEmployeeGroup;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = employeeGroupService.GetEmployeeGroup(form.NameTextBox.Text).Result;
@@ -127,6 +128,7 @@ namespace Primary.SchoolApp.UI
             if (item != null)
             {
                 var form = Program.ServiceProvider.GetService<EditJobForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelJob;
                 form.Init(item);
                 form.Icon = this.Icon;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -139,7 +141,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Fonction inconnue");
+                RadMessageBox.Show(Language.messageUnknowJob);
             }
         }
         // show employee group UI for edit
@@ -148,6 +150,7 @@ namespace Primary.SchoolApp.UI
             if (item != null)
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeGroupForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelEmployeeGroup;
                 form.Init(item);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -159,7 +162,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                RadMessageBox.Show("Groupe d'employés inconnu");
+                RadMessageBox.Show(Language.messageUnknowGroup);
             }
         }
         private void ShowEmployeeEditForm(Employee employee)
@@ -167,6 +170,7 @@ namespace Primary.SchoolApp.UI
             if (employee != null)
             {
                 var form = Program.ServiceProvider.GetService<EditEmployeeForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelEmployee;
                 form.Init(employee);
                 form.Icon = this.Icon;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -185,6 +189,7 @@ namespace Primary.SchoolApp.UI
         private void ShowEmployeeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelEmployee;
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {

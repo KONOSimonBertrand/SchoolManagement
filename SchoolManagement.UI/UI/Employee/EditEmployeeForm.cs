@@ -126,7 +126,7 @@ namespace SchoolManagement.UI
             this.lastNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.birthdayDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.birthdayDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.birthdayDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.birthdayDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.birthdayDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.birthdayDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
@@ -163,7 +163,7 @@ namespace SchoolManagement.UI
             this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.hiringDateDateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.hiringDateDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.hiringDateDateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.hiringDateDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.hiringDateDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.hiringDateDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);

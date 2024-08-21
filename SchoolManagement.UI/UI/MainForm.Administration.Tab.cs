@@ -20,13 +20,13 @@ namespace SchoolManagement.UI
         public RadGridView EmployeeGridView { get => employeeGridView; }
         private void InitEmployeePage()
         {
-            InitComponentEmployeePage();
+            InitComponentsEmployeePage();
 
             InitEventsEmployeePage();
 
         }
 
-        private void InitComponentEmployeePage()
+        private void InitComponentsEmployeePage()
         {
             employeeMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             employeeMainPanel.BackgroundImage = Resources.Background;

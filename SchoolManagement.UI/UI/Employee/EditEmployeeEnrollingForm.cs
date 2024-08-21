@@ -97,7 +97,7 @@ namespace SchoolManagement.UI
             this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
-            this.dateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.dateTimePicker.CustomFormat = "dd/MM/yyyy";
             this.dateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
             this.dateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
             this.dateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);

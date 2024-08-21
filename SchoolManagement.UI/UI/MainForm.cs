@@ -3,27 +3,37 @@ using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using SchoolManagement.UI.Utilities;
 using SchoolManagement.UI.Localization;
+using MediaFoundation;
 
 namespace SchoolManagement.UI
 {
     public partial class MainForm : RadForm
     {
-        RadButtonElement aboutButton = new();
-        RadSplitButtonElement userSplitButtonElement = new();
-        RadMenuItem logoutMenuItem = new(Language.labelLogOut);
-        RadMenuItem changePasswordMenuItem = new(Language.messageChangePassword);
-        RadDropDownListElement themesDropDown = new RadDropDownListElement();
+        readonly RadButtonElement aboutButton = new();
+        readonly RadSplitButtonElement userSplitButtonElement = new();
+        readonly RadMenuItem logoutMenuItem = new(Language.labelLogOut);
+        readonly RadMenuItem changePasswordMenuItem = new(Language.messageChangePassword);
+        readonly RadDropDownListElement themesDropDown = new ();
         #region Properties
         public RadButtonElement AboutButton { get => aboutButton; }
         public RadMenuItem LogOutMenu { get => logoutMenuItem; }
         public RadMenuItem ChangePasswordMenu{ get => changePasswordMenuItem; }
         public RadDropDownList HomeSchoolYearDropDownList { get=>homeSchoolYearDropDownList; }
+        public RadListView HomeLeftListView { get => homeLeftListView; }
+        public RadListView HomeMainListView { get => homeMainListView; }
+        public RadGridView HomeGridView { get=>homeGridView; }
+        public RadPanel HomeInfoRightPanel { get=>homeInfoRightPanel; }
+        public CustomControls.SearchTextBox HomeSearchTextBox {  get => homeSearchTextBox; }
+        public RadButton HomeAddButton { get => homeAddButton; }
         public RadDropDownList CashFlowSchoolYearDropDownList { get => cashFlowSchoolYearDropDownList; }
         public RadDropDownList TimeTableSchoolYearDropDownList {  get => timeTableSchoolYearDropDownList; }
         public RadDropDownList DisciplineSchoolYearDropDownList { get=>disciplineSchoolYearDropDownList;}
         public RadDropDownList StudentNoteSchoolYearDropDownList { get=>studentNoteSchoolYearDropDownList; }
         public RadDropDownList ReportSchoolYearDropDownList { get => reportSchoolYearDropDownList; }
         public RadDropDownListElement ThemesDropDownList { get => themesDropDown; }
+        public RadSplitButtonElement UserSplitButtonElement { get => userSplitButtonElement; }
+        public RadToggleButton HomeIconViewToggleButton { get=>homeIconViewToggleButton; }
+        public RadToggleButton HomeListViewToggleButton {  get => homeListViewToggleButton; }
         #endregion
 
         public MainForm()
@@ -39,7 +49,6 @@ namespace SchoolManagement.UI
             InitEmployeePage();
             InitSettingPage();
             InitLanguage();
-            AdjustMainColor();
         }
 
         private void InitCommonComponents()
@@ -49,7 +58,6 @@ namespace SchoolManagement.UI
 
             RadPageViewStripElement stripElement = mainPageView.ViewElement as RadPageViewStripElement;
            
-
             stripElement.StripButtons = ~StripViewButtons.All;
             stripElement.ItemContainer.ButtonsPanel.Children.Add(themesDropDown);
             stripElement.ItemContainer.ButtonsPanel.Children.Add(aboutButton);
@@ -61,20 +69,22 @@ namespace SchoolManagement.UI
             stripElement.ItemContainer.ButtonsPanel.Margin = new Padding(0, 0, 40, 0);
             themesDropDown.Items.AddRange(new RadListDataItem[]
             {
-                new RadListDataItem("Material") { Image = Resources.default_small }, new RadListDataItem("MaterialPink") { Image = Resources.pink_blue_small },
-                new RadListDataItem("MaterialTeal") { Image = Resources.teal_red_small }, new RadListDataItem("MaterialBlueGrey") { Image = Resources.blue_grey_green_small }
+                new ("Material") { Image = Resources.default_small }, new("MaterialPink") { Image = Resources.pink_blue_small },
+                new ("MaterialTeal") { Image = Resources.teal_red_small }, new("MaterialBlueGrey") { Image = Resources.blue_grey_green_small }
             });
             themesDropDown.SelectedValue = "Material";
-            ThemeResolutionService.ApplicationThemeName = "Material"; ;
+            ThemeResolutionService.ApplicationThemeName = "Material";
             themesDropDown.SelectedIndexChanged += delegate (object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
             {
                 if (e.Position > -1)
                 {
                     ThemeResolutionService.ApplicationThemeName = themesDropDown.Items[e.Position].Text;
                     AdjustMainColor();
-
                 }
             };
+            aboutButton.Image = Resources.about;
+            userSplitButtonElement.Image = Resources.user_blue;
+            Icon = Resources.icon_orange;
             aboutButton.FindDescendant<FillPrimitive>().BackColor = Color.Transparent;
             aboutButton.EnableElementShadow = false;
             aboutButton.Padding = new Padding(0);
@@ -115,6 +125,10 @@ namespace SchoolManagement.UI
         }
         private void InitHomePage()
         {
+            InitComponentsHomePage();
+            InitEventsHomePage();
+        }
+        private void InitComponentsHomePage() {
             homeMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             homeMainPanel.BackgroundImage = Resources.Background;
             homeMainPanel.BackgroundImageLayout = ImageLayout.Stretch;
@@ -130,7 +144,7 @@ namespace SchoolManagement.UI
             homeSearchPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             homeSearchPanel.BackColor = Color.Transparent;
             homeSearchPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
-           
+
             homeEmptyPanel.RootElement.EnableElementShadow = false;
             homeEmptyPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             homeEmptyPanel.BackColor = Color.Transparent;
@@ -206,40 +220,79 @@ namespace SchoolManagement.UI
             homeMainListView.RootElement.EnableElementShadow = false;
 
             homeInfoRightPanel.RootElement.EnableElementShadow = false;
-         
         }
         private void AdjustMainColor()
         {
-            ViewUtilities.MainThemeColor = FormElement.TitleBar.FillPrimitive.BackColor;
+            ViewUtilities.MainThemeColor = this.FormElement.TitleBar.FillPrimitive.BackColor;
             switch (ThemeResolutionService.ApplicationThemeName)
             {
                 case "Material":
                     aboutButton.Image = Resources.about;
                     userSplitButtonElement.Image = Resources.user_blue;
-                    Icon = Resources.icon_orange;
+                    this.Icon = Resources.icon_orange;
                     break;
                 case "MaterialBlueGrey":
                     aboutButton.Image = Resources.about_blue_grey;
                     userSplitButtonElement.Image = Resources.user_blue_grey;
-                    Icon = Resources.icon_green;
+                    this.Icon = Resources.icon_green;
                     break;
                 case "MaterialPink":
                     aboutButton.Image = Resources.about_pink;
                     userSplitButtonElement.Image = Resources.user_pink;
-                    Icon = Resources.icon_blue;
+                    this.Icon = Resources.icon_blue;
                     break;
                 case "MaterialTeal":
                     aboutButton.Image = Resources.about_teal;
                     userSplitButtonElement.Image = Resources.user_teal;
-                    Icon = Resources.icon_red;
+                    this.Icon = Resources.icon_red;
                     break;
 
                 default:
-                    Icon = Resources.icon_pink;
+                    this.Icon = Resources.icon_pink;
                     break;
             }
         }
+        private void InitEventsHomePage()
+        {
+            homeMainListView.VisualItemFormatting += HomeMainListView_VisualItemFormatting;
+        }
+        private void HomeMainListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
+        {
+            IconListViewGroupVisualItem groupItem = e.VisualItem as IconListViewGroupVisualItem;
+            try
+            {
+                if (groupItem != null)
+                {
+                    if (groupItem.HasVisibleItems())
+                    {
+                        groupItem.Visibility = ElementVisibility.Visible;
+                    }
+                    else
+                    {
+                        groupItem.Visibility = ElementVisibility.Collapsed;
+                    }
+                    e.VisualItem.CustomFont = ViewUtilities.MainFont;
+                    e.VisualItem.CustomFontSize = 15;
+                    e.VisualItem.CustomFontStyle = FontStyle.Regular;
+                    groupItem.ToggleElement.Visibility = ElementVisibility.Collapsed;
+                    e.VisualItem.ShowHorizontalLine = false;
+                    e.VisualItem.Padding = new Padding(20, 0, 0, 0);
+                    e.VisualItem.TextAlignment = ContentAlignment.BottomLeft;
+                    e.VisualItem.EnableElementShadow = false;
+                }
+                else
+                {
+                    e.VisualItem.EnableElementShadow = true;
+                    e.VisualItem.ShadowDepth = 1;
+                    e.VisualItem.Padding = new Padding(0);
+                    e.VisualItem.ResetValue(LightVisualElement.TextAlignmentProperty, Telerik.WinControls.ValueResetFlags.Local);
+                }
+            }
+            catch (Exception ex)
+            {
 
-        
+            }
+        }
+
     }
 }

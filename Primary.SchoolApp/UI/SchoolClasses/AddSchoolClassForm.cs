@@ -23,7 +23,6 @@ namespace Primary.SchoolApp.UI
             this.schoolGroupService = schoolGroupService;
             GroupDropDownList.DataSource = Program.SchoolGroupList;
             InitEvents();
-            this.Text = Language.titleClassAdd.ToUpper();
         }
         private void InitEvents()
         {
@@ -99,6 +98,7 @@ namespace Primary.SchoolApp.UI
             if (schoolGroup != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelGroup;
                 form.Icon = this.Icon;
                 form.Init(schoolGroup);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -119,6 +119,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSchoolGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolGroupForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelGroup;
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {

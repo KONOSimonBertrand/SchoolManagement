@@ -22,7 +22,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             cashFlowTypeNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleCashflowUpdate.ToUpper();
         }
 
         private void InitEvents()

@@ -1,29 +1,38 @@
 ﻿using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using SchoolManagement.UI.Utilities;
+using SchoolManagement.UI.Localization;
 
 namespace SchoolManagement.UI
 {
+
     public partial class MainForm
     {
-
-        SchedulerBindingDataSource scheduleSource = new SchedulerBindingDataSource();
-        string timeTableLeftViewForToolTipText = "";
+        public RadButton TimeTablePrintButtton { get => timeTablePrintButton; }
+        public CustomControls.DateNavigator TimeTableDateNavigator { get => timeTableDateNavigator; }
+        public RadListView TimeTableLeftListView {  get => timeTableLeftListView; }
+        public RadScheduler TimeTableScheduler {  get => timeTableScheduler; }
+       public RadDropDownList TimeTableSearchDropDownList {  get => timeTableSearchDropDownList; }  
         private void InitTimeTablePage()
         {
 
+            InitComponentTimeTablePage();
+        }
+      
+        private void InitComponentTimeTablePage()
+        {
             timeTableMainContainer.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             timeTableNavigationPanel.BackgroundImage = Resources.fasha_no_borders;
             timeTableNavigationPanel.BackgroundImageLayout = ImageLayout.Stretch;
-            timeTableNavigationPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;          
+            timeTableNavigationPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             timeTableNavigationPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             timeTableNavigationPanel.PanelElement.PanelFill.GradientStyle = GradientStyles.Solid;
-           
+
             timeTableSearchPanel.RootElement.EnableElementShadow = false;
             timeTableSearchPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             timeTableSearchPanel.BackColor = Color.Transparent;
             timeTableSearchPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
-            
+
             timeTableEmptyPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
             timeTableEmptyPanel.BackColor = Color.Transparent;
             timeTableEmptyPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
@@ -54,54 +63,10 @@ namespace SchoolManagement.UI
 
             timeTablePrintButton.ImageAlignment = ContentAlignment.MiddleCenter;
             timeTablePrintButton.TextAlignment = ContentAlignment.MiddleCenter;
-           
-            timeTablePrintButton.ButtonElement.ToolTipText = "Cliquer ici pour Imprimer";
 
-            //ScheduleRadScheduler.AppointmentTitleFormat = "{2} ({3})";
-            timeTableScheduler.SchedulerElement.SetResourceHeaderAngleTransform(SchedulerViewType.Timeline, 0);
-
-            AppointmentMappingInfo appointmentMappingInfo = new AppointmentMappingInfo();
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("Id", "Id"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("TeacherId", "TeacherId"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("CourseId", "CourseId"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("DayId", "DayId"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("Teacher", "Teacher"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("Course", "Course"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("Day", "Day"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("TeacherIn", "TeacherIn"));
-            appointmentMappingInfo.Mappings.Add(new SchedulerMapping("TeacherOut", "TeacherOut"));
-            appointmentMappingInfo.Start = "Start";
-            appointmentMappingInfo.End = "End";
-            appointmentMappingInfo.Summary = "Name";
-            appointmentMappingInfo.Description = "Description";
-            appointmentMappingInfo.ResourceId = "ResourceId";
-            appointmentMappingInfo.BackgroundId = "Status";
-            appointmentMappingInfo.Location = "Location";
-            timeTableScheduler.AppointmentFactory = new TimeTableFactory();
-            scheduleSource.EventProvider.AppointmentFactory = timeTableScheduler.AppointmentFactory;
-            scheduleSource.EventProvider.Mapping = appointmentMappingInfo;
-            ResourceMappingInfo resourceMappingInfo = new ResourceMappingInfo();
-            resourceMappingInfo.Id = "Id";
-            resourceMappingInfo.Name = "Name";
-            scheduleSource.ResourceProvider.Mapping = resourceMappingInfo;
-            timeTableScheduler.DataSource = scheduleSource;
+            timeTablePrintButton.ButtonElement.ToolTipText = Language.messageClickToPrint;
 
             timeTableScheduler.Backgrounds.Clear();
-            AppointmentBackgroundInfo toDoBackgroundInfo = new AppointmentBackgroundInfo(1, "A Faire", Color.LightGray);
-            toDoBackgroundInfo.ShadowWidth = 0;
-            timeTableScheduler.Backgrounds.Add(toDoBackgroundInfo);
-            AppointmentBackgroundInfo inProgressBackgroundInfo = new AppointmentBackgroundInfo(2, "En cours", Color.Orange);
-            inProgressBackgroundInfo.ShadowWidth = 0;
-            timeTableScheduler.Backgrounds.Add(inProgressBackgroundInfo);
-            AppointmentBackgroundInfo courseDoneBackgroundInfo = new AppointmentBackgroundInfo(3, "Fait", Color.LightGreen);
-            courseDoneBackgroundInfo.ShadowWidth = 0;
-            timeTableScheduler.Backgrounds.Add(courseDoneBackgroundInfo);
-            AppointmentBackgroundInfo courseNoDoneBackgroundInfo = new AppointmentBackgroundInfo(4, "Non fait", Color.LightPink);
-            courseNoDoneBackgroundInfo.ShadowWidth = 0;
-            timeTableScheduler.Backgrounds.Add(courseNoDoneBackgroundInfo);
-            AppointmentBackgroundInfo canceledBackgroundInfo = new AppointmentBackgroundInfo(5, "Annulé", Color.Red);
-            canceledBackgroundInfo.ShadowWidth = 0;
-            timeTableScheduler.Backgrounds.Add(canceledBackgroundInfo);
 
             //ScheduleRadScheduler.GroupType = GroupType.Resource;
             timeTableScheduler.ShowAppointmentStatus = false;
@@ -121,5 +86,6 @@ namespace SchoolManagement.UI
                 view.RulerEndScale = 19;
             }
         }
+
     }
 }

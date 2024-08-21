@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperModuleRepository : IModuleRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperModuleRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperModuleRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<Module?> GetAsync(string name)
         {
-            var connection=dbConnectionFactoty.CreateConnection();
+            var connection=dbConnectionFactory.CreateConnection();
             string query = @"SELECT *  FROM Modules  WHERE Name=@name;";
             var result = connection.Query<Module>(query, new {name}).FirstOrDefault();
             await Task.Delay(0);
@@ -25,7 +25,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<Module>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT *  FROM Modules ;";
             var result = connection.Query<Module>(query).ToList();
             await Task.Delay(0);

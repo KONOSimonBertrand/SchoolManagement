@@ -20,7 +20,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             evaluationTypeNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleEvaluationUpdate.ToUpper();
         }
 
         private void InitEvents()

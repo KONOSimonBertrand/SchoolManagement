@@ -87,6 +87,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Hide":
                             image = Resources.hide_blue;
                             break;
+                        case "Undo":
+                            image = Resources.undo_blue;
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
@@ -130,6 +133,9 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Hide":
                             image = Resources.hide_blue_grey;
+                            break;
+                        case "Undo":
+                            image = Resources.undo_blue_grey;
                             break;
                     }
                     break;
@@ -175,6 +181,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Hide":
                             image = Resources.hide_pink;
                             break;
+                        case "Undo":
+                            image = Resources.undo_pink;
+                            break;
                     }
                     break;
                 case "MaterialTeal":
@@ -218,6 +227,9 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Hide":
                             image = Resources.hide_teal;
+                            break;
+                        case "Undo":
+                            image = Resources.undo_teal;
                             break;
                     }
                     break;

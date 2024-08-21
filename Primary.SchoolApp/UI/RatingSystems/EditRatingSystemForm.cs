@@ -21,7 +21,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             ratingSystemNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleRatingSystemUpdate.ToUpper();
         }
 
         private void InitEvents()

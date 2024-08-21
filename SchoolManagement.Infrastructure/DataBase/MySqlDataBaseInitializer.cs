@@ -4,8 +4,8 @@ namespace SchoolManagement.Infrastructure.DataBase
 {
     public class MySqlDataBaseInitializer
     {
-        private readonly IDbConnectionFactoty _connectionFactory;
-        public MySqlDataBaseInitializer( IDbConnectionFactoty connectionFactoty)
+        private readonly IDbConnectionFactory _connectionFactory;
+        public MySqlDataBaseInitializer( IDbConnectionFactory connectionFactoty)
         {
             _connectionFactory = connectionFactoty;
         }

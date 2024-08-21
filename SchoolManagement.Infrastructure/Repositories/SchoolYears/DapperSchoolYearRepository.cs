@@ -1,18 +1,19 @@
 ﻿using Dapper;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Infrastructure.DataBase;
+using System.Xml.Linq;
 
 namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperSchoolYearRepository : ISchoolYearRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactory;
+        private readonly IDbConnectionFactory dbConnectionFactory;
 
-        public DapperSchoolYearRepository(IDbConnectionFactoty dbConnectionFactory)
+        public DapperSchoolYearRepository(IDbConnectionFactory dbConnectionFactory)
         {
             this.dbConnectionFactory = dbConnectionFactory;
         }
-        public async Task<List<SchoolYear>> GetListAsync()
+        public async Task<List<SchoolYear>> GetSchoolYearListAsync()
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM SchoolYears ORDER BY Id DESC ";
@@ -21,7 +22,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<bool> AddAsync(SchoolYear schoolYear)
+        public async Task<bool> AddSchoolYearAsync(SchoolYear schoolYear)
         {
             using var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SchoolYears(Name, StartFirstQuarter, EndFirstQuarter, StartSecondQuarter, EndSecondQuarter, StartThirdQuarter, EndThirdQuarter ) 
@@ -42,7 +43,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async Task<bool> UpdateAsync(SchoolYear schoolYear)
+        public async Task<bool> UpdateSchoolYearAsync(SchoolYear schoolYear)
         {
             using var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE SchoolYears 
@@ -65,7 +66,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async Task<SchoolYear?> GetAsync(string name)
+        public async Task<SchoolYear?> GetSchoolYearAsync(string name)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM SchoolYears Where Name=@name ";
@@ -74,7 +75,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<bool> ChangeStatusAsync(SchoolYear schoolYear)
+        public async Task<bool> ChangeSchoolYearStatusAsync(SchoolYear schoolYear)
         {
             schoolYear.IsClosed = !schoolYear.IsClosed;
             using var connection = dbConnectionFactory.CreateConnection();
@@ -91,6 +92,24 @@ namespace SchoolManagement.Infrastructure.Repositories
                 );
             await Task.Delay(0);
             return result > 0;
+        }
+
+        public async  Task<SchoolYear?> GetLastSchoolYearAsync()
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = "SELECT * FROM SchoolYears ORDER BY Id DESC LIMIT 1 ";
+            var result = connection.QuerySingleOrDefault<SchoolYear>(query);
+            await Task.Delay(0);
+            return result;
+        }
+
+        public async Task<int> GetTotalSchoolYearAsync()
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = "SELECT COUNT(*) FROM SchoolYears  ";
+            var result = connection.ExecuteScalar<int>(query);
+            await Task.Delay(0);
+            return result;
         }
     }
 }

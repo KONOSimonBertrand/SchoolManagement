@@ -118,6 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="about_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\about_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="about_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\about_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="about_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\about_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="about_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\about_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\add_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -340,6 +352,21 @@
   <data name="printer_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\printer_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="tripple_users" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\tripple_users.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undo_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undo_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undo_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="undo_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="unlock_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\unlock_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -351,6 +378,30 @@
   </data>
   <data name="unlock_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\unlock_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\users_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\users_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\users_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="users_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\users_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\user_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\user_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\user_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\user_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="view_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\view_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

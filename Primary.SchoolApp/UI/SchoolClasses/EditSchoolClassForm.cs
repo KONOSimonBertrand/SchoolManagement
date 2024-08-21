@@ -25,7 +25,6 @@ namespace Primary.SchoolApp.UI
             this.schoolGroupService = schoolGroupService;
             schoolClassNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleClassUpdate;
 
         }
 
@@ -116,6 +115,7 @@ namespace Primary.SchoolApp.UI
             if (schoolGroup != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelClassGroup;
                 form.Icon=this.Icon;
                 form.Init(schoolGroup);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -136,6 +136,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSchoolGroupAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolGroupForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelClassGroup;
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {

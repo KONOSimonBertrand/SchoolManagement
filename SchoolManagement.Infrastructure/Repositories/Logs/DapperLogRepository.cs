@@ -7,15 +7,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperLogRepository : ILogRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperLogRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperLogRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(Log log)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO Logs(Id,UserAction,UserId,CreateDate) 
                            VALUES(@id,@action,@user,@date);";
             var result = connection.Execute(query, new
@@ -31,7 +31,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<Log>> GetListAsync(DateTime date)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Logs WHERE DATE(CreateDate)=@date ;";
             var result = connection.Query<Log>(query, new { date = date.Date }).ToList();
             await Task.Delay(0);
@@ -40,7 +40,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<Log>> GetListAsync(int userId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Logs WHERE UserId=@userId ;";
             var result = connection.Query<Log>(query, new { userId }).ToList();
             await Task.Delay(0);
@@ -49,7 +49,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<Log>> GetListAsync(DateTime start, DateTime end)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Logs WHERE DATE(CreateDate)>=@startDate AND DATE(CreateDate)<=@endDate  ;";
             var result = connection.Query<Log>(query, new { startDate = start.Date, endDate = end.Date }).ToList();
             await Task.Delay(0);

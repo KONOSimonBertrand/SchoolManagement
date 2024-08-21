@@ -22,7 +22,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             subjectGroupNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleGroupUpdate.ToUpper();
         }
         private void InitEvents()
         {

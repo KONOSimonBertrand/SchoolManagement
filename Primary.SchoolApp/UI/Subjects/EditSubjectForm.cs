@@ -20,7 +20,6 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             subjectNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleSubjectUpdate;
         }
         private void InitEvents()
         {

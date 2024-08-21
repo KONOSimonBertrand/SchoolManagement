@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     internal class DapperSubjectRepository : ISubjectRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperSubjectRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSubjectRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(Subject subject)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO Subjects(FrenchName,EnglishName,Sequence) 
                                          VALUES(@frenchName,@englishName,@sequence);";
             var result = connection.Execute(query, new
@@ -31,7 +31,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<Subject?> GetAsync(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Subjects WHERE FrenchName=@name ;";
             var result = connection.Query<Subject>(query, new { name }).FirstOrDefault();
             await Task.Delay(0);
@@ -40,7 +40,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<Subject>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Subjects ;";
             var result = connection.Query<Subject>(query).ToList();
             await Task.Delay(0);
@@ -49,7 +49,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(Subject subject)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE Subjects SET FrenchName=@frenchName,EnglishName=@englishName,
                                      Sequence=@sequence  WHERE Id=@id";
             var result = connection.Execute(query, new

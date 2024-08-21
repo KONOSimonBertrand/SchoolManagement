@@ -22,7 +22,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             schoolYearNameTracker = string.Empty;
-            this.Text = Language.titleSchoolYearUpdate.ToUpper();
         }
         private void InitEvents()
         {

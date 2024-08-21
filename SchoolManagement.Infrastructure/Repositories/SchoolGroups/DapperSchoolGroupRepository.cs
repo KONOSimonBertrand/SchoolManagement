@@ -8,8 +8,8 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperSchoolGroupRepository : ISchoolGroupRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactory;
-        public DapperSchoolGroupRepository(IDbConnectionFactoty dbConnectionFactory)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSchoolGroupRepository(IDbConnectionFactory dbConnectionFactory)
         {
             this.dbConnectionFactory = dbConnectionFactory;
         }

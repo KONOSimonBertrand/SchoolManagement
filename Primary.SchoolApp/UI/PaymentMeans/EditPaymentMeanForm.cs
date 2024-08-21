@@ -21,7 +21,6 @@ namespace Primary.SchoolApp.UI
             this.paymentMeanService = paymentMeanService;
             this.clientApp = clientApp;
             this.logService = logService;
-            this.Text = Language.titlePaymentMeanUpdate.ToUpper();
             InitEvents();
         }
         private void InitEvents()

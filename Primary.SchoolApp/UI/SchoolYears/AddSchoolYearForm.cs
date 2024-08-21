@@ -19,7 +19,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             ClearData();
-            this.Text = Language.titleSchoolYearAdd.ToUpper();
         }
         private void InitEvents()
         {

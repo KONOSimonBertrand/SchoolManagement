@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperUserRepository : IUserRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperUserRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperUserRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(User user)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO Users(UserName,Password,Name,Email,EmployeeId) 
                            VALUES(@userName,@password,@name,@email,@employeeId) ;";
             var result = connection.Execute(query, new
@@ -32,7 +32,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         private async Task<bool> AddModuleAsync(UserModule module)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO UsersModules(UserId,ModuleId,IsDefault,AllowCreate,AllowUpdate,AllowDelete,AllowRead,AllowPrint,AllowMail) 
                            VALUES(@userId,@moduleId,@isDefault,@allowCreate,@allowUpdate,@allowDelete,@allowRead,@allowPrint,@allowMail) ;";
             var result = connection.Execute(query, new
@@ -52,7 +52,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         private async Task<bool> DeleteModuleListAsync(int userId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"DELETE FROM UsersModules WHERE UserId=@userId ;";
             var result = connection.Execute(query, new
             {
@@ -76,7 +76,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<User?> GetAsync(string userName, string password)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Users A 
                            WHERE UserName=@userName AND Password=@password ;";
             var result = connection.Query<User>(query, new { userName, password }).FirstOrDefault();
@@ -85,7 +85,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<User?> GetAsync(string userName)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Users A 
                            LEFT JOIN Employees B ON A.EmployeeId=B.Id
                            WHERE UserName=@userName  ;";
@@ -101,7 +101,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<List<User>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Users A 
                            LEFT JOIN Employees B ON A.EmployeeId=B.Id;";
             var result = connection.Query<User, Employee, User>(query,
@@ -115,7 +115,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<IList<UserModule>> GetModuleListAsync(int userId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM UsersModules A 
                            INNER JOIN Users B ON A.UserId=B.Id
                            INNER JOIN Modules C ON A.ModuleId=C.Id
@@ -133,7 +133,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<bool> UpdateAsync(User user)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE Users SET UserName=@userName,Password=@password,Name=@name,Email=@email,EmployeeId=@employeeId 
                               WHERE Id=@id ;";
             var result = connection.Execute(query, new
@@ -150,7 +150,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async  Task<IList<UserRoom>> GetRoomListAsync(int userId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM UsersRooms A 
                            INNER JOIN Users B ON A.UserId=B.Id
                            INNER JOIN SchoolRooms C ON A.RoomId=C.Id
@@ -181,7 +181,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         private async Task<bool> AddRoomAsync(UserRoom room)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO UsersRooms(UserId,RoomId) 
                            VALUES(@userId,@roomId) ;";
             var result = connection.Execute(query, new
@@ -195,7 +195,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         private async Task<bool> DeleteRoomListAsync(int userId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"DELETE FROM UsersRooms WHERE UserId=@userId ;";
             var result = connection.Execute(query, new
             {
@@ -206,7 +206,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<bool> ChangePasswordAsync(int userId, string password)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE Users SET Password=@password WHERE Id=@userId ;";                             
             var result = connection.Execute(query, new
             {

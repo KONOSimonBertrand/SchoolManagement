@@ -35,7 +35,6 @@ namespace Primary.SchoolApp.UI
             SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "AB");
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
             InitEvents();
-            this.Text = Language.titleSubscriptionFeesUpdate.ToUpper();
         }
 
         private void InitEvents()
@@ -173,6 +172,7 @@ namespace Primary.SchoolApp.UI
             if (schoolYear != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolYearForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelSchoolYear;
                 form.Init(schoolYear);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -192,6 +192,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSchoolYearAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolYearForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelSchoolYear;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
@@ -209,6 +210,7 @@ namespace Primary.SchoolApp.UI
             if (cashFlowType != null)
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelCashFlowType;
                 form.Init(cashFlowType);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -228,6 +230,7 @@ namespace Primary.SchoolApp.UI
         private void ShowCashFlowTypeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddCashFlowTypeForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelCashFlowType;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;

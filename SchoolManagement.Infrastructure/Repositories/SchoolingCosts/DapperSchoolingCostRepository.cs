@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     internal class DapperSchoolingCostRepository : ISchoolingCostRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperSchoolingCostRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSchoolingCostRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(SchoolingCost cost)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SchoolingCosts(SchoolClassId,CashFlowTypeId,SchoolYearId,Amount,TrancheNumber,IsPayable) 
                                                  VALUES(@classId,@typeId,@yearId,@amount,@tranches,@isPayable) ;";
             var result = connection.Execute(query, new
@@ -44,7 +44,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<SchoolingCost> GetAsync(int classId, int costTypeId, int schoolYearId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolingCosts AS A 
                              INNER JOIN SchoolClasses AS  B ON A.SchoolClassId=B.Id 
                              INNER JOIN CashFlowTypes AS D ON A.CashFlowTypeId=D.Id 
@@ -71,7 +71,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<SchoolingCostItem>> GetItemsAsync(int schoolingCostId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM SchoolingCostItems WHERE SchoolingCostId=@id ;";
             var result = connection.Query<SchoolingCostItem>(query, new { id = schoolingCostId }).ToList();
             await Task.Delay(0);
@@ -80,7 +80,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<SchoolingCost>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolingCosts AS A 
                              INNER JOIN SchoolClasses  AS B ON A.SchoolClassId=B.Id 
                              INNER JOIN CashFlowTypes AS D ON A.CashFlowTypeId=D.Id 
@@ -101,7 +101,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(SchoolingCost cost)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE SchoolingCosts SET SchoolClassId=@classId,CashFlowTypeId=@typeId,
                              SchoolYearId=@yearId,Amount=@amount,TrancheNumber=@tranches,IsPayable=@isPayable  WHERE Id=@id ;";
 
@@ -127,7 +127,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         private async Task<bool> AddAsyncItems(SchoolingCost cost)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SchoolingCostItems(Amount,DeadLine,SchoolingCostId) 
                                          VALUES(@amount,@deadLine,@schoolingCostId);";
             var resut = connection.Execute(query, cost.SchoolingCostItems);
@@ -136,7 +136,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         private async Task<bool> DeleteAsyncItems(SchoolingCost cost)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = "DELETE FROM SchoolingCostItems WHERE SchoolingCostId=@id";
             var resut = connection.Execute(query, new { id = cost.Id });
             await Task.Delay(0);

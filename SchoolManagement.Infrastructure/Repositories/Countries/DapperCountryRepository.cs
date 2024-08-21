@@ -6,15 +6,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperCountryRepository : ICountryRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperCountryRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperCountryRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<IList<Country>> GetLIstAsync()
         {
-            var connection=dbConnectionFactoty.CreateConnection();
+            var connection=dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM Countries ;";
             var result=connection.Query<Country>(query).ToList();
             await Task.Delay(0);

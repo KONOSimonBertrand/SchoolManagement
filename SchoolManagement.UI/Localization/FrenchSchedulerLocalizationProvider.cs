@@ -1,4 +1,5 @@
-﻿using Telerik.WinControls.UI.Localization;
+﻿using Telerik.WinControls.UI;
+using Telerik.WinControls.UI.Localization;
 
 namespace SchoolManagement.UI.Localization
 {
@@ -243,6 +244,7 @@ namespace SchoolManagement.UI.Localization
                     return "Recurrence interval must be greater or equal to appointment duration!";
                 case RadSchedulerStringId.TimeZoneLocal:
                     return "Local";
+               
             }
 
             return string.Empty;

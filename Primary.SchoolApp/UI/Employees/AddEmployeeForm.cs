@@ -25,7 +25,6 @@ namespace Primary.SchoolApp.UI
             NationalityDropDownList.Text = "Cameroun";
             LoadNextIdNumber();
             InitEvents();
-            this.Text = Language.titleEmployeeAdd.ToUpper();
         }
 
         private void InitEvents()

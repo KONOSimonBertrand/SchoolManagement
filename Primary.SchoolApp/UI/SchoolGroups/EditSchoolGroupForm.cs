@@ -19,7 +19,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.schoolGroupNameTracker = string.Empty;
             InitEvents();
-            this.Text = Language.titleGroupUpdate.ToUpper();
         }
         private void InitEvents()
         {

@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperSubscriptionFeeRepository : ISubscriptionFeeRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperSubscriptionFeeRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSubscriptionFeeRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(SubscriptionFee subscriptionFee)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SubscriptionFees(Amount,Duration,CashFlowTypeId,SchoolYearId)  
                                           VALUES(@amount,@duration,@cashFlowTypeId,@schoolYearId);";
             var result = connection.Execute(query, new
@@ -32,7 +32,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<SubscriptionFee> GetAsync(int cashFlowTypeId, int schoolYearId)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SubscriptionFees   A   
                              INNER JOIN CashFlowTypes B ON A.CashFlowTypeId=B.Id  
                              INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id 
@@ -55,7 +55,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<SubscriptionFee>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SubscriptionFees A   
                              INNER JOIN CashFlowTypes B ON A.CashFlowTypeId=B.Id  
                              INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id  ORDER BY A.SchoolYearId DESC;";
@@ -73,7 +73,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> Updatesync(SubscriptionFee subscriptionFee)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE SubscriptionFees SET Amount=@amount,Duration=@duration,CashFlowTypeId=@cashFlowTypeId,SchoolYearId=@schoolYearId  
                                           WHERE id=@id  ;";
             var result = connection.Execute(query, new

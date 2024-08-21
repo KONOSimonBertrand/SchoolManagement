@@ -8,6 +8,7 @@ using System;
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using Primary.SchoolApp.Utilities;
+using System.Threading.Tasks;
 
 namespace Primary.SchoolApp.UI
 {
@@ -96,7 +97,7 @@ namespace Primary.SchoolApp.UI
         internal void Init(User user)
         {
             selectedUser = user;
-            selectedUser.Rooms = userService.GetUserRoomList(user.Id).Result;
+            LoadRooms();
             foreach (var item in selectedUser.Rooms)
             {
                 item.IsChecked = true;
@@ -125,6 +126,13 @@ namespace Primary.SchoolApp.UI
                 EmailLabel.Text = string.Empty;
                 PhoneLabel.Text = string.Empty;
             }
+            
+        }
+        //load user'rooms
+        private async void LoadRooms()
+        {
+            selectedUser.Rooms = userService.GetUserRoomList(selectedUser.Id).Result;
+
             var userRoomlList = selectedUser.Rooms.Select(x => x.Room).ToList();
             //find room to complete user room list
             foreach (var room in Program.SchoolRoomList)
@@ -136,13 +144,14 @@ namespace Primary.SchoolApp.UI
                         {
                             Room = room,
                             RoomId = room.Id,
-                            User = user,
-                            UserId = user.Id,
+                            User = selectedUser,
+                            UserId = selectedUser.Id,
                         }
                         );
                 }
             }
             DataGridView.DataSource = selectedUser.Rooms;
+            await Task.Delay(0);
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {

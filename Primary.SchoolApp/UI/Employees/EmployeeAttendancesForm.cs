@@ -41,6 +41,7 @@ namespace Primary.SchoolApp.UI
             PrintButton.Click += PrintButton_Click;
             ExportButton.Click += ExportButton_Click;
             DataGridView.ContextMenuOpening += DataGridView_ContextMenuOpening;
+            DataGridView.CustomFiltering += DataGridView_CustomFiltering; 
             SaveButton.Text=Language.labelAdd;
         }
 
@@ -67,7 +68,9 @@ namespace Primary.SchoolApp.UI
             if (FilterTextBox.Text != null)
             {
 
-                e.Visible &= e.Row.Cells["Room.Name"].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower());
+                e.Visible &= e.Row.Cells["StartHour"].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower())||
+                     e.Row.Cells["Room.Name"].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower()) ||
+                     e.Row.Cells[Language.fieldSubjectName].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower());
             }
         }
         private void FilterTextBox_TextChanged(object sender, EventArgs e)
@@ -87,7 +90,8 @@ namespace Primary.SchoolApp.UI
             }
 
         }
-
+        // initialise certains éléments. chargement de la photo,
+        // affichage des informations personnelles de l'employé etc.
         internal void Init(EmployeeEnrolling enrolling)
         {           
             selectedEnrolling = enrolling;
@@ -111,8 +115,8 @@ namespace Primary.SchoolApp.UI
             {
                 workAge--;
             }
-            PersonalInformationLabel.Text = string.Format("{0} ans | {1} | {2}", age.ToString(), enrolling.Employee.Sex == "M" ? "Masculin" : "Feminin", enrolling.Employee.BirthDate.ToString("dd-MM-yyyy"));
-            string schoolInfo = Language.labelHiredOn + " " + enrolling.Employee.HiringDate.ToString("dd-MM-yyyy") + " | " + workAge + " " + Language.labelYearOfService + " | " + enrolling.Job.Name + " | " + enrolling.GroupName + " | " + enrolling.SchoolYear;
+            PersonalInformationLabel.Text = string.Format("{0} ans | {1} | {2}", age.ToString(), enrolling.Employee.Sex == "M" ? "Masculin" : "Feminin", enrolling.Employee.BirthDate.ToString("dd/MM/yyyy"));
+            string schoolInfo = Language.labelHiredOn + " " + enrolling.Employee.HiringDate.ToString("dd/MM/yyyy") + " | " + workAge + " " + Language.labelYearOfService + " | " + enrolling.Job.Name + " | " + enrolling.GroupName + " | " + enrolling.SchoolYear;
             SchoolInformationLabel.LabelElement.ToolTipText = schoolInfo;
             if (schoolInfo.Length <= 121)
             {
@@ -149,13 +153,14 @@ namespace Primary.SchoolApp.UI
             //load attendances
             LoadAttendances(enrolling.Id);
         }
-
+        // chargement de la liste des présences dans le datagridview
         private async void LoadAttendances(int enrollingId)
         {
             selectedEnrolling.Attendances = employeeService.GetAttendanceList(enrollingId).Result;
             DataGridView.DataSource = selectedEnrolling.Attendances;
             await Task.Delay(0);      
          }
+        //Création des colonnes du datqgridview
         private void CreateGridViewColumn()
         {
             DataGridView.ReadOnly = true;
@@ -181,8 +186,8 @@ namespace Primary.SchoolApp.UI
             durationColumn.HeaderText = Language.labelDuration;
 
             dateColumn.Format = DateTimePickerFormat.Custom;
-            dateColumn.CustomFormat = "dd-MM-yyyy";
-            dateColumn.FormatString = "{0:dd-MM-yyyy}";
+            dateColumn.CustomFormat = "dd/MM/yyyy";
+            dateColumn.FormatString = "{0:dd/MM/yyyy}";
             startColumn.Format = DateTimePickerFormat.Custom;
             startColumn.CustomFormat = "H:mm";
             startColumn.FormatString = "{0:H:mm}";
@@ -202,7 +207,7 @@ namespace Primary.SchoolApp.UI
                 col.HeaderTextAlignment = ContentAlignment.MiddleLeft;
             }
         }
-
+        //fait appel au menu contextuel du grid view
         private void DataGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
         {
             //don't add  header's item
@@ -220,44 +225,67 @@ namespace Primary.SchoolApp.UI
                 
             }
         }
-
+        // supression d'une présence
         private void DeleteMenu_Click(object sender, EventArgs e)
         {
-            if (DataGridView.CurrentRow.DataBoundItem is EmployeeAttendance record)
+            if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (record != null)
+                if (DataGridView.CurrentRow.DataBoundItem is EmployeeAttendance record)
                 {
-                    DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmDelete, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
+                    if (record != null)
                     {
-                        var isDone = employeeService.DeleteAttendance(record.Id).Result;
-                        if (isDone)
+                        DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmDelete, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
+                        if (dialogResult == DialogResult.Yes)
                         {
-                            LoadAttendances(selectedEnrolling.Id);
-                        }
-                        else
-                        {
-                            RadMessageBox.Show(Language.messageDeleteError);
+                            var isDone = employeeService.DeleteAttendance(record.Id).Result;
+                            if (isDone)
+                            {
+                                LoadAttendances(selectedEnrolling.Id);
+                                Log log = new()
+                                {
+                                    UserAction = $"Suppression d'un pointage de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                logService.CreateLog(log);
+                            }
+                            else
+                            {
+                                RadMessageBox.Show(Language.messageDeleteError);
+                            }
                         }
                     }
                 }
+
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
             }
         }
-
+        //Modification d'une présence
         private void EditMenu_Click(object sender, EventArgs e)
         {
-            if (DataGridView.CurrentRow.DataBoundItem is EmployeeAttendance record)
+            if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (record != null)
+                if (DataGridView.CurrentRow.DataBoundItem is EmployeeAttendance record)
                 {
-                    ShowEditEmployeeAttendanceForm(record);
+                    if (record != null)
+                    {
+                        ShowEditEmployeeAttendanceForm(record);
+                    }
                 }
             }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+            
         }
-
+        //affichage de UI pour l'ajout d'une présence
         private void ShowAddEmployeeAttendanceForm()
         {
             var form = Program.ServiceProvider.GetService<AddEmployeeAttendanceForm>();
+            form.Text = selectedEnrolling.Employee.FullName + ":.." + Language.labelAdd + " " + Language.labelAttendance;
             form.Init(selectedEnrolling);
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
@@ -265,9 +293,11 @@ namespace Primary.SchoolApp.UI
                 LoadAttendances(selectedEnrolling.Id);
             }
         }
+        //affichage de UI pour la modification d'une présence
         private void ShowEditEmployeeAttendanceForm(EmployeeAttendance attendance)
         {
             var form = Program.ServiceProvider.GetService<EditEmployeeAttendanceForm>();
+            form.Text = selectedEnrolling.Employee.FullName + ":.." + Language.labelUpdate + " " + Language.labelAttendance;
             form.Init(selectedEnrolling,attendance);
             form.Icon = this.Icon;
             form.ShowDialog(this);

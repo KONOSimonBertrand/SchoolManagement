@@ -21,7 +21,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             employeeGroupNameTracker = string.Empty;
-            this.Text = Language.titleGroupUpdate;
             InitEvents();
         }
         private void InitEvents()

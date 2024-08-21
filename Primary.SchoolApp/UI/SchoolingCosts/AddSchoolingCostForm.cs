@@ -38,8 +38,6 @@ namespace Primary.SchoolApp.UI
             InitTranchesGridView();
             InitEvents();
             TrancheNumberTextBox.Text = "0";
-            this.Text = Language.titleSchoolFeesAdd.ToUpper();
-
         }
 
         private void InitEvents()
@@ -198,8 +196,8 @@ namespace Primary.SchoolApp.UI
             amounColumn.Width = 150;
             deadLineColumn.Width = 250;
             deadLineColumn.Format = DateTimePickerFormat.Custom;
-            deadLineColumn.CustomFormat = "dd-MM-yyyy";
-            deadLineColumn.FormatString = "{0:dd-MM-yyyy}";
+            deadLineColumn.CustomFormat = "dd/MM/yyyy";
+            deadLineColumn.FormatString = "{0:dd/MM/yyyy}";
             deadLineColumn.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
             idColumn.ReadOnly = true;
             TranchesGridView.Columns.Add(idColumn);
@@ -286,6 +284,7 @@ namespace Primary.SchoolApp.UI
             if (schoolYear != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolYearForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelSchoolYear;
                 form.Init(schoolYear);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -305,6 +304,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSchoolYearAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolYearForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelSchoolYear;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = schoolYearService.GetSchoolYear(form.NameTextBox.Text).Result;
@@ -320,9 +320,9 @@ namespace Primary.SchoolApp.UI
             if (schoolClass != null)
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelClass;
                 form.Init(schoolClass);
                 form.Icon = this.Icon;
-                form.ClientSize = new System.Drawing.Size(700, 210);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;
@@ -341,6 +341,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSchoolClassAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSchoolClassForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelClass;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;
@@ -356,6 +357,7 @@ namespace Primary.SchoolApp.UI
             if (cashFlowType != null)
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelCashFlowType;
                 form.Init(cashFlowType);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
@@ -375,6 +377,7 @@ namespace Primary.SchoolApp.UI
         private void ShowCashFlowTypeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddCashFlowTypeForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.labelCashFlowType;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;

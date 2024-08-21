@@ -29,6 +29,8 @@ namespace SchoolManagement.Core.Model
         public virtual IList<EmployeeRoom> Rooms { get; set; } = new List<EmployeeRoom>();
         public virtual IList<EmployeeSubject> Subjects { get; set; } = new List<EmployeeSubject>();
         public virtual IList<EmployeeAttendance> Attendances { get; set; }= new List<EmployeeAttendance>();
+        public virtual IList<EmployeeNote> Notes { get; set; }=new List<EmployeeNote>();
+        public virtual IList<EmployeeAccountTransaction> AccountTransactions { get; set; }=new List< EmployeeAccountTransaction>();
         public override bool Equals(object? obj)
         {
             if (obj is not EmployeeEnrolling other) return false;

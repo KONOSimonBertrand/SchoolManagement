@@ -1,7 +1,7 @@
--blue crey:#436175
--teal: #219C90
--pink: #FF0080
--blue:#4B70F5
+-blue crey:#436175-#607D8B
+-teal: #219C90-#009688
+-pink: #FF0080-#DF1E63
+-blue:#4B70F5-#3F51B5
 
 
 -red:EF5A6F

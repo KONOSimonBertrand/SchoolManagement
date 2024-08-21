@@ -70,8 +70,11 @@ namespace SchoolManagement.UI
             cashFlowEmptyPanel = new RadPanel();
             TimeTablePage = new RadPageViewPage();
             timeTableMainContainer = new RadPanel();
+            timeTableLeftPanel = new RadPanel();
             timeTableLeftListView = new RadListView();
+            timeTableSearchDropDownList = new RadDropDownList();
             timeTableNavigationPanel = new RadPanel();
+            timeTableDateNavigator = new CustomControls.DateNavigator();
             timeTableSchoolYearDropDownList = new RadDropDownList();
             timeTableSchoolYearLabel = new RadLabel();
             timeTablePrintButton = new RadButton();
@@ -149,10 +152,6 @@ namespace SchoolManagement.UI
             settingSearchPanel = new RadPanel();
             settingSearchTextBox = new CustomControls.SearchTextBox();
             settingEmptyPanel = new RadPanel();
-            materialTealTheme1 = new Telerik.WinControls.Themes.MaterialTealTheme();
-            materialPinkTheme1 = new Telerik.WinControls.Themes.MaterialPinkTheme();
-            materialBlueGreyTheme1 = new Telerik.WinControls.Themes.MaterialBlueGreyTheme();
-            materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
             ((System.ComponentModel.ISupportInitialize)timeTableScheduler).BeginInit();
             ((System.ComponentModel.ISupportInitialize)mainPageView).BeginInit();
             mainPageView.SuspendLayout();
@@ -196,7 +195,10 @@ namespace SchoolManagement.UI
             TimeTablePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)timeTableMainContainer).BeginInit();
             timeTableMainContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)timeTableLeftPanel).BeginInit();
+            timeTableLeftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)timeTableLeftListView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)timeTableSearchDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)timeTableNavigationPanel).BeginInit();
             timeTableNavigationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)timeTableSchoolYearDropDownList).BeginInit();
@@ -298,10 +300,10 @@ namespace SchoolManagement.UI
             // 
             timeTableScheduler.Culture = new System.Globalization.CultureInfo("fr-FR");
             timeTableScheduler.Dock = DockStyle.Fill;
-            timeTableScheduler.Location = new Point(253, 0);
+            timeTableScheduler.Location = new Point(287, 0);
             timeTableScheduler.Name = "timeTableScheduler";
             timeTableScheduler.PrintStyle = schedulerDailyPrintStyle1;
-            timeTableScheduler.Size = new Size(1046, 222);
+            timeTableScheduler.Size = new Size(1249, 708);
             timeTableScheduler.TabIndex = 2;
             // 
             // mainPageView
@@ -317,8 +319,8 @@ namespace SchoolManagement.UI
             mainPageView.Dock = DockStyle.Fill;
             mainPageView.Location = new Point(0, 0);
             mainPageView.Name = "mainPageView";
-            mainPageView.SelectedPage = EmployeePage;
-            mainPageView.Size = new Size(1548, 395);
+            mainPageView.SelectedPage = HomePage;
+            mainPageView.Size = new Size(1548, 815);
             mainPageView.TabIndex = 1;
             // 
             // HomePage
@@ -328,7 +330,7 @@ namespace SchoolManagement.UI
             HomePage.ItemSize = new SizeF(62F, 29F);
             HomePage.Location = new Point(6, 36);
             HomePage.Name = "HomePage";
-            HomePage.Size = new Size(1536, 353);
+            HomePage.Size = new Size(1536, 773);
             HomePage.Text = "ACCUEIL";
             // 
             // homeMainPanel
@@ -341,7 +343,7 @@ namespace SchoolManagement.UI
             homeMainPanel.Location = new Point(0, 65);
             homeMainPanel.Margin = new Padding(0);
             homeMainPanel.Name = "homeMainPanel";
-            homeMainPanel.Size = new Size(1536, 288);
+            homeMainPanel.Size = new Size(1536, 708);
             homeMainPanel.TabIndex = 3;
             // 
             // homeMainListView
@@ -351,23 +353,23 @@ namespace SchoolManagement.UI
             homeMainListView.GroupItemSize = new Size(250, 35);
             homeMainListView.HeaderHeight = 43.75F;
             homeMainListView.ItemSize = new Size(250, 35);
-            homeMainListView.Location = new Point(253, 0);
+            homeMainListView.Location = new Point(300, 0);
             homeMainListView.Margin = new Padding(0);
             homeMainListView.Name = "homeMainListView";
-            homeMainListView.Size = new Size(1064, 288);
+            homeMainListView.Size = new Size(878, 708);
             homeMainListView.TabIndex = 3;
             // 
             // homeGridView
             // 
             homeGridView.Dock = DockStyle.Fill;
-            homeGridView.Location = new Point(253, 0);
+            homeGridView.Location = new Point(300, 0);
             homeGridView.Margin = new Padding(4);
             // 
             // 
             // 
             homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             homeGridView.Name = "homeGridView";
-            homeGridView.Size = new Size(1064, 288);
+            homeGridView.Size = new Size(878, 708);
             homeGridView.TabIndex = 5;
             // 
             // homeLeftListView
@@ -379,16 +381,16 @@ namespace SchoolManagement.UI
             homeLeftListView.Location = new Point(0, 0);
             homeLeftListView.Margin = new Padding(0);
             homeLeftListView.Name = "homeLeftListView";
-            homeLeftListView.Size = new Size(253, 288);
+            homeLeftListView.Size = new Size(300, 708);
             homeLeftListView.TabIndex = 1;
             // 
             // homeInfoRightPanel
             // 
             homeInfoRightPanel.Dock = DockStyle.Right;
-            homeInfoRightPanel.Location = new Point(1317, 0);
+            homeInfoRightPanel.Location = new Point(1178, 0);
             homeInfoRightPanel.Margin = new Padding(4);
             homeInfoRightPanel.Name = "homeInfoRightPanel";
-            homeInfoRightPanel.Size = new Size(219, 288);
+            homeInfoRightPanel.Size = new Size(358, 708);
             homeInfoRightPanel.TabIndex = 3;
             // 
             // homeNavigationPanel
@@ -631,33 +633,56 @@ namespace SchoolManagement.UI
             TimeTablePage.ItemSize = new SizeF(118F, 29F);
             TimeTablePage.Location = new Point(6, 36);
             TimeTablePage.Name = "TimeTablePage";
-            TimeTablePage.Size = new Size(1299, 287);
+            TimeTablePage.Size = new Size(1536, 773);
             TimeTablePage.Text = "EMPLOI DU TEMPS";
             // 
             // timeTableMainContainer
             // 
             timeTableMainContainer.Controls.Add(timeTableScheduler);
-            timeTableMainContainer.Controls.Add(timeTableLeftListView);
+            timeTableMainContainer.Controls.Add(timeTableLeftPanel);
             timeTableMainContainer.Dock = DockStyle.Fill;
             timeTableMainContainer.Location = new Point(0, 65);
             timeTableMainContainer.Margin = new Padding(0);
             timeTableMainContainer.Name = "timeTableMainContainer";
-            timeTableMainContainer.Size = new Size(1299, 222);
+            timeTableMainContainer.Size = new Size(1536, 708);
             timeTableMainContainer.TabIndex = 5;
+            // 
+            // timeTableLeftPanel
+            // 
+            timeTableLeftPanel.Controls.Add(timeTableLeftListView);
+            timeTableLeftPanel.Controls.Add(timeTableSearchDropDownList);
+            timeTableLeftPanel.Dock = DockStyle.Left;
+            timeTableLeftPanel.Location = new Point(0, 0);
+            timeTableLeftPanel.Name = "timeTableLeftPanel";
+            timeTableLeftPanel.Size = new Size(287, 708);
+            timeTableLeftPanel.TabIndex = 2;
             // 
             // timeTableLeftListView
             // 
-            timeTableLeftListView.Dock = DockStyle.Left;
+            timeTableLeftListView.Dock = DockStyle.Fill;
             timeTableLeftListView.GroupItemSize = new Size(200, 28);
             timeTableLeftListView.ItemSize = new Size(200, 28);
-            timeTableLeftListView.Location = new Point(0, 0);
+            timeTableLeftListView.Location = new Point(0, 24);
             timeTableLeftListView.Margin = new Padding(0);
             timeTableLeftListView.Name = "timeTableLeftListView";
-            timeTableLeftListView.Size = new Size(253, 222);
-            timeTableLeftListView.TabIndex = 1;
+            timeTableLeftListView.Size = new Size(287, 684);
+            timeTableLeftListView.TabIndex = 2;
+            // 
+            // timeTableSearchDropDownList
+            // 
+            timeTableSearchDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            timeTableSearchDropDownList.Dock = DockStyle.Top;
+            timeTableSearchDropDownList.DropDownAnimationEnabled = true;
+            timeTableSearchDropDownList.Location = new Point(0, 0);
+            timeTableSearchDropDownList.MinimumSize = new Size(0, 24);
+            timeTableSearchDropDownList.Name = "timeTableSearchDropDownList";
+            timeTableSearchDropDownList.NullText = "Rechercher une classe..";
+            timeTableSearchDropDownList.Size = new Size(287, 24);
+            timeTableSearchDropDownList.TabIndex = 80;
             // 
             // timeTableNavigationPanel
             // 
+            timeTableNavigationPanel.Controls.Add(timeTableDateNavigator);
             timeTableNavigationPanel.Controls.Add(timeTableSchoolYearDropDownList);
             timeTableNavigationPanel.Controls.Add(timeTableSchoolYearLabel);
             timeTableNavigationPanel.Controls.Add(timeTablePrintButton);
@@ -666,8 +691,17 @@ namespace SchoolManagement.UI
             timeTableNavigationPanel.Location = new Point(0, 0);
             timeTableNavigationPanel.Margin = new Padding(0);
             timeTableNavigationPanel.Name = "timeTableNavigationPanel";
-            timeTableNavigationPanel.Size = new Size(1299, 65);
+            timeTableNavigationPanel.Size = new Size(1536, 65);
             timeTableNavigationPanel.TabIndex = 2;
+            // 
+            // timeTableDateNavigator
+            // 
+            timeTableDateNavigator.BackColor = Color.Transparent;
+            timeTableDateNavigator.Location = new Point(289, 0);
+            timeTableDateNavigator.Margin = new Padding(3, 4, 3, 4);
+            timeTableDateNavigator.Name = "timeTableDateNavigator";
+            timeTableDateNavigator.Size = new Size(246, 61);
+            timeTableDateNavigator.TabIndex = 79;
             // 
             // timeTableSchoolYearDropDownList
             // 
@@ -690,7 +724,7 @@ namespace SchoolManagement.UI
             // 
             // timeTablePrintButton
             // 
-            timeTablePrintButton.Location = new Point(564, 14);
+            timeTablePrintButton.Location = new Point(921, 14);
             timeTablePrintButton.Margin = new Padding(4);
             timeTablePrintButton.Name = "timeTablePrintButton";
             timeTablePrintButton.Size = new Size(105, 32);
@@ -701,7 +735,7 @@ namespace SchoolManagement.UI
             // 
             timeTableSearchPanel.Controls.Add(timeTableEmptyPanel);
             timeTableSearchPanel.Dock = DockStyle.Right;
-            timeTableSearchPanel.Location = new Point(877, 0);
+            timeTableSearchPanel.Location = new Point(1114, 0);
             timeTableSearchPanel.Margin = new Padding(4);
             timeTableSearchPanel.Name = "timeTableSearchPanel";
             timeTableSearchPanel.Size = new Size(422, 65);
@@ -1158,7 +1192,7 @@ namespace SchoolManagement.UI
             EmployeePage.ItemSize = new SizeF(115F, 29F);
             EmployeePage.Location = new Point(6, 36);
             EmployeePage.Name = "EmployeePage";
-            EmployeePage.Size = new Size(1536, 353);
+            EmployeePage.Size = new Size(1536, 773);
             EmployeePage.Text = "ADMINISTRATION";
             // 
             // employeeMainPanel
@@ -1171,7 +1205,7 @@ namespace SchoolManagement.UI
             employeeMainPanel.Location = new Point(0, 65);
             employeeMainPanel.Margin = new Padding(0);
             employeeMainPanel.Name = "employeeMainPanel";
-            employeeMainPanel.Size = new Size(1536, 288);
+            employeeMainPanel.Size = new Size(1536, 708);
             employeeMainPanel.TabIndex = 4;
             // 
             // employeeMainListView
@@ -1184,7 +1218,7 @@ namespace SchoolManagement.UI
             employeeMainListView.Location = new Point(300, 0);
             employeeMainListView.Margin = new Padding(0);
             employeeMainListView.Name = "employeeMainListView";
-            employeeMainListView.Size = new Size(878, 288);
+            employeeMainListView.Size = new Size(878, 708);
             employeeMainListView.TabIndex = 3;
             // 
             // employeeGridView
@@ -1197,7 +1231,7 @@ namespace SchoolManagement.UI
             // 
             employeeGridView.MasterTemplate.ViewDefinition = tableViewDefinition5;
             employeeGridView.Name = "employeeGridView";
-            employeeGridView.Size = new Size(878, 288);
+            employeeGridView.Size = new Size(878, 708);
             employeeGridView.TabIndex = 5;
             // 
             // employeeLeftListView
@@ -1209,7 +1243,7 @@ namespace SchoolManagement.UI
             employeeLeftListView.Location = new Point(0, 0);
             employeeLeftListView.Margin = new Padding(0);
             employeeLeftListView.Name = "employeeLeftListView";
-            employeeLeftListView.Size = new Size(300, 288);
+            employeeLeftListView.Size = new Size(300, 708);
             employeeLeftListView.TabIndex = 1;
             // 
             // employeeInfoRightPanel
@@ -1218,7 +1252,7 @@ namespace SchoolManagement.UI
             employeeInfoRightPanel.Location = new Point(1178, 0);
             employeeInfoRightPanel.Margin = new Padding(4);
             employeeInfoRightPanel.Name = "employeeInfoRightPanel";
-            employeeInfoRightPanel.Size = new Size(358, 288);
+            employeeInfoRightPanel.Size = new Size(358, 708);
             employeeInfoRightPanel.TabIndex = 3;
             // 
             // employeeNavigationPanel
@@ -1328,7 +1362,7 @@ namespace SchoolManagement.UI
             SettingPage.ItemSize = new SizeF(89F, 29F);
             SettingPage.Location = new Point(6, 36);
             SettingPage.Name = "SettingPage";
-            SettingPage.Size = new Size(1536, 353);
+            SettingPage.Size = new Size(1536, 626);
             SettingPage.Text = "PARAMETRES";
             // 
             // settingMainPanel
@@ -1340,7 +1374,7 @@ namespace SchoolManagement.UI
             settingMainPanel.Location = new Point(0, 65);
             settingMainPanel.Margin = new Padding(0);
             settingMainPanel.Name = "settingMainPanel";
-            settingMainPanel.Size = new Size(1536, 288);
+            settingMainPanel.Size = new Size(1536, 561);
             settingMainPanel.TabIndex = 4;
             // 
             // settingGridView
@@ -1353,7 +1387,7 @@ namespace SchoolManagement.UI
             // 
             settingGridView.MasterTemplate.ViewDefinition = tableViewDefinition6;
             settingGridView.Name = "settingGridView";
-            settingGridView.Size = new Size(936, 288);
+            settingGridView.Size = new Size(936, 561);
             settingGridView.TabIndex = 5;
             // 
             // settingLeftListView
@@ -1365,7 +1399,7 @@ namespace SchoolManagement.UI
             settingLeftListView.Location = new Point(0, 0);
             settingLeftListView.Margin = new Padding(0);
             settingLeftListView.Name = "settingLeftListView";
-            settingLeftListView.Size = new Size(300, 288);
+            settingLeftListView.Size = new Size(300, 561);
             settingLeftListView.TabIndex = 1;
             // 
             // settingInfoRightPanel
@@ -1374,7 +1408,7 @@ namespace SchoolManagement.UI
             settingInfoRightPanel.Location = new Point(1236, 0);
             settingInfoRightPanel.Margin = new Padding(4);
             settingInfoRightPanel.Name = "settingInfoRightPanel";
-            settingInfoRightPanel.Size = new Size(300, 288);
+            settingInfoRightPanel.Size = new Size(300, 561);
             settingInfoRightPanel.TabIndex = 3;
             // 
             // settingNavigationPanel
@@ -1453,7 +1487,7 @@ namespace SchoolManagement.UI
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1548, 395);
+            ClientSize = new Size(1548, 815);
             Controls.Add(mainPageView);
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
@@ -1506,7 +1540,11 @@ namespace SchoolManagement.UI
             TimeTablePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)timeTableMainContainer).EndInit();
             timeTableMainContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)timeTableLeftPanel).EndInit();
+            timeTableLeftPanel.ResumeLayout(false);
+            timeTableLeftPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)timeTableLeftListView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)timeTableSearchDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)timeTableNavigationPanel).EndInit();
             timeTableNavigationPanel.ResumeLayout(false);
             timeTableNavigationPanel.PerformLayout();
@@ -1661,12 +1699,6 @@ namespace SchoolManagement.UI
         private RadPanel timeTableSearchPanel;
         private RadPanel timeTableEmptyPanel;
         private RadPanel timeTableMainContainer;
-        private RadListView timeTableLeftListView;
-        private CustomControls.DateNavigator timeTableDateNavigator;
-        private Telerik.WinControls.Themes.MaterialTealTheme materialTealTheme1;
-        private Telerik.WinControls.Themes.MaterialPinkTheme materialPinkTheme1;
-        private Telerik.WinControls.Themes.MaterialBlueGreyTheme materialBlueGreyTheme1;
-        private Telerik.WinControls.Themes.MaterialTheme materialTheme1;
         private RadPanel disciplineNavigationPanel;
         private RadDropDownList disciplineSchoolYearDropDownList;
         private RadLabel disciplineSchoolYearLabel;
@@ -1731,8 +1763,12 @@ namespace SchoolManagement.UI
         private RadPanel settingMainPanel;
         private RadPanel settingSearchPanel;
         private RadGridView settingGridView;
-        private RadListView settingLeftListView;
         private RadPanel settingInfoRightPanel;
         private RadDropDownList settingSearchModuleDropDownList;
+        private CustomControls.DateNavigator timeTableDateNavigator;
+        private RadListView settingLeftListView;
+        private RadPanel timeTableLeftPanel;
+        private RadListView timeTableLeftListView;
+        private RadDropDownList timeTableSearchDropDownList;
     }
 }

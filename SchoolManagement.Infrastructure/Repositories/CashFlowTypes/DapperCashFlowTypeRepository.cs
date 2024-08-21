@@ -8,14 +8,14 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     internal class DapperCashFlowTypeRepository : ICashFlowTypeRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperCashFlowTypeRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperCashFlowTypeRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
         public async Task<bool> AddAsync(CashFlowType cashFlowType)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO CashFlowTypes(Name,Category,Domain,Description,Sequence) 
                               VALUES(@name,@category,@domain,@description,@sequence);";
             var result = connection.Execute(query, new
@@ -33,7 +33,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<CashFlowType> GetAsyn(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM CashFlowTypes WHERE Name=@name ;";
             var result = connection.Query<CashFlowType>(query, new { name }).FirstOrDefault();
             await Task.Delay(0);
@@ -42,7 +42,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<CashFlowType>> GetAsynList()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM CashFlowTypes ;";
             var result = connection.Query<CashFlowType>(query).ToList();
             await Task.Delay(0);
@@ -51,7 +51,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(CashFlowType cashFlowType)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE CashFlowTypes SET Name=@name,Category=@category,Domain=@domain,
                              Description=@description,Sequence=@sequence WHERE Id=@id";
             var result = connection.Execute(query, new

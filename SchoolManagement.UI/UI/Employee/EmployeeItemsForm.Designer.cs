@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition3 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             dataGridView = new Telerik.WinControls.UI.RadGridView();
             radLabel3 = new Telerik.WinControls.UI.RadLabel();
             radLabel2 = new Telerik.WinControls.UI.RadLabel();
@@ -86,7 +86,7 @@
             dataGridView.MasterTemplate.AllowAddNewRow = false;
             dataGridView.MasterTemplate.AllowDeleteRow = false;
             dataGridView.MasterTemplate.AllowEditRow = false;
-            dataGridView.MasterTemplate.ViewDefinition = tableViewDefinition3;
+            dataGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             dataGridView.Name = "dataGridView";
             dataGridView.Size = new Size(1073, 355);
             dataGridView.TabIndex = 4;
@@ -300,7 +300,7 @@
             saveButton.TabIndex = 0;
             saveButton.Text = "Enregistrer";
             // 
-            // EmployeeRoomsForm
+            // EmployeeItemsForm
             // 
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -310,8 +310,7 @@
             Controls.Add(personPanel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "EmployeeRoomsForm";
+            Name = "EmployeeItemsForm";
             Text = "Room list";
             ((System.ComponentModel.ISupportInitialize)dataGridView.MasterTemplate).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();

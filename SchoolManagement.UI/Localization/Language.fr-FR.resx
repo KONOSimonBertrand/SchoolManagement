@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="fieldDescription" xml:space="preserve">
-    <value>FrenchDescription</value>
-  </data>
   <data name="fieldGroupName" xml:space="preserve">
     <value>Group.FrenchName</value>
   </data>
@@ -150,11 +147,17 @@
   <data name="labelAmount" xml:space="preserve">
     <value>Montant</value>
   </data>
+  <data name="labelAmountTuition" xml:space="preserve">
+    <value>Montant de la scolarité</value>
+  </data>
   <data name="labelAppreciation" xml:space="preserve">
     <value>Appréciation</value>
   </data>
   <data name="labelAssign" xml:space="preserve">
     <value>Assigner</value>
+  </data>
+  <data name="labelAttendance" xml:space="preserve">
+    <value>Présence</value>
   </data>
   <data name="labelAttendances" xml:space="preserve">
     <value>Présences</value>
@@ -162,8 +165,14 @@
   <data name="labelBirthDate" xml:space="preserve">
     <value>Date de naissance</value>
   </data>
+  <data name="labelBirthPlace" xml:space="preserve">
+    <value>Lieu de naissance</value>
+  </data>
   <data name="labelBookModel" xml:space="preserve">
     <value>Modèle de bulletin</value>
+  </data>
+  <data name="labelBornOn" xml:space="preserve">
+    <value>Né le</value>
   </data>
   <data name="labelCancel" xml:space="preserve">
     <value>Annuler</value>
@@ -207,6 +216,15 @@
   <data name="labelConnection" xml:space="preserve">
     <value>Connexion</value>
   </data>
+  <data name="labelContact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="labelContacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="labelDay" xml:space="preserve">
+    <value>Jour</value>
+  </data>
   <data name="labelDefaultModule" xml:space="preserve">
     <value>Module par défaut</value>
   </data>
@@ -225,8 +243,20 @@
   <data name="labelDesignation" xml:space="preserve">
     <value>Désignation</value>
   </data>
+  <data name="labelDisciplinaryRecord" xml:space="preserve">
+    <value>Fiche de discipline</value>
+  </data>
+  <data name="labelDisciplinarySheet" xml:space="preserve">
+    <value>Fiche de discipline</value>
+  </data>
   <data name="labelDiscipline" xml:space="preserve">
     <value>Discipline</value>
+  </data>
+  <data name="labelDisciplines" xml:space="preserve">
+    <value>Disciplines</value>
+  </data>
+  <data name="labelDiscount" xml:space="preserve">
+    <value>Réduction</value>
   </data>
   <data name="labelDomain" xml:space="preserve">
     <value>Domaine</value>
@@ -282,6 +312,9 @@
   <data name="labelEnroll" xml:space="preserve">
     <value>Inscrire</value>
   </data>
+  <data name="labelEnrollingDate" xml:space="preserve">
+    <value>Date d'inscription</value>
+  </data>
   <data name="labelEvaluationSession" xml:space="preserve">
     <value>Session d'évaluation</value>
   </data>
@@ -321,6 +354,15 @@
   <data name="labelGroup" xml:space="preserve">
     <value>Groupe</value>
   </data>
+  <data name="labelHealth" xml:space="preserve">
+    <value>Santé</value>
+  </data>
+  <data name="labelHealthRecord" xml:space="preserve">
+    <value>Fiche de santé</value>
+  </data>
+  <data name="labelHealthStatus" xml:space="preserve">
+    <value>Etat de santé</value>
+  </data>
   <data name="labelHiredOn" xml:space="preserve">
     <value>Embauché le</value>
   </data>
@@ -333,11 +375,20 @@
   <data name="labelIdCard" xml:space="preserve">
     <value>CNI</value>
   </data>
+  <data name="labelIdNumber" xml:space="preserve">
+    <value>N° Identification</value>
+  </data>
+  <data name="labelIdTransaction" xml:space="preserve">
+    <value>N° Transaction</value>
+  </data>
   <data name="labelImport" xml:space="preserve">
     <value>Importer</value>
   </data>
   <data name="labelInput" xml:space="preserve">
     <value>Entrée</value>
+  </data>
+  <data name="labelInsolvency" xml:space="preserve">
+    <value>Insolvabilité</value>
   </data>
   <data name="labelInstallmentCount" xml:space="preserve">
     <value>Nombre de Tranches</value>
@@ -387,6 +438,9 @@
   <data name="labelModules" xml:space="preserve">
     <value>Modules</value>
   </data>
+  <data name="labelMoreInfo" xml:space="preserve">
+    <value>Plus d'information</value>
+  </data>
   <data name="labelName" xml:space="preserve">
     <value>Nom</value>
   </data>
@@ -405,6 +459,9 @@
   <data name="labelNotes" xml:space="preserve">
     <value>Notes</value>
   </data>
+  <data name="labelNoteSubject" xml:space="preserve">
+    <value>Objet</value>
+  </data>
   <data name="labelOldPassword" xml:space="preserve">
     <value>Ancien mot de passe</value>
   </data>
@@ -413,6 +470,9 @@
   </data>
   <data name="labelOutput" xml:space="preserve">
     <value>Sortie</value>
+  </data>
+  <data name="labelPaid" xml:space="preserve">
+    <value>Payés</value>
   </data>
   <data name="labelPassword" xml:space="preserve">
     <value>Mot de passe</value>
@@ -441,11 +501,17 @@
   <data name="labelReason" xml:space="preserve">
     <value>Motif</value>
   </data>
+  <data name="labelRegisteredOn" xml:space="preserve">
+    <value>Inscrit le</value>
+  </data>
   <data name="labelReligion" xml:space="preserve">
     <value>Religion</value>
   </data>
   <data name="labelReports" xml:space="preserve">
     <value>Rapports</value>
+  </data>
+  <data name="labelReturn" xml:space="preserve">
+    <value>Retourner</value>
   </data>
   <data name="labelRoom" xml:space="preserve">
     <value>Salle de classe</value>
@@ -455,6 +521,12 @@
   </data>
   <data name="labelSalary" xml:space="preserve">
     <value>Salaire</value>
+  </data>
+  <data name="labelSateDone" xml:space="preserve">
+    <value>Fait</value>
+  </data>
+  <data name="labelSateNoDone" xml:space="preserve">
+    <value>Non fait</value>
   </data>
   <data name="labelSave" xml:space="preserve">
     <value>Enregistrer</value>
@@ -486,6 +558,9 @@
   <data name="labelSignIn" xml:space="preserve">
     <value>Connexion au système</value>
   </data>
+  <data name="labelSolvency" xml:space="preserve">
+    <value>Solvabilité</value>
+  </data>
   <data name="labelStart" xml:space="preserve">
     <value>Début</value>
   </data>
@@ -500,6 +575,18 @@
   </data>
   <data name="labelStartThirdQuarter" xml:space="preserve">
     <value>Début 3ᵉ trimestre</value>
+  </data>
+  <data name="labelStateCancel" xml:space="preserve">
+    <value>Annulé</value>
+  </data>
+  <data name="labelStateOngoing" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="labelStateToDo" xml:space="preserve">
+    <value>A faire</value>
+  </data>
+  <data name="labelStatus" xml:space="preserve">
+    <value>Statut</value>
   </data>
   <data name="labelStatut" xml:space="preserve">
     <value>Statut</value>
@@ -516,11 +603,26 @@
   <data name="labelStudentId" xml:space="preserve">
     <value>Matricule</value>
   </data>
+  <data name="labelStudentLeft" xml:space="preserve">
+    <value>Actif</value>
+  </data>
   <data name="labelStudentNotes" xml:space="preserve">
     <value>Notes scolaires</value>
   </data>
   <data name="labelStudents" xml:space="preserve">
     <value>Elèves</value>
+  </data>
+  <data name="labelStudentsByClass" xml:space="preserve">
+    <value>Effectifs par classe</value>
+  </data>
+  <data name="labelStudentsByGroup" xml:space="preserve">
+    <value>Effectifs par groupe</value>
+  </data>
+  <data name="labelStudentsByStatus" xml:space="preserve">
+    <value>Effectif par statut</value>
+  </data>
+  <data name="labelStudentsNoLeft" xml:space="preserve">
+    <value>Non Actif</value>
   </data>
   <data name="labelSubject" xml:space="preserve">
     <value>Matière</value>
@@ -543,6 +645,18 @@
   <data name="labelSubscriptionFee" xml:space="preserve">
     <value>Frais d'abonnement</value>
   </data>
+  <data name="labelSubscriptions" xml:space="preserve">
+    <value>Abonnements</value>
+  </data>
+  <data name="labelTeacher" xml:space="preserve">
+    <value>Enseignant</value>
+  </data>
+  <data name="labelTeacherIn" xml:space="preserve">
+    <value>Sortie enseignant</value>
+  </data>
+  <data name="labelTeacherOut" xml:space="preserve">
+    <value>Entrée enseignant</value>
+  </data>
   <data name="labelTimesheet" xml:space="preserve">
     <value>Fiche de présences</value>
   </data>
@@ -555,6 +669,9 @@
   <data name="labelTrancheNumber" xml:space="preserve">
     <value>Nbre de tranches</value>
   </data>
+  <data name="labelTuitionFees" xml:space="preserve">
+    <value>Frais scolaires</value>
+  </data>
   <data name="labelType" xml:space="preserve">
     <value>Type</value>
   </data>
@@ -566,6 +683,9 @@
   </data>
   <data name="labelUnCheckAll" xml:space="preserve">
     <value>Décocher tout</value>
+  </data>
+  <data name="labelUnPaid" xml:space="preserve">
+    <value>Impayés</value>
   </data>
   <data name="labelUpdate" xml:space="preserve">
     <value>Mise à jour</value>
@@ -702,6 +822,9 @@
   <data name="messageConfirmeDuplicateFee" xml:space="preserve">
     <value>Voulez-vous dupliquer ces frais pour</value>
   </data>
+  <data name="messageConfirmReturn" xml:space="preserve">
+    <value>Voulez-vous retourner cette transaction?</value>
+  </data>
   <data name="messageDeleteError" xml:space="preserve">
     <value>Erreur de suppression...</value>
   </data>
@@ -756,6 +879,9 @@
   <data name="messageResearch" xml:space="preserve">
     <value>Rechercher ...</value>
   </data>
+  <data name="messageReturnAllreadyDone" xml:space="preserve">
+    <value>Cette transaction a déjà été retournée</value>
+  </data>
   <data name="messageRoomExist" xml:space="preserve">
     <value>Une salle de classe portant le même nom existe déjà</value>
   </data>
@@ -795,6 +921,9 @@
   <data name="messageUnknowGroup" xml:space="preserve">
     <value>Groupe inconnu</value>
   </data>
+  <data name="messageUnknowJob" xml:space="preserve">
+    <value>Fonction inconnue</value>
+  </data>
   <data name="messageUnknowSchoolYear" xml:space="preserve">
     <value>Année scolaire inconnue</value>
   </data>
@@ -809,6 +938,9 @@
   </data>
   <data name="messageUserExist" xml:space="preserve">
     <value>Ce compte utilisateur existe déjà</value>
+  </data>
+  <data name="tiltleAttendanceList" xml:space="preserve">
+    <value>Liste des présences</value>
   </data>
   <data name="titleAttendanceAdd" xml:space="preserve">
     <value>Ajout:... Présence</value>
@@ -825,53 +957,17 @@
   <data name="titleClassAdd" xml:space="preserve">
     <value>Ajout:.. Classe</value>
   </data>
-  <data name="titleClassUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Classe</value>
+  <data name="titleClassList" xml:space="preserve">
+    <value>Liste des classes</value>
   </data>
-  <data name="titleEmployeeAdd" xml:space="preserve">
-    <value>Ajout:.. Employé</value>
+  <data name="titleEmployeeList" xml:space="preserve">
+    <value>Liste des employés</value>
   </data>
-  <data name="titleEmployeeUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Employé</value>
+  <data name="titleModuleList" xml:space="preserve">
+    <value>Module list</value>
   </data>
-  <data name="titleEnrollingAdd" xml:space="preserve">
-    <value>Ajout:.. Inscription</value>
-  </data>
-  <data name="titleEnrollingUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Inscription</value>
-  </data>
-  <data name="titleEvaluationAdd" xml:space="preserve">
-    <value>Ajout:.. Evaluation</value>
-  </data>
-  <data name="titleEvaluationUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Evaluation</value>
-  </data>
-  <data name="titleGroupAdd" xml:space="preserve">
-    <value>Ajout:.. Groupe</value>
-  </data>
-  <data name="titleGroupUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Groupe</value>
-  </data>
-  <data name="titleJobAdd" xml:space="preserve">
-    <value>Ajout.. Fonction</value>
-  </data>
-  <data name="titleJobUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Fonction</value>
-  </data>
-  <data name="titlePasswordUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Mot de passe</value>
-  </data>
-  <data name="titlePaymentMeanAdd" xml:space="preserve">
-    <value>Ajout:.. moyen de paiement</value>
-  </data>
-  <data name="titlePaymentMeanUpdate" xml:space="preserve">
-    <value>Mise à jour:.. moyen de paiement</value>
-  </data>
-  <data name="titleRatingSystemAdd" xml:space="preserve">
-    <value>Ajout:.. Système d'appréciation</value>
-  </data>
-  <data name="titleRatingSystemUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Système d'appréciation</value>
+  <data name="titleNoteList" xml:space="preserve">
+    <value>Liste des notes</value>
   </data>
   <data name="titleRoomList" xml:space="preserve">
     <value>Liste des salles de classe</value>
@@ -879,46 +975,13 @@
   <data name="titleSchoolFees" xml:space="preserve">
     <value>Frais de scolarité</value>
   </data>
-  <data name="titleSchoolFeesAdd" xml:space="preserve">
-    <value>Ajout:... Frais de scolarité</value>
-  </data>
-  <data name="titleSchoolFeesUpdate" xml:space="preserve">
-    <value>Mise à jour::... Frais de scolarité</value>
-  </data>
-  <data name="titleSchoolRoomAdd" xml:space="preserve">
-    <value>Ajout:... Salle de classe</value>
-  </data>
-  <data name="titleSchoolRoomUpdate" xml:space="preserve">
-    <value>Mise à jour:... Salle de classe</value>
-  </data>
-  <data name="titleSchoolYearAdd" xml:space="preserve">
-    <value>Ajout:... Année scolaire</value>
-  </data>
-  <data name="titleSchoolYearUpdate" xml:space="preserve">
-    <value>Mise à jour:... Année scolaire</value>
-  </data>
   <data name="titleStudentList" xml:space="preserve">
     <value>Liste des élèves</value>
-  </data>
-  <data name="titleSubjectAdd" xml:space="preserve">
-    <value>Ajout:.. Matière</value>
   </data>
   <data name="titleSubjectList" xml:space="preserve">
     <value>Liste des matières</value>
   </data>
-  <data name="titleSubjectUpdate" xml:space="preserve">
-    <value>Mise à jour:.. Mqtière</value>
-  </data>
-  <data name="titleSubscriptionFeesAdd" xml:space="preserve">
-    <value>Ajout:... Frais d'abonnement</value>
-  </data>
-  <data name="titleSubscriptionFeesUpdate" xml:space="preserve">
-    <value>Mise à jour:... Frais d'abonnement</value>
-  </data>
-  <data name="titleUserAdd" xml:space="preserve">
-    <value>Ajout.. Utilisateur</value>
-  </data>
-  <data name="titleUserUpdate" xml:space="preserve">
-    <value>Mise à jour::.. Utilisateur</value>
+  <data name="titleUserList" xml:space="preserve">
+    <value>Liste des utilisateurs</value>
   </data>
 </root>

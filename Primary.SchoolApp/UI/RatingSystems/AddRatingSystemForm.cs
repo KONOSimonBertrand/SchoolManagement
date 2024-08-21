@@ -18,7 +18,6 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             InitEvents();
-            this.Text = Language.titleRatingSystemAdd.ToUpper();
         }
 
         private void InitEvents()

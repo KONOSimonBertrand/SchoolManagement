@@ -9,7 +9,7 @@ namespace SchoolManagement.Infrastructure.DataBase
     /// <summary>
     /// Cette classe permet de créer une connexion à un serveur de base de données MySql.
     /// </summary>
-    public class MySqlConnectionFactory : IDbConnectionFactoty
+    public class MySqlConnectionFactory : IDbConnectionFactory
     {
         private readonly ClientApp _clientApp;
         private readonly ILogger<MySqlConnectionFactory> _logger;

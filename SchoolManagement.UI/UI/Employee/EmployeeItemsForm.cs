@@ -6,8 +6,8 @@ namespace SchoolManagement.UI
 {
     public partial class EmployeeItemsForm : RadForm
     {
-        //
-        // Résumé :
+
+
         //     Cette classe sert d'interface utilisateur pour:
         //     - Les versements d'un élève
         //     - Les dépôts d'un élève
@@ -15,11 +15,20 @@ namespace SchoolManagement.UI
         //     - Le dossier médical d'un élève
         //     - La fiche de discipline d'un élève
         //     - Les contacts d'un élève,
-        //     - Les dépôts d'un employé
-        //     - Les salles de classe allouées à un employé
-        //     - Les unités d'enseignement allouées à un employé
-        //     - Les notes d'un employé
-        //     - Les présences d'un employé
+        //     
+        //     
+        //    
+        //    
+        //     
+
+        /// <summary>
+        /// Cette classe sert d'interface utilisateur pour:
+        /// - Les salles de classe assignées à un employé
+        /// - Les unités d'enseignement assignées à un employé
+        /// - Les dépôts d'un employé sur son compte
+        /// - La fiche de présences d'un employé
+        ///  - Les notes sur un employé
+        /// </summary>
         public RadButton SaveButton { get => saveButton; }
         public RadButton CloseButton { get => closeButton; }
         public RadButton PrintButton { get => printButton; }

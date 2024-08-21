@@ -4,9 +4,8 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
-using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -45,12 +44,12 @@ namespace Primary.SchoolApp.UI
         {
             this.Close();
         }
-
+        //export gridview data to Excel
         private void ExportButton_Click(object sender, EventArgs e)
         {
             AppUtilities.ExportGridViewToExcel(DataGridView, Language.labelModules);
         }
-
+        //print gridview data
         private void PrintButton_Click(object sender, EventArgs e)
         {
             AppUtilities.PrintGridView(DataGridView, Language.labelModules);
@@ -103,7 +102,7 @@ namespace Primary.SchoolApp.UI
         internal void Init(User user)
         {
             selectedUser = user;
-            selectedUser.Modules = userService.GetUserModuleList(user.Id).Result;
+            LoadModules();
             LoginLabel.Text = user.UserName;
             if (user.Name.Length >= 17)
             {
@@ -128,6 +127,12 @@ namespace Primary.SchoolApp.UI
                 EmailLabel.Text = string.Empty;
                 PhoneLabel.Text = string.Empty;
             }
+            
+        }
+       //load modules in datagridview
+        private async void LoadModules()
+        {
+            selectedUser.Modules = userService.GetUserModuleList(selectedUser.Id).Result;
             var userModulList = selectedUser.Modules.Select(x => x.Module).ToList();
             //find module to complete user module list
             foreach (var module in Program.ModuleList)
@@ -146,13 +151,15 @@ namespace Primary.SchoolApp.UI
                             AllowRead = false,
                             AllowUpdate = false,
                             IsDefault = false,
-                            User = user,
-                            UserId = user.Id,
+                            User = selectedUser,
+                            UserId = selectedUser.Id,
                         }
                         );
                 }
             }
             DataGridView.DataSource = selectedUser.Modules;
+
+            await Task.Delay(0);
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
@@ -178,6 +185,7 @@ namespace Primary.SchoolApp.UI
             else RadMessageBox.Show(Language.messageUpdateError);
 
         }
+        //create columns of datagridview
         private void CreateGridViewColumn()
         {
             DataGridView.AllowEditRow = true;

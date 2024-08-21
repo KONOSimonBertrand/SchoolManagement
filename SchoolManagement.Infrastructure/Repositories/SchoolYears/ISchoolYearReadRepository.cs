@@ -6,7 +6,9 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public  interface ISchoolYearReadRepository
     {
-        public Task<List<SchoolYear>> GetListAsync();
-        public Task<SchoolYear?> GetAsync(string name);
+        public Task<List<SchoolYear>> GetSchoolYearListAsync();
+        public Task<SchoolYear?> GetSchoolYearAsync(string name);
+        Task<SchoolYear?> GetLastSchoolYearAsync();
+        Task<int> GetTotalSchoolYearAsync();
     }
 }

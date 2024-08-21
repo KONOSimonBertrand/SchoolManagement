@@ -8,15 +8,15 @@ namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperSubjectGroupRepository : ISubjectGroupRepository
     {
-        private readonly IDbConnectionFactoty dbConnectionFactoty;
-        public DapperSubjectGroupRepository(IDbConnectionFactoty dbConnectionFactoty)
+        private readonly IDbConnectionFactory dbConnectionFactory;
+        public DapperSubjectGroupRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            this.dbConnectionFactoty = dbConnectionFactoty;
+            this.dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<bool> AddAsync(SubjectGroup subjectGroup)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"INSERT INTO SubjectGroups(FrenchName,EnglishName,Sequence) 
                                          VALUES(@frenchName,@englishName,@sequence);";
             var result = connection.Execute(query, new
@@ -31,7 +31,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<SubjectGroup?> GetAsync(string name)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SubjectGroups WHERE FrenchName=@name ;";
             var result = connection.Query<SubjectGroup>(query, new { name }).FirstOrDefault();
             await Task.Delay(0);
@@ -40,7 +40,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IList<SubjectGroup>> GetListAsync()
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SubjectGroups ;";
             var result = connection.Query<SubjectGroup>(query).ToList();
             await Task.Delay(0);
@@ -49,7 +49,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(SubjectGroup subjectGroup)
         {
-            var connection = dbConnectionFactoty.CreateConnection();
+            var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE SubjectGroups SET FrenchName=@frenchName,EnglishName=@englishName,Sequence=@sequence 
                                      WHERE Id=@id";
             var result = connection.Execute(query, new
