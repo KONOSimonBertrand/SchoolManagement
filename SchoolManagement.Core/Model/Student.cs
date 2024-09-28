@@ -36,6 +36,7 @@ namespace SchoolManagement.Core.Model
         public string Address { get; set; }
         public int Health {  get; set; }
         public string? PictureUrl { get; set; }
+        public virtual IList<Contact> ContactList { get; set; } = new List<Contact>();
         public override bool Equals(object? obj)
         {
             if (obj is not Student other) return false;

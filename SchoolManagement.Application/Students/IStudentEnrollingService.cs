@@ -11,9 +11,10 @@ namespace SchoolManagement.Application
         public Task<StudentEnrolling?> GetStudentEnrollingAsync(int studentId, int schoolyearId);
         public Task<List<StudentEnrolling>> GetStudentEnrollingListAsync(int schoolyearId);
         public Task<bool> CreateStudentRoomAsync(StudentRoom room);
-        public Task<bool> DeleteStudentRoomAsync(int studentId,int roomId,int schoolYearId);
+        public Task<bool> DeleteStudentRoomAsync(int studentId,int schoolYearId);
         public Task<StudentRoom?> GetStudentRoomAsync(int studentId, int schoolYearId);
         public Task<List<StudentRoom>> GetStudentRoomListAsync(int roomId,int schoolYearId);
         public Task<List<StudentRoom>> GetStudentRoomListAsync(int schoolYearId);
+        public Task<bool> SaveStudentEnrollingPictureAsync(int studentId, string urlPicture);
     }
 }

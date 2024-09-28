@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.Services;
 using Primary.SchoolApp.UI;
 
 namespace Primary.SchoolApp
@@ -61,7 +62,27 @@ namespace Primary.SchoolApp
             services.AddTransient<EmployeeAccountTransactionsForm>();
             services.AddTransient<AddEmployeeAccountTransactionForm>();
             services.AddTransient<EditTimeTableForm>();
-
+            services.AddTransient<EditStudentEnrollingForm>();
+            services.AddTransient<AddStudentEnrollingForm>();
+            services.AddTransient<EditStudentForm>();
+            services.AddTransient<AddStudentForm>();
+            services.AddTransient<UploadStudentPictureForm>();
+            services.AddTransient<IPrintService,PrintService>();
+            services.AddTransient<TuitionPaymentsForm>();
+            services.AddTransient<AddTuitionPaymentForm>();
+            services.AddTransient<TuitionDiscountsForm>();
+            services.AddTransient<AddTuitionDiscountForm>();
+            services.AddTransient<EditTuitionDiscountForm>();
+            services.AddTransient<AddSubscriptionForm>();
+            services.AddTransient<EditSubscriptionForm>();
+            services.AddTransient<SubscriptionsForm>();
+            services.AddTransient<EditDisciplineSubjectForm>();
+            services.AddTransient<EditDisciplineForm>();
+            services.AddTransient<AddDisciplineForm>();
+            services.AddTransient<DisciplinesForm>();
+            services.AddTransient<ContactsForm>();
+            services.AddTransient<AddContactForm>();
+            services.AddTransient<EditContactForm>();
             return services;
         }
     }

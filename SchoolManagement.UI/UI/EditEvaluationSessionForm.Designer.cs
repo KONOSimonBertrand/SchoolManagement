@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             sequenceLabel = new Telerik.WinControls.UI.RadLabel();
             nameEnSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -43,9 +45,10 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
-            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameEnSeparator).BeginInit();
@@ -60,7 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -84,6 +87,15 @@
             editPanel.Name = "editPanel";
             editPanel.Size = new Size(573, 141);
             editPanel.TabIndex = 29;
+            // 
+            // sequenceSeparator
+            // 
+            sequenceSeparator.Location = new Point(411, 127);
+            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
+            sequenceSeparator.Name = "sequenceSeparator";
+            sequenceSeparator.Size = new Size(135, 3);
+            sequenceSeparator.TabIndex = 78;
+            sequenceSeparator.TabStop = false;
             // 
             // sequenceSpinEditor
             // 
@@ -219,14 +231,9 @@
             saveButton.TabIndex = 5;
             saveButton.Text = "Enregistrer";
             // 
-            // sequenceSeparator
+            // errorProvider
             // 
-            sequenceSeparator.Location = new Point(411, 127);
-            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
-            sequenceSeparator.Name = "sequenceSeparator";
-            sequenceSeparator.Size = new Size(135, 3);
-            sequenceSeparator.TabIndex = 78;
-            sequenceSeparator.TabStop = false;
+            errorProvider.ContainerControl = this;
             // 
             // EditEvaluationSessionForm
             // 
@@ -239,11 +246,15 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditEvaluationSessionForm";
             Text = "EditEvaluationTypeForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameEnSeparator).EndInit();
@@ -258,7 +269,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -281,5 +292,6 @@
         private Telerik.WinControls.UI.RadButton closeButton;
         private Telerik.WinControls.UI.RadButton saveButton;
         private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
+        private ErrorProvider errorProvider;
     }
 }

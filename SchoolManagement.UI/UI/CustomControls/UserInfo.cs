@@ -50,13 +50,13 @@ namespace SchoolManagement.UI.CustomControls
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 
-            this.moduleCountLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.moduleCountLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.moduleCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.moduleCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.moduleCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.moduleCountLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.roomCountLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.roomCountLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.roomCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.roomCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.roomCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
@@ -106,6 +106,10 @@ namespace SchoolManagement.UI.CustomControls
             this.loginSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.defaultModuleSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
         }
 
         private void InitEvents()

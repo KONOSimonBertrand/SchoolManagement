@@ -11,5 +11,6 @@ namespace SchoolManagement.Application
         public Task<SchoolingCost> GetSchoolingCost(int classId, int cashFlowTypeId, int schoolYearId);
         public Task<IList<SchoolingCost>> GetSchoolingCostList();
         public Task<IList<SchoolingCostItem>> GetSchoolingCostItems(int schoolingCostId);
+        public Task<IList<SchoolingCostItem>> GetSchoolingCostItemsBySchoolYear(int schoolYearId);
     }
 }

@@ -1377,6 +1377,7 @@
       },
       "SchoolManagement.UI/1.0.0": {
         "dependencies": {
+          "Telerik.Reporting": "17.1.23.718",
           "UI.for.WinForms.AllControls.Net60": "2023.2.718"
         },
         "runtime": {

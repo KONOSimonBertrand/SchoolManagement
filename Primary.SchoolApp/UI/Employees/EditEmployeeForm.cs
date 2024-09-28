@@ -4,6 +4,7 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace Primary.SchoolApp.UI
 {
@@ -24,8 +25,16 @@ namespace Primary.SchoolApp.UI
             this.employeeService = employeeService;
             this.clientApp = clientApp;
             this.logService = logService;
-            NationalityDropDownList.DataSource = Program.CountryList.Select(x => x.FrenchName);
-            NationalityDropDownList.Text = "Cameroun";
+            if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
+            {
+                NationalityDropDownList.DataSource = Program.CountryList.Select(x => x.FrenchName);
+                NationalityDropDownList.Text = "Cameroun";
+            }
+            else
+            {
+                NationalityDropDownList.DataSource = Program.CountryList.Select(x => x.EnglishName);
+                NationalityDropDownList.Text = "Cameroon";
+            }
             InitEvents();
         }
 

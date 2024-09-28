@@ -375,9 +375,10 @@ namespace SchoolManagement.UI
             // homeLeftListView
             // 
             homeLeftListView.Dock = DockStyle.Left;
-            homeLeftListView.GroupItemSize = new Size(200, 28);
+            homeLeftListView.GroupIndent = 31;
+            homeLeftListView.GroupItemSize = new Size(250, 45);
             homeLeftListView.HeaderHeight = 43.75F;
-            homeLeftListView.ItemSize = new Size(200, 28);
+            homeLeftListView.ItemSize = new Size(250, 45);
             homeLeftListView.Location = new Point(0, 0);
             homeLeftListView.Margin = new Padding(0);
             homeLeftListView.Name = "homeLeftListView";
@@ -1237,9 +1238,10 @@ namespace SchoolManagement.UI
             // employeeLeftListView
             // 
             employeeLeftListView.Dock = DockStyle.Left;
-            employeeLeftListView.GroupItemSize = new Size(200, 28);
+            employeeLeftListView.GroupIndent = 31;
+            employeeLeftListView.GroupItemSize = new Size(250, 45);
             employeeLeftListView.HeaderHeight = 43.75F;
-            employeeLeftListView.ItemSize = new Size(200, 28);
+            employeeLeftListView.ItemSize = new Size(250, 45);
             employeeLeftListView.Location = new Point(0, 0);
             employeeLeftListView.Margin = new Padding(0);
             employeeLeftListView.Name = "employeeLeftListView";

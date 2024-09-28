@@ -34,6 +34,7 @@ namespace Primary.SchoolApp
         private JobInfo jobInfo;
         private EmployeeGroupInfo employeeGroupInfo;
         private UserInfo userInfo;
+        private DisciplineSubjectInfo disciplineSubjectInfo;
         private bool isFirstLoadingBasicData = false;//  détermine si c'est le premier chargement des données de base
         private readonly List<UserControl> settingPageUserControlList = new();
        
@@ -137,7 +138,14 @@ namespace Primary.SchoolApp
                 Key = 15,
                 Value = Language.labelUsers
             };
-           
+
+
+            ListViewDataItem itemDiscipline = new()
+            {
+                Key = 16,
+                Value = Language.labelDisciplineSubjects
+            };
+
 
 
             itemSchoolYear.Group = settingGroup;
@@ -154,6 +162,7 @@ namespace Primary.SchoolApp
             itemEmployeeGroup.Group = settingGroup;
             itemUser.Group = settingGroup;
             itemSubscriptionFees.Group = settingGroup;
+            itemDiscipline.Group = settingGroup;
             SettingLeftListView.Items.Add(itemSchoolYear);
             SettingLeftListView.Items.Add(itemGroup);
             SettingLeftListView.Items.Add(itemClass);
@@ -166,6 +175,7 @@ namespace Primary.SchoolApp
             SettingLeftListView.Items.Add(itemSubject);
             SettingLeftListView.Items.Add(itemEvaluationSession);
             SettingLeftListView.Items.Add(itemEvaluationSystem);
+            SettingLeftListView.Items.Add(itemDiscipline);
             SettingLeftListView.Items.Add(itemJob);
             SettingLeftListView.Items.Add(itemEmployeeGroup);
             SettingLeftListView.Items.Add(itemUser);
@@ -181,6 +191,7 @@ namespace Primary.SchoolApp
             SettingSearchModuleDropDownList.Items.Add(itemEvaluationSession.Text);
             SettingSearchModuleDropDownList.Items.Add(itemEvaluationSystem.Text);
             SettingSearchModuleDropDownList.Items.Add(itemJob.Text);
+            SettingSearchModuleDropDownList.Items.Add(itemDiscipline.Text);
             SettingSearchModuleDropDownList.Items.Add(itemEmployeeGroup.Text);
             SettingSearchModuleDropDownList.Items.Add(itemUser.Text);
             SettingLeftListView.ShowCheckBoxes = false;
@@ -359,6 +370,20 @@ namespace Primary.SchoolApp
             ratingSystemInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(ratingSystemInfo);
             settingPageUserControlList.Add(ratingSystemInfo);
+            // add discipline subject 
+            disciplineSubjectInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            disciplineSubjectInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            disciplineSubjectInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(disciplineSubjectInfo);
+            settingPageUserControlList.Add(disciplineSubjectInfo);
             //add job info user control
             jobInfo = new()
             {
@@ -582,9 +607,18 @@ namespace Primary.SchoolApp
                 var defautModule = modules.FirstOrDefault(m => m.IsDefault == true);
                 userInfo.DefaultModuleTextBox.Text = defautModule != null ? defautModule.Module.Name : string.Empty;
                 userInfo.ModuleCount.Text = $"{Language.labelModules}: {modules.Count.ToString()}/ {Program.ModuleList.Count}";
-                userInfo.ModuleCount.Image = Utilities.AppUtilities.GetImage("Eye");
+                userInfo.ModuleCount.Image = Utilities.AppUtilities.GetImage("View");
                 userInfo.RoomCount.Text = $"{Language.labelRooms}: {rooms.Count.ToString()}/{Program.SchoolRoomList.Count}";
-                userInfo.RoomCount.Image = Utilities.AppUtilities.GetImage("Eye");
+                userInfo.RoomCount.Image = Utilities.AppUtilities.GetImage("View");
+            }
+        }
+        // affiche les info d'un objet de discipline 
+        private void LoadSelectedDisciplineSubjectDetail(DisciplineSubject subject)
+        {
+            if (subject != null)
+            {
+                disciplineSubjectInfo.TitleInfoLabel.Text = "INFO...";
+                disciplineSubjectInfo.NameTextBox.Text = subject.DefaultName;              
             }
         }
         //chargement la liste des années scolaires dans le datagridview de la page setting
@@ -982,6 +1016,15 @@ namespace Primary.SchoolApp
             Program.UserList = await getData;
             SettingGridView.DataSource = Program.UserList;
         }
+        //chargement la liste des objets de discipline dans le datagridview de la page setting
+        private async void LoadDisciplineSubjectListToSettingGridView()
+        {
+            var getData = disciplineService.GetDisciplineSubjectList();
+            CreateDisciplineSubjectColumnsForSettingGridView();
+            //chargement des données
+            Program.DisciplineSubjectList = await getData;
+            SettingGridView.DataSource = Program.DisciplineSubjectList;
+        }
         private void CreateUserColumnsForSettingGridView()
         {
             GridViewTextBoxColumn loginColumn = new("UserName");
@@ -990,6 +1033,15 @@ namespace Primary.SchoolApp
             nameColumn.HeaderText = Language.labelName;
             SettingGridView.Columns.Add(loginColumn);
             SettingGridView.Columns.Add(nameColumn);
+        }
+        private void CreateDisciplineSubjectColumnsForSettingGridView()
+        {
+            GridViewTextBoxColumn nameColumn = new("DefaultName");
+            GridViewDecimalColumn sequenceColumn = new("Sequence");
+            sequenceColumn.HeaderText = Language.labelSequence;
+            nameColumn.HeaderText = Language.labelName;
+            SettingGridView.Columns.Add(nameColumn);
+            SettingGridView.Columns.Add(sequenceColumn);
         }
         // show school year UI for edit
         private void ShowSchoolYearEditForm(SchoolYear schoolYear)
@@ -1505,6 +1557,28 @@ namespace Primary.SchoolApp
             }
 
         }
+        // show discipline subject UI for edit
+        private void ShowDisciplineSubjectEditForm(DisciplineSubject subject)
+        {
+            if (subject != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditDisciplineSubjectForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelDisciplineSubject;
+                form.Init(subject);
+                form.Icon = this.Icon;
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.DataSource = new List<DisciplineSubject>();
+                    SettingGridView.DataSource = Program.DisciplineSubjectList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show("Object  inconnu");
+            }
+
+        }
+
         // rend visible le user control selectionnee, les autre invisible
         private void SetVisibleSelectedSettingPageUserControl(UserControl userControl)
         {
@@ -1817,6 +1891,227 @@ namespace Primary.SchoolApp
             }
 
         }
+        //génère les objets de discipline manquants
+        private void GenerateDisciplineSubjects()
+        {
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id==0) == null)
+            {
+                DisciplineSubject subject = new ()
+                {
+                    Id=0,
+                    FrenchName = "Présence Effective",
+                    EnglishName = "Effective presence",
+                    Sequence = 1
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 1) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 1,
+                    FrenchName = "Retard",
+                    EnglishName = "Delay",
+                    Sequence = 2
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 2) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 2,
+                    FrenchName = "Départ Précosse",
+                    EnglishName = "Departure Precosse",
+                    Sequence = 3
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 3) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 3,
+                    FrenchName = "Absence Justifiée",
+                    EnglishName = "Justified absence",
+                    Sequence = 3
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 4) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 4,
+                    FrenchName = "Absence Non Justifiée",
+                    EnglishName = "Unjustified absence",
+                    Sequence = 4
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 5) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 5,
+                    FrenchName = "Avertissement",
+                    EnglishName = "Warning",
+                    Sequence = 5
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 6) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 6,
+                    FrenchName = "Blâme",
+                    EnglishName = "Blame",
+                    Sequence = 6
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 7) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 7,
+                    FrenchName = "Exclusion",
+                    EnglishName = "Exclusion",
+                    Sequence = 7
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+            if (Program.DisciplineSubjectList.FirstOrDefault(x => x.Id == 8) == null)
+            {
+                DisciplineSubject subject = new()
+                {
+                    Id = 8,
+                    FrenchName = "Retenue",
+                    EnglishName = "Retaining",
+                    Sequence = 8
+                };
+                var isDone = disciplineService.CreateDisciplineSubject(subject).Result;
+                if (isDone)
+                {
+                    Log log = new()
+                    {
+                        UserAction = $"Ajout d'un objet de discipline {subject.FrenchName} par l'utilisateur {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
+                        UserId = clientApp.UserConnected.Id
+                    };
+                    logService.CreateLog(log);
+                }
+                else
+                {
+                    RadMessageBox.Show(Language.messageAddError, Language.labelRecordingData, MessageBoxButtons.OK, RadMessageIcon.Error);
+                }
+            }
+
+        }
         //affiche la liste matières d'une classe
         private void ShowSubjectsOfClass()
         {
@@ -1896,7 +2191,7 @@ namespace Primary.SchoolApp
                         SetVisibleSelectedSettingPageUserControl(schoolClassInfo);
                         schoolClassInfo.CloseButton.Image = AppUtilities.GetImage("Close");
                         schoolClassInfo.EditButton.Image = AppUtilities.GetImage("Edit");
-                        schoolClassInfo.SubjectsCountLabel.Image = AppUtilities.GetImage("Eye");
+                        schoolClassInfo.SubjectsCountLabel.Image = AppUtilities.GetImage("View");
                         break;
                     case 4:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddRoom;
@@ -1913,7 +2208,7 @@ namespace Primary.SchoolApp
                         SetVisibleSelectedSettingPageUserControl(schoolRoomInfo);
                         schoolRoomInfo.CloseButton.Image = AppUtilities.GetImage("Close");
                         schoolRoomInfo.EditButton.Image = AppUtilities.GetImage("Edit");
-                        schoolRoomInfo.StudentsCountLabel.Image = AppUtilities.GetImage("Eye");
+                        schoolRoomInfo.StudentsCountLabel.Image = AppUtilities.GetImage("View");
                         break;
                     case 5:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddCashflowType;
@@ -2094,6 +2389,22 @@ namespace Primary.SchoolApp
                         SetVisibleSelectedSettingPageUserControl(userInfo);
                         userInfo.CloseButton.Image = AppUtilities.GetImage("Close");
                         userInfo.EditButton.Image = AppUtilities.GetImage("Edit");
+                        break;
+                    case 16:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddDisciplineSubject;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadDisciplineSubjectListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateDisciplineSubjectColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.DisciplineSubjectList;
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(disciplineSubjectInfo);
+                        disciplineSubjectInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        disciplineSubjectInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
                     default:
                         SetVisibleSelectedSettingPageUserControl(null);
@@ -2310,6 +2621,13 @@ namespace Primary.SchoolApp
                             if (!userInfo.Visible) userInfo.Visible = true;
                         }
                         break;
+                    case 16:
+                        LoadSelectedDisciplineSubjectDetail(SettingGridView.CurrentRow.DataBoundItem as DisciplineSubject);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!userInfo.Visible) userInfo.Visible = true;
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -2370,6 +2688,9 @@ namespace Primary.SchoolApp
                 case 15:
                     ShowUserAddForm();
                     break;
+                    case 16:
+                    GenerateDisciplineSubjects();
+                    break;
                 default:
                     RadMessageBox.Show("Not Implemented");
                     break;
@@ -2425,6 +2746,9 @@ namespace Primary.SchoolApp
                 case 15:
                     ShowUserEditForm(SettingGridView.CurrentRow.DataBoundItem as User);
                     break;
+                case 16:
+                    ShowDisciplineSubjectEditForm(SettingGridView.CurrentRow.DataBoundItem as DisciplineSubject);
+                    break;
                 default:
                     RadMessageBox.Show("En cours d'implementation");
                     break;
@@ -2460,7 +2784,7 @@ namespace Primary.SchoolApp
                         break;
                     case 3:
                         RadMenuItem menuShowSubjectOfClass = new(Language.labelSubjectTaught);
-                        menuShowSubjectOfClass.Image = AppUtilities.GetImage("Eye");
+                        menuShowSubjectOfClass.Image = AppUtilities.GetImage("View");
                         menuShowSubjectOfClass.ToolTipText = Language.messageClickToSee;
                         menuShowSubjectOfClass.Click += MenuShowSubjectOfClass_Click;
                         RadMenuItem menuGenerateEmptyClassReport = new(Language.labelGenerateEmptyClassReport);
@@ -2471,7 +2795,7 @@ namespace Primary.SchoolApp
                         break;
                     case 4:
                         RadMenuItem menuShowStudentOfClass = new(Language.titleStudentList);
-                        menuShowStudentOfClass.Image = AppUtilities.GetImage("Eye");
+                        menuShowStudentOfClass.Image = AppUtilities.GetImage("View");
                         menuShowStudentOfClass.ToolTipText = Language.messageClickToSee;
                         menuShowStudentOfClass.Click += MenuShowStudentOfClass_Click; ;
                         RadMenuItem menuGenerateEmptyRoomReport = new(Language.labelGenerateEmptyClassReport);
@@ -2494,11 +2818,11 @@ namespace Primary.SchoolApp
                         break;
                     case 15:
                         RadMenuItem menuShowUserModule = new(Language.labelUserModule);
-                        menuShowUserModule.Image = AppUtilities.GetImage("Eye");
+                        menuShowUserModule.Image = AppUtilities.GetImage("View");
                         menuShowUserModule.ToolTipText = Language.messageClickToSee;
                         menuShowUserModule.Click += MenuShowUserModule_Click;
                         RadMenuItem menuShowUserRoom = new(Language.labelUserRoom);
-                        menuShowUserRoom.Image = AppUtilities.GetImage("Eye");
+                        menuShowUserRoom.Image = AppUtilities.GetImage("View");
                         menuShowUserRoom.ToolTipText = Language.messageClickToSee;
                         menuShowUserRoom.Click += MenuShowUserRoom_Click;
                         e.ContextMenu.Items.Add(menuShowUserModule);

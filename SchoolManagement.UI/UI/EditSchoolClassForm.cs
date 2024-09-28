@@ -1,6 +1,7 @@
 ﻿
 
 using SchoolManagement.UI.Localization;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -100,17 +101,19 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
-            addGroupButton.RootElement.ToolTipText = "Cliquer ici pour ajouter un nouveau groupe";
-            addGroupButton.Image = Resources.plus;
+            addGroupButton.RootElement.ToolTipText = Language.messageClickToAddGroup;
+            addGroupButton.Image = ViewUtilities.GetImage("Add");
             addGroupButton.ImageAlignment = ContentAlignment.MiddleCenter;
             addGroupButton.ButtonElement.Padding = new Padding(0);
             this.groupDropDownList.DisplayMember = "Name";
             this.groupDropDownList.ValueMember = "Id";
             this.groupDropDownList.SelectedIndex = -1;
-
-            this.bookTypeDropDownList.Items.Add(new RadListDataItem("Français uniquement", 0));
-            this.bookTypeDropDownList.Items.Add(new RadListDataItem("Anglais uniquement", 1));
-            this.bookTypeDropDownList.Items.Add(new RadListDataItem("Français & Anglais", 2));
+            string labelFrenchOnly = Language.labelFrenchOnly;
+            string labelEnglishOnly = Language.labelEnglishOnly;
+            string labelFrenchAndEnglish = Language.labelFrenchAndEnglish;
+            this.bookTypeDropDownList.Items.Add(new RadListDataItem(labelFrenchOnly, 0));
+            this.bookTypeDropDownList.Items.Add(new RadListDataItem(labelEnglishOnly, 1));
+            this.bookTypeDropDownList.Items.Add(new RadListDataItem(labelFrenchAndEnglish, 2));
             this.bookTypeDropDownList.SelectedIndex = 0;
 
             this.errorLabel.ForeColor = Color.Red;
@@ -120,9 +123,11 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
+            errorProvider.Clear();
             if (this.nameTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(nameTextBox,Language.messageFillField);
                 this.nameTextBox.Focus();
                 return false;
             }
@@ -130,7 +135,8 @@ namespace SchoolManagement.UI
 
             if (this.groupDropDownList.SelectedIndex < 0)
             {
-                this.errorLabel.Text = "La sélection du groupe est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(groupDropDownList, Language.messageFillField);
                 this.groupDropDownList.Focus();
                 return false;
             }
@@ -144,12 +150,12 @@ namespace SchoolManagement.UI
             if (groupDropDownList.SelectedIndex < 0)
             {
                 addGroupButton.Image = Utilities.ViewUtilities.GetImage("Add");
-                addGroupButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer une nouveau groupe";
+                addGroupButton.RootElement.ToolTipText = Language.messageClickToAddGroup;
             }
             else
             {
                 addGroupButton.Image = Utilities.ViewUtilities.GetImage("Edit");
-                addGroupButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations du groupe";
+                addGroupButton.RootElement.ToolTipText = Language.messageClickToEdit;
             }
         }
 

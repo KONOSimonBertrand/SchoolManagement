@@ -12,6 +12,6 @@ namespace SchoolManagement.Infrastructure.Repositories
         /// extraction des lignes d'un SchoolingCost
         /// </summary>
         public Task<IList<SchoolingCostItem>> GetItemsAsync(int schoolingCostId);
-
+        Task<IList<SchoolingCostItem>> GetItemsBySchoolYearAsync(int schoolYearId);
     }
 }

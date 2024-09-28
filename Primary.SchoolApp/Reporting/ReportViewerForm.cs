@@ -1,7 +1,9 @@
 ﻿using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Reporting;
+using Primary.SchoolApp.Reporting.CashFlow;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,10 +14,13 @@ namespace Primary.SchoolApp
     public partial class ReportViewerForm : Telerik.WinControls.UI.RadForm
     {
         private readonly ISchoolClassService schoolClassService;
-        public ReportViewerForm(ISchoolClassService schoolClassService)
+        private readonly ClientApp clientApp;
+        public ReportViewerForm(ISchoolClassService schoolClassService, ClientApp clientApp)
         {
             InitializeComponent();
             this.schoolClassService = schoolClassService;
+            this.clientApp = clientApp;
+            this.Text = Language.labelReportViewer;
         }
         // génère un procès verbal vide
         internal async  void GenerateEmptyReportClassNote(SchoolRoom selectedRoom, SchoolYear selectedYear, string language)
@@ -24,6 +29,41 @@ namespace Primary.SchoolApp
             reportViewer.ReportSource = GetEmptyReportClassNote(selectedRoom, selectedYear, language);
             reportViewer.RefreshReport();
             await Task.Delay(0);
+        }
+        //affiche l'apperçu d'un reçu d'inscription
+        internal void LoadStudentEnrollingReceipt(StudentEnrolling enrolling, bool isCopy)
+        {
+            InstanceReportSource reportSource = new();
+            reportSource.ReportDocument = new PaymentReceiptA4Report(enrolling, isCopy,clientApp);
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
+        }
+        internal void LoadTuitionPaymentReceipt(TuitionPayment payment, bool isCopy)
+        {
+            InstanceReportSource reportSource = new();
+            reportSource.ReportDocument = new PaymentReceiptA4Report(payment, isCopy, clientApp);
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
+        }
+
+        internal void LoadSubscriptionReceipt(Subscription subscription, bool isCopy)
+        {
+            InstanceReportSource reportSource = new();
+            reportSource.ReportDocument = new PaymentReceiptA4Report(subscription, isCopy, clientApp);
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
+        }
+
+        internal void LoadPaymentSummary(StudentEnrolling enrolling)
+        {
+            InstanceReportSource reportSource = new();
+            reportSource.ReportDocument = new PaymentSummaryReport(enrolling,clientApp);
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
         }
         // extraction un procès verbal sans note
         private ReportSource GetEmptyReportClassNote(SchoolRoom selectedRoom,SchoolYear selectedYear, string language)

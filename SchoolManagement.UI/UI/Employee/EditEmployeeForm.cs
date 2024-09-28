@@ -40,7 +40,7 @@ namespace SchoolManagement.UI
             this.birthdayLabel.Text = Language.labelBirthDate;
             this.nationalityLabel.Text=Language.labelNativeCountry;
             this.phoneLabel.Text = Language.labelPhone;
-            this.addressLabel.Text = Language.labelAdddress;
+            this.addressLabel.Text = Language.labelAddress;
             this.idCardLabel.Text = Language.labelIdCard;
             this.hiringDateLabel.Text = Language.labelHiringDate;
             this.emailLabel.Text= Language.labelMail;

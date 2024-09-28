@@ -115,11 +115,29 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Address.
+        ///   Recherche une chaîne localisée semblable à Add contact.
         /// </summary>
-        public static string labelAdddress {
+        public static string labelAddContact {
             get {
-                return ResourceManager.GetString("labelAdddress", resourceCulture);
+                return ResourceManager.GetString("labelAddContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add disciplinary item.
+        /// </summary>
+        public static string labelAddDiscipline {
+            get {
+                return ResourceManager.GetString("labelAddDiscipline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add discount.
+        /// </summary>
+        public static string labelAddDiscount {
+            get {
+                return ResourceManager.GetString("labelAddDiscount", resourceCulture);
             }
         }
         
@@ -133,11 +151,38 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add payment.
+        /// </summary>
+        public static string labelAddPayment {
+            get {
+                return ResourceManager.GetString("labelAddPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add picture.
         /// </summary>
         public static string labelAddPicture {
             get {
                 return ResourceManager.GetString("labelAddPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Address.
+        /// </summary>
+        public static string labelAddress {
+            get {
+                return ResourceManager.GetString("labelAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add subscription.
+        /// </summary>
+        public static string labelAddSubscription {
+            get {
+                return ResourceManager.GetString("labelAddSubscription", resourceCulture);
             }
         }
         
@@ -156,6 +201,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelAmount {
             get {
                 return ResourceManager.GetString("labelAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Amount paid.
+        /// </summary>
+        public static string labelAmountPaid {
+            get {
+                return ResourceManager.GetString("labelAmountPaid", resourceCulture);
             }
         }
         
@@ -385,6 +439,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date transaction.
+        /// </summary>
+        public static string labelDateTransaction {
+            get {
+                return ResourceManager.GetString("labelDateTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Day.
         /// </summary>
         public static string labelDay {
@@ -448,6 +511,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disciplinary file.
+        /// </summary>
+        public static string labelDisciplinaryFile {
+            get {
+                return ResourceManager.GetString("labelDisciplinaryFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Disciplinary record.
         /// </summary>
         public static string labelDisciplinaryRecord {
@@ -484,11 +556,38 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Discipline&apos;s  subject.
+        /// </summary>
+        public static string labelDisciplineSubject {
+            get {
+                return ResourceManager.GetString("labelDisciplineSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Subjects of discipline.
+        /// </summary>
+        public static string labelDisciplineSubjects {
+            get {
+                return ResourceManager.GetString("labelDisciplineSubjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Discount.
         /// </summary>
         public static string labelDiscount {
             get {
                 return ResourceManager.GetString("labelDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Discount amount.
+        /// </summary>
+        public static string labelDiscountAmount {
+            get {
+                return ResourceManager.GetString("labelDiscountAmount", resourceCulture);
             }
         }
         
@@ -646,6 +745,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à English only.
+        /// </summary>
+        public static string labelEnglishOnly {
+            get {
+                return ResourceManager.GetString("labelEnglishOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Enroll.
         /// </summary>
         public static string labelEnroll {
@@ -727,6 +835,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à French &amp; English.
+        /// </summary>
+        public static string labelFrenchAndEnglish {
+            get {
+                return ResourceManager.GetString("labelFrenchAndEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à French appreciation.
         /// </summary>
         public static string labelFrenchAppreciation {
@@ -750,6 +867,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelFrenchName {
             get {
                 return ResourceManager.GetString("labelFrenchName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à French only.
+        /// </summary>
+        public static string labelFrenchOnly {
+            get {
+                return ResourceManager.GetString("labelFrenchOnly", resourceCulture);
             }
         }
         
@@ -1006,6 +1132,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Medical file.
+        /// </summary>
+        public static string labelMedicalFile {
+            get {
+                return ResourceManager.GetString("labelMedicalFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Min Mark.
         /// </summary>
         public static string labelMinNote {
@@ -1069,6 +1204,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à No.
+        /// </summary>
+        public static string labelNo {
+            get {
+                return ResourceManager.GetString("labelNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Note.
         /// </summary>
         public static string labelNote {
@@ -1114,11 +1258,29 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Last school attended.
+        /// </summary>
+        public static string labelOldSchool {
+            get {
+                return ResourceManager.GetString("labelOldSchool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Opened.
         /// </summary>
         public static string labelOpened {
             get {
                 return ResourceManager.GetString("labelOpened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ordored by.
+        /// </summary>
+        public static string labelOrdoredBy {
+            get {
+                return ResourceManager.GetString("labelOrdoredBy", resourceCulture);
             }
         }
         
@@ -1150,6 +1312,24 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Payment.
+        /// </summary>
+        public static string labelPayment {
+            get {
+                return ResourceManager.GetString("labelPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Payment done by.
+        /// </summary>
+        public static string labelPaymentDoneBy {
+            get {
+                return ResourceManager.GetString("labelPaymentDoneBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Payment mean.
         /// </summary>
         public static string labelPaymentMean {
@@ -1164,6 +1344,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelPaymentMeans {
             get {
                 return ResourceManager.GetString("labelPaymentMeans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Payments.
+        /// </summary>
+        public static string labelPayments {
+            get {
+                return ResourceManager.GetString("labelPayments", resourceCulture);
             }
         }
         
@@ -1204,6 +1393,33 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Print on.
+        /// </summary>
+        public static string labelPrintOn {
+            get {
+                return ResourceManager.GetString("labelPrintOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Print registration receipt.
+        /// </summary>
+        public static string labelPrintRegistrationReceipt {
+            get {
+                return ResourceManager.GetString("labelPrintRegistrationReceipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Print summary of payments.
+        /// </summary>
+        public static string labelPrintSummaryPayment {
+            get {
+                return ResourceManager.GetString("labelPrintSummaryPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Read.
         /// </summary>
         public static string labelRead {
@@ -1222,11 +1438,38 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Recording data.
+        /// </summary>
+        public static string labelRecordingData {
+            get {
+                return ResourceManager.GetString("labelRecordingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Registered On.
         /// </summary>
         public static string labelRegisteredOn {
             get {
                 return ResourceManager.GetString("labelRegisteredOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Registration.
+        /// </summary>
+        public static string labelRegistration {
+            get {
+                return ResourceManager.GetString("labelRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Relationship.
+        /// </summary>
+        public static string labelRelationship {
+            get {
+                return ResourceManager.GetString("labelRelationship", resourceCulture);
             }
         }
         
@@ -1240,11 +1483,29 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Repeater.
+        /// </summary>
+        public static string labelRepeater {
+            get {
+                return ResourceManager.GetString("labelRepeater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Reports.
         /// </summary>
         public static string labelReports {
             get {
                 return ResourceManager.GetString("labelReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Report viewer.
+        /// </summary>
+        public static string labelReportViewer {
+            get {
+                return ResourceManager.GetString("labelReportViewer", resourceCulture);
             }
         }
         
@@ -1380,6 +1641,60 @@ namespace SchoolManagement.UI.Localization {
         public static string labelSex {
             get {
                 return ResourceManager.GetString("labelSex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sharing.
+        /// </summary>
+        public static string labelSharing {
+            get {
+                return ResourceManager.GetString("labelSharing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à View contact list.
+        /// </summary>
+        public static string labelShowContact {
+            get {
+                return ResourceManager.GetString("labelShowContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à View disciplinary file.
+        /// </summary>
+        public static string labelShowDiscipline {
+            get {
+                return ResourceManager.GetString("labelShowDiscipline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Show discounts.
+        /// </summary>
+        public static string labelShowDiscounts {
+            get {
+                return ResourceManager.GetString("labelShowDiscounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Show payments.
+        /// </summary>
+        public static string labelShowPayments {
+            get {
+                return ResourceManager.GetString("labelShowPayments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Show subscriptions.
+        /// </summary>
+        public static string labelShowSubscriptions {
+            get {
+                return ResourceManager.GetString("labelShowSubscriptions", resourceCulture);
             }
         }
         
@@ -1843,6 +2158,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Yes.
+        /// </summary>
+        public static string labelYes {
+            get {
+                return ResourceManager.GetString("labelYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Activate school year.
         /// </summary>
         public static string messageActivateSchoolYear {
@@ -1875,6 +2199,15 @@ namespace SchoolManagement.UI.Localization {
         public static string messageAskCloseSchoolYear {
             get {
                 return ResourceManager.GetString("messageAskCloseSchoolYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The distribution of the amount paid is incorrect.
+        /// </summary>
+        public static string messageBadDistribution {
+            get {
+                return ResourceManager.GetString("messageBadDistribution", resourceCulture);
             }
         }
         
@@ -1978,6 +2311,24 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click here to add discipline&apos;s subject.
+        /// </summary>
+        public static string messageClickToAddDisciplineSubject {
+            get {
+                return ResourceManager.GetString("messageClickToAddDisciplineSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click here to add new discount.
+        /// </summary>
+        public static string messageClickToAddDiscount {
+            get {
+                return ResourceManager.GetString("messageClickToAddDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click here to add an employee.
         /// </summary>
         public static string messageClickToAddEmployee {
@@ -2019,6 +2370,15 @@ namespace SchoolManagement.UI.Localization {
         public static string messageClickToAddMarkSystem {
             get {
                 return ResourceManager.GetString("messageClickToAddMarkSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click here to add new payment.
+        /// </summary>
+        public static string messageClickToAddPayment {
+            get {
+                return ResourceManager.GetString("messageClickToAddPayment", resourceCulture);
             }
         }
         
@@ -2167,6 +2527,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to cancel?.
+        /// </summary>
+        public static string messageConfirmCancel {
+            get {
+                return ResourceManager.GetString("messageConfirmCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you want to delete?.
         /// </summary>
         public static string messageConfirmDelete {
@@ -2181,6 +2550,15 @@ namespace SchoolManagement.UI.Localization {
         public static string messageConfirmeDuplicateFee {
             get {
                 return ResourceManager.GetString("messageConfirmeDuplicateFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you confirm enrolling without payment ?.
+        /// </summary>
+        public static string messageConfirmEnrollingWithoutPayment {
+            get {
+                return ResourceManager.GetString("messageConfirmEnrollingWithoutPayment", resourceCulture);
             }
         }
         
@@ -2235,6 +2613,15 @@ namespace SchoolManagement.UI.Localization {
         public static string messageEndHourGreaterThanStartHour {
             get {
                 return ResourceManager.GetString("messageEndHourGreaterThanStartHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à This enrolling  already exist.
+        /// </summary>
+        public static string messageEnrollingExist {
+            get {
+                return ResourceManager.GetString("messageEnrollingExist", resourceCulture);
             }
         }
         
@@ -2307,6 +2694,15 @@ namespace SchoolManagement.UI.Localization {
         public static string messageNoActionWithClosedYear {
             get {
                 return ResourceManager.GetString("messageNoActionWithClosedYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The payment is greater than the amount to be paid.
+        /// </summary>
+        public static string messagePaymentGreaterThanToPaid {
+            get {
+                return ResourceManager.GetString("messagePaymentGreaterThanToPaid", resourceCulture);
             }
         }
         
@@ -2563,6 +2959,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Contact list.
+        /// </summary>
+        public static string titleContactList {
+            get {
+                return ResourceManager.GetString("titleContactList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Employee list.
         /// </summary>
         public static string titleEmployeeList {
@@ -2586,6 +2991,15 @@ namespace SchoolManagement.UI.Localization {
         public static string titleNoteList {
             get {
                 return ResourceManager.GetString("titleNoteList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Payment list.
+        /// </summary>
+        public static string titlePaymentList {
+            get {
+                return ResourceManager.GetString("titlePaymentList", resourceCulture);
             }
         }
         
@@ -2622,6 +3036,24 @@ namespace SchoolManagement.UI.Localization {
         public static string titleSubjectList {
             get {
                 return ResourceManager.GetString("titleSubjectList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Subscription list.
+        /// </summary>
+        public static string titleSubscriptionList {
+            get {
+                return ResourceManager.GetString("titleSubscriptionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Summary of school fees payments.
+        /// </summary>
+        public static string titleSummarySchoolFee {
+            get {
+                return ResourceManager.GetString("titleSummarySchoolFee", resourceCulture);
             }
         }
         

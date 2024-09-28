@@ -2,5 +2,65 @@
 Cette table contient les enregistrements des types de flux à savoir :
 - la pension,
 - l'abonnement
-*************EnrollingEmployees*******************
+*************EmployeesEnrollings*******************
 cette contient des inscriptions des employés effectuées chaque année scolaire
+
+
+*************CashFlows****************************
+-Description: Cette table contient les flux de trésorerie
+-Requête de mise à jour vers la nouvelle version
+INSERT INTO db_primary.CashFlows(Id,IdNumber,Date,Amount,CashFlowTypeId,SchoolYearId)
+SELECT id,reference,date,amount,cash_flow_type_id,school_year_id FROM primary_app.cash_flow
+
+*******************schoolingcostitems***********************
+ - Executer le script
+ ALTER TABLE `db_primary`.`schoolingcostitems` 
+ADD COLUMN `class_id` INT NULL AFTER `SchoolingCostId`,
+ADD COLUMN `school_year_id` INT NULL AFTER `class_id`,
+ADD COLUMN `cash_flow_type_id` INT NULL AFTER `school_year_id`;
+- exporter les donnees de la table "schooling_cost_line"
+- importer les données exportées dans la table schoolingcostitems
+- executer le script
+Update schoolingcostitems set SchoolingCostId=
+(SELECT Id FROM schoolingcosts 
+WHERE 
+SchoolClassId=schoolingcostitems.class_id AND
+SchoolYearId=schoolingcostitems.school_year_id AND
+CashFlowTypeId=schoolingcostitems.cash_flow_type_id 
+LIMIT 1
+)
+-executer le script
+ALTER TABLE `db_primary`.`schoolingcostitems` 
+DROP COLUMN `cash_flow_type_id`,
+DROP COLUMN `school_year_id`,
+DROP COLUMN `class_id`;
+
+*****************tuitionsdiscounts***********************
+INSERT INTO db_primary.tuitionsdiscounts(Amount,Date,CashFlowTypeId,Reason,EnrollingId)
+SELECT amount,create_date,cash_flow_type_id,reason,inscription_id FROM primary_app.payment_discount
+
+*****************TuitionPayments**********************************
+INSERT INTO tuitionspayments(Id,IdNumber,Date,EnrollingId,Amount,Balance,CashFlowTypeId,PaymentMeanId,TransactionId,TransactionDate,IsDuringEnrolling,DoneBy)
+SELECT id,reference,date,inscription_id,amount,amount_rest,cash_flow_type_id,payment_mean_id,transaction_id,transaction_date,during_inscription,payment_order
+ From primary_app.payment_payment WHERE inscription_id IN (SELECT Id FROM primary_app.inscription_inscription WHERE school_year_id=7) 
+ 
+ *******************Subscriptions******************************
+ 1- creer la colonne SubscriptionFeeId via le script ci-dessous
+       ALTER TABLE `nouvel_bd`.`subscriptions` 
+       ADD COLUMN `SubscriptionFeeId` INT NULL AFTER `EndDate`;
+ 2- Inserer les donnees avec le script ci-dessius.
+       INTO nouvel_bd.subscriptions(Id,Date,Amount,Discount,DoneBy,EndDate,EnrollingId,SubscriptionFeeId,PaymentMeanId,TransactionId,TransactionDate)
+       SELECT id,date,amount,discount,subscription_order,end_date,inscription_id,subscription_id,payment_mean_id,transaction_id,transaction_date  FROM ancienne_bd.subscription_subscription
+3- Effectuer une mise a jour via le script ci-dessous
+        UPDATE Subscriptions A 
+        INNER JOIN subscriptionfees B ON A.SubscriptionFeeId=B.Id
+        SET A.CashFlowTypeId=B.CashFlowTypeId
+4- Supprimer la colonne SubscriptionFeeId via le script ci-dessous
+        ALTER TABLE `nouvel_bd`.`subscriptions` 
+        DROP COLUMN `SubscriptionFeeId`;
+		
+**************************Contacts***********************************
+1-  impoter les données avec le script ci-dessous
+        INSERT INTO db_primary.contacts(Id,Name,Sex,Phone,Email,Address,IdCard,Job,Relationship,StudentId)
+        SELECT id,full_name,sex,phone,email,address,idCard,job,relationship,student_id FROM primary_app.student_family 
+   

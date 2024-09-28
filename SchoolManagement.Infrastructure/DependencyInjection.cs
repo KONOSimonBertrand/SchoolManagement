@@ -35,6 +35,10 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<ITimeTableServiceRepository, DapperTimeTableServiceRepository>();
             services.AddTransient<IStudentRepository,DapperStudentRepository>();
             services.AddTransient<IStudentEnrollingRepository, DapperStudentEnrollingRepository>();
+            services.AddTransient<ICashFlowRepository, DapperCashFlowRepository>();
+            services.AddTransient<ISubscriptionRepository, DapperSubscriptionRepository>();
+            services.AddTransient<IDisciplineRepository, DapperDisciplineRepository>();
+            services.AddTransient<IContactRepository, DapperContactRepository>();
             services.AddDbContext<AppDbContext>();
             services.AddLogging(builder => builder.AddConsole());
             return services;

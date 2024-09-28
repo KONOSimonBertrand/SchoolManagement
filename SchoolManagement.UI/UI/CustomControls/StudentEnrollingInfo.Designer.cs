@@ -181,25 +181,25 @@
             headerPanel.Location = new Point(0, 0);
             headerPanel.Margin = new Padding(4, 5, 4, 5);
             headerPanel.Name = "headerPanel";
-            headerPanel.Size = new Size(315, 62);
+            headerPanel.Size = new Size(315, 40);
             headerPanel.TabIndex = 19;
             // 
             // editButton
             // 
             editButton.Dock = DockStyle.Right;
-            editButton.Location = new Point(225, 0);
+            editButton.Location = new Point(235, 0);
             editButton.Margin = new Padding(4, 5, 4, 5);
             editButton.Name = "editButton";
-            editButton.Size = new Size(45, 62);
+            editButton.Size = new Size(40, 40);
             editButton.TabIndex = 2;
             // 
             // closeButton
             // 
             closeButton.Dock = DockStyle.Right;
-            closeButton.Location = new Point(270, 0);
+            closeButton.Location = new Point(275, 0);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(45, 62);
+            closeButton.Size = new Size(40, 40);
             closeButton.TabIndex = 2;
             // 
             // titleInfoLabel
@@ -209,7 +209,7 @@
             titleInfoLabel.Location = new Point(0, 0);
             titleInfoLabel.Margin = new Padding(4, 5, 4, 5);
             titleInfoLabel.Name = "titleInfoLabel";
-            titleInfoLabel.Size = new Size(315, 62);
+            titleInfoLabel.Size = new Size(315, 40);
             titleInfoLabel.TabIndex = 1;
             titleInfoLabel.Text = "INFO...";
             // 
@@ -227,7 +227,7 @@
             editPanel.Controls.Add(studentTextBox);
             editPanel.Controls.Add(studentLabel);
             editPanel.Dock = DockStyle.Top;
-            editPanel.Location = new Point(0, 62);
+            editPanel.Location = new Point(0, 40);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
             editPanel.Size = new Size(315, 632);
@@ -238,7 +238,7 @@
             contactSplitContainer.Controls.Add(roomsSplitPanel);
             contactSplitContainer.Controls.Add(notesSplitPanel);
             contactSplitContainer.Dock = DockStyle.Top;
-            contactSplitContainer.Location = new Point(0, 527);
+            contactSplitContainer.Location = new Point(0, 530);
             contactSplitContainer.Name = "contactSplitContainer";
             // 
             // 
@@ -326,11 +326,11 @@
             addressTextBox.AutoSize = false;
             addressTextBox.Controls.Add(addressSeparator);
             addressTextBox.Dock = DockStyle.Top;
-            addressTextBox.Location = new Point(0, 492);
+            addressTextBox.Location = new Point(0, 494);
             addressTextBox.Margin = new Padding(4, 5, 4, 5);
             addressTextBox.Name = "addressTextBox";
             addressTextBox.ReadOnly = true;
-            addressTextBox.Size = new Size(315, 35);
+            addressTextBox.Size = new Size(315, 36);
             addressTextBox.TabIndex = 73;
             // 
             // addressSeparator
@@ -346,7 +346,7 @@
             // 
             addressLabel.AutoSize = false;
             addressLabel.Dock = DockStyle.Top;
-            addressLabel.Location = new Point(0, 462);
+            addressLabel.Location = new Point(0, 464);
             addressLabel.Margin = new Padding(4, 5, 4, 5);
             addressLabel.Name = "addressLabel";
             addressLabel.Size = new Size(315, 30);
@@ -358,11 +358,11 @@
             emailTextBox.AutoSize = false;
             emailTextBox.Controls.Add(emailSeparator);
             emailTextBox.Dock = DockStyle.Top;
-            emailTextBox.Location = new Point(0, 427);
+            emailTextBox.Location = new Point(0, 428);
             emailTextBox.Margin = new Padding(4, 5, 4, 5);
             emailTextBox.Name = "emailTextBox";
             emailTextBox.ReadOnly = true;
-            emailTextBox.Size = new Size(315, 35);
+            emailTextBox.Size = new Size(315, 36);
             emailTextBox.TabIndex = 71;
             // 
             // emailSeparator
@@ -378,7 +378,7 @@
             // 
             emailLabel.AutoSize = false;
             emailLabel.Dock = DockStyle.Top;
-            emailLabel.Location = new Point(0, 397);
+            emailLabel.Location = new Point(0, 398);
             emailLabel.Margin = new Padding(4, 5, 4, 5);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new Size(315, 30);
@@ -390,7 +390,7 @@
             idCardSplitContainer.Controls.Add(idCardPanel);
             idCardSplitContainer.Controls.Add(phonePanel);
             idCardSplitContainer.Dock = DockStyle.Top;
-            idCardSplitContainer.Location = new Point(0, 335);
+            idCardSplitContainer.Location = new Point(0, 336);
             idCardSplitContainer.Name = "idCardSplitContainer";
             // 
             // 
@@ -424,7 +424,7 @@
             idCardTextBox.Margin = new Padding(4, 5, 4, 5);
             idCardTextBox.Name = "idCardTextBox";
             idCardTextBox.ReadOnly = true;
-            idCardTextBox.Size = new Size(158, 35);
+            idCardTextBox.Size = new Size(158, 36);
             idCardTextBox.TabIndex = 60;
             // 
             // idCardSeparator
@@ -470,7 +470,7 @@
             phoneTextBox.Margin = new Padding(4, 5, 4, 5);
             phoneTextBox.Name = "phoneTextBox";
             phoneTextBox.ReadOnly = true;
-            phoneTextBox.Size = new Size(157, 35);
+            phoneTextBox.Size = new Size(157, 36);
             phoneTextBox.TabIndex = 62;
             // 
             // phoneSeparator
@@ -498,7 +498,7 @@
             sexSplitContainer.Controls.Add(sexSplitPanel);
             sexSplitContainer.Controls.Add(nationalitySplitPanel);
             sexSplitContainer.Dock = DockStyle.Top;
-            sexSplitContainer.Location = new Point(0, 273);
+            sexSplitContainer.Location = new Point(0, 274);
             sexSplitContainer.Name = "sexSplitContainer";
             // 
             // 
@@ -532,7 +532,7 @@
             sexTextBox.Margin = new Padding(4, 5, 4, 5);
             sexTextBox.Name = "sexTextBox";
             sexTextBox.ReadOnly = true;
-            sexTextBox.Size = new Size(158, 35);
+            sexTextBox.Size = new Size(158, 36);
             sexTextBox.TabIndex = 9;
             // 
             // sexSeparator
@@ -578,7 +578,7 @@
             nationalityTextBox.Margin = new Padding(4, 5, 4, 5);
             nationalityTextBox.Name = "nationalityTextBox";
             nationalityTextBox.ReadOnly = true;
-            nationalityTextBox.Size = new Size(157, 35);
+            nationalityTextBox.Size = new Size(157, 36);
             nationalityTextBox.TabIndex = 58;
             // 
             // nationalitySeparator
@@ -606,7 +606,7 @@
             dateSplitContainer.Controls.Add(birthDatePanel);
             dateSplitContainer.Controls.Add(hiringDatePanel);
             dateSplitContainer.Dock = DockStyle.Top;
-            dateSplitContainer.Location = new Point(0, 211);
+            dateSplitContainer.Location = new Point(0, 212);
             dateSplitContainer.Name = "dateSplitContainer";
             // 
             // 
@@ -640,7 +640,7 @@
             birthdayTextBox.Margin = new Padding(4, 5, 4, 5);
             birthdayTextBox.Name = "birthdayTextBox";
             birthdayTextBox.ReadOnly = true;
-            birthdayTextBox.Size = new Size(158, 35);
+            birthdayTextBox.Size = new Size(158, 36);
             birthdayTextBox.TabIndex = 9;
             // 
             // birthdaySeparator
@@ -686,7 +686,7 @@
             birthPlaceTextBox.Margin = new Padding(4, 5, 4, 5);
             birthPlaceTextBox.Name = "birthPlaceTextBox";
             birthPlaceTextBox.ReadOnly = true;
-            birthPlaceTextBox.Size = new Size(157, 35);
+            birthPlaceTextBox.Size = new Size(157, 36);
             birthPlaceTextBox.TabIndex = 58;
             // 
             // birthPlaceSeparator
@@ -714,7 +714,7 @@
             roomSplitContainer.Controls.Add(roomSplitPanel);
             roomSplitContainer.Controls.Add(enrollingDateSplitPanel);
             roomSplitContainer.Dock = DockStyle.Top;
-            roomSplitContainer.Location = new Point(0, 149);
+            roomSplitContainer.Location = new Point(0, 150);
             roomSplitContainer.Name = "roomSplitContainer";
             // 
             // 
@@ -748,7 +748,7 @@
             roomTextBox.Margin = new Padding(4, 5, 4, 5);
             roomTextBox.Name = "roomTextBox";
             roomTextBox.ReadOnly = true;
-            roomTextBox.Size = new Size(158, 35);
+            roomTextBox.Size = new Size(158, 36);
             roomTextBox.TabIndex = 9;
             // 
             // roomSeparator
@@ -794,7 +794,7 @@
             enrollingDateTextBox.Margin = new Padding(4, 5, 4, 5);
             enrollingDateTextBox.Name = "enrollingDateTextBox";
             enrollingDateTextBox.ReadOnly = true;
-            enrollingDateTextBox.Size = new Size(157, 35);
+            enrollingDateTextBox.Size = new Size(157, 36);
             enrollingDateTextBox.TabIndex = 58;
             // 
             // enrollingDateSeparator
@@ -826,7 +826,7 @@
             studentTextBox.Margin = new Padding(4, 5, 4, 5);
             studentTextBox.Name = "studentTextBox";
             studentTextBox.ReadOnly = true;
-            studentTextBox.Size = new Size(315, 35);
+            studentTextBox.Size = new Size(315, 36);
             studentTextBox.TabIndex = 7;
             // 
             // studentSeparator

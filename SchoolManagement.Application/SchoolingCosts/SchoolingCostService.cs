@@ -29,6 +29,11 @@ namespace SchoolManagement.Application
             return await schoolingCostReadRepository.GetItemsAsync(schoolingCostId);
         }
 
+        public async Task<IList<SchoolingCostItem>> GetSchoolingCostItemsBySchoolYear(int schoolYearId)
+        {
+            return await schoolingCostReadRepository.GetItemsBySchoolYearAsync(schoolYearId);
+        }
+
         public async Task<IList<SchoolingCost>> GetSchoolingCostList()
         {
             return await schoolingCostReadRepository.GetListAsync();

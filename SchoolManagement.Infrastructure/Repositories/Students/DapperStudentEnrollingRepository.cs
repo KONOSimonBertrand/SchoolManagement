@@ -17,8 +17,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public  async Task<bool> AddStudentEnrollingAsync(StudentEnrolling enrolling)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" INSERT INTO StudentsEnrollings(Date,StudentId,ClassId,SchoolYearId,OldSchool,IsRepeater)  
-                              VALUES(@date,@studentId,@classId,@schoolYearId,@oldSchool,@isRepeater);";
+            string query = @" INSERT INTO StudentsEnrollings(Date,StudentId,ClassId,SchoolYearId,OldSchool,IsRepeater,DoneBy)  
+                              VALUES(@date,@studentId,@classId,@schoolYearId,@oldSchool,@isRepeater,@doneBy);";
             var result = connection.Execute(query, new
             {
                 date = enrolling.Date,
@@ -27,6 +27,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 schoolYearId=enrolling.SchoolYearId,
                 oldSchool =enrolling.OldSchool,
                 isRepeater=enrolling.IsRepeater,
+                doneBy = enrolling.DoneBy,
             });
             await Task.Delay(0);
             return result > 0;
@@ -48,14 +49,13 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async Task<bool> DeleteStudentRoomAsync(int studentId, int roomId, int schoolYearId)
+        public async Task<bool> DeleteStudentRoomAsync(int studentId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" DELETE FROM StudentsRooms  WHERE StudentId=@studentId AND RoomId=@roomId AND SchoolYearId=@schoolYearId ;";  
+            string query = @" DELETE FROM StudentsRooms  WHERE StudentId=@studentId AND SchoolYearId=@schoolYearId ;";  
             var result = connection.Execute(query, new
             {
                 studentId ,
-                roomId,
                 schoolYearId
             });
             await Task.Delay(0);
@@ -65,8 +65,18 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<StudentEnrolling?> GetStudentEnrollingAsyn(int studentId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"SELECT * FROM StudentsEnrollings WHERE StudentId=@studentId AND SchoolYearId=schoolYearId  ;";
-            var result = connection.Query<StudentEnrolling>(query, new { studentId,schoolYearId}).FirstOrDefault();
+            string query = @"SELECT * FROM StudentsEnrollings AS A   
+                             INNER JOIN Students AS B ON A.StudentId=B.Id 
+                             INNER JOIN  SchoolClasses AS C ON A.ClassId=C.Id
+                             WHERE StudentId=@studentId AND SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<StudentEnrolling, Student, SchoolClass, StudentEnrolling>(query,
+                (enrolling, student, schoolclass) =>
+                {
+                    enrolling.Student = student;
+                    enrolling.SchoolClass = schoolclass;
+                    return enrolling;
+                }
+                , new { studentId,schoolYearId}).FirstOrDefault();
             await Task.Delay(0);
             return result;
         }
@@ -96,7 +106,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM StudentsRooms   AS A
                              INNER JOIN SchoolRooms AS B ON A.RoomId=B.Id
-                             WHERE StudentId=@studentId AND SchoolYearId=schoolYearId  ;";
+                             WHERE StudentId=@studentId AND SchoolYearId=@schoolYearId  ;";
             var result = connection.Query<StudentRoom,SchoolRoom, StudentRoom>(query, 
                 (studentRoom, schoolroom) =>
                 {
@@ -148,11 +158,24 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
+        public async Task<bool> AddStudentEnrollingPictureAsync(int enrollingId, string urlPicture)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" UPDATE StudentsEnrollings SET PictureUrl=@urlPicture WHERE Id=@enrollingId";
+            var result = connection.Execute(query, new
+            {
+                urlPicture,
+                enrollingId
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+
         public async  Task<bool> UpdateStudentEnrollingAsync(StudentEnrolling enrolling)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE StudentsEnrollings SET Date=@date,StudentId=@studentId,ClassId=@classId,
-                                     OldSchool=@oldSchool,IsRepeater=@isRepeater WHERE Id=@enrollingId ;";
+                                     OldSchool=@oldSchool,IsRepeater=@isRepeater,DoneBy=@doneBy WHERE Id=@enrollingId ;";
             var result = connection.Execute(query, new
             {
                 date = enrolling.Date,
@@ -160,7 +183,8 @@ namespace SchoolManagement.Infrastructure.Repositories
                 classId = enrolling.ClassId,
                 oldSchool = enrolling.OldSchool,
                 isRepeater = enrolling.IsRepeater,
-                enrollingId=enrolling.Id
+                enrollingId=enrolling.Id,
+                doneBy=enrolling.DoneBy,
             });
             await Task.Delay(0);
             return result > 0;

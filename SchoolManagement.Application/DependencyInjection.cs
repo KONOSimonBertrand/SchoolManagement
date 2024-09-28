@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolManagement.Application.Subscriptions;
 using SchoolManagement.Core.Model;
 
 
@@ -33,6 +34,10 @@ namespace SchoolManagement.Application
             services.AddSingleton<ClientApp>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IStudentEnrollingService, StudentEnrollingService>();
+            services.AddTransient<ICashFlowService, CashFlowService>();
+            services.AddTransient<ISubscriptionService, SubscriptionService>();
+            services.AddTransient<IDisciplineService, DisciplineService>();
+            services.AddTransient<IContactService, ContactService>();
             return services;
         }
     }

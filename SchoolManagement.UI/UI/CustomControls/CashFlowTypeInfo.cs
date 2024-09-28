@@ -93,6 +93,11 @@ namespace SchoolManagement.UI.CustomControls
             this.closeButton.Image = ViewUtilities.GetImage("Close");
             this.closeButton.RootElement.ToolTipText = "Cliquer ici pour fermer";
 
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
+
             this.nameLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.categoryLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.typeLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

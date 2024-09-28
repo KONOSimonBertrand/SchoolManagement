@@ -44,6 +44,11 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
+        public Task<IList<SchoolingCostItem>> GetItemsBySchoolYearAsync(int schoolYearId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IList<SchoolingCost>> GetListAsync()
         {
             var result = appDbContext.SchoolingCosts

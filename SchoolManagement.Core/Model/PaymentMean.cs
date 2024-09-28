@@ -12,6 +12,13 @@ namespace SchoolManagement.Core.Model
         public string? Name { get; set; }
         public string? Type { get; set; }
         public string? Account {  get; set; }
+        public string FullName
+        {
+            get
+            {
+                return Name+" "+Account;
+            }
+        }
         public int Sequence {  get; set; }
         public override bool Equals(object? obj)
         {

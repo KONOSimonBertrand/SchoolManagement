@@ -14,7 +14,7 @@ namespace SchoolManagement.Core.Model
 
         public int SchoolYearId { get; set; }
 
-        public double? Amount { get; set; }
+        public double  Amount { get; set; }
         public int? TrancheNumber { get; set; }
 
         public bool? IsPayable { get; set; }

@@ -30,10 +30,10 @@ namespace Primary.SchoolApp
             InitEmployeeLeftView();
             InitGridViewEmployeePage();
             InitEmployeeMainListView();
-            LoadEnrollingEmployee();
-            InitEmployeePageEvents();
             InitEmployeePageCustomControls();
             InitContextMenuEmployeePage();
+            InitEmployeePageEvents();
+            LoadEnrollingEmployee();           
         }
         //create Employee context menu for Employee main list view
         private void InitContextMenuEmployeePage()
@@ -51,13 +51,13 @@ namespace Primary.SchoolApp
             menuEdit.Image = AppUtilities.GetImage("Edit");
             menuDuplicateEnrolling.Image = AppUtilities.GetImage("Duplicate");
             menuAddPicture.Image = AppUtilities.GetImage("Add");
-            menuShowSubjects.Image = AppUtilities.GetImage("Eye");
-            menuShowRooms.Image = AppUtilities.GetImage("Eye");
-            menuShowAccount.Image = AppUtilities.GetImage("Eye");
-            menuShowTimesheet.Image = AppUtilities.GetImage("Eye");
-            menuShowNotes.Image = AppUtilities.GetImage("Eye");
+            menuShowSubjects.Image = AppUtilities.GetImage("View");
+            menuShowRooms.Image = AppUtilities.GetImage("View");
+            menuShowAccount.Image = AppUtilities.GetImage("View");
+            menuShowTimesheet.Image = AppUtilities.GetImage("View");
+            menuShowNotes.Image = AppUtilities.GetImage("View");
             menuEdit.Click+= EmployeeEditButton_Click;
-            menuAddPicture.Click += MenuAddPicture_Click;
+            menuAddPicture.Click += MenuAddEmployeePicture_Click;
             menuShowRooms.Click += MenuShowRooms_Click;
             menuShowSubjects.Click += MenuShowSubjects_Click;
             menuShowTimesheet.Click += MenuShowTimesheet_Click;
@@ -278,7 +278,7 @@ namespace Primary.SchoolApp
         }
 
         #region Events
-        private void MenuAddPicture_Click(object sender, EventArgs e)
+        private void MenuAddEmployeePicture_Click(object sender, EventArgs e)
         {
             if (EmployeeGridView.CurrentRow != null)
             {
@@ -288,7 +288,22 @@ namespace Primary.SchoolApp
                 }
             }
         }
-
+        //recherche des données correspondantes
+        private void EmployeeSearchTextBox_TextChanged(object sender, System.EventArgs e)
+        {
+            EmployeeGridView.MasterTemplate.Refresh();
+            if (EmployeeSearchTextBox.Text == string.Empty)
+            {
+                EmployeeMainListView.FilterPredicate = null;
+            }
+            else
+            {
+                EmployeeMainListView.FilterPredicate = null;
+                EmployeeMainListView.FilterPredicate = FilterEmployeePredicate;
+            }
+            EmployeeLeftListView.ListViewElement.SynchronizeVisualItems();
+            UpdateEmployeeMainListView();
+        }
         private void EmployeeGridView_CurrentRowChanged(object sender, CurrentRowChangedEventArgs e)
         {
             if (e.CurrentRow != null)
@@ -297,6 +312,95 @@ namespace Primary.SchoolApp
                 {
                     LoadSelectedEmployeeEnrollingDetail(record);
                 }
+            }
+        }
+
+        // filtre la liste des données présente dans le data grid view
+        private void EmployeeGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
+        {
+            e.Handled = true;
+            var record = e.Row.DataBoundItem as EmployeeEnrolling;
+            e.Visible = IsEmployeeByGroupChecked(e.Row.Cells["GroupName"].Value.ToString());
+            if (this.EmployeeSearchTextBox.Text != null)
+            {
+                e.Visible &= e.Row.Cells["Employee.IdNumber"].Value.ToString().Contains(EmployeeSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["Employee.FullName"].Value.ToString().ToLower().Contains(EmployeeSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["GroupName"].Value.ToString().ToLower().Contains(EmployeeSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["Job.Name"].Value.ToString().ToLower().Contains(EmployeeSearchTextBox.Text.ToLower());
+            }
+        }
+        private void EmployeeGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
+        {
+            if (!e.ContextMenuProvider.ToString().Contains("Header"))
+            {
+                RadMenuItem menuEdit = new(Language.labelEdit);
+                RadMenuItem menuDuplicateEnrolling = new(Language.labelDuplicateForCurrentYear);
+                RadMenuItem menuAddPicture = new RadMenuItem(Language.labelAddPicture);
+                RadMenuItem menuShowRooms = new RadMenuItem(Language.labelRooms);
+                RadMenuItem menuShowSubjects = new RadMenuItem(Language.labelSubjects);
+                RadMenuItem menuShowTimesheet = new RadMenuItem(Language.labelTimesheet);
+                RadMenuItem menuShowAccount = new RadMenuItem(Language.labelEmployeeAccount);
+                RadMenuItem menuShowNotes = new RadMenuItem(Language.labelNotes);
+                menuEdit.Image = AppUtilities.GetImage("Edit");
+                menuDuplicateEnrolling.Image = AppUtilities.GetImage("Duplicate");
+                menuAddPicture.Image = AppUtilities.GetImage("Add");
+                menuShowSubjects.Image = AppUtilities.GetImage("View");
+                menuShowRooms.Image = AppUtilities.GetImage("View");
+                menuShowAccount.Image = AppUtilities.GetImage("View");
+                menuShowTimesheet.Image = AppUtilities.GetImage("View");
+                menuShowNotes.Image = AppUtilities.GetImage("View");
+                menuEdit.Click += EmployeeEditButton_Click;
+                menuAddPicture.Click += MenuAddEmployeePicture_Click;
+                menuShowRooms.Click += MenuShowRooms_Click;
+                menuShowSubjects.Click += MenuShowSubjects_Click;
+                menuShowTimesheet.Click += MenuShowTimesheet_Click;
+                menuShowNotes.Click += MenuShowNotes_Click;
+                menuShowAccount.Click += MenuShowAccount_Click;
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuEdit);
+                e.ContextMenu.Items.Add(menuDuplicateEnrolling);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuAddPicture);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuShowRooms);
+                e.ContextMenu.Items.Add(menuShowSubjects);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuShowTimesheet);
+                e.ContextMenu.Items.Add(menuShowNotes);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuShowAccount);
+            }
+
+
+        }
+
+        private void EmployeeLeftListView_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
+        {
+            UpdateEmployeeMainListView();
+            EmployeeGridView.MasterTemplate.Refresh();
+            EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
+        }
+        private void EmployeeLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
+        {
+            employeeLeftViewForToolTipText = "" + e.Item.Tag;
+        }
+        //affiche info bul pour 
+        private void EmployeeLeftListView_ToolTipTextNeeded(object sender, Telerik.WinControls.ToolTipTextNeededEventArgs e)
+        {
+            try
+            {
+                e.Offset = new Size(e.Offset.Width + 20, e.Offset.Height + 20);
+                e.ToolTipText = employeeLeftViewForToolTipText;
+            }
+            catch
+            {
+            }
+        }
+        private void EmployeeLeftListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
+        {
+            if (e.VisualItem is SimpleListViewVisualItem)
+            {
+                e.VisualItem = new EmployeeSimpleListViewVisualItem();
             }
         }
 
@@ -315,75 +419,7 @@ namespace Primary.SchoolApp
                 }
             }
         }
-
-        private void EmployeeLeftListView_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
-        {
-            UpdateEmployeeMainListView();
-            EmployeeGridView.MasterTemplate.Refresh();
-            EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
-        }
-
-        //recherche des données correspondantes
-        private void EmployeeSearchTextBox_TextChanged(object sender, System.EventArgs e)
-        {
-            EmployeeGridView.MasterTemplate.Refresh();
-            if (EmployeeSearchTextBox.Text == string.Empty)
-            {
-                EmployeeMainListView.FilterPredicate = null;
-            }
-            else
-            {
-                EmployeeMainListView.FilterPredicate = null;
-                EmployeeMainListView.FilterPredicate = FilterEmployeePredicate;
-            }
-            EmployeeLeftListView.ListViewElement.SynchronizeVisualItems();
-            UpdateEmployeeMainListView();
-        }
-
-        // filtre la liste des données présente dans le data grid view
-        private void EmployeeGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
-        {
-            e.Handled = true;
-            var record = e.Row.DataBoundItem as EmployeeEnrolling;
-            e.Visible = IsEmployeeByGroupChecked(e.Row.Cells["GroupName"].Value.ToString());
-            if (this.EmployeeSearchTextBox.Text != null)
-            {
-                e.Visible &= e.Row.Cells["Employee.IdNumber"].Value.ToString().Contains(EmployeeSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["Employee.FullName"].Value.ToString().ToLower().Contains(EmployeeSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["GroupName"].Value.ToString().ToLower().Contains(EmployeeSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["Job.Name"].Value.ToString().ToLower().Contains(EmployeeSearchTextBox.Text.ToLower());
-            }
-        }
-
-        private void EmployeeLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
-        {
-            employeeLeftViewForToolTipText = "" + e.Item.Tag;
-        }
-
-        //affiche info bul pour 
-        private void EmployeeLeftListView_ToolTipTextNeeded(object sender, Telerik.WinControls.ToolTipTextNeededEventArgs e)
-        {
-            try
-            {
-                e.Offset = new Size(e.Offset.Width + 20, e.Offset.Height + 20);
-                e.ToolTipText = employeeLeftViewForToolTipText;
-
-
-
-            }
-            catch
-            {
-            }
-        }
-
-        private void EmployeeLeftListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
-        {
-            if (e.VisualItem is SimpleListViewVisualItem)
-            {
-                e.VisualItem = new EmployeeSimpleListViewVisualItem();
-            }
-        }
-
+       
         private void EmployeeMainListView_ItemMouseClick(object sender, ListViewItemEventArgs e)
         {
             e.ListViewElement.SelectedItem = e.Item;
@@ -393,6 +429,15 @@ namespace Primary.SchoolApp
         {
             e.Cancel = e.Group.Expanded;
         }
+        private void EmployeeMainListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
+        {
+            if (e.VisualItem is IconListViewVisualItem)
+            {
+
+                e.VisualItem = new EmployeeIconListViewVisualItem();
+            }
+        }
+
         private void EmployeeEditButton_Click(object sender, EventArgs e)
         {
             if (EmployeeGridView.CurrentRow != null)
@@ -497,61 +542,7 @@ namespace Primary.SchoolApp
             {
                 args.Cancel = true;
             }
-        }
-        private void EmployeeMainListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
-        {
-            if (e.VisualItem is IconListViewVisualItem)
-            {
-
-                e.VisualItem = new EmployeeIconListViewVisualItem();
-            }
-        }
-
-        private void EmployeeGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
-        {
-            if (!e.ContextMenuProvider.ToString().Contains("Header"))
-            {
-                RadMenuItem menuEdit = new(Language.labelEdit);
-                RadMenuItem menuDuplicateEnrolling = new(Language.labelDuplicateForCurrentYear);
-                RadMenuItem menuAddPicture = new RadMenuItem(Language.labelAddPicture);
-                RadMenuItem menuShowRooms = new RadMenuItem(Language.labelRooms);
-                RadMenuItem menuShowSubjects = new RadMenuItem(Language.labelSubjects);
-                RadMenuItem menuShowTimesheet = new RadMenuItem(Language.labelTimesheet);
-                RadMenuItem menuShowAccount = new RadMenuItem(Language.labelEmployeeAccount);
-                RadMenuItem menuShowNotes = new RadMenuItem(Language.labelNotes);
-                menuEdit.Image = AppUtilities.GetImage("Edit");
-                menuDuplicateEnrolling.Image = AppUtilities.GetImage("Duplicate");
-                menuAddPicture.Image = AppUtilities.GetImage("Add");
-                menuShowSubjects.Image = AppUtilities.GetImage("Eye");
-                menuShowRooms.Image = AppUtilities.GetImage("Eye");
-                menuShowAccount.Image = AppUtilities.GetImage("Eye");
-                menuShowTimesheet.Image = AppUtilities.GetImage("Eye");
-                menuShowNotes.Image = AppUtilities.GetImage("Eye");
-                menuEdit.Click += EmployeeEditButton_Click;
-                menuAddPicture.Click += MenuAddPicture_Click;
-                menuShowRooms.Click += MenuShowRooms_Click;
-                menuShowSubjects.Click += MenuShowSubjects_Click;
-                menuShowTimesheet.Click += MenuShowTimesheet_Click;
-                menuShowNotes.Click += MenuShowNotes_Click;
-                menuShowAccount.Click += MenuShowAccount_Click;
-                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                e.ContextMenu.Items.Add(menuEdit);
-                e.ContextMenu.Items.Add(menuDuplicateEnrolling);
-                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                e.ContextMenu.Items.Add(menuAddPicture);
-                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                e.ContextMenu.Items.Add(menuShowRooms);
-                e.ContextMenu.Items.Add(menuShowSubjects);
-                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                e.ContextMenu.Items.Add(menuShowTimesheet);
-                e.ContextMenu.Items.Add(menuShowNotes);
-                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                e.ContextMenu.Items.Add(menuShowAccount);
-            }
-                
-
-        }
-        
+        }       
         private void EmployeeEnrollingAddButton_Click(object sender, EventArgs e)
         {
             ShowAddEnployeeEnrollingForm();
@@ -625,15 +616,18 @@ namespace Primary.SchoolApp
         //chargement de la liste des employés inscrits pour une année scolaire
         private async void LoadEnrollingEmployee()
         {
+            EmployeeInfoRightPanel.Visible = false;
             if (EmployeeSchoolYearDropDownList.SelectedItem != null)
             {
                 if (EmployeeSchoolYearDropDownList.SelectedItem.DataBoundItem is SchoolYear record)
                 {
+                    Program.EmployeeEnrollingList = new List<EmployeeEnrolling>();
                     Program.EmployeeEnrollingList = (await employeeService.GetEmployeeEnrollingList(record.Id));
                     EmployeeGridView.DataSource = Program.EmployeeEnrollingList;
                     EmployeeMainListView.DataSource = Program.EmployeeEnrollingList;
                     EmployeeLeftListView.ListViewElement.SynchronizeVisualItems();
                     EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
+
                 }
             }
         }
@@ -685,8 +679,17 @@ namespace Primary.SchoolApp
                 }
                 else
                 {
-                    using var ms = new MemoryStream(Resources.no_image);
-                    employeeEnrollingInfo.EmployeeLabel.Image = Image.FromStream(ms);
+                    //on cherche une photo dans le dossier 
+                    var url = clientApp.EmployeePitureFolder + "/" + record.Employee.IdNumber;
+                    if (File.Exists(url))
+                    {
+                        employeeEnrollingInfo.EmployeeLabel.Image = new Bitmap(Image.FromFile(url), new System.Drawing.Size(114, 114));
+                    }
+                    else
+                    {
+                        using var ms = new MemoryStream(Resources.no_image);
+                        employeeEnrollingInfo.EmployeeLabel.Image = Image.FromStream(ms);
+                    }
                 }
             }
             employeeEnrollingInfo.RoomsLabel.Text=Language.labelRooms+": "+getClassList.Result.Count.ToString();
@@ -705,6 +708,7 @@ namespace Primary.SchoolApp
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     enrolling.PictureUrl=form.UrlPicture;
+                    employeeEnrollingInfo.EmployeeLabel.Image = new Bitmap(Image.FromFile(enrolling.PictureUrl), new Size(114, 114));
                 }
             }
             else

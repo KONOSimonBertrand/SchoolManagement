@@ -66,8 +66,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Edit":
                             image = Resources.pencil_blue;
                             break;
-                        case "Eye":
-                            image = Resources.eye_blue;
+                        case "Watch":
+                            image = Resources.watch_blue;
                             break;
                         case "File":
                             image = Resources.create_file_blue;
@@ -104,8 +104,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Edit":
                             image = Resources.pencil_blue_grey;
                             break;
-                        case "Eye":
-                            image = Resources.eye_blue_grey;
+                        case "Watch":
+                            image = Resources.watch_blue_grey;
                             break;
                         case "File":
                             image = Resources.create_file_blue_grey;
@@ -142,8 +142,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Edit":
                             image = Resources.pencil_pink;
                             break;
-                        case "Eye":
-                            image = Resources.eye_pink;
+                        case "Watch":
+                            image = Resources.watch_pink;
                             break;
                         case "File":
                             image = Resources.create_file_pink;
@@ -180,8 +180,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Edit":
                             image = Resources.pencil_teal;
                             break;
-                        case "Eye":
-                            image = Resources.eye_teal;
+                        case "Watch":
+                            image = Resources.watch_teal;
                             break;
                         case "File":
                             image = Resources.create_file_teal;

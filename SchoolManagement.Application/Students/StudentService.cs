@@ -12,12 +12,12 @@ namespace SchoolManagement.Application
         private readonly IStudentWriteRepository studentWriteRepository;
         private readonly IGenerateIdNumberService generateIdNumberService;
         private readonly ISchoolYearReadRepository schoolYearReadRepository;
-        public StudentService(IStudentRepository studentRepository, IGenerateIdNumberService generateIdNumberService, ISchoolYearReadRepository schoolYearReadRepository)
+        public StudentService(IStudentRepository studentRepository, IGenerateIdNumberService generateIdNumberService, ISchoolYearRepository schoolYearRepository)
         {
             this.studentReadRepository = studentRepository;
             this.studentWriteRepository = studentRepository;
             this.generateIdNumberService = generateIdNumberService;
-            this.schoolYearReadRepository = schoolYearReadRepository;
+            this.schoolYearReadRepository = schoolYearRepository;
         }
 
         public async Task<bool> CreateStudentAsync(Student student)
@@ -59,6 +59,11 @@ namespace SchoolManagement.Application
         public async Task<List<Student>> GetStudentListsync()
         {
             return await studentReadRepository.GetStudentListAsync();
+        }
+
+        public async Task<bool> SaveStudentPictureAsync(int studentId, string urlPicture)
+        {
+            return await studentWriteRepository.AddStudentPictureAsync(studentId, urlPicture);
         }
 
         public async Task<bool> UpdateStudentAsync(Student student)

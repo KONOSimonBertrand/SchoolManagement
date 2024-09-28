@@ -16,14 +16,14 @@ namespace SchoolManagement.Infrastructure.Repositories.Students
         public async Task<bool> AddStudentAsync(Student student)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" INSERT INTO Students(IdNumber,FirstName,LastName,Birthday,BirthPlace,Sex,Phone,Email,Address,IdCard,Nationality,Religion)  
-                              VALUES(@idNumber,@firstName,@lastName,@birthday,@birthPlace,@sex,@phone,@email,@address,@idCard,@nationality,@religion);";
+            string query = @" INSERT INTO Students(IdNumber,FirstName,LastName,Birthdate,BirthPlace,Sex,Phone,Email,Address,IdCard,Nationality,Religion)  
+                              VALUES(@idNumber,@firstName,@lastName,@birthdate,@birthPlace,@sex,@phone,@email,@address,@idCard,@nationality,@religion);";
             var result = connection.Execute(query, new
             {
                 idNumber = student.IdNumber,
                 firstName = student.FirstName,
                 lastName = student.LastName,
-                birthday = student.BirthDate,
+                birthdate = student.BirthDate,
                 sex = student.Sex,
                 phone = student.Phone,
                 email = student.Email,
@@ -64,17 +64,30 @@ namespace SchoolManagement.Infrastructure.Repositories.Students
             return result;
         }
 
+        public async Task<bool> AddStudentPictureAsync(int studentId, string urlPicture)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" UPDATE Students SET PictureUrl=@urlPicture WHERE Id=@studentId";
+            var result = connection.Execute(query, new
+            {
+                urlPicture,
+                studentId
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+
         public async Task<bool> UpdateStudentAsync(Student student)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" UPDATE Students SET IdNumber=@idNumber,FirstName=@firstName,LastName=@lastName,Birthday=@birthday,Sex=@sex,Phone=@phone,Email=@email,Address=@address,
+            string query = @" UPDATE Students SET IdNumber=@idNumber,FirstName=@firstName,LastName=@lastName,Birthdate=@birthdate,Sex=@sex,Phone=@phone,Email=@email,Address=@address,
                               IdCard=@idCard,Nationality=@nationality,Religion=@religion,BirthPlace=@birthPlace WHERE Id=@id";
             var result = connection.Execute(query, new
             {
                 idNumber = student.IdNumber,
                 firstName = student.FirstName,
                 lastName = student.LastName,
-                birthday = student.BirthDate,
+                birthdate = student.BirthDate,
                 sex = student.Sex,
                 phone = student.Phone,
                 email = student.Email,

@@ -26,9 +26,9 @@ namespace SchoolManagement.Application
             return await studentEnrollingWriteRepository.AddStudentRoomAsync(room);  
         }
 
-        public async Task<bool> DeleteStudentRoomAsync(int StudentId, int RoomId, int schoolYearId)
+        public async Task<bool> DeleteStudentRoomAsync(int StudentId, int schoolYearId)
         {
-            return await studentEnrollingWriteRepository.DeleteStudentRoomAsync(StudentId,RoomId, schoolYearId);
+            return await studentEnrollingWriteRepository.DeleteStudentRoomAsync(StudentId, schoolYearId);
         }
 
         public async Task<StudentEnrolling?> GetStudentEnrollingAsync(int studentId, int schoolyearId)
@@ -53,6 +53,11 @@ namespace SchoolManagement.Application
         public async Task<List<StudentRoom>> GetStudentRoomListAsync(int schoolYearId)
         {
             return await studentEnrollingReadRepository.GetStudentRoomListAsync(schoolYearId);
+        }
+
+        public async Task<bool> SaveStudentEnrollingPictureAsync(int studentId, string urlPicture)
+        {
+           return  await studentEnrollingWriteRepository.AddStudentEnrollingPictureAsync(studentId, urlPicture);
         }
 
         public async Task<bool> UpdateStudentEnrollingAsync(StudentEnrolling enrolling)

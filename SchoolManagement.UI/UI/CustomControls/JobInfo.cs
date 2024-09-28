@@ -33,12 +33,9 @@ namespace SchoolManagement.UI.CustomControls
             this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-
-
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -65,6 +62,10 @@ namespace SchoolManagement.UI.CustomControls
             this.nameTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
 
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
         }
 
         private void InitEvents()

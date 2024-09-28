@@ -135,20 +135,38 @@
   <data name="labelAdd" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="labelAdddress" xml:space="preserve">
-    <value>Address</value>
+  <data name="labelAddContact" xml:space="preserve">
+    <value>Add contact</value>
+  </data>
+  <data name="labelAddDiscipline" xml:space="preserve">
+    <value>Add disciplinary item</value>
+  </data>
+  <data name="labelAddDiscount" xml:space="preserve">
+    <value>Add discount</value>
   </data>
   <data name="labelAdding" xml:space="preserve">
     <value>Adding</value>
   </data>
+  <data name="labelAddPayment" xml:space="preserve">
+    <value>Add payment</value>
+  </data>
   <data name="labelAddPicture" xml:space="preserve">
     <value>Add picture</value>
+  </data>
+  <data name="labelAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="labelAddSubscription" xml:space="preserve">
+    <value>Add subscription</value>
   </data>
   <data name="labelAdministration" xml:space="preserve">
     <value>Administration</value>
   </data>
   <data name="labelAmount" xml:space="preserve">
     <value>Amount</value>
+  </data>
+  <data name="labelAmountPaid" xml:space="preserve">
+    <value>Amount paid</value>
   </data>
   <data name="labelAmountTuition" xml:space="preserve">
     <value>Amount tuition</value>
@@ -225,6 +243,9 @@
   <data name="labelContacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
+  <data name="labelDateTransaction" xml:space="preserve">
+    <value>Date transaction</value>
+  </data>
   <data name="labelDay" xml:space="preserve">
     <value>Day</value>
   </data>
@@ -246,6 +267,9 @@
   <data name="labelDesignation" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="labelDisciplinaryFile" xml:space="preserve">
+    <value>Disciplinary file</value>
+  </data>
   <data name="labelDisciplinaryRecord" xml:space="preserve">
     <value>Disciplinary record</value>
   </data>
@@ -258,8 +282,17 @@
   <data name="labelDisciplines" xml:space="preserve">
     <value>Disciplines</value>
   </data>
+  <data name="labelDisciplineSubject" xml:space="preserve">
+    <value>Discipline's  subject</value>
+  </data>
+  <data name="labelDisciplineSubjects" xml:space="preserve">
+    <value>Subjects of discipline</value>
+  </data>
   <data name="labelDiscount" xml:space="preserve">
     <value>Discount</value>
+  </data>
+  <data name="labelDiscountAmount" xml:space="preserve">
+    <value>Discount amount</value>
   </data>
   <data name="labelDomain" xml:space="preserve">
     <value>Domain</value>
@@ -312,6 +345,9 @@
   <data name="labelEnglishName" xml:space="preserve">
     <value>English name</value>
   </data>
+  <data name="labelEnglishOnly" xml:space="preserve">
+    <value>English only</value>
+  </data>
   <data name="labelEnroll" xml:space="preserve">
     <value>Enroll</value>
   </data>
@@ -339,6 +375,9 @@
   <data name="labelFirstName" xml:space="preserve">
     <value>First name</value>
   </data>
+  <data name="labelFrenchAndEnglish" xml:space="preserve">
+    <value>French &amp; English</value>
+  </data>
   <data name="labelFrenchAppreciation" xml:space="preserve">
     <value>French appreciation</value>
   </data>
@@ -347,6 +386,9 @@
   </data>
   <data name="labelFrenchName" xml:space="preserve">
     <value>French name</value>
+  </data>
+  <data name="labelFrenchOnly" xml:space="preserve">
+    <value>French only</value>
   </data>
   <data name="labelFullName" xml:space="preserve">
     <value>Full name</value>
@@ -432,6 +474,9 @@
   <data name="labelMaxNote" xml:space="preserve">
     <value>Max mark</value>
   </data>
+  <data name="labelMedicalFile" xml:space="preserve">
+    <value>Medical file</value>
+  </data>
   <data name="labelMinNote" xml:space="preserve">
     <value>Min Mark</value>
   </data>
@@ -453,6 +498,9 @@
   <data name="labelNewPasswors" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="labelNo" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="labelNote" xml:space="preserve">
     <value>Note</value>
   </data>
@@ -468,8 +516,14 @@
   <data name="labelOldPassword" xml:space="preserve">
     <value>Old password</value>
   </data>
+  <data name="labelOldSchool" xml:space="preserve">
+    <value>Last school attended</value>
+  </data>
   <data name="labelOpened" xml:space="preserve">
     <value>Opened</value>
+  </data>
+  <data name="labelOrdoredBy" xml:space="preserve">
+    <value>Ordored by</value>
   </data>
   <data name="labelOutput" xml:space="preserve">
     <value>Output</value>
@@ -477,11 +531,20 @@
   <data name="labelPaid" xml:space="preserve">
     <value>Paid</value>
   </data>
+  <data name="labelPayment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="labelPaymentDoneBy" xml:space="preserve">
+    <value>Payment done by</value>
+  </data>
   <data name="labelPaymentMean" xml:space="preserve">
     <value>Payment mean</value>
   </data>
   <data name="labelPaymentMeans" xml:space="preserve">
     <value>Payment means</value>
+  </data>
+  <data name="labelPayments" xml:space="preserve">
+    <value>Payments</value>
   </data>
   <data name="labelPhone" xml:space="preserve">
     <value>Phone</value>
@@ -495,20 +558,44 @@
   <data name="labelPrinting" xml:space="preserve">
     <value>Printing</value>
   </data>
+  <data name="labelPrintOn" xml:space="preserve">
+    <value>Print on</value>
+  </data>
+  <data name="labelPrintRegistrationReceipt" xml:space="preserve">
+    <value>Print registration receipt</value>
+  </data>
+  <data name="labelPrintSummaryPayment" xml:space="preserve">
+    <value>Print summary of payments</value>
+  </data>
   <data name="labelRead" xml:space="preserve">
     <value>Read</value>
   </data>
   <data name="labelReason" xml:space="preserve">
     <value>Reason</value>
   </data>
+  <data name="labelRecordingData" xml:space="preserve">
+    <value>Recording data</value>
+  </data>
   <data name="labelRegisteredOn" xml:space="preserve">
     <value>Registered On</value>
+  </data>
+  <data name="labelRegistration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="labelRelationship" xml:space="preserve">
+    <value>Type de relation</value>
   </data>
   <data name="labelReligion" xml:space="preserve">
     <value>Religion</value>
   </data>
+  <data name="labelRepeater" xml:space="preserve">
+    <value>Repeater</value>
+  </data>
   <data name="labelReports" xml:space="preserve">
     <value>Reports</value>
+  </data>
+  <data name="labelReportViewer" xml:space="preserve">
+    <value>Report viewer</value>
   </data>
   <data name="labelReturn" xml:space="preserve">
     <value>Return</value>
@@ -554,6 +641,24 @@
   </data>
   <data name="labelSex" xml:space="preserve">
     <value>Sex</value>
+  </data>
+  <data name="labelSharing" xml:space="preserve">
+    <value>Sharing</value>
+  </data>
+  <data name="labelShowContact" xml:space="preserve">
+    <value>View contact list</value>
+  </data>
+  <data name="labelShowDiscipline" xml:space="preserve">
+    <value>View disciplinary file</value>
+  </data>
+  <data name="labelShowDiscounts" xml:space="preserve">
+    <value>Show discounts</value>
+  </data>
+  <data name="labelShowPayments" xml:space="preserve">
+    <value>Show payments</value>
+  </data>
+  <data name="labelShowSubscriptions" xml:space="preserve">
+    <value>Show subscriptions</value>
   </data>
   <data name="labelSignIn" xml:space="preserve">
     <value>Sign In</value>
@@ -702,6 +807,9 @@
   <data name="labelYearOfService" xml:space="preserve">
     <value>year(s) of service</value>
   </data>
+  <data name="labelYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="messageActivateSchoolYear" xml:space="preserve">
     <value>Activate school year</value>
   </data>
@@ -713,6 +821,9 @@
   </data>
   <data name="messageAskCloseSchoolYear" xml:space="preserve">
     <value>Do you want to close the school year</value>
+  </data>
+  <data name="messageBadDistribution" xml:space="preserve">
+    <value>The distribution of the amount paid is incorrect</value>
   </data>
   <data name="messageBadInstalment" xml:space="preserve">
     <value>One of instalments is not correct</value>
@@ -747,6 +858,12 @@
   <data name="messageClickToAddClass" xml:space="preserve">
     <value>Click here to add a class</value>
   </data>
+  <data name="messageClickToAddDisciplineSubject" xml:space="preserve">
+    <value>Click here to add discipline's subject</value>
+  </data>
+  <data name="messageClickToAddDiscount" xml:space="preserve">
+    <value>Click here to add new discount</value>
+  </data>
   <data name="messageClickToAddEmployee" xml:space="preserve">
     <value>Click here to add an employee</value>
   </data>
@@ -761,6 +878,9 @@
   </data>
   <data name="messageClickToAddMarkSystem" xml:space="preserve">
     <value>Click here to add a mark system</value>
+  </data>
+  <data name="messageClickToAddPayment" xml:space="preserve">
+    <value>Click here to add new payment</value>
   </data>
   <data name="messageClickToAddPaymentMean" xml:space="preserve">
     <value>Click here to add a payment mean</value>
@@ -810,11 +930,17 @@
   <data name="messageCloseSchoolYear" xml:space="preserve">
     <value>Close the school year</value>
   </data>
+  <data name="messageConfirmCancel" xml:space="preserve">
+    <value>Do you want to cancel?</value>
+  </data>
   <data name="messageConfirmDelete" xml:space="preserve">
     <value>Do you want to delete?</value>
   </data>
   <data name="messageConfirmeDuplicateFee" xml:space="preserve">
     <value>Do you want to duplicate these fees for</value>
+  </data>
+  <data name="messageConfirmEnrollingWithoutPayment" xml:space="preserve">
+    <value>Do you confirm enrolling without payment ?</value>
   </data>
   <data name="messageConfirmReturn" xml:space="preserve">
     <value>Do you want to return this transaction ?</value>
@@ -833,6 +959,9 @@
   </data>
   <data name="messageEndHourGreaterThanStartHour" xml:space="preserve">
     <value>The end hour must be greater than start hour</value>
+  </data>
+  <data name="messageEnrollingExist" xml:space="preserve">
+    <value>This enrolling  already exist</value>
   </data>
   <data name="messageEvaluationExist" xml:space="preserve">
     <value>This evaluation already exists</value>
@@ -857,6 +986,9 @@
   </data>
   <data name="messageNoActionWithClosedYear" xml:space="preserve">
     <value>You cannot take action with a closed school year</value>
+  </data>
+  <data name="messagePaymentGreaterThanToPaid" xml:space="preserve">
+    <value>Le versement est supérieur au montant à payer</value>
   </data>
   <data name="messagePaymentMeanExist" xml:space="preserve">
     <value>This payment mean already exists</value>
@@ -939,6 +1071,9 @@
   <data name="titleClassList" xml:space="preserve">
     <value>Class list</value>
   </data>
+  <data name="titleContactList" xml:space="preserve">
+    <value>Contact list</value>
+  </data>
   <data name="titleEmployeeList" xml:space="preserve">
     <value>Employee list</value>
   </data>
@@ -947,6 +1082,9 @@
   </data>
   <data name="titleNoteList" xml:space="preserve">
     <value>Note list</value>
+  </data>
+  <data name="titlePaymentList" xml:space="preserve">
+    <value>Payment list</value>
   </data>
   <data name="titleRoomList" xml:space="preserve">
     <value>Room list</value>
@@ -960,8 +1098,11 @@
   <data name="titleSubjectList" xml:space="preserve">
     <value>Subject list</value>
   </data>
-  <data name="titleSubjectList1" xml:space="preserve">
-    <value>Subject list</value>
+  <data name="titleSubscriptionList" xml:space="preserve">
+    <value>Subscription list</value>
+  </data>
+  <data name="titleSummarySchoolFee" xml:space="preserve">
+    <value>Summary of school fees payments</value>
   </data>
   <data name="titleUserList" xml:space="preserve">
     <value>User list</value>

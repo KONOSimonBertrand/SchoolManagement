@@ -93,6 +93,26 @@ namespace Primary.SchoolApp.Utilities
             };
             return dto;
         }
+        public static StudentEnrolling ConvertToStudentEnrolling(this StudentEnrollingDTO enrolling)
+        {
+            var dto = new StudentEnrolling
+            {
+                Id = enrolling.Id,
+                Date = enrolling.Date,
+                SchoolYearId = enrolling.SchoolYearId,
+                StudentId = enrolling.StudentId,
+                ClassId = enrolling.ClassId,
+                OldSchool = enrolling.OldSchool,
+                IsRepeater = enrolling.IsRepeater,
+                IsActive = enrolling.IsActive,
+                ReasonLeft = enrolling.ReasonLeft,
+                PictureUrl = enrolling.PictureUrl,
+                Student = enrolling.Student,
+                SchoolClass = enrolling.SchoolClass,
+                SchoolYear = enrolling.SchoolYear,
+            };
+            return dto;
+        }
 
     }
 }

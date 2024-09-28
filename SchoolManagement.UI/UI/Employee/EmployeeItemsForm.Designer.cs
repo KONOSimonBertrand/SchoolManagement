@@ -311,7 +311,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "EmployeeItemsForm";
-            Text = "Room list";
+            Text = "Items";
             ((System.ComponentModel.ISupportInitialize)dataGridView.MasterTemplate).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)radLabel3).EndInit();

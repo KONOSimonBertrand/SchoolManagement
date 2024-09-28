@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Infrastructure;
@@ -23,6 +24,7 @@ namespace Primary.SchoolApp
         public static IList<CashFlowType> CashFlowTypeList;
         public static IList<PaymentMean> PaymentMeanList;
         public static IList<SchoolingCost> SchoolingCostList;
+        public static IList<SchoolingCostItem> SchoolingCostItemList;
         public static IList<SubscriptionFee> SubscriptionFeeList;
         public static IList<SubjectGroup> SubjectGroupList;
         public static IList<Subject> SubjectList;
@@ -38,6 +40,11 @@ namespace Primary.SchoolApp
         public static IList<Country> CountryList;
         public static IList<EmployeeEnrolling> EmployeeEnrollingList;
         public static IList<StudentEnrollingDTO> StudentEnrollingList;
+        public static IList<Student> StudentList;
+        public static IList<TuitionPayment> TuitionPaymentList;
+        public static IList<TuitionDiscount> TuitionDiscountList;
+        public static IList<DisciplineSubject> DisciplineSubjectList;
+        public static IList<Discipline> DisciplineList;
         public static User UserConnected;
         public static IServiceProvider ServiceProvider { get; private set; }
         public static string ConnectionString { get; private set; }
@@ -51,8 +58,9 @@ namespace Primary.SchoolApp
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             ConnectionString = ConfigurationManager.ConnectionStrings["school_data_base"].ConnectionString;
+            
             #region Définition des dépendances
-            var hostBuilder = new HostBuilder()
+                var hostBuilder = new HostBuilder()
                .ConfigureServices(services =>
                {
                    services.AddApplicationDependency();
@@ -64,8 +72,16 @@ namespace Primary.SchoolApp
             ServiceProvider = host.Services;
             #endregion
             //définition des indépendances 
-
-            Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
+            var clientName = ConfigurationManager.AppSettings["ClientName"];
+            var clientCode = ConfigurationManager.AppSettings["ClientCode"];
+            if (AppUtilities.ToHex(clientName) == clientCode) {
+                Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
+            }
+            else
+            {
+                Telerik.WinControls.RadMessageBox.Show("Merci de bien vouloir contacter SuiTtech au +237 679 72 83 44 ou +33 06 01 24 89 20  pour obtenir une licence ");
+            }
+            
             //Application.Run(new MainForm());
         }
 

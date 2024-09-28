@@ -91,6 +91,10 @@ namespace SchoolManagement.UI.CustomControls
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.startDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.endDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
         }
         private void InitLanguage()
         {

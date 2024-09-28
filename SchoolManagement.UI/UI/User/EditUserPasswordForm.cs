@@ -71,7 +71,7 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             showPasswordToggleButton.RootElement.ToolTipText = Language.messageClickToSeePassword;
-            showPasswordToggleButton.Image = ViewUtilities.GetImage("View");
+            showPasswordToggleButton.Image = ViewUtilities.GetImage("Watch");
             showPasswordToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
             showPasswordToggleButton.ButtonElement.Padding = new Padding(0);
 
@@ -88,7 +88,7 @@ namespace SchoolManagement.UI
         private void ShowPasswordToggleButton_CheckStateChanged(object sender, EventArgs e)
         {
             if (showPasswordToggleButton.ToggleState == Telerik.WinControls.Enumerations.ToggleState.Off) {
-                showPasswordToggleButton.Image = ViewUtilities.GetImage("View");
+                showPasswordToggleButton.Image = ViewUtilities.GetImage("Watch");
                 showPasswordToggleButton.RootElement.ToolTipText = Language.messageClickToSeePassword;
                 newPasswordTextBox.PasswordChar = '*';
             }

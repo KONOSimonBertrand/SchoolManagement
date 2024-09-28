@@ -2,8 +2,20 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Reporting\CashFlow\PaymentReceiptA4Report.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\CashFlow\PaymentSummaryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\DisciplineSubjectInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\StudentEnrollingInfo.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Diciplines\EditDisciplineSubjectForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\LoginForm.cs">
       <SubType>Form</SubType>
@@ -194,7 +206,61 @@
     <Compile Update="UI\SchoolYears\EditSchoolYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\AddContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddDisciplineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddStudentEnrollingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddSubscriptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddTuitionDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddTuitionPaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\ContactsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\DisciplinesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditDisciplineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\EditStudentEnrollingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditSubscriptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditTuitionDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\SubscriptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\TuitionDiscountsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\TuitionPaymentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\UploadStudentPictureForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SubjectGroups\AddSubjectGroupForm.cs">

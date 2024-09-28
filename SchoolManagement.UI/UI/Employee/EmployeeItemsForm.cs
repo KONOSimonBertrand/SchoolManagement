@@ -8,18 +8,6 @@ namespace SchoolManagement.UI
     {
 
 
-        //     Cette classe sert d'interface utilisateur pour:
-        //     - Les versements d'un élève
-        //     - Les dépôts d'un élève
-        //     - Les abonnements d'un élève
-        //     - Le dossier médical d'un élève
-        //     - La fiche de discipline d'un élève
-        //     - Les contacts d'un élève,
-        //     
-        //     
-        //    
-        //    
-        //     
 
         /// <summary>
         /// Cette classe sert d'interface utilisateur pour:

@@ -226,21 +226,6 @@
   <data name="export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="fasha_borders" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\fasha_borders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -378,5 +363,17 @@
   </data>
   <data name="view_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\view_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

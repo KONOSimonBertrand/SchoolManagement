@@ -135,19 +135,28 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                //on cherche un photo par defaut
+                //on cherche une photo par defaut
                 if (File.Exists(enrolling.Employee.PictureUrl))
                 {
                     PictureLabel.Image = new Bitmap(Image.FromFile(enrolling.Employee.PictureUrl), new Size(114, 114));
                 }
                 else
                 {
-                    using var ms = new MemoryStream(Resources.no_image);
-                    PictureLabel.Image = Image.FromStream(ms);
+                    var url = clientApp.EmployeePitureFolder + "/" + enrolling.Employee.IdNumber;
+                    if (File.Exists(url))
+                    {
+
+                    }
+                    else
+                    {
+                        using var ms = new MemoryStream(Resources.no_image);
+                        PictureLabel.Image = Image.FromStream(ms);
+                    }
                 }
+                
             }
 
-            //load notes
+            //load transaction
             LoadACountTransactions(enrolling.Id);
         }
         // chargement de la liste des mouvements du compte dans le datagridview

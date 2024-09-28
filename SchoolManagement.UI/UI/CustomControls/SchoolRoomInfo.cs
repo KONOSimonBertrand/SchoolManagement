@@ -61,7 +61,7 @@ namespace SchoolManagement.UI.CustomControls
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.studentsCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.studentsCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.studentsCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
@@ -97,6 +97,11 @@ namespace SchoolManagement.UI.CustomControls
             this.classSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
 
             studentsCountLabel.LabelElement.ToolTipText = "Cliquer ici pour consulter les matières enseignées";
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
+
         }
 
         private void Label_MouseMove(object sender, MouseEventArgs e)

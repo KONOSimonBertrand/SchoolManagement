@@ -38,7 +38,7 @@ namespace SchoolManagement.UI
             printButton.ButtonElement.ToolTipText = Language.messageClickToPrint;
             radLabel2.Text = Language.labelPhone;
             radLabel3.Text = Language.labelMail;
-            radLabel1.Text = Language.labelAdddress;
+            radLabel1.Text = Language.labelAddress;
             exportButton.Text = Language.labelExport;
             closeButton.Text = Language.labelCancel;
             printButton.Text = Language.labelPrint;

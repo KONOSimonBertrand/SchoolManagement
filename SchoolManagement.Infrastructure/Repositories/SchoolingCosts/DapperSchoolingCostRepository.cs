@@ -36,7 +36,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 {
                     item.SchoolingCostId = cost.Id;
                 }
-                await AddAsyncItems(cost);
+                await AddItemsAsync(cost);
             }
             await Task.Delay(0);
             return result > 0;
@@ -74,6 +74,23 @@ namespace SchoolManagement.Infrastructure.Repositories
             var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM SchoolingCostItems WHERE SchoolingCostId=@id ;";
             var result = connection.Query<SchoolingCostItem>(query, new { id = schoolingCostId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+
+        public async Task<IList<SchoolingCostItem>> GetItemsBySchoolYearAsync(int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM SchoolingCostItems AS A
+                            INNER JOIN SchoolingCosts AS C ON A.SchoolingCostId=C.Id
+                            WHERE A.SchoolingCostId IN (SELECT Id FROM SchoolingCosts WHERE SchoolYearId=@schoolYearId) ;";
+            var result = connection.Query<SchoolingCostItem, SchoolingCost, SchoolingCostItem>(query,
+                (schoolingCostItem, schoolingCost) =>
+                {
+                    schoolingCostItem.SchoolingCost=schoolingCost;
+                    return schoolingCostItem;
+                }
+                , new { schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -118,18 +135,18 @@ namespace SchoolManagement.Infrastructure.Repositories
             if (result > 0)
             {
                 await DeleteAsyncItems(cost);
-                await AddAsyncItems(cost);
+                await AddItemsAsync(cost);
             }
             await Task.Delay(0);
             return result > 0;
 
         }
 
-        private async Task<bool> AddAsyncItems(SchoolingCost cost)
+        private async Task<bool> AddItemsAsync(SchoolingCost cost)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO SchoolingCostItems(Amount,DeadLine,SchoolingCostId) 
-                                         VALUES(@amount,@deadLine,@schoolingCostId);";
+            string query = @"INSERT INTO SchoolingCostItems(Amount,DeadLine,Rank,SchoolingCostId) 
+                                         VALUES(@amount,@deadLine,@rank,@schoolingCostId);";
             var resut = connection.Execute(query, cost.SchoolingCostItems);
             await Task.Delay(0);
             return resut > 0;

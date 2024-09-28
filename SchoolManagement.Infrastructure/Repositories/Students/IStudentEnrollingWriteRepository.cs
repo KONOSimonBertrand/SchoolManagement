@@ -6,7 +6,8 @@ namespace SchoolManagement.Infrastructure.Repositories
     {
         Task<bool> AddStudentEnrollingAsync(StudentEnrolling enrolling);
         Task<bool> AddStudentRoomAsync(StudentRoom room);
-        Task<bool> DeleteStudentRoomAsync(int studentId, int roomId, int schoolYearId);
+        Task<bool> DeleteStudentRoomAsync(int studentId,  int schoolYearId);
+        Task<bool> AddStudentEnrollingPictureAsync(int enrollingId, string urlPicture);
         Task<bool> UpdateStudentEnrollingAsync(StudentEnrolling enrolling);
     }
 }

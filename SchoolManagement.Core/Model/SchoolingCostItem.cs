@@ -7,6 +7,7 @@ namespace SchoolManagement.Core.Model
         public int Id {  get; set; }
         public double Amount { get; set; }
         public DateTime DeadLine { get; set; }
+        public int Rank {  get; set; }
         public int SchoolingCostId {  get; set; }
         public virtual SchoolingCost? SchoolingCost { get; set; }
         public override bool Equals(object? obj)

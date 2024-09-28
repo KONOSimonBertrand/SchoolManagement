@@ -5,8 +5,12 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 using Telerik.WinControls;
+using System.Net;
+using System.Linq;
+using System.Net.Sockets;
 namespace Primary.SchoolApp
 {
     public partial class LoginForm : SchoolManagement.UI.LoginForm
@@ -25,6 +29,7 @@ namespace Primary.SchoolApp
             InitEvents();
             this.Text = Language.labelSignIn;
             ConnectionButton.Text = Language.labelLogIn;
+            
         }
         private void InitEvents()
         {
@@ -35,8 +40,6 @@ namespace Primary.SchoolApp
             this.Shown += OnShown;
 
         }
-
-
 
         private void OnShown(object sender, EventArgs e)
         {
@@ -70,14 +73,22 @@ namespace Primary.SchoolApp
                     user = userService.GetUser(UserNameTextBox.Text.Trim(), PasswordTextBox.Text.Trim()).Result;
                     if (user != null)
                     {
-                        if (user.UserName != "root")
+                        //get ip address
+                        var hostName = Dns.GetHostName();
+                        var ipAddresses = Dns.GetHostAddresses(hostName).Where(x => x.AddressFamily.ToString() == ProtocolFamily.InterNetwork.ToString());
+                        if (ipAddresses.Any())
                         {
-                            user.Rooms = userService.GetUserRoomList(user.Id).Result;
-                            user.Modules = userService.GetUserModuleList(user.Id).Result;
+                            clientApp.IpAddress = ipAddresses.First().ToString();
                         }
+                        else
+                        {
+                            clientApp.IpAddress = hostName;
+                        }
+                        user.Rooms = userService.GetUserRoomList(user.Id).Result;
+                        user.Modules = userService.GetUserModuleList(user.Id).Result;
                         Log log = new()
                         {
-                            UserAction = " Connexion de l'utilisateur " + user.UserName,
+                            UserAction = $" Connexion de l'utilisateur {user.UserName}  sur le poste {clientApp.IpAddress} le {DateTime.Now} ",
                             UserId = user.Id
                         };
                         Program.UserConnected=user;
@@ -91,8 +102,19 @@ namespace Primary.SchoolApp
                 }
                 if (user != null)
                 {
-
+                   
+                    clientApp.Name= ConfigurationManager.AppSettings["ClientName"];
+                    clientApp.Code = ConfigurationManager.AppSettings["ClientCode"];
+                    clientApp.Contact = ConfigurationManager.AppSettings["ClientContact"];
+                    clientApp.Address = ConfigurationManager.AppSettings["ClientAddress"];
+                    clientApp.WebSite = ConfigurationManager.AppSettings["ClientWebSite"];                  
+                    clientApp.LogoUrl = ConfigurationManager.AppSettings["ClientLogo"];
+                    clientApp.StudentPitureFolder = ConfigurationManager.AppSettings["StudentPitureFolder"];
+                    clientApp.EmployeePitureFolder = ConfigurationManager.AppSettings["EmployeePitureFolder"];
                     clientApp.UserConnected = user;
+                    
+                    
+
                     var mainForm = Program.ServiceProvider.GetService<MainForm>();
                     this.Hide();
                     mainForm.Show();

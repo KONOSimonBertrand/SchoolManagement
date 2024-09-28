@@ -72,25 +72,25 @@
             headerPanel.Location = new Point(0, 0);
             headerPanel.Margin = new Padding(4, 5, 4, 5);
             headerPanel.Name = "headerPanel";
-            headerPanel.Size = new Size(313, 62);
+            headerPanel.Size = new Size(313, 40);
             headerPanel.TabIndex = 20;
             // 
             // editButton
             // 
             editButton.Dock = DockStyle.Right;
-            editButton.Location = new Point(223, 0);
+            editButton.Location = new Point(233, 0);
             editButton.Margin = new Padding(4, 5, 4, 5);
             editButton.Name = "editButton";
-            editButton.Size = new Size(45, 62);
+            editButton.Size = new Size(40, 40);
             editButton.TabIndex = 2;
             // 
             // closeButton
             // 
             closeButton.Dock = DockStyle.Right;
-            closeButton.Location = new Point(268, 0);
+            closeButton.Location = new Point(273, 0);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(45, 62);
+            closeButton.Size = new Size(40, 40);
             closeButton.TabIndex = 2;
             // 
             // titleInfoLabel
@@ -100,7 +100,7 @@
             titleInfoLabel.Location = new Point(0, 0);
             titleInfoLabel.Margin = new Padding(4, 5, 4, 5);
             titleInfoLabel.Name = "titleInfoLabel";
-            titleInfoLabel.Size = new Size(313, 62);
+            titleInfoLabel.Size = new Size(313, 40);
             titleInfoLabel.TabIndex = 1;
             titleInfoLabel.Text = "FRAIS ABONNEMENT";
             // 
@@ -113,7 +113,7 @@
             editPanel.Controls.Add(schoolYearTextBox);
             editPanel.Controls.Add(schoolYearLabel);
             editPanel.Dock = DockStyle.Top;
-            editPanel.Location = new Point(0, 62);
+            editPanel.Location = new Point(0, 40);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
             editPanel.Size = new Size(313, 218);
@@ -221,7 +221,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(editPanel);
             Controls.Add(headerPanel);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "SubscriptionFeesInfo";
             Size = new Size(313, 290);
             ((System.ComponentModel.ISupportInitialize)headerPanel).EndInit();

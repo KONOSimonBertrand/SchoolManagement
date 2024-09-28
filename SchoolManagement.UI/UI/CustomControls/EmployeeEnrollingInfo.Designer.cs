@@ -33,6 +33,13 @@
             closeButton = new Telerik.WinControls.UI.RadButton();
             titleInfoLabel = new Telerik.WinControls.UI.RadLabel();
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            roomSplitContainer = new Telerik.WinControls.UI.RadSplitContainer();
+            roomsSplitPanel = new Telerik.WinControls.UI.SplitPanel();
+            subjectsLabel = new Telerik.WinControls.UI.RadLabel();
+            roomsLabel = new Telerik.WinControls.UI.RadLabel();
+            notesSplitPanel = new Telerik.WinControls.UI.SplitPanel();
+            attendancesLabel = new Telerik.WinControls.UI.RadLabel();
+            notesLabel = new Telerik.WinControls.UI.RadLabel();
             addressTextBox = new Telerik.WinControls.UI.RadTextBox();
             addressSeparator = new Telerik.WinControls.UI.RadSeparator();
             addressLabel = new Telerik.WinControls.UI.RadLabel();
@@ -69,13 +76,6 @@
             employeeTextBox = new Telerik.WinControls.UI.RadTextBox();
             employeeSeparator = new Telerik.WinControls.UI.RadSeparator();
             employeeLabel = new Telerik.WinControls.UI.RadLabel();
-            roomSplitContainer = new Telerik.WinControls.UI.RadSplitContainer();
-            roomsSplitPanel = new Telerik.WinControls.UI.SplitPanel();
-            roomsLabel = new Telerik.WinControls.UI.RadLabel();
-            notesSplitPanel = new Telerik.WinControls.UI.SplitPanel();
-            notesLabel = new Telerik.WinControls.UI.RadLabel();
-            subjectsLabel = new Telerik.WinControls.UI.RadLabel();
-            attendancesLabel = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)headerPanel).BeginInit();
             headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)editButton).BeginInit();
@@ -83,6 +83,16 @@
             ((System.ComponentModel.ISupportInitialize)titleInfoLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)roomSplitContainer).BeginInit();
+            roomSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)roomsSplitPanel).BeginInit();
+            roomsSplitPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)subjectsLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)roomsLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)notesSplitPanel).BeginInit();
+            notesSplitPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)attendancesLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)notesLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addressTextBox).BeginInit();
             addressTextBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)addressSeparator).BeginInit();
@@ -137,16 +147,6 @@
             employeeTextBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)employeeSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)employeeLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)roomSplitContainer).BeginInit();
-            roomSplitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)roomsSplitPanel).BeginInit();
-            roomsSplitPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)roomsLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)notesSplitPanel).BeginInit();
-            notesSplitPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)notesLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)subjectsLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)attendancesLabel).BeginInit();
             SuspendLayout();
             // 
             // headerPanel
@@ -158,25 +158,25 @@
             headerPanel.Location = new Point(0, 0);
             headerPanel.Margin = new Padding(4, 5, 4, 5);
             headerPanel.Name = "headerPanel";
-            headerPanel.Size = new Size(315, 62);
+            headerPanel.Size = new Size(315, 40);
             headerPanel.TabIndex = 19;
             // 
             // editButton
             // 
             editButton.Dock = DockStyle.Right;
-            editButton.Location = new Point(225, 0);
+            editButton.Location = new Point(235, 0);
             editButton.Margin = new Padding(4, 5, 4, 5);
             editButton.Name = "editButton";
-            editButton.Size = new Size(45, 62);
+            editButton.Size = new Size(40, 40);
             editButton.TabIndex = 2;
             // 
             // closeButton
             // 
             closeButton.Dock = DockStyle.Right;
-            closeButton.Location = new Point(270, 0);
+            closeButton.Location = new Point(275, 0);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(45, 62);
+            closeButton.Size = new Size(40, 40);
             closeButton.TabIndex = 2;
             // 
             // titleInfoLabel
@@ -186,7 +186,7 @@
             titleInfoLabel.Location = new Point(0, 0);
             titleInfoLabel.Margin = new Padding(4, 5, 4, 5);
             titleInfoLabel.Name = "titleInfoLabel";
-            titleInfoLabel.Size = new Size(315, 62);
+            titleInfoLabel.Size = new Size(315, 40);
             titleInfoLabel.TabIndex = 1;
             titleInfoLabel.Text = "INFO...";
             // 
@@ -203,11 +203,99 @@
             editPanel.Controls.Add(employeeTextBox);
             editPanel.Controls.Add(employeeLabel);
             editPanel.Dock = DockStyle.Top;
-            editPanel.Location = new Point(0, 62);
+            editPanel.Location = new Point(0, 40);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
             editPanel.Size = new Size(315, 632);
             editPanel.TabIndex = 20;
+            // 
+            // roomSplitContainer
+            // 
+            roomSplitContainer.Controls.Add(roomsSplitPanel);
+            roomSplitContainer.Controls.Add(notesSplitPanel);
+            roomSplitContainer.Dock = DockStyle.Top;
+            roomSplitContainer.Location = new Point(0, 465);
+            roomSplitContainer.Name = "roomSplitContainer";
+            // 
+            // 
+            // 
+            roomSplitContainer.RootElement.MinSize = new Size(25, 25);
+            roomSplitContainer.Size = new Size(315, 62);
+            roomSplitContainer.SplitterWidth = 0;
+            roomSplitContainer.TabIndex = 76;
+            roomSplitContainer.TabStop = false;
+            // 
+            // roomsSplitPanel
+            // 
+            roomsSplitPanel.Controls.Add(subjectsLabel);
+            roomsSplitPanel.Controls.Add(roomsLabel);
+            roomsSplitPanel.Location = new Point(0, 0);
+            roomsSplitPanel.Name = "roomsSplitPanel";
+            // 
+            // 
+            // 
+            roomsSplitPanel.RootElement.MinSize = new Size(25, 25);
+            roomsSplitPanel.Size = new Size(158, 62);
+            roomsSplitPanel.TabIndex = 3;
+            roomsSplitPanel.TabStop = false;
+            // 
+            // subjectsLabel
+            // 
+            subjectsLabel.AutoSize = false;
+            subjectsLabel.Dock = DockStyle.Top;
+            subjectsLabel.Location = new Point(0, 30);
+            subjectsLabel.Margin = new Padding(4, 5, 4, 5);
+            subjectsLabel.Name = "subjectsLabel";
+            subjectsLabel.Size = new Size(158, 34);
+            subjectsLabel.TabIndex = 66;
+            subjectsLabel.Text = "Matières";
+            // 
+            // roomsLabel
+            // 
+            roomsLabel.AutoSize = false;
+            roomsLabel.Dock = DockStyle.Top;
+            roomsLabel.Location = new Point(0, 0);
+            roomsLabel.Margin = new Padding(4, 5, 4, 5);
+            roomsLabel.Name = "roomsLabel";
+            roomsLabel.Size = new Size(158, 30);
+            roomsLabel.TabIndex = 59;
+            roomsLabel.Text = "Classes";
+            // 
+            // notesSplitPanel
+            // 
+            notesSplitPanel.Controls.Add(attendancesLabel);
+            notesSplitPanel.Controls.Add(notesLabel);
+            notesSplitPanel.Location = new Point(158, 0);
+            notesSplitPanel.Name = "notesSplitPanel";
+            // 
+            // 
+            // 
+            notesSplitPanel.RootElement.MinSize = new Size(25, 25);
+            notesSplitPanel.Size = new Size(157, 62);
+            notesSplitPanel.TabIndex = 2;
+            notesSplitPanel.TabStop = false;
+            // 
+            // attendancesLabel
+            // 
+            attendancesLabel.AutoSize = false;
+            attendancesLabel.Dock = DockStyle.Top;
+            attendancesLabel.Location = new Point(0, 30);
+            attendancesLabel.Margin = new Padding(4, 5, 4, 5);
+            attendancesLabel.Name = "attendancesLabel";
+            attendancesLabel.Size = new Size(157, 34);
+            attendancesLabel.TabIndex = 67;
+            attendancesLabel.Text = "Présences";
+            // 
+            // notesLabel
+            // 
+            notesLabel.AutoSize = false;
+            notesLabel.Dock = DockStyle.Top;
+            notesLabel.Location = new Point(0, 0);
+            notesLabel.Margin = new Padding(4, 5, 4, 5);
+            notesLabel.Name = "notesLabel";
+            notesLabel.Size = new Size(157, 30);
+            notesLabel.TabIndex = 61;
+            notesLabel.Text = "Notes";
             // 
             // addressTextBox
             // 
@@ -629,94 +717,6 @@
             employeeLabel.Size = new Size(315, 114);
             employeeLabel.TabIndex = 5;
             // 
-            // roomSplitContainer
-            // 
-            roomSplitContainer.Controls.Add(roomsSplitPanel);
-            roomSplitContainer.Controls.Add(notesSplitPanel);
-            roomSplitContainer.Dock = DockStyle.Top;
-            roomSplitContainer.Location = new Point(0, 465);
-            roomSplitContainer.Name = "roomSplitContainer";
-            // 
-            // 
-            // 
-            roomSplitContainer.RootElement.MinSize = new Size(25, 25);
-            roomSplitContainer.Size = new Size(315, 62);
-            roomSplitContainer.SplitterWidth = 0;
-            roomSplitContainer.TabIndex = 76;
-            roomSplitContainer.TabStop = false;
-            // 
-            // roomsSplitPanel
-            // 
-            roomsSplitPanel.Controls.Add(subjectsLabel);
-            roomsSplitPanel.Controls.Add(roomsLabel);
-            roomsSplitPanel.Location = new Point(0, 0);
-            roomsSplitPanel.Name = "roomsSplitPanel";
-            // 
-            // 
-            // 
-            roomsSplitPanel.RootElement.MinSize = new Size(25, 25);
-            roomsSplitPanel.Size = new Size(158, 62);
-            roomsSplitPanel.TabIndex = 3;
-            roomsSplitPanel.TabStop = false;
-            // 
-            // roomsLabel
-            // 
-            roomsLabel.AutoSize = false;
-            roomsLabel.Dock = DockStyle.Top;
-            roomsLabel.Location = new Point(0, 0);
-            roomsLabel.Margin = new Padding(4, 5, 4, 5);
-            roomsLabel.Name = "roomsLabel";
-            roomsLabel.Size = new Size(158, 30);
-            roomsLabel.TabIndex = 59;
-            roomsLabel.Text = "Classes";
-            // 
-            // notesSplitPanel
-            // 
-            notesSplitPanel.Controls.Add(attendancesLabel);
-            notesSplitPanel.Controls.Add(notesLabel);
-            notesSplitPanel.Location = new Point(158, 0);
-            notesSplitPanel.Name = "notesSplitPanel";
-            // 
-            // 
-            // 
-            notesSplitPanel.RootElement.MinSize = new Size(25, 25);
-            notesSplitPanel.Size = new Size(157, 62);
-            notesSplitPanel.TabIndex = 2;
-            notesSplitPanel.TabStop = false;
-            // 
-            // notesLabel
-            // 
-            notesLabel.AutoSize = false;
-            notesLabel.Dock = DockStyle.Top;
-            notesLabel.Location = new Point(0, 0);
-            notesLabel.Margin = new Padding(4, 5, 4, 5);
-            notesLabel.Name = "notesLabel";
-            notesLabel.Size = new Size(157, 30);
-            notesLabel.TabIndex = 61;
-            notesLabel.Text = "Notes";
-            // 
-            // subjectsLabel
-            // 
-            subjectsLabel.AutoSize = false;
-            subjectsLabel.Dock = DockStyle.Top;
-            subjectsLabel.Location = new Point(0, 30);
-            subjectsLabel.Margin = new Padding(4, 5, 4, 5);
-            subjectsLabel.Name = "subjectsLabel";
-            subjectsLabel.Size = new Size(158, 34);
-            subjectsLabel.TabIndex = 66;
-            subjectsLabel.Text = "Matières";
-            // 
-            // attendancesLabel
-            // 
-            attendancesLabel.AutoSize = false;
-            attendancesLabel.Dock = DockStyle.Top;
-            attendancesLabel.Location = new Point(0, 30);
-            attendancesLabel.Margin = new Padding(4, 5, 4, 5);
-            attendancesLabel.Name = "attendancesLabel";
-            attendancesLabel.Size = new Size(157, 34);
-            attendancesLabel.TabIndex = 67;
-            attendancesLabel.Text = "Présences";
-            // 
             // EmployeeEnrollingInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -733,6 +733,16 @@
             ((System.ComponentModel.ISupportInitialize)titleInfoLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)roomSplitContainer).EndInit();
+            roomSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)roomsSplitPanel).EndInit();
+            roomsSplitPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)subjectsLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)roomsLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)notesSplitPanel).EndInit();
+            notesSplitPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)attendancesLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)notesLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)addressTextBox).EndInit();
             addressTextBox.ResumeLayout(false);
             addressTextBox.PerformLayout();
@@ -796,16 +806,6 @@
             employeeTextBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)employeeSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)employeeLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)roomSplitContainer).EndInit();
-            roomSplitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)roomsSplitPanel).EndInit();
-            roomsSplitPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)roomsLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)notesSplitPanel).EndInit();
-            notesSplitPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)notesLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)subjectsLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)attendancesLabel).EndInit();
             ResumeLayout(false);
         }
 

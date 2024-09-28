@@ -5,6 +5,7 @@ using Telerik.WinControls;
 using Primary.SchoolApp.Utilities;
 using System.Drawing;
 using Primary.SchoolApp.DTO;
+using SchoolManagement.UI.Localization;
 
 namespace Primary.SchoolApp.CustomElements
 {
@@ -139,8 +140,7 @@ namespace Primary.SchoolApp.CustomElements
                 {
                     className.Text = enrolling.SchoolClass.Name;
                 }
-                //unPaidAmount.Text = Program.UserConnected.Modules.Where(m => m.Module.Id == 3).Count() > 0 ? "Impayé: " + enrolling.Balance : "";
-                //unPaidAmount.Text = "KONO";
+                unPaidAmount.Text =$"{Language.labelUnPaid}: {enrolling.Balance}";
                 this.BackColor = AppUtilities.MainThemeColor;
                 studentIdNumber.ForeColor = Color.White;
                 className.ForeColor = Color.White;

@@ -1,10 +1,8 @@
 ﻿
 
-using Microsoft.VisualBasic.ApplicationServices;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
-using SchoolManagement.UI.CustomControls;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Drawing;

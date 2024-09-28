@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI.Export;
 using Telerik.WinControls.UI;
+using System.Threading;
+using System.Linq;
 
 namespace Primary.SchoolApp.Utilities
 {
@@ -15,7 +17,59 @@ namespace Primary.SchoolApp.Utilities
         public static Color MainThemeColor;
         public static string MainFont = "Roboto";
         public static string MainFontMedium = "Roboto Medium";
-
+        public   readonly struct Relationship
+        {
+            public int Id { get; }
+            public string Name { get; }
+            public Relationship(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+        }
+       static List<Relationship> relationshipFrenchList = new() {
+                new Relationship(0,"Père"),
+                new Relationship(1,"Mère"),
+                new Relationship(2,"Sœur"),
+                new Relationship(3,"Frère"),
+                new Relationship(4,"Oncle"),
+                new Relationship(5,"Tante"),
+                new Relationship(6,"Grand Père"),
+                new Relationship(7,"Grand Mère"),
+                new Relationship(8,"Cousin"),
+                new Relationship(9,"Cousine"),
+                new Relationship(10,"Tuteur"),
+                new Relationship(11,"Tutrice"),
+                new Relationship(12,"Parrain"),
+                new Relationship(13,"Marraine"),
+                new Relationship(14,"Chauffeur"),
+                new Relationship(15,"Nounou"),
+                new Relationship(16,"Domestique"),
+                new Relationship(17,"Médecin"),
+                new Relationship(18,"Autre"),
+            };
+        static List<Relationship> relationshipEnglishList = new() {
+                new Relationship(0,"Father"),
+                new Relationship(1,"Mother"),
+                new Relationship(2,"Sister"),
+                new Relationship(3,"Brother"),
+                new Relationship(4,"Uncle"),
+                new Relationship(5,"Aunt"),
+                new Relationship(6,"Grandfather"),
+                new Relationship(7,"Grandmother"),
+                new Relationship(8,"Cousin"),
+                new Relationship(9,"Cousin"),
+                new Relationship(10,"Tutor"),
+                new Relationship(11,"Tutor"),
+                new Relationship(12,"GodFather"),
+                new Relationship(13,"GodMother"),
+                new Relationship(14,"Driver"),
+                new Relationship(15,"Nanny"),
+                new Relationship(16,"household"),
+                new Relationship(17,"Doctor"),
+                new Relationship(18,"Other"),
+            };
+        static List<Relationship> relationshipDefaultList = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList : relationshipFrenchList;
         public static List<string> Religions()
         {
             List<string> religions = new List<string>();
@@ -39,7 +93,20 @@ namespace Primary.SchoolApp.Utilities
             return religions;
 
         }
+        public static String ToHex(String data)
 
+        {
+
+            String output = String.Empty;
+
+            foreach (Char c in data)
+            {
+
+                output += ((int)c).ToString("X");
+
+            }
+            return output;
+        }
         public static Image GetImage(string category)
         {
             Image image = null;
@@ -49,10 +116,13 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.pencil_blue;
+                            image = Resources.edit_blue;
                             break;
-                        case "Eye":
-                            image = Resources.eye_blue;
+                        case "Watch":
+                            image = Resources.watch_blue;
+                            break;
+                        case "Image":
+                            image = Resources.add_image_blue;
                             break;
                         case "File":
                             image = Resources.create_file_blue;
@@ -90,16 +160,25 @@ namespace Primary.SchoolApp.Utilities
                         case "Undo":
                             image = Resources.undo_blue;
                             break;
+                        case "Cancel":
+                            image = Resources.cancel_blue;
+                            break;
+                        case "Search":
+                            image = Resources.search_blue;
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.pencil_blue_grey;
+                            image = Resources.edit_blue_grey;
                             break;
-                        case "Eye":
-                            image = Resources.eye_blue_grey;
+                        case "Watch":
+                            image = Resources.watch_blue_grey;
+                            break;
+                        case "Image":
+                            image = Resources.add_image_blue_grey;
                             break;
                         case "File":
                             image = Resources.create_file_blue_grey;
@@ -137,16 +216,25 @@ namespace Primary.SchoolApp.Utilities
                         case "Undo":
                             image = Resources.undo_blue_grey;
                             break;
+                        case "Cancel":
+                            image = Resources.cancel_blue_grey;
+                            break;
+                        case "Search":
+                            image = Resources.search_blue_grey;
+                            break;
                     }
                     break;
                 case "MaterialPink":
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.pencil_pink;
+                            image = Resources.edit_pink;
                             break;
-                        case "Eye":
-                            image = Resources.eye_pink;
+                        case "Watch":
+                            image = Resources.watch_pink;
+                            break;
+                        case "Image":
+                            image = Resources.add_image_pink;
                             break;
                         case "File":
                             image = Resources.create_file_pink;
@@ -184,16 +272,25 @@ namespace Primary.SchoolApp.Utilities
                         case "Undo":
                             image = Resources.undo_pink;
                             break;
+                        case "Cancel":
+                            image = Resources.cancel_pink;
+                            break;
+                        case "Search":
+                            image = Resources.search_pink;
+                            break;
                     }
                     break;
                 case "MaterialTeal":
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.pencil_teal;
+                            image = Resources.edit_teal;
                             break;
-                        case "Eye":
-                            image = Resources.eye_teal;
+                        case "Watch":
+                            image = Resources.watch_teal;
+                            break;
+                        case "Image":
+                            image = Resources.add_image_teal;
                             break;
                         case "File":
                             image = Resources.create_file_teal;
@@ -230,6 +327,12 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Undo":
                             image = Resources.undo_teal;
+                            break;
+                        case "Cancel":
+                            image = Resources.cancel_teal;
+                            break;
+                        case "Search":
+                            image = Resources.search_teal;
                             break;
                     }
                     break;
@@ -335,5 +438,16 @@ namespace Primary.SchoolApp.Utilities
 
         }
         #endregion
+
+        public static string GetRelationshipName(int relationshipId)
+        {
+            var relationship = relationshipDefaultList.FirstOrDefault(x=>x.Id== relationshipId);
+            return relationship.Name;   
+        }
+        public static List<Relationship> GetRelationshipList()
+        {
+            return relationshipDefaultList;
+        }
+
     }
 }

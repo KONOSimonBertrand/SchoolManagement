@@ -136,11 +136,35 @@
   <data name="add_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\add_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="add_image_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_image_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add_image_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_image_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add_image_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_image_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="add_image_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_image_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\add_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\add_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\close_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,23 +247,23 @@
   <data name="eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="eye_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\eye_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="GlyphCheck_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\GlyphCheck_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GlyphClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\GlyphClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="head_paper_big_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\head_paper_big_en.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="head_paper_big_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\head_paper_big_fr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="head_paper_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\head_paper_en.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="head_paper_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\head_paper_fr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="heartbeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\heartbeat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -325,18 +349,6 @@
   <data name="no_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\no-image.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pencil_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\pencil_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pencil_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\pencil_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pencil_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\pencil_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pencil_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\pencil_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -351,6 +363,18 @@
   </data>
   <data name="printer_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\printer_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tripple_users" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\tripple_users.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -414,5 +438,17 @@
   </data>
   <data name="view_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\view_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="watch_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

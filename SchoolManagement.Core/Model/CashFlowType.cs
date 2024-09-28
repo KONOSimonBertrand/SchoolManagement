@@ -12,7 +12,7 @@ namespace SchoolManagement.Core.Model
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public string TypeName
+        virtual public string TypeName
         {
             get
             {

@@ -212,7 +212,7 @@
             religionDropDownList.Margin = new Padding(4, 5, 4, 5);
             religionDropDownList.MinimumSize = new Size(0, 30);
             religionDropDownList.Name = "religionDropDownList";
-            religionDropDownList.Size = new Size(347, 30);
+            religionDropDownList.Size = new Size(347, 35);
             religionDropDownList.TabIndex = 10;
             ((Telerik.WinControls.UI.RadDropDownListElement)religionDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)religionDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -227,7 +227,7 @@
             idCardTextBox.Location = new Point(10, 32);
             idCardTextBox.Margin = new Padding(4, 5, 4, 5);
             idCardTextBox.Name = "idCardTextBox";
-            idCardTextBox.Size = new Size(211, 30);
+            idCardTextBox.Size = new Size(211, 36);
             idCardTextBox.TabIndex = 9;
             // 
             // religionLabel
@@ -310,7 +310,7 @@
             emailTextBox.Location = new Point(229, 30);
             emailTextBox.Margin = new Padding(4, 5, 4, 5);
             emailTextBox.Name = "emailTextBox";
-            emailTextBox.Size = new Size(283, 30);
+            emailTextBox.Size = new Size(283, 36);
             emailTextBox.TabIndex = 7;
             // 
             // phoneTextBox
@@ -319,7 +319,7 @@
             phoneTextBox.Location = new Point(10, 30);
             phoneTextBox.Margin = new Padding(4, 5, 4, 5);
             phoneTextBox.Name = "phoneTextBox";
-            phoneTextBox.Size = new Size(211, 30);
+            phoneTextBox.Size = new Size(211, 36);
             phoneTextBox.TabIndex = 6;
             // 
             // emailLabel
@@ -357,7 +357,7 @@
             addressTextBox.Location = new Point(519, 30);
             addressTextBox.Margin = new Padding(4, 5, 4, 5);
             addressTextBox.Name = "addressTextBox";
-            addressTextBox.Size = new Size(348, 30);
+            addressTextBox.Size = new Size(348, 36);
             addressTextBox.TabIndex = 8;
             addressTextBox.Text = "Inconnue";
             // 
@@ -428,7 +428,7 @@
             nationalityDropDownList.Margin = new Padding(4, 5, 4, 5);
             nationalityDropDownList.MinimumSize = new Size(0, 30);
             nationalityDropDownList.Name = "nationalityDropDownList";
-            nationalityDropDownList.Size = new Size(251, 30);
+            nationalityDropDownList.Size = new Size(251, 35);
             nationalityDropDownList.TabIndex = 108;
             ((Telerik.WinControls.UI.RadDropDownListElement)nationalityDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)nationalityDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -480,7 +480,7 @@
             birthPlaceTextBox.Location = new Point(308, 30);
             birthPlaceTextBox.Margin = new Padding(4, 5, 4, 5);
             birthPlaceTextBox.Name = "birthPlaceTextBox";
-            birthPlaceTextBox.Size = new Size(302, 30);
+            birthPlaceTextBox.Size = new Size(302, 36);
             birthPlaceTextBox.TabIndex = 5;
             // 
             // birthplaceLabel
@@ -504,7 +504,7 @@
             // 
             // 
             birthdayDateTimePicker.RootElement.MinSize = new Size(0, 30);
-            birthdayDateTimePicker.Size = new Size(148, 30);
+            birthdayDateTimePicker.Size = new Size(148, 36);
             birthdayDateTimePicker.TabIndex = 4;
             birthdayDateTimePicker.TabStop = false;
             birthdayDateTimePicker.Text = "lundi 29 janvier 2018";
@@ -529,7 +529,7 @@
             sexDropDownList.Margin = new Padding(4, 5, 4, 5);
             sexDropDownList.MinimumSize = new Size(0, 30);
             sexDropDownList.Name = "sexDropDownList";
-            sexDropDownList.Size = new Size(136, 30);
+            sexDropDownList.Size = new Size(136, 35);
             sexDropDownList.TabIndex = 3;
             ((Telerik.WinControls.UI.RadDropDownListElement)sexDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)sexDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -617,7 +617,7 @@
             firstNameTextBox.Location = new Point(462, 30);
             firstNameTextBox.Margin = new Padding(4, 5, 4, 5);
             firstNameTextBox.Name = "firstNameTextBox";
-            firstNameTextBox.Size = new Size(320, 30);
+            firstNameTextBox.Size = new Size(320, 36);
             firstNameTextBox.TabIndex = 2;
             // 
             // lastNameTextBox
@@ -626,7 +626,7 @@
             lastNameTextBox.Location = new Point(135, 30);
             lastNameTextBox.Margin = new Padding(4, 5, 4, 5);
             lastNameTextBox.Name = "lastNameTextBox";
-            lastNameTextBox.Size = new Size(320, 30);
+            lastNameTextBox.Size = new Size(320, 36);
             lastNameTextBox.TabIndex = 1;
             // 
             // firstNameLabel
@@ -655,7 +655,7 @@
             idNumberTextBox.Location = new Point(10, 30);
             idNumberTextBox.Margin = new Padding(4, 5, 4, 5);
             idNumberTextBox.Name = "idNumberTextBox";
-            idNumberTextBox.Size = new Size(122, 30);
+            idNumberTextBox.Size = new Size(122, 36);
             idNumberTextBox.TabIndex = 0;
             // 
             // idNumberLabel
@@ -683,7 +683,7 @@
             closeButton.Location = new Point(743, 308);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(117, 30);
+            closeButton.Size = new Size(117, 36);
             closeButton.TabIndex = 12;
             closeButton.Text = "Annuler";
             // 
@@ -692,7 +692,7 @@
             saveButton.Location = new Point(618, 308);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(117, 30);
+            saveButton.Size = new Size(117, 36);
             saveButton.TabIndex = 11;
             saveButton.Text = "Enregistrer";
             // 
@@ -707,11 +707,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(879, 394);
+            ClientSize = new Size(879, 355);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditStudentForm";
             Text = "EditStudentForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();

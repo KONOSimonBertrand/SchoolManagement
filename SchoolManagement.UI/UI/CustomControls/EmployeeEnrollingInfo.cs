@@ -53,7 +53,7 @@ namespace SchoolManagement.UI.CustomControls
             this.idCardLabel.Text = Language.labelIdCard;
             this.phoneLabel.Text = Language.labelPhone;
             this.emailLabel.Text=Language.labelMail;
-            this.addressLabel.Text = Language.labelAdddress;
+            this.addressLabel.Text = Language.labelAddress;
             this.roomsLabel.Text = Language.labelRooms;
             this.subjectsLabel.Text = Language.labelSubjects;
             this.notesLabel.Text = Language.labelNotes;
@@ -79,25 +79,25 @@ namespace SchoolManagement.UI.CustomControls
             this.employeeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.employeeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.roomsLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.roomsLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.roomsLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.roomsLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.roomsLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.roomsLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.subjectsLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.subjectsLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.subjectsLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.subjectsLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.subjectsLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.subjectsLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.notesLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.notesLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.notesLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.notesLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.notesLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.notesLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.attendancesLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.attendancesLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.attendancesLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.attendancesLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.attendancesLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
@@ -273,7 +273,10 @@ namespace SchoolManagement.UI.CustomControls
             attendancesLabel.LabelElement.ToolTipText = Language.messageDoubleClickToSee;
             notesLabel.LabelElement.ToolTipText = Language.messageDoubleClickToSee; ;
 
-
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
         }
         private void Label_MouseMove(object sender, EventArgs e)
         {

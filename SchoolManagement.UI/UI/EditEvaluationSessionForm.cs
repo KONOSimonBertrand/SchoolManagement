@@ -108,19 +108,21 @@ namespace SchoolManagement.UI
             this.errorLabel.Text = "";
             if (this.nameFrTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
-                this.nameFrTextBox.Focus();
+                this.errorProvider.SetError(this.nameFrTextBox, Language.messageFillField);
+                this.errorLabel.Text = Language.messageFillField;
                 return false;
             }
             if (this.codeTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de l'abréviation de la désignation est requise!";
+                this.errorProvider.SetError(this.codeTextBox, Language.messageFillField);
+                this.errorLabel.Text = Language.messageFillField;
                 this.codeTextBox.Focus();
                 return false;
             }
             if (this.nameEnTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation anglaise est requise!";
+                this.errorProvider.SetError(this.nameEnTextBox, Language.messageFillField);
+                this.errorLabel.Text = Language.messageFillField;
                 this.nameEnTextBox.Focus();
                 return false;
             }

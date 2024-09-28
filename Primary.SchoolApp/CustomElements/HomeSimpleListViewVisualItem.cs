@@ -1,16 +1,16 @@
 ﻿
 
 using Primary.SchoolApp.Utilities;
-using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Drawing;
 using System.Linq;
 using Telerik.WinControls.UI;
+using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 
 namespace Primary.SchoolApp.CustomElements
 {
-    internal class HomeSimpleListViewVisualItem : SimpleListViewVisualItem
+    class HomeSimpleListViewVisualItem : SimpleListViewVisualItem
     {
         protected override Type ThemeEffectiveType
         {
@@ -33,7 +33,7 @@ namespace Primary.SchoolApp.CustomElements
             this.countElement.ShouldHandleMouseInput = false;
             this.countElement.StretchHorizontally = false;
             this.countElement.Alignment = System.Drawing.ContentAlignment.MiddleRight;
-            this.countElement.MinSize = countElement.MaxSize = new System.Drawing.Size(30, 0);
+            this.countElement.MinSize = countElement.MaxSize = new System.Drawing.Size(40, 0);
             this.countImage.ImageLayout = System.Windows.Forms.ImageLayout.None;
             this.countImage.ImageAlignment = ContentAlignment.MiddleRight;
             this.countImage.StretchHorizontally = true;
@@ -50,11 +50,11 @@ namespace Primary.SchoolApp.CustomElements
             this.DrawText = false;
             this.ToggleElement.Text = this.Text;
 
-            this.ToggleElement.CustomFont = AppUtilities.MainFont;
+            this.ToggleElement.CustomFont =AppUtilities.MainFont;
             this.ToggleElement.CustomFontSize = 10.5f;
             this.ToggleElement.TextElement.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
 
-            this.countElement.CustomFont = AppUtilities.MainFont;
+            this.countElement.CustomFont =AppUtilities.MainFont;
             this.countElement.CustomFontSize = 10.5f;
             this.countElement.CustomFontStyle = FontStyle.Regular;
 
@@ -119,25 +119,23 @@ namespace Primary.SchoolApp.CustomElements
                     }
                 }
             }
-            
-
-        }
+    }
         private string GetStudentBySchoolGroup(int id)
         {
-           int count = 0;
-           count= Program.StudentEnrollingList.Where(i => i.IsActive && i.SchoolClass.Group.Id == id).Count();
+            int count = 0;
+            count = Program.StudentEnrollingList != null ? Program.StudentEnrollingList.Where(i => i.IsActive && i.SchoolClass.Group.Id == id).Count() : 0;
             return count.ToString();
         }
         private string GetStudentByClass(int id)
         {
             int count = 0;
-            count = Program.StudentEnrollingList.Where(i => i.IsActive && i.SchoolClass.Id == id).Count();
+            count = Program.StudentEnrollingList != null ? Program.StudentEnrollingList.Where(i => i.IsActive && i.SchoolClass.Id == id).Count() : 0;
             return count.ToString();
         }
         private string GetStudentByStatusHealth(int status)
         {
             int count = 0;
-            count = Program.StudentEnrollingList.Where(i => i.IsActive && i.Student.Health==status).Count();          
+            count = Program.StudentEnrollingList != null ? Program.StudentEnrollingList.Where(i => i.IsActive && i.Student.Health == status).Count() : 0;
             return count.ToString();
         }
 
@@ -145,29 +143,27 @@ namespace Primary.SchoolApp.CustomElements
         private string GetStudentByTuitionFeeStatus(int paymentType)
         {
             int count = 0;
-            
+            count = paymentType != 0 ? Program.StudentEnrollingList.Where(x => x.Balance > 0 && x.IsActive).Count() : Program.StudentEnrollingList.Where(x => x.Balance == 0 && x.IsActive).Count();
             return count.ToString();
         }
         // extraction des eleves insolvable
         private string GetStudentByInsolvency(int paymentType)
         {
-            int count = 0;
-           
-            return count.ToString();
+            var result = Program.StudentEnrollingList.Where(x => x.IsActive && x.InsolvencyStateList.Where(y => y.Id == paymentType).Sum(y => y.Amount) > 0);
+            return result.Count().ToString();
         }
         //extraction des eleves solvables
         private string GetStudentBySolvency(int paymentType)
         {
-            int count = 0;
-            
-            return count.ToString();
+            var result=Program.StudentEnrollingList.Where(x => x.IsActive && x.InsolvencyStateList.Where(y => y.Id == paymentType).Sum(y => y.Amount) == 0);
+            return result.Count().ToString();
         }
         //extraction des eleves actif
         private string GetStudentByStatus(int status)
         {
             bool boolStatus = false;
             if (status == 1) boolStatus = true;
-            var count=Program.StudentEnrollingList.Where(x=>x.IsActive== boolStatus).Count();
+            var count = Program.StudentEnrollingList.Where(x => x.IsActive == boolStatus).Count();
             return count.ToString();
         }
 

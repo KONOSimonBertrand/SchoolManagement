@@ -22,6 +22,8 @@ namespace SchoolManagement.UI
         public RadTextBox AddressTextBox { get=>addressTextBox;}
         public RadTextBox IdCardTextBox { get=>idCardTextBox;}
         public RadDropDownList ReligionDropDownList {get=>religionDropDownList;}
+        public RadLabel ErrorLabel { get=>errorLabel;}
+        public ErrorProvider ErrorProvider { get=>errorProvider;}
         public EditStudentForm()
         {
             InitializeComponent();
@@ -39,7 +41,7 @@ namespace SchoolManagement.UI
             this.birthdayLabel.Text = "<html>" + Language.labelBirthDate + ":" + "<color=Red>*";
             this.nationalityLabel.Text = Language.labelNativeCountry;
             this.phoneLabel.Text = Language.labelPhone;
-            this.addressLabel.Text = Language.labelAdddress;
+            this.addressLabel.Text = Language.labelAddress;
             this.idCardLabel.Text = Language.labelIdCard;
             this.birthplaceLabel.Text = Language.labelBirthPlace;
             this.emailLabel.Text = Language.labelMail;
@@ -240,6 +242,7 @@ namespace SchoolManagement.UI
             this.phoneTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.addressTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.idCardTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
+            this.birthPlaceTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
 
             this.idNumberSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.lastNameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);

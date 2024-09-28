@@ -20,6 +20,7 @@ namespace Primary.SchoolApp.UI
             this.employeeService = employeeService;
             this.clientApp = clientApp; 
             this.logService = logService;
+            this.Text = "Photo";
             InitEvents();
             UrlPicture=string.Empty;
         }
@@ -97,7 +98,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                //on cherche un photo par defaut
+                //on cherche une photo par defaut
                 if (File.Exists(enrolling.Employee.PictureUrl))
                 {
                     Bitmap bitmap = new(Image.FromFile(enrolling.Employee.PictureUrl), new Size(114, 114));
@@ -105,7 +106,17 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    this.SetPanelImage(this.DefaultImage);
+                    //on cherche une photo dans le dossier 
+                    var url = clientApp.EmployeePitureFolder + "/" + enrolling.Employee.IdNumber;
+                    if (File.Exists(url))
+                    {
+                        Bitmap bitmap = new(Image.FromFile(url), new Size(114, 114));
+                        this.SetPanelImage(bitmap);
+                    }
+                    else
+                    {
+                        this.SetPanelImage(this.DefaultImage);
+                    }
                 }
             }
         }

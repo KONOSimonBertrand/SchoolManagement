@@ -2,6 +2,12 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Reporting\PaymentReceiptA4Report.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\PaymentSummaryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="UI\ClassSubjectsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -9,6 +15,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\DateNavigator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\CustomControls\DisciplineSubjectInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\EmployeeEnrollingInfo.cs">
@@ -65,7 +74,22 @@
     <Compile Update="UI\EditCashFlowTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\EditContactForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditDisciplineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditDisciplineSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\EditTimeTableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditTuitionDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditTuitionPaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Employee\EditEmployeeAccountTransactionForm.cs">
@@ -126,6 +150,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Student\EditStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\StudentItemsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditSubscriptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\User\EditUserForm.cs">

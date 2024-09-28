@@ -4,7 +4,7 @@ using SchoolManagement.Core.Model;
 
 namespace SchoolManagement.Application
 {
-    internal interface IStudentService
+    public interface IStudentService
     {
         public Task<string> GenerateStudentIdNumberAsync();
         public Task<bool> CreateStudentAsync(Student student);
@@ -12,7 +12,7 @@ namespace SchoolManagement.Application
         public Task<Student> GetStudentAsync(string idNumber);
         public Task<Student> GetLastStudentAsync();
         public Task<List<Student>> GetStudentListsync();
-       
+        public Task<bool> SaveStudentPictureAsync(int studentId, string urlPicture);
 
     }
 }

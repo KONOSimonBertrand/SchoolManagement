@@ -59,7 +59,7 @@ namespace SchoolManagement.UI.CustomControls
             this.idCardLabel.Text = Language.labelIdCard;
             this.phoneLabel.Text = Language.labelPhone;
             this.emailLabel.Text = Language.labelMail;
-            this.addressLabel.Text = Language.labelAdddress;
+            this.addressLabel.Text = Language.labelAddress;
             this.contactsLabel.Text = Language.labelRooms;
             this.healthLabel.Text = Language.labelSubjects;
             this.disciplineLabel.Text = Language.labelNotes;
@@ -86,25 +86,25 @@ namespace SchoolManagement.UI.CustomControls
             this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.contactsLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.contactsLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.contactsLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.contactsLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.contactsLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.contactsLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.healthLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.healthLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.healthLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.healthLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.healthLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.healthLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.disciplineLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.disciplineLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.disciplineLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.disciplineLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.disciplineLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.disciplineLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.subscriptionLabel.Image = Utilities.ViewUtilities.GetImage("Eye");
+            this.subscriptionLabel.Image = Utilities.ViewUtilities.GetImage("View");
             this.subscriptionLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.subscriptionLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.subscriptionLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
@@ -266,8 +266,13 @@ namespace SchoolManagement.UI.CustomControls
             this.closeButton.ButtonElement.Padding = new Padding(0);
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.closeButton.Image = Utilities.ViewUtilities.GetImage("Close");
+            this.closeButton.Image = Utilities.ViewUtilities.GetImage("Close");           
             this.closeButton.RootElement.ToolTipText = Language.messageClickToEdit;
+
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
 
             this.roomLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.contactsLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

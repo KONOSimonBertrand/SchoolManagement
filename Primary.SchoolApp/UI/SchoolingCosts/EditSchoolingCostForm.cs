@@ -159,10 +159,10 @@ namespace Primary.SchoolApp.UI
                     );
                 }
                 TranchesGridView.DataSource = emptyList;
-                foreach (var row in TranchesGridView.Rows)
-                {
-                    row.Height = 30;
-                }
+                //foreach (var row in TranchesGridView.Rows)
+                //{
+                //    row.Height = 40;
+                //}
             }
         }
 
@@ -213,21 +213,21 @@ namespace Primary.SchoolApp.UI
         private void InitTranchesGridView()
         {
 
-            GridViewDecimalColumn idColumn = new("Id");
+            GridViewDecimalColumn rankColumn = new("Rank");
             GridViewDecimalColumn amounColumn = new("Amount");
             GridViewDateTimeColumn deadLineColumn = new("DeadLine");
-            idColumn.HeaderText = "N°";
+            rankColumn.HeaderText = "N°";
             amounColumn.HeaderText = Language.labelAmount;
             deadLineColumn.HeaderText = Language.labelDelay;
-            idColumn.Width = 50;
+            rankColumn.Width = 50;
             amounColumn.Width = 150;
             deadLineColumn.Width = 250;
             deadLineColumn.Format = DateTimePickerFormat.Custom;
             deadLineColumn.CustomFormat = "dd/MM/yyyy";
             deadLineColumn.FormatString = "{0:dd/MM/yyyy}";
             deadLineColumn.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            idColumn.ReadOnly = true;
-            TranchesGridView.Columns.Add(idColumn);
+            rankColumn.ReadOnly = true;
+            TranchesGridView.Columns.Add(rankColumn);
             TranchesGridView.Columns.Add(amounColumn);
             TranchesGridView.Columns.Add(deadLineColumn);
             GridViewSummaryRowItem summaryRow = new()
@@ -243,24 +243,22 @@ namespace Primary.SchoolApp.UI
         {
             var getData = await schoolingCostService.GetSchoolingCostItems(schoolingCost.Id);
             IList<SchoolingCostItem> listToLoad = new List<SchoolingCostItem>();
-            int i = 1;
             foreach (var item in getData)
             {
                 listToLoad.Add(
                     new SchoolingCostItem()
                     {
-                        Id = i,
+                        Rank =item.Rank,
                         Amount = item.Amount,
                         DeadLine = item.DeadLine,
                     }
                     );
-                i++;
             }
             TranchesGridView.DataSource = listToLoad;
-            foreach (var row in TranchesGridView.Rows)
-            {
-                row.Height = 30;
-            }
+            //foreach (var row in TranchesGridView.Rows)
+            //{
+            //    row.Height = 30;
+            //}
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {

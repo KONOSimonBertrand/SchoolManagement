@@ -61,8 +61,6 @@ namespace SchoolManagement.UI.CustomControls
             this.subscriptionTypeTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.subscriptionTypeTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-
-
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities. MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
@@ -99,6 +97,10 @@ namespace SchoolManagement.UI.CustomControls
             this.schoolYearSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.subscriptionTypeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.amountSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
         }
 
         private void InitEvents()

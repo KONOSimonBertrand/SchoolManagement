@@ -170,37 +170,37 @@ namespace Primary.SchoolApp.UI
                 {
                     emptyList.Add(new SchoolingCostItem()
                     {
-                        Id = i,
+                        Rank = i,
                         Amount = 0,
                         DeadLine = DateTime.Now
                     }
                     );
                 }
                 TranchesGridView.DataSource = emptyList;
-                foreach (var row in TranchesGridView.Rows)
-                {
-                    row.Height = 30;
-                }
+                //foreach (var row in TranchesGridView.Rows)
+                //{
+                //    row.Height = 40;
+                //}
             }
         }
         //création des colonnes du gridView
         private void InitTranchesGridView()
         {
-            GridViewDecimalColumn idColumn = new("Id");
+            GridViewDecimalColumn rankColumn = new("Rank");
             GridViewDecimalColumn amounColumn = new("Amount");
             GridViewDateTimeColumn deadLineColumn = new("DeadLine");
-            idColumn.HeaderText = "N°";
+            rankColumn.HeaderText = "N°";
             amounColumn.HeaderText = Language.labelAmount;
             deadLineColumn.HeaderText = Language.labelDelay;
-            idColumn.Width = 50;
+            rankColumn.Width = 50;
             amounColumn.Width = 150;
             deadLineColumn.Width = 250;
             deadLineColumn.Format = DateTimePickerFormat.Custom;
             deadLineColumn.CustomFormat = "dd/MM/yyyy";
             deadLineColumn.FormatString = "{0:dd/MM/yyyy}";
             deadLineColumn.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
-            idColumn.ReadOnly = true;
-            TranchesGridView.Columns.Add(idColumn);
+            rankColumn.ReadOnly = true;
+            TranchesGridView.Columns.Add(rankColumn);
             TranchesGridView.Columns.Add(amounColumn);
             TranchesGridView.Columns.Add(deadLineColumn);
             GridViewSummaryRowItem summaryRow = new()

@@ -116,7 +116,7 @@
             editPanel.Dock = DockStyle.Top;
             editPanel.Location = new Point(0, 0);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(575, 416);
+            editPanel.Size = new Size(579, 416);
             editPanel.TabIndex = 74;
             // 
             // tranchesGroupBox
@@ -192,7 +192,7 @@
             trancheNumberTextBox.Margin = new Padding(4, 5, 4, 5);
             trancheNumberTextBox.MaxLength = 1;
             trancheNumberTextBox.Name = "trancheNumberTextBox";
-            trancheNumberTextBox.Size = new Size(109, 32);
+            trancheNumberTextBox.Size = new Size(109, 36);
             trancheNumberTextBox.TabIndex = 8;
             // 
             // amountTextBox
@@ -201,7 +201,7 @@
             amountTextBox.Location = new Point(6, 175);
             amountTextBox.Margin = new Padding(4, 5, 4, 5);
             amountTextBox.Name = "amountTextBox";
-            amountTextBox.Size = new Size(234, 32);
+            amountTextBox.Size = new Size(234, 36);
             amountTextBox.TabIndex = 7;
             // 
             // trancheNumberLabel
@@ -230,7 +230,7 @@
             addCostTypeButton.Location = new Point(242, 103);
             addCostTypeButton.Margin = new Padding(4, 5, 4, 5);
             addCostTypeButton.Name = "addCostTypeButton";
-            addCostTypeButton.Size = new Size(20, 30);
+            addCostTypeButton.Size = new Size(20, 36);
             addCostTypeButton.TabIndex = 5;
             // 
             // costTypeDropDownList
@@ -242,7 +242,7 @@
             costTypeDropDownList.Margin = new Padding(4, 5, 4, 5);
             costTypeDropDownList.MinimumSize = new Size(0, 30);
             costTypeDropDownList.Name = "costTypeDropDownList";
-            costTypeDropDownList.Size = new Size(234, 30);
+            costTypeDropDownList.Size = new Size(234, 35);
             costTypeDropDownList.TabIndex = 4;
             ((Telerik.WinControls.UI.RadDropDownListElement)costTypeDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)costTypeDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -261,7 +261,7 @@
             costPayableDropDownList.Margin = new Padding(4, 5, 4, 5);
             costPayableDropDownList.MinimumSize = new Size(0, 30);
             costPayableDropDownList.Name = "costPayableDropDownList";
-            costPayableDropDownList.Size = new Size(109, 30);
+            costPayableDropDownList.Size = new Size(109, 35);
             costPayableDropDownList.TabIndex = 6;
             ((Telerik.WinControls.UI.RadDropDownListElement)costPayableDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)costPayableDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -314,7 +314,7 @@
             addClassButton.Location = new Point(525, 32);
             addClassButton.Margin = new Padding(4, 5, 4, 5);
             addClassButton.Name = "addClassButton";
-            addClassButton.Size = new Size(20, 30);
+            addClassButton.Size = new Size(20, 36);
             addClassButton.TabIndex = 3;
             // 
             // classDropDownList
@@ -326,7 +326,7 @@
             classDropDownList.Margin = new Padding(4, 5, 4, 5);
             classDropDownList.MinimumSize = new Size(0, 30);
             classDropDownList.Name = "classDropDownList";
-            classDropDownList.Size = new Size(234, 30);
+            classDropDownList.Size = new Size(234, 35);
             classDropDownList.TabIndex = 2;
             ((Telerik.WinControls.UI.RadDropDownListElement)classDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)classDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -341,7 +341,7 @@
             addSchoolYearButton.Location = new Point(242, 32);
             addSchoolYearButton.Margin = new Padding(4, 5, 4, 5);
             addSchoolYearButton.Name = "addSchoolYearButton";
-            addSchoolYearButton.Size = new Size(20, 30);
+            addSchoolYearButton.Size = new Size(20, 36);
             addSchoolYearButton.TabIndex = 1;
             // 
             // schoolYearDropDownList
@@ -353,7 +353,7 @@
             schoolYearDropDownList.Margin = new Padding(4, 5, 4, 5);
             schoolYearDropDownList.MinimumSize = new Size(0, 30);
             schoolYearDropDownList.Name = "schoolYearDropDownList";
-            schoolYearDropDownList.Size = new Size(234, 30);
+            schoolYearDropDownList.Size = new Size(234, 35);
             schoolYearDropDownList.TabIndex = 0;
             ((Telerik.WinControls.UI.RadDropDownListElement)schoolYearDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)schoolYearDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -393,10 +393,11 @@
             // 
             // closeButton
             // 
+            closeButton.DialogResult = DialogResult.Cancel;
             closeButton.Location = new Point(427, 423);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(133, 32);
+            closeButton.Size = new Size(133, 36);
             closeButton.TabIndex = 112;
             closeButton.Text = "Annuler";
             // 
@@ -405,7 +406,7 @@
             saveButton.Location = new Point(287, 423);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(133, 32);
+            saveButton.Size = new Size(133, 36);
             saveButton.TabIndex = 111;
             saveButton.Text = "Enregistrer";
             // 
@@ -415,12 +416,16 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(575, 491);
+            CancelButton = closeButton;
+            ClientSize = new Size(579, 493);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditSchoolingCostForm";
             Text = "EditSchoolingCostForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();

@@ -51,6 +51,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Telerik.Reporting": {
+              "target": "Package",
+              "version": "[17.1.23.718, )"
+            },
             "UI.for.WinForms.AllControls.Net60": {
               "target": "Package",
               "version": "[2023.2.718, )"

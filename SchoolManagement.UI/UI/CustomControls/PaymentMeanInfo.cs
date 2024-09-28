@@ -98,6 +98,10 @@ namespace SchoolManagement.UI.CustomControls
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.accountSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.typeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            closeButton.ButtonElement.Padding = new Padding(0);
+            editButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            editButton.ButtonElement.Padding = new Padding(0);
         }
         private void InitLanguage()
         {

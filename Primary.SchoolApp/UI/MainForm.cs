@@ -18,6 +18,12 @@ using Primary.SchoolApp.UI.CustomControls;
 using System.IO;
 using System.Drawing;
 using Telerik.Windows.Diagrams.Core;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Services;
+using System.Diagnostics;
+using MediaFoundation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using SchoolManagement.Application.Subscriptions;
 namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
@@ -47,14 +53,21 @@ namespace Primary.SchoolApp
         private readonly IModuleService moduleService;
         private readonly ICountryService countryService;
         private readonly ITimeTableService timeTableService;
+        private readonly IPrintService printService;
         private readonly IStudentEnrollingService studentEnrollingService;
+        private readonly ICashFlowService cashFlowService;
+        private readonly ISubscriptionService subscriptionService;
+        private readonly LocalEnrollingService localEnrollingService;
+        private readonly IDisciplineService disciplineService;
+        private readonly IContactService contactService;
         public MainForm(ISchoolYearService schoolYearService, ISchoolGroupService schoolGroupService,
             ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
             , IPaymentMeanService paymentMeanService, ISchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
             , ISubjectGroupService subjectGroupService, ISubjectService subjectService, IEvaluationSessionService evaluationSessionService,
             ClientApp clientApp, ILogService logService, IRatingSystemService ratingSystemService, IJobService jobService, IEmployeeGroupService employeeGroupService,
-            IUserService userService, IEmployeeService employeeService, IModuleService moduleService, ICountryService countryService,ITimeTableService timeTableService,
-            IStudentEnrollingService studentEnrollingService
+            IUserService userService, IEmployeeService employeeService, IModuleService moduleService, ICountryService countryService, ITimeTableService timeTableService,
+            IStudentEnrollingService studentEnrollingService, IPrintService printService, ICashFlowService cashFlowService, ISubscriptionService subscriptionService,
+            IDisciplineService disciplineService, IContactService contactService
             )
         {
             this.schoolYearService = schoolYearService;
@@ -79,25 +92,31 @@ namespace Primary.SchoolApp
             this.countryService = countryService;
             this.timeTableService = timeTableService;
             this.studentEnrollingService = studentEnrollingService;
+            this.cashFlowService = cashFlowService;
+            this.printService = printService;
+            this.subscriptionService = subscriptionService;
+            this.disciplineService =disciplineService;
+            this.contactService= contactService;
+            localEnrollingService = new LocalEnrollingService();
             LoadBasicData();
             InitHomePage();
             InitTimeTablePage();
             InitSettingPage();
             InitMainEvents();
             InitEmployeePage();
-           
+
         }
 
         private void InitHomePage()
         {
-            AppUtilities.MainThemeColor = FormElement.TitleBar.FillPrimitive.BackColor;
             HomeIconViewToggleButton.ToggleState = ToggleState.On;
             InitGridViewHomePage();
             InitHomeMainListView();
-            LoadDataToHomeLeftListView();
-            LoadEnrollingStudent();
-            InitEventsHomePage();
+            InitContextHomePage();
             InitHomePageCustomControls();
+            LoadDataToHomeLeftListView();
+            InitEventsHomePage();
+            LoadEnrollingStudentList();
         }
         private void InitMainEvents()
         {
@@ -110,7 +129,6 @@ namespace Primary.SchoolApp
             this.Load += MainForm_Load;
             ThemeResolutionService.ApplicationThemeChanged += ThemeResolutionService_ApplicationThemeChanged;
         }
-
         private void InitEventsHomePage()
         {
             this.HomeSchoolYearDropDownList.SelectedValueChanged += HomeSchoolYearDropDownList_SelectedValueChanged;
@@ -120,48 +138,80 @@ namespace Primary.SchoolApp
             HomeListViewToggleButton.ToggleStateChanging += HomeToggleButton_ToggleStateChanging;
             HomeIconViewToggleButton.ToggleStateChanging += HomeToggleButton_ToggleStateChanging;
             HomeMainListView.VisualItemCreating += HomeMainListView_VisualItemCreating;
-            HomeMainListView.GroupExpanding+= HomeMainListView_GroupExpanding;
-            HomeLeftListView.ItemCheckedChanged+= HomeLeftListView_ItemCheckedChanged;
+            HomeMainListView.GroupExpanding += HomeMainListView_GroupExpanding;
+            HomeLeftListView.ItemCheckedChanged += HomeLeftListView_ItemCheckedChanged;
             HomeMainListView.CurrentItemChanged += HomeMainListView_CurrentItemChanged;
             HomeGridView.CurrentRowChanged += HomeGridView_CurrentRowChanged;
             HomeSearchTextBox.TextChanged += HomeSearchTextBox_TextChanged;
             HomeGridView.CustomFiltering += HomeGridView_CustomFiltering;
+            HomeGridView.ContextMenuOpening += HomeGridView_ContextMenuOpening;
             HomeLeftListView.ItemMouseHover += HomeLeftListView_ItemMouseHover;
             HomeLeftListView.ToolTipTextNeeded += HomeLeftListView_ToolTipTextNeeded;
             HomeLeftListView.VisualItemCreating += HomeLeftListView_VisualItemCreating;
             HomeMainListView.ItemMouseClick += HomeMainListView_ItemMouseClick;
         }
+
+        private void ThemesDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            AppUtilities.MainThemeColor = this.FormElement.TitleBar.FillPrimitive.BackColor;
+            AjustColorTimeTablePage();
+            HomeMainListView.ListViewElement.SynchronizeVisualItems();
+            EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
+        }
+
+
+        #region Events
         //inscription d'un élève
         private void HomeAddButton_Click(object sender, EventArgs e)
         {
-            
+            ShowAddStudentEnrollingForm();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            AppUtilities.MainThemeColor = FormElement.TitleBar.FillPrimitive.BackColor;
             //fire event to load data to Scheduler
-            TimeTableLeftListView.SelectedIndex = 1;
+            TimeTableLeftListView.SelectedIndex = 0;
         }
 
         private void ThemeResolutionService_ApplicationThemeChanged(object sender, ThemeChangedEventArgs args)
         {
             InitAppointmentBackground();
         }
-
+        // Affichage de l'IU pricipale
         private void MainForm_Shown(object sender, EventArgs e)
         {
             TimeTableDateNavigator.Location = new System.Drawing.Point(350, 10);
             TimeTableDateNavigator.Size = new System.Drawing.Size(350, 60);
         }
-
-        private void ThemesDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            AppUtilities.MainThemeColor = this.FormElement.TitleBar.FillPrimitive.BackColor;
-            AjustColorTimeTablePage();            
-            HomeMainListView.ListViewElement.SynchronizeVisualItems();
-            EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
+            if (!isLogOut)
+            {
+                LogOut();
+            }
         }
-
+        //déconnexion du systeème
+        private void LogOutMenu_Click(object sender, System.EventArgs e)
+        {
+            LogOut();
+        }
+        //changement du mot de passe
+        private void ChangePasswordMenu_Click(object sender, System.EventArgs e)
+        {
+            var form = Program.ServiceProvider.GetService<EditUserPasswordForm>();
+            form.Text = Language.labelUpdate + ":.. " + Language.labelPassword;
+            form.Icon = this.Icon;
+            form.Init(clientApp.UserConnected.Id);
+            form.ShowDialog(this);
+        }
+        //affiche la boite de dialog about
+        private void AboutButton_Click(object sender, System.EventArgs e)
+        {
+            var form = new AboutAppForm();
+            form.ShowDialog();
+        }
+        //permet de changer de vue:vue list, vue icon
         private void HomeToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {
             if (updatingHomeToggleState)
@@ -201,42 +251,23 @@ namespace Primary.SchoolApp
                 args.Cancel = true;
             }
         }
-        #region Events
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!isLogOut)
-            {
-                LogOut();
-            }
-        }
-        //déconnexion du systeème
-        private void LogOutMenu_Click(object sender, System.EventArgs e)
-        {
-            LogOut();
-        }
-        //changement du mot de passe
-        private void ChangePasswordMenu_Click(object sender, System.EventArgs e)
-        {
-            var form = Program.ServiceProvider.GetService<EditUserPasswordForm>();
-            form.Text = Language.labelUpdate + ":.. " + Language.labelPassword;
-            form.Icon = this.Icon;
-            form.Init(clientApp.UserConnected.Id);
-            form.ShowDialog(this);
-        }
-
-        private void AboutButton_Click(object sender, System.EventArgs e)
-        {
-            var form = new AboutAppForm();
-            form.ShowDialog();
-        }
+        //Selectionne une année scolaire
         private void HomeSchoolYearDropDownList_SelectedValueChanged(object sender, System.EventArgs e)
         {
-            Program.CurrentSchoolYear = HomeSchoolYearDropDownList.SelectedItem.DataBoundItem as SchoolYear;
-            // add cashflow type for insolvable and solvable
-            LoadCashFlowTypeListToHomeLeftView();
-            //load student enrolling data
-            LoadEnrollingStudent();
+            if (HomeSchoolYearDropDownList.SelectedItem != null)
+            {
+                if (HomeSchoolYearDropDownList.SelectedItem.DataBoundItem is SchoolYear schoolYear)
+                {
+                    Program.CurrentSchoolYear = schoolYear;
+                    // add cashflow type for insolvable and solvable
+                    LoadCashFlowTypeListToHomeLeftView();
+                    //load student enrolling data
+                    LoadEnrollingStudentList();
+
+                }
+            }
         }
+
         private void HomeMainListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
         {
             if (e.VisualItem is IconListViewVisualItem)
@@ -249,6 +280,55 @@ namespace Primary.SchoolApp
         {
             e.Cancel = e.Group.Expanded;
         }
+        private void HomeMainListView_CurrentItemChanged(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item.DataBoundItem is DTO.StudentEnrollingDTO record)
+            {
+                foreach (var row in HomeGridView.Rows)
+                {
+                    var item = row.DataBoundItem as DTO.StudentEnrollingDTO;
+                    if (item.Id == record.Id)
+                    {
+                        HomeGridView.CurrentRow = row;
+                        break;
+                    }
+                }
+            }
+        }
+        private void HomeMainListView_ItemMouseClick(object sender, ListViewItemEventArgs e)
+        {
+            e.ListViewElement.SelectedItem = e.Item;
+        }
+
+        private void HomeLeftListView_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
+        {
+            UpdateHomeMainListView();
+            HomeGridView.MasterTemplate.Refresh();
+            HomeMainListView.ListViewElement.SynchronizeVisualItems();
+        }
+        private void HomeLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
+        {
+            homeLeftViewForToolTipText = "" + e.Item.Tag;
+        }
+        //affiche info bul pour 
+        private void HomeLeftListView_ToolTipTextNeeded(object sender, Telerik.WinControls.ToolTipTextNeededEventArgs e)
+        {
+            try
+            {
+                e.Offset = new System.Drawing.Size(e.Offset.Width + 20, e.Offset.Height + 20);
+                e.ToolTipText = homeLeftViewForToolTipText;
+            }
+            catch
+            {
+            }
+        }
+        private void HomeLeftListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
+        {
+            if (e.VisualItem is SimpleListViewVisualItem)
+            {
+                e.VisualItem = new HomeSimpleListViewVisualItem();
+            }
+        }
 
         private void HomeGridView_CurrentRowChanged(object sender, CurrentRowChangedEventArgs e)
         {
@@ -260,31 +340,49 @@ namespace Primary.SchoolApp
                 }
             }
         }
-
-        private void HomeMainListView_CurrentItemChanged(object sender, ListViewItemEventArgs e)
+        // filtre la liste des données présente dans le data grid view
+        private void HomeGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
         {
-            if (e.Item.DataBoundItem is DTO.StudentEnrollingDTO record)
+            HomeGridViewCustomFiltering(e);
+            //e.Handled = true;
+            //var record = e.Row.DataBoundItem as DTO.StudentEnrollingDTO;
+            //e.Visible = IsStudentByGroupChecked(e.Row.Cells["ClassGroupName"].Value.ToString());
+            //e.Visible &= IsStudentByClassChecked(e.Row.Cells["ClassName"].Value.ToString());
+            //e.Visible &= IsStatusHealthChecked(e.Row.Cells["Student.Health"].Value.ToString());
+            //e.Visible &= IsStatusPaymentChecked(record);
+            //e.Visible &= IsStatusInsolvencyChecked(record);
+            //e.Visible &= IsStatusSolvencyChecked(record);
+            //e.Visible &= IsStudentStatusChecked(record);
+            //if (this.EmployeeSearchTextBox.Text != null)
+            //{
+            //    e.Visible &= e.Row.Cells["Student.IdNumber"].Value.ToString().Contains(HomeSearchTextBox.Text.ToLower()) ||
+            //         e.Row.Cells["Student.FullName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower()) ||
+            //         e.Row.Cells["ClassGroupName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower()) ||
+            //         e.Row.Cells["ClassName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower());
+            //}
+        }
+
+        private async void HomeGridViewCustomFiltering(GridViewCustomFilteringEventArgs e)
+        {
+            e.Handled = true;
+            var record = e.Row.DataBoundItem as DTO.StudentEnrollingDTO;
+            e.Visible = IsStudentByGroupChecked(e.Row.Cells["ClassGroupName"].Value.ToString());
+            e.Visible &= IsStudentByClassChecked(e.Row.Cells["ClassName"].Value.ToString());
+            e.Visible &= IsStatusHealthChecked(e.Row.Cells["Student.Health"].Value.ToString());
+            e.Visible &= IsStatusPaymentChecked(record);
+            e.Visible &= IsStatusInsolvencyChecked(record);
+            e.Visible &= IsStatusSolvencyChecked(record);
+            e.Visible &= IsStudentStatusChecked(record);
+            if (this.EmployeeSearchTextBox.Text != null)
             {
-                foreach (var row in HomeGridView.Rows)
-                {
-                    var item = row.DataBoundItem as DTO.StudentEnrollingDTO;
-                    if (item.Id == record.Id)
-                    {
-                        EmployeeGridView.CurrentRow = row;
-                        break;
-                    }
-                }
+                e.Visible &= e.Row.Cells["Student.IdNumber"].Value.ToString().Contains(HomeSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["Student.FullName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["ClassGroupName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["ClassName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower());
             }
+            await System.Threading.Tasks.Task.Delay(0);
         }
-
-        private void HomeLeftListView_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
-        {
-            UpdateHomeMainListView();
-            HomeGridView.MasterTemplate.Refresh();
-            HomeMainListView.ListViewElement.SynchronizeVisualItems();
-        }
-
-        //recherche des données correspondantes pour lancer des filtre
+        //recherche des données correspondantes pour lancer des filtres
         private void HomeSearchTextBox_TextChanged(object sender, System.EventArgs e)
         {
             HomeGridView.MasterTemplate.Refresh();
@@ -301,65 +399,426 @@ namespace Primary.SchoolApp
             UpdateHomeMainListView();
         }
 
-        // filtre la liste des données présente dans le data grid view
-        private void HomeGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
+        private void MenuShowSubscriptions_Click(object sender, EventArgs e)
         {
-            e.Handled = true;
-            var record = e.Row.DataBoundItem as DTO.StudentEnrollingDTO;
-            e.Visible = IsStudentByGroupChecked(e.Row.Cells["ClassGroupName"].Value.ToString());
-            e.Visible &= IsStudentByClassChecked(e.Row.Cells["ClassName"].Value.ToString());
-            e.Visible &= IsStatusPaymentChecked(e.Row.Cells["IsActive"].Value.ToString());
-            e.Visible &= IsStatusHealthChecked(e.Row.Cells["Student.Health"].Value.ToString());
-            e.Visible &= IsStatusInsolvencyChecked(record);
-            e.Visible &= IsStatusSolvencyChecked(record);
-            e.Visible &= IsStudentStatusChecked(record);
-            if (this.EmployeeSearchTextBox.Text != null)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
             {
-                e.Visible &= e.Row.Cells["Student.IdNumber"].Value.ToString().Contains(HomeSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["sTudent.FullName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["ClassGroupName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["ClassName"].Value.ToString().ToLower().Contains(HomeSearchTextBox.Text.ToLower());
+                ShowSubscriptionsForm(enrollingDTO);
             }
         }
 
-        private void HomeLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
+        private void MenuShowHealthFile_Click(object sender, EventArgs e)
         {
-            homeLeftViewForToolTipText = "" + e.Item.Tag;
+            RadMessageBox.Show("en cours de programmation....");
         }
 
-        //affiche info bul pour 
-        private void HomeLeftListView_ToolTipTextNeeded(object sender, Telerik.WinControls.ToolTipTextNeededEventArgs e)
+        private void MenuShowContacts_Click(object sender, EventArgs e)
         {
-            try
+            if(HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                e.Offset = new System.Drawing.Size(e.Offset.Width + 20, e.Offset.Height + 20);
-                e.ToolTipText = homeLeftViewForToolTipText;
-
-
-
-            }
-            catch
-            {
+                var form = Program.ServiceProvider.GetService<ContactsForm>();
+                form.Text = enrolling.Student.FullName + ": " + Language.labelSubscriptions;
+                form.Icon = this.Icon;
+                form.Init(enrolling.ConvertToStudentEnrolling());
+                form.Show();
             }
         }
-
-        private void HomeLeftListView_VisualItemCreating(object sender, ListViewVisualItemCreatingEventArgs e)
+        private void MenuAddContact_Click(object sender, EventArgs e)
         {
-            if (e.VisualItem is SimpleListViewVisualItem)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                e.VisualItem = new HomeSimpleListViewVisualItem();
+                var form = Program.ServiceProvider.GetService<AddContactForm>();
+                form.Text = enrolling.Student.FullName + ": " + Language.labelSubscriptions;
+                form.Icon = this.Icon;
+                form.Init(enrolling.ConvertToStudentEnrolling().Student);
+                form.Show();
+            }
+        }
+        private void StudentEnrollingEditButton_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow != null)
+            {
+                if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
+                {
+                    ShowEditStudentEnrollingForm(enrolling);
+                }
+            }
+        }
+        private void MenuAddStudentPicture_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow != null)
+            {
+                if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO record)
+                {
+                    ShowUploadStudentPictureForm(record);
+                }
+            }
+        }
+        private void HomeGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
+        {
+            if (!e.ContextMenuProvider.ToString().Contains("Header"))
+            {
+                RadMenuItem menuEdit = new(Language.labelEdit);
+                RadMenuItem menuPrint = new(Language.labelPrintRegistrationReceipt);
+                RadMenuItem menuAddPicture = new(Language.labelAddPicture);
+                RadMenuItem menuSchoolFee = new(Language.labelSchoolingFee);
+                RadMenuItem menuAddPayment = new(Language.labelAddPayment);
+                RadMenuItem menuShowPayments = new(Language.labelShowPayments);
+                RadMenuItem menuPrintPaymentSummary = new(Language.labelPrintSummaryPayment);
+                RadMenuItem menuShowDiscounts = new(Language.labelShowDiscounts);
+                RadMenuItem menuAddDiscount = new(Language.labelAddDiscount);
+                RadMenuItem menuSubscription= new(Language.labelSubscription);
+                RadMenuItem menuAddSubscription = new(Language.labelAddSubscription);
+                RadMenuItem menuShowSubscriptions = new(Language.labelShowSubscriptions);
+                RadMenuItem menuDiscipline = new(Language.labelDiscipline);
+                RadMenuItem menuAddDiscipline = new(Language.labelAddDiscipline);
+                RadMenuItem menuShowDisciplines = new(Language.labelShowDiscipline);
+                RadMenuItem menuContact = new(Language.labelContact);
+                RadMenuItem menuAddContact = new(Language.labelAddContact);
+                RadMenuItem menuShowContacts = new(Language.labelShowContact);
+                menuEdit.Image = AppUtilities.GetImage("Edit");
+                menuPrint.Image = AppUtilities.GetImage("Printer");
+                menuAddPicture.Image = AppUtilities.GetImage("Add");
+                menuAddPayment.Image = AppUtilities.GetImage("Add");
+                menuShowPayments.Image = AppUtilities.GetImage("View");
+                menuPrintPaymentSummary.Image = AppUtilities.GetImage("Printer");
+                menuShowDiscounts.Image = AppUtilities.GetImage("View");
+                menuAddDiscount.Image = AppUtilities.GetImage("Add");
+                menuShowSubscriptions.Image = AppUtilities.GetImage("View");
+                menuAddSubscription.Image= AppUtilities.GetImage("Add");
+                menuAddDiscipline.Image = AppUtilities.GetImage("Add");
+                menuShowDisciplines.Image = AppUtilities.GetImage("View");
+                menuAddContact.Image = AppUtilities.GetImage("Add");
+                menuShowContacts.Image = AppUtilities.GetImage("View");
+
+                menuSchoolFee.Items.Add(menuAddPayment);
+                menuSchoolFee.Items.Add(menuShowPayments);
+                menuSchoolFee.Items.Add(menuPrintPaymentSummary);
+                menuSchoolFee.Items.Add(new RadMenuSeparatorItem());
+                menuSchoolFee.Items.Add(menuAddDiscount);
+                menuSchoolFee.Items.Add(menuShowDiscounts);
+                menuSubscription.Items.Add(menuAddSubscription);
+                menuSubscription.Items.Add(menuShowSubscriptions);
+                menuDiscipline.Items.Add(menuAddDiscipline);
+                menuDiscipline.Items.Add(menuShowDisciplines);
+                menuContact.Items.Add(menuAddContact);
+                menuContact.Items.Add(menuShowContacts);
+                menuEdit.Click += StudentEnrollingEditButton_Click;
+                menuAddPicture.Click += MenuAddStudentPicture_Click;
+                menuPrint.Click += MenuPrintStudentEnrollingReceipt;
+                menuShowPayments.Click += MenuShowPayments_Click;
+                menuAddPayment.Click += MenuAddTuitionPayment_Click;
+                menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
+                menuShowDiscounts.Click += MenuShowDiscounts_Click;
+                menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
+                menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
+                menuAddSubscription.Click += MenuAddSubscription_Click;
+                menuAddDiscipline.Click += MenuAddDiscipline_Click;
+                menuShowDisciplines.Click += MenuShowDisciplines_Click;
+                menuAddContact.Click += MenuAddContact_Click;
+                menuShowContacts.Click += MenuShowContacts_Click;
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuEdit);
+                e.ContextMenu.Items.Add(menuPrint);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuAddPicture);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuSchoolFee);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuSubscription);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuDiscipline);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuContact);
+
+            }
+
+
+        }
+
+        private void MenuAddTuitionPayment_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowAddTuitionPaymentForm(enrollingDTO.ConvertToStudentEnrolling());
+            }
+        }
+        private void MenuAddTuitionDiscount_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowAddTuitionDiscountForm(enrollingDTO.ConvertToStudentEnrolling());
+            }
+        }
+        private void MenuShowPayments_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowTuitionPaymentsForm(enrollingDTO);
+            }
+        }
+        private void MenuShowDiscounts_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowTuitionDiscountsForm(enrollingDTO);
+            }
+        }
+        private void MenuAddSubscription_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowAddSubscriptionForm(enrollingDTO.ConvertToStudentEnrolling());
             }
         }
 
-        private void HomeMainListView_ItemMouseClick(object sender, ListViewItemEventArgs e)
+        //impression du reçu d'inscription
+        private void MenuPrintStudentEnrollingReceipt(object sender, EventArgs e)
         {
-            e.ListViewElement.SelectedItem = e.Item;
-        }
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO record)
+            {
 
-       
+                record.SchoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == record.SchoolYearId);
+                var enrolling = record.ConvertToStudentEnrolling();
+                var payments = cashFlowService.GetTuitionPaymentByEnrollingList(enrolling.Id).Result;
+                enrolling.PaymentList = payments.Where(x => x.IsDuringEnrolling && x.Amount > 0).ToList();
+                printService.PrintPaymentReceipt(enrolling, true);
+            }
+            //impression du reçu
+
+        }
+        //print summary of payments
+        private void MenuPrintPaymentSummary_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                var enrolling = enrollingDTO.ConvertToStudentEnrolling();
+                enrolling.PaymentList = cashFlowService.GetTuitionPaymentByEnrollingList(enrolling.Id).Result;
+                enrolling.SchoolYear = Program.CurrentSchoolYear;
+                printService.PrintPaymentSummary(enrolling);
+            }
+        }
         #endregion
 
-        #region Methodes   
+        #region Methodes  
+        //affichage de UI pour l'ajout d'une réduction
+        private void ShowAddTuitionDiscountForm(StudentEnrolling enrolling)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddTuitionDiscountForm>();
+                form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
+                form.Icon = this.Icon;
+                form.Init(enrolling);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    var cashFlowType = form.CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                    var data = cashFlowService.GetTuitionDiscount(enrolling.Id, cashFlowType.Id).Result;
+                    Program.TuitionDiscountList.Add(data);
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+
+        // show ui tuition payment form
+        private void ShowAddTuitionPaymentForm(StudentEnrolling enrolling)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddTuitionPaymentForm>();
+                form.Text = Language.labelAdd + ":.." + Language.labelPayment;
+                form.Icon = this.Icon;
+                form.Init(enrolling);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+
+        }
+        //affiche les versements d'un élève
+        private void ShowTuitionPaymentsForm(StudentEnrollingDTO enrolling)
+        {
+            var form = Program.ServiceProvider.GetService<TuitionPaymentsForm>();
+            form.Text = Language.labelPayments;
+            form.Icon = this.Icon;
+            form.Init(enrolling.ConvertToStudentEnrolling());
+            form.Show();
+        }
+        //affiche les Réductions accordées à un élève
+        private void ShowTuitionDiscountsForm(StudentEnrollingDTO enrolling)
+        {
+            var form = Program.ServiceProvider.GetService<TuitionDiscountsForm>();
+            form.Text = Language.labelPayments;
+            form.Icon = this.Icon;
+            form.Init(enrolling.ConvertToStudentEnrolling());
+            form.Show();
+        }
+        private void ShowUploadStudentPictureForm(StudentEnrollingDTO enrolling)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<UploadStudentPictureForm>();
+                form.Icon = this.Icon;
+                form.Init(enrolling.ConvertToStudentEnrolling());
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    enrolling.PictureUrl = form.UrlPicture;
+                    studentEnrollingInfo.StudentLabel.Image = new Bitmap(Image.FromFile(enrolling.PictureUrl), new System.Drawing.Size(114, 114));
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+        // show add ui subscription form
+        private void ShowAddSubscriptionForm(StudentEnrolling enrolling)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddSubscriptionForm>();
+                form.Text = Language.labelAdd + ":.." + Language.labelSubscription;
+                form.Icon = this.Icon;
+                form.Init(enrolling);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+
+        }
+        // affiche les abonnements d'un élève
+        private void ShowSubscriptionsForm(StudentEnrollingDTO enrolling)
+        {
+            var form = Program.ServiceProvider.GetService<SubscriptionsForm>();
+            form.Text = enrolling.Student.FullName+": "+Language.labelSubscriptions;
+            form.Icon = this.Icon;
+            form.Init(enrolling.ConvertToStudentEnrolling());
+            form.Show();
+        }
+        //create Home context menu for home main list view
+        private void InitContextHomePage()
+        {
+            RadContextMenuManager contextMenuManager = new();
+            RadContextMenu contextMenu = new();
+            RadMenuItem menuEdit = new(Language.labelEdit);
+            RadMenuItem menuPrint = new(Language.labelPrintRegistrationReceipt);
+            RadMenuItem menuAddPicture = new RadMenuItem(Language.labelAddPicture);
+            RadMenuItem menuSchoolFee = new(Language.labelSchoolingFee);
+            RadMenuItem menuAddPayment = new(Language.labelAddPayment);
+            RadMenuItem menuShowPayments = new(Language.labelShowPayments);
+            RadMenuItem menuPrintPaymentSummary = new RadMenuItem(Language.labelPrintSummaryPayment);
+            RadMenuItem menuShowDiscounts = new(Language.labelShowDiscounts);
+            RadMenuItem menuAddDiscount = new(Language.labelAddDiscount);
+            RadMenuItem menuSubscription = new(Language.labelSubscription);
+            RadMenuItem menuAddSubscription = new(Language.labelAddSubscription);
+            RadMenuItem menuShowSubscriptions = new(Language.labelShowSubscriptions);
+            RadMenuItem menuDiscipline = new(Language.labelDiscipline);
+            RadMenuItem menuAddDiscipline = new(Language.labelAddDiscipline);
+            RadMenuItem menuShowDisciplines = new(Language.labelShowDiscipline);
+            RadMenuItem menuContact = new(Language.labelContact);
+            RadMenuItem menuAddContact = new(Language.labelAddContact);
+            RadMenuItem menuShowContacts = new(Language.labelShowContact);
+            menuEdit.Image = AppUtilities.GetImage("Edit");
+            menuPrint.Image = AppUtilities.GetImage("Printer");
+            menuAddPicture.Image = AppUtilities.GetImage("Add");
+            menuAddPayment.Image = AppUtilities.GetImage("Add");
+            menuShowPayments.Image = AppUtilities.GetImage("View");
+            menuAddDiscount.Image = AppUtilities.GetImage("Add");
+            menuShowDiscounts.Image = AppUtilities.GetImage("View");
+            menuPrintPaymentSummary.Image = AppUtilities.GetImage("Printer");
+            menuShowSubscriptions.Image = AppUtilities.GetImage("View");
+            menuAddSubscription.Image = AppUtilities.GetImage("Add");
+            menuAddDiscipline.Image = AppUtilities.GetImage("Add");
+            menuShowDisciplines.Image = AppUtilities.GetImage("View");
+            menuAddContact.Image = AppUtilities.GetImage("Add");
+            menuShowContacts.Image = AppUtilities.GetImage("View");
+            menuSchoolFee.Items.Add(menuAddPayment);
+            menuSchoolFee.Items.Add(menuShowPayments);
+            menuSchoolFee.Items.Add(menuPrintPaymentSummary);
+            menuSchoolFee.Items.Add(new RadMenuSeparatorItem());
+            menuSchoolFee.Items.Add(menuAddDiscount);
+            menuSchoolFee.Items.Add(menuShowDiscounts);
+            menuSubscription.Items.Add(menuAddSubscription);
+            menuSubscription.Items.Add(menuShowSubscriptions);
+            menuDiscipline.Items.Add(menuAddDiscipline);
+            menuDiscipline.Items.Add(menuShowDisciplines);
+            menuContact.Items.Add(menuAddContact);
+            menuContact.Items.Add(menuShowContacts);
+            menuEdit.Click += StudentEnrollingEditButton_Click;
+            menuAddPicture.Click += MenuAddStudentPicture_Click;
+            menuPrint.Click += MenuPrintStudentEnrollingReceipt;
+            menuShowPayments.Click += MenuShowPayments_Click;
+            menuAddPayment.Click += MenuAddTuitionPayment_Click;
+            menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
+            menuShowDiscounts.Click += MenuShowDiscounts_Click;
+            menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
+            menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
+            menuAddSubscription.Click += MenuAddSubscription_Click;
+            menuAddDiscipline.Click += MenuAddDiscipline_Click;
+            menuShowDisciplines.Click += MenuShowDisciplines_Click;
+            menuAddContact.Click += MenuAddContact_Click;
+            menuShowContacts.Click += MenuShowContacts_Click;
+            contextMenu.Items.Add(menuEdit);
+            contextMenu.Items.Add(menuPrint);
+            contextMenu.Items.Add(new RadMenuSeparatorItem());
+            contextMenu.Items.Add(menuAddPicture);
+            contextMenu.Items.Add(new RadMenuSeparatorItem());
+            contextMenu.Items.Add(menuSchoolFee);
+            contextMenu.Items.Add(new RadMenuSeparatorItem());
+            contextMenu.Items.Add(menuSubscription);
+            contextMenu.Items.Add(new RadMenuSeparatorItem());
+            contextMenu.Items.Add(menuDiscipline);
+            contextMenu.Items.Add(new RadMenuSeparatorItem());
+            contextMenu.Items.Add(menuContact);
+
+            contextMenuManager.SetRadContextMenu(HomeMainListView, contextMenu);
+        }
+
+        private void MenuShowDisciplines_Click(object sender, EventArgs e)
+        {
+            if (this.HomeGridView.CurrentRow != null)
+            {
+                if (this.HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+                {
+                    var form = Program.ServiceProvider.GetService<DisciplinesForm>();
+                    form.Text = enrollingDTO.Student.FullName + ": " + Language.labelDisciplinaryFile;
+                    form.Icon = this.Icon;
+                    form.Init(enrollingDTO.ConvertToStudentEnrolling());
+                    form.Show();
+                }
+            }
+        }
+
+        private void MenuAddDiscipline_Click(object sender, EventArgs e)
+        {
+            if (this.HomeGridView.CurrentRow != null) {
+                if (this.HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+                {
+                    var form = Program.ServiceProvider.GetService<AddDisciplineForm>();
+                    form.Text = Language.labelAdd+":.. "+Language.labelDiscipline;
+                    form.Icon = this.Icon;
+                    form.Init(enrollingDTO.ConvertToStudentEnrolling());
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
+           
+                    }
+                }
+            }
+        }
+
         private async void LoadBasicData()
         {
             var getSchoolYearList = schoolYearService.GetSchoolYearList();
@@ -380,6 +839,7 @@ namespace Primary.SchoolApp
             var getUserList = userService.GetUserList();
             var getEmployeeList = employeeService.GetEmployeeList();
             var getCountryList = countryService.GetCountryList();
+            var getDisciplineSubjectList = disciplineService.GetDisciplineSubjectList();
             Program.SchoolYearList = await getSchoolYearList;
             Program.SchoolGroupList = await getSchoolGroupList;
             Program.SchoolClassList = await getClassList;
@@ -398,6 +858,7 @@ namespace Primary.SchoolApp
             Program.EmployeeList = await getEmployeeList;
             Program.ModuleList = await getModuleList;
             Program.CountryList = await getCountryList;
+            Program.DisciplineSubjectList=await getDisciplineSubjectList;
             //sépare les sessions d'évaluation en mère-fille
             SplitEvaluationSessionList();
             isFirstLoadingBasicData = true;
@@ -478,10 +939,11 @@ namespace Primary.SchoolApp
         //ajoute les types de flux de trésorerie dans l'objet homeLeftListView
         private void LoadCashFlowTypeListToHomeLeftView()
         {
-            if (HomeSchoolYearDropDownList.SelectedItem != null) {
+            if (HomeSchoolYearDropDownList.SelectedItem != null)
+            {
                 if (HomeSchoolYearDropDownList.SelectedItem.DataBoundItem is SchoolYear schoolYear)
                 {
-                    var listItemToAdd = Program.SchoolingCostList.Where(x => x.IsPayable == true && x.SchoolYearId == schoolYear.Id).Select(x => x.CashFlowType).Distinct().ToList();
+                    var listItemToAdd = Program.SchoolingCostList.Where(x => x.IsPayable == true && x.SchoolYearId == schoolYear.Id).Select(x => x.CashFlowType).Distinct().OrderBy(x=>x.Sequence).ToList();
                     var insolvencyGoup = HomeLeftListView.Groups.Where(x => (int)x.Key == 4).FirstOrDefault();
                     var solvencyGoup = HomeLeftListView.Groups.Where(x => (int)x.Key == 5).FirstOrDefault();
                     if (insolvencyGoup != null)
@@ -491,7 +953,7 @@ namespace Primary.SchoolApp
                         foreach (var item in insolvencyOldItem.Clone())
                         {
                             HomeLeftListView.Items.Remove(item);
-                            
+
                         }
                     }
                     if (solvencyGoup != null)
@@ -505,7 +967,7 @@ namespace Primary.SchoolApp
                         }
                     }
                     //add new item
-                    foreach(var item in listItemToAdd)
+                    foreach (var item in listItemToAdd)
                     {
                         if (insolvencyGoup != null)
                         {
@@ -536,7 +998,7 @@ namespace Primary.SchoolApp
                     }
                 }
             }
-            
+
         }
         //load basic data list to left listview of home page
         private void LoadDataToHomeLeftListView()
@@ -544,15 +1006,15 @@ namespace Primary.SchoolApp
             //liste des salles de classe
             var roomList = new List<SchoolRoom>();
             //liste des classes
-            var classList=new List<SchoolClass>();
+            var classList = new List<SchoolClass>();
             //liste des groupes de classe
-            var groupList =new List<SchoolGroup>();
+            var groupList = new List<SchoolGroup>();
             if (clientApp.UserConnected.UserName != "root")
             {
                 roomList = clientApp.UserConnected.Rooms.Select(x => x.Room).ToList();
                 //get class list for other user
-                var classIdList=roomList.Select(x => x.ClassId).ToList();    
-                foreach(var itemClass in Program.SchoolClassList)
+                var classIdList = roomList.Select(x => x.ClassId).ToList();
+                foreach (var itemClass in Program.SchoolClassList)
                 {
                     if (classIdList.Contains(itemClass.Id))
                     {
@@ -560,9 +1022,11 @@ namespace Primary.SchoolApp
                     }
                 }
                 //get class group for the other user
-                var groupIdList=classList.Select(x => x.GroupId).ToList();
-                foreach (var group in Program.SchoolGroupList) {
-                    if (groupIdList.Contains(group.Id)) { 
+                var groupIdList = classList.Select(x => x.GroupId).ToList();
+                foreach (var group in Program.SchoolGroupList)
+                {
+                    if (groupIdList.Contains(group.Id))
+                    {
                         groupList.Add(group);
                     }
                 }
@@ -570,8 +1034,8 @@ namespace Primary.SchoolApp
             else
             {
                 roomList = Program.SchoolRoomList.ToList();
-                classList=Program.SchoolClassList.ToList();
-                groupList=Program.SchoolGroupList.ToList();
+                classList = Program.SchoolClassList.ToList();
+                groupList = Program.SchoolGroupList.ToList();
             }
             //clear
             HomeLeftListView.Items.Clear();
@@ -589,7 +1053,7 @@ namespace Primary.SchoolApp
             {
                 Key = 3,
                 Text = Language.labelTuitionFees.ToUpper()
-            };            
+            };
             ListViewDataItemGroup homeInsolvencyStatusdGroup = new()
             {
                 Key = 4,
@@ -620,10 +1084,10 @@ namespace Primary.SchoolApp
                     Value = item.Name,
                     Tag = item,
                     CheckState = ToggleState.On,
-                    Text= item.Name.Trim().Length > 20 ? item.Name.Substring(0, 20) + "..." : item.Name,
+                    Text = item.Name.Trim().Length > 20 ? item.Name.Substring(0, 20) + "..." : item.Name,
                     Group = homeGroupSudentGroup
                 };
-                HomeLeftListView.Items.Add(dataItem);        
+                HomeLeftListView.Items.Add(dataItem);
             }
             //add class list
             foreach (var item in classList)
@@ -673,7 +1137,7 @@ namespace Primary.SchoolApp
             HomeLeftListView.Items.Add(itemHealthGood);
             //itemHealthMedium.Text = "Medium";
             ListViewDataItem itemHealthMedium = new()
-            {               
+            {
                 Key = 1,
                 Image = Resources.heartbeat_orange,
                 CheckState = ToggleState.On,
@@ -703,32 +1167,72 @@ namespace Primary.SchoolApp
             {
                 Text = Language.labelStudentsNoLeft,
                 Key = 0,
-                CheckState = ToggleState.On,
+                CheckState = ToggleState.Off,
                 Group = homeStudentStatusdGroup
             };
             HomeLeftListView.Items.Add(itemStatusOut);
         }
         //load enrolling of students
-        private async void LoadEnrollingStudent()
+        private async void LoadEnrollingStudentList()
         {
+            HomeInfoRightPanel.Visible = false;
             if (HomeSchoolYearDropDownList.SelectedItem != null)
             {
                 if (HomeSchoolYearDropDownList.SelectedItem.DataBoundItem is SchoolYear record)
                 {
-                    var enrollingList= (await studentEnrollingService.GetStudentEnrollingListAsync(record.Id));
-                    Program.StudentEnrollingList=new List<DTO.StudentEnrollingDTO>();
-                    foreach (var item in enrollingList) {
-                        item.SchoolClass.Group=Program.SchoolClassList.Where(x=> x.Id == item.ClassId).Select(x=>x.Group).FirstOrDefault();
-                        Program.StudentEnrollingList.Add(item.ConvertToStudentEnrollingDTO());
+                    //lancement des tâches d'extraction des données
+                    var getPaymentListTask = cashFlowService.GetTuitionPaymentBySchoolYearList(record.Id);
+                    var getEnrollingListTask = studentEnrollingService.GetStudentEnrollingListAsync(record.Id);
+                    var getDiscountListTask = cashFlowService.GetTuitionDiscountBySchoolYearList(record.Id);
+                    var getSchoolingCostItemTask = schoolingCostService.GetSchoolingCostItemsBySchoolYear(record.Id);
+                    //on s'assure que toutes soient terminées
+                    await System.Threading.Tasks.Task.WhenAll(getPaymentListTask, getEnrollingListTask, getDiscountListTask);
+                    //chargement des données dans les listes principales
+                    Program.TuitionDiscountList = getDiscountListTask.Result;
+                    Program.TuitionPaymentList = getPaymentListTask.Result;
+                    Program.SchoolingCostItemList = getSchoolingCostItemTask.Result;
+                    var enrollingList = getEnrollingListTask.Result;
+                    //Création de la liste des inscriptions à afficher
+                    Program.StudentEnrollingList = new List<StudentEnrollingDTO>();
+                    foreach (var enrolling in enrollingList)
+                    {
+                        enrolling.SchoolClass.Group = Program.SchoolClassList.Where(x => x.Id == enrolling.ClassId).Select(x => x.Group).FirstOrDefault();
+                        //convertion du l'inscription extraite à l'inscription à afficher
+                        var enrollingDTO = enrolling.ConvertToStudentEnrollingDTO();
+                        //extraction de la liste des frais exigibles
+                        var feeIdList = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Select(x => x.CashFlowTypeId).ToList();
+                        //extraction des réductions et des versements de l'élève
+                        enrollingDTO.PaymentList = Program.TuitionPaymentList.Where(x => x.EnrollingId == enrolling.Id).ToList();
+                        enrollingDTO.PaymentPayableList = Program.TuitionPaymentList.Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
+                        enrollingDTO.DiscountList = Program.TuitionDiscountList.Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
+                        //extraction de la somme des frais exigibles
+                        var amountFee = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Sum(x => x.Amount);
+                        //calcul des impayés de l'élève
+                        enrollingDTO.Balance = amountFee - (enrollingDTO.DiscountList.Sum(x => x.Amount) + enrollingDTO.PaymentPayableList.Sum(x => x.Amount));
+                        //récupération de l'état des insolvabilités
+                        foreach(int feeId in feeIdList)
+                        {
+                            InsolvencyState state= new() { 
+                                Id = feeId,
+                                Amount = localEnrollingService.GetInsolvencyAmount(enrollingDTO,feeId),
+                            };
+                            state.Value = state.Amount > 0;
+                            enrollingDTO.InsolvencyStateList.Add(state);
+                        }
+                        
+                        // Ajout de l'inscription dans la liste à afficher
+                        Program.StudentEnrollingList.Add(enrollingDTO);
                     }
-                     
+
                     HomeGridView.DataSource = Program.StudentEnrollingList;
                     HomeMainListView.DataSource = Program.StudentEnrollingList;
                     HomeLeftListView.ListViewElement.SynchronizeVisualItems();
                     HomeMainListView.ListViewElement.SynchronizeVisualItems();
+
                 }
             }
         }
+        
         // initialisation du grid view employé
         private void InitGridViewHomePage()
         {
@@ -744,12 +1248,10 @@ namespace Primary.SchoolApp
             GridViewTextBoxColumn studentColumn = new("Student.FullName");
             GridViewTextBoxColumn classColumn = new("ClassName");
             GridViewImageColumn healtImageColumn = new("HealthImage");
-
+            GridViewDecimalColumn balanceColumn = new("Balance");
             GridViewTextBoxColumn groupColumn = new("ClassGroupName");
-            GridViewTextBoxColumn isLeftColumn = new("IsActive");
             GridViewTextBoxColumn healthColumn = new("Student.Health");
             groupColumn.IsVisible = false;
-            isLeftColumn.IsVisible = false;
             healthColumn.IsVisible = false;
             idNumberColumn.HeaderText = Language.labelStudentId;
             studentColumn.HeaderText = Language.labelStudent;
@@ -757,22 +1259,23 @@ namespace Primary.SchoolApp
             healtImageColumn.HeaderText = Language.labelHealth;
             healthColumn.HeaderText = Language.labelHealth;
             groupColumn.HeaderText = Language.labelGroup;
-            isLeftColumn.HeaderText = Language.labelStudentLeft;
+            balanceColumn.HeaderText = Language.labelUnPaid;
             idNumberColumn.Width = 100;
             studentColumn.Width = 250;
             classColumn.Width = 200;
-           healtImageColumn.Width = 100;
-           
+            healtImageColumn.Width = 100;
+
             HomeGridView.Columns.Add(idNumberColumn);
             HomeGridView.Columns.Add(studentColumn);
             HomeGridView.Columns.Add(classColumn);
             HomeGridView.Columns.Add(healtImageColumn);
+            HomeGridView.Columns.Add(balanceColumn);
             HomeGridView.Columns.Add(groupColumn);
             HomeGridView.Columns.Add(healthColumn);
-            HomeGridView.Columns.Add(isLeftColumn);
             GridViewSummaryRowItem total = new()
             {
-                new GridViewSummaryItem("Student.IdNumber", " {0}", GridAggregateFunction.Count)
+                new GridViewSummaryItem("Student.IdNumber", " {0}", GridAggregateFunction.Count),
+                new GridViewSummaryItem("Balance", " {0}", GridAggregateFunction.Sum)
             };
             HomeGridView.MasterTemplate.SummaryRowsBottom.Add(total);
             foreach (GridViewDataColumn col in this.HomeGridView.Columns)
@@ -789,7 +1292,7 @@ namespace Primary.SchoolApp
 
             HomeMainListView.GroupDescriptors.Add(groupByValue);
         }
-       
+
         //initialisation des contrôles utilisateurs personnalisés 
         private void InitHomePageCustomControls()
         {
@@ -805,42 +1308,21 @@ namespace Primary.SchoolApp
             {
                 HomeInfoRightPanel.Visible = false;
             };
-            studentEnrollingInfo.EditButton.Click += StudentEditButton_Click;
+            studentEnrollingInfo.EditButton.Click += StudentEnrollingEditButton_Click;
             studentEnrollingInfo.ContactsLabel.DoubleClick += MenuShowContacts_Click;
             studentEnrollingInfo.HealthFileLabel.DoubleClick += MenuShowHealthFile_Click;
-            studentEnrollingInfo.DisciplineFileLabel.DoubleClick += MenuShowDisciplineFile_Click;
             studentEnrollingInfo.SubscriptionsLabel.DoubleClick += MenuShowSubscriptions_Click;
+            studentEnrollingInfo.DisciplineFileLabel.DoubleClick += MenuShowDisciplines_Click;
             HomeInfoRightPanel.Controls.Add(studentEnrollingInfo);
         }
 
-        private void MenuShowSubscriptions_Click(object sender, EventArgs e)
-        {
-            RadMessageBox.Show("en cours de programmation....");
-        }
-
-        private void MenuShowDisciplineFile_Click(object sender, EventArgs e)
-        {
-            RadMessageBox.Show("en cours de programmation....");
-        }
-
-        private void MenuShowHealthFile_Click(object sender, EventArgs e)
-        {
-            RadMessageBox.Show("en cours de programmation....");
-        }
-
-        private void MenuShowContacts_Click(object sender, EventArgs e)
-        {
-            RadMessageBox.Show("en cours de programmation....");
-        }
-
-        private void StudentEditButton_Click(object sender, EventArgs e)
-        {
-            RadMessageBox.Show("en cours de programmation....");
-        }
-       //affiche les informations d'une inscription
+        //affiche les informations d'une inscription
         private void LoadSelectedStudentEnrollingDetail(DTO.StudentEnrollingDTO record)
         {
             var getRoom = studentEnrollingService.GetStudentRoomAsync(record.StudentId, record.SchoolYearId);
+            var getSubscriptions = subscriptionService.GetSubscriptionListByEnrollingAsync(record.Id);
+            var getDisciplines = disciplineService.GetDisciplineListByEnrolling(record.Id);
+            var getContacts = contactService.GetContactList(record.StudentId);
             HomeInfoRightPanel.Visible = true;
             studentEnrollingInfo.StudentTextBox.Text = record.Student.FullName;
             studentEnrollingInfo.EnrollingDateTextBox.Text = record.Date.ToString("dd/MM/yyyy");
@@ -867,19 +1349,29 @@ namespace Primary.SchoolApp
                 }
                 else
                 {
-                    using var ms = new MemoryStream(Resources.no_image);
-                    studentEnrollingInfo.StudentLabel.Image = Image.FromStream(ms);
+                    //on cherche une photo dans le dossier 
+                    var url = clientApp.StudentPitureFolder + "/" + record.Student.IdNumber;
+                    if (File.Exists(url))
+                    {
+                        studentEnrollingInfo.StudentLabel.Image = new Bitmap(Image.FromFile(url), new System.Drawing.Size(114, 114));
+                    }
+                    else
+                    {
+                        using var ms = new MemoryStream(Resources.no_image);
+                        studentEnrollingInfo.StudentLabel.Image = Image.FromStream(ms);
+                    }
                 }
+
             }
             studentEnrollingInfo.RoomTextBox.Text = getRoom.Result.Room.Name;
-            studentEnrollingInfo.ContactsLabel.Text = Language.labelContacts + ": 0";
-            studentEnrollingInfo.DisciplineFileLabel.Text = Language.labelDiscipline + ": 0";
-            studentEnrollingInfo.HealthFileLabel.Text = Language.labelHealth + ": 0";
-            studentEnrollingInfo.SubscriptionsLabel.Text = Language.labelSubscriptions + ": 0";
+            studentEnrollingInfo.ContactsLabel.Text = $"{Language.labelContacts}: {getContacts.Result.Count}";
+            studentEnrollingInfo.DisciplineFileLabel.Text = $"{Language.labelDisciplinaryFile}: {getDisciplines.Result.Count}";
+            studentEnrollingInfo.HealthFileLabel.Text = $"{Language.labelMedicalFile}: 0";
+            studentEnrollingInfo.SubscriptionsLabel.Text = $"{Language.labelSubscriptions}: {getSubscriptions.Result.Count}";
             studentEnrollingInfo.Visible = true;
         }
-        // a revoir
-        private void UpdateHomeMainListView()
+        // permet de filtrer l'object homeMainListView en fonction des item décochés sur le leftlistview
+        private async void UpdateHomeMainListView()
         {
             foreach (ListViewDataItem item in HomeMainListView.Items)
             {
@@ -890,8 +1382,9 @@ namespace Primary.SchoolApp
 
                     if (leftViewItem.Group.Text.ToUpper() == Language.labelStudentsByGroup.ToUpper())
                     {
-                        var itemGroup = Program.SchoolGroupList.FirstOrDefault(x=>x.Id==(int)leftViewItem.Key);
-                        if (itemGroup != null) {
+                        var itemGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == (int)leftViewItem.Key);
+                        if (itemGroup != null)
+                        {
                             if (record.ClassGroupName.ToUpper() == itemGroup.Name.ToUpper() && leftViewItem.CheckState == ToggleState.Off)
                             {
                                 isRecordItemVisible = false;
@@ -920,11 +1413,11 @@ namespace Primary.SchoolApp
                                     isRecordItemVisible = false;
                                 break;
                             case 1:
-                                if(leftViewItem.CheckState == ToggleState.Off && record.Student.Health == 1)
+                                if (leftViewItem.CheckState == ToggleState.Off && record.Student.Health == 1)
                                     isRecordItemVisible = false;
                                 break;
                             case 2:
-                                if(leftViewItem.CheckState == ToggleState.Off && record.Student.Health == 2)
+                                if (leftViewItem.CheckState == ToggleState.Off && record.Student.Health == 2)
                                     isRecordItemVisible = false;
                                 break;
                         }
@@ -939,6 +1432,41 @@ namespace Primary.SchoolApp
                             break;
                         }
                     }
+                    if (leftViewItem.Group.Text.ToUpper() == Language.labelTuitionFees.ToUpper())
+                    {
+                        isRecordItemVisible = true;
+                        int val = record.Balance > 0 ? 1 : 0;
+                        if ((int)leftViewItem.Key == val && leftViewItem.CheckState == ToggleState.Off)
+                        {
+                            isRecordItemVisible = false;
+                            break;
+                        }
+                    }
+
+                    if (leftViewItem.Group.Text.ToUpper() == Language.labelSolvency.ToUpper())
+                    {
+                        isRecordItemVisible = true;
+                        if (record.InsolvencyStateList.Where(c => c.Id == (int)leftViewItem.Key && c.Value == false).Count() == 1)
+                        {
+                            if (leftViewItem.CheckState == ToggleState.Off)
+                            {
+                                isRecordItemVisible = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (leftViewItem.Group.Text.ToUpper() == Language.labelInsolvency.ToUpper())
+                    {
+                        isRecordItemVisible = true;
+                        if (record.InsolvencyStateList.Where(c => c.Id == (int)leftViewItem.Key && c.Value == true).Count() == 1)
+                        {
+                            if (leftViewItem.CheckState == ToggleState.Off)
+                            {
+                                isRecordItemVisible = false;
+                                break;
+                            }
+                        }
+                    }
                 }
                 if (isRecordItemVisible == false)
                 {
@@ -949,10 +1477,12 @@ namespace Primary.SchoolApp
                     item.Visible = true;
                 }
             }
+            await System.Threading.Tasks.Task.Delay(0);
         }
-       //permet de filtrer l'object homeMainListView
+        //permet de filtrer l'object homeMainListView en fonction des recherches
         private bool FilterHomePredicate(ListViewDataItem item)
         {
+            
             if (HomeSearchTextBox.Text != string.Empty)
             {
                 var record = item.DataBoundItem as DTO.StudentEnrollingDTO;
@@ -970,23 +1500,22 @@ namespace Primary.SchoolApp
                 }
                 return false;
             }
-
             return true;
         }
         //permet de filter par status de payement: impayé ou payé
-        private bool IsStatusPaymentChecked(string statusPayment)
+        private bool IsStatusPaymentChecked(StudentEnrollingDTO enrolling)
         {
             bool status = true;
+            int val = enrolling.Balance == 0 ? 0 : 1;
             foreach (ListViewDataItem item in HomeLeftListView.Items)
             {
-                if (item.Key.ToString() == statusPayment && item.Group.Text.ToUpper() == Language.labelTuitionFees.ToUpper())
+                if (item.Group.Text.ToUpper() == Language.labelTuitionFees.ToUpper())
                 {
-                    if (item.CheckState == ToggleState.Off)
+                    if ((int)item.Key == val && item.CheckState == ToggleState.Off)
                     {
                         status = false;
                     }
                 }
-
             }
             return status;
         }
@@ -1012,6 +1541,7 @@ namespace Primary.SchoolApp
         private bool IsStatusInsolvencyChecked(DTO.StudentEnrollingDTO enrolling)
         {
             bool status = true;
+
             foreach (ListViewDataItem item in HomeLeftListView.Items)
             {
                 if (item.Group.Text.ToUpper() == Language.labelInsolvency.ToUpper())
@@ -1056,12 +1586,13 @@ namespace Primary.SchoolApp
             bool status = true;
             foreach (ListViewDataItem item in HomeLeftListView.Items)
             {
-                
+
                 if (item.Value != null)
                 {
-                    if (item.Group.Text.ToUpper() == Language.labelStudentsByGroup.ToUpper()) {
-                        var itemGroup=Program.SchoolGroupList.FirstOrDefault(x=>x.Id == (int)item.Key);
-                       if(itemGroup != null)
+                    if (item.Group.Text.ToUpper() == Language.labelStudentsByGroup.ToUpper())
+                    {
+                        var itemGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == (int)item.Key);
+                        if (itemGroup != null)
                         {
                             if (itemGroup.Name.ToUpper() == statusGroup.ToUpper())
                             {
@@ -1073,7 +1604,7 @@ namespace Primary.SchoolApp
                                 }
                             }
                         }
-                    }                    
+                    }
                 }
 
             }
@@ -1108,15 +1639,14 @@ namespace Primary.SchoolApp
                 }
 
             }
-         
+
             return status;
         }
         //permet de filter les élèves par statut: parti au cours de l'année ou pas
         private bool IsStudentStatusChecked(DTO.StudentEnrollingDTO enrolling)
         {
             bool status = true;
-            int val = 1;
-            if (enrolling.IsActive == false) val = 0;
+            int val = enrolling.IsActive ? 1 : 0;
             foreach (ListViewDataItem item in HomeLeftListView.Items)
             {
                 if (item.Group.Text.ToUpper() == Language.labelStudentsByStatus.ToUpper())
@@ -1132,7 +1662,56 @@ namespace Primary.SchoolApp
             return status;
         }
 
-      
+        // show ui to add student enrolling
+        private void ShowAddStudentEnrollingForm()
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddStudentEnrollingForm>();
+                form.Text = Language.labelAdd + ":.. " + Language.labelRegistration;
+                form.Icon = this.Icon;
+                form.Init(Program.CurrentSchoolYear);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    var data = studentEnrollingService.GetStudentEnrollingAsync((form.StudentDropDownList.SelectedItem.DataBoundItem as Student).Id, Program.CurrentSchoolYear.Id).Result;
+                    Program.StudentEnrollingList.Add(data.ConvertToStudentEnrollingDTO());
+                    HomeGridView.DataSource = new List<DTO.StudentEnrollingDTO>();
+                    HomeMainListView.DataSource = new List<DTO.StudentEnrollingDTO>();
+                    HomeGridView.DataSource = Program.StudentEnrollingList;
+                    HomeMainListView.DataSource = Program.StudentEnrollingList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+
+            }
+
+        }
+        private void ShowEditStudentEnrollingForm(DTO.StudentEnrollingDTO enrollingDTO)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                enrollingDTO.SchoolYear = Program.CurrentSchoolYear;
+                var form = Program.ServiceProvider.GetService<EditStudentEnrollingForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelEnroll;
+                form.Icon = this.Icon;
+                form.Init(enrollingDTO.ConvertToStudentEnrolling());
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    var data = studentEnrollingService.GetStudentEnrollingAsync((form.StudentDropDownList.SelectedItem.DataBoundItem as Student).Id, Program.CurrentSchoolYear.Id).Result;
+                    enrollingDTO = data.ConvertToStudentEnrollingDTO();
+                    HomeGridView.DataSource = new List<StudentEnrollingDTO>();
+                    HomeGridView.DataSource = Program.StudentEnrollingList;
+                    HomeMainListView.DataSource = Program.StudentEnrollingList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+
+        }
         #endregion
 
     }
