@@ -5,6 +5,8 @@ namespace SchoolManagement.UI
 {
     public partial class MainForm
     {
+        public RadDropDownList ReportSchoolYearDropDownList { get => reportSchoolYearDropDownList; }
+
         private void InitReportsPage()
         {
             reportMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;

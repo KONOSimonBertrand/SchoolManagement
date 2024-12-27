@@ -1,6 +1,6 @@
 ﻿
-
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -23,6 +23,16 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         }
 
+        public Task<bool> AddStateAsync(EvaluationSessionState evaluationSate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteStateAsync(int evaluationId, int schoolYearId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<EvaluationSession?> GetAsync(string code)
         {
             var result = appDbContext.EvaluationSessions.FirstOrDefault(x => x.Code == code);
@@ -37,6 +47,21 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
+        public Task<EvaluationSessionState> GetStateAsync(int evaluationId, int schoolYearId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<EvaluationSessionState>> GetStateListByEvaluationAsync(int evaluationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<EvaluationSessionState>> GetStateListBySchoolYearAsync(int schoolYearId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UpdateAsync(EvaluationSession evaluationType)
         {
             appDbContext.ChangeTracker.Clear();
@@ -45,6 +70,11 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
 
+        }
+
+        public Task<bool> UpdateStateAsync(EvaluationSessionState evaluationSate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using SchoolManagement.Core.Model;
-using SchoolManagement.Infrastructure.Repositories;
+using SchoolManagement.Core.Repositories;
 
 
 namespace SchoolManagement.Application
@@ -33,11 +33,14 @@ namespace SchoolManagement.Application
             return await classReadRepository.GetSubjectAsync(classId, subjectId, bookId);
         }
 
+        public async Task<IList<ClassSubject>> GetClassSubjectList()
+        {
+            return await classReadRepository.GetSubjectListAsync();
+        }
         public async Task<IList<ClassSubject>> GetClassSubjectList(int classId)
         {
             return await classReadRepository.GetSubjectListAsync(classId);
         }
-
         public async  Task<SchoolClass?> GetSchoolClass(string name)
         {
             return await classReadRepository.GetAsync(name);

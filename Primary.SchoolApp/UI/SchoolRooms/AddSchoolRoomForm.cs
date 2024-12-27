@@ -92,7 +92,7 @@ namespace Primary.SchoolApp.UI
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelClass;
-                form.Init(item);
+                form.InitStartup(item);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;

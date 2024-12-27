@@ -2,8 +2,8 @@
 
 using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
-using System.Configuration;
 
 namespace SchoolManagement.Infrastructure.Repositories
 {
@@ -119,8 +119,8 @@ namespace SchoolManagement.Infrastructure.Repositories
                               INNER JOIN Employees B ON A.EmployeeId=B.Id
                               INNER JOIN Jobs C ON A.JobId=C.Id
                               INNER JOIN EmployeeGroups D ON A.GroupId=D.Id 
-                               INNER JOIN SchoolYears E ON A.SchoolYearId=E.Id 
-                               WHERE A.SchoolYearId=@schoolYearId  ;";
+                              INNER JOIN SchoolYears E ON A.SchoolYearId=E.Id 
+                              WHERE A.SchoolYearId=@schoolYearId  ;";
             var result = connection.Query<EmployeeEnrolling, Employee, Job, EmployeeGroup,SchoolYear, EmployeeEnrolling>(query,
                 (enrolling,employee, job, group,schoolYear) =>
                 {

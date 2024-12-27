@@ -1,68 +1,73 @@
 ﻿
 
 using SchoolManagement.Core.Model;
-using SchoolManagement.Infrastructure.Repositories;
+using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Application
 {
     public class StudentEnrollingService : IStudentEnrollingService
     {
-        private readonly IStudentEnrollingReadRepository studentEnrollingReadRepository;
-        private readonly IStudentEnrollingWriteRepository studentEnrollingWriteRepository;
+        private readonly IStudentEnrollingReadRepository enrollingReadRepository;
+        private readonly IStudentEnrollingWriteRepository enrollingWriteRepository;
 
-        public StudentEnrollingService(IStudentEnrollingRepository studentEnrollingRepository)
+        public StudentEnrollingService(IStudentEnrollingRepository enrollingRepository)
         {
-            this.studentEnrollingReadRepository = studentEnrollingRepository;
-            this.studentEnrollingWriteRepository = studentEnrollingRepository;
+            this.enrollingReadRepository = enrollingRepository;
+            this.enrollingWriteRepository = enrollingRepository;
+        }
+
+        public async Task<bool> ChangeStudentEnrollingStatusAsync(int enrollingId, bool status,string reason)
+        {
+            return await enrollingWriteRepository.ChangeEnrollingStatus(enrollingId,status,reason);
         }
 
         public async Task<bool> CreateStudentEnrollingAsync(StudentEnrolling enrolling)
         {
-            return await studentEnrollingWriteRepository.AddStudentEnrollingAsync(enrolling);
+            return await enrollingWriteRepository.AddEnrollingAsync(enrolling);
         }
 
         public async Task<bool> CreateStudentRoomAsync(StudentRoom room)
         {
-            return await studentEnrollingWriteRepository.AddStudentRoomAsync(room);  
+            return await enrollingWriteRepository.AddStudentRoomAsync(room);  
         }
 
         public async Task<bool> DeleteStudentRoomAsync(int StudentId, int schoolYearId)
         {
-            return await studentEnrollingWriteRepository.DeleteStudentRoomAsync(StudentId, schoolYearId);
+            return await enrollingWriteRepository.DeleteStudentRoomAsync(StudentId, schoolYearId);
         }
 
         public async Task<StudentEnrolling?> GetStudentEnrollingAsync(int studentId, int schoolyearId)
         {
-            return await studentEnrollingReadRepository.GetStudentEnrollingAsyn(studentId,schoolyearId);
+            return await enrollingReadRepository.GetStudentEnrollingAsyn(studentId,schoolyearId);
         }
 
         public async Task<List<StudentEnrolling>> GetStudentEnrollingListAsync(int schoolyearId)
         {
-            return await studentEnrollingReadRepository.GetStudentEnrollingLIstAsync(schoolyearId);
+            return await enrollingReadRepository.GetStudentEnrollingLIstAsync(schoolyearId);
         }
 
         public async Task<StudentRoom?> GetStudentRoomAsync(int studentId, int schoolYearId)
         {
-            return await studentEnrollingReadRepository.GetStudentRoomAsync(studentId,schoolYearId);
+            return await enrollingReadRepository.GetStudentRoomAsync(studentId,schoolYearId);
         }
 
         public async  Task<List<StudentRoom>> GetStudentRoomListAsync(int roomId, int schoolYearId)
         {
-            return await studentEnrollingReadRepository.GetStudentRoomListAsync(roomId,schoolYearId);
+            return await enrollingReadRepository.GetStudentRoomListAsync(roomId,schoolYearId);
         }
         public async Task<List<StudentRoom>> GetStudentRoomListAsync(int schoolYearId)
         {
-            return await studentEnrollingReadRepository.GetStudentRoomListAsync(schoolYearId);
+            return await enrollingReadRepository.GetStudentRoomListAsync(schoolYearId);
         }
 
         public async Task<bool> SaveStudentEnrollingPictureAsync(int studentId, string urlPicture)
         {
-           return  await studentEnrollingWriteRepository.AddStudentEnrollingPictureAsync(studentId, urlPicture);
+           return  await enrollingWriteRepository.AddEnrollingPictureAsync(studentId, urlPicture);
         }
 
         public async Task<bool> UpdateStudentEnrollingAsync(StudentEnrolling enrolling)
         {
-            return await studentEnrollingWriteRepository.UpdateStudentEnrollingAsync(enrolling);
+            return await enrollingWriteRepository.UpdateEnrollingAsync(enrolling);
         }
     }
 }

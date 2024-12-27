@@ -46,6 +46,9 @@ namespace SchoolManagement.UI
             saveButton.Text = Language.labelSave;
             filterTextBox.NullText = Language.messageResearch;
             this.Text = Language.titleRoomList;
+            this. radLabel1.Text = Language.labelPhone+ ":";
+            this.radLabel2.Text = Language.labelAddress + ":";
+            this.radLabel3.Text = Language.labelMail + ":";
         }
 
        

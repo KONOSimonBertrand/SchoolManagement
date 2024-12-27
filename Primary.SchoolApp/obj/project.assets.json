@@ -2067,8 +2067,7 @@
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
           "Microsoft.Extensions.Localization.Abstractions": "7.0.20",
-          "SchoolManagement.Core": "1.0.0",
-          "SchoolManagement.Infrastructure": "1.0.0"
+          "SchoolManagement.Core": "1.0.0"
         },
         "compile": {
           "bin/placeholder/SchoolManagement.Application.dll": {}
@@ -5824,7 +5823,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net6.0-windows7.0": {
@@ -5874,7 +5874,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

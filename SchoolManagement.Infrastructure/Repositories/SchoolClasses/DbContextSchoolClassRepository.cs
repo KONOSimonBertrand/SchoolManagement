@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 using System;
 
@@ -71,6 +72,11 @@ namespace SchoolManagement.Infrastructure.Repositories
             var result = appDbContext.ClassSubjects.Include(x=>x.Class).Include(g => g.Group).ToList();
             await Task.Delay(0);
             return result;
+        }
+
+        public Task<IList<ClassSubject>> GetSubjectListAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> UpdateAsync(SchoolClass schoolClass)

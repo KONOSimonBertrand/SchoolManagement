@@ -205,7 +205,6 @@ namespace Primary.SchoolApp.UI
         private void CreateGridViewColumn()
         {
             GridViewTextBoxColumn subjectColumn = new GridViewTextBoxColumn(Language.fieldSubjectName);
-            GridViewTextBoxColumn fullNameColumn = new GridViewTextBoxColumn("Subject.FullName");
             GridViewTextBoxColumn groupColumn = new GridViewTextBoxColumn(Language.fieldGroupName);
             GridViewDecimalColumn coefColumn = new GridViewDecimalColumn("Coefficient");
             GridViewDecimalColumn noteOnColumn = new GridViewDecimalColumn("NotedOn");
@@ -216,21 +215,18 @@ namespace Primary.SchoolApp.UI
             sequenceColumn.HeaderText = Language.labelSequence;
             noteOnColumn.HeaderText = Language.labelMaxNote;
             groupColumn.HeaderText = Language.labelGroup;
-            fullNameColumn.HeaderText = Language.labelFullName;
             sectionColumn.HeaderText = (Language.labelSection);
             coefColumn.Width = 80;
-            subjectColumn.Width = 200;
-            groupColumn.Width = 250;
+            subjectColumn.Width = 300;
+            groupColumn.Width = 300;
             noteOnColumn.Width = 90;
             sectionColumn.Width = 120;
-            fullNameColumn.Width = 200;
             this.DataGridView.Columns.Add(subjectColumn);
-            this.DataGridView.Columns.Add(fullNameColumn);
             this.DataGridView.Columns.Add(groupColumn);
             this.DataGridView.Columns.Add(coefColumn);
             this.DataGridView.Columns.Add(noteOnColumn);
             this.DataGridView.Columns.Add(sequenceColumn);
-            if (selectedClass.BookTypeId == 2)
+            if (selectedClass.DocumentLanguageId == 2)
                 this.DataGridView.Columns.Add(sectionColumn);
         }
 

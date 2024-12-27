@@ -392,6 +392,8 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditRatingSystemForm";
             Text = "EditEvaluationSystemForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();

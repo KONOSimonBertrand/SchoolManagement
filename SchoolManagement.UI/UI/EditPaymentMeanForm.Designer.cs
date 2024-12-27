@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             shortNameSeparator = new Telerik.WinControls.UI.RadSeparator();
             accountTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -43,9 +44,9 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
-            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)shortNameSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)accountTextBox).BeginInit();
@@ -60,7 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -85,17 +85,26 @@
             editPanel.Size = new Size(888, 147);
             editPanel.TabIndex = 27;
             // 
+            // sequenceSeparator
+            // 
+            sequenceSeparator.Location = new Point(525, 128);
+            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
+            sequenceSeparator.Name = "sequenceSeparator";
+            sequenceSeparator.Size = new Size(341, 4);
+            sequenceSeparator.TabIndex = 108;
+            sequenceSeparator.TabStop = false;
+            // 
             // sequenceSpinEditor
             // 
             sequenceSpinEditor.Location = new Point(525, 97);
             sequenceSpinEditor.Margin = new Padding(4);
-            sequenceSpinEditor.MinimumSize = new Size(0, 30);
+            sequenceSpinEditor.MinimumSize = new Size(0, 38);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
             // 
             // 
             // 
             sequenceSpinEditor.RootElement.MinSize = new Size(0, 38);
-            sequenceSpinEditor.Size = new Size(341, 30);
+            sequenceSpinEditor.Size = new Size(341, 38);
             sequenceSpinEditor.TabIndex = 107;
             // 
             // shortNameSeparator
@@ -230,15 +239,6 @@
             saveButton.TabIndex = 111;
             saveButton.Text = "Enregistrer";
             // 
-            // sequenceSeparator
-            // 
-            sequenceSeparator.Location = new Point(525, 128);
-            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
-            sequenceSeparator.Name = "sequenceSeparator";
-            sequenceSeparator.Size = new Size(341, 4);
-            sequenceSeparator.TabIndex = 108;
-            sequenceSeparator.TabStop = false;
-            // 
             // EditPaymentMeanForm
             // 
             AcceptButton = saveButton;
@@ -250,11 +250,14 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditPaymentMeanForm";
             Text = "EditPaymentMeanForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)shortNameSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)accountTextBox).EndInit();
@@ -269,7 +272,6 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }

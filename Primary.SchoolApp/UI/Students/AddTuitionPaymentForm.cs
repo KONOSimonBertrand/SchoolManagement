@@ -1,5 +1,5 @@
-﻿using MediaFoundation;
-using Primary.SchoolApp.Services;
+﻿using Primary.SchoolApp.Services;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System;
@@ -16,13 +16,14 @@ namespace Primary.SchoolApp.UI
         private StudentEnrolling selectedEnrolling;
         private readonly IPrintService printService;
         private List<SchoolingCost> selectedSchoolFeeList;
+        private int selectedInitMethod = 0;
+        internal string LastIdNumber=string.Empty;// is given when payment added
         public AddTuitionPaymentForm(ICashFlowService cashFlowService, ILogService logService, ClientApp clientApp, IPrintService printService)
         {
             this.cashFlowService = cashFlowService;
             this.logService = logService;
             this.clientApp = clientApp;
             this.printService = printService;
-            selectedEnrolling = new StudentEnrolling();
             selectedSchoolFeeList = new List<SchoolingCost>();
             this.PaymentMeanDropDownList.DataSource = Program.PaymentMeanList;          
             InitEvents();
@@ -40,6 +41,11 @@ namespace Primary.SchoolApp.UI
             if (this.StudentDropDownList.SelectedItem != null) { 
                 if(this.StudentDropDownList.SelectedItem.DataBoundItem is Student student)
                 {
+                    if (selectedInitMethod==1)// if Init(List<Student>)
+                    {
+                        selectedEnrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.StudentId == student.Id).AsStudentEnrolling();
+                        selectedEnrolling.SchoolYear=Program.CurrentSchoolYear;
+                    }
                     this.ClassTextBox.Text = selectedEnrolling.SchoolClass.Name;
                     this.SchoolYearTextBox.Text = selectedEnrolling.SchoolYear.Name;
                     selectedSchoolFeeList = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == selectedEnrolling.ClassId).OrderBy(x => x.CashFlowType.Sequence).ToList();
@@ -78,6 +84,12 @@ namespace Primary.SchoolApp.UI
             this.StudentDropDownList.ReadOnly = true;
         }
 
+        internal void Init(List<Student> students)
+        {
+            selectedInitMethod = 1;
+            this.StudentDropDownList.DataSource= students;            
+        }
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData()) { 
@@ -101,7 +113,15 @@ namespace Primary.SchoolApp.UI
                 //add payment
                 var isDone = cashFlowService.CreateTuitionPayment(payment).Result;
                 if (isDone)
-                {   
+                {
+                    LastIdNumber = payment.IdNumber;
+                    //update list of payment
+                    var recordAdded = cashFlowService.GetTuitionPayment(payment.IdNumber).Result;
+                    if (recordAdded != null)
+                    {
+                        payment.Id=recordAdded.Id;
+                        Program.TuitionPaymentList.Add(payment);
+                    }
                     //enregistrement du log
                     Log logPayment = new()
                     {
@@ -110,30 +130,8 @@ namespace Primary.SchoolApp.UI
                     };
                     logService.CreateLog(logPayment);
 
-                    //enregistrement du cashflow
-                    var cashflow = new CashFlow()
-                    {
-                        Amount = payment.Amount,
-                        CashFlowType = payment.CashFlowType,
-                        CashFlowTypeId = payment.CashFlowTypeId,
-                        Date = payment.Date,
-                        DoneBy = payment.DoneBy,
-                        SchoolYear = selectedEnrolling.SchoolYear,
-                        SchoolYearId = selectedEnrolling.SchoolYearId,
-                        Note = payment.CashFlowType.Name + " " + selectedEnrolling.Student.FullName,
-                    };
-                    if (cashFlowService.CreateCashFlow(cashflow).Result)
-                    {
-                        //enregistrement du log
-                        Log logCash = new()
-                        {
-                            UserAction = $"Ajout d'un flux de trésorerie de {cashflow.Amount} pour {cashflow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                            UserId = clientApp.UserConnected.Id
-                        };
-                        logService.CreateLog(logCash);
-                    }
                     //impression du reçu
-                    printService.PrintPaymentReceipt(payment, false);
+                    printService.PrintPaymentReceiptAsync(payment, false);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }

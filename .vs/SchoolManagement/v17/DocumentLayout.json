@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|solutionrelative:schoolmanagement.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\reporting\\notereport\\classnotereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\reporting\\notereport\\classnotereport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\reporting\\notereport\\primaryevaluationreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\reporting\\notereport\\primaryevaluationreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\services\\reportcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\services\\reportcardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\mainform.studentnotetab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\mainform.studentnotetab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\dto\\dtoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\dto\\dtoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\reporting\\reportviewerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\reporting\\reportviewerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,21 +42,86 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Application\\DependencyInjection.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\DependencyInjection.cs",
-              "RelativeToolTip": "SchoolManagement.Application\\DependencyInjection.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAkAAABjAAAA",
+              "DocumentIndex": 1,
+              "Title": "PrimaryEvaluationReport.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\NoteReport\\PrimaryEvaluationReport.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\Reporting\\NoteReport\\PrimaryEvaluationReport.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\NoteReport\\PrimaryEvaluationReport.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\Reporting\\NoteReport\\PrimaryEvaluationReport.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAQwGEAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T18:30:33.911Z",
+              "WhenOpened": "2024-12-26T19:45:22.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DTOItem.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\DTO\\DTOItem.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\DTO\\DTOItem.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\DTO\\DTOItem.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\DTO\\DTOItem.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAIA/wBMAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T01:49:33.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClassNoteReport.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\NoteReport\\ClassNoteReport.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\Reporting\\NoteReport\\ClassNoteReport.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\NoteReport\\ClassNoteReport.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\Reporting\\NoteReport\\ClassNoteReport.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAQwFcAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T01:37:02.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ReportViewerForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\ReportViewerForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\Reporting\\ReportViewerForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\ReportViewerForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\Reporting\\ReportViewerForm.cs",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAswNcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-21T17:21:02.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReportCardService.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\ReportCardService.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\Services\\ReportCardService.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\ReportCardService.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\Services\\ReportCardService.cs",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAcwGkBAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-21T15:07:33.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainForm.StudentNoteTab.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.StudentNoteTab.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\MainForm.StudentNoteTab.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.StudentNoteTab.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\MainForm.StudentNoteTab.cs",
+              "ViewState": "AgIAACMBAAAAAAAAAAAewC8BAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T18:11:04.687Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedHeight": 200,
+          "DockedHeight": 73,
           "SelectedChildIndex": -1,
           "Children": [
             {

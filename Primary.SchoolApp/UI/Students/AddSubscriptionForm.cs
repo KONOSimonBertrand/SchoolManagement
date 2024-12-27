@@ -1,6 +1,6 @@
 ﻿using Primary.SchoolApp.Services;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
-using SchoolManagement.Application.Subscriptions;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
@@ -12,16 +12,15 @@ namespace Primary.SchoolApp.UI
     internal class AddSubscriptionForm : SchoolManagement.UI.EditSubscriptionForm
     {
         private readonly ISubscriptionService subscriptionService;
-        private readonly ICashFlowService cashFlowService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private readonly IPrintService printService;
-        private StudentEnrolling selectedEnrolling;
         private readonly List<SubscriptionFee> selectedFeeList;
-        public AddSubscriptionForm(ISubscriptionService subscriptionService,ICashFlowService cashFlowService, ILogService logService, ClientApp clientApp, IPrintService printService)
+        //private int selectedInitMethod = 0;
+        internal string LastIdNumber = string.Empty;// is given when payment added
+        public AddSubscriptionForm(ISubscriptionService subscriptionService, ILogService logService, ClientApp clientApp, IPrintService printService)
         {
             this.subscriptionService = subscriptionService;
-            this.cashFlowService = cashFlowService;
             this.logService = logService;
             this.clientApp = clientApp;
             this.printService = printService;
@@ -44,8 +43,9 @@ namespace Primary.SchoolApp.UI
             {
                 if (this.StudentDropDownList.SelectedItem.DataBoundItem is Student student)
                 {
-                    this.ClassTextBox.Text = selectedEnrolling.SchoolClass.Name;
-                    this.SchoolYearTextBox.Text = selectedEnrolling.SchoolYear.Name;                  
+                    var enrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.StudentId == student.Id).AsStudentEnrolling();
+                    this.ClassTextBox.Text = enrolling.SchoolClass.Name;
+                    this.SchoolYearTextBox.Text = Program.CurrentSchoolYear.Name;                  
                 }
             }
         }
@@ -66,27 +66,29 @@ namespace Primary.SchoolApp.UI
             }
         }
         
-        internal void Init(StudentEnrolling enrolling)
+        internal void InitStartup(Student student)
         {
-            enrolling.SchoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == enrolling.SchoolYearId);
-            this.selectedEnrolling = enrolling;
             this.StudentDropDownList.DataSource = new List<Student>() {
-                enrolling.Student
+                student
             };
             this.StudentDropDownList.ReadOnly = true;
         }
-
+        internal void InitStartup(List<Student> students)
+        {
+            this.StudentDropDownList.DataSource = students;
+        }
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData())
             {
                 var subscriptionType=this.SubscriptionDropDownList.SelectedItem.DataBoundItem as CashFlowType;
                 var paymentMean = this.PaymentMeanDropDownList.SelectedItem.DataBoundItem as PaymentMean;
-                if (!RecordExist(selectedEnrolling.Id, subscriptionType.Id, this.StartDateTimePicker.Value))
+                var student=this.StudentDropDownList.SelectedItem.DataBoundItem as Student;
+                if (!RecordExist(student.Id,Program.CurrentSchoolYear.Id, subscriptionType.Id, this.StartDateTimePicker.Value))
                 {
                     Subscription subscription = new()
                     {
-                        Date = this.StartDateTimePicker.Value,
+                        StartDate = this.StartDateTimePicker.Value,
                         Amount = double.Parse(this.FeeTextBox.Text),
                         Discount = double.Parse(this.DiscountTextBox.Text),
                         EndDate = this.EndDateTimePicker.Value,
@@ -97,47 +99,35 @@ namespace Primary.SchoolApp.UI
                         TransactionDate = this.TransactionDateTimePicker.Value,
                         TransactionId = this.TransactionIdTextBox.Text,
                         DoneBy = this.DoneByTextBox.Text,
-                        Enrolling = selectedEnrolling,
-                        EnrollingId = selectedEnrolling.Id,
+                        Student = student,
+                        StudentId = student.Id,
+                        SchoolYear=Program.CurrentSchoolYear,
+                        SchoolYearId=Program.CurrentSchoolYear.Id,
+                        
                     };
                     //add subscription
                     var isDone = subscriptionService.CreateSubscriptionAsync(subscription).Result;
                     if (isDone)
                     {
+                        LastIdNumber = subscription.IdNumber;
+                        //update list of subscription
+                        var recordAdded = subscriptionService.GetSubscriptionAsync(subscription.IdNumber).Result;
+                        if (recordAdded != null)
+                        {
+                            subscription.Id = recordAdded.Id;
+                            Program.SubscriptionList.Add(subscription);
+                        }
                         //enregistrement du log
                         Log logSubscription = new()
                         {
-                            UserAction = $"Ajout d'un abonnement  {subscription.CashFlowType.Name} de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                            UserAction = $"Ajout d'un abonnement  {subscription.CashFlowType.Name} de l'élève {student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(logSubscription);
-
-                        //enregistrement du cashflow
-                        var cashflow = new CashFlow()
-                        {
-                            Amount = subscription.Amount,
-                            CashFlowType = subscription.CashFlowType,
-                            CashFlowTypeId = subscription.CashFlowTypeId,
-                            Date = subscription.Date,
-                            DoneBy = subscription.DoneBy,
-                            SchoolYear = selectedEnrolling.SchoolYear,
-                            SchoolYearId = selectedEnrolling.SchoolYearId,
-                            Note = subscription.CashFlowType.Name + " " + selectedEnrolling.Student.FullName,
-                        };
-                        if (cashFlowService.CreateCashFlow(cashflow).Result)
-                        {
-                            //enregistrement du log
-                            Log logCash = new()
-                            {
-                                UserAction = $"Ajout d'un flux de trésorerie de {cashflow.Amount} pour {cashflow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                UserId = clientApp.UserConnected.Id
-                            };
-                            logService.CreateLog(logCash);
-                        }
-                        //impression du reçu
-                        var result = subscriptionService.GetSubscriptionAsync(subscription.EnrollingId, subscription.CashFlowTypeId, subscription.Date).Result;
+                        //print
+                        var result = subscriptionService.GetSubscriptionAsync(subscription.StudentId,subscription.SchoolYearId, subscription.CashFlowTypeId, subscription.StartDate).Result;
                         subscription.Id = result.Id;
-                        printService.PrintPaymentReceipt(subscription, false);
+                        printService.PrintPaymentReceiptAsync(subscription, false);
                         this.DialogResult = System.Windows.Forms.DialogResult.OK;
                         this.Close();
                     }
@@ -156,9 +146,9 @@ namespace Primary.SchoolApp.UI
                 }
             }
         }
-        private bool RecordExist(int enrollingId,int cashFlowTypeId,DateTime subscriptionDate)
+        private bool RecordExist(int studentId,int schoolYearId,int cashFlowTypeId,DateTime subscriptionDate)
         {          
-            return subscriptionService.GetSubscriptionAsync(enrollingId,cashFlowTypeId,subscriptionDate).Result!=null;
+            return subscriptionService.GetSubscriptionAsync(studentId,schoolYearId,cashFlowTypeId,subscriptionDate).Result!=null;
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
-using System.Xml.Linq;
+
 
 namespace SchoolManagement.Infrastructure.Repositories
 {

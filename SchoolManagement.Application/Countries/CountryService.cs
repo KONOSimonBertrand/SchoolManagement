@@ -1,6 +1,6 @@
 ﻿
 using SchoolManagement.Core.Model;
-using SchoolManagement.Infrastructure.Repositories;
+using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Application
 {

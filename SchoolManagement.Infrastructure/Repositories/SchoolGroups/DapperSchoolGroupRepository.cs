@@ -2,6 +2,7 @@
 
 using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -32,7 +33,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<List<SchoolGroup>> GetListAsync()
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = "SELECT * FROM SchoolGroups ";
+            string query = "SELECT * FROM SchoolGroups ORDER BY Sequence";
             var result = connection.Query<SchoolGroup>(query).ToList();
             await Task.Delay(0);
             return result;

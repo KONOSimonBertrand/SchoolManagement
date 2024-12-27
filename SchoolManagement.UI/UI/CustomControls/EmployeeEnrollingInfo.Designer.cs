@@ -857,8 +857,6 @@
         private Telerik.WinControls.UI.RadLabel nationalityLabel;
         private Telerik.WinControls.UI.RadSplitContainer roomSplitContainer;
         private Telerik.WinControls.UI.SplitPanel roomsSplitPanel;
-        private Telerik.WinControls.UI.RadTextBox radTextBox1;
-        private Telerik.WinControls.UI.RadSeparator radSeparator1;
         private Telerik.WinControls.UI.RadLabel roomsLabel;
         private Telerik.WinControls.UI.SplitPanel notesSplitPanel;
     }

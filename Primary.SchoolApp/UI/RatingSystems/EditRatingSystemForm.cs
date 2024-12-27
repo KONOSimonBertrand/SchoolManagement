@@ -31,6 +31,7 @@ namespace Primary.SchoolApp.UI
 
         private void OnShown(object sender, EventArgs e)
         {
+            
             FrenchNameDropDownList.Focus();
         }
         internal void Init(RatingSystem ratingSystem)
@@ -44,8 +45,6 @@ namespace Primary.SchoolApp.UI
             MaxNoteTextBox.Text = ratingSystem.MaxNote.ToString();
             MinNoteTextBox.Text = ratingSystem.MinNote.ToString();
             DomainDropDownList.SelectedValue = ratingSystem.Domain;
-
-
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {

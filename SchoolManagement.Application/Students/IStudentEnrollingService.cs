@@ -16,5 +16,7 @@ namespace SchoolManagement.Application
         public Task<List<StudentRoom>> GetStudentRoomListAsync(int roomId,int schoolYearId);
         public Task<List<StudentRoom>> GetStudentRoomListAsync(int schoolYearId);
         public Task<bool> SaveStudentEnrollingPictureAsync(int studentId, string urlPicture);
+        public Task<bool> ChangeStudentEnrollingStatusAsync(int enrollingId,bool status,string reason);
+
     }
 }

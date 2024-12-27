@@ -20,7 +20,7 @@ namespace SchoolManagement.Core.Model
             get
             {
                 if (Class != null) {
-                    if (Class.BookTypeId == 0 || Class.BookTypeId == 1) return string.Empty;
+                    if (Class.DocumentLanguageId == 0 || Class.DocumentLanguageId == 1) return string.Empty;
                     else
                     {
                         if(BookId==0) return "Francophone";

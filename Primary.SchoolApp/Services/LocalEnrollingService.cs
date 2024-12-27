@@ -1,4 +1,5 @@
 ﻿using Primary.SchoolApp.DTO;
+using SchoolManagement.Core.Model;
 using System;
 using System.Linq;
 
@@ -7,13 +8,13 @@ namespace Primary.SchoolApp.Services
 {
     internal class LocalEnrollingService 
     {
-        internal double GetInsolvencyAmount(StudentEnrollingDTO enrolling, int cashFlowTypeId)
+        internal double GetInsolvencyAmount(StudentEnrollingDTO enrolling, int cashFlowTypeId,SchoolYear schoolYear)
         {
             double sum = 0;
             if (enrolling != null)
             {
                 //extraction des frais liés au type de flux de trésorerie
-                var fee = Program.SchoolingCostList.FirstOrDefault(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId && x.CashFlowTypeId == cashFlowTypeId);
+                var fee = Program.SchoolingCostList.FirstOrDefault(x => x.SchoolYearId == schoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId && x.CashFlowTypeId == cashFlowTypeId);
                 if (fee != null)
                 {   //extraction des tranches de payement liées
                     fee.SchoolingCostItems = Program.SchoolingCostItemList.Where(x => x.SchoolingCostId == fee.Id).ToList();

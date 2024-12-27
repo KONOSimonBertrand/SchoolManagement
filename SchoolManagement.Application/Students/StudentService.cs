@@ -2,7 +2,7 @@
 
 
 using SchoolManagement.Core.Model;
-using SchoolManagement.Infrastructure.Repositories;
+using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Application
 {
@@ -19,6 +19,8 @@ namespace SchoolManagement.Application
             this.generateIdNumberService = generateIdNumberService;
             this.schoolYearReadRepository = schoolYearRepository;
         }
+
+        
 
         public async Task<bool> CreateStudentAsync(Student student)
         {

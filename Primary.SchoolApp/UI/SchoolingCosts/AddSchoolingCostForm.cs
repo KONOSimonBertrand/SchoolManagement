@@ -21,7 +21,6 @@ namespace Primary.SchoolApp.UI
         private readonly ISchoolYearService schoolYearService;
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ISchoolClassService schoolClassService;
-        bool flag = false;
         public AddSchoolingCostForm(ISchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ISchoolClassService schoolClassService
             )
@@ -321,7 +320,7 @@ namespace Primary.SchoolApp.UI
             {
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelClass;
-                form.Init(schoolClass);
+                form.InitStartup(schoolClass);
                 form.Icon = this.Icon;
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {

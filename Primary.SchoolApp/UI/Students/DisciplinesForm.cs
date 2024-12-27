@@ -5,7 +5,6 @@ using System;
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using System.Drawing;
-using SchoolManagement.Application.Subscriptions;
 using Primary.SchoolApp.Services;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
@@ -18,14 +17,13 @@ namespace Primary.SchoolApp.UI
 {
     internal class DisciplinesForm : SchoolManagement.UI.StudentItemsForm
     {
-        private readonly IPrintService printService;
+     
         private readonly IDisciplineService disciplineService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private StudentEnrolling selectedEnrolling;
         public DisciplinesForm(IPrintService printService, IDisciplineService disciplineService, ILogService logService, ClientApp clientApp)
         {
-            this.printService = printService;
             this.disciplineService = disciplineService;
             this.logService = logService;
             this.clientApp = clientApp;
@@ -36,6 +34,8 @@ namespace Primary.SchoolApp.UI
         // affichage des informations personnelles de l'élève etc.
         internal void Init(StudentEnrolling enrolling)
         {
+            SaveButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowCreate == true);
+
             enrolling.SchoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == enrolling.SchoolYearId);
             selectedEnrolling = enrolling;
             if (enrolling.Student.FullName.Length >= 17)
@@ -54,7 +54,7 @@ namespace Primary.SchoolApp.UI
                 age--;
             }
 
-            PersonalInformationLabel.Text = string.Format("{0} ans | {1} | {2}", age.ToString(), enrolling.Student.Sex == "M" ? "Masculin" : "Feminin", enrolling.Student.BirthDate.ToString("dd/MM/yyyy"));
+            PersonalInformationLabel.Text = string.Format("{0} {1} | {2} | {3}", age.ToString(), Language.LabelYearOld.ToLower(), enrolling.Student.Sex == "M" ? Language.LabelMale : Language.LabelFemale, enrolling.Student.BirthDate.ToString("dd/MM/yyyy"));
             string schoolInfo = Language.labelRegisteredOn + " " + enrolling.Date.ToString("dd/MM/yyyy") + " | " + enrolling.SchoolClass.Name + " | " + enrolling.SchoolClass.Group.Name + " | " + enrolling.SchoolYear.Name;
             SchoolInformationLabel.LabelElement.ToolTipText = schoolInfo;
             if (schoolInfo.Length <= 121)
@@ -99,7 +99,7 @@ namespace Primary.SchoolApp.UI
             }
 
             //load disciplines
-            LoadDisciplines(enrolling.Id);
+            LoadDisciplines(selectedEnrolling.StudentId);
         }
         private void InitEvents()
         {
@@ -151,10 +151,10 @@ namespace Primary.SchoolApp.UI
                     var form = Program.ServiceProvider.GetService<AddDisciplineForm>();
                     form.Text = Language.labelAdd + ":.." + Language.labelDiscipline;
                     form.Icon = this.Icon;
-                    form.Init(selectedEnrolling);
+                    form.Init(selectedEnrolling.Student);
                     if (form.ShowDialog(this) == DialogResult.OK)
                     {
-                        LoadDisciplines(selectedEnrolling.Id);
+                        LoadDisciplines(selectedEnrolling.StudentId);
                     }
                 }
                 else
@@ -169,12 +169,11 @@ namespace Primary.SchoolApp.UI
 
         }
         // chargement de la liste des abonnements dans le datagridview
-        private async void LoadDisciplines(int enrollingId)
+        private async void LoadDisciplines(int studentId)
         {
-            selectedEnrolling.DisciplineList = disciplineService.GetDisciplineListByEnrolling(enrollingId).Result;
-            DataGridView.DataSource = selectedEnrolling.DisciplineList;
+            DataGridView.DataSource = await disciplineService.GetDisciplineListByStudent(studentId,Program.CurrentSchoolYear.Id);
             DataGridView.BestFitColumns();
-            await Task.Delay(0);
+            
         }
         //Création des colonnes du datagridview
         private void CreateGridViewColumn()
@@ -222,6 +221,9 @@ namespace Primary.SchoolApp.UI
                 RadMenuItem deleteMenu = new(Language.labelDelete);
                 editMenu.Image = AppUtilities.GetImage("Edit");
                 deleteMenu.Image = AppUtilities.GetImage("Delete");
+                editMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowUpdate == true);
+                deleteMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowDelete == true);
+                SaveButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowCreate == true);
                 e.ContextMenu.Items.Add(editMenu);
                 e.ContextMenu.Items.Add(deleteMenu);
                 editMenu.Click += EditMenu_Click;
@@ -238,7 +240,7 @@ namespace Primary.SchoolApp.UI
                     var isDone=disciplineService.DeleteDiscipline(discipline.Id).Result;
                     if (isDone)
                     {
-                        LoadDisciplines(selectedEnrolling.Id);
+                        LoadDisciplines(selectedEnrolling.StudentId);
                         //enregistrement du log
                         Log logSubscription = new()
                         {
@@ -271,7 +273,7 @@ namespace Primary.SchoolApp.UI
                         form.Init(discipline);
                         if (form.ShowDialog(this) == DialogResult.OK)
                         {
-                            LoadDisciplines(selectedEnrolling.Id);
+                            LoadDisciplines(selectedEnrolling.StudentId);
                         }
                     }
                     else

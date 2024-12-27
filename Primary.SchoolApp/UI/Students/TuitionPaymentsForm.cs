@@ -22,9 +22,10 @@ namespace Primary.SchoolApp.UI
         private readonly IPrintService  printService;
         private readonly ICashFlowService cashFlowService;
         private readonly ILogService logService;
+        private readonly IUserService userService;
         private readonly ClientApp clientApp;
         private StudentEnrolling selectedEnrolling;
-        public TuitionPaymentsForm(IPrintService printService, ICashFlowService cashFlowService, ClientApp clientApp, ILogService logService)
+        public TuitionPaymentsForm(IPrintService printService, ICashFlowService cashFlowService, ClientApp clientApp, ILogService logService, IUserService userService)
         {
             this.printService = printService;
             this.cashFlowService = cashFlowService;
@@ -33,6 +34,7 @@ namespace Primary.SchoolApp.UI
             this.SaveButton.ButtonElement.ToolTipText = Language.messageClickToAddPayment;
             CreateGridViewColumn();
             InitEvents();
+            this.userService = userService;
         }
         // initialise certains éléments. chargement de la photo,
         // affichage des informations personnelles de l'élève etc.
@@ -55,7 +57,7 @@ namespace Primary.SchoolApp.UI
                 age--;
             }
             
-            PersonalInformationLabel.Text = string.Format("{0} ans | {1} | {2}", age.ToString(), enrolling.Student.Sex == "M" ? "Masculin" : "Feminin", enrolling.Student.BirthDate.ToString("dd/MM/yyyy"));
+            PersonalInformationLabel.Text = string.Format("{0} {1} | {2} | {3}", age.ToString(), Language.LabelYearOld.ToLower(), enrolling.Student.Sex == "M" ? Language.LabelMale : Language.LabelFemale, enrolling.Student.BirthDate.ToString("dd/MM/yyyy"));
             string schoolInfo = Language.labelRegisteredOn + " " + enrolling.Date.ToString("dd/MM/yyyy") + " | " + enrolling.SchoolClass.Name + " | " + enrolling.SchoolClass.Group.Name + " | " + enrolling.SchoolYear.Name;
             SchoolInformationLabel.LabelElement.ToolTipText = schoolInfo;
             if (schoolInfo.Length <= 121)
@@ -98,7 +100,11 @@ namespace Primary.SchoolApp.UI
                 }
 
             }
-
+            //check authorizations
+            Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
+            this.SaveButton.Enabled= Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
+            this.PrintButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true);
+            this.ExportButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true);
             //load payments
             LoadPayments(enrolling.Id);
         }
@@ -182,8 +188,12 @@ namespace Primary.SchoolApp.UI
             GridViewDateTimeColumn transactionDateColumn = new("TransactionDate");
             GridViewTextBoxColumn transactionIdColumn = new("TransactionId");
             GridViewTextBoxColumn doneByColumn = new("DoneBy");
+            GridViewTextBoxColumn isValidatedColumn = new("IsValidated");
+
+            isValidatedColumn.IsVisible = false;
+
             dateColumn.HeaderText = "Date";
-            idNumberColumn.HeaderText = Language.labelIdNumber;
+            idNumberColumn.HeaderText = Language.LabelReference;
             amountColumn.HeaderText = Language.labelAmount;
             cashFlowTypeColumn.HeaderText = Language.labelReason;
             paymentMeanColumn.HeaderText = Language.labelPaymentMean;
@@ -196,14 +206,23 @@ namespace Primary.SchoolApp.UI
             transactionDateColumn.CustomFormat = "dd/MM/yyyy";
             transactionDateColumn.FormatString = "{0:dd/MM/yyyy}";
 
-            this.DataGridView.Columns.Add(dateColumn);
+            ConditionalFormattingObject c1 = new("Orange, applied to entire row", ConditionTypes.Equal, "False", "", true);
+            c1.RowBackColor = Color.FromArgb(255, 209, 140);
+            c1.CellBackColor = Color.FromArgb(255, 209, 140);
+            c1.RowForeColor = Color.Black;
+            c1.CellForeColor = Color.Black;
+            isValidatedColumn.ConditionalFormattingObjectList.Add(c1);
+
+
             this.DataGridView.Columns.Add(idNumberColumn);
+            this.DataGridView.Columns.Add(dateColumn);
             this.DataGridView.Columns.Add(amountColumn);          
             this.DataGridView.Columns.Add(cashFlowTypeColumn);
             this.DataGridView.Columns.Add(paymentMeanColumn);
             this.DataGridView.Columns.Add(transactionDateColumn);
             this.DataGridView.Columns.Add(transactionIdColumn);
             this.DataGridView.Columns.Add(doneByColumn);
+            this.DataGridView.Columns.Add(isValidatedColumn);
             GridViewSummaryRowItem total = new()
             {
                 new GridViewSummaryItem("Amount", " {0}", GridAggregateFunction.Sum)
@@ -220,18 +239,96 @@ namespace Primary.SchoolApp.UI
             //don't add  header's item
             if (!e.ContextMenuProvider.ToString().Contains("Header"))
             {
-                if (DataGridView.CurrentRow.DataBoundItem is TuitionPayment record)
+                if (DataGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
                 {
-                    if (!record.IdNumber.ToLower().Contains("return"))
+                    Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
+                    if (!selectedPayment.IsValidated)
+                    {
+                        RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                        {
+                            Image = AppUtilities.GetImage("Check"),
+                            Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                        };
+                        validateMenu.Click += ValidateMenu_Click;
+                        e.ContextMenu.Items.Add(validateMenu);
+                    }
+
+                    if (!selectedPayment.IdNumber.ToLower().Contains("return") && selectedPayment.IsValidated)
                     {
                         RadMenuItem returnMenu = new(Language.labelReturn);
-                        RadMenuItem printMenu = new(Language.labelPrintRegistrationReceipt);
+                        returnMenu.Image = AppUtilities.GetImage("Undo");
+                        returnMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true);
                         e.ContextMenu.Items.Add(returnMenu);
-                        e.ContextMenu.Items.Add(printMenu);
                         returnMenu.Click += ReturnMenu_Click;
-                        printMenu.Click += PrintMenu_Click;
+                        
+                    }
+                    RadMenuItem printMenu = new(Language.labelPrintReceipt);
+                    printMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true);
+                    e.ContextMenu.Items.Add(printMenu);
+                    printMenu.Image = AppUtilities.GetImage("Printer");
+                    printMenu.Click += PrintMenu_Click;
+
+                }
+            }
+        }
+
+        private void ValidateMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (DataGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
+                {
+                    if (selectedPayment != null && selectedPayment.IsValidated==false)
+                    {                        
+                        var isValidated=cashFlowService.ValidateTuitionPayment(selectedPayment.Id).Result;
+                        if (isValidated) {
+
+                            //enregistrement du log de validation
+                            Log logValidate = new()
+                            {
+                                UserAction = $"Validation du paiement {selectedPayment.IdNumber} d'un montant de {selectedPayment.Amount} pour {selectedPayment.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserId = clientApp.UserConnected.Id
+                            };
+                            logService.CreateLog(logValidate);
+                            //create cash flow
+                            var cashFlow = new CashFlow()
+                            {
+                                Amount = selectedPayment.Amount,
+                                CashFlowType = selectedPayment.CashFlowType,
+                                CashFlowTypeId = selectedPayment.CashFlowTypeId,
+                                Date = DateTime.Now,
+                                DoneBy = selectedPayment.DoneBy,
+                                SchoolYear = selectedEnrolling.SchoolYear,
+                                SchoolYearId = selectedEnrolling.SchoolYearId,
+                                Note = $"{Language.labelPayment} {selectedPayment.IdNumber}:{selectedPayment.CashFlowType.Name}  {selectedEnrolling.Student.FullName}",
+                            };
+                            var isDone = cashFlowService.CreateCashFlow(cashFlow).Result;
+                            if (isDone)
+                            {
+                                LoadPayments(selectedEnrolling.Id);
+                                //enregistrement du log cash flow
+                                Log logCash = new()
+                                {
+                                    UserAction = $"Ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                logService.CreateLog(logCash);
+                            }
+                            else
+                            {
+                                RadMessageBox.Show(Language.messageAddError);
+                            }
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(Language.MessageValidateError);
+                        }
                     }
                 }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
             }
         }
 
@@ -239,7 +336,7 @@ namespace Primary.SchoolApp.UI
         {
            if(DataGridView.CurrentRow.DataBoundItem is TuitionPayment payment){
                 payment.Enrolling=selectedEnrolling;
-                printService.PrintPaymentReceipt(payment,true);
+                printService.PrintPaymentReceiptAsync(payment,true);
             }
         }
 
@@ -248,9 +345,9 @@ namespace Primary.SchoolApp.UI
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (DataGridView.CurrentRow.DataBoundItem is TuitionPayment record)
+                if (DataGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
                 {
-                    if (record != null)
+                    if (selectedPayment != null)
                     {
                         DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
                         if (dialogResult == DialogResult.Yes)
@@ -258,20 +355,20 @@ namespace Primary.SchoolApp.UI
                             var payment = new TuitionPayment()
                             {
                                 Date = DateTime.Now,
-                                Amount = record.Amount,
-                                TransactionDate = record.TransactionDate,
-                                TransactionId = record.TransactionId,
-                                Enrolling = record.Enrolling,
-                                EnrollingId = record.EnrollingId,
-                                CashFlowType=record.CashFlowType,
-                                CashFlowTypeId = record.CashFlowTypeId,
-                                PaymentMean =record.PaymentMean,
-                                PaymentMeanId=record.PaymentMeanId,
-                                Balance=record.Balance,
-                                IdNumber = record.IdNumber,
-                                Note = record.Note,
-                                DoneBy = record.DoneBy,
-                                IsDuringEnrolling = record.IsDuringEnrolling,
+                                Amount = selectedPayment.Amount,
+                                TransactionDate = selectedPayment.TransactionDate,
+                                TransactionId = selectedPayment.TransactionId,
+                                Enrolling = selectedPayment.Enrolling,
+                                EnrollingId = selectedPayment.EnrollingId,
+                                CashFlowType=selectedPayment.CashFlowType,
+                                CashFlowTypeId = selectedPayment.CashFlowTypeId,
+                                PaymentMean =selectedPayment.PaymentMean,
+                                PaymentMeanId=selectedPayment.PaymentMeanId,
+                                Balance=selectedPayment.Balance,
+                                IdNumber = selectedPayment.IdNumber,
+                                Note = selectedPayment.Note,
+                                DoneBy = selectedPayment.DoneBy,
+                                IsDuringEnrolling = selectedPayment.IsDuringEnrolling,
                               
                             };
                             if (!selectedEnrolling.PaymentList.ToList().Select(x => x.IdNumber).Contains(payment.IdNumber+"-return"))
@@ -286,32 +383,11 @@ namespace Primary.SchoolApp.UI
                                         UserId = clientApp.UserConnected.Id
                                     };
                                     logService.CreateLog(log);
-                                    //enregistrement du cashflow
-                                    var cashflow = new CashFlow()
-                                    {
-                                        Amount = payment.Amount,
-                                        CashFlowType = payment.CashFlowType,
-                                        CashFlowTypeId = payment.CashFlowTypeId,
-                                        Date = DateTime.Now,
-                                        DoneBy = payment.DoneBy,
-                                        SchoolYear = selectedEnrolling.SchoolYear,
-                                        SchoolYearId = selectedEnrolling.SchoolYearId,
-                                        Note = "Retour du paiment "+ payment.IdNumber,
-                                    };
-                                    if (cashFlowService.CreateCashFlow(cashflow).Result)
-                                    {
-                                        //enregistrement du log
-                                        Log logCash = new()
-                                        {
-                                            UserAction = $"Ajout d'un flux de trésorerie de {cashflow.Amount} pour {cashflow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                            UserId = clientApp.UserConnected.Id
-                                        };
-                                        logService.CreateLog(logCash);
-                                    }
+                                   
                                 }
                                 else
                                 {
-                                    RadMessageBox.Show(Language.messageDeleteError);
+                                    RadMessageBox.Show(Language.messageAddError);
                                 }
                             }
                             else
@@ -321,7 +397,6 @@ namespace Primary.SchoolApp.UI
                         }
                     }
                 }
-
             }
             else
             {
@@ -348,8 +423,5 @@ namespace Primary.SchoolApp.UI
                 RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
             }
         }
-    
-
-    
     }
 }

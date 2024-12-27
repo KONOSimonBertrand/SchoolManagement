@@ -66,7 +66,6 @@ namespace Primary.SchoolApp
             if (this.IsValidData())
             {
                 clientApp.Name = "Windows Form";
-                clientApp.ConnectionString = Program.ConnectionString;
                 User user = null;
                 try
                 {
@@ -109,11 +108,9 @@ namespace Primary.SchoolApp
                     clientApp.Address = ConfigurationManager.AppSettings["ClientAddress"];
                     clientApp.WebSite = ConfigurationManager.AppSettings["ClientWebSite"];                  
                     clientApp.LogoUrl = ConfigurationManager.AppSettings["ClientLogo"];
-                    clientApp.StudentPitureFolder = ConfigurationManager.AppSettings["StudentPitureFolder"];
+                    clientApp.StudentPitureFolder = ConfigurationManager.AppSettings["SudentPictureFolder"];
                     clientApp.EmployeePitureFolder = ConfigurationManager.AppSettings["EmployeePitureFolder"];
-                    clientApp.UserConnected = user;
-                    
-                    
+                    clientApp.UserConnected = user;                                   
 
                     var mainForm = Program.ServiceProvider.GetService<MainForm>();
                     this.Hide();

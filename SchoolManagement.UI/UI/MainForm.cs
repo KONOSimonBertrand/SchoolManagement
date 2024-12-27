@@ -3,7 +3,6 @@ using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using SchoolManagement.UI.Utilities;
 using SchoolManagement.UI.Localization;
-using MediaFoundation;
 
 namespace SchoolManagement.UI
 {
@@ -14,7 +13,11 @@ namespace SchoolManagement.UI
         readonly RadMenuItem logoutMenuItem = new(Language.labelLogOut);
         readonly RadMenuItem changePasswordMenuItem = new(Language.messageChangePassword);
         readonly RadDropDownListElement themesDropDown = new ();
+        readonly RadWaitingBarElement taskWaitingBar = new ();
+        readonly RadLabelElement waitingLabel = new();
         #region Properties
+        public RadPageView MainPageView { get => mainPageView; }
+        public RadWaitingBarElement TaskWaitingBar { get => taskWaitingBar; }
         public RadButtonElement AboutButton { get => aboutButton; }
         public RadMenuItem LogOutMenu { get => logoutMenuItem; }
         public RadMenuItem ChangePasswordMenu{ get => changePasswordMenuItem; }
@@ -25,11 +28,7 @@ namespace SchoolManagement.UI
         public RadPanel HomeInfoRightPanel { get=>homeInfoRightPanel; }
         public CustomControls.SearchTextBox HomeSearchTextBox {  get => homeSearchTextBox; }
         public RadButton HomeAddButton { get => homeAddButton; }
-        public RadDropDownList CashFlowSchoolYearDropDownList { get => cashFlowSchoolYearDropDownList; }
-        public RadDropDownList TimeTableSchoolYearDropDownList {  get => timeTableSchoolYearDropDownList; }
-        public RadDropDownList DisciplineSchoolYearDropDownList { get=>disciplineSchoolYearDropDownList;}
-        public RadDropDownList StudentNoteSchoolYearDropDownList { get=>studentNoteSchoolYearDropDownList; }
-        public RadDropDownList ReportSchoolYearDropDownList { get => reportSchoolYearDropDownList; }
+        public RadButton HomeExportToExcelButton {  get => homeExportToExcelButton; }
         public RadDropDownListElement ThemesDropDownList { get => themesDropDown; }
         public RadSplitButtonElement UserSplitButtonElement { get => userSplitButtonElement; }
         public RadToggleButton HomeIconViewToggleButton { get=>homeIconViewToggleButton; }
@@ -59,9 +58,21 @@ namespace SchoolManagement.UI
             RadPageViewStripElement stripElement = mainPageView.ViewElement as RadPageViewStripElement;
            
             stripElement.StripButtons = ~StripViewButtons.All;
+            stripElement.ItemContainer.ButtonsPanel.Children.Add(taskWaitingBar);
+            stripElement.ItemContainer.ButtonsPanel.Children.Add(waitingLabel);
             stripElement.ItemContainer.ButtonsPanel.Children.Add(themesDropDown);
             stripElement.ItemContainer.ButtonsPanel.Children.Add(aboutButton);
             stripElement.ItemContainer.ButtonsPanel.Children.Add(userSplitButtonElement);
+
+            taskWaitingBar.Padding = new Padding(0);
+            taskWaitingBar.MinSize = new Size(150, 8);
+            //taskWaitingBar.WaitingIndicatorSize = new System.Drawing.Size(15, 16);
+            taskWaitingBar.EnableElementShadow = false;
+            taskWaitingBar.Visibility=ElementVisibility.Hidden;
+            waitingLabel.Padding = new Padding(0);
+            waitingLabel.MinSize = new Size(24, 8);
+            waitingLabel.EnableElementShadow = false;
+
             themesDropDown.MinSize = new Size(200, 24);
             themesDropDown.EnableElementShadow = false;
             themesDropDown.FindDescendant<FillPrimitive>().BackColor = Color.Transparent;
@@ -127,6 +138,7 @@ namespace SchoolManagement.UI
         {
             InitComponentsHomePage();
             InitEventsHomePage();
+            
         }
         private void InitComponentsHomePage() {
             homeMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
@@ -290,7 +302,7 @@ namespace SchoolManagement.UI
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
 

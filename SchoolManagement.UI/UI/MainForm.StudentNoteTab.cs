@@ -1,10 +1,27 @@
-﻿using SchoolManagement.UI.Utilities;
+﻿using SchoolManagement.UI.CustomControls;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
+using Telerik.WinControls.UI;
 
 namespace SchoolManagement.UI
 {
     public partial class MainForm
     {
+        public RadDropDownList StudentNoteSchoolYearDropDownList { get => studentNoteSchoolYearDropDownList; }
+        public SearchTextBox StudentNoteSearchTextBox { get => studentNoteSearchTextBox; }
+        public RadDropDownList StudentNoteRoomDropDownList {  get => studentNoteRoomDropDownList; }
+        public RadDropDownList StudentNoteGroupDropDownList {  get => studentNoteGroupDropDownList; }
+        public RadDropDownButton StudentNoteAddButton { get => studentNoteAddButton; }
+        public RadMenuItem StudentNoteAddOneNoteMenu { get => studentNoteAddNoteMenu; }
+        public RadMenuItem StudentNoteAddNotesMenu { get => studentNoteAddNotesMenu; }
+        public RadMenuItem StudentNoteAddCommentMenu { get => studentNoteAddCommentMenu; }
+        public RadMenuItem StudentNoteImportNoteMenu { get => studentNoteImportNoteMenu; }
+        public RadButton StudentNoteExportToExcelButton {  get => studentNoteExportToExcelButton; }
+        public RadToggleButton StudentNoteIconViewToggleButton {  get => studentNoteIconViewToggleButton; }
+        public RadToggleButton StudentNoteListViewToggleButton {  get => studentNoteListViewToggleButton; }
+        public RadGridView StudentNoteGridView {  get => studentNoteGridView; }
+        public RadPanel StudentNoteInfoRightPanel {  get => studentNoteInfoRightPanel; }
+        public RadListView StudentNoteLeftListView { get => studentNoteLeftListView; }
         private void InitStudentNotePage()
         {
             studentNoteMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
@@ -66,6 +83,18 @@ namespace SchoolManagement.UI
             studentNoteSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             studentNoteSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
+            studentNoteRoomDropDownList.RootElement.EnableElementShadow = false;
+            studentNoteRoomDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
+            studentNoteRoomDropDownList.RootElement.CustomFontSize = 10.5f;
+            studentNoteRoomDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            studentNoteRoomDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
+
+            studentNoteGroupDropDownList.RootElement.EnableElementShadow = false;
+            studentNoteGroupDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
+            studentNoteGroupDropDownList.RootElement.CustomFontSize = 10.5f;
+            studentNoteGroupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            studentNoteGroupDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
+
             studentNoteSchoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             studentNoteSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
             studentNoteSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
@@ -75,6 +104,11 @@ namespace SchoolManagement.UI
             studentNoteRoomLabel.LabelElement.CustomFontSize = 10.5f;
             studentNoteRoomLabel.ForeColor = Color.FromArgb(89, 89, 89);
             studentNoteRoomLabel.TextAlignment = ContentAlignment.BottomCenter;
+
+            studentNoteGroupLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            studentNoteGroupLabel.LabelElement.CustomFontSize = 10.5f;
+            studentNoteGroupLabel.ForeColor = Color.FromArgb(89, 89, 89);
+            studentNoteGroupLabel.TextAlignment = ContentAlignment.BottomCenter;
 
             studentNoteGridView.TableElement.CellSpacing = 10;
             studentNoteGridView.RootElement.EnableElementShadow = false;

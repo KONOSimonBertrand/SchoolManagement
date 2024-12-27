@@ -1,8 +1,7 @@
 ﻿
 
 using Telerik.WinControls;
-using Telerik.WinControls.UI;
-using Telerik.WinControls.UI.Export;
+
 
 namespace SchoolManagement.UI.Utilities
 {
@@ -96,6 +95,9 @@ namespace SchoolManagement.UI.Utilities
                         case "Hide":
                             image = Resources.hide_blue;
                             break;
+                        case "Save":
+                            image = Resources.floppy_disk_blue;
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
@@ -133,6 +135,9 @@ namespace SchoolManagement.UI.Utilities
                             break;
                         case "Hide":
                             image = Resources.hide_blue_grey;
+                            break;
+                        case "Save":
+                            image = Resources.floppy_disk_blue_grey;
                             break;
                     }
                     break;
@@ -172,6 +177,9 @@ namespace SchoolManagement.UI.Utilities
                         case "Hide":
                             image = Resources.hide_pink;
                             break;
+                        case "Save":
+                            image = Resources.floppy_disk_pink;
+                            break;
                     }
                     break;
                 case "MaterialTeal":
@@ -209,6 +217,9 @@ namespace SchoolManagement.UI.Utilities
                             break;
                         case "Hide":
                             image = Resources.hide_teal;
+                            break;
+                        case "Save":
+                            image = Resources.floppy_disk_teal;
                             break;
                     }
                     break;

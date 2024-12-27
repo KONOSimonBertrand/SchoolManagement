@@ -124,6 +124,8 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditJobForm";
             Text = "EditJobForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();

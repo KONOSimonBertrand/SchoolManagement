@@ -421,6 +421,16 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] facebook {
+            get {
+                object obj = ResourceManager.GetObject("facebook", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap fasha_borders {
@@ -446,6 +456,76 @@ namespace SchoolManagement.UI {
         internal static System.Drawing.Bitmap fasha_no_borders_fullsize {
             get {
                 object obj = ResourceManager.GetObject("fasha_no_borders_fullsize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk_blue {
+            get {
+                object obj = ResourceManager.GetObject("floppy_disk_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("floppy_disk_blue_grey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk_pink {
+            get {
+                object obj = ResourceManager.GetObject("floppy_disk_pink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap floppy_disk_teal {
+            get {
+                object obj = ResourceManager.GetObject("floppy_disk_teal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap heartbeat_green {
+            get {
+                object obj = ResourceManager.GetObject("heartbeat_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap heartbeat_orange {
+            get {
+                object obj = ResourceManager.GetObject("heartbeat_orange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap heartbeat_red {
+            get {
+                object obj = ResourceManager.GetObject("heartbeat_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -917,6 +997,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("watch_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] website {
+            get {
+                object obj = ResourceManager.GetObject("website", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

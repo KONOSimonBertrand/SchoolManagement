@@ -32,6 +32,11 @@
             editPanel = new Telerik.WinControls.UI.RadPanel();
             addressSplitContainer = new Telerik.WinControls.UI.RadSplitContainer();
             addressSplitPanel = new Telerik.WinControls.UI.SplitPanel();
+            healthStateSplitButton = new Telerik.WinControls.UI.RadSplitButton();
+            goodHealthMenuItem = new Telerik.WinControls.UI.RadMenuItem();
+            mediumHealthMenuItem = new Telerik.WinControls.UI.RadMenuItem();
+            badHealthMenuItem = new Telerik.WinControls.UI.RadMenuItem();
+            healthStateLabel = new Telerik.WinControls.UI.RadLabel();
             religionSeparator = new Telerik.WinControls.UI.RadSeparator();
             idCardSeparator = new Telerik.WinControls.UI.RadSeparator();
             religionDropDownList = new Telerik.WinControls.UI.RadDropDownList();
@@ -84,6 +89,8 @@
             addressSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)addressSplitPanel).BeginInit();
             addressSplitPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)healthStateSplitButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)healthStateLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)religionSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)idCardSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)religionDropDownList).BeginInit();
@@ -169,6 +176,8 @@
             // 
             // addressSplitPanel
             // 
+            addressSplitPanel.Controls.Add(healthStateSplitButton);
+            addressSplitPanel.Controls.Add(healthStateLabel);
             addressSplitPanel.Controls.Add(religionSeparator);
             addressSplitPanel.Controls.Add(idCardSeparator);
             addressSplitPanel.Controls.Add(religionDropDownList);
@@ -184,6 +193,43 @@
             addressSplitPanel.Size = new Size(879, 68);
             addressSplitPanel.TabIndex = 0;
             addressSplitPanel.TabStop = false;
+            // 
+            // healthStateSplitButton
+            // 
+            healthStateSplitButton.Items.AddRange(new Telerik.WinControls.RadItem[] { goodHealthMenuItem, mediumHealthMenuItem, badHealthMenuItem });
+            healthStateSplitButton.Location = new Point(591, 32);
+            healthStateSplitButton.Name = "healthStateSplitButton";
+            healthStateSplitButton.Size = new Size(186, 36);
+            healthStateSplitButton.TabIndex = 110;
+            healthStateSplitButton.Text = "Etat de santé";
+            // 
+            // goodHealthMenuItem
+            // 
+            goodHealthMenuItem.Name = "goodHealthMenuItem";
+            goodHealthMenuItem.Tag = "0";
+            goodHealthMenuItem.Text = "";
+            // 
+            // mediumHealthMenuItem
+            // 
+            mediumHealthMenuItem.Name = "mediumHealthMenuItem";
+            mediumHealthMenuItem.Tag = "1";
+            mediumHealthMenuItem.Text = "";
+            // 
+            // badHealthMenuItem
+            // 
+            badHealthMenuItem.Name = "badHealthMenuItem";
+            badHealthMenuItem.Tag = "2";
+            badHealthMenuItem.Text = "";
+            // 
+            // healthStateLabel
+            // 
+            healthStateLabel.AutoSize = false;
+            healthStateLabel.Location = new Point(591, 2);
+            healthStateLabel.Margin = new Padding(4, 5, 4, 5);
+            healthStateLabel.Name = "healthStateLabel";
+            healthStateLabel.Size = new Size(186, 30);
+            healthStateLabel.TabIndex = 109;
+            healthStateLabel.Text = "Santé:";
             // 
             // religionSeparator
             // 
@@ -212,7 +258,7 @@
             religionDropDownList.Margin = new Padding(4, 5, 4, 5);
             religionDropDownList.MinimumSize = new Size(0, 30);
             religionDropDownList.Name = "religionDropDownList";
-            religionDropDownList.Size = new Size(347, 35);
+            religionDropDownList.Size = new Size(347, 30);
             religionDropDownList.TabIndex = 10;
             ((Telerik.WinControls.UI.RadDropDownListElement)religionDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)religionDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -428,7 +474,7 @@
             nationalityDropDownList.Margin = new Padding(4, 5, 4, 5);
             nationalityDropDownList.MinimumSize = new Size(0, 30);
             nationalityDropDownList.Name = "nationalityDropDownList";
-            nationalityDropDownList.Size = new Size(251, 35);
+            nationalityDropDownList.Size = new Size(251, 30);
             nationalityDropDownList.TabIndex = 108;
             ((Telerik.WinControls.UI.RadDropDownListElement)nationalityDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)nationalityDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -504,7 +550,7 @@
             // 
             // 
             birthdayDateTimePicker.RootElement.MinSize = new Size(0, 30);
-            birthdayDateTimePicker.Size = new Size(148, 36);
+            birthdayDateTimePicker.Size = new Size(148, 30);
             birthdayDateTimePicker.TabIndex = 4;
             birthdayDateTimePicker.TabStop = false;
             birthdayDateTimePicker.Text = "lundi 29 janvier 2018";
@@ -529,7 +575,7 @@
             sexDropDownList.Margin = new Padding(4, 5, 4, 5);
             sexDropDownList.MinimumSize = new Size(0, 30);
             sexDropDownList.Name = "sexDropDownList";
-            sexDropDownList.Size = new Size(136, 35);
+            sexDropDownList.Size = new Size(136, 30);
             sexDropDownList.TabIndex = 3;
             ((Telerik.WinControls.UI.RadDropDownListElement)sexDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)sexDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -724,6 +770,8 @@
             ((System.ComponentModel.ISupportInitialize)addressSplitPanel).EndInit();
             addressSplitPanel.ResumeLayout(false);
             addressSplitPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)healthStateSplitButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)healthStateLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)religionSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)idCardSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)religionDropDownList).EndInit();
@@ -832,5 +880,10 @@
         private Telerik.WinControls.UI.RadDropDownList nationalityDropDownList;
         private Telerik.WinControls.UI.RadLabel nationalityLabel;
         private ErrorProvider errorProvider;
+        private Telerik.WinControls.UI.RadLabel healthStateLabel;
+        private Telerik.WinControls.UI.RadSplitButton healthStateSplitButton;
+        private Telerik.WinControls.UI.RadMenuItem goodHealthMenuItem;
+        private Telerik.WinControls.UI.RadMenuItem mediumHealthMenuItem;
+        private Telerik.WinControls.UI.RadMenuItem badHealthMenuItem;
     }
 }

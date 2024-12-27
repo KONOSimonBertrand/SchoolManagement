@@ -23,5 +23,16 @@ namespace SchoolManagement.Application
         public Task<CashFlow> GetCashFlow(string idNumber);
         public Task<List<CashFlow>> GetCashFlowList(int schoolYearId);
 
+        public Task<bool> CreateCashBoxIn(CashBoxIn cashBox);
+        public Task<bool> ValidateCashBoxIn(int cashBoxId);
+        public Task<bool> ReturnCashBoxIn(CashBoxIn cashbox);
+        public Task<CashBoxIn> GetCashBoxIn(string idNumber);
+        public Task<List<CashBoxIn>> GetCashBoxInList(int schoolYearId);
+
+        public Task<bool> CreateCashBoxOut(CashBoxOut cashBox);
+        public Task<CashBoxOut> GetCashBoxOut(string idNumber);
+        public Task<List<CashBoxOut>> GetCashBoxOutList(int schoolYearId);
+        public Task<bool> ValidateCashBoxOut(int cashBoxId);
+        public Task<bool> ReturnCashBoxOut(CashBoxOut cashbox);
     }
 }

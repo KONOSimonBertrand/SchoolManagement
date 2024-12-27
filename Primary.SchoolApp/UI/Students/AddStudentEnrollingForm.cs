@@ -87,6 +87,7 @@ namespace Primary.SchoolApp.UI
             if (StudentDropDownList.SelectedItem != null) {
                 if (StudentDropDownList.SelectedItem.DataBoundItem is Student student) { 
                     DoneByTextBox.Text=student.FullName;
+                    StudentDropDownList.RootElement.ToolTipText = student.FullName;
                 }
             }
         }
@@ -154,10 +155,11 @@ namespace Primary.SchoolApp.UI
         {
             if (ClassDropDownList.SelectedItem != null)
             {
-                if (ClassDropDownList.SelectedItem.DataBoundItem is SchoolClass record)
+                if (ClassDropDownList.SelectedItem.DataBoundItem is SchoolClass selectedRecord)
                 {
-                    RoomDropDownList.DataSource = Program.SchoolRoomList.Where(x => x.ClassId == record.Id);
-                    var payments = GetInitialPaymentList(record.Id);
+                    ClassDropDownList.RootElement.ToolTipText = selectedRecord.Name;
+                    RoomDropDownList.DataSource = Program.SchoolRoomList.Where(x => x.ClassId == selectedRecord.Id);
+                    var payments = GetInitialPaymentList(selectedRecord.Id);
                     var amountToPaid = payments.Sum(x => x.Balance);
                     if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                     {
@@ -245,7 +247,7 @@ namespace Primary.SchoolApp.UI
                                 return;
                             }
                         }
-                        var record = new StudentEnrolling()
+                        var enrollingToAdd = new StudentEnrolling()
                         {
                             Date = EnrollingDateTimePicker.Value,
                             SchoolYear = selectedSchoolYear,
@@ -259,13 +261,13 @@ namespace Primary.SchoolApp.UI
                             DoneBy=DoneByTextBox.Text,
                         };
                         //enregistrement de l'inscription
-                        var isDone = studentEnrollingService.CreateStudentEnrollingAsync(record).Result;
+                        var isDone = studentEnrollingService.CreateStudentEnrollingAsync(enrollingToAdd).Result;
                         if (isDone)
                         {
                             //enregistrement du log
                             Log logEnrol = new()
                             {
-                                UserAction = $"Ajout de l'inscription de l'élève {record.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserAction = $"Ajout de l'inscription de l'élève {enrollingToAdd.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                                 UserId = clientApp.UserConnected.Id
                             };
                             logService.CreateLog(logEnrol);
@@ -296,7 +298,7 @@ namespace Primary.SchoolApp.UI
                                 var enrolling = studentEnrollingService.GetStudentEnrollingAsync(selectedStudent.Id, selectedSchoolYear.Id).Result;
                                 if (enrolling != null)
                                 {
-                                    record.Id = enrolling.Id;
+                                    enrollingToAdd.Id = enrolling.Id;
                                     var payments = GetPaymentListFromPaymentsGridView();
                                     foreach (var payment in payments)
                                     {
@@ -309,42 +311,20 @@ namespace Primary.SchoolApp.UI
                                             if (cashFlowService.CreateTuitionPayment(payment).Result)
                                             {
                                                 enrolling.PaymentList.Add(payment);
-                                                record.PaymentList.Add(payment);
+                                                enrollingToAdd.PaymentList.Add(payment);
                                                 Log logPayment = new()
                                                 {
-                                                    UserAction = $"Ajout d'un versement de  {payment.Amount} pour {payment.CashFlowType.Name} de l'élève {record.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                                    UserAction = $"Ajout d'un versement de  {payment.Amount} pour {payment.CashFlowType.Name} de l'élève {enrollingToAdd.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                                                     UserId = clientApp.UserConnected.Id
                                                 };
                                                 logService.CreateLog(logPayment);
-                                            }
-                                            //enregistrement du cashflow
-                                            var cashflow = new CashFlow()
-                                            {
-                                                Amount = payment.Amount,
-                                                CashFlowType = payment.CashFlowType,
-                                                CashFlowTypeId = payment.CashFlowTypeId,
-                                                Date = payment.Date,
-                                                DoneBy = payment.DoneBy,
-                                                SchoolYear=enrolling.SchoolYear,
-                                                SchoolYearId=enrolling.SchoolYearId,
-                                                Note = payment.CashFlowType.Name+" "+record.Student.FullName,
-                                            };
-                                            if (cashFlowService.CreateCashFlow(cashflow).Result)
-                                            {
-                                                //enregistrement du log
-                                                Log logCash = new()
-                                                {
-                                                    UserAction = $"Ajout d'un flux de trésorerie de {cashflow.Amount} pour {cashflow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                                    UserId = clientApp.UserConnected.Id
-                                                };
-                                                logService.CreateLog(logCash);
-                                            }
+                                            }                                           
                                         }
                                     }
                                 }   
                             }
                             //impression du reçu
-                            printService.PrintPaymentReceipt(record,false);
+                            printService.PrintPaymentReceiptAsync(enrollingToAdd,false);
                             this.DialogResult = System.Windows.Forms.DialogResult.OK;
                             this.Close();
                         }
@@ -415,7 +395,7 @@ namespace Primary.SchoolApp.UI
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelClass;
                 form.Icon = this.Icon;
-                form.Init(record);
+                form.InitStartup(record);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = classService.GetSchoolClass(form.NameTextBox.Text).Result;
@@ -576,6 +556,7 @@ namespace Primary.SchoolApp.UI
             {
                 if (row.DataBoundItem is TuitionPayment payment)
                 {
+                    if (payment.TransactionId == null) payment.TransactionId = string.Empty;
                     payments.Add(payment);
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -50,7 +51,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM SchoolRooms AS A 
-                            INNER JOIN SchoolClasses B ON A.ClassId=B.Id  ;";
+                            INNER JOIN SchoolClasses B ON A.ClassId=B.Id  
+                            ORDER BY A.Sequence ;";
             var result = connection.Query<SchoolRoom, SchoolClass, SchoolRoom>(query,
                 (schoolRoom, schoolClass) =>
                 {

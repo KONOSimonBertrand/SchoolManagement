@@ -1,12 +1,17 @@
-﻿using MediaFoundation;
-using Telerik.WinControls.UI;
+﻿using SchoolManagement.UI.CustomControls;
 using Telerik.WinControls;
-using Telerik.Windows.Diagrams.Core;
+using Telerik.WinControls.UI;
 
 namespace SchoolManagement.UI
 {
     public partial class MainForm
     {
+        public RadDropDownList CashFlowSchoolYearDropDownList { get => cashFlowSchoolYearDropDownList; }
+        public RadListView CashFlowLeftListView { get => cashFlowLeftListView; }
+        public RadGridView CashFlowGridView {  get => cashFlowGridView; }
+        public RadButton CashFlowExportToExcelButton { get => cashFlowExportToExcelButton; }
+        public SearchTextBox CashFlowSearchTextBox {  get => cashFlowSearchTextBox; }
+        public RadButton CashFlowAddButton {  get => cashFlowAddButton; }
         private void InitCashFlowPage()
         {
            
@@ -58,7 +63,6 @@ namespace SchoolManagement.UI
             cashFlowMainPanel.PanelElement.PanelFill.Visibility = ElementVisibility.Hidden;
             cashFlowInfoRightPanel.RootElement.EnableElementShadow = false;
             cashFlowInfoRightPanel.Visible = false;
-
 
             cashFlowExportToExcelButton.ImageAlignment = ContentAlignment.MiddleCenter;
             cashFlowExportToExcelButton.TextAlignment = ContentAlignment.MiddleCenter;

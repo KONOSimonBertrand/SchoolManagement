@@ -77,7 +77,7 @@ namespace Primary.SchoolApp.UI
             AddSubjectButton.Enabled = false;
             SubjectDropDownList.Enabled = false;
             SectionDropDownList.Enabled = false;
-            if (selectedClass.BookTypeId != 2)
+            if (selectedClass.DocumentLanguageId != 2)
             {
                 this.SectionDropDownList.Items.Clear();
                 this.SectionDropDownList.Items.Add(new RadListDataItem(string.Empty, 0));

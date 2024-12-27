@@ -13,17 +13,20 @@ namespace SchoolManagement.Core.Model
         public string? Name { get; set; }
         public int GroupId { get; set; }
         public virtual SchoolGroup? Group { get; set; }
-        public int BookTypeId { get; set; }
-        public string BookTypeName
+        public int DocumentLanguageId { get; set; } //type de document
+        public string DocumentLanguage
         {
             get
             {
-                if (this.BookTypeId == 0) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB"? "Français uniquement":"French only";
-                if (this.BookTypeId == 1) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Anglais uniquement" : "English only";
-                if (this.BookTypeId == 2) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Français & Anglais" : "French & English";
+                if (this.DocumentLanguageId == 0) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Français uniquement" : "French only";
+                if (this.DocumentLanguageId == 1) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Anglais uniquement" : "English only";
+                if (this.DocumentLanguageId == 2) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Français & Anglais" : "French & English";
                 return string.Empty;
             }
         }
+        public bool NoteIsTruncate { get; set; }
+        public int ReportCardModel { get; set; }
+        public int AverageFormula { get; set; }
         public int Sequence { get; set; }
         public virtual ICollection<SchoolRoom> Rooms { get; set; }
         public virtual ICollection<SchoolingCost> SchoolingCosts { get; set; }

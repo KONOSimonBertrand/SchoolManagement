@@ -68,7 +68,7 @@ namespace Primary.SchoolApp.UI
         {
             this.selectedClass = selectedClass;
             subjectList = schoolClassService.GetClassSubjectList(selectedClass.Id).Result;
-            if (selectedClass.BookTypeId != 2)
+            if (selectedClass.DocumentLanguageId != 2)
             {
                 this.SectionDropDownList.Items.Clear();
                 this.SectionDropDownList.Items.Add(new RadListDataItem(string.Empty, 0));

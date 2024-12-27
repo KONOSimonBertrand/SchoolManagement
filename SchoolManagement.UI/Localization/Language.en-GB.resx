@@ -132,6 +132,9 @@
   <data name="labelAccount" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="labelActivateEnrolling" xml:space="preserve">
+    <value>Activate enrolling</value>
+  </data>
   <data name="labelAdd" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -144,8 +147,14 @@
   <data name="labelAddDiscount" xml:space="preserve">
     <value>Add discount</value>
   </data>
+  <data name="labelAddHealthInformation" xml:space="preserve">
+    <value>Add new health information</value>
+  </data>
   <data name="labelAdding" xml:space="preserve">
     <value>Adding</value>
+  </data>
+  <data name="labelAddNewRecord" xml:space="preserve">
+    <value>Add new record</value>
   </data>
   <data name="labelAddPayment" xml:space="preserve">
     <value>Add payment</value>
@@ -189,7 +198,7 @@
   <data name="labelBirthPlace" xml:space="preserve">
     <value>Birth place</value>
   </data>
-  <data name="labelBookModel" xml:space="preserve">
+  <data name="LabelBookModel" xml:space="preserve">
     <value>Book model</value>
   </data>
   <data name="labelBornOn" xml:space="preserve">
@@ -261,6 +270,9 @@
   <data name="labelDeletion" xml:space="preserve">
     <value>Deletion</value>
   </data>
+  <data name="labelDesactivateEnrolling" xml:space="preserve">
+    <value>Disable enrolling</value>
+  </data>
   <data name="labelDescription" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -294,7 +306,7 @@
   <data name="labelDiscountAmount" xml:space="preserve">
     <value>Discount amount</value>
   </data>
-  <data name="labelDomain" xml:space="preserve">
+  <data name="LabelDomain" xml:space="preserve">
     <value>Domain</value>
   </data>
   <data name="labelDuplicateForCurrentYear" xml:space="preserve">
@@ -399,14 +411,29 @@
   <data name="labelGroup" xml:space="preserve">
     <value>Group</value>
   </data>
+  <data name="labelHealInformation" xml:space="preserve">
+    <value>Health information</value>
+  </data>
   <data name="labelHealth" xml:space="preserve">
     <value>Health</value>
+  </data>
+  <data name="labelHealthBad" xml:space="preserve">
+    <value>Bad</value>
+  </data>
+  <data name="labelHealthGood" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="labelHealthMedium" xml:space="preserve">
+    <value>Medium</value>
   </data>
   <data name="labelHealthRecord" xml:space="preserve">
     <value>Health record</value>
   </data>
   <data name="labelHealthStatus" xml:space="preserve">
     <value>Healthe status</value>
+  </data>
+  <data name="labelHealthSubject" xml:space="preserve">
+    <value>Health subject</value>
   </data>
   <data name="labelHiredOn" xml:space="preserve">
     <value>Hired on</value>
@@ -531,6 +558,9 @@
   <data name="labelPaid" xml:space="preserve">
     <value>Paid</value>
   </data>
+  <data name="labelPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
   <data name="labelPayment" xml:space="preserve">
     <value>Payment</value>
   </data>
@@ -583,7 +613,7 @@
     <value>Registration</value>
   </data>
   <data name="labelRelationship" xml:space="preserve">
-    <value>Type de relation</value>
+    <value>Relationship</value>
   </data>
   <data name="labelReligion" xml:space="preserve">
     <value>Religion</value>
@@ -654,6 +684,9 @@
   <data name="labelShowDiscounts" xml:space="preserve">
     <value>Show discounts</value>
   </data>
+  <data name="labelShowMedicalFile" xml:space="preserve">
+    <value>Show medical file</value>
+  </data>
   <data name="labelShowPayments" xml:space="preserve">
     <value>Show payments</value>
   </data>
@@ -668,6 +701,9 @@
   </data>
   <data name="labelStart" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="labelStartFirstQuarter" xml:space="preserve">
+    <value>Start 1ˢᵗ quarter</value>
   </data>
   <data name="labelStartHour" xml:space="preserve">
     <value>Start hour</value>
@@ -798,6 +834,9 @@
   <data name="labelUserModule" xml:space="preserve">
     <value>User modules</value>
   </data>
+  <data name="labelUserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
   <data name="labelUserRoom" xml:space="preserve">
     <value>User rooms</value>
   </data>
@@ -820,7 +859,7 @@
     <value>Do you want to activate the school year</value>
   </data>
   <data name="messageAskCloseSchoolYear" xml:space="preserve">
-    <value>Do you want to close the school year</value>
+    <value>Are you sure you  want to close this school year</value>
   </data>
   <data name="messageBadDistribution" xml:space="preserve">
     <value>The distribution of the amount paid is incorrect</value>
@@ -931,19 +970,19 @@
     <value>Close the school year</value>
   </data>
   <data name="messageConfirmCancel" xml:space="preserve">
-    <value>Do you want to cancel?</value>
+    <value>Are you sure you  want to cancel?</value>
   </data>
   <data name="messageConfirmDelete" xml:space="preserve">
-    <value>Do you want to delete?</value>
+    <value>Are you sure you  want to delete?</value>
   </data>
   <data name="messageConfirmeDuplicateFee" xml:space="preserve">
-    <value>Do you want to duplicate these fees for</value>
+    <value>Are you sure you want  to duplicate these fees for</value>
   </data>
   <data name="messageConfirmEnrollingWithoutPayment" xml:space="preserve">
-    <value>Do you confirm enrolling without payment ?</value>
+    <value>Are you sure you want to save enrolling without payment ?</value>
   </data>
   <data name="messageConfirmReturn" xml:space="preserve">
-    <value>Do you want to return this transaction ?</value>
+    <value>Are you sure you want  to return this transaction ?</value>
   </data>
   <data name="messageDeleteError" xml:space="preserve">
     <value>Delete error...</value>
@@ -1044,6 +1083,9 @@
   <data name="messageUnknowClass" xml:space="preserve">
     <value>Unknow class</value>
   </data>
+  <data name="messageUnknowEmployee" xml:space="preserve">
+    <value>Unknown employee</value>
+  </data>
   <data name="messageUnknowGroup" xml:space="preserve">
     <value>Unknow group</value>
   </data>
@@ -1106,5 +1148,230 @@
   </data>
   <data name="titleUserList" xml:space="preserve">
     <value>User list</value>
+  </data>
+  <data name="titleAttendanceAdd" xml:space="preserve">
+    <value>Add:....Attendance</value>
+  </data>
+  <data name="titleAttendanceUpdate" xml:space="preserve">
+    <value>Update:....Attendance</value>
+  </data>
+  <data name="titleCashflowAdd" xml:space="preserve">
+    <value>Add:....CashFlow</value>
+  </data>
+  <data name="titleCashflowUpdate" xml:space="preserve">
+    <value>Update:....CashFlow</value>
+  </data>
+  <data name="titleClassAdd" xml:space="preserve">
+    <value>Add:....Class</value>
+  </data>
+  <data name="LabelPrintSchoolCertificate" xml:space="preserve">
+    <value>Print the school certificate</value>
+  </data>
+  <data name="LabelDocumentTemplate" xml:space="preserve">
+    <value>Document Template</value>
+  </data>
+  <data name="DocumentLanguage" xml:space="preserve">
+    <value>Document Language</value>
+  </data>
+  <data name="LabelChangeRoom" xml:space="preserve">
+    <value>Change classroom</value>
+  </data>
+  <data name="LabelSchoolBadge" xml:space="preserve">
+    <value>School badge</value>
+  </data>
+  <data name="LabelShowClassBadge" xml:space="preserve">
+    <value>Display class badges</value>
+  </data>
+  <data name="LabelShowStudentBadge" xml:space="preserve">
+    <value>Display student's badge</value>
+  </data>
+  <data name="LabelGenerate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="LabelFor" xml:space="preserve">
+    <value>For</value>
+  </data>
+  <data name="LabelGenerateBadge" xml:space="preserve">
+    <value>Generate school badges</value>
+  </data>
+  <data name="LabelCashBoxMovement" xml:space="preserve">
+    <value>Cash box movement</value>
+  </data>
+  <data name="LabelCashBoxMovements" xml:space="preserve">
+    <value>Cash box movements</value>
+  </data>
+  <data name="LabelExpense" xml:space="preserve">
+    <value>Expense</value>
+  </data>
+  <data name="LabelExpenses" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
+  <data name="LabelSupply" xml:space="preserve">
+    <value>Supply</value>
+  </data>
+  <data name="LabelAuthorizer" xml:space="preserve">
+    <value>Authorizer</value>
+  </data>
+  <data name="labelPrintReceipt" xml:space="preserve">
+    <value>Print receipt</value>
+  </data>
+  <data name="LabelReference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="LabelValidate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="LabelValidateTransaction" xml:space="preserve">
+    <value>Validate transaction</value>
+  </data>
+  <data name="MessageConfirmValidation" xml:space="preserve">
+    <value>Are you sure you want  to validate this transaction ?</value>
+  </data>
+  <data name="LabelValidationTransaction" xml:space="preserve">
+    <value>Validation of the transaction</value>
+  </data>
+  <data name="MessageValidateError" xml:space="preserve">
+    <value>Validation error</value>
+  </data>
+  <data name="LabelValidation" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+  <data name="LabelYearOld" xml:space="preserve">
+    <value>Years old</value>
+  </data>
+  <data name="LabelMale" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="LabelFemale" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="TitleCashFlowList" xml:space="preserve">
+    <value>Cash flow list</value>
+  </data>
+  <data name="LabelEnrollings" xml:space="preserve">
+    <value>Enrollings</value>
+  </data>
+  <data name="LabelSupplies" xml:space="preserve">
+    <value>Supplies</value>
+  </data>
+  <data name="MessageSearchBy" xml:space="preserve">
+    <value>Search by</value>
+  </data>
+  <data name="MessageFindClass" xml:space="preserve">
+    <value>Find class</value>
+  </data>
+  <data name="MessageFindClassroom" xml:space="preserve">
+    <value>Find Classroom</value>
+  </data>
+  <data name="LabelClassroom" xml:space="preserve">
+    <value>Classroom</value>
+  </data>
+  <data name="LabelClassrooms" xml:space="preserve">
+    <value>Classrooms</value>
+  </data>
+  <data name="LabelComment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="LabelFilter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="LabelAddNewNote" xml:space="preserve">
+    <value>Add new note</value>
+  </data>
+  <data name="LabelOneNote" xml:space="preserve">
+    <value>One note</value>
+  </data>
+  <data name="LabelNoteList" xml:space="preserve">
+    <value>Note list</value>
+  </data>
+  <data name="LabelImportNotes" xml:space="preserve">
+    <value>Import notes</value>
+  </data>
+  <data name="LabelObservations" xml:space="preserve">
+    <value>Observations</value>
+  </data>
+  <data name="LabelObservation" xml:space="preserve">
+    <value>Observation</value>
+  </data>
+  <data name="MessageClosedEvaluation" xml:space="preserve">
+    <value>The records of this evaluation are closed</value>
+  </data>
+  <data name="MessageSelectEvaluation" xml:space="preserve">
+    <value>Select evaluation</value>
+  </data>
+  <data name="MessageSelectClassroom" xml:space="preserve">
+    <value>Select classroom</value>
+  </data>
+  <data name="TitleEvaluationState" xml:space="preserve">
+    <value>Evaluations state</value>
+  </data>
+  <data name="LabelCloseEvaluation" xml:space="preserve">
+    <value>Close  evaluation</value>
+  </data>
+  <data name="LabelActivateEvaluation" xml:space="preserve">
+    <value>Activate  evaluation</value>
+  </data>
+  <data name="LabelCloseOrActivateEvaluation" xml:space="preserve">
+    <value>Close or activate evaluation</value>
+  </data>
+  <data name="LabelGrading" xml:space="preserve">
+    <value>Grading</value>
+  </data>
+  <data name="LabelPosition" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="LabelAverage" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="LabelEnableNoteTruncation" xml:space="preserve">
+    <value>Enable Note Truncation</value>
+  </data>
+  <data name="messageNoteExist" xml:space="preserve">
+    <value>This note already exists</value>
+  </data>
+  <data name="MessageNoteHigherThanMaxNote" xml:space="preserve">
+    <value>The note must not be higher than the max note</value>
+  </data>
+  <data name="MessageEvaluationBadNoteMax" xml:space="preserve">
+    <value>An evaluation cannot have two marks max </value>
+  </data>
+  <data name="TitleSummaryNote" xml:space="preserve">
+    <value>Summary of marks</value>
+  </data>
+  <data name="LabelReportCardModel" xml:space="preserve">
+    <value>Report card model</value>
+  </data>
+  <data name="LabelAverageFormula" xml:space="preserve">
+    <value>Averaging formula</value>
+  </data>
+  <data name="LabelPrimaryModel" xml:space="preserve">
+    <value>Primary school model</value>
+  </data>
+  <data name="LabelHighSchoolModel" xml:space="preserve">
+    <value>High school model</value>
+  </data>
+  <data name="LabelKindergartenModel" xml:space="preserve">
+    <value>Kindergarten model</value>
+  </data>
+  <data name="LabelFoundationModel" xml:space="preserve">
+    <value>Foundation model</value>
+  </data>
+  <data name="LabelFormulaWithCoef" xml:space="preserve">
+    <value>Formula with coefficient</value>
+  </data>
+  <data name="LabelFormulaWithoutCoef" xml:space="preserve">
+    <value>Formula without coefficient</value>
+  </data>
+  <data name="LabelReportCard" xml:space="preserve">
+    <value>Report card</value>
+  </data>
+  <data name="LabelReportCards" xml:space="preserve">
+    <value>Report cards</value>
+  </data>
+  <data name="LabelClassroomReport" xml:space="preserve">
+    <value>Classroom report </value>
+  </data>
+  <data name="LabelDisciplinarySheets" xml:space="preserve">
+    <value>Disciplinary Sheets</value>
   </data>
 </root>

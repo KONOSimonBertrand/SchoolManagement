@@ -36,18 +36,18 @@ namespace SchoolManagement.UI
         private void InitLanguage()
         {
             studentLabel.Text = "<html>" + Language.labelStudent + ":" + "<color=Red>*";
-            schoolYearLabel.Text = Language.labelSchoolYear;
-            classLabel.Text = Language.labelClass;
+            schoolYearLabel.Text = Language.labelSchoolYear + ":";
+            classLabel.Text = Language.labelClass + ":";
             subscriptionLabel.Text = "<html>" + Language.labelSubscription + ":" + "<color=Red>*";
             dateLabel.Text = "<html>" + Language.labelStart + ":" + "<color=Red>*";
             endDateLabel.Text = "<html>" + Language.labelEnd + ":" + "<color=Red>*";
             paymentMeanLabel.Text = "<html>" + Language.labelPaymentMean + ":" + "<color=Red>*";
             discountLabel.Text = "<html>" + Language.labelDiscount + ":" + "<color=Red>*";
-            feeLabel.Text = Language.labelSubscriptionFee;
-            transactionIdLabel.Text = Language.labelIdTransaction;
-            transactionDateLabel.Text = Language.labelDateTransaction;
-            durationLabel.Text = Language.labelDuration;
-            doneByLabel.Text = Language.labelPaymentDoneBy;
+            feeLabel.Text = Language.labelSubscriptionFee + ":";
+            transactionIdLabel.Text = Language.labelIdTransaction + ":";
+            transactionDateLabel.Text = "<html>" + Language.labelDateTransaction + ":" + "<color=Red>*";
+            durationLabel.Text = Language.labelDuration+":";
+            doneByLabel.Text = Language.labelPaymentDoneBy + ":";
         }
 
         private void InitEvent()

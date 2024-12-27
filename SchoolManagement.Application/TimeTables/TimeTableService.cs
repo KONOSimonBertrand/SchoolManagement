@@ -1,8 +1,7 @@
 ﻿
 
 using SchoolManagement.Core.Model;
-using SchoolManagement.Infrastructure.Repositories;
-using SchoolManagement.Infrastructure.Repositories.TimeTables;
+using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Application
 {

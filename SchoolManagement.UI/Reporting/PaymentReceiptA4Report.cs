@@ -12,10 +12,15 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox SchoolNameTextBox { get => schoolNameTextBox; }
         public Telerik.Reporting.TextBox PaymentIdNumberLabel { get => referenceLabel; }
         public Telerik.Reporting.TextBox PaymentIdNumberTextBox { get => paymentIdTextBox; }
-        public Telerik.Reporting.TextBox PaymentDateLabel { get => paymentDateLabel; }
         public Telerik.Reporting.TextBox PaymentDateTextBox { get => paymentDateTextBox; }
         public Telerik.Reporting.TextBox StudentLabelFR { get => studentLabelFR; }
         public Telerik.Reporting.TextBox StudentLabelEN { get => studentLabelEN; }
+        
+        public Telerik.Reporting.TextBox PaymentCostTypeLabelFR { get => paymentCostTypeLabelFR; }
+        public Telerik.Reporting.TextBox PaymentPlaceLabelEN { get => paymentPlaceLabelEN; }
+        public Telerik.Reporting.TextBox PaymentPlace2LabelEN { get => paymentPlace2LabelEN; }
+        public Telerik.Reporting.TextBox PaymentPlaceLabelFR { get => paymentPlaceLabelFR; }
+        public Telerik.Reporting.TextBox PaymentPlace2LabelFR { get => paymentPlace2LabelFR; }
         public Telerik.Reporting.TextBox StudentTextBox { get => studentTextBox; }
         public Telerik.Reporting.TextBox StudentIdNumberLabel { get => studentIdLabel; }
         public Telerik.Reporting.TextBox StudentIdNumberTextBox { get => studentIdTextBox; }
@@ -25,6 +30,10 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox SchoolYearLabelFR { get => schoolYearLabelFR; }
         public Telerik.Reporting.TextBox SchoolYearLabelEN { get => schoolYearLabelEN; }
         public Telerik.Reporting.TextBox SchoolYearTextBox { get => schoolYearTextBox; }
+        public Telerik.Reporting.TextBox ReferenceLabel {  get => referenceLabel; }
+        public Telerik.Reporting.TextBox Reference2Label { get => reference2Label; }
+        public Telerik.Reporting.TextBox PaymentDate2Label { get => paymentDate2Label; }
+        public Telerik.Reporting.TextBox PaymentDateLabel { get => paymentDateLabel; }
         public Telerik.Reporting.TextBox PaymentAmountLabelEN { get => paymentAmountLabelEN; }
         public Telerik.Reporting.TextBox PaymentAmountLabelFR { get => paymentAmountLabelFR; }
         public Telerik.Reporting.TextBox PaymentAmountTextBox { get => paymentAmountTextBox; }
@@ -64,7 +73,6 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox SchoolName2TextBox { get => schoolName2TextBox; }
         public Telerik.Reporting.TextBox PaymentIdNumber2Label { get => reference2Label; }
         public Telerik.Reporting.TextBox PaymentIdNumber2TextBox { get => paymentId2TextBox; }
-        public Telerik.Reporting.TextBox PaymentDate2Label { get => paymentDate2Label; }
         public Telerik.Reporting.TextBox PaymentDate2TextBox { get => paymentDate2TextBox; }
         public Telerik.Reporting.TextBox Student2LabelFR { get => student2LabelFR; }
         public Telerik.Reporting.TextBox Student2LabelEN { get => student2LabelEN; }

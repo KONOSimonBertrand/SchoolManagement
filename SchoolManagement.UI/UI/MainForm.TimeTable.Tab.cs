@@ -8,6 +8,7 @@ namespace SchoolManagement.UI
 
     public partial class MainForm
     {
+        public RadDropDownList TimeTableSchoolYearDropDownList { get => timeTableSchoolYearDropDownList; }
         public RadButton TimeTablePrintButtton { get => timeTablePrintButton; }
         public CustomControls.DateNavigator TimeTableDateNavigator { get => timeTableDateNavigator; }
         public RadListView TimeTableLeftListView {  get => timeTableLeftListView; }
@@ -85,6 +86,8 @@ namespace SchoolManagement.UI
                 view.RulerStartScale = 7;
                 view.RulerEndScale = 19;
             }
+            timeTableSearchDropDownList.RootElement.ToolTipText = Language.MessageFindClassroom;
+            timeTableSearchDropDownList.NullText = Language.MessageFindClassroom;
         }
 
     }

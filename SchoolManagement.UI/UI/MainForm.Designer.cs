@@ -30,13 +30,13 @@ namespace SchoolManagement.UI
         /// </summary>
         private void InitializeComponent()
         {
-            SchedulerDailyPrintStyle schedulerDailyPrintStyle1 = new SchedulerDailyPrintStyle();
-            TableViewDefinition tableViewDefinition1 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition2 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition3 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition4 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition5 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition6 = new TableViewDefinition();
+            SchedulerDailyPrintStyle schedulerDailyPrintStyle2 = new SchedulerDailyPrintStyle();
+            TableViewDefinition tableViewDefinition7 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition8 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition9 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition10 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition11 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition12 = new TableViewDefinition();
             timeTableScheduler = new RadScheduler();
             mainPageView = new RadPageView();
             HomePage = new RadPageViewPage();
@@ -83,7 +83,9 @@ namespace SchoolManagement.UI
             DisciplinePage = new RadPageViewPage();
             disciplineMainPanel = new RadPanel();
             disciplineGridView = new RadGridView();
+            disciplineLeftPanel = new RadPanel();
             disciplineLeftListView = new RadListView();
+            disciplineSearchDropDownList = new RadDropDownList();
             disciplineNavigationPanel = new RadPanel();
             disciplineSchoolYearDropDownList = new RadDropDownList();
             disciplineSchoolYearLabel = new RadLabel();
@@ -98,14 +100,16 @@ namespace SchoolManagement.UI
             studentNoteLeftListView = new RadListView();
             studentNoteInfoRightPanel = new RadPanel();
             studentNoteNavigationPanel = new RadPanel();
+            studentNoteGroupDropDownList = new RadDropDownList();
+            studentNoteGroupLabel = new RadLabel();
             studentNoteRoomDropDownList = new RadDropDownList();
             studentNoteRoomLabel = new RadLabel();
             studentNoteAddButton = new RadDropDownButton();
-            studentNoteAddNoteMenuItem = new RadMenuItem();
-            studentNoteAddNoteListMenuItem = new RadMenuItem();
-            studentNoteImportNoteMenuItem = new RadMenuItem();
-            studentNoteMenuSeparatorItem = new RadMenuSeparatorItem();
-            studentNoteAddCommentMenuItem = new RadMenuItem();
+            studentNoteAddNoteMenu = new RadMenuItem();
+            studentNoteAddNotesMenu = new RadMenuItem();
+            studentNoteImportNoteMenu = new RadMenuItem();
+            studentNoteMenuSeparator = new RadMenuSeparatorItem();
+            studentNoteAddCommentMenu = new RadMenuItem();
             studentNoteSchoolYearDropDownList = new RadDropDownList();
             studentNoteSchoolYearLabel = new RadLabel();
             studentNoteExportToExcelButton = new RadButton();
@@ -212,7 +216,10 @@ namespace SchoolManagement.UI
             disciplineMainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)disciplineGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)disciplineGridView.MasterTemplate).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)disciplineLeftPanel).BeginInit();
+            disciplineLeftPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)disciplineLeftListView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)disciplineSearchDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)disciplineNavigationPanel).BeginInit();
             disciplineNavigationPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)disciplineSchoolYearDropDownList).BeginInit();
@@ -232,6 +239,8 @@ namespace SchoolManagement.UI
             ((System.ComponentModel.ISupportInitialize)studentNoteInfoRightPanel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteNavigationPanel).BeginInit();
             studentNoteNavigationPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)studentNoteGroupDropDownList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)studentNoteGroupLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteRoomDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteRoomLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteAddButton).BeginInit();
@@ -302,8 +311,8 @@ namespace SchoolManagement.UI
             timeTableScheduler.Dock = DockStyle.Fill;
             timeTableScheduler.Location = new Point(287, 0);
             timeTableScheduler.Name = "timeTableScheduler";
-            timeTableScheduler.PrintStyle = schedulerDailyPrintStyle1;
-            timeTableScheduler.Size = new Size(1249, 708);
+            timeTableScheduler.PrintStyle = schedulerDailyPrintStyle2;
+            timeTableScheduler.Size = new Size(1240, 702);
             timeTableScheduler.TabIndex = 2;
             // 
             // mainPageView
@@ -320,7 +329,7 @@ namespace SchoolManagement.UI
             mainPageView.Location = new Point(0, 0);
             mainPageView.Name = "mainPageView";
             mainPageView.SelectedPage = HomePage;
-            mainPageView.Size = new Size(1548, 815);
+            mainPageView.Size = new Size(1548, 817);
             mainPageView.TabIndex = 1;
             // 
             // HomePage
@@ -330,7 +339,7 @@ namespace SchoolManagement.UI
             HomePage.ItemSize = new SizeF(62F, 29F);
             HomePage.Location = new Point(6, 36);
             HomePage.Name = "HomePage";
-            HomePage.Size = new Size(1536, 773);
+            HomePage.Size = new Size(1536, 775);
             HomePage.Text = "ACCUEIL";
             // 
             // homeMainPanel
@@ -343,7 +352,7 @@ namespace SchoolManagement.UI
             homeMainPanel.Location = new Point(0, 65);
             homeMainPanel.Margin = new Padding(0);
             homeMainPanel.Name = "homeMainPanel";
-            homeMainPanel.Size = new Size(1536, 708);
+            homeMainPanel.Size = new Size(1536, 710);
             homeMainPanel.TabIndex = 3;
             // 
             // homeMainListView
@@ -356,7 +365,7 @@ namespace SchoolManagement.UI
             homeMainListView.Location = new Point(300, 0);
             homeMainListView.Margin = new Padding(0);
             homeMainListView.Name = "homeMainListView";
-            homeMainListView.Size = new Size(878, 708);
+            homeMainListView.Size = new Size(878, 710);
             homeMainListView.TabIndex = 3;
             // 
             // homeGridView
@@ -367,9 +376,9 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition7;
             homeGridView.Name = "homeGridView";
-            homeGridView.Size = new Size(878, 708);
+            homeGridView.Size = new Size(878, 710);
             homeGridView.TabIndex = 5;
             // 
             // homeLeftListView
@@ -382,7 +391,7 @@ namespace SchoolManagement.UI
             homeLeftListView.Location = new Point(0, 0);
             homeLeftListView.Margin = new Padding(0);
             homeLeftListView.Name = "homeLeftListView";
-            homeLeftListView.Size = new Size(300, 708);
+            homeLeftListView.Size = new Size(300, 710);
             homeLeftListView.TabIndex = 1;
             // 
             // homeInfoRightPanel
@@ -391,7 +400,7 @@ namespace SchoolManagement.UI
             homeInfoRightPanel.Location = new Point(1178, 0);
             homeInfoRightPanel.Margin = new Padding(4);
             homeInfoRightPanel.Name = "homeInfoRightPanel";
-            homeInfoRightPanel.Size = new Size(358, 708);
+            homeInfoRightPanel.Size = new Size(358, 710);
             homeInfoRightPanel.TabIndex = 3;
             // 
             // homeNavigationPanel
@@ -463,7 +472,7 @@ namespace SchoolManagement.UI
             homeAddButton.Location = new Point(259, 14);
             homeAddButton.Margin = new Padding(4);
             homeAddButton.Name = "homeAddButton";
-            homeAddButton.Size = new Size(93, 32);
+            homeAddButton.Size = new Size(93, 36);
             homeAddButton.TabIndex = 72;
             homeAddButton.Text = "Inscrire";
             // 
@@ -472,7 +481,7 @@ namespace SchoolManagement.UI
             homeExportToExcelButton.Location = new Point(360, 14);
             homeExportToExcelButton.Margin = new Padding(4);
             homeExportToExcelButton.Name = "homeExportToExcelButton";
-            homeExportToExcelButton.Size = new Size(93, 32);
+            homeExportToExcelButton.Size = new Size(93, 36);
             homeExportToExcelButton.TabIndex = 71;
             homeExportToExcelButton.Text = "Exporter";
             // 
@@ -482,7 +491,7 @@ namespace SchoolManagement.UI
             homeIconViewToggleButton.Location = new Point(501, 14);
             homeIconViewToggleButton.Margin = new Padding(4);
             homeIconViewToggleButton.Name = "homeIconViewToggleButton";
-            homeIconViewToggleButton.Size = new Size(32, 32);
+            homeIconViewToggleButton.Size = new Size(32, 36);
             homeIconViewToggleButton.TabIndex = 70;
             // 
             // homeListViewToggleButton
@@ -491,7 +500,7 @@ namespace SchoolManagement.UI
             homeListViewToggleButton.Location = new Point(536, 14);
             homeListViewToggleButton.Margin = new Padding(4);
             homeListViewToggleButton.Name = "homeListViewToggleButton";
-            homeListViewToggleButton.Size = new Size(32, 32);
+            homeListViewToggleButton.Size = new Size(32, 36);
             homeListViewToggleButton.TabIndex = 69;
             // 
             // CashFlowPage
@@ -501,7 +510,7 @@ namespace SchoolManagement.UI
             CashFlowPage.ItemSize = new SizeF(130F, 29F);
             CashFlowPage.Location = new Point(6, 36);
             CashFlowPage.Name = "CashFlowPage";
-            CashFlowPage.Size = new Size(1299, 287);
+            CashFlowPage.Size = new Size(1536, 773);
             CashFlowPage.Text = "FLUX DE TRESORERIE";
             // 
             // cashFlowMainPanel
@@ -513,7 +522,7 @@ namespace SchoolManagement.UI
             cashFlowMainPanel.Location = new Point(0, 65);
             cashFlowMainPanel.Margin = new Padding(0);
             cashFlowMainPanel.Name = "cashFlowMainPanel";
-            cashFlowMainPanel.Size = new Size(1299, 222);
+            cashFlowMainPanel.Size = new Size(1536, 708);
             cashFlowMainPanel.TabIndex = 4;
             // 
             // cashFlowGridView
@@ -523,17 +532,17 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            cashFlowGridView.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            cashFlowGridView.MasterTemplate.ViewDefinition = tableViewDefinition8;
             cashFlowGridView.Name = "cashFlowGridView";
-            cashFlowGridView.Size = new Size(776, 222);
+            cashFlowGridView.Size = new Size(1013, 708);
             cashFlowGridView.TabIndex = 5;
             // 
             // cashFlowInfoRightPanel
             // 
             cashFlowInfoRightPanel.Dock = DockStyle.Right;
-            cashFlowInfoRightPanel.Location = new Point(1029, 0);
+            cashFlowInfoRightPanel.Location = new Point(1266, 0);
             cashFlowInfoRightPanel.Name = "cashFlowInfoRightPanel";
-            cashFlowInfoRightPanel.Size = new Size(270, 222);
+            cashFlowInfoRightPanel.Size = new Size(270, 708);
             cashFlowInfoRightPanel.TabIndex = 3;
             // 
             // cashFlowLeftListView
@@ -544,7 +553,7 @@ namespace SchoolManagement.UI
             cashFlowLeftListView.Location = new Point(0, 0);
             cashFlowLeftListView.Margin = new Padding(0);
             cashFlowLeftListView.Name = "cashFlowLeftListView";
-            cashFlowLeftListView.Size = new Size(253, 222);
+            cashFlowLeftListView.Size = new Size(253, 708);
             cashFlowLeftListView.TabIndex = 1;
             // 
             // cashFlowNavigationPanel
@@ -558,7 +567,7 @@ namespace SchoolManagement.UI
             cashFlowNavigationPanel.Location = new Point(0, 0);
             cashFlowNavigationPanel.Margin = new Padding(0);
             cashFlowNavigationPanel.Name = "cashFlowNavigationPanel";
-            cashFlowNavigationPanel.Size = new Size(1299, 65);
+            cashFlowNavigationPanel.Size = new Size(1536, 65);
             cashFlowNavigationPanel.TabIndex = 1;
             // 
             // cashFlowSchoolYearDropDownList
@@ -603,7 +612,7 @@ namespace SchoolManagement.UI
             cashFlowSearchPanel.Controls.Add(cashFlowSearchTextBox);
             cashFlowSearchPanel.Controls.Add(cashFlowEmptyPanel);
             cashFlowSearchPanel.Dock = DockStyle.Right;
-            cashFlowSearchPanel.Location = new Point(723, 0);
+            cashFlowSearchPanel.Location = new Point(960, 0);
             cashFlowSearchPanel.Margin = new Padding(4);
             cashFlowSearchPanel.Name = "cashFlowSearchPanel";
             cashFlowSearchPanel.Size = new Size(576, 65);
@@ -632,9 +641,9 @@ namespace SchoolManagement.UI
             TimeTablePage.Controls.Add(timeTableMainContainer);
             TimeTablePage.Controls.Add(timeTableNavigationPanel);
             TimeTablePage.ItemSize = new SizeF(118F, 29F);
-            TimeTablePage.Location = new Point(6, 36);
+            TimeTablePage.Location = new Point(10, 37);
             TimeTablePage.Name = "TimeTablePage";
-            TimeTablePage.Size = new Size(1536, 773);
+            TimeTablePage.Size = new Size(1527, 767);
             TimeTablePage.Text = "EMPLOI DU TEMPS";
             // 
             // timeTableMainContainer
@@ -645,7 +654,7 @@ namespace SchoolManagement.UI
             timeTableMainContainer.Location = new Point(0, 65);
             timeTableMainContainer.Margin = new Padding(0);
             timeTableMainContainer.Name = "timeTableMainContainer";
-            timeTableMainContainer.Size = new Size(1536, 708);
+            timeTableMainContainer.Size = new Size(1527, 702);
             timeTableMainContainer.TabIndex = 5;
             // 
             // timeTableLeftPanel
@@ -655,7 +664,7 @@ namespace SchoolManagement.UI
             timeTableLeftPanel.Dock = DockStyle.Left;
             timeTableLeftPanel.Location = new Point(0, 0);
             timeTableLeftPanel.Name = "timeTableLeftPanel";
-            timeTableLeftPanel.Size = new Size(287, 708);
+            timeTableLeftPanel.Size = new Size(287, 702);
             timeTableLeftPanel.TabIndex = 2;
             // 
             // timeTableLeftListView
@@ -666,7 +675,7 @@ namespace SchoolManagement.UI
             timeTableLeftListView.Location = new Point(0, 24);
             timeTableLeftListView.Margin = new Padding(0);
             timeTableLeftListView.Name = "timeTableLeftListView";
-            timeTableLeftListView.Size = new Size(287, 684);
+            timeTableLeftListView.Size = new Size(287, 678);
             timeTableLeftListView.TabIndex = 2;
             // 
             // timeTableSearchDropDownList
@@ -692,7 +701,7 @@ namespace SchoolManagement.UI
             timeTableNavigationPanel.Location = new Point(0, 0);
             timeTableNavigationPanel.Margin = new Padding(0);
             timeTableNavigationPanel.Name = "timeTableNavigationPanel";
-            timeTableNavigationPanel.Size = new Size(1536, 65);
+            timeTableNavigationPanel.Size = new Size(1527, 65);
             timeTableNavigationPanel.TabIndex = 2;
             // 
             // timeTableDateNavigator
@@ -736,7 +745,7 @@ namespace SchoolManagement.UI
             // 
             timeTableSearchPanel.Controls.Add(timeTableEmptyPanel);
             timeTableSearchPanel.Dock = DockStyle.Right;
-            timeTableSearchPanel.Location = new Point(1114, 0);
+            timeTableSearchPanel.Location = new Point(1105, 0);
             timeTableSearchPanel.Margin = new Padding(4);
             timeTableSearchPanel.Name = "timeTableSearchPanel";
             timeTableSearchPanel.Size = new Size(422, 65);
@@ -759,42 +768,64 @@ namespace SchoolManagement.UI
             DisciplinePage.ItemSize = new SizeF(75F, 29F);
             DisciplinePage.Location = new Point(6, 36);
             DisciplinePage.Name = "DisciplinePage";
-            DisciplinePage.Size = new Size(1299, 287);
+            DisciplinePage.Size = new Size(1536, 773);
             DisciplinePage.Text = "DISCIPLINE";
             // 
             // disciplineMainPanel
             // 
             disciplineMainPanel.Controls.Add(disciplineGridView);
-            disciplineMainPanel.Controls.Add(disciplineLeftListView);
+            disciplineMainPanel.Controls.Add(disciplineLeftPanel);
             disciplineMainPanel.Dock = DockStyle.Fill;
             disciplineMainPanel.Location = new Point(0, 65);
             disciplineMainPanel.Margin = new Padding(0);
             disciplineMainPanel.Name = "disciplineMainPanel";
-            disciplineMainPanel.Size = new Size(1299, 222);
+            disciplineMainPanel.Size = new Size(1536, 708);
             disciplineMainPanel.TabIndex = 5;
             // 
             // disciplineGridView
             // 
             disciplineGridView.Dock = DockStyle.Fill;
-            disciplineGridView.Location = new Point(253, 0);
+            disciplineGridView.Location = new Point(287, 0);
             // 
             // 
             // 
-            disciplineGridView.MasterTemplate.ViewDefinition = tableViewDefinition3;
+            disciplineGridView.MasterTemplate.ViewDefinition = tableViewDefinition9;
             disciplineGridView.Name = "disciplineGridView";
-            disciplineGridView.Size = new Size(1046, 222);
+            disciplineGridView.Size = new Size(1249, 708);
             disciplineGridView.TabIndex = 5;
+            // 
+            // disciplineLeftPanel
+            // 
+            disciplineLeftPanel.Controls.Add(disciplineLeftListView);
+            disciplineLeftPanel.Controls.Add(disciplineSearchDropDownList);
+            disciplineLeftPanel.Dock = DockStyle.Left;
+            disciplineLeftPanel.Location = new Point(0, 0);
+            disciplineLeftPanel.Name = "disciplineLeftPanel";
+            disciplineLeftPanel.Size = new Size(287, 708);
+            disciplineLeftPanel.TabIndex = 2;
             // 
             // disciplineLeftListView
             // 
-            disciplineLeftListView.Dock = DockStyle.Left;
+            disciplineLeftListView.Dock = DockStyle.Fill;
             disciplineLeftListView.GroupItemSize = new Size(200, 28);
             disciplineLeftListView.ItemSize = new Size(200, 28);
-            disciplineLeftListView.Location = new Point(0, 0);
+            disciplineLeftListView.Location = new Point(0, 24);
             disciplineLeftListView.Margin = new Padding(0);
             disciplineLeftListView.Name = "disciplineLeftListView";
-            disciplineLeftListView.Size = new Size(253, 222);
-            disciplineLeftListView.TabIndex = 1;
+            disciplineLeftListView.Size = new Size(287, 684);
+            disciplineLeftListView.TabIndex = 81;
+            // 
+            // disciplineSearchDropDownList
+            // 
+            disciplineSearchDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            disciplineSearchDropDownList.Dock = DockStyle.Top;
+            disciplineSearchDropDownList.DropDownAnimationEnabled = true;
+            disciplineSearchDropDownList.Location = new Point(0, 0);
+            disciplineSearchDropDownList.MinimumSize = new Size(0, 24);
+            disciplineSearchDropDownList.Name = "disciplineSearchDropDownList";
+            disciplineSearchDropDownList.NullText = "Rechercher une classe..";
+            disciplineSearchDropDownList.Size = new Size(287, 24);
+            disciplineSearchDropDownList.TabIndex = 80;
             // 
             // disciplineNavigationPanel
             // 
@@ -807,7 +838,7 @@ namespace SchoolManagement.UI
             disciplineNavigationPanel.Location = new Point(0, 0);
             disciplineNavigationPanel.Margin = new Padding(0);
             disciplineNavigationPanel.Name = "disciplineNavigationPanel";
-            disciplineNavigationPanel.Size = new Size(1299, 65);
+            disciplineNavigationPanel.Size = new Size(1536, 65);
             disciplineNavigationPanel.TabIndex = 2;
             // 
             // disciplineSchoolYearDropDownList
@@ -852,7 +883,7 @@ namespace SchoolManagement.UI
             disciplineSearchPanel.Controls.Add(disciplineSearchTextBox);
             disciplineSearchPanel.Controls.Add(disciplineEmptyPanel);
             disciplineSearchPanel.Dock = DockStyle.Right;
-            disciplineSearchPanel.Location = new Point(723, 0);
+            disciplineSearchPanel.Location = new Point(960, 0);
             disciplineSearchPanel.Margin = new Padding(4);
             disciplineSearchPanel.Name = "disciplineSearchPanel";
             disciplineSearchPanel.Size = new Size(576, 65);
@@ -863,7 +894,7 @@ namespace SchoolManagement.UI
             disciplineSearchTextBox.Location = new Point(2, 18);
             disciplineSearchTextBox.Name = "disciplineSearchTextBox";
             disciplineSearchTextBox.NullText = "Rechercher par ....";
-            disciplineSearchTextBox.Size = new Size(43, 30);
+            disciplineSearchTextBox.Size = new Size(430, 30);
             disciplineSearchTextBox.TabIndex = 0;
             // 
             // disciplineEmptyPanel
@@ -883,7 +914,7 @@ namespace SchoolManagement.UI
             StudentNotePage.ItemSize = new SizeF(117F, 29F);
             StudentNotePage.Location = new Point(6, 36);
             StudentNotePage.Name = "StudentNotePage";
-            StudentNotePage.Size = new Size(1299, 287);
+            StudentNotePage.Size = new Size(1536, 775);
             StudentNotePage.Text = "NOTES SCOLAIRES";
             // 
             // studentNoteMainPanel
@@ -895,7 +926,7 @@ namespace SchoolManagement.UI
             studentNoteMainPanel.Location = new Point(0, 65);
             studentNoteMainPanel.Margin = new Padding(0);
             studentNoteMainPanel.Name = "studentNoteMainPanel";
-            studentNoteMainPanel.Size = new Size(1299, 222);
+            studentNoteMainPanel.Size = new Size(1536, 710);
             studentNoteMainPanel.TabIndex = 4;
             // 
             // studentNoteGridView
@@ -906,10 +937,10 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            studentNoteGridView.MasterTemplate.ViewDefinition = tableViewDefinition4;
+            studentNoteGridView.MasterTemplate.ViewDefinition = tableViewDefinition10;
             studentNoteGridView.Name = "studentNoteGridView";
-            studentNoteGridView.Size = new Size(827, 222);
-            studentNoteGridView.TabIndex = 5;
+            studentNoteGridView.Size = new Size(1064, 710);
+            studentNoteGridView.TabIndex = 7;
             // 
             // studentNoteLeftListView
             // 
@@ -920,20 +951,22 @@ namespace SchoolManagement.UI
             studentNoteLeftListView.Location = new Point(0, 0);
             studentNoteLeftListView.Margin = new Padding(0);
             studentNoteLeftListView.Name = "studentNoteLeftListView";
-            studentNoteLeftListView.Size = new Size(253, 222);
-            studentNoteLeftListView.TabIndex = 1;
+            studentNoteLeftListView.Size = new Size(253, 710);
+            studentNoteLeftListView.TabIndex = 6;
             // 
             // studentNoteInfoRightPanel
             // 
             studentNoteInfoRightPanel.Dock = DockStyle.Right;
-            studentNoteInfoRightPanel.Location = new Point(1080, 0);
+            studentNoteInfoRightPanel.Location = new Point(1317, 0);
             studentNoteInfoRightPanel.Margin = new Padding(4);
             studentNoteInfoRightPanel.Name = "studentNoteInfoRightPanel";
-            studentNoteInfoRightPanel.Size = new Size(219, 222);
+            studentNoteInfoRightPanel.Size = new Size(219, 710);
             studentNoteInfoRightPanel.TabIndex = 3;
             // 
             // studentNoteNavigationPanel
             // 
+            studentNoteNavigationPanel.Controls.Add(studentNoteGroupDropDownList);
+            studentNoteNavigationPanel.Controls.Add(studentNoteGroupLabel);
             studentNoteNavigationPanel.Controls.Add(studentNoteRoomDropDownList);
             studentNoteNavigationPanel.Controls.Add(studentNoteRoomLabel);
             studentNoteNavigationPanel.Controls.Add(studentNoteAddButton);
@@ -947,8 +980,28 @@ namespace SchoolManagement.UI
             studentNoteNavigationPanel.Location = new Point(0, 0);
             studentNoteNavigationPanel.Margin = new Padding(0);
             studentNoteNavigationPanel.Name = "studentNoteNavigationPanel";
-            studentNoteNavigationPanel.Size = new Size(1299, 65);
+            studentNoteNavigationPanel.Size = new Size(1536, 65);
             studentNoteNavigationPanel.TabIndex = 1;
+            // 
+            // studentNoteGroupDropDownList
+            // 
+            studentNoteGroupDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            studentNoteGroupDropDownList.DropDownAnimationEnabled = true;
+            studentNoteGroupDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+            studentNoteGroupDropDownList.Location = new Point(531, 18);
+            studentNoteGroupDropDownList.MinimumSize = new Size(0, 24);
+            studentNoteGroupDropDownList.Name = "studentNoteGroupDropDownList";
+            studentNoteGroupDropDownList.NullText = "Section";
+            studentNoteGroupDropDownList.Size = new Size(158, 24);
+            studentNoteGroupDropDownList.TabIndex = 2;
+            // 
+            // studentNoteGroupLabel
+            // 
+            studentNoteGroupLabel.Location = new Point(469, 22);
+            studentNoteGroupLabel.Name = "studentNoteGroupLabel";
+            studentNoteGroupLabel.Size = new Size(43, 18);
+            studentNoteGroupLabel.TabIndex = 83;
+            studentNoteGroupLabel.Text = "Section";
             // 
             // studentNoteRoomDropDownList
             // 
@@ -959,7 +1012,7 @@ namespace SchoolManagement.UI
             studentNoteRoomDropDownList.Name = "studentNoteRoomDropDownList";
             studentNoteRoomDropDownList.NullText = "Classe";
             studentNoteRoomDropDownList.Size = new Size(158, 24);
-            studentNoteRoomDropDownList.TabIndex = 84;
+            studentNoteRoomDropDownList.TabIndex = 1;
             // 
             // studentNoteRoomLabel
             // 
@@ -971,39 +1024,39 @@ namespace SchoolManagement.UI
             // 
             // studentNoteAddButton
             // 
-            studentNoteAddButton.Items.AddRange(new Telerik.WinControls.RadItem[] { studentNoteAddNoteMenuItem, studentNoteAddNoteListMenuItem, studentNoteImportNoteMenuItem, studentNoteMenuSeparatorItem, studentNoteAddCommentMenuItem });
-            studentNoteAddButton.Location = new Point(467, 14);
+            studentNoteAddButton.Items.AddRange(new Telerik.WinControls.RadItem[] { studentNoteAddNoteMenu, studentNoteAddNotesMenu, studentNoteImportNoteMenu, studentNoteMenuSeparator, studentNoteAddCommentMenu });
+            studentNoteAddButton.Location = new Point(698, 14);
             studentNoteAddButton.Margin = new Padding(4);
             studentNoteAddButton.Name = "studentNoteAddButton";
-            studentNoteAddButton.Size = new Size(123, 32);
-            studentNoteAddButton.TabIndex = 82;
+            studentNoteAddButton.Size = new Size(123, 36);
+            studentNoteAddButton.TabIndex = 3;
             studentNoteAddButton.Text = "Ajouter";
             // 
-            // studentNoteAddNoteMenuItem
+            // studentNoteAddNoteMenu
             // 
-            studentNoteAddNoteMenuItem.Name = "studentNoteAddNoteMenuItem";
-            studentNoteAddNoteMenuItem.Text = "une note";
+            studentNoteAddNoteMenu.Name = "studentNoteAddNoteMenu";
+            studentNoteAddNoteMenu.Text = "une note";
             // 
-            // studentNoteAddNoteListMenuItem
+            // studentNoteAddNotesMenu
             // 
-            studentNoteAddNoteListMenuItem.Name = "studentNoteAddNoteListMenuItem";
-            studentNoteAddNoteListMenuItem.Text = "une liste de notes";
+            studentNoteAddNotesMenu.Name = "studentNoteAddNotesMenu";
+            studentNoteAddNotesMenu.Text = "une liste de notes";
             // 
-            // studentNoteImportNoteMenuItem
+            // studentNoteImportNoteMenu
             // 
-            studentNoteImportNoteMenuItem.Name = "studentNoteImportNoteMenuItem";
-            studentNoteImportNoteMenuItem.Text = "des notes via un fichier";
+            studentNoteImportNoteMenu.Name = "studentNoteImportNoteMenu";
+            studentNoteImportNoteMenu.Text = "des notes via un fichier";
             // 
-            // studentNoteMenuSeparatorItem
+            // studentNoteMenuSeparator
             // 
-            studentNoteMenuSeparatorItem.Name = "studentNoteMenuSeparatorItem";
-            studentNoteMenuSeparatorItem.Text = "radMenuSeparatorItem1";
-            studentNoteMenuSeparatorItem.TextAlignment = ContentAlignment.MiddleLeft;
+            studentNoteMenuSeparator.Name = "studentNoteMenuSeparator";
+            studentNoteMenuSeparator.Text = "radMenuSeparatorItem1";
+            studentNoteMenuSeparator.TextAlignment = ContentAlignment.MiddleLeft;
             // 
-            // studentNoteAddCommentMenuItem
+            // studentNoteAddCommentMenu
             // 
-            studentNoteAddCommentMenuItem.Name = "studentNoteAddCommentMenuItem";
-            studentNoteAddCommentMenuItem.Text = "des commentaires";
+            studentNoteAddCommentMenu.Name = "studentNoteAddCommentMenu";
+            studentNoteAddCommentMenu.Text = "des commentaires";
             // 
             // studentNoteSchoolYearDropDownList
             // 
@@ -1014,7 +1067,7 @@ namespace SchoolManagement.UI
             studentNoteSchoolYearDropDownList.Name = "studentNoteSchoolYearDropDownList";
             studentNoteSchoolYearDropDownList.NullText = "Années";
             studentNoteSchoolYearDropDownList.Size = new Size(153, 24);
-            studentNoteSchoolYearDropDownList.TabIndex = 74;
+            studentNoteSchoolYearDropDownList.TabIndex = 0;
             // 
             // studentNoteSchoolYearLabel
             // 
@@ -1026,37 +1079,37 @@ namespace SchoolManagement.UI
             // 
             // studentNoteExportToExcelButton
             // 
-            studentNoteExportToExcelButton.Location = new Point(598, 14);
+            studentNoteExportToExcelButton.Location = new Point(829, 14);
             studentNoteExportToExcelButton.Margin = new Padding(4);
             studentNoteExportToExcelButton.Name = "studentNoteExportToExcelButton";
-            studentNoteExportToExcelButton.Size = new Size(93, 32);
-            studentNoteExportToExcelButton.TabIndex = 71;
+            studentNoteExportToExcelButton.Size = new Size(93, 36);
+            studentNoteExportToExcelButton.TabIndex = 4;
             studentNoteExportToExcelButton.Text = "Exporter";
             // 
             // studentNoteIconViewToggleButton
             // 
             studentNoteIconViewToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
-            studentNoteIconViewToggleButton.Location = new Point(699, 14);
+            studentNoteIconViewToggleButton.Location = new Point(930, 14);
             studentNoteIconViewToggleButton.Margin = new Padding(4);
             studentNoteIconViewToggleButton.Name = "studentNoteIconViewToggleButton";
-            studentNoteIconViewToggleButton.Size = new Size(32, 32);
-            studentNoteIconViewToggleButton.TabIndex = 70;
+            studentNoteIconViewToggleButton.Size = new Size(32, 36);
+            studentNoteIconViewToggleButton.TabIndex = 5;
             // 
             // studentNoteListViewToggleButton
             // 
             studentNoteListViewToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
-            studentNoteListViewToggleButton.Location = new Point(734, 14);
+            studentNoteListViewToggleButton.Location = new Point(965, 14);
             studentNoteListViewToggleButton.Margin = new Padding(4);
             studentNoteListViewToggleButton.Name = "studentNoteListViewToggleButton";
-            studentNoteListViewToggleButton.Size = new Size(32, 32);
-            studentNoteListViewToggleButton.TabIndex = 69;
+            studentNoteListViewToggleButton.Size = new Size(32, 36);
+            studentNoteListViewToggleButton.TabIndex = 6;
             // 
             // studentNoteSearchPanel
             // 
             studentNoteSearchPanel.Controls.Add(studentNoteSearchTextBox);
             studentNoteSearchPanel.Controls.Add(studentNoteEmptyPanel);
             studentNoteSearchPanel.Dock = DockStyle.Right;
-            studentNoteSearchPanel.Location = new Point(845, 0);
+            studentNoteSearchPanel.Location = new Point(1082, 0);
             studentNoteSearchPanel.Margin = new Padding(4);
             studentNoteSearchPanel.Name = "studentNoteSearchPanel";
             studentNoteSearchPanel.Size = new Size(454, 65);
@@ -1230,7 +1283,7 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            employeeGridView.MasterTemplate.ViewDefinition = tableViewDefinition5;
+            employeeGridView.MasterTemplate.ViewDefinition = tableViewDefinition11;
             employeeGridView.Name = "employeeGridView";
             employeeGridView.Size = new Size(878, 708);
             employeeGridView.TabIndex = 5;
@@ -1364,7 +1417,7 @@ namespace SchoolManagement.UI
             SettingPage.ItemSize = new SizeF(89F, 29F);
             SettingPage.Location = new Point(6, 36);
             SettingPage.Name = "SettingPage";
-            SettingPage.Size = new Size(1536, 626);
+            SettingPage.Size = new Size(1536, 773);
             SettingPage.Text = "PARAMETRES";
             // 
             // settingMainPanel
@@ -1376,7 +1429,7 @@ namespace SchoolManagement.UI
             settingMainPanel.Location = new Point(0, 65);
             settingMainPanel.Margin = new Padding(0);
             settingMainPanel.Name = "settingMainPanel";
-            settingMainPanel.Size = new Size(1536, 561);
+            settingMainPanel.Size = new Size(1536, 708);
             settingMainPanel.TabIndex = 4;
             // 
             // settingGridView
@@ -1387,9 +1440,9 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            settingGridView.MasterTemplate.ViewDefinition = tableViewDefinition6;
+            settingGridView.MasterTemplate.ViewDefinition = tableViewDefinition12;
             settingGridView.Name = "settingGridView";
-            settingGridView.Size = new Size(936, 561);
+            settingGridView.Size = new Size(936, 708);
             settingGridView.TabIndex = 5;
             // 
             // settingLeftListView
@@ -1401,7 +1454,7 @@ namespace SchoolManagement.UI
             settingLeftListView.Location = new Point(0, 0);
             settingLeftListView.Margin = new Padding(0);
             settingLeftListView.Name = "settingLeftListView";
-            settingLeftListView.Size = new Size(300, 561);
+            settingLeftListView.Size = new Size(300, 708);
             settingLeftListView.TabIndex = 1;
             // 
             // settingInfoRightPanel
@@ -1410,7 +1463,7 @@ namespace SchoolManagement.UI
             settingInfoRightPanel.Location = new Point(1236, 0);
             settingInfoRightPanel.Margin = new Padding(4);
             settingInfoRightPanel.Name = "settingInfoRightPanel";
-            settingInfoRightPanel.Size = new Size(300, 561);
+            settingInfoRightPanel.Size = new Size(300, 708);
             settingInfoRightPanel.TabIndex = 3;
             // 
             // settingNavigationPanel
@@ -1489,7 +1542,7 @@ namespace SchoolManagement.UI
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1548, 815);
+            ClientSize = new Size(1548, 817);
             Controls.Add(mainPageView);
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
@@ -1561,7 +1614,11 @@ namespace SchoolManagement.UI
             disciplineMainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)disciplineGridView.MasterTemplate).EndInit();
             ((System.ComponentModel.ISupportInitialize)disciplineGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)disciplineLeftPanel).EndInit();
+            disciplineLeftPanel.ResumeLayout(false);
+            disciplineLeftPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)disciplineLeftListView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)disciplineSearchDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)disciplineNavigationPanel).EndInit();
             disciplineNavigationPanel.ResumeLayout(false);
             disciplineNavigationPanel.PerformLayout();
@@ -1584,6 +1641,8 @@ namespace SchoolManagement.UI
             ((System.ComponentModel.ISupportInitialize)studentNoteNavigationPanel).EndInit();
             studentNoteNavigationPanel.ResumeLayout(false);
             studentNoteNavigationPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)studentNoteGroupDropDownList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)studentNoteGroupLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteRoomDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteRoomLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)studentNoteAddButton).EndInit();
@@ -1711,7 +1770,6 @@ namespace SchoolManagement.UI
         private RadPanel disciplineEmptyPanel;
         private RadPanel disciplineMainPanel;
         private RadGridView disciplineGridView;
-        private RadListView disciplineLeftListView;
         private RadPanel studentNoteNavigationPanel;
         private RadDropDownList studentNoteSchoolYearDropDownList;
         private RadLabel studentNoteSchoolYearLabel;
@@ -1728,11 +1786,11 @@ namespace SchoolManagement.UI
         private RadDropDownButton studentNoteAddButton;
         private RadDropDownList studentNoteRoomDropDownList;
         private RadLabel studentNoteRoomLabel;
-        private RadMenuItem studentNoteAddNoteMenuItem;
-        private RadMenuItem studentNoteAddNoteListMenuItem;
-        private RadMenuItem studentNoteImportNoteMenuItem;
-        private RadMenuSeparatorItem studentNoteMenuSeparatorItem;
-        private RadMenuItem studentNoteAddCommentMenuItem;
+        private RadMenuItem studentNoteAddNoteMenu;
+        private RadMenuItem studentNoteAddNotesMenu;
+        private RadMenuItem studentNoteImportNoteMenu;
+        private RadMenuSeparatorItem studentNoteMenuSeparator;
+        private RadMenuItem studentNoteAddCommentMenu;
         private RadPanel reportNavigationPanel;
         private RadDropDownList reportSchoolYearDropDownList;
         private RadLabel reportSchoolYearLabel;
@@ -1770,7 +1828,12 @@ namespace SchoolManagement.UI
         private CustomControls.DateNavigator timeTableDateNavigator;
         private RadListView settingLeftListView;
         private RadPanel timeTableLeftPanel;
+        private RadPanel disciplineLeftPanel;
         private RadListView timeTableLeftListView;
         private RadDropDownList timeTableSearchDropDownList;
+        private RadDropDownList disciplineSearchDropDownList;
+        private RadListView disciplineLeftListView;
+        private RadDropDownList studentNoteGroupDropDownList;
+        private RadLabel studentNoteGroupLabel;
     }
 }

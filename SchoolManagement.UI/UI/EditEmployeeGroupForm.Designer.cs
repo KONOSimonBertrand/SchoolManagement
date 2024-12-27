@@ -43,6 +43,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
             // editPanel
@@ -115,6 +116,7 @@
             // EditEmployeeGroupForm
             // 
             AcceptButton = saveButton;
+            AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(427, 146);
@@ -123,6 +125,8 @@
             Controls.Add(saveButton);
             Controls.Add(editPanel);
             Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditEmployeeGroupForm";
             Text = "EditEmployeeGroupForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
@@ -133,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
 

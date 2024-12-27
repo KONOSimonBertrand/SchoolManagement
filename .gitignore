@@ -1,0 +1,6 @@
+.idea
+.vs
+published
+**/bin
+**/obj
+*.DotSettings.user

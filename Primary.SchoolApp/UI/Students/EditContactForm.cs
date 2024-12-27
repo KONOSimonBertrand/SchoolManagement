@@ -4,7 +4,6 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System.Linq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telerik.WinControls.UI;

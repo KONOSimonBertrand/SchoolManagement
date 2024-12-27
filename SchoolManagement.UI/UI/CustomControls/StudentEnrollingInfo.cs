@@ -1,8 +1,5 @@
 ﻿
-using MediaFoundation;
 using SchoolManagement.UI.Localization;
-using SchoolManagement.UI.Utilities;
-using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -54,6 +51,8 @@ namespace SchoolManagement.UI.CustomControls
 
         private void InitLanguage()
         {
+            this.roomLabel.Text =Language.labelRoom;
+            this.enrollingDateLabel.Text=Language.labelEnrollingDate;
             this.BirthdayLabel.Text = Language.labelBirthDate;
             this.birthPlaceLabel.Text = Language.labelBirthPlace;
             this.idCardLabel.Text = Language.labelIdCard;

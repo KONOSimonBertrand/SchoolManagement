@@ -2,6 +2,7 @@
 
 using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -43,7 +44,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<IList<CashFlowType>> GetAsynList()
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = "SELECT * FROM CashFlowTypes ;";
+            string query = "SELECT * FROM CashFlowTypes ORDER BY Sequence ;";
             var result = connection.Query<CashFlowType>(query).ToList();
             await Task.Delay(0);
             return result;

@@ -17,18 +17,8 @@ namespace SchoolManagement.Core.Model
         public double MinNote {  get; set; }
         public double MaxNote { get; set; }
         public string? Domain {  get; set; }
-        public string DefaultName {
-            get {
-                return FrenchName + "/" + EnglishName;
-            }
-        }
-        public string DefaultDescription
-        {
-            get
-            {
-                return FrenchDescription + "/" + EnglishDescription;
-            }
-        }
+        
+        
         public override bool Equals(object? obj)
         {
             if (obj is not RatingSystem other) return false;
@@ -38,7 +28,7 @@ namespace SchoolManagement.Core.Model
         {
             return this.Id;
         }
-        public override string ToString() => DefaultName;
+        public override string ToString() => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ?EnglishName:FrenchName;
     }
 }
 

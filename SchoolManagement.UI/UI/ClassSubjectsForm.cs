@@ -22,7 +22,11 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitLanguage();
+            
         }
+
+        
+
         private void InitComponent()
         {
             this.addSubjectCommandBarButton.ToolTipText = "Cliquer ici pour ajouter une nouvelle matière";

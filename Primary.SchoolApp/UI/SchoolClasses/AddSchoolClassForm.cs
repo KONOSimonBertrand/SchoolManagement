@@ -66,7 +66,10 @@ namespace Primary.SchoolApp.UI
                     schoolClass.Name = NameTextBox.Text;
                     schoolClass.Group = GroupDropDownList.SelectedItem.DataBoundItem as SchoolGroup;
                     schoolClass.GroupId = schoolClass.Group.Id;
-                    schoolClass.BookTypeId = (int)BookTypeDropDownList.SelectedValue;
+                    schoolClass.DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue;
+                    schoolClass.NoteIsTruncate= bool.Parse(IsTruncateDropDownList.SelectedValue.ToString());
+                    schoolClass.ReportCardModel=int.Parse(ReportCardDropDownList.SelectedValue.ToString());
+                    schoolClass.AverageFormula=int.Parse(AverageFormulaDropDownList.SelectedValue.ToString());  
                     schoolClass.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                     bool isDone = schoolClassService.CreateSchoolClass(schoolClass).Result;
                     if (isDone == true)

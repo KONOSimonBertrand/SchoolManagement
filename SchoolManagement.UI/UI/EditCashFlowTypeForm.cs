@@ -27,7 +27,7 @@ namespace SchoolManagement.UI
         {
             this.descriptionLabel.Text = Language.labelDescription;
             this.categoryLabel.Text = Language.labelCategory;
-            this.domainLabel.Text=Language.labelDomain;
+            this.domainLabel.Text=Language.LabelDomain;
             this.nameLabel.Text = Language.labelDesignation;
             this.sequenceLabel.Text= Language.labelSequence;
             this.saveButton.Text= Language.labelSave;
@@ -125,15 +125,16 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            RadListDataItem scItem = new RadListDataItem("Frais de scolarité", "FS");
-            RadListDataItem stItem = new RadListDataItem("Abonnement", "AB");
-            RadListDataItem saItem = new RadListDataItem("Salaire", "SA");
-            RadListDataItem deItem = new RadListDataItem("Dépense", "DE");
-            RadListDataItem apItem = new RadListDataItem("Approvisionnement", "AP");
+            var scItemText = Language.labelSchoolingFee;
+            var stItemText = Language.labelSubscription;
+            var deItemText = Language.LabelExpense;
+            var apItemText = Language.LabelSupply;
+            RadListDataItem scItem = new (scItemText, "FS");
+            RadListDataItem stItem = new (stItemText, "AB");
+            RadListDataItem deItem = new (deItemText, "DE");
+            RadListDataItem apItem = new (apItemText, "AP");
             categoryDropDownList.Items.Add(scItem);
             categoryDropDownList.Items.Add(stItem);
-            categoryDropDownList.Items.Add(saItem);
             categoryDropDownList.Items.Add(deItem);
             categoryDropDownList.Items.Add(apItem);
             this.errorLabel.ForeColor = Color.Red;

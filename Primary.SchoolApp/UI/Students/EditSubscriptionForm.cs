@@ -1,12 +1,12 @@
 ﻿
 using Primary.SchoolApp.Services;
-using SchoolManagement.Application.Subscriptions;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System.Collections.Generic;
 using SchoolManagement.UI.Localization;
 using System.Linq;
 using System;
+using Primary.SchoolApp.Utilities;
 
 namespace Primary.SchoolApp.UI
 {
@@ -40,19 +40,20 @@ namespace Primary.SchoolApp.UI
             {
                 if (this.StudentDropDownList.SelectedItem.DataBoundItem is Student student)
                 {
-                    this.ClassTextBox.Text = selectedSubscription.Enrolling.SchoolClass.Name;
-                    this.SchoolYearTextBox.Text = selectedSubscription.Enrolling.SchoolYear.Name;
+                    var enrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.StudentId == student.Id).AsStudentEnrolling();
+                    this.ClassTextBox.Text = enrolling.SchoolClass.Name;
+                    this.SchoolYearTextBox.Text = Program.CurrentSchoolYear.Name;
                 }
             }
         }
 
-        internal void Init(Subscription subscription)
+        internal void InitStartUp(Subscription subscription)
         {
            selectedSubscription = subscription;
             if (selectedSubscription != null)
             {
                 this.StudentDropDownList.DataSource = new List<Student>() {
-                selectedSubscription.Enrolling.Student
+                selectedSubscription.Student
                 };
                 this.SubscriptionDropDownList.DataSource = new List<CashFlowType>()
                 {
@@ -61,7 +62,7 @@ namespace Primary.SchoolApp.UI
                 var fee = selectedFeeList.FirstOrDefault(x => x.CashFlowTypeId == selectedSubscription.CashFlowType.Id);
                 this.FeeTextBox.Text= selectedSubscription.Amount.ToString();
                 this.DurationTextBox.Text= fee.Duration.ToString();
-                this.StartDateTimePicker.Value=selectedSubscription.Date;
+                this.StartDateTimePicker.Value=selectedSubscription.StartDate;
                 this.EndDateTimePicker.Value=selectedSubscription.EndDate;
                 this.TransactionIdTextBox.Text=selectedSubscription.TransactionId;
                 this.TransactionDateTimePicker.Value=selectedSubscription.TransactionDate;
@@ -78,7 +79,7 @@ namespace Primary.SchoolApp.UI
                 var paymentMean = this.PaymentMeanDropDownList.SelectedItem.DataBoundItem as PaymentMean;
                 selectedSubscription.PaymentMean = paymentMean;
                 selectedSubscription.PaymentMeanId = paymentMean.Id;
-                selectedSubscription.Date = this.StartDateTimePicker.Value;
+                selectedSubscription.StartDate = this.StartDateTimePicker.Value;
                 selectedSubscription.Discount = double.Parse(this.DiscountTextBox.Text);
                 selectedSubscription.EndDate = this.EndDateTimePicker.Value;
                 selectedSubscription.TransactionDate= this.StartDateTimePicker.Value;
@@ -90,7 +91,7 @@ namespace Primary.SchoolApp.UI
                     //enregistrement du log
                     Log logSubscription = new()
                     {
-                        UserAction = $" Mise à jour de  l'abonnement  {selectedSubscription.CashFlowType.Name} de l'élève {selectedSubscription.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                        UserAction = $" Mise à jour de  l'abonnement  {selectedSubscription.CashFlowType.Name} de l'élève {selectedSubscription.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                         UserId = clientApp.UserConnected.Id
                     };
                     logService.CreateLog(logSubscription);

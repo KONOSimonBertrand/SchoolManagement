@@ -502,7 +502,7 @@ namespace Primary.SchoolApp
 
         private void EmployeeSchoolYearDropDownList_SelectedValueChanged(object sender, System.EventArgs e)
         {
-            LoadEnrollingEmployee();
+            //LoadEnrollingEmployee();
         }
         private void EmployeeToggleButton_ToggleStateChanged(object sender, StateChangedEventArgs args)
         {

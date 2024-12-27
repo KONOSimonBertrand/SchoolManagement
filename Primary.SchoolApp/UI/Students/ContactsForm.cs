@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
@@ -13,6 +11,8 @@ using System;
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
 using System.Drawing;
+using Primary.SchoolApp.DTO;
+using System.Collections.Generic;
 
 namespace Primary.SchoolApp.UI
 {
@@ -52,7 +52,7 @@ namespace Primary.SchoolApp.UI
                 age--;
             }
 
-            PersonalInformationLabel.Text = string.Format("{0} ans | {1} | {2}", age.ToString(), enrolling.Student.Sex == "M" ? "Masculin" : "Feminin", enrolling.Student.BirthDate.ToString("dd/MM/yyyy"));
+            PersonalInformationLabel.Text = string.Format("{0} {1} | {2} | {3}", age.ToString(), Language.LabelYearOld.ToLower(), enrolling.Student.Sex == "M" ? Language.LabelMale : Language.LabelFemale, enrolling.Student.BirthDate.ToString("dd/MM/yyyy"));
             string schoolInfo = Language.labelRegisteredOn + " " + enrolling.Date.ToString("dd/MM/yyyy") + " | " + enrolling.SchoolClass.Name + " | " + enrolling.SchoolClass.Group.Name + " | " + enrolling.SchoolYear.Name;
             SchoolInformationLabel.LabelElement.ToolTipText = schoolInfo;
             if (schoolInfo.Length <= 121)
@@ -139,7 +139,7 @@ namespace Primary.SchoolApp.UI
         {
             DataGridView.MasterTemplate.Refresh();
         }
-        // add new discipline
+        // add new contact
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (!Program.CurrentSchoolYear.IsClosed)
@@ -169,8 +169,14 @@ namespace Primary.SchoolApp.UI
         // chargement de la liste des contact dans le datagridview
         private async void LoadContacts(int studentId)
         {
-            selectedEnrolling.Student.ContactList = contactService.GetContactList(studentId).Result;
-            DataGridView.DataSource = selectedEnrolling.Student.ContactList;
+            var contactList = await contactService.GetContactList(studentId);
+            selectedEnrolling.Student.ContactList = contactList;
+            IList<ContactDTO> contactDTOList=new List<ContactDTO>();
+            foreach (var contact in contactList) {
+                contactDTOList.Add(contact.AsContactDTO());
+            }
+
+            DataGridView.DataSource = contactDTOList;
             DataGridView.BestFitColumns();
             await Task.Delay(0);
         }
@@ -192,7 +198,7 @@ namespace Primary.SchoolApp.UI
             GridViewTextBoxColumn emailColumn = new("Email");
             GridViewTextBoxColumn jobColumn = new("Job");
             GridViewTextBoxColumn idCardColumn = new("IdCard");
-            GridViewTextBoxColumn relationColumn = new("Relationship");
+            GridViewTextBoxColumn relationColumn = new("RelationshipName");
 
             contactColumn.HeaderText = Language.labelContact;
             relationColumn.HeaderText = Language.labelRelationship;
@@ -235,19 +241,19 @@ namespace Primary.SchoolApp.UI
         //suppression
         private void DeleteMenu_Click(object sender, EventArgs e)
         {
-            if (DataGridView.CurrentRow.DataBoundItem is Contact contact)
+            if (DataGridView.CurrentRow.DataBoundItem is ContactDTO contactDTO)
             {
                 DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmDelete, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    var isDone = contactService.DeleteContact(contact.Id).Result;
+                    var isDone = contactService.DeleteContact(contactDTO.Id).Result;
                     if (isDone)
                     {
-                        LoadContacts(selectedEnrolling.Id);
+                        LoadContacts(selectedEnrolling.StudentId);
                         //enregistrement du log
                         Log logSubscription = new()
                         {
-                            UserAction = $"Suppression du contact  {contact.Name} de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                            UserAction = $"Suppression du contact  {contactDTO.Name} de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(logSubscription);
@@ -261,22 +267,22 @@ namespace Primary.SchoolApp.UI
             }
         }
 
-        // edit discipline
+        // edit contact
         private void EditMenu_Click(object sender, EventArgs e)
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (DataGridView.CurrentRow.DataBoundItem is Contact contact)
+                if (DataGridView.CurrentRow.DataBoundItem is ContactDTO contactDTO)
                 {
                     if (!Program.CurrentSchoolYear.IsClosed)
                     {
                         var form = Program.ServiceProvider.GetService<EditContactForm>();
                         form.Text = Language.labelUpdate + ":.." + Language.labelContact;
                         form.Icon = this.Icon;
-                        form.Init(contact);
+                        form.Init(contactDTO.AsContact());
                         if (form.ShowDialog(this) == DialogResult.OK)
                         {
-                            LoadContacts(contact.StudentId);
+                            LoadContacts(selectedEnrolling.StudentId);
                         }
                     }
                     else

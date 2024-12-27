@@ -32,7 +32,7 @@ namespace SchoolManagement.UI
             this.nameEnLabel.Text = Language.labelEnglishDescription;
             this.maxNoteLabel.Text=Language.labelMaxNote;
             this.minNoteLabel.Text=Language.labelMinNote;
-            this.domainLabel.Text = Language.labelDomain;
+            this.domainLabel.Text = Language.LabelDomain;
             this.descriptionFrLabel.Text = Language.labelFrenchDescription;
             this.descriptionEnLabel.Text = Language.labelEnglishDescription;
             this.saveButton.Text = Language.labelSave;
@@ -41,7 +41,7 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;
-            this.nameFrDropDownList.SelectedIndexChanged += NameDropDownListSelectedIndexChanged;
+            //this.nameFrDropDownList.SelectedIndexChanged += NameDropDownListSelectedIndexChanged;
             minNoteTextBox.TextChanging += TxtChanging;
             maxNoteTextBox.TextChanging += TxtChanging;
         }

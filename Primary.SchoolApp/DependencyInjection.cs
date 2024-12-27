@@ -83,6 +83,20 @@ namespace Primary.SchoolApp
             services.AddTransient<ContactsForm>();
             services.AddTransient<AddContactForm>();
             services.AddTransient<EditContactForm>();
+            services.AddTransient<AddMedicalRecordForm>();
+            services.AddTransient<EditMedicalRecordForm>();
+            services.AddTransient<MedicalRecordsForm>();
+            services.AddTransient<EditStatusForm>();
+            services.AddTransient<EditStudentClassForm>();
+            services.AddTransient<EditBadgeForm>();
+            services.AddTransient<StartForm>();
+            services.AddTransient<AddOtherCashFlowForm>();
+            services.AddTransient<AddStudentNoteForm>();
+            services.AddTransient<AddStudentNotesForm>();
+            services.AddTransient<EditStudentNoteForm>();
+            services.AddTransient<EvaluationSessionStateForm>();
+            services.AddTransient<LocalStudentNoteService>();
+            services.AddTransient<ReportCardService>();
             return services;
         }
     }

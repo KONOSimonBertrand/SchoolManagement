@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             descriptionSeparator = new Telerik.WinControls.UI.RadSeparator();
             descriptionTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -46,9 +47,9 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
-            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)descriptionSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)descriptionTextBox).BeginInit();
@@ -66,7 +67,6 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -91,8 +91,17 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(617, 277);
+            editPanel.Size = new Size(621, 277);
             editPanel.TabIndex = 28;
+            // 
+            // sequenceSeparator
+            // 
+            sequenceSeparator.Location = new Point(466, 128);
+            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
+            sequenceSeparator.Name = "sequenceSeparator";
+            sequenceSeparator.Size = new Size(136, 4);
+            sequenceSeparator.TabIndex = 93;
+            sequenceSeparator.TabStop = false;
             // 
             // sequenceSpinEditor
             // 
@@ -103,7 +112,7 @@
             // 
             // 
             sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
-            sequenceSpinEditor.Size = new Size(136, 30);
+            sequenceSpinEditor.Size = new Size(136, 36);
             sequenceSpinEditor.TabIndex = 92;
             // 
             // descriptionSeparator
@@ -154,7 +163,7 @@
             domainDropDownList.Location = new Point(307, 97);
             domainDropDownList.Margin = new Padding(4, 5, 4, 5);
             domainDropDownList.Name = "domainDropDownList";
-            domainDropDownList.Size = new Size(152, 30);
+            domainDropDownList.Size = new Size(152, 36);
             domainDropDownList.TabIndex = 2;
             ((Telerik.WinControls.UI.RadDropDownListElement)domainDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)domainDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -202,7 +211,7 @@
             categoryDropDownList.Location = new Point(4, 97);
             categoryDropDownList.Margin = new Padding(4, 5, 4, 5);
             categoryDropDownList.Name = "categoryDropDownList";
-            categoryDropDownList.Size = new Size(295, 30);
+            categoryDropDownList.Size = new Size(295, 36);
             categoryDropDownList.TabIndex = 1;
             ((Telerik.WinControls.UI.RadDropDownListElement)categoryDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)categoryDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -246,7 +255,7 @@
             nameTextBox.Location = new Point(4, 30);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new Size(597, 30);
+            nameTextBox.Size = new Size(597, 36);
             nameTextBox.TabIndex = 0;
             // 
             // errorLabel
@@ -263,7 +272,7 @@
             closeButton.Location = new Point(485, 287);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(117, 30);
+            closeButton.Size = new Size(117, 36);
             closeButton.TabIndex = 6;
             closeButton.Text = "Annuler";
             // 
@@ -272,18 +281,9 @@
             saveButton.Location = new Point(360, 287);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(117, 30);
+            saveButton.Size = new Size(117, 36);
             saveButton.TabIndex = 5;
             saveButton.Text = "Enregistrer";
-            // 
-            // sequenceSeparator
-            // 
-            sequenceSeparator.Location = new Point(466, 128);
-            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
-            sequenceSeparator.Name = "sequenceSeparator";
-            sequenceSeparator.Size = new Size(136, 4);
-            sequenceSeparator.TabIndex = 93;
-            sequenceSeparator.TabStop = false;
             // 
             // EditCashFlowTypeForm
             // 
@@ -291,16 +291,19 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(617, 350);
+            ClientSize = new Size(621, 352);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditCashFlowTypeForm";
-            Text = "EditCashFlowTypeForm";
+            Text = "Edit CashFlowType";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)descriptionSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)descriptionTextBox).EndInit();
@@ -318,7 +321,6 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }

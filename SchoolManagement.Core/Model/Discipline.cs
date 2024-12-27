@@ -10,10 +10,12 @@ namespace SchoolManagement.Core.Model
         public string Reason { get; set; }
         public double Duration {  get; set; }
         public int EvaluationId {  get; set; }
-        public int EnrollingId {  get; set; }
+        public int StudentId {  get; set; }
+        public int SchoolYearId { get; set; }
         public virtual DisciplineSubject Subject { get; set; }
         public virtual EvaluationSession Evaluation {  get; set; }
-        public virtual StudentEnrolling Enrolling { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual SchoolYear SchoolYear { get; set; }
 
         public override bool Equals(object? obj)
         {
@@ -26,7 +28,7 @@ namespace SchoolManagement.Core.Model
         }
         public override string ToString()
         {
-            return $"{Date} - {Evaluation.DefaultName} - {Reason}";
+            return $"{Date} - {Evaluation.ToString()} - {Reason}";
         }
 
     }

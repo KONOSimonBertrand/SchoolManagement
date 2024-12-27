@@ -160,7 +160,7 @@ namespace SchoolManagement.UI
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
         }
 

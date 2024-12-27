@@ -2,11 +2,29 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Reporting\Administration\BadgeReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\Administration\SchoolCertificateReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\CashFlow\PaymentReceiptA4Report.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\CashFlow\PaymentSummaryReport.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\ClassNoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\Detail1NoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\PrimaryEvaluationReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\CashFlowTypes\AddOtherCashFlowForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\CustomControls\DisciplineSubjectInfo.cs">
       <SubType>UserControl</SubType>
@@ -17,16 +35,25 @@
     <Compile Update="UI\Diciplines\EditDisciplineSubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\EvaluationSessions\EvaluationSessionStateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.CashFlow.Tab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\MainForm.Discipline.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\MainForm.Employee.Tab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.SettingsTab.cs">
+    <Compile Update="UI\MainForm.Settings.Tab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Reporting\NoteReport\ClassNoteReportEmpty.cs">
@@ -152,6 +179,9 @@
     <Compile Update="UI\Jobs\EditJobForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\MainForm.StudentNoteTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\MainForm.TimeTable.Tab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,16 +236,28 @@
     <Compile Update="UI\SchoolYears\EditSchoolYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\StartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\AddContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\AddDisciplineForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\AddMedicalRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\AddStudentEnrollingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\AddStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddStudentNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddStudentNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\AddSubscriptionForm.cs">
@@ -233,10 +275,22 @@
     <Compile Update="UI\Students\DisciplinesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\EditBadgeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\EditContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\EditDisciplineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditMedicalRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\EditStudentClassForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\EditStudentEnrollingForm.cs">
@@ -245,10 +299,16 @@
     <Compile Update="UI\Students\EditStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\EditStudentNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\EditSubscriptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\EditTuitionDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\MedicalRecordsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\SubscriptionsForm.cs">

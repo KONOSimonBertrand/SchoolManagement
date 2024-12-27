@@ -2,9 +2,7 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Relea
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net6.0\SchoolManagement.Application.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net6.0\SchoolManagement.Application.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net6.0\SchoolManagement.Core.dll
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net6.0\SchoolManagement.Infrastructure.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net6.0\SchoolManagement.Core.pdb
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\bin\Release\net6.0\SchoolManagement.Infrastructure.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net6.0\SchoolManagement.Application.csproj.AssemblyReference.cache
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net6.0\SchoolManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\obj\Release\net6.0\SchoolManagement.Application.AssemblyInfoInputs.cache

@@ -2,6 +2,7 @@
 
 using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -41,7 +42,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<IList<PaymentMean>> GetAsyncList()
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = "SELECT * FROM PaymentMeans ;";
+            string query = "SELECT * FROM PaymentMeans ORDER BY Sequence ;";
             var result = connection.Query<PaymentMean>(query).ToList();
             await Task.Delay(0);
             return result;

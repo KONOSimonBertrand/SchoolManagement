@@ -51,7 +51,7 @@ namespace Primary.SchoolApp.UI
                     evaluationType.FrenchName = FrenchNameTextBox.Text;
                     evaluationType.EnglishName = EnglishNameTextBox.Text;
                     evaluationType.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
-                    var isDone = evaluationTypeService.UpdateEvaluationSession(evaluationType).Result;
+                    var isDone = evaluationTypeService.UpdateEvaluationSessionAsync(evaluationType).Result;
                     if (isDone)
                     {
                         Log log = new()
@@ -80,7 +80,7 @@ namespace Primary.SchoolApp.UI
             if (evaluationTypeNameTracker == frenchName) return false;
             var item = Program.EvaluationSessionList.FirstOrDefault(x => x.FrenchName == frenchName);
             if (item != null) return true;
-            return evaluationTypeService.GetEvaluationSession(frenchName).Result != null;
+            return evaluationTypeService.GetEvaluationSessionAsync(frenchName).Result != null;
         }
     }
 }

@@ -3,7 +3,8 @@
 using SchoolManagement.Core.Model;
 using Dapper;
 using SchoolManagement.Infrastructure.DataBase;
-namespace SchoolManagement.Infrastructure.Repositories.TimeTables
+using SchoolManagement.Core.Repositories;
+namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperTimeTableServiceRepository : ITimeTableServiceRepository
     {

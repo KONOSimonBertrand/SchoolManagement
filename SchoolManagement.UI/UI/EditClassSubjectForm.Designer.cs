@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
-            groupDropDownList = new Telerik.WinControls.UI.RadDropDownList();
-            subjectDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             sectionSeparator = new Telerik.WinControls.UI.RadSeparator();
             sectionDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             sectionLabel = new Telerik.WinControls.UI.RadLabel();
             groupLabel = new Telerik.WinControls.UI.RadLabel();
             groupSeparator = new Telerik.WinControls.UI.RadSeparator();
+            groupDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             addGroupButton = new Telerik.WinControls.UI.RadButton();
             noteOnSeparator = new Telerik.WinControls.UI.RadSeparator();
             coefSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -46,6 +45,7 @@
             sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             subjectSeparator = new Telerik.WinControls.UI.RadSeparator();
             addSubjectButton = new Telerik.WinControls.UI.RadButton();
+            subjectDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             sequenceLabel = new Telerik.WinControls.UI.RadLabel();
             subjectLabel = new Telerik.WinControls.UI.RadLabel();
@@ -53,14 +53,13 @@
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)groupDropDownList).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)subjectDropDownList).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sectionSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sectionDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sectionLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)groupLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)groupSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)groupDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addGroupButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)noteOnSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)coefSeparator).BeginInit();
@@ -71,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)subjectSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addSubjectButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)subjectDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)subjectLabel).BeginInit();
@@ -82,51 +82,6 @@
             // 
             // editPanel
             // 
-            // 
-            // groupDropDownList
-            // 
-            groupDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            groupDropDownList.DropDownAnimationEnabled = true;
-            groupDropDownList.DropDownHeight = 199;
-            groupDropDownList.ItemHeight = 30;
-            groupDropDownList.Location = new Point(421, 34);
-            groupDropDownList.Margin = new Padding(5, 6, 5, 6);
-            groupDropDownList.Name = "groupDropDownList";
-            // 
-            // 
-            // 
-            groupDropDownList.RootElement.StretchVertically = true;
-            groupDropDownList.Size = new Size(374, 30);
-            groupDropDownList.TabIndex = 2;
-            ((Telerik.WinControls.UI.RadDropDownListElement)groupDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)groupDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)groupDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
-            ((Telerik.WinControls.UI.RadTextBoxItem)groupDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)groupDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)groupDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
-            ((Telerik.WinControls.Primitives.BorderPrimitive)groupDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            // 
-            // subjectDropDownList
-            // 
-            subjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            subjectDropDownList.DropDownAnimationEnabled = true;
-            subjectDropDownList.DropDownHeight = 159;
-            subjectDropDownList.Location = new Point(3, 34);
-            subjectDropDownList.Margin = new Padding(4, 5, 4, 5);
-            subjectDropDownList.Name = "subjectDropDownList";
-            // 
-            // 
-            // 
-            subjectDropDownList.RootElement.StretchVertically = true;
-            subjectDropDownList.Size = new Size(364, 30);
-            subjectDropDownList.TabIndex = 0;
-            ((Telerik.WinControls.UI.RadDropDownListElement)subjectDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)subjectDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)subjectDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
-            ((Telerik.WinControls.UI.RadTextBoxItem)subjectDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)subjectDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)subjectDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
-            ((Telerik.WinControls.Primitives.BorderPrimitive)subjectDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
             editPanel.Controls.Add(sectionSeparator);
             editPanel.Controls.Add(sectionDropDownList);
             editPanel.Controls.Add(sectionLabel);
@@ -173,7 +128,7 @@
             sectionDropDownList.Margin = new Padding(5, 6, 5, 6);
             sectionDropDownList.MinimumSize = new Size(0, 30);
             sectionDropDownList.Name = "sectionDropDownList";
-            sectionDropDownList.Size = new Size(213, 30);
+            sectionDropDownList.Size = new Size(213, 35);
             sectionDropDownList.TabIndex = 7;
             ((Telerik.WinControls.UI.RadDropDownListElement)sectionDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)sectionDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -211,12 +166,35 @@
             groupSeparator.TabIndex = 118;
             groupSeparator.TabStop = false;
             // 
+            // groupDropDownList
+            // 
+            groupDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            groupDropDownList.DropDownAnimationEnabled = true;
+            groupDropDownList.DropDownHeight = 199;
+            groupDropDownList.ItemHeight = 30;
+            groupDropDownList.Location = new Point(421, 34);
+            groupDropDownList.Margin = new Padding(5, 6, 5, 6);
+            groupDropDownList.Name = "groupDropDownList";
+            // 
+            // 
+            // 
+            groupDropDownList.RootElement.StretchVertically = true;
+            groupDropDownList.Size = new Size(374, 30);
+            groupDropDownList.TabIndex = 2;
+            ((Telerik.WinControls.UI.RadDropDownListElement)groupDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)groupDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)groupDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+            ((Telerik.WinControls.UI.RadTextBoxItem)groupDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)groupDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)groupDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
+            ((Telerik.WinControls.Primitives.BorderPrimitive)groupDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
             // addGroupButton
             // 
             addGroupButton.Location = new Point(798, 34);
             addGroupButton.Margin = new Padding(5, 6, 5, 6);
             addGroupButton.Name = "addGroupButton";
-            addGroupButton.Size = new Size(20, 30);
+            addGroupButton.Size = new Size(20, 36);
             addGroupButton.TabIndex = 3;
             // 
             // noteOnSeparator
@@ -243,7 +221,7 @@
             noteOnTextBox.Location = new Point(122, 101);
             noteOnTextBox.Margin = new Padding(4, 5, 4, 5);
             noteOnTextBox.Name = "noteOnTextBox";
-            noteOnTextBox.Size = new Size(112, 30);
+            noteOnTextBox.Size = new Size(112, 36);
             noteOnTextBox.TabIndex = 5;
             noteOnTextBox.Text = "20";
             // 
@@ -273,7 +251,7 @@
             coefTextBox.Location = new Point(2, 101);
             coefTextBox.Margin = new Padding(4, 5, 4, 5);
             coefTextBox.Name = "coefTextBox";
-            coefTextBox.Size = new Size(112, 30);
+            coefTextBox.Size = new Size(112, 36);
             coefTextBox.TabIndex = 4;
             coefTextBox.Text = "1";
             // 
@@ -301,8 +279,30 @@
             addSubjectButton.Location = new Point(369, 34);
             addSubjectButton.Margin = new Padding(4, 5, 4, 5);
             addSubjectButton.Name = "addSubjectButton";
-            addSubjectButton.Size = new Size(20, 30);
+            addSubjectButton.Size = new Size(20, 36);
             addSubjectButton.TabIndex = 1;
+            // 
+            // subjectDropDownList
+            // 
+            subjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            subjectDropDownList.DropDownAnimationEnabled = true;
+            subjectDropDownList.DropDownHeight = 159;
+            subjectDropDownList.Location = new Point(3, 34);
+            subjectDropDownList.Margin = new Padding(4, 5, 4, 5);
+            subjectDropDownList.Name = "subjectDropDownList";
+            // 
+            // 
+            // 
+            subjectDropDownList.RootElement.StretchVertically = true;
+            subjectDropDownList.Size = new Size(364, 30);
+            subjectDropDownList.TabIndex = 0;
+            ((Telerik.WinControls.UI.RadDropDownListElement)subjectDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)subjectDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)subjectDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+            ((Telerik.WinControls.UI.RadTextBoxItem)subjectDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)subjectDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)subjectDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
+            ((Telerik.WinControls.Primitives.BorderPrimitive)subjectDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // sequenceSpinEditor
             // 
@@ -313,7 +313,7 @@
             // 
             // 
             sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
-            sequenceSpinEditor.Size = new Size(104, 30);
+            sequenceSpinEditor.Size = new Size(104, 36);
             sequenceSpinEditor.TabIndex = 6;
             // 
             // sequenceLabel
@@ -353,7 +353,7 @@
             closeButton.Location = new Point(725, 158);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(117, 30);
+            closeButton.Size = new Size(117, 36);
             closeButton.TabIndex = 9;
             closeButton.Text = "Annuler";
             // 
@@ -362,7 +362,7 @@
             saveButton.Location = new Point(600, 158);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(117, 30);
+            saveButton.Size = new Size(117, 36);
             saveButton.TabIndex = 8;
             saveButton.Text = "Enregistrer";
             // 
@@ -378,11 +378,12 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditClassSubjectForm";
             Text = "EditSubjectClassForm";
-            ((System.ComponentModel.ISupportInitialize)groupDropDownList).EndInit();
-            ((System.ComponentModel.ISupportInitialize)subjectDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
@@ -391,6 +392,7 @@
             ((System.ComponentModel.ISupportInitialize)sectionLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)groupLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)groupSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)groupDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)addGroupButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)noteOnSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)coefSeparator).EndInit();
@@ -401,6 +403,7 @@
             ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)subjectSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)addSubjectButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)subjectDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)subjectLabel).EndInit();

@@ -2,10 +2,31 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Reporting\BadgeReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\ClassNoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\DisciplinarySheetReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\Detail1NoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\PrimaryEvaluationReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\EditBadgeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Reporting\PaymentReceiptA4Report.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\PaymentSummaryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\SchoolCertificateReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="UI\ClassSubjectsForm.cs">
@@ -77,6 +98,18 @@
     <Compile Update="UI\EditContactForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\EditMedicalRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditOtherCashFlowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EvaluationSessionStateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditStudentClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Student\EditDisciplineForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,10 +179,19 @@
     <Compile Update="UI\Employee\EditEmployeeNoteForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Student\EditStatusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Student\EditStudentEnrollingForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Student\EditStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditStudentNoteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditStudentNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Student\StudentItemsForm.cs">
@@ -206,5 +248,16 @@
     <Compile Update="UI\User\UserRoomsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Localization\Language.en-GB.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Language.fr-FR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Language.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

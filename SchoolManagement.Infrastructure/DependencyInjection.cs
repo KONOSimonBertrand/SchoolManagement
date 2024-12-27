@@ -2,8 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SchoolManagement.Infrastructure.DataBase;
 using SchoolManagement.Infrastructure.Repositories;
-using SchoolManagement.Infrastructure.Repositories.Students;
-using SchoolManagement.Infrastructure.Repositories.TimeTables;
+using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Infrastructure
 {
@@ -39,6 +38,8 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<ISubscriptionRepository, DapperSubscriptionRepository>();
             services.AddTransient<IDisciplineRepository, DapperDisciplineRepository>();
             services.AddTransient<IContactRepository, DapperContactRepository>();
+            services.AddTransient<IMedicalRepository, DapperMedicalRepository>();
+            services.AddTransient<IStudentNoteRepository, DapperStudentNoteRepository>();
             services.AddDbContext<AppDbContext>();
             services.AddLogging(builder => builder.AddConsole());
             return services;

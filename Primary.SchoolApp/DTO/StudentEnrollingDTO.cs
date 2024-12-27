@@ -4,7 +4,6 @@ using MediaFoundation;
 using SchoolManagement.Core.Model;
 using System.Threading;
 using System;
-using Telerik.Reporting;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,6 +87,7 @@ namespace Primary.SchoolApp.DTO
         public List<TuitionDiscount> DiscountList { get;set; }=new List<TuitionDiscount>();
         public List<TuitionPayment> PaymentPayableList { get; set; } =new List<TuitionPayment>();
         public List<TuitionPayment> PaymentList { get; set; } = new List<TuitionPayment>();
+        public List<Subscription> SubscriptionList { get; set; }= new List<Subscription>();
 
     }
 }

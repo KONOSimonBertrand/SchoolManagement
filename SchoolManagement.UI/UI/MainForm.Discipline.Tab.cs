@@ -1,9 +1,19 @@
-﻿using Telerik.WinControls;
+﻿using SchoolManagement.UI.CustomControls;
+using SchoolManagement.UI.Localization;
+using Telerik.WinControls;
+using Telerik.WinControls.UI;
 
 namespace SchoolManagement.UI
 {
     public partial class MainForm
     {
+        public RadDropDownList DisciplineSchoolYearDropDownList { get => disciplineSchoolYearDropDownList; }
+        public SearchTextBox DisciplineSearchTextBox { get => disciplineSearchTextBox; }
+        public RadDropDownList DisciplineSearchDropDownList { get => disciplineSearchDropDownList; }
+        public RadButton DisciplineAddButton { get => disciplineAddButton; }
+        public RadButton DisciplineExportToExcelButton { get=> disciplineExportToExcelButton; }
+        public RadGridView DisciplineGridView { get => disciplineGridView; }
+        public RadListView DisciplineLeftListView {  get => disciplineLeftListView; }
         private void InitDisciplinePage()
         {
 
@@ -54,13 +64,14 @@ namespace SchoolManagement.UI
             disciplineMainPanel.BackgroundImageLayout = ImageLayout.Stretch;
             disciplineMainPanel.PanelElement.PanelFill.Visibility = ElementVisibility.Hidden;
 
-
             disciplineExportToExcelButton.ImageAlignment = ContentAlignment.MiddleCenter;
             disciplineExportToExcelButton.TextAlignment = ContentAlignment.MiddleCenter;
 
-            disciplineSearchTextBox.NullText = "Rechercher par élève, motif, objet, période...";
-            disciplineAddButton.ButtonElement.ToolTipText = "Cliquer ici pour ajouter";
-            disciplineExportToExcelButton.ButtonElement.ToolTipText = "Cliquer ici pour exporter les données vers excel";
+            disciplineSearchTextBox.NullText = $"{Language.MessageSearchBy}";
+            disciplineAddButton.ButtonElement.ToolTipText = Language.messageClickToAdd;
+            disciplineExportToExcelButton.ButtonElement.ToolTipText = Language.messageClickToExport;
+            disciplineSearchDropDownList.RootElement.ToolTipText=Language.MessageFindClass;
+            disciplineSearchDropDownList.NullText = Language.MessageFindClass;
         }
     }
 }

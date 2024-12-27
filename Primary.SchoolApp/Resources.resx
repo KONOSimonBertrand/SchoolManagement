@@ -154,6 +154,12 @@
   <data name="add_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\add_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="balance_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\balance_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="balance_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\balance_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cancel_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\cancel_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -265,8 +271,14 @@
   <data name="head_paper_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\head_paper_fr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="heartbeat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\heartbeat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="healthcare_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\healthcare_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="healthcare_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\healthcare_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="healthcare_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\healthcare_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="heartbeat_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\heartbeat_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -450,5 +462,35 @@
   </data>
   <data name="watch_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\watch_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="badge_panel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\badge_panel.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="badge_photo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\badge_photo.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Signature" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\Signature.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Background_load" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\Background_load.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="check_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="facebook" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\facebook.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="website" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\website.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

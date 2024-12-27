@@ -29,21 +29,19 @@ namespace SchoolManagement.UI
 
         private void InitLanguage()
         {
-            this.studentLabel.Text = "<html>" + Language.labelStudent + ":" + "<color=Red>*";
-            classLabel.Text=Language.labelClass;
-            this.dateLabel.Text= "<html> Date:" + "<color=Red>*";
-            this.reasonLabel.Text = "<html>" + Language.labelReason+ ":" + "<color=Red>*";
-            this.subjectLabel.Text = "<html>" + Language.labelDisciplineSubject + ":" + "<color=Red>*";
-            this.durationLabel.Text= "<html>" + Language.labelDuration + ":" + "<color=Red>*";
-            this.evaluationLabel.Text= "<html>" + Language.labelEvaluationSession+ ":" + "<color=Red>*";
+            this.studentLabel.Text =  $"<html>{Language.labelStudent}:<color=Red>*";
+            classLabel.Text=Language.LabelClassroom;
+            this.dateLabel.Text= "<html> Date:<color=Red>*";
+            this.reasonLabel.Text = $"<html>{Language.labelReason}:<color=Red>*";
+            this.subjectLabel.Text = $"<html>{Language.labelDisciplineSubject}:<color=Red>*";
+            this.durationLabel.Text= $"<html>{Language.labelDuration}:<color=Red>*";
+            this.evaluationLabel.Text= $"<html>{Language.labelEvaluationSession}:<color=Red>*";
         }
 
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.durationTextBox.TextChanging += TextChanging;
-
-
         }
         private void CloseButton_Click(object sender, EventArgs e)
         {

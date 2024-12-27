@@ -5,6 +5,7 @@ using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using System.Threading;
+using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
@@ -13,6 +14,7 @@ namespace Primary.SchoolApp.UI
         private readonly ILogService logService;
         private readonly IStudentService studentService;
         private readonly ClientApp clientApp;
+        private int healthState = 0;
         public AddStudentForm(ILogService logService, IStudentService studentService, ClientApp clientApp)
         {
             this.logService = logService;
@@ -37,8 +39,21 @@ namespace Primary.SchoolApp.UI
         {
             SaveButton.Click += SaveButton_Click;
             this.Shown += OnShown;
+            GoodHealthMenuItem.Click += HealthState_Click;
+            MediumHealthMenuItem.Click += HealthState_Click;
+            BadHealthMenuItem.Click += HealthState_Click;
         }
+        private void HealthState_Click(object sender, EventArgs e)
+        {
+            var state = (RadMenuItem)sender;
+            if (state != null)
+            {
+                healthState = int.Parse(state.Tag.ToString());
+                HealthStateSplitButton.Tag = state.Tag;
+                HealthStateSplitButton.Image = state.Image;
+            }
 
+        }
         private void OnShown(object sender, EventArgs e)
         {
             LastNameTextBox.Focus();
@@ -71,7 +86,8 @@ namespace Primary.SchoolApp.UI
                         Address = AddressTextBox.Text,
                         Nationality = NationalityDropDownList.Text,
                         Religion = ReligionDropDownList.Text,
-                        IdCard = IdCardTextBox.Text
+                        IdCard = IdCardTextBox.Text,
+                        Health = healthState
                     };
                     var isDone = studentService.CreateStudentAsync(record).Result;
                     if (isDone == true)

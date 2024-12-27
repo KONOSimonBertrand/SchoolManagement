@@ -115,7 +115,7 @@ namespace Primary.SchoolApp.UI
             {
                 workAge--;
             }
-            PersonalInformationLabel.Text = string.Format("{0} ans | {1} | {2}", age.ToString(), enrolling.Employee.Sex == "M" ? "Masculin" : "Feminin", enrolling.Employee.BirthDate.ToString("dd/MM/yyyy"));
+            PersonalInformationLabel.Text = string.Format("{0} {1} | {2} | {3}", age.ToString(), Language.LabelYearOld.ToLower(), enrolling.Employee.Sex == "M" ? Language.LabelMale : Language.LabelFemale, enrolling.Employee.BirthDate.ToString("dd/MM/yyyy"));
             string schoolInfo = Language.labelHiredOn + " " + enrolling.Employee.HiringDate.ToString("dd/MM/yyyy") + " | " + workAge + " " + Language.labelYearOfService + " | " + enrolling.Job.Name + " | " + enrolling.GroupName + " | " + enrolling.SchoolYear;
             SchoolInformationLabel.LabelElement.ToolTipText = schoolInfo;
             if (schoolInfo.Length <= 121)

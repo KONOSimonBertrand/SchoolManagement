@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.UI;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
@@ -22,12 +23,16 @@ namespace Primary.SchoolApp
         public static IList<SchoolClass> SchoolClassList;
         public static IList<SchoolRoom> SchoolRoomList;
         public static IList<CashFlowType> CashFlowTypeList;
+        public static IList<CashFlow> CashFlowList;
         public static IList<PaymentMean> PaymentMeanList;
         public static IList<SchoolingCost> SchoolingCostList;
         public static IList<SchoolingCostItem> SchoolingCostItemList;
         public static IList<SubscriptionFee> SubscriptionFeeList;
+        public static IList<Subscription> SubscriptionList;
         public static IList<SubjectGroup> SubjectGroupList;
         public static IList<Subject> SubjectList;
+        public static IList<ClassSubject> ClassSubjectList;
+        public static IList<EvaluationSessionState> EvaluationSessionStateList;
         public static IList<EvaluationSession> EvaluationSessionList;
         public static IList<EvaluationSession> EvaluationSessionParentList;
         public static IList<EvaluationSessionChild> EvaluationSessionChildList;
@@ -44,7 +49,10 @@ namespace Primary.SchoolApp
         public static IList<TuitionPayment> TuitionPaymentList;
         public static IList<TuitionDiscount> TuitionDiscountList;
         public static IList<DisciplineSubject> DisciplineSubjectList;
-        public static IList<Discipline> DisciplineList;
+        public static IList<CashBoxIn> CashBoxInList;
+        public static IList<CashBoxOut> CashBoxOutList;
+        public static IList<StudentRoom> StudentRoomList;
+        //public static IList<StudentNoteDTO> StudentNoteList;
         public static User UserConnected;
         public static IServiceProvider ServiceProvider { get; private set; }
         public static string ConnectionString { get; private set; }
@@ -55,8 +63,8 @@ namespace Primary.SchoolApp
         static void Main()
         {
           
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             ConnectionString = ConfigurationManager.ConnectionStrings["school_data_base"].ConnectionString;
             
             #region Définition des dépendances
@@ -68,6 +76,7 @@ namespace Primary.SchoolApp
                    services.AddInfrastructureDependency();
                })
                ;
+            
             var host = hostBuilder.Build();
             ServiceProvider = host.Services;
             #endregion
@@ -75,17 +84,12 @@ namespace Primary.SchoolApp
             var clientName = ConfigurationManager.AppSettings["ClientName"];
             var clientCode = ConfigurationManager.AppSettings["ClientCode"];
             if (AppUtilities.ToHex(clientName) == clientCode) {
-                Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
+               Application.Run(ServiceProvider.GetRequiredService<StartForm>());
             }
             else
             {
                 Telerik.WinControls.RadMessageBox.Show("Merci de bien vouloir contacter SuiTtech au +237 679 72 83 44 ou +33 06 01 24 89 20  pour obtenir une licence ");
-            }
-            
-            //Application.Run(new MainForm());
-        }
-
-
-
+            }            
+        }     
     }
 }

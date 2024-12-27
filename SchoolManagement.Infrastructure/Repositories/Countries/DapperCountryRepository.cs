@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -15,7 +16,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<IList<Country>> GetLIstAsync()
         {
             var connection=dbConnectionFactory.CreateConnection();
-            string query = "SELECT * FROM Countries ;";
+            string query = "SELECT * FROM Countries ORDER BY FrenchName ;";
             var result=connection.Query<Country>(query).ToList();
             await Task.Delay(0);
             return result;

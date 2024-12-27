@@ -184,3 +184,15 @@ C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-win
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.pdb
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.genruntimeconfig.cache
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\ref\Primary.SchoolApp.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\facebook.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\head_paper_big_en.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\head_paper_big_fr.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\head_paper_en.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\head_paper_fr.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\badge_panel.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\badge_photo.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\badge_signature.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.UI.StartForm.resources
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.UI.AddDisciplineForm.resources
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.UI.MedicalRecordsForm.resources
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\website.png

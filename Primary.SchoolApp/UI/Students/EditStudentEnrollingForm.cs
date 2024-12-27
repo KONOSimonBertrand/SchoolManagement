@@ -216,7 +216,6 @@ namespace Primary.SchoolApp.UI
                
             }
         }
-
         private void AddRoomButton_Click(object sender, EventArgs e)
         {
             if (RoomDropDownList.SelectedItem != null)
@@ -359,7 +358,7 @@ namespace Primary.SchoolApp.UI
                 var form = Program.ServiceProvider.GetService<EditSchoolClassForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelClass;
                 form.Icon = this.Icon;
-                form.Init(record);
+                form.InitStartup(record);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = classService.GetSchoolClass(form.NameTextBox.Text).Result;

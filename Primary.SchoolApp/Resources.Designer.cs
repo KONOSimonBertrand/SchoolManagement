@@ -183,6 +183,56 @@ namespace Primary.SchoolApp {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Background_load {
+            get {
+                object obj = ResourceManager.GetObject("Background_load", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] badge_panel {
+            get {
+                object obj = ResourceManager.GetObject("badge_panel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] badge_photo {
+            get {
+                object obj = ResourceManager.GetObject("badge_photo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap balance_green {
+            get {
+                object obj = ResourceManager.GetObject("balance_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap balance_red {
+            get {
+                object obj = ResourceManager.GetObject("balance_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancel_blue {
             get {
                 object obj = ResourceManager.GetObject("cancel_blue", resourceCulture);
@@ -217,6 +267,46 @@ namespace Primary.SchoolApp {
             get {
                 object obj = ResourceManager.GetObject("cancel_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_blue {
+            get {
+                object obj = ResourceManager.GetObject("check_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("check_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_pink {
+            get {
+                object obj = ResourceManager.GetObject("check_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_teal {
+            get {
+                object obj = ResourceManager.GetObject("check_teal", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -491,6 +581,16 @@ namespace Primary.SchoolApp {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] facebook {
+            get {
+                object obj = ResourceManager.GetObject("facebook", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap GlyphCheck_small {
@@ -553,9 +653,29 @@ namespace Primary.SchoolApp {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap heartbeat {
+        internal static System.Drawing.Bitmap healthcare_green {
             get {
-                object obj = ResourceManager.GetObject("heartbeat", resourceCulture);
+                object obj = ResourceManager.GetObject("healthcare_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap healthcare_orange {
+            get {
+                object obj = ResourceManager.GetObject("healthcare_orange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap healthcare_red {
+            get {
+                object obj = ResourceManager.GetObject("healthcare_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -921,6 +1041,16 @@ namespace Primary.SchoolApp {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] Signature {
+            get {
+                object obj = ResourceManager.GetObject("Signature", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap tripple_users {
@@ -1166,6 +1296,16 @@ namespace Primary.SchoolApp {
         internal static System.Drawing.Bitmap watch_teal {
             get {
                 object obj = ResourceManager.GetObject("watch_teal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap website {
+            get {
+                object obj = ResourceManager.GetObject("website", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

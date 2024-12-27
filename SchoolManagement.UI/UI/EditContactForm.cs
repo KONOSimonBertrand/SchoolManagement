@@ -34,11 +34,13 @@ namespace SchoolManagement.UI
         {
             this.studentLabel.Text=Language.labelStudent;
             this.idCardLabel.Text=Language.labelIdCard;
-            this.phoneLabel.Text=Language.labelPhone;
+            this.phoneLabel.Text=$"<html>{Language.labelPhone}:<color=Red>*";
             this.addressLabel.Text = Language.labelAddress;
             this.emailLabel.Text=Language.labelMail;
             this.jobLabel.Text=Language.labelJob;
-            this.relationshipLabel.Text=Language.labelRelationship;
+            this.sexLabel.Text= $"<html>{Language.labelSex}:<color=Red>*";
+            this.fullNameLabel.Text= $"<html>{Language.labelName}:<color=Red>*";
+            this.relationshipLabel.Text=$"<html>{Language.labelRelationship}:<color=Red>*";
 
         }
 
@@ -236,14 +238,8 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
-            if (this.idCardTextBox.Text == "")
-            {
-                this.errorProvider.SetError(this.idCardTextBox, Language.messageFillField);
-                this.errorLabel.Text = Language.messageFillField;
-                this.idCardTextBox.Focus();
-                return false;
-            }
 
+            this.errorProvider.Clear();
             if (this.fullNameTextBox.Text == "")
             {
                 this.errorProvider.SetError(this.fullNameTextBox, Language.messageFillField);
@@ -268,7 +264,13 @@ namespace SchoolManagement.UI
                 this.relationshipDropDownList.Focus();
                 return false;
             }
-
+            if (this.phoneTextBox.Text == "")
+            {
+                this.errorProvider.SetError(this.phoneTextBox, Language.messageFillField);
+                this.errorLabel.Text = Language.messageFillField;
+                this.phoneTextBox.Focus();
+                return false;
+            }
             return true;
         }
     }

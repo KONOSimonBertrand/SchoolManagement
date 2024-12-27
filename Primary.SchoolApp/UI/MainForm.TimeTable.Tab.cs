@@ -1,7 +1,6 @@
 ﻿
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic.ApplicationServices;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.UI;
 using Primary.SchoolApp.Utilities;
@@ -13,7 +12,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Telerik.WinControls;
-using Telerik.WinControls.Svg;
 using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp
@@ -99,7 +97,7 @@ namespace Primary.SchoolApp
         {
             if (e.Appointment is TimeTableAppointment appointment)
             {
-                var timeTable = appointment.ConvertToTimeTable();
+                var timeTable = appointment.AsTimeTable();
                 var isDone = timeTableService.UpdateTimeTableAsync(timeTable).Result;
                 if (isDone)
                 {
@@ -124,7 +122,6 @@ namespace Primary.SchoolApp
 
         private void TimeTableSchoolYearDropDownList_SelectedValueChanged(object sender, EventArgs e)
         {
-            LoadTimTableList();
             
         }
 
@@ -182,8 +179,7 @@ namespace Primary.SchoolApp
                     {
                         item.Image = Resources.users_blue;
                     }
-                    break;
-                    break;
+                    break;                   
             }
         }
         //permet de naviguer dans l'objet Scheduler pour consulter les différente programmations des cours
@@ -235,25 +231,27 @@ namespace Primary.SchoolApp
         private void TimeTableLeftListView_SelectedItemChanged(object sender, System.EventArgs e)
         {
             //chargement des programmations
-            LoadTimTableList();
+            LoadDataForTimeTableScheduler();
         }
         /// <summary>
         ///  charge les programmations des cours d'une classe pour l'anneé scolaire en cours
         /// </summary>
-        private async void LoadTimTableList()
+        private async  void LoadDataForTimeTableScheduler()
         {
             if (TimeTableLeftListView.SelectedItem != null)
             {
                 if (TimeTableLeftListView.SelectedItem.Tag is SchoolRoom room)
                 {
                     InitAppointmentBackground();
-                    var recordList = await timeTableService.GetTimeTableListAsync(room.Id, Program.CurrentSchoolYear.Id);
-                    var appointmentList = new List<TimeTableAppointment>();
                     TimeTableScheduler.Appointments.Clear();
+                    //fetch data
+                    var getTimeTableTask = timeTableService.GetTimeTableListAsync(room.Id,Program.CurrentSchoolYear.Id);
+                    var appointmentList = new List<TimeTableAppointment>();
+                    var timeTableList = await getTimeTableTask;
                     //convertion en object TimeTableDTO
-                    foreach (var record in recordList)
+                    foreach (var timeTable in timeTableList)
                     {
-                        appointmentList.Add(record.ConvertToTimeTableAppointment());
+                        appointmentList.Add(timeTable.AsTimeTableAppointment());
                     }
                     scheduleSource.EventProvider.DataSource = appointmentList;
                     TimeTableScheduler.DataSource = scheduleSource;
@@ -343,6 +341,7 @@ namespace Primary.SchoolApp
                 TimeTableLeftListView.Items.Add(dataItem);
                
             }
+            TimeTableLeftListView.SelectedIndex = -1;
         }
     }
 }

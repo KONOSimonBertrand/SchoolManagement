@@ -40,17 +40,14 @@ namespace SchoolManagement.Core.Model
                 {
                     return "in";
                 }
-                if (Category == "SA")
-                {
-                    return "out";
-                }
+                
                 if (Category == "DE")
                 {
                     return "out";
                 }
-                if (Category == "in")
+                if (Category == "AP")
                 {
-                    return "APPROVISIONNEMENT";
+                    return "out";
                 }
                 return "RAS";
             }

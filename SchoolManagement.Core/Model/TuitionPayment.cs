@@ -16,6 +16,18 @@ namespace SchoolManagement.Core.Model
         public string TransactionId {  get; set; }
         public bool IsDuringEnrolling {  get; set; }
         public string Note {  get; set; }
+        public bool IsValidated { get; set; }
+        public string ValidattionState { 
+            get {
+                if(Thread.CurrentThread.CurrentUICulture.Name == "en-GB")
+                {
+                    return IsValidated ? "OK" : "Pending";
+                }
+                else
+                {
+                    return IsValidated ? "OK" : "En attente";
+                }
+            } }
         public virtual StudentEnrolling Enrolling { get; set; }
         public virtual CashFlowType CashFlowType { get; set; }
         public virtual PaymentMean PaymentMean { get; set; }

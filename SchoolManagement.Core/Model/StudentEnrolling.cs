@@ -24,8 +24,6 @@ namespace SchoolManagement.Core.Model
         public virtual Student Student { get; set; }
         public virtual IList<TuitionPayment> PaymentList { get; set; }=new List<TuitionPayment>();
         public virtual IList<TuitionDiscount> DiscountList { get; set; } =new List<TuitionDiscount>();
-        public virtual IList<Subscription> SubscriptionList { get; set; }=new List<Subscription>();
-        public virtual IList<Discipline> DisciplineList { get; set; }=new List<Discipline>();
             
         public override bool Equals(object? obj)
         {

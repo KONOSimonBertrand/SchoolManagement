@@ -152,7 +152,7 @@ namespace Primary.SchoolApp.UI
             this.currentAppointment.State = (TimeTableState)this.cmbBackground.SelectedValue;
             ((RadScheduler)this.SchedulerData).Tag = this.currentAppointment;
             base.ApplySettingsToEvent(ev);
-            var timeTable = currentAppointment.ConvertToTimeTable();
+            var timeTable = currentAppointment.AsTimeTable();
             if (this.currentAppointment.Id > 0)
             {                
                 var updateIsDone = timeTableService.UpdateTimeTableAsync(timeTable).Result;

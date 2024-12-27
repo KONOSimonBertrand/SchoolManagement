@@ -49,8 +49,8 @@ SELECT id,reference,date,inscription_id,amount,amount_rest,cash_flow_type_id,pay
        ALTER TABLE `nouvel_bd`.`subscriptions` 
        ADD COLUMN `SubscriptionFeeId` INT NULL AFTER `EndDate`;
  2- Inserer les donnees avec le script ci-dessius.
-       INTO nouvel_bd.subscriptions(Id,Date,Amount,Discount,DoneBy,EndDate,EnrollingId,SubscriptionFeeId,PaymentMeanId,TransactionId,TransactionDate)
-       SELECT id,date,amount,discount,subscription_order,end_date,inscription_id,subscription_id,payment_mean_id,transaction_id,transaction_date  FROM ancienne_bd.subscription_subscription
+       INSERT INTO nouvel_bd.subscriptions(Id,IdNumber,StartDate,Amount,Discount,DoneBy,EndDate,EnrollingId,SubscriptionFeeId,PaymentMeanId,TransactionId,TransactionDate,IsValidated)
+       SELECT id,reference,date,amount,discount,subscription_order,end_date,inscription_id,subscription_id,payment_mean_id,transaction_id,transaction_date,1  FROM ancienne_bd.subscription_subscription
 3- Effectuer une mise a jour via le script ci-dessous
         UPDATE Subscriptions A 
         INNER JOIN subscriptionfees B ON A.SubscriptionFeeId=B.Id
@@ -63,4 +63,41 @@ SELECT id,reference,date,inscription_id,amount,amount_rest,cash_flow_type_id,pay
 1-  impoter les données avec le script ci-dessous
         INSERT INTO db_primary.contacts(Id,Name,Sex,Phone,Email,Address,IdCard,Job,Relationship,StudentId)
         SELECT id,full_name,sex,phone,email,address,idCard,job,relationship,student_id FROM primary_app.student_family 
-   
+		
+************************MedicalRecord*********************************************************
+1-  impoter les données avec le script ci-dessous
+   INSERT INTO db_primary.medicalrecords(id,date,HealthSubject,description,studentId)
+SELECT id,date,object,description,student_id FROM primary_app.student_medical
+
+************************Disciplines**********************************
+1- creer la colonne enrolling_id via le script ci-dessous
+       ALTER TABLE `ancienne_bd`.`student_discipline` 
+       ADD COLUMN `enrolling_id` INT NULL ;
+2 Effectuer une mise a jour de la colonne enrolling_id via le script ci-dessous
+       UPDATE student_discipline AS A 
+       INNER JOIN inscription_inscription AS B ON A.student_id=B.student_id
+       SET A.enrolling_id=B.id 
+3- Effectuer une mise a jour via le script ci-dessous
+     INSERT INTO db_primary.disciplines(Id,Date,SubjectId,Reason,Duration,EvaluationId,EnrollingId)
+      SELECT id,date,status,reason,duration,evaluation_id,enrolling_id FROM ancienne_bd.student_discipline AS B
+4- Supprimer la colonne enrolling_id via le script ci-dessous
+        ALTER TABLE `encienne_bd`.`student_discipline` 
+        DROP COLUMN `enrolling_id`;
+******************************* EvaluationSessionStates****************************
+INSERT INTO EvaluationSessionStates(EvaluationId,SchoolYearId,IsClosed)
+SELECT evaluation_type_id,school_year_id,close FROM primary_app.evaluation_type_state
+*****************************StudentNotes***********************************
+1- INSERT INTO studentnotes(Note,NoteCoef,NotedOn,Comment,SubjectId,StudentId,EvaluationId,SchoolYearId,BookId,Date)
+SELECT note,note_coef,noted_on,comment,subject_id,student_id,evaluation_id,school_year_id,0,date FROM primary_app.student_note WHERE note>-1
+2- INSERT INTO studentnotes(Note,NoteCoef,NotedOn,Comment,SubjectId,StudentId,EvaluationId,SchoolYearId,BookId,Date)
+SELECT note2,note2_coef,noted2_on,comment,subject_id,student_id,evaluation_id,school_year_id,1,date FROM primary_app.student_note WHERE note2>-1
+*********************note de mise à jour chez yves*******************************************
+-  creer les colonnes "AverageFormula" et "ReportCardModel" dans la table schoolclasses
+- Ajout des colonnes "StudentId" et "SchoolYearId" dans la table "Subscriptions"
+
+- Effectuer une mise a jour de  la table "Subscriptions" via le script ci-dessous
+         UPDATE Subscriptions A 
+         INNER JOIN studentsenrollings B ON A.EnrollingId=B.Id
+         SET A.SchoolYearId=B.SchoolYearId, A.StudentId=B.StudentId
+- suppression de la cle etrangre "Enrolling_Subscriptioin_fk" dans la table "Subscriptions"
+- suppression de la colonne "EnrollingId" de la table "Subscriptions"

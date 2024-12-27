@@ -4,6 +4,7 @@ using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using System.Threading;
+using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
@@ -13,6 +14,7 @@ namespace Primary.SchoolApp.UI
         private readonly IStudentService studentService;
         private readonly ClientApp clientApp;
         private Student selectedStudent;
+        private int healthState = 0;
         public EditStudentForm(ILogService logService, IStudentService studentService, ClientApp clientApp)
         {
             this.logService = logService;
@@ -35,7 +37,23 @@ namespace Primary.SchoolApp.UI
         private void InitEvents()
         {
             SaveButton.Click += SaveButton_Click;
+            GoodHealthMenuItem.Click += HealthState_Click;
+            MediumHealthMenuItem.Click += HealthState_Click;
+            BadHealthMenuItem.Click += HealthState_Click;
         }
+
+        private void HealthState_Click(object sender, EventArgs e)
+        {
+            var state=(RadMenuItem)sender;
+            if (state != null) {
+                healthState = int.Parse(state.Tag.ToString());
+                HealthStateSplitButton.Text = state.Text;
+                HealthStateSplitButton.Tag = state.Tag;
+                HealthStateSplitButton.Image = state.Image;
+            }
+            
+        }
+
         //affiches les info du student 
         internal void Init(Student student)
         {
@@ -54,6 +72,23 @@ namespace Primary.SchoolApp.UI
                 ReligionDropDownList.Text = student.Religion;
                 NationalityDropDownList.Text= student.Nationality;
                 IdCardTextBox.Text = student.IdCard;
+                switch (student.Health) { 
+                    case 0:
+                        HealthStateSplitButton.Text= GoodHealthMenuItem.Text;
+                        HealthStateSplitButton.Tag = GoodHealthMenuItem.Tag;
+                        HealthStateSplitButton.Image= GoodHealthMenuItem.Image;
+                        break;
+                        case 1:
+                        HealthStateSplitButton.Text = MediumHealthMenuItem.Text;
+                        HealthStateSplitButton.Tag = MediumHealthMenuItem.Tag;
+                        HealthStateSplitButton.Image = MediumHealthMenuItem.Image;
+                        break;
+                        case 2:
+                        HealthStateSplitButton.Text = BadHealthMenuItem.Text;
+                        HealthStateSplitButton.Tag = BadHealthMenuItem.Tag;
+                        HealthStateSplitButton.Image = BadHealthMenuItem.Image;
+                        break;
+                }
             }
         }
         private void SaveButton_Click(object sender, EventArgs e)
@@ -70,6 +105,7 @@ namespace Primary.SchoolApp.UI
                 selectedStudent.Nationality=NationalityDropDownList.Text;
                 selectedStudent.Religion=ReligionDropDownList.Text;
                 selectedStudent.IdCard=IdCardTextBox.Text;
+                selectedStudent.Health = healthState;
                 var isDone=studentService.UpdateStudentAsync(selectedStudent).Result;
                 if (isDone == true)
                 {

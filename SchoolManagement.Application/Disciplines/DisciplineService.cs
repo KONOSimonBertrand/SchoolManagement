@@ -1,7 +1,7 @@
 ﻿
 
 using SchoolManagement.Core.Model;
-using SchoolManagement.Infrastructure.Repositories;
+using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Application
 {
@@ -35,13 +35,17 @@ namespace SchoolManagement.Application
             return await disciplineReadRepository.GetDisciplineAsync(enrollingId,subjectId,date);
         }
 
-        public async Task<IList<Discipline>> GetDisciplineListByEnrolling(int enrollingId)
+        public async Task<IList<Discipline>> GetDisciplineListByStudent(int studentId,int schoolYearId)
         {
-            return await disciplineReadRepository.GetDisciplineListByEnrollingAsync(enrollingId);
+            return await disciplineReadRepository.GetDisciplineListByStudentAsync(studentId,schoolYearId);
+        }
+        public async Task<IList<Discipline>> GetDisciplineListByClass(int classId, int schoolYearId)
+        {
+            return await disciplineReadRepository.GetDisciplineListByClassAsync(classId, schoolYearId);
         }
         public async Task<IList<Discipline>> GetDisciplineListBySchoolYear(int schoolYearId)
         {
-            return await disciplineReadRepository.GetDisciplineListByEnrollingAsync(schoolYearId);
+            return await disciplineReadRepository.GetDisciplineListBySchoolYearAsync(schoolYearId);
         }
 
         public async Task<DisciplineSubject?> GetDisciplineSubject(int subjectId)

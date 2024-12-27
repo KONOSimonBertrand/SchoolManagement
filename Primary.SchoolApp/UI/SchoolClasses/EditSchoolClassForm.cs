@@ -24,6 +24,7 @@ namespace Primary.SchoolApp.UI
             this.schoolClassService = schoolClassService;
             this.schoolGroupService = schoolGroupService;
             schoolClassNameTracker = string.Empty;
+            IsTruncateDropDownList.SelectedValue = 0;
             InitEvents();
 
         }
@@ -70,7 +71,10 @@ namespace Primary.SchoolApp.UI
                     schoolClass.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                     schoolClass.Group = GroupDropDownList.SelectedItem.DataBoundItem as SchoolGroup;
                     schoolClass.GroupId = schoolClass.Group.Id;
-                    schoolClass.BookTypeId = (int)BookTypeDropDownList.SelectedValue;
+                    schoolClass.DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue;
+                    schoolClass.ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString());
+                    schoolClass.AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString());
+                    schoolClass.NoteIsTruncate = IsTruncateDropDownList.SelectedValue.ToString()=="0"?false:true;
                     bool isDone = schoolClassService.UpdateSchoolClass(schoolClass).Result;
                     if (isDone == true)
                     {
@@ -96,7 +100,7 @@ namespace Primary.SchoolApp.UI
             }
         }
 
-        internal void Init(SchoolClass schoolClass)
+        internal void InitStartup(SchoolClass schoolClass)
         {
             if (schoolClass != null)
             {
@@ -106,7 +110,10 @@ namespace Primary.SchoolApp.UI
                 NameTextBox.Text = schoolClass.Name;
                 SequenceSpinEditor.Value = schoolClass.Sequence;
                 GroupDropDownList.SelectedValue = schoolClass.GroupId;
-                BookTypeDropDownList.SelectedValue = schoolClass.BookTypeId;
+                DocumentTemplateDropDownList.SelectedValue = schoolClass.DocumentLanguageId;
+                IsTruncateDropDownList.SelectedValue = schoolClass.NoteIsTruncate==true?1:0;
+                ReportCardDropDownList.SelectedValue = schoolClass.ReportCardModel;
+                AverageFormulaDropDownList.SelectedValue=schoolClass.AverageFormula;
             }
         }
         // show school grou UI for edit

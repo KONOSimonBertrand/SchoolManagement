@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SchoolManagement.Application.Subscriptions;
 using SchoolManagement.Core.Model;
 
 
@@ -38,6 +37,8 @@ namespace SchoolManagement.Application
             services.AddTransient<ISubscriptionService, SubscriptionService>();
             services.AddTransient<IDisciplineService, DisciplineService>();
             services.AddTransient<IContactService, ContactService>();
+            services.AddTransient<IMedicalService, MedicalService>();
+            services.AddTransient<IStudentNoteService,StudentNoteService>();
             return services;
         }
     }

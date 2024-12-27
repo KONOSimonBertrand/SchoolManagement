@@ -2,6 +2,7 @@
 
 using Dapper;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
 namespace SchoolManagement.Infrastructure.Repositories
@@ -14,7 +15,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             this.dbConnectionFactory = dbConnectionFactory;
         }
 
-        public  async Task<bool> AddStudentEnrollingAsync(StudentEnrolling enrolling)
+        public  async Task<bool> AddEnrollingAsync(StudentEnrolling enrolling)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" INSERT INTO StudentsEnrollings(Date,StudentId,ClassId,SchoolYearId,OldSchool,IsRepeater,DoneBy)  
@@ -106,11 +107,15 @@ namespace SchoolManagement.Infrastructure.Repositories
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM StudentsRooms   AS A
                              INNER JOIN SchoolRooms AS B ON A.RoomId=B.Id
+                             INNER JOIN Students AS C ON A.StudentId=C.Id
+                             INNER JOIN SchoolYears AS D ON A.SchoolYearId=D.Id
                              WHERE StudentId=@studentId AND SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<StudentRoom,SchoolRoom, StudentRoom>(query, 
-                (studentRoom, schoolroom) =>
+            var result = connection.Query<StudentRoom,SchoolRoom,Student,SchoolYear, StudentRoom>(query, 
+                (studentRoom, schoolroom, student, schoolYear) =>
                 {
                     studentRoom.Room=schoolroom;
+                    studentRoom.Student=student;
+                    studentRoom.SchoolYear=schoolYear;
                     return studentRoom;
                 },
                 new { studentId,schoolYearId }).FirstOrDefault();
@@ -122,12 +127,16 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM StudentsRooms  AS A  
-                             INNER JOIN Students AS B ON A.StudentId=B.Id 
+                             INNER JOIN SchoolRooms AS B ON A.RoomId=B.Id
+                             INNER JOIN Students AS C ON A.StudentId=C.Id
+                             INNER JOIN SchoolYears AS D ON A.SchoolYearId=D.Id
                              WHERE A.RoomId=@roomId AND A.SchoolYearId=@schoolYearId  ;";                              
-            var result = connection.Query<StudentRoom, Student, StudentRoom>(query,
-                (studentRoom, student) =>
+            var result = connection.Query<StudentRoom,SchoolRoom, Student,SchoolYear, StudentRoom>(query,
+                (studentRoom,room, student,schoolYear) =>
                 {
+                    studentRoom.Room=room;
                     studentRoom.Student = student;
+                    studentRoom.SchoolYear = schoolYear;
                     return studentRoom;
                 },
                 new {roomId,schoolYearId}
@@ -140,14 +149,16 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM StudentsRooms  AS A  
-                             INNER JOIN Students AS B ON A.StudentId=B.Id 
-                             INNER JOIN SchoolRooms AS C ON A.RoomId=C.Id
-                             WHERE A.SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<StudentRoom, Student,SchoolRoom, StudentRoom>(query,
-                (studentRoom, student,room) =>
+                             INNER JOIN SchoolRooms AS B ON A.RoomId=B.Id
+                             INNER JOIN Students AS C ON A.StudentId=C.Id
+                             INNER JOIN SchoolYears AS D ON A.SchoolYearId=D.Id
+                             WHERE A.SchoolYearId=@schoolYearId ;";
+            var result = connection.Query<StudentRoom,SchoolRoom, Student,SchoolYear, StudentRoom>(query,
+                (studentRoom,room, student, schoolYear) =>
                 {
-                    studentRoom.Student = student;
                     studentRoom.Room=room;
+                    studentRoom.Student = student;
+                    studentRoom.SchoolYear=schoolYear;
                     return studentRoom;
                 }, new
                 {
@@ -158,7 +169,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<bool> AddStudentEnrollingPictureAsync(int enrollingId, string urlPicture)
+        public async Task<bool> AddEnrollingPictureAsync(int enrollingId, string urlPicture)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE StudentsEnrollings SET PictureUrl=@urlPicture WHERE Id=@enrollingId";
@@ -171,7 +182,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async  Task<bool> UpdateStudentEnrollingAsync(StudentEnrolling enrolling)
+        public async  Task<bool> UpdateEnrollingAsync(StudentEnrolling enrolling)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE StudentsEnrollings SET Date=@date,StudentId=@studentId,ClassId=@classId,
@@ -185,6 +196,20 @@ namespace SchoolManagement.Infrastructure.Repositories
                 isRepeater = enrolling.IsRepeater,
                 enrollingId=enrolling.Id,
                 doneBy=enrolling.DoneBy,
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+
+        public async Task<bool> ChangeEnrollingStatus(int enrollingId, bool status, string reason)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" UPDATE StudentsEnrollings SET IsActive=@status,ReasonLeft=@reason WHERE Id=@enrollingId;";
+            var result = connection.Execute(query, new
+            {
+                status,
+                reason,
+                enrollingId
             });
             await Task.Delay(0);
             return result > 0;

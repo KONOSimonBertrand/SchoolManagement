@@ -22,6 +22,10 @@ namespace SchoolManagement.UI
         public RadTextBox AddressTextBox { get=>addressTextBox;}
         public RadTextBox IdCardTextBox { get=>idCardTextBox;}
         public RadDropDownList ReligionDropDownList {get=>religionDropDownList;}
+        public RadSplitButton HealthStateSplitButton { get=>healthStateSplitButton;}
+        public RadMenuItem GoodHealthMenuItem { get => goodHealthMenuItem; }
+        public RadMenuItem MediumHealthMenuItem { get=>mediumHealthMenuItem; }
+        public RadMenuItem BadHealthMenuItem { get => badHealthMenuItem; }
         public RadLabel ErrorLabel { get=>errorLabel;}
         public ErrorProvider ErrorProvider { get=>errorProvider;}
         public EditStudentForm()
@@ -48,6 +52,9 @@ namespace SchoolManagement.UI
             this.religionLabel.Text = Language.labelReligion;
             this.saveButton.Text = Language.labelSave;
             this.closeButton.Text = Language.labelCancel;
+            this.healthStateLabel.Text= Language.labelHealthStatus;
+            
+           
         }
         private void InitComponent()
         {
@@ -266,6 +273,10 @@ namespace SchoolManagement.UI
 
             this.nationalityDropDownList.Text = "Cameroun";
             this.errorLabel.ForeColor = Color.Red;
+            this.healthStateSplitButton.Image=Resources.heartbeat_green;
+            this.goodHealthMenuItem.Image = Resources.heartbeat_green;
+            this.mediumHealthMenuItem.Image = Resources.heartbeat_orange;
+            this.badHealthMenuItem.Image = Resources.heartbeat_red;
 
         }
 

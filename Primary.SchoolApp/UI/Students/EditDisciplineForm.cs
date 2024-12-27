@@ -34,13 +34,13 @@ namespace Primary.SchoolApp.UI
 
         internal void Init(Discipline discipline)
         {
-            discipline.Enrolling.Student=Program.StudentEnrollingList.Select(x=>x.Student).FirstOrDefault(x=>x.Id==discipline.Enrolling.StudentId);
             selectedDiscipline = discipline;
             if (selectedDiscipline != null) {
                 this.StudentDropDownList.DataSource = new List<Student>() {
-                discipline.Enrolling.Student
+                discipline.Student
             };
-                this.ClassTextBox.Text = Program.SchoolClassList.FirstOrDefault(x=>x.Id== discipline.Enrolling.ClassId).Name;
+                var room = Program.StudentRoomList.FirstOrDefault(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.StudentId == selectedDiscipline.StudentId).Room;
+                this.ClassTextBox.Text = room.Name;
                 this.DurationTextBox.Text=discipline.Duration.ToString();
                 this.SubjectDropDownList.SelectedValue = discipline.SubjectId;
                 this.ReasonDropDownList.Text = discipline.Reason;
@@ -65,7 +65,7 @@ namespace Primary.SchoolApp.UI
                 //enregistrement du log
                 Log logSubscription = new()
                 {
-                    UserAction = $"Mise à jour de l'objet disciplinaire  {selectedDiscipline.Subject.DefaultName} de l'élève {selectedDiscipline.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                    UserAction = $"Mise à jour de l'objet disciplinaire  {selectedDiscipline.Subject.DefaultName} de l'élève {selectedDiscipline.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                     UserId = clientApp.UserConnected.Id
                 };
                 logService.CreateLog(logSubscription);

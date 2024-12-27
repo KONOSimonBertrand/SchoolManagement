@@ -27,7 +27,7 @@ namespace Primary.SchoolApp.Utilities
                 Name = name;
             }
         }
-       static List<Relationship> relationshipFrenchList = new() {
+       static readonly List<Relationship> relationshipFrenchList = new() {
                 new Relationship(0,"Père"),
                 new Relationship(1,"Mère"),
                 new Relationship(2,"Sœur"),
@@ -48,7 +48,7 @@ namespace Primary.SchoolApp.Utilities
                 new Relationship(17,"Médecin"),
                 new Relationship(18,"Autre"),
             };
-        static List<Relationship> relationshipEnglishList = new() {
+        static readonly List<Relationship> relationshipEnglishList = new() {
                 new Relationship(0,"Father"),
                 new Relationship(1,"Mother"),
                 new Relationship(2,"Sister"),
@@ -69,7 +69,6 @@ namespace Primary.SchoolApp.Utilities
                 new Relationship(17,"Doctor"),
                 new Relationship(18,"Other"),
             };
-        static List<Relationship> relationshipDefaultList = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList : relationshipFrenchList;
         public static List<string> Religions()
         {
             List<string> religions = new List<string>();
@@ -166,6 +165,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Search":
                             image = Resources.search_blue;
                             break;
+                        case "Check":
+                            image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_blue);
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
@@ -221,6 +223,9 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Search":
                             image = Resources.search_blue_grey;
+                            break;
+                        case "Check":
+                            image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_blue_grey);
                             break;
                     }
                     break;
@@ -278,6 +283,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Search":
                             image = Resources.search_pink;
                             break;
+                        case "Check":
+                            image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_pink);
+                            break;
                     }
                     break;
                 case "MaterialTeal":
@@ -333,6 +341,9 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Search":
                             image = Resources.search_teal;
+                            break;
+                        case "Check":
+                            image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_teal);
                             break;
                     }
                     break;
@@ -439,14 +450,39 @@ namespace Primary.SchoolApp.Utilities
         }
         #endregion
 
+        public static double TruncateDouble(double value, int precision)
+        {
+            var divisor = (decimal)Math.Pow(10, -1 * 2);
+            decimal decimalValue = (decimal)value;
+            var actual = (decimalValue - (decimalValue % divisor));
+            return (double)actual;
+        }
         public static string GetRelationshipName(int relationshipId)
         {
-            var relationship = relationshipDefaultList.FirstOrDefault(x=>x.Id== relationshipId);
+            var relationship = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList.FirstOrDefault(x=>x.Id== relationshipId): relationshipFrenchList.FirstOrDefault(x => x.Id == relationshipId);
             return relationship.Name;   
         }
         public static List<Relationship> GetRelationshipList()
         {
-            return relationshipDefaultList;
+            return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList : relationshipFrenchList;
+        }
+        public static Image GetImageFromUrl(string imageName)
+        {
+            var url = Application.StartupPath + @"\Images\"+imageName;
+            try
+            {
+                var image = Image.FromFile(url);
+                return image;
+            }
+            catch (Exception ex) {
+                AddLog(ex.Message);
+            }
+            return null;
+        }
+
+        public static Image GetImage(Byte[] byteImage)
+        {
+            return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
         }
 
     }
