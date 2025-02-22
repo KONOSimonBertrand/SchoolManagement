@@ -6,6 +6,7 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace Primary.SchoolApp.UI
         private readonly IEmployeeService employeeService;
         private readonly ClientApp clientApp;
         private EmployeeEnrolling selectedEnrolling;
+        private List<EmployeeAccountTransaction> transactionList;
         public EmployeeAccountTransactionsForm(ILogService logService, IEmployeeService employeeService, ClientApp clientApp)
         {
             this.logService = logService;
             this.employeeService = employeeService;
             this.clientApp = clientApp;
+            transactionList = new List<EmployeeAccountTransaction>();
             CreateGridViewColumn();
             InitEvents();
         }
@@ -142,7 +145,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    var url = clientApp.EmployeePitureFolder + "/" + enrolling.Employee.IdNumber;
+                    var url = Program.CurrentSchool.EmployeePictureDirectory + "/" + enrolling.Employee.IdNumber;
                     if (File.Exists(url))
                     {
 
@@ -157,13 +160,14 @@ namespace Primary.SchoolApp.UI
             }
 
             //load transaction
-            LoadACountTransactions(enrolling.Id);
+            LoadACountTransactions(enrolling.EmployeeId,enrolling.SchoolYearId);
         }
         // chargement de la liste des mouvements du compte dans le datagridview
-        private async void LoadACountTransactions(int enrollingId)
+        private async void LoadACountTransactions(int employeeId,int schoolYearId)
         {
-            selectedEnrolling.AccountTransactions = employeeService.GetAccountTransactionList(enrollingId).Result;
-            DataGridView.DataSource = selectedEnrolling.AccountTransactions;
+            var transactions = await employeeService.GetAccountTransactionListByEmployee(employeeId,schoolYearId);
+            transactionList = transactions.ToList();
+            DataGridView.DataSource = transactionList;
             await Task.Delay(0);
         }
         //Création des colonnes du datagridview
@@ -238,16 +242,18 @@ namespace Primary.SchoolApp.UI
                             {
                                 Date=record.Date,
                                 Amount=(-1)*record.Amount,
-                                TransactionId="Return"+record.TransactionId,
-                                Enrolling=record.Enrolling,
-                                EnrollingId=record.EnrollingId,
+                                TransactionId=record.TransactionId+ "-Return",
+                                Employee=record.Employee,
+                                EmployeeId = record.EmployeeId,
+                                SchoolYear=record.SchoolYear,
+                                SchoolYearId=record.SchoolYearId,
                                 Reason=record.Reason,
                             };
-                            if (!selectedEnrolling.AccountTransactions.Select(x=>x.TransactionId).Contains(transaction.TransactionId)) {
+                            if (!transactionList.Select(x=>x.TransactionId).Contains(transaction.TransactionId)) {
                                 var isDone = employeeService.AddAccountTransaction(transaction).Result;
                                 if (isDone)
                                 {
-                                    LoadACountTransactions(selectedEnrolling.Id);
+                                    LoadACountTransactions(selectedEnrolling.EmployeeId,selectedEnrolling.SchoolYearId);
                                     Log log = new()
                                     {
                                         UserAction = $"Ajout d'une transaction de {transaction.Amount} sur le compte de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
@@ -284,7 +290,7 @@ namespace Primary.SchoolApp.UI
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                LoadACountTransactions(selectedEnrolling.Id);
+                LoadACountTransactions(selectedEnrolling.EmployeeId,selectedEnrolling.SchoolYearId);
             }
         }
        

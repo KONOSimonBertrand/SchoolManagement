@@ -7,9 +7,9 @@ using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Reporting
 {
-    internal class Detail1NoteReport : SchoolManagement.UI.Reporting.Detail1NoteReport
+    internal class Subreport1NoteReport : SchoolManagement.UI.Reporting.Subreport1NoteReport
     {
-        public Detail1NoteReport(ReportCard reportCard ) {
+        public Subreport1NoteReport(EvaluationReportCard reportCard ) {
             this.Filters.Clear();
             this.Filters.Add(new Filter("=Fields.SubjectGroup.Id", FilterOperator.Equal, "= Parameters.GroupID.Value"));
             FinalNoteTextBox.Value = "=NoteAsString";

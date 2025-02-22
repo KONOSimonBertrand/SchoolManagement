@@ -1,6 +1,4 @@
-﻿
-
-using SchoolManagement.Application;
+﻿using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
@@ -42,7 +40,6 @@ namespace Primary.SchoolApp.UI
             }
         }
 
-
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData())
@@ -60,7 +57,7 @@ namespace Primary.SchoolApp.UI
                     {
                         Log log = new()
                         {
-                            UserAction = $"Mise à jour d'une note de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                            UserAction = $"Mise à jour d'une note de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
@@ -90,12 +87,8 @@ namespace Primary.SchoolApp.UI
 
         private bool RecordExist(DateTime date, string title)
         {
-            if (selectedEnrolling.Notes.Where(
-                x => x.Date.Date == date.Date && x.Title == title).Count() > 1)
-            {
-                return true;
-            }
-            return false;
+            var notes = employeeService.GetNoteListByEmployee(this.selectedEnrolling.EmployeeId, this.selectedEnrolling.SchoolYearId).Result;
+            return notes.Count(x => x.Date.Date == date.Date && x.Title == title)>1;
         }
     }
 }

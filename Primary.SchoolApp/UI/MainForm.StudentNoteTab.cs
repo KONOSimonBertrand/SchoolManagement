@@ -56,7 +56,7 @@ namespace Primary.SchoolApp
         {
             var groups = new BindingList<ListViewDataItemGroup>();
             StudentNoteLeftListView.ShowCheckBoxes = false;
-            foreach(var father in Program.EvaluationSessionParentList)
+            foreach(var father in Program.EvaluationSessionParentList.OrderBy(e=>e.Sequence))
             {
                 var group = new ListViewDataItemGroup
                 {
@@ -67,14 +67,14 @@ namespace Primary.SchoolApp
                 groups.Add(group);
                 StudentNoteLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { group });
             }
-            foreach (var child in Program.EvaluationSessionChildList)
+            foreach (var child in Program.EvaluationSessionChildList.OrderBy(e => e.Sequence))
             {
                 var dataItem = new ListViewDataItem
                 {
                     Text = child.FrenchName,
                     Key = child.Id,
                     Tag = child,
-                    Group=groups.FirstOrDefault(g=> ((EvaluationSession) g.Tag).Code==child.ParentCode)
+                    Group=groups.FirstOrDefault(g=> ((EvaluationSession) g.Tag).Id==child.Mother)
                 };
                 StudentNoteLeftListView.Items.Add(dataItem);
             }
@@ -165,6 +165,7 @@ namespace Primary.SchoolApp
             }
 
         }
+        //init event of page
         private void InitEventsStudentNotePage()
         {
             StudentNoteRoomDropDownList.SelectedValueChanged += StudentNoteRoomDropDownList_SelectedValueChanged;
@@ -202,10 +203,11 @@ namespace Primary.SchoolApp
                     StudentNoteSearchTextBox.Text = string.Empty;
                     selectedRoom = room;
                     var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+                    var classGroup= Program.SchoolGroupList.FirstOrDefault(x=>x.Id==classOfRoom.GroupId);
                     if (classOfRoom != null)
                     {
 
-                        if (classOfRoom.DocumentLanguageId == 2)
+                        if (classGroup.DocumentLanguageId == 2)
                         {
                             StudentNoteGroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                             StudentNoteGroupDropDownList.Items.Add(new RadListDataItem("Anglophone", 1));
@@ -213,7 +215,7 @@ namespace Primary.SchoolApp
                         }
                         else
                         {
-                            if (classOfRoom.DocumentLanguageId == 0)
+                            if (classGroup.DocumentLanguageId == 0)
                             {
                                 StudentNoteGroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                                 StudentNoteGroupDropDownList.SelectedIndex = 0;
@@ -280,9 +282,15 @@ namespace Primary.SchoolApp
                     {
                         Image = AppUtilities.GetImage("View")
                     };
+                    var group = Program.SchoolGroupList.FirstOrDefault(s => s.Id == classOfRoom.GroupId);
+                    RadMenuItem printGroupStatisticReportMenu = new($" {Language.LabelEvaluationStatistique} {group.Name}")
+                    {
+                        Image = AppUtilities.GetImage("View")
+                    };
                     printStudentReportCardMenu.Click += PrintStudentReportCardMenu_Click;
                     printRoomReportCardMenu.Click += PrintRoomReportCardMenu_Click;
                     printRoomReportMenu.Click += PrintRoomReportMenu_Click;
+                    printGroupStatisticReportMenu.Click+= PrintGroupStatisticReportMenu_Click;
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                     e.ContextMenu.Items.Add(printStudentReportCardMenu);
                     e.ContextMenu.Items.Add(printRoomReportCardMenu);
@@ -290,6 +298,7 @@ namespace Primary.SchoolApp
                     e.ContextMenu.Items.Add(printRoomDisciplinarySheetMenu);
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                     e.ContextMenu.Items.Add(printRoomReportMenu);
+                    e.ContextMenu.Items.Add(printGroupStatisticReportMenu);
                 }
             }
                
@@ -301,7 +310,18 @@ namespace Primary.SchoolApp
             {
                 if (selectedEvaluation != null)
                 {
-                    printService.PrintClassroomReportAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    printService.PrintClassRoomReportAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                }
+            }
+        }
+        private void PrintGroupStatisticReportMenu_Click(object sender, EventArgs e)
+        {
+            if (StudentNoteGridView.CurrentRow != null)
+            {
+                if (selectedEvaluation != null)
+                {
+                    var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id == selectedRoom.ClassId);
+                    printService.PrintClassGroupReportAsync(classOfRoom.GroupId, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
                 }
             }
         }
@@ -312,7 +332,7 @@ namespace Primary.SchoolApp
             {
                 if (selectedEvaluation != null)
                 {
-                    printService.PrintReportCardByClassroomAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    printService.PrintReportCardByClassRoomAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
                 }
             }
         }
@@ -321,9 +341,9 @@ namespace Primary.SchoolApp
         {
 
             if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord averageRecord) {
-                if (selectedEvaluation != null) {
-                    printService.PrintReportCardByStudentAsync(averageRecord.Student.Id, selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                }
+                
+                int evalId= selectedEvaluation != null? selectedEvaluation.Id:selectedFatherEvaluation.Id;
+                printService.PrintReportCardByStudentAsync(averageRecord.Student.Id, selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
             }
             
         }
@@ -407,7 +427,6 @@ namespace Primary.SchoolApp
             }
             
         }
-        // select classroom to load note data
         
         // show ui to import notes
         private void StudentNoteImportNoteMenu_Click(object sender, EventArgs e)
@@ -654,8 +673,9 @@ namespace Primary.SchoolApp
         private string GetSubjectField()
         {
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == selectedRoom.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
 
-            if (classOfRoom.DocumentLanguageId == 1 || classOfRoom.DocumentLanguageId == 2 && selectedBookId == 1)
+            if (classGroup.DocumentLanguageId == 1 || classGroup.DocumentLanguageId == 2 && selectedBookId == 1)
             {
                 return "EnglishName";
             }

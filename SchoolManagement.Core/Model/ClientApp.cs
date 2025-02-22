@@ -13,12 +13,7 @@ namespace SchoolManagement.Core.Model
     public class ClientApp
     {
         private string? _connectionString { get; set; }
-        public string? Name { get; set; }
-        public string Code {  get; set; }
-        public string Phone {  get; set; }
-        public string Contact { get; set; }
-        public string WebSite { get; set; }
-        public string LogoUrl {  get; set; }
+        public string Name {  get; set; }   
         public string? Type { get; set; } //type de client Web, WinForm, API
         public string? IpAddress { get; set; }
         public string ConnectionString
@@ -32,9 +27,6 @@ namespace SchoolManagement.Core.Model
                 _connectionString = value;
             }
         }
-       public string StudentPitureFolder { get; set; }
-        public string EmployeePitureFolder { get; set; }
         public virtual User? UserConnected { get; set; }
-        public string Address { get; set; }
     }
 }

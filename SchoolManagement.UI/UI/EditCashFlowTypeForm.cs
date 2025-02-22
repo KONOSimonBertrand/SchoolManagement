@@ -143,16 +143,18 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
-
+            this.errorProvider.Clear();
             if (this.nameTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.nameTextBox, Language.messageFillField);
                 this.nameTextBox.Focus();
                 return false;
             }
             if (this.categoryDropDownList.SelectedIndex < 0)
             {
-                this.errorLabel.Text = "La sélection d'une catégorie est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.categoryDropDownList, Language.messageFillField);
                 this.categoryDropDownList.Focus();
                 return false;
             }

@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
-using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.UI;
 using Primary.SchoolApp.UI.CustomControls;
 using Primary.SchoolApp.Utilities;
@@ -8,6 +7,7 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -20,6 +20,7 @@ namespace Primary.SchoolApp
 {
     public partial class MainForm
     {
+        private SchoolInfo  schoolInfo;
         private SchoolYearInfo schoolYearInfo;
         private SchoolGroupInfo schoolGroupInfo;
         private SchoolClassInfo schoolClassInfo;
@@ -64,6 +65,12 @@ namespace Primary.SchoolApp
                 Text = Language.labelSettings.ToUpper()
             };
             this.SettingLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { settingGroup });
+            ListViewDataItem itemSchool = new()
+            {
+                Key = 0,
+                Value = Language.labelHome
+            };
+
             ListViewDataItem itemSchoolYear = new()
             {
                 Key = 1,
@@ -148,7 +155,7 @@ namespace Primary.SchoolApp
             };
 
 
-
+            itemSchool.Group = settingGroup;
             itemSchoolYear.Group = settingGroup;
             itemGroup.Group = settingGroup;
             itemClass.Group = settingGroup;
@@ -164,6 +171,7 @@ namespace Primary.SchoolApp
             itemUser.Group = settingGroup;
             itemSubscriptionFees.Group = settingGroup;
             itemDiscipline.Group = settingGroup;
+            SettingLeftListView.Items.Add(itemSchool);
             SettingLeftListView.Items.Add(itemSchoolYear);
             SettingLeftListView.Items.Add(itemGroup);
             SettingLeftListView.Items.Add(itemClass);
@@ -181,6 +189,7 @@ namespace Primary.SchoolApp
             SettingLeftListView.Items.Add(itemEmployeeGroup);
             SettingLeftListView.Items.Add(itemUser);
 
+            SettingSearchModuleDropDownList.Items.Add(itemSchool.Text);
             SettingSearchModuleDropDownList.Items.Add(itemGroup.Text);
             SettingSearchModuleDropDownList.Items.Add(itemClass.Text);
             SettingSearchModuleDropDownList.Items.Add(itemRoom.Text);
@@ -201,6 +210,20 @@ namespace Primary.SchoolApp
         //initialisation des contrôles utilisateurs personnalisés 
         private void InitSettingPageCustomControls()
         {
+
+            schoolInfo = new SchoolInfo
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            schoolInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            schoolInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(schoolInfo);
+            settingPageUserControlList.Add(schoolInfo);
 
             schoolYearInfo = new SchoolYearInfo
             {
@@ -446,6 +469,31 @@ namespace Primary.SchoolApp
         }
 
         #region Methodes
+        // affiche les informations de l'école
+        private void LoadSchoolDetail(School school)
+        {
+            schoolInfo.TitleInfoLabel.Text = "INFO ...";
+            var serialKeytring = AppUtilities.ConvertHexToString(school.SerialKey);
+            schoolInfo.SerialKeyLabel.Text = Language.LabelLisence;
+           var serialKeyData = serialKeytring.Split('@');
+            if (serialKeyData.Length == 3)
+            {
+                schoolInfo.SerialKeyUserLabel.Text = $"{Language.labelUser}: {serialKeyData[0]}";
+                schoolInfo.SerialKeyTypeLabel.Text = $"{Language.LabelLisenceType}: {AppUtilities.ToLisenceType(serialKeyData[1])}";
+                schoolInfo.SerialKeyDurationLabel.Text = $"{Language.LabelExpiryDate}: {AppUtilities.GetExpiryDate(serialKeyData[1], serialKeyData[2])} ";
+            }
+            else
+            {
+                schoolInfo.SerialKeyUserLabel.Text = $"{Language.labelUser}:";
+                schoolInfo.SerialKeyTypeLabel.Text = $"{Language.LabelLisenceType}: ";
+                schoolInfo.SerialKeyDurationLabel.Text = $"{Language.LabelExpiryDate}: ";
+            }
+            schoolInfo.SerialKeyButton.Click += (ob, ev) => {
+                var form = Program.ServiceProvider.GetService<EditSerialKeyForm>();
+                form.InitStartup();
+                form.ShowDialog(this);
+            };
+        }
         // affiche les informations d'une année scolaire sur le contrôle personnalisé SchoolYearInfo
         private void LoadSelectedSchoolYearDetail(SchoolYear schoolYear)
         {
@@ -622,6 +670,72 @@ namespace Primary.SchoolApp
                 disciplineSubjectInfo.NameTextBox.Text = subject.DefaultName;              
             }
         }
+
+        //chargement des info de l'école dans le datagridview de la page setting
+        private void LoadSchoolInfoToSettingGridView()
+        {
+            DataTable dataTable = new();
+            string language = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "EN" : "FR";
+            
+            string columnName="Name";
+            string columnValue = "Value";
+            dataTable.Columns.Add(columnName);
+            dataTable.Columns.Add(columnValue);
+            object[] rowName = new object[2];
+            rowName[0] = language == "FR" ? "ECOLE" : "SCHOOL";
+            rowName[1] = Program.CurrentSchool.Name;
+            object[] rowMotto = new object[2];
+            rowMotto[0] = language == "FR" ? "DEVISE" : "MOTTO";
+            rowMotto[1] = Program.CurrentSchool.Motto;
+            object[] rowPhone = new object[2];
+            rowPhone[0] = language == "FR" ? "TELEPHONE" : "PHONE";
+            rowPhone[1] = Program.CurrentSchool.Phone;
+            object[] rowCity = new object[2];
+            rowCity[0] = language == "FR" ? "VILLE" : "CITY";
+            rowCity[1] = Program.CurrentSchool.City;
+            object[] rowPostBox = new object[2];
+            rowPostBox[0] = language == "FR" ? "BOITE POSTALE" : "POST BOX";
+            rowPostBox[1] = Program.CurrentSchool.PostBox;
+            object[] rowLocalization = new object[2];
+            rowLocalization[0] = language == "FR" ? "LOCALISATION" : "LOCALIZATION";
+            rowLocalization[1] = Program.CurrentSchool.Address;
+            object[] rowWebsite = new object[2];
+            rowWebsite[0] = language == "FR" ? "SITE WEB" : "WEB SITE";
+            rowWebsite[1] = Program.CurrentSchool.WebSite;
+            object[] rowEmail = new object[2];
+            rowEmail[0] = language == "FR" ? "EMAIL" : "EMAIL";
+            rowEmail[1] = Program.CurrentSchool.Email;
+            object[] rowFacebook = new object[2];
+            rowFacebook[0] = language == "FR" ? "FACEBOOK" : "FACEBOOK";
+            rowFacebook[1] = Program.CurrentSchool.FaceBook;
+            object[] rowHeadMaster = new object[2];
+            rowHeadMaster[0] = language == "FR" ? "RESPONSABLE" : "HEAD MASTER";
+            rowHeadMaster[1] = Program.CurrentSchool.HeadMasterName;
+
+            dataTable.Rows.Add(rowName);
+            dataTable.Rows.Add(rowMotto);
+            dataTable.Rows.Add(rowPhone);
+            dataTable.Rows.Add(rowCity);
+            dataTable.Rows.Add(rowPostBox);
+            dataTable.Rows.Add(rowLocalization);
+            dataTable.Rows.Add(rowWebsite);
+            dataTable.Rows.Add(rowEmail);
+            dataTable.Rows.Add(rowFacebook);
+            dataTable.Rows.Add(rowHeadMaster);
+
+            CreateSchoolColumnsForSettingGridView();
+            SettingGridView.DataSource = dataTable;
+        }
+        private void CreateSchoolColumnsForSettingGridView()
+        {
+            SettingGridView.Columns.Clear();
+            GridViewTextBoxColumn nameColum = new("Name");
+            GridViewTextBoxColumn valueColum = new("Value");
+            nameColum.HeaderText = string.Empty;
+            valueColum.HeaderText = string.Empty;
+            SettingGridView.Columns.Add(nameColum);
+            SettingGridView.Columns.Add(valueColum);
+        }
         //chargement la liste des années scolaires dans le datagridview de la page setting
         private async void LoadSchoolYearListToSettingGridView()
         {
@@ -690,10 +804,17 @@ namespace Primary.SchoolApp
         {
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColum = new("Name");
+            GridViewTextBoxColumn docTemplateColum = new("DocumentLanguage");
+            GridViewCheckBoxColumn isTruncateColumn = new("NoteIsTruncate");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
             nameColum.HeaderText = Language.labelDesignation;
             sequenceColum.HeaderText = Language.labelSequence;
+            docTemplateColum.HeaderText = Language.LabelDocumentTemplate;
+            isTruncateColumn.HeaderText = Language.LabelEnableNoteTruncation;
+
             SettingGridView.Columns.Add(nameColum);
+            SettingGridView.Columns.Add(docTemplateColum);
+            SettingGridView.Columns.Add(isTruncateColumn);
             SettingGridView.Columns.Add(sequenceColum);
         }
         //chargement des  classes dans le datagridview de la page setting
@@ -710,19 +831,13 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Clear();
             GridViewTextBoxColumn nameColum = new("Name");
             GridViewTextBoxColumn groupColum = new("Group.Name");
-            GridViewTextBoxColumn docTemplateColum = new("DocumentLanguage");
-            GridViewCheckBoxColumn isTruncateColumn = new("NoteIsTruncate");
             GridViewTextBoxColumn sequenceColum = new("Sequence");
 
             nameColum.HeaderText = Language.labelDesignation;
             groupColum.HeaderText = Language.labelGroup;
-            docTemplateColum.HeaderText = Language.LabelDocumentTemplate;
             sequenceColum.HeaderText = Language.labelSequence;
-            isTruncateColumn.HeaderText = Language.LabelEnableNoteTruncation;
             SettingGridView.Columns.Add(nameColum);
             SettingGridView.Columns.Add(groupColum);
-            SettingGridView.Columns.Add(docTemplateColum);
-            SettingGridView.Columns.Add(isTruncateColumn);
             SettingGridView.Columns.Add(sequenceColum);
         }
         //chargement des  salles de classe dans le datagridview de la page setting
@@ -915,35 +1030,35 @@ namespace Primary.SchoolApp
                 SettingGridView.Columns.Clear();
                 SettingGridView.Templates.Clear();
                 SettingGridView.Relations.Clear();
-                GridViewTextBoxColumn codeColumn = new("Code");
+                GridViewDecimalColumn idColumn = new("Id");
                 GridViewTextBoxColumn nameColumn = new(Language.fieldName);
                 GridViewTextBoxColumn sequenceColumn = new("Sequence");
                 nameColumn.HeaderText = Language.labelDesignation;
-                codeColumn.HeaderText = Language.labelCode;
+                idColumn.HeaderText = Language.labelCode;
                 sequenceColumn.HeaderText = Language.labelSequence;
-                codeColumn.IsVisible = false;
-                SettingGridView.Columns.Add(codeColumn);
+                idColumn.IsVisible = false;
+                SettingGridView.Columns.Add(idColumn);
                 SettingGridView.Columns.Add(nameColumn);
                 SettingGridView.Columns.Add(sequenceColumn);
 
                 //
-                GridViewTemplate template = new GridViewTemplate();
-                GridViewTextBoxColumn parentCodeColumn = new("ParentCode");
+                GridViewTemplate template = new();
+                GridViewDecimalColumn parentIdColumn = new("Mother");
                 GridViewTextBoxColumn childNameColumn = new(Language.fieldName);
                 GridViewTextBoxColumn sequenceTColumn = new("Sequence");
-                parentCodeColumn.HeaderText = Language.labelCode;
+                parentIdColumn.HeaderText = Language.labelCode;
                 childNameColumn.HeaderText = Language.labelDesignation;
                 sequenceTColumn.HeaderText = Language.labelSequence;
-                parentCodeColumn.IsVisible = false;
-                template.Columns.Add(parentCodeColumn);
+                parentIdColumn.IsVisible = false;
+                template.Columns.Add(parentIdColumn);
                 template.Columns.Add(childNameColumn);
                 template.Columns.Add(sequenceTColumn);
                 SettingGridView.Templates.Add(template);
 
                 GridViewRelation relation = new (SettingGridView.MasterTemplate, template);
                 relation.RelationName = "ParentChild";
-                relation.ParentColumnNames.Add("Code");
-                relation.ChildColumnNames.Add("ParentCode");
+                relation.ParentColumnNames.Add("Id");
+                relation.ChildColumnNames.Add("Mother");
                 this.SettingGridView.Relations.Add(relation);
             }
 
@@ -1045,6 +1160,19 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Add(nameColumn);
             SettingGridView.Columns.Add(sequenceColumn);
         }
+
+        // show school UI for edit
+        private void ShowSchoolEditForm()
+        {
+            var form = Program.ServiceProvider.GetService<EditSchoolForm>();
+            form.Text = Language.labelHome;
+            form.Icon = this.Icon;
+            form.InitStartup();
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                LoadSchoolInfoToSettingGridView();
+            }
+        }
         // show school year UI for edit
         private void ShowSchoolYearEditForm(SchoolYear schoolYear)
         {
@@ -1062,7 +1190,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Année scolaire inconnue");
+                RadMessageBox.Show(Language.messageUnknowSchoolYear);
             }
         }
         // show school year UI for add new 
@@ -1087,7 +1215,7 @@ namespace Primary.SchoolApp
                 var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelGroup;
                 form.Icon = this.Icon;
-                form.Init(schoolGroup);
+                form.InitStartup(schoolGroup);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     SettingGridView.DataSource = new List<SchoolGroup>();
@@ -1096,7 +1224,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Groupe inconnu");
+                RadMessageBox.Show(Language.messageUnknowGroup);
             }
 
         }
@@ -1131,7 +1259,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Classe inconnue");
+                RadMessageBox.Show(Language.messageUnknowClass);
             }
         }
         // show school class UI to add new 
@@ -1165,7 +1293,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Salle de Classe inconnue");
+                RadMessageBox.Show(Language.messageUnknowClass);
             }
         }
         // show school room UI to add new 
@@ -1200,7 +1328,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Type de flux de trésorerie inconnu");
+                RadMessageBox.Show(Language.messageUnknowCashflow);
             }
         }
         // show  cashflowtype UI to add new 
@@ -1234,7 +1362,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Type de flux de trésorerie inconnu");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
         }
         // show PaymentMean UI to add new 
@@ -1269,7 +1397,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Type de flux de trésorerie inconnu");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
         }
         // show SchoolingCost UI to add new 
@@ -1306,7 +1434,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Type de flux de trésorerie inconnu");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
         }
         // show SchoolingCost UI to add new 
@@ -1342,7 +1470,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Groupe inconnu");
+                RadMessageBox.Show(Language.messageUnknowGroup);
             }
         }
         // show Subject group UI to add new 
@@ -1377,7 +1505,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Matière inconnue");
+                RadMessageBox.Show(Language.messageUnknowSubject);
             }
         }
         // show Subject UI to add new 
@@ -1402,19 +1530,20 @@ namespace Primary.SchoolApp
             {
                 var form = Program.ServiceProvider.GetService<EditEvaluationSessionForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelEvaluationSession;
-                form.Init(item);
+                form.InitStartup(item);
                 form.Icon= this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
+                    SplitEvaluationSessionList();
                     SettingGridView.MasterTemplate.DataSource = new List<EvaluationSession>();
-                    SettingGridView.Templates[0].DataSource = new List<EvaluationSessionChild>();
+                    SettingGridView.Templates[0].DataSource = new List<EvaluationSession>();
                     SettingGridView.MasterTemplate.DataSource = Program.EvaluationSessionParentList;
                     SettingGridView.Templates[0].DataSource = Program.EvaluationSessionChildList;
                 }
             }
             else
             {
-                RadMessageBox.Show("Session inconnue");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
         }
         // show Rating system UI for add new
@@ -1448,7 +1577,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Système inconnu");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
         }
         // show job UI for add
@@ -1483,7 +1612,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Fonction inconnue");
+                RadMessageBox.Show(Language.messageUnknowJob);
             }
 
         }
@@ -1519,7 +1648,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Fonction inconnue");
+                RadMessageBox.Show(Language.messageUnknowGroup);
             }
 
         }
@@ -1555,7 +1684,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Utilisateur  inconnu");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
 
         }
@@ -1576,7 +1705,7 @@ namespace Primary.SchoolApp
             }
             else
             {
-                RadMessageBox.Show("Object  inconnu");
+                RadMessageBox.Show(Language.messageUnknowType);
             }
 
         }
@@ -1603,36 +1732,24 @@ namespace Primary.SchoolApp
 
 
         }
-
-        //load basic data like school year, student, room,....
       
         //sépare les sessions d'évaluation en mère-fille
         private void SplitEvaluationSessionList()
         {
-            Program.EvaluationSessionChildList = new List<EvaluationSessionChild>();
-            Program.EvaluationSessionParentList = new List<EvaluationSession>();
-            foreach (var item in Program.EvaluationSessionList)
-            {
-                if (item.Code != "TERM01" && item.Code != "TERM02" && item.Code != "TERM03")
-                {
-                    Program.EvaluationSessionChildList.Add(item.AsEvaluationSessionChild());
-                }
-                else
-                {
-                    Program.EvaluationSessionParentList.Add(item);
-                }
-            }
+            Program.EvaluationSessionParentList = Program.EvaluationSessionList.Where(e => e.Mother == 0).ToList();
+            Program.EvaluationSessionChildList = Program.EvaluationSessionList.Where(e=>e.Mother!=0).ToList();
         }
         //génère les sessions d'évaluation manquantes
         private void GenerateEvaluationSessions()
         {
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "TERM01") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new ()
                 {
                     Code = "TERM01",
                     FrenchName = "Premier Trimestre",
                     EnglishName = "First Trimester",
+                    Mother=0,
                     Sequence = 1
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1657,6 +1774,7 @@ namespace Primary.SchoolApp
                     Code = "TERM02",
                     FrenchName = "Deuxième Trimestre",
                     EnglishName = "Second Trimester",
+                    Mother = 0,
                     Sequence = 2
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1681,6 +1799,7 @@ namespace Primary.SchoolApp
                     Code = "TERM03",
                     FrenchName = "Troisième Trimestre",
                     EnglishName = "Third Trimester",
+                    Mother = 0,
                     Sequence = 3
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1700,11 +1819,12 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL01") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new ()
                 {
                     Code = "EVAL01",
-                    FrenchName = "EVALUATION N°1",
-                    EnglishName = "EVALUATION N°1",
+                    FrenchName = "Evaluation N°1",
+                    EnglishName = "Evaluation N°1",
+                    Mother =1,
                     Sequence = 1
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1724,12 +1844,13 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL02") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new()
                 {
 
                     Code = "EVAL02",
-                    FrenchName = "EVALUATION N°2",
-                    EnglishName = "EVALUATION N°2",
+                    FrenchName = "Evaluation N°2",
+                    EnglishName = "Evaluation N°2",
+                    Mother = 1,
                     Sequence = 2
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1752,8 +1873,9 @@ namespace Primary.SchoolApp
                 EvaluationSession type = new EvaluationSession()
                 {
                     Code = "EVAL03",
-                    FrenchName = "EVALUATION N°3",
-                    EnglishName = "EVALUATION N°3",
+                    FrenchName = "Evaluation N°3",
+                    EnglishName = "Evaluation N°3",
+                    Mother = 1,
                     Sequence = 3
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1773,11 +1895,12 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL04") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new()
                 {
                     Code = "EVAL04",
-                    FrenchName = "EVALUATION N°4",
-                    EnglishName = "EVALUATION N°4",
+                    FrenchName = "Evaluation N°4",
+                    EnglishName = "Evaluation N°4",
+                    Mother = 2,
                     Sequence = 1
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1797,11 +1920,12 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL05") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new()
                 {
                     Code = "EVAL05",
-                    FrenchName = "EVALUATION N°5",
-                    EnglishName = "EVALUATION N°5",
+                    FrenchName = "Evaluation N°5",
+                    EnglishName = "Evaluation N°5",
+                    Mother = 2,
                     Sequence = 2
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1821,11 +1945,12 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL06") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new ()
                 {
                     Code = "EVAL06",
-                    FrenchName = "EVALUATION N°6",
-                    EnglishName = "EVALUATION N°6",
+                    FrenchName = "Evaluation N°6",
+                    EnglishName = "Evaluation N°6",
+                    Mother = 2,
                     Sequence = 3
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1845,11 +1970,12 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL07") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new ()
                 {
                     Code = "EVAL07",
-                    FrenchName = "EVALUATION N°7",
-                    EnglishName = "EVALUATION N°7",
+                    FrenchName = "Evaluation N°7",
+                    EnglishName = "Evaluation N°7",
+                    Mother = 3,
                     Sequence = 1
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -1869,11 +1995,12 @@ namespace Primary.SchoolApp
             }
             if (Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL08") == null)
             {
-                EvaluationSession type = new EvaluationSession()
+                EvaluationSession type = new()
                 {
                     Code = "EVAL08",
-                    FrenchName = "EVALUATION N°8",
-                    EnglishName = "EVALUATION N°8",
+                    FrenchName = "Evaluation N°8",
+                    EnglishName = "Evaluation N°8",
+                    Mother = 3,
                     Sequence = 2
                 };
                 var isDone = evaluationSessionService.CreateEvaluationSessionAsync(type).Result;
@@ -2147,6 +2274,12 @@ namespace Primary.SchoolApp
                 SettingGridView.DataSource = null;
                 switch (SettingLeftListView.SelectedItem.Key)
                 {
+                    case 0:
+                        LoadSchoolInfoToSettingGridView();
+                        SetVisibleSelectedSettingPageUserControl(schoolInfo);
+                        schoolInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolInfo.EditButton.Image = AppUtilities.GetImage("Edit");
+                        break;
                     case 1:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSchoolYear;
                         if (!isFirstLoadingBasicData)
@@ -2519,6 +2652,13 @@ namespace Primary.SchoolApp
                 SettingInfoRightPanel.Visible = true;
                 switch (SettingLeftListView.SelectedItem.Key)
                 {
+                    case 0:
+                        LoadSchoolDetail(Program.CurrentSchool);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!schoolInfo.Visible) schoolYearInfo.Visible = true;
+                        }
+                        break;
                     case 1:
                         LoadSelectedSchoolYearDetail(SettingGridView.CurrentRow.DataBoundItem as SchoolYear);
                         if (SettingGridView.RowCount > 0)
@@ -2704,6 +2844,9 @@ namespace Primary.SchoolApp
         {
             switch (SettingLeftListView.SelectedItem.Key)
             {
+                case 0:
+                    ShowSchoolEditForm();
+                    break;
                 case 1:
                     ShowSchoolYearEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolYear);
                     break;
@@ -2861,7 +3004,7 @@ namespace Primary.SchoolApp
             {
                 if (SettingGridView.CurrentRow.DataBoundItem is SubscriptionFee selectedRecord)
                 {
-                    var result = RadMessageBox.Show(this, Language.messageConfirmeDuplicateFee + " " + openYear.Name, Language.labelSchoolingFee, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
+                    var result = RadMessageBox.Show(this, Language.messageConfirmeFeeDuplicate + " " + openYear.Name, Language.labelSchoolingFee, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
                     if (result == DialogResult.Yes)
                     {
                         var newRecord = new SubscriptionFee
@@ -2898,7 +3041,7 @@ namespace Primary.SchoolApp
                         }
                         else
                         {
-                            RadMessageBox.Show(this, Language.messageFeeAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
+                            RadMessageBox.Show(this, Language.messageFeeDuplicateAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
 
                         }
                     }
@@ -2913,18 +3056,18 @@ namespace Primary.SchoolApp
         // duplique les frais de scolarité pour l'année en cours
         private void MenuDuplicateSchoolingFee_Click(object sender, EventArgs e)
         {
-            var openYear = Program.CurrentSchoolYear;
-            if (openYear.IsClosed == false)
+            var currentYear = Program.SchoolYearList.Where(y => y.IsClosed == false).FirstOrDefault();
+            if (currentYear != null)
             {
                if (SettingGridView.CurrentRow.DataBoundItem is SchoolingCost selectedRecord)
                 {
-                    var result = RadMessageBox.Show(this, Language.messageConfirmeDuplicateFee+" " + openYear.Name, Language.labelSchoolingFee, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
+                    var result = RadMessageBox.Show(this, $"{Language.messageConfirmeFeeDuplicate} ({currentYear.Name}) "  , Language.labelSchoolingFee, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
                     if (result == DialogResult.Yes)
                     {
                         var newRecord = new SchoolingCost
                         {
-                            SchoolYear = openYear,
-                            SchoolYearId = openYear.Id,
+                            SchoolYear = currentYear,
+                            SchoolYearId = currentYear.Id,
                             SchoolClass = selectedRecord.SchoolClass,
                             SchoolClassId = selectedRecord.SchoolClassId,
                             CashFlowType = selectedRecord.CashFlowType,
@@ -2959,8 +3102,7 @@ namespace Primary.SchoolApp
                         }
                         else
                         {
-                            RadMessageBox.Show(this, Language.messageFeeAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
-
+                            RadMessageBox.Show(this, Language.messageFeeDuplicateAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
                         }
                     }
                 }

@@ -40,17 +40,19 @@ namespace Primary.SchoolApp.UI
         private readonly IStudentEnrollingService studentEnrollingService;
         private readonly LocalEnrollingService localEnrollingService;
         private readonly ISubscriptionService subscriptionService;
+        private readonly ISchoolService schoolService;
         public StartForm(ClientApp clientApp, ISchoolYearService schoolYearService, IDisciplineService disciplineService, ICountryService countryService,
             IModuleService moduleService, IEmployeeService employeeService, IUserService userService, IEmployeeGroupService employeeGroupService,
             IRatingSystemService ratingSystemService, IEvaluationSessionService evaluationSessionService, ISubjectService subjectService,
             ISubjectGroupService subjectGroupService, ISubscriptionFeeService subscriptionFeeService, ISchoolingCostService schoolingCostService,
             IPaymentMeanService paymentMeanService, ICashFlowTypeService cashFlowTypeService, ISchoolRoomService schoolRoomService,
             ISchoolClassService schoolClassService, ISchoolGroupService schoolGroupService, IJobService jobService, ICashFlowService cashFlowService,
-            IStudentEnrollingService studentEnrollingService,ISubscriptionService subscriptionService
+            IStudentEnrollingService studentEnrollingService,ISubscriptionService subscriptionService,ISchoolService schoolService
             )
         {
             InitializeComponent();
             this.BackgroundImage = Resources.Background_load;
+            this.schoolService = schoolService;
             this.clientApp= clientApp;
             this.schoolYearService = schoolYearService;
             this.disciplineService = disciplineService;
@@ -121,6 +123,7 @@ namespace Primary.SchoolApp.UI
             var getEmployeeListTask = employeeService.GetEmployeeList();
             var getCountryListTask = countryService.GetCountryList();
             var getDisciplineSubjectListTask = disciplineService.GetDisciplineSubjectList();
+            var getCurrentSchoolTask=schoolService.GetLastSchooAsync();
            
             Program.SchoolYearList = await getSchoolYearListTask;
             Program.SchoolGroupList = await getSchoolGroupListTask;
@@ -142,6 +145,7 @@ namespace Primary.SchoolApp.UI
             Program.ModuleList = await getModuleListTask;
             Program.CountryList = await getCountryListTask;
             Program.DisciplineSubjectList = await getDisciplineSubjectListTask;
+            Program.CurrentSchool= await getCurrentSchoolTask;
             LoadDataForDefaultSchoolYear();
         }
         // chargement des données pour l'année en cours
@@ -162,7 +166,8 @@ namespace Primary.SchoolApp.UI
                 var getCashBoxOutTask = cashFlowService.GetCashBoxOutList(schoolYear.Id);
                 var getStudentRoomTask=studentEnrollingService.GetStudentRoomListAsync(schoolYear.Id);
                 var getEvaluationStateTask=evaluationSessionService.GetEvaluationSessionStateListBySchoolYearAsync(schoolYear.Id);
-                
+                var getEmployeeListTask = employeeService.GetEmployeeEnrollingList(schoolYear.Id);
+                var getEmployeeRoomListTask=employeeService.GetRoomListBySchoolYear(schoolYear.Id); 
                 //on s'assure que toutes soient terminées
                 await System.Threading.Tasks.Task.WhenAll(getPaymentListTask, getEnrollingListTask, getDiscountListTask);
                 //chargement des données dans les listes principales
@@ -173,6 +178,8 @@ namespace Primary.SchoolApp.UI
                 Program.SubscriptionList=await getSubscriptionTask;
                 Program.CashFlowList = await getCashFlowTask;
                 Program.StudentRoomList = await getStudentRoomTask;
+                Program.EmployeeEnrollingList = await getEmployeeListTask;
+                Program.EmployeeRoomList=await getEmployeeRoomListTask;
                 //Création de la liste des inscriptions à afficher
                 Program.StudentEnrollingList = new List<StudentEnrollingDTO>();
                 foreach (var enrolling in enrollingList)

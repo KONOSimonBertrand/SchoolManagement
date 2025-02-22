@@ -10,7 +10,6 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox ReportTitleTextBox { get => reportTitleTextBox; }
         public Telerik.Reporting.TextBox SchoolYearTextBox { get => schoolYearTextBox; }
         public Telerik.Reporting.TextBox RoomTextBox { get => roomTextBox; }
-        public Telerik.Reporting.TextBox ClassroomSizeTextBox { get => classroomSizeTextBox; }
         public Telerik.Reporting.TextBox TotalCoefTextBox { get => totalCoefTextBox; }
         public Telerik.Reporting.TextBox StudentLabel {  get => studentLabel; }
         public Telerik.Reporting.TextBox StudentTextLabel { get=>studentTextBox; }

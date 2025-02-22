@@ -18,15 +18,11 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAsync(SchoolClass schoolClass)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO SchoolClasses(Name,GroupId,DocumentLanguageId,ReportCardModel,AverageFormula,NoteIsTruncate,Sequence) VALUES(@name,@groupId,@documentLanguageId,@reportCardModel,@averageFormula,@noteIsTruncate,@sequence);";
+            string query = @"INSERT INTO SchoolClasses(Name,GroupId,Sequence) VALUES(@name,@groupId,@sequence);";
             var result = connection.Execute(query, new
             {
                 schoolClass.Name,
                 schoolClass.GroupId,
-                schoolClass.DocumentLanguageId,
-                schoolClass.ReportCardModel,
-                schoolClass.AverageFormula,
-                schoolClass.NoteIsTruncate,
                 schoolClass.Sequence
             });
             await Task.Delay(0);
@@ -165,16 +161,11 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> UpdateAsync(SchoolClass schoolClass)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"UPDATE SchoolClasses SET Name=@name,GroupId=@groupId,DocumentLanguageId=@documentLanguageId,
-                             ReportCardModel=@reportCardModel,AverageFormula=@averageFormula,NoteIsTruncate=@noteIsTruncate,Sequence=@sequence WHERE Id=@id ;";
+            string query = @"UPDATE SchoolClasses SET Name=@name,GroupId=@groupId,Sequence=@sequence WHERE Id=@id ;";
             var result = connection.Execute(query, new
             {
                 schoolClass.Name,
                 schoolClass.GroupId,
-                schoolClass.DocumentLanguageId,
-                schoolClass.ReportCardModel,
-                schoolClass.AverageFormula,
-                schoolClass.NoteIsTruncate,
                 schoolClass.Sequence,
                 schoolClass.Id
             });

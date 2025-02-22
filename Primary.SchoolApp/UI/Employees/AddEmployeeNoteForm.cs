@@ -52,18 +52,20 @@ namespace Primary.SchoolApp.UI
                 {
                     EmployeeNote note = new()
                     {
-                        EnrollingId = selectedEnrolling.Id,
+                        EmployeeId = selectedEnrolling.EmployeeId,
                         Title=subject,
                         Date=date,
                         Description = DescriptionTextBox.Text,
-                        Enrolling = selectedEnrolling,
+                        Employee = selectedEnrolling.Employee,
+                        SchoolYearId=selectedEnrolling.SchoolYearId,
+                        SchoolYear=selectedEnrolling.SchoolYear,
                     };
                     var isDone = employeeService.AddNote(note).Result;
                     if (isDone)
                     {
                         Log log = new()
                         {
-                            UserAction = $"Ajout d'une note de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                            UserAction = $"Ajout d'une note de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
@@ -89,12 +91,8 @@ namespace Primary.SchoolApp.UI
        
         private bool RecordExist(DateTime date,string title)
         {
-            if (selectedEnrolling.Notes.Where(
-                x => x.Date.Date== date.Date && x.Title == title).Count() > 0)
-            {
-                return true;
-            }
-            return false;
+            var notes=employeeService.GetNoteListByEmployee(this.selectedEnrolling.EmployeeId, this.selectedEnrolling.SchoolYearId).Result;
+            return notes.Any(x => x.Date.Date == date.Date && x.Title == title);
         }
     }
 }

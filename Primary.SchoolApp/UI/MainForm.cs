@@ -24,7 +24,7 @@ namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
     {
-        private BackgroundWorker backgroundWorker;
+        private readonly BackgroundWorker mainBackgroundWorker;
         private readonly RadContextMenuManager homeMainListViewContextMenuManager = new();
         private readonly RadContextMenu homeMainListViewContextMenu = new();
         private readonly RadMenuItem menuChangeEnrollingStatus = new();
@@ -101,7 +101,12 @@ namespace Primary.SchoolApp
             this.studentNoteService = studentNoteService;
             localEnrollingService = new LocalEnrollingService();
             localStudentNoteService=Program.ServiceProvider.GetService<LocalStudentNoteService>();
-            backgroundWorker = new()
+            mainBackgroundWorker = new()
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            employeeBackgroundWorker = new BackgroundWorker()
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
@@ -151,9 +156,9 @@ namespace Primary.SchoolApp
         }
         private void InitEventsHomePage()
         {
-            backgroundWorker.DoWork += BackgroundWorker_DoWork;
-            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+            mainBackgroundWorker.DoWork += MainBackgroundWorker_DoWork;
+            mainBackgroundWorker.ProgressChanged += MainBackgroundWorker_ProgressChanged;
+            mainBackgroundWorker.RunWorkerCompleted += MainBackgroundWorker_RunWorkerCompleted;
             this.HomeSchoolYearDropDownList.SelectedValueChanged += HomeSchoolYearDropDownList_SelectedValueChanged;
             HomeAddButton.Click += HomeAddButton_Click;
             HomeListViewToggleButton.ToggleStateChanged += HomeToggleButton_ToggleStateChanged;
@@ -179,7 +184,7 @@ namespace Primary.SchoolApp
             };
         }
 
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void MainBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             StudentNoteSearchTextBox.Text = string.Empty;
             HomeSearchTextBox.Text = string.Empty;
@@ -190,6 +195,10 @@ namespace Primary.SchoolApp
             HomeMainListView.DataSource = Program.StudentEnrollingList;
             HomeLeftListView.ListViewElement.SynchronizeVisualItems();
             HomeMainListView.ListViewElement.SynchronizeVisualItems();
+            EmployeeGridView.DataSource = Program.EmployeeEnrollingList;
+            EmployeeMainListView.DataSource = Program.EmployeeEnrollingList;
+            EmployeeLeftListView.ListViewElement.SynchronizeVisualItems();
+            EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
             InitCashFlowGridViewForData();
             LoadDataForDisciplineGridView();
             LoadDataToStudentNoteGridView();
@@ -198,12 +207,12 @@ namespace Primary.SchoolApp
             this.TaskWaitingBar.Visibility=ElementVisibility.Hidden;
         }
 
-        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void MainBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
            
         }
 
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void MainBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (HomeSchoolYearDropDownList.SelectedItem != null)
             {
@@ -222,6 +231,8 @@ namespace Primary.SchoolApp
                     var getCashBoxOutTask = cashFlowService.GetCashBoxOutList(schoolYear.Id);
                     var getEvaluationStateTask = evaluationSessionService.GetEvaluationSessionStateListBySchoolYearAsync(schoolYear.Id);
                     var getStudentRoomTask = studentEnrollingService.GetStudentRoomListAsync(schoolYear.Id);
+                    var getEmployeeListTask = employeeService.GetEmployeeEnrollingList(schoolYear.Id);
+                    var getEmployeeRoomListTask = employeeService.GetRoomListBySchoolYear(schoolYear.Id);
                     Program.TuitionDiscountList = getDiscountListTask.Result;
                     Program.TuitionPaymentList = getPaymentListTask.Result;
                     Program.SchoolingCostItemList = getSchoolingCostItemTask.Result;
@@ -229,6 +240,8 @@ namespace Primary.SchoolApp
                     Program.CashFlowList= getCashFlowTask.Result;
                     Program.StudentRoomList= getStudentRoomTask.Result;
                     Program.EvaluationSessionStateList = getEvaluationStateTask.Result;
+                    Program.EmployeeEnrollingList = getEmployeeListTask.Result;
+                    Program.EmployeeRoomList = getEmployeeRoomListTask.Result;
                     var enrollingList = getEnrollingListTask.Result;
                     //Création de la liste des inscriptions à afficher
                     Program.StudentEnrollingList = new List<StudentEnrollingDTO>();
@@ -271,7 +284,7 @@ namespace Primary.SchoolApp
         //Selectionne une année scolaire
         private void HomeSchoolYearDropDownList_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (backgroundWorker.IsBusy != true)
+            if (mainBackgroundWorker.IsBusy != true)
             {
                 HomeInfoRightPanel.Visible = false;
                 HomeGridView.DataSource = null;
@@ -279,12 +292,11 @@ namespace Primary.SchoolApp
                 HomeLeftListView.ListViewElement.SynchronizeVisualItems();
                 HomeMainListView.ListViewElement.SynchronizeVisualItems();
                 CashFlowGridView.DataSource = null;
-                //show waiting bar
-               
+                // show waiting bar
                this.TaskWaitingBar.Visibility=ElementVisibility.Visible;
                this.TaskWaitingBar.StartWaiting();
                 // Start the asynchronous operation to get data.
-                backgroundWorker.RunWorkerAsync();
+                mainBackgroundWorker.RunWorkerAsync();
             }
             
         }
@@ -309,10 +321,19 @@ namespace Primary.SchoolApp
         {
             TimeTableDateNavigator.Location = new System.Drawing.Point(350, 10);
             TimeTableDateNavigator.Size = new System.Drawing.Size(350, 60);
+
+            if (!Program.SerialKeyIsOK)
+            {
+                var customer = Program.CurrentSchool != null ? Program.CurrentSchool.Name : "SCHOOL APP";
+                RadMessageBox.Show($"{customer}, Votre licence a expiré. Merci de bien vouloir contacter SuiTtech au +237 679 72 83 44 ou +33 06 01 24 89 20  pour obtenir une licence ");
+
+                var form = Program.ServiceProvider.GetService<EditSerialKeyForm>();
+                form.ShowDialog(this);
+            }
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isLogOut)
+            if (!isLogOut && Program.SerialKeyIsOK)
             {
                 LogOut();
             }
@@ -1528,7 +1549,7 @@ namespace Primary.SchoolApp
                 else
                 {
                     //on cherche une photo dans le dossier 
-                    var url = clientApp.StudentPitureFolder + "/" + enrolling.Student.IdNumber;
+                    var url = Program.CurrentSchool.StudentPictureDirectory + "/" + enrolling.Student.IdNumber;
                     if (File.Exists(url))
                     {
                         studentEnrollingInfo.StudentLabel.Image = new Bitmap(Image.FromFile(url), new System.Drawing.Size(114, 114));
@@ -1955,8 +1976,7 @@ namespace Primary.SchoolApp
             }
 
         }
-        
-      
+       
         #endregion
 
     }

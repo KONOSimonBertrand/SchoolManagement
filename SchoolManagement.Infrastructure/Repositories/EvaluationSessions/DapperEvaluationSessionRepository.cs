@@ -1,7 +1,4 @@
-﻿
-
-using Dapper;
-using MySqlX.XDevAPI;
+﻿using Dapper;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
@@ -19,13 +16,14 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAsync(EvaluationSession session)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO EvaluationSessions(Code,FrenchName,EnglishName,Sequence)  
-                             VALUES(@code,@frenchName,@englishName,@sequence);";
+            string query = @"INSERT INTO EvaluationSessions(Code,FrenchName,EnglishName,Mother,Sequence)  
+                             VALUES(@code,@frenchName,@englishName,@mother,@sequence);";
             var result = connection.Execute(query, new
             {
                 code = session.Code,
                 frenchName = session.FrenchName,
                 englishName = session.EnglishName,
+                mother=session.Mother,
                 sequence = session.Sequence
             });
             await Task.Delay(0);
@@ -124,8 +122,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> UpdateAsync(EvaluationSession session)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"UPDATE EvaluationSessions SET FrenchName=@frenchName,EnglishName=@englishName
-                             WHERE Id=@id;";
+            string query = @"UPDATE EvaluationSessions SET FrenchName=@frenchName,EnglishName=@englishName  WHERE Id=@id;";
             var result = connection.Execute(query, new
             {
                 frenchName = session.FrenchName,

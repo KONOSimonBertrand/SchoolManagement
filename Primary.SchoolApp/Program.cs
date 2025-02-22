@@ -35,7 +35,7 @@ namespace Primary.SchoolApp
         public static IList<EvaluationSessionState> EvaluationSessionStateList;
         public static IList<EvaluationSession> EvaluationSessionList;
         public static IList<EvaluationSession> EvaluationSessionParentList;
-        public static IList<EvaluationSessionChild> EvaluationSessionChildList;
+        public static IList<EvaluationSession> EvaluationSessionChildList;
         public static IList<RatingSystem> RatingSystemList;
         public static IList<Job> JobList;
         public static IList<EmployeeGroup> EmployeeGroupList;
@@ -52,6 +52,8 @@ namespace Primary.SchoolApp
         public static IList<CashBoxIn> CashBoxInList;
         public static IList<CashBoxOut> CashBoxOutList;
         public static IList<StudentRoom> StudentRoomList;
+        public static IList<EmployeeRoom> EmployeeRoomList;
+        public static School CurrentSchool;
         //public static IList<StudentNoteDTO> StudentNoteList;
         public static User UserConnected;
         public static IServiceProvider ServiceProvider { get; private set; }
@@ -59,6 +61,7 @@ namespace Primary.SchoolApp
         public static DateTime ScheduleDate { get; internal set; }
 
         public static SchoolYear CurrentSchoolYear;
+        public static bool SerialKeyIsOK=false;
         [STAThread]
         static void Main()
         {
@@ -81,15 +84,8 @@ namespace Primary.SchoolApp
             ServiceProvider = host.Services;
             #endregion
             //définition des indépendances 
-            var clientName = ConfigurationManager.AppSettings["ClientName"];
-            var clientCode = ConfigurationManager.AppSettings["ClientCode"];
-            if (AppUtilities.ToHex(clientName) == clientCode) {
-               Application.Run(ServiceProvider.GetRequiredService<StartForm>());
-            }
-            else
-            {
-                Telerik.WinControls.RadMessageBox.Show("Merci de bien vouloir contacter SuiTtech au +237 679 72 83 44 ou +33 06 01 24 89 20  pour obtenir une licence ");
-            }            
+            Application.Run(ServiceProvider.GetRequiredService<StartForm>());
+                   
         }     
     }
 }

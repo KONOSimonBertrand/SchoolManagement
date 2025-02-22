@@ -710,6 +710,8 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditEmployeeForm";
             Text = "EditEmployeeForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();

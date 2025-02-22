@@ -66,10 +66,6 @@ namespace Primary.SchoolApp.UI
                     schoolClass.Name = NameTextBox.Text;
                     schoolClass.Group = GroupDropDownList.SelectedItem.DataBoundItem as SchoolGroup;
                     schoolClass.GroupId = schoolClass.Group.Id;
-                    schoolClass.DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue;
-                    schoolClass.NoteIsTruncate= bool.Parse(IsTruncateDropDownList.SelectedValue.ToString());
-                    schoolClass.ReportCardModel=int.Parse(ReportCardDropDownList.SelectedValue.ToString());
-                    schoolClass.AverageFormula=int.Parse(AverageFormulaDropDownList.SelectedValue.ToString());  
                     schoolClass.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                     bool isDone = schoolClassService.CreateSchoolClass(schoolClass).Result;
                     if (isDone == true)
@@ -103,7 +99,7 @@ namespace Primary.SchoolApp.UI
                 var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelGroup;
                 form.Icon = this.Icon;
-                form.Init(schoolGroup);
+                form.InitStartup(schoolGroup);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = schoolGroupService.GetSchoolGroup(form.NameTextBox.Text).Result;

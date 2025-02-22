@@ -96,24 +96,32 @@ namespace SchoolManagement.Application
             return await employeeWriteRepository.AddEnrollingPictureAsync(enrollingId, urlPicture);
         }
 
-        public Task<bool> AddRoomList(int enrollingId, IList<EmployeeRoom> roomList)
+        public Task<bool> AddRoomList(int employeeId,int schoolYearId, IList<EmployeeRoom> roomList)
         {
-            return employeeWriteRepository.AddRoomListAsync(enrollingId, roomList);
+            return employeeWriteRepository.AddRoomListAsync(employeeId,schoolYearId, roomList);
         }
 
-        public async Task<IList<EmployeeRoom>> GetRoomList(int enrollingId)
+        public async Task<IList<EmployeeRoom>> GetRoomListByEmployee(int employeeId,int schoolYearId)
         {
-            return await employeeReadRepository.GetRoomListAsync(enrollingId);
+            return await employeeReadRepository.GetRoomListByEmployeeAsync(employeeId,schoolYearId);
+        }
+        public async Task<IList<EmployeeRoom>> GetRoomListBySchoolYear(int schoolYearId)
+        {
+            return await employeeReadRepository.GetRoomListBySchoolYearAsync(schoolYearId);
+        }
+        public async Task<bool> AddSubjectList(int employeeId,int schoolYearId, IList<EmployeeSubject> subjectList)
+        {
+            return await employeeWriteRepository.AddSubjectListAsync(employeeId,schoolYearId, subjectList);
         }
 
-        public async Task<bool> AddSubjectList(int enrollingId, IList<EmployeeSubject> subjectList)
+        public async Task<IList<EmployeeSubject>> GetSubjectListByEmployee(int employeeId, int schoolYearId)
         {
-            return await employeeWriteRepository.AddSubjectListAsync(enrollingId, subjectList);
+            return await employeeReadRepository.GetSubjectListByEmployeeAsync(employeeId,schoolYearId);
         }
 
-        public async Task<IList<EmployeeSubject>> GetSubjectList(int enrollingId)
+        public async Task<IList<EmployeeSubject>> GetSubjectListBySchoolYear(int schoolYearId)
         {
-            return await employeeReadRepository.GetSubjectListAsync(enrollingId);
+            return await employeeReadRepository.GetSubjectListBySchoolYearAsync(schoolYearId);
         }
 
         public async Task<bool> AddAttendance(EmployeeAttendance attendance)
@@ -131,11 +139,14 @@ namespace SchoolManagement.Application
             return await employeeWriteRepository.DeleteAttendanceAsync(attendanceId);
         }
 
-        public async Task<IList<EmployeeAttendance>> GetAttendanceList(int enrollingId)
+        public async Task<IList<EmployeeAttendance>> GetAttendanceListByEmployee(int employeeId, int schoolYearId)
         {
-            return await employeeReadRepository.GetAttendanceListAsync(enrollingId);
+            return await employeeReadRepository.GetAttendanceListByEmployeeAsync(employeeId, schoolYearId);
         }
-
+        public async Task<IList<EmployeeAttendance>> GetAttendanceListBySchoolYear(int schoolYearId)
+        {
+            return await employeeReadRepository.GetAttendanceListBySchoolYearAsync(schoolYearId);
+        }
         public async Task<bool> AddNote(EmployeeNote note)
         {
             return await employeeWriteRepository.AddNoteAsync(note);
@@ -151,11 +162,14 @@ namespace SchoolManagement.Application
             return await employeeWriteRepository.DeleteNoteAsync(noteId);
         }
 
-        public async Task<IList<EmployeeNote>> GetNoteList(int enrollingId)
+        public async Task<IList<EmployeeNote>> GetNoteListByEmployee(int employeeId,int schoolYearId)
         {
-            return await employeeReadRepository.GetNoteListAsync(enrollingId);
+            return await employeeReadRepository.GetNoteListByEmployeeAsync(employeeId,schoolYearId);
         }
-
+        public async Task<IList<EmployeeNote>> GetNoteListBySchoolYear(int schoolYearId)
+        {
+            return await employeeReadRepository.GetNoteListBySchoolYearAsync(schoolYearId);
+        }
         public async Task<string> GenerateAccountTransactionIdNumber()
         {
             string idNumber;
@@ -181,11 +195,14 @@ namespace SchoolManagement.Application
             return await employeeWriteRepository.AddAccountTransactionAsync(transaction);
         }
 
-        public async Task<IList<EmployeeAccountTransaction>> GetAccountTransactionList(int enrollingId)
+        public async Task<IList<EmployeeAccountTransaction>> GetAccountTransactionListByEmployee(int employeeId, int schoolYearId)
         {
-            return await employeeReadRepository.GetAccountTransactionListAsync(enrollingId);
+            return await employeeReadRepository.GetAccountTransactionListByEmployeeAsync(employeeId,schoolYearId);
         }
-
+        public async Task<IList<EmployeeAccountTransaction>> GetAccountTransactionListBySchoolYear(int schoolYearId)
+        {
+            return await employeeReadRepository.GetAccountTransactionListBySchoolYearAsync(schoolYearId);
+        }
         public async Task<EmployeeAccountTransaction?> GetLastAccountTransaction()
         {
             return await employeeReadRepository.GetLastAccountTransactionAsync();

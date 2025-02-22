@@ -10,8 +10,8 @@ namespace SchoolManagement.Core.Repositories
         public Task<bool> UpdateEmployeeAsync(Employee employee);
         public Task<bool> AddEmployeePictureAsync(int employeeId,string urlPicture);
         public Task<bool> AddEnrollingPictureAsync(int enrollingId, string urlPicture);
-        public Task<bool> AddRoomListAsync(int enrollingId, IList<EmployeeRoom> roomList);
-        public Task<bool> AddSubjectListAsync(int enrollingId, IList<EmployeeSubject> subjectList);
+        public Task<bool> AddRoomListAsync(int employeeId,int schoolYearId, IList<EmployeeRoom> roomList);
+        public Task<bool> AddSubjectListAsync(int employeeId,int schoolYearId, IList<EmployeeSubject> subjectList);
         Task<bool> AddAttendanceAsync(EmployeeAttendance attendance);
         Task<bool> UpdateAttendanceAsync(EmployeeAttendance attendance);
         Task<bool> DeleteAttendanceAsync(int attendanceId);

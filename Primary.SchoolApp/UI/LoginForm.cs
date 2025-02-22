@@ -5,12 +5,12 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
-using System.Configuration;
 using System.Windows.Forms;
 using Telerik.WinControls;
 using System.Net;
 using System.Linq;
 using System.Net.Sockets;
+using Primary.SchoolApp.UI;
 namespace Primary.SchoolApp
 {
     public partial class LoginForm : SchoolManagement.UI.LoginForm
@@ -40,13 +40,11 @@ namespace Primary.SchoolApp
             this.Shown += OnShown;
 
         }
-
         private void OnShown(object sender, EventArgs e)
         {
+            Program.SerialKeyIsOK = AppUtilities.SerialKeyIsOk(Program.CurrentSchool.Name, Program.CurrentSchool.SerialKey);
             this.UserNameTextBox.Focus();
-
         }
-
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)
         {
             if (ErrorLabel.Text.Trim().Length > 0)
@@ -101,17 +99,7 @@ namespace Primary.SchoolApp
                 }
                 if (user != null)
                 {
-                   
-                    clientApp.Name= ConfigurationManager.AppSettings["ClientName"];
-                    clientApp.Code = ConfigurationManager.AppSettings["ClientCode"];
-                    clientApp.Contact = ConfigurationManager.AppSettings["ClientContact"];
-                    clientApp.Address = ConfigurationManager.AppSettings["ClientAddress"];
-                    clientApp.WebSite = ConfigurationManager.AppSettings["ClientWebSite"];                  
-                    clientApp.LogoUrl = ConfigurationManager.AppSettings["ClientLogo"];
-                    clientApp.StudentPitureFolder = ConfigurationManager.AppSettings["SudentPictureFolder"];
-                    clientApp.EmployeePitureFolder = ConfigurationManager.AppSettings["EmployeePitureFolder"];
                     clientApp.UserConnected = user;                                   
-
                     var mainForm = Program.ServiceProvider.GetService<MainForm>();
                     this.Hide();
                     mainForm.Show();
@@ -128,5 +116,6 @@ namespace Primary.SchoolApp
         {
             Application.Exit();
         }
+    
     }
 }

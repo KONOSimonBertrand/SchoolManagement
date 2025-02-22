@@ -196,8 +196,10 @@ namespace Primary.SchoolApp.UI
             {
                 if (!RecordExist((EmployeeDropDownList.SelectedItem.DataBoundItem as Employee).Id, selectedSchoolYear.Id))
                 {
-                    var enrolling = new EmployeeEnrolling();
-                    enrolling.SchoolYear = selectedSchoolYear;
+                    var enrolling = new EmployeeEnrolling
+                    {
+                        SchoolYear = selectedSchoolYear
+                    };
                     enrolling.SchoolYearId = enrolling.SchoolYear.Id;
                     enrolling.Date = EnrollingDateTimePicker.Value;
                     enrolling.Employee = EmployeeDropDownList.SelectedItem.DataBoundItem as Employee;
@@ -212,7 +214,7 @@ namespace Primary.SchoolApp.UI
                     {
                         Log log = new()
                         {
-                            UserAction = $"Ajout  de l'inscription de l'employé {enrolling.Employee.FullName} pour l'année {enrolling.SchoolYear.Name}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                            UserAction = $"Ajout  de l'inscription de l'employé {enrolling.Employee.FullName} pour l'année {enrolling.SchoolYear.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);

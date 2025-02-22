@@ -12,13 +12,9 @@ namespace Primary.SchoolApp.UI
     {
         private readonly ILogService logService;
         private readonly IEmployeeService employeeService;
-        private readonly IJobService jobService;
-        private readonly IEmployeeGroupService employeeGroupService;
         private readonly ClientApp clientApp;
-        public AddEmployeeForm(IEmployeeService employeeService, IJobService jobService, IEmployeeGroupService employeeGroupService, ClientApp clientApp, ILogService logService)
+        public AddEmployeeForm(IEmployeeService employeeService, ClientApp clientApp, ILogService logService)
         {
-            this.employeeGroupService = employeeGroupService;
-            this.jobService = jobService;
             this.employeeService = employeeService;
             this.clientApp = clientApp;
             this.logService = logService;
@@ -45,7 +41,6 @@ namespace Primary.SchoolApp.UI
         {
             IdNumberTextBox.Focus();
         }
-
         private bool IdNumberExist(string idMumber)
         {
             var item = Program.EmployeeList.FirstOrDefault(x => x.IdNumber == idMumber);
@@ -76,7 +71,7 @@ namespace Primary.SchoolApp.UI
                     {
                         Log log = new()
                         {
-                            UserAction = $"Mise à jour fonction employé {employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                            UserAction = $"Mise à jour fonction employé {employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);

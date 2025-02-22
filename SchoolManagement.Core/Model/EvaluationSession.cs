@@ -8,6 +8,7 @@ namespace SchoolManagement.Core.Model
         public string? Code { get; set; }
         public string? FrenchName { get; set; }
         public string? EnglishName { get; set; }
+        public int Mother { get; set; }
         public int Sequence { get; set; }
         public override bool Equals(object? obj)
         {

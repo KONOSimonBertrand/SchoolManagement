@@ -223,16 +223,17 @@ namespace Primary.SchoolApp.UI
             ClassroomLabel.Text = room.Name;
             students = Program.StudentRoomList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.RoomId == room.Id).Select(x => x.Student).OrderBy(x=>x.FullName).ToList();
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
             if (classOfRoom != null)
             {
-                if (classOfRoom.DocumentLanguageId == 2)
+                if (classGroup.DocumentLanguageId == 2)
                 {
                     GroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                     GroupDropDownList.Items.Add(new RadListDataItem("Anglophone", 1));
                 }
                 else
                 {
-                    if (classOfRoom.DocumentLanguageId == 0)
+                    if (classGroup.DocumentLanguageId == 0)
                     {
                         GroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                     }

@@ -5,6 +5,12 @@ using System;
 using System.Drawing;
 using SchoolManagement.Core.Model;
 using Primary.SchoolApp.Utilities;
+using Telerik.WinControls.Layouts;
+using System.Windows.Forms;
+using Primary.SchoolApp.DTO;
+using SchoolManagement.UI.Localization;
+using System.IO;
+using Telerik.WinControls.Primitives;
 
 namespace Primary.SchoolApp.CustomElements
 {
@@ -17,7 +23,7 @@ namespace Primary.SchoolApp.CustomElements
                 return typeof(IconListViewVisualItem);
             }
         }
-        Color themeColor;
+        readonly Color themeColor;
         public EmployeeIconListViewVisualItem()
         {
 
@@ -26,124 +32,200 @@ namespace Primary.SchoolApp.CustomElements
         {
             this.themeColor = themeColor;
         }
-        private LightVisualElement employeeIdNumber = new();
-        private LightVisualElement employeeName = new();
-        private LightVisualElement employeeJob = new();
-        private StackLayoutElement verticalContainer = new();
-        private StackLayoutElement employeeHeaderContainer = new();
-        private StackLayoutElement employeeFooterContainer = new();
+        private LightVisualElement imageElement;
+        private LightVisualElement idNumberElement;
+        private LightVisualElement nameElement ; //nom de l'em
+        private LightVisualElement jobElement;
+        private LightVisualElement dateElement;
+        private StackLayoutElement footerLayout;
+        private StackLayoutPanel mainLayout;
+
 
         protected override void CreateChildElements()
         {
             base.CreateChildElements();
 
-            verticalContainer.Orientation = System.Windows.Forms.Orientation.Vertical;
-            verticalContainer.NotifyParentOnMouseInput = true;
-            verticalContainer.ShouldHandleMouseInput = false;
-            verticalContainer.StretchHorizontally = true;
-            verticalContainer.StretchVertically = true;
+            mainLayout = new StackLayoutPanel
+            {
+                Orientation = System.Windows.Forms.Orientation.Vertical,
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+                StretchHorizontally = true,
+                StretchVertically = true
+            };
 
-            employeeHeaderContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            employeeHeaderContainer.NotifyParentOnMouseInput = true;
-            employeeHeaderContainer.ShouldHandleMouseInput = false;
-            employeeHeaderContainer.Children.Add(employeeIdNumber);
-            employeeHeaderContainer.StretchHorizontally = true;
+            footerLayout = new StackLayoutElement
+            {
+                Orientation = System.Windows.Forms.Orientation.Horizontal,
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+                StretchHorizontally = true,
+                DrawFill = true,
+                BackColor = Color.White,
+                GradientStyle = GradientStyles.Solid,
+                //MinSize = new System.Drawing.Size(0, 30)
+            };
 
-            employeeIdNumber.NotifyParentOnMouseInput = true;
-            employeeIdNumber.ShouldHandleMouseInput = false;
-            employeeIdNumber.StretchHorizontally = true;
-            employeeIdNumber.CustomFont = AppUtilities.MainFont;
-            employeeIdNumber.CustomFontSize = 9;
-            employeeIdNumber.CustomFontStyle = FontStyle.Bold;
-            employeeIdNumber.Margin = new System.Windows.Forms.Padding(5, 10, 0, 0);
-            employeeIdNumber.TextAlignment = ContentAlignment.MiddleLeft;
+            imageElement = new LightVisualElement
+            {
+                DrawText = false,
+                ImageLayout = System.Windows.Forms.ImageLayout.Zoom,
+                StretchVertically = false,
+                Margin = new System.Windows.Forms.Padding(10, 5, 10, 5),
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+            };
+            mainLayout.Children.Add(imageElement);
 
-            employeeFooterContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            employeeFooterContainer.NotifyParentOnMouseInput = true;
-            employeeFooterContainer.ShouldHandleMouseInput = false;
-            employeeFooterContainer.StretchHorizontally = true;
-            employeeFooterContainer.DrawFill = true;
-            employeeFooterContainer.BackColor = Color.White;
-            employeeFooterContainer.GradientStyle = GradientStyles.Solid;
-            employeeFooterContainer.MinSize = new Size(0, 30);
+            nameElement = new LightVisualElement
+            {
+                TextAlignment = ContentAlignment.MiddleLeft,
+                Margin = new Padding(10, 5, 10, 5),
+                CustomFont = CustomFont = AppUtilities.MainFont,
+                CustomFontSize = 12,
+                CustomFontStyle = FontStyle.Regular,
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+            };
+            mainLayout.Children.Add(nameElement);
 
-            employeeName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            employeeName.StretchHorizontally = false;
-            employeeName.Layout.LeftPart.Padding = new System.Windows.Forms.Padding(24, 0, 8, 0);
+            idNumberElement = new LightVisualElement
+            {
+                TextAlignment = ContentAlignment.MiddleLeft,
+                Margin = new Padding(10, 5, 10, 5),
+                CustomFont = CustomFont = AppUtilities.MainFont,
+                CustomFontSize = 9,
+                CustomFontStyle = FontStyle.Regular,
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+            };
+            mainLayout.Children.Add(idNumberElement);
 
-            employeeName.Alignment = ContentAlignment.MiddleCenter;
-            employeeName.NotifyParentOnMouseInput = true;
-            employeeName.ShouldHandleMouseInput = false;
-            employeeName.CustomFont = AppUtilities.MainFont;
-            employeeName.CustomFontSize = 12;
-            employeeName.CustomFontStyle = FontStyle.Regular;
+            dateElement = new LightVisualElement
+            {
+                TextAlignment = ContentAlignment.MiddleLeft,
+                Margin = new Padding(10, 5, 10, 5),
+                CustomFont = CustomFont = AppUtilities.MainFont,
+                CustomFontSize = 9,
+                CustomFontStyle = FontStyle.Regular,
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+            };
+            footerLayout.Children.Add(dateElement);
 
-            employeeJob.StretchVertically = true;
-            employeeFooterContainer.Children.Add(employeeJob);
+            jobElement = new LightVisualElement
+            {
+                TextAlignment = ContentAlignment.MiddleLeft,
+                Margin = new Padding(10, 5, 10, 5),
+                CustomFont = CustomFont = AppUtilities.MainFont,
+                CustomFontSize = 9,
+                CustomFontStyle = FontStyle.Regular,
+                ForeColor = Color.FromArgb(255, 114, 118, 125),
+                NotifyParentOnMouseInput = true,
+                ShouldHandleMouseInput = false,
+            };
 
-            employeeJob.NotifyParentOnMouseInput = true;
-            employeeJob.ShouldHandleMouseInput = false;
-            employeeJob.StretchHorizontally = false;
-            employeeJob.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            employeeJob.CustomFont = AppUtilities.MainFont;
-            employeeJob.CustomFontSize = 9;
-            employeeJob.CustomFontStyle = FontStyle.Regular;
-            employeeJob.ForeColor = Color.FromArgb(200, 0, 0, 0);
-            employeeJob.Layout.LeftPart.Margin = new System.Windows.Forms.Padding(0, -3, 0, 0);
+            mainLayout.Children.Add(jobElement);
+            mainLayout.Children.Add(footerLayout);
 
-            verticalContainer.Children.Add(employeeHeaderContainer);
-            verticalContainer.Children.Add(employeeName);
-            verticalContainer.Children.Add(employeeFooterContainer);
+            this.Children.Add(mainLayout);
 
-            Children.Add(verticalContainer);
+            this.Padding = new Padding(5);
+            this.Shape = new RoundRectShape(3);
+            this.BorderColor = Color.FromArgb(255, 110, 153, 210);
+            this.BorderGradientStyle = GradientStyles.Solid;
+            this.DrawBorder = true;
+            this.DrawFill = true;
+            this.BackColor = Color.FromArgb(255, 230, 238, 254);
+            this.GradientStyle = GradientStyles.Solid;
         }
 
         protected override void SynchronizeProperties()
         {
             base.SynchronizeProperties();
-            DrawText = false;
-            BackColor = Color.White;
-            DrawFill = true;
-            DrawBorder = false;
-            employeeIdNumber.Margin = new System.Windows.Forms.Padding(8, 8, 0, 0);
-            employeeName.ImageLayout = System.Windows.Forms.ImageLayout.None;
-            employeeName.Margin = new System.Windows.Forms.Padding(24, 0, 0, 0);
-            employeeName.Image = Resources.heartbeat_green;
-            employeeName.Layout.LeftPart.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            employeeName.StretchHorizontally = true;
-            employeeName.ImageAlignment = ContentAlignment.MiddleLeft;
-            employeeName.TextAlignment = ContentAlignment.MiddleLeft;
-
-
-
-            EmployeeEnrolling enrolling = Data.DataBoundItem as EmployeeEnrolling;
-            if (enrolling != null)
+            this.DrawText = false;
+            this.BackColor = Color.White;
+            this.DrawFill = true;
+            this.DrawBorder = false;
+            if (this.Data.DataBoundItem is EmployeeEnrolling enrolling)
             {
-                employeeIdNumber.Text = enrolling.Employee.IdNumber;
-                employeeName.Image = null;
+                imageElement.Image = GetEmployeeImage(enrolling);
+                idNumberElement.Text = $"{Language.labelStudentId}: {enrolling.Employee.IdNumber}";
+                nameElement.ImageLayout = System.Windows.Forms.ImageLayout.None;
+                dateElement.Text=enrolling.Date.ToShortDateString();
                 if (enrolling.Employee.FullName.Length >= 12)
                 {
-                    employeeName.Text = enrolling.Employee.FullName.Substring(0, 12) + "...";
+                    nameElement.Text = enrolling.Employee.FullName.Substring(0, 12) + "...";
                 }
                 else
                 {
-                    employeeName.Text = enrolling.Employee.FullName;
+                    nameElement.Text = enrolling.Employee.FullName;
                 }
-                if (enrolling.Job.Name.Length >= 20)
+
+                if (enrolling.Job.Name.Length >= 14)
                 {
-                    employeeJob.Text = enrolling.Job.Name.Substring(0, 20) + "...";
+                    jobElement.Text = $"{Language.labelJob}: {enrolling.Job.Name.Substring(0, 14)}...";
                 }
                 else
                 {
-                    employeeJob.Text = enrolling.Job.Name;
+                    jobElement.Text = $"{Language.labelJob}: {enrolling.Job.Name}";
 
                 }
+                this.BackColor = AppUtilities.MainThemeColor;
+                idNumberElement.ForeColor = Color.White;
+                jobElement.ForeColor = Color.White;
+                nameElement.ForeColor = Color.White;
+            }
+        }
+        protected override SizeF MeasureOverride(SizeF availableSize)
+        {
+            SizeF measuredSize = base.MeasureOverride(availableSize);
 
-                BackColor = AppUtilities.MainThemeColor;
-                employeeIdNumber.ForeColor = Color.White;
-                employeeName.ForeColor = Color.White;
+            this.mainLayout.Measure(measuredSize);
+
+            return measuredSize;
+        }
+
+        protected override SizeF ArrangeOverride(SizeF finalSize)
+        {
+            base.ArrangeOverride(finalSize);
+
+            this.mainLayout.Arrange(new RectangleF(PointF.Empty, finalSize));
+
+            return finalSize;
+        }
+        private Bitmap GetEmployeeImage(EmployeeEnrolling enrolling)
+        {
+
+            Bitmap image = null;
+            if (File.Exists(enrolling.PictureUrl))
+            {
+
+                image = new Bitmap(Image.FromFile(enrolling.PictureUrl), new Size(114, 114));
+            }
+            else
+            {
+                //on cherche une photo par defaut
+                if (File.Exists(enrolling.Employee.PictureUrl))
+                {
+                    image = new Bitmap(Image.FromFile(enrolling.Employee.PictureUrl), new Size(114, 114));
+                }
+                else
+                {
+                    var url = Program.CurrentSchool.EmployeePictureDirectory + "/" + enrolling.Employee.IdNumber;
+                    if (File.Exists(url))
+                    {
+                        image = new Bitmap(Image.FromFile(url), new Size(114, 114));
+                    }
+                    else
+                    {
+                        using var ms = new MemoryStream(Resources.no_image);
+                        image = new Bitmap(Image.FromStream(ms));
+                    }
+                }
 
             }
+            return image;
         }
     }
 }

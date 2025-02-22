@@ -18,6 +18,7 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             this.logService = logService;
             this.schoolGroupNameTracker = string.Empty;
+            IsTruncateDropDownList.SelectedValue = 0;
             InitEvents();
         }
         private void InitEvents()
@@ -41,6 +42,11 @@ namespace Primary.SchoolApp.UI
                     {
                         schoolGroup.Name = NameTextBox.Text;
                         schoolGroup.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
+                        schoolGroup.DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue;
+                        schoolGroup.ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString());
+                        schoolGroup.AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString());
+                        schoolGroup.NoteIsTruncate = IsTruncateDropDownList.SelectedValue.ToString() == "0" ? false : true;
+
                         bool isDone = schoolGroupService.UpdateSchoolGroup(schoolGroup).Result;
                         if (isDone)
                         {
@@ -66,7 +72,7 @@ namespace Primary.SchoolApp.UI
                 }
             }
         }
-        internal void Init(SchoolGroup schoolGroup)
+        internal void InitStartup(SchoolGroup schoolGroup)
         {
             this.schoolGroup = schoolGroup;
             if (schoolGroup != null)
@@ -74,6 +80,11 @@ namespace Primary.SchoolApp.UI
                 schoolGroupNameTracker = schoolGroup.Name;
                 NameTextBox.Text = schoolGroup.Name;
                 SequenceSpinEditor.Value = schoolGroup.Sequence;
+                DocumentTemplateDropDownList.SelectedValue = schoolGroup.DocumentLanguageId;
+                IsTruncateDropDownList.SelectedValue = schoolGroup.NoteIsTruncate == true ? 1 : 0;
+                ReportCardDropDownList.SelectedValue = schoolGroup.ReportCardModel;
+                AverageFormulaDropDownList.SelectedValue = schoolGroup.AverageFormula;
+
             }
         }
         private bool SchoolGroupExist(string name)

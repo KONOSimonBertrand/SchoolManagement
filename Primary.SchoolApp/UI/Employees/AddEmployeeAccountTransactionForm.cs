@@ -32,8 +32,10 @@ namespace Primary.SchoolApp.UI
             if (IsValidData()) {
                 EmployeeAccountTransaction transaction = new()
                 {
-                    Enrolling = selectedEnrolling,
-                    EnrollingId = selectedEnrolling.Id,
+                    Employee = selectedEnrolling.Employee,
+                    EmployeeId = selectedEnrolling.EmployeeId,
+                    SchoolYearId = selectedEnrolling.SchoolYearId,
+                    SchoolYear = selectedEnrolling.SchoolYear,
                     Amount = double.Parse(AmountTextBox.Text),
                     Reason=ReasonTextBox.Text,
                     Date = TransactionDateTimePicker.Value,
@@ -44,7 +46,7 @@ namespace Primary.SchoolApp.UI
                 {
                     Log log = new()
                     {
-                        UserAction = $"Ajout d'une transaction de {transaction.Amount} sur le compte de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                        UserAction = $"Ajout d'une transaction de {transaction.Amount} sur le compte de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                         UserId = clientApp.UserConnected.Id
                     };
                     logService.CreateLog(log);

@@ -7,16 +7,6 @@ namespace Primary.SchoolApp.Utilities
 {
     static class Extension
     {
-        public static EvaluationSessionChild AsEvaluationSessionChild(this EvaluationSession session)
-        {
-            EvaluationSessionChild dto = new();
-            dto.Code = session.Code;
-            dto.Id = session.Id;
-            dto.FrenchName = session.FrenchName;
-            dto.EnglishName = session.EnglishName;
-            dto.Sequence = session.Sequence;
-            return dto;
-        }
         public static TimeTableAppointment AsTimeTableAppointment(this TimeTable timetable)
         {
             var dto = new TimeTableAppointment

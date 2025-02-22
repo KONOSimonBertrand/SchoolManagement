@@ -81,15 +81,16 @@ namespace Primary.SchoolApp.UI
             StudentDropDownList.DataSource = students.OrderBy(x=>x.FullName);
             StudentDropDownList.SelectedIndex = -1;
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
             if (classOfRoom != null) {
-                if (classOfRoom.DocumentLanguageId == 2)
+                if (classGroup.DocumentLanguageId == 2)
                 {
                     GroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                     GroupDropDownList.Items.Add(new RadListDataItem("Anglophone", 1));
                 }
                 else
                 {
-                    if (classOfRoom.DocumentLanguageId == 0) {
+                    if (classGroup.DocumentLanguageId == 0) {
                         GroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                     }
                     else

@@ -109,13 +109,15 @@ namespace Primary.SchoolApp.UI
                 if (!RecordExist(subject.Id, room.Id, startHour)) {
                     EmployeeAttendance attendance = new()
                     {
-                        EnrollingId = selectedEnrolling.Id,
+                        EmployeeId = selectedEnrolling.EmployeeId,
                         RoomId = room.Id,
                         SubjectId = subject.Id,
                         StartHour = startHour,
                         EndHour = endHour,
                         Description =DescriptionTextBox.Text,
-                        Enrolling = selectedEnrolling,
+                        Employee = selectedEnrolling.Employee,
+                        SchoolYearId = selectedEnrolling.SchoolYearId,
+                        SchoolYear = selectedEnrolling.SchoolYear,
                         Subject = subject,
                         Room = room
                     };
@@ -123,7 +125,7 @@ namespace Primary.SchoolApp.UI
                     if (isDone) {
                         Log log = new()
                         {
-                            UserAction = $"Ajout d'un pointage de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                            UserAction = $"Ajout d'un pointage de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
@@ -154,14 +156,10 @@ namespace Primary.SchoolApp.UI
         }
         private bool RecordExist(int subjectId,int roomId,DateTime start)
         {
-            if (selectedEnrolling.Attendances.Where(
-                x => x.SubjectId == subjectId && x.RoomId == roomId &&
-                x.StartHour.Date==start.Date && x.StartHour.Hour==start.Hour
-                ).Count()>0)
-            {
-                return true;
-            }
-            return false;
+            var attendances = employeeService.GetAttendanceListByEmployee(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId).Result;
+            return attendances.Any(x => x.SubjectId == subjectId && x.RoomId == roomId &&
+                                  x.StartHour.Date == start.Date && x.StartHour.Hour == start.Hour
+                                );
         }
         // show school room UI for edit
         private void ShowSchoolRoomEditForm(SchoolRoom item)

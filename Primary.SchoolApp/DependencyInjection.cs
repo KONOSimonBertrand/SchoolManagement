@@ -9,7 +9,9 @@ namespace Primary.SchoolApp
         public static IServiceCollection AddClientDependency(this IServiceCollection services)
         {
             services.AddTransient<MainForm>();
+            services.AddTransient<EditSerialKeyForm>();
             services.AddTransient<LoginForm>();
+            services.AddTransient<EditSchoolForm>();
             services.AddTransient<AddSchoolYearForm>();
             services.AddTransient<EditSchoolYearForm>();
             services.AddTransient<AddSchoolGroupForm>();
@@ -97,6 +99,7 @@ namespace Primary.SchoolApp
             services.AddTransient<EvaluationSessionStateForm>();
             services.AddTransient<LocalStudentNoteService>();
             services.AddTransient<ReportCardService>();
+           
             return services;
         }
     }

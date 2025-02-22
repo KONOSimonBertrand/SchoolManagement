@@ -5,6 +5,7 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -69,8 +70,9 @@ namespace Primary.SchoolApp.UI
                     {
                         var section = Convert.ToDouble(e.Value);
                         record.Room.SchoolClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == record.Room.ClassId);
+                        var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == record.Room.SchoolClass.GroupId);
                         //si classe pas bilingue
-                        if (record.Room.SchoolClass.DocumentLanguageId != 2)
+                        if (classGroup.DocumentLanguageId != 2)
                         {
                             if (section != 0)
                             {
@@ -120,23 +122,13 @@ namespace Primary.SchoolApp.UI
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                selectedEnrolling.Rooms.Clear();
-                foreach (var row in DataGridView.Rows)
-                {
-                    if (row.DataBoundItem is EmployeeRoom room)
-                    {
-                        if (room.IsChecked)
-                        {
-                            selectedEnrolling.Rooms.Add(room);
-                        }
-                    }
-                }
-                var isDone = employeeService.AddRoomList(selectedEnrolling.Id, selectedEnrolling.Rooms.ToList()).Result;
+                var roomListToSave = DataGridView.Rows.Select(x => x.DataBoundItem as EmployeeRoom).Where(x=>x.IsChecked).ToList();
+                var isDone = employeeService.AddRoomList(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId, roomListToSave).Result;
                 if (isDone)
                 {
                     Log log = new()
                     {
-                        UserAction = $"Mise à jour des classes allouées de l'employé {selectedEnrolling.Employee.FullName}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                        UserAction = $"Mise à jour des classes allouées de l'employé {selectedEnrolling.Employee.FullName}  par l'utisateur  {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress}",
                         UserId = clientApp.UserConnected.Id
                     };
                     logService.CreateLog(log);
@@ -209,36 +201,38 @@ namespace Primary.SchoolApp.UI
                 }
             }
             //load rooms 
-            LoadRooms(enrolling.Id);
+            LoadRooms(enrolling.EmployeeId,enrolling.SchoolYearId);
 
 
         }
-        private async void LoadRooms(int enrollingId)
+        private async void LoadRooms(int employeeId,int schoolYearId)
         {
-            selectedEnrolling.Rooms= employeeService.GetRoomList(enrollingId).Result;           
-            foreach (var room in selectedEnrolling.Rooms)
+            var rooms= await employeeService.GetRoomListByEmployee(employeeId,schoolYearId);           
+            foreach (var room in rooms)
             {
                 room.IsChecked = true;
             }
-            var roomlList = selectedEnrolling.Rooms.Select(x => x.Room).ToList();
+            var roomlList = rooms.Select(x => x.Room).ToList();
             //find room to complete employee room list
             foreach (var room in Program.SchoolRoomList)
             {
                 if (!roomlList.Contains(room))
                 {
-                    selectedEnrolling.Rooms.Add(
+                    rooms.Add(
                         new EmployeeRoom()
                         {
                             Room = room,
                             RoomId = room.Id,
-                            Enrolling = selectedEnrolling,
-                            EnrollingId = selectedEnrolling.Id,
+                            Employee = selectedEnrolling.Employee,
+                            EmployeeId = selectedEnrolling.EmployeeId,
+                            SchoolYear=selectedEnrolling.SchoolYear,
+                            SchoolYearId=selectedEnrolling.SchoolYearId,
                             DefaultSection = 0,
                         }
                         );
                 }
             }
-            DataGridView.DataSource = selectedEnrolling.Rooms;
+            DataGridView.DataSource = rooms;
             await Task.Delay(0);
         }
         private void CreateGridViewColumn()
@@ -254,16 +248,16 @@ namespace Primary.SchoolApp.UI
             DataGridView.EnableFiltering = true;
             GridViewTextBoxColumn roomColumn = new("Room.Name");
             GridViewCheckBoxColumn isMasterRoomColumn = new("IsMasterRoom");
-            GridViewDecimalColumn defaultSectionColumn = new("DefaultSection");
+            GridViewDecimalColumn sectionColumn = new("DefaultSection");
             GridViewCheckBoxColumn stateColumn = new("IsChecked");
             roomColumn.HeaderText = Language.labelRoom;
-            defaultSectionColumn.HeaderText = Language.labelSection;
+            sectionColumn.HeaderText = Language.labelSection;
             stateColumn.HeaderText = Language.labelAssign;
             isMasterRoomColumn.HeaderText = Language.labelMasterTeacher;
             roomColumn.ReadOnly = true;
             this.DataGridView.Columns.Add(roomColumn);
             this.DataGridView.Columns.Add(isMasterRoomColumn);
-            this.DataGridView.Columns.Add(defaultSectionColumn);
+            this.DataGridView.Columns.Add(sectionColumn);
             this.DataGridView.Columns.Add(stateColumn);
         }
 

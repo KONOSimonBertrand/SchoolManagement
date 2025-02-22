@@ -107,7 +107,7 @@ namespace Primary.SchoolApp.UI
                 else
                 {
                     //on cherche une photo dans le dossier 
-                    var url = clientApp.EmployeePitureFolder + "/" + enrolling.Employee.IdNumber;
+                    var url = Program.CurrentSchool.EmployeePictureDirectory + "/" + enrolling.Employee.IdNumber;
                     if (File.Exists(url))
                     {
                         Bitmap bitmap = new(Image.FromFile(url), new Size(114, 114));

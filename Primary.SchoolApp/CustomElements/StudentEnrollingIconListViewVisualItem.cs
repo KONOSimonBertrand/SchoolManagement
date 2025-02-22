@@ -152,13 +152,11 @@ namespace Primary.SchoolApp.CustomElements
 
         protected override void SynchronizeProperties()
         {
-            StudentEnrollingDTO enrolling = this.Data.DataBoundItem as StudentEnrollingDTO;
-            
-            if (enrolling != null)
+            if (this.Data.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                healthElement.Image=enrolling.HealthImage;
-                balanceElement.Image =enrolling.Balance>0? Resources.balance_red : Resources.balance_green;
-                this.imageElement.Image = GetStudentImage(enrolling);
+                healthElement.Image = enrolling.HealthImage;
+                balanceElement.Image = enrolling.Balance > 0 ? Resources.balance_red : Resources.balance_green;
+               this.imageElement.Image = GetStudentImage(enrolling);
                 this.studentIdNumberElement.Text = $"{Language.labelStudentId}: {enrolling.Student.IdNumber}";
                 this.studentNameElement.ImageLayout = System.Windows.Forms.ImageLayout.None;
                 if (enrolling.Student.FullName.Length >= 12)
@@ -178,7 +176,7 @@ namespace Primary.SchoolApp.CustomElements
                 {
                     roomElement.Text = $"{Language.labelClass}: {enrolling.SchoolClass.Name}";
                 }
-               balanceElement.Text = $"{enrolling.Balance}";
+                balanceElement.Text = $"{enrolling.Balance}";
                 this.BackColor = AppUtilities.MainThemeColor;
                 studentIdNumberElement.ForeColor = Color.White;
                 roomElement.ForeColor = Color.White;
@@ -187,8 +185,6 @@ namespace Primary.SchoolApp.CustomElements
                 healthElement.Layout.LeftPart.Margin = new System.Windows.Forms.Padding(0, -3, 0, 0);
                 balanceElement.ForeColor = Color.FromArgb(200, 0, 0, 0);
             }
-            
-            
         }
 
         protected override SizeF MeasureOverride(SizeF availableSize)
@@ -226,7 +222,7 @@ namespace Primary.SchoolApp.CustomElements
                 }
                 else
                 {
-                    var url = clientApp.StudentPitureFolder + "/" + enrolling.Student.IdNumber;
+                    var url = Program.CurrentSchool.StudentPictureDirectory + "/" + enrolling.Student.IdNumber;
                     if (File.Exists(url))
                     {
                         image = new Bitmap(Image.FromFile(url), new Size(114, 114));

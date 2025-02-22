@@ -41,7 +41,7 @@ namespace Primary.SchoolApp.Services
                 reportProcessor.PrintController = standardPrintController;
                 Telerik.Reporting.TypeReportSource typeReportSource = new();
                 //get report to print
-                var report = new PaymentSummaryReport(enrolling, clientApp);
+                var report = new PaymentSummaryReport(enrolling);
                 Telerik.Reporting.InstanceReportSource reportSource = new();
                 reportSource.ReportDocument = report;
                 //print report
@@ -74,7 +74,8 @@ namespace Primary.SchoolApp.Services
                 reportProcessor.PrintController = standardPrintController;
                 Telerik.Reporting.TypeReportSource typeReportSource = new();
                 //get report to print
-                var report = new PaymentReceiptA4Report(enrolling, isCopy, clientApp);
+                var classGroup=Program.SchoolGroupList.FirstOrDefault(x=>x.Id==enrolling.SchoolClass.GroupId);
+                var report = new PaymentReceiptA4Report(new PaymentReceiptData(enrolling, isCopy, classGroup));
                 Telerik.Reporting.InstanceReportSource reportSource = new();
                 reportSource.ReportDocument = report;
                 //print report
@@ -107,7 +108,7 @@ namespace Primary.SchoolApp.Services
                 reportProcessor.PrintController = standardPrintController;
                 Telerik.Reporting.TypeReportSource typeReportSource = new();
                 //get report to print
-                var report = new PaymentReceiptA4Report(payment, isCopy, clientApp);
+                var report = new PaymentReceiptA4Report( new TuitionReceiptData(payment, isCopy));
                 Telerik.Reporting.InstanceReportSource reportSource = new();
                 reportSource.ReportDocument = report;
                 //print report
@@ -125,6 +126,7 @@ namespace Primary.SchoolApp.Services
 
         public async Task PrintPaymentReceiptAsync(Subscription subscription, bool isCopy)
         {
+            subscription.SchoolYear??=Program.SchoolYearList.FirstOrDefault(x=>x.Id== subscription.SchoolYearId);
             //si  droit d'impression des abonnements
             clientApp.UserConnected.Modules = userService.GetUserModuleList(clientApp.UserConnected.Id).Result;
             if (clientApp.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true))
@@ -139,7 +141,7 @@ namespace Primary.SchoolApp.Services
                 reportProcessor.PrintController = standardPrintController;
                 Telerik.Reporting.TypeReportSource typeReportSource = new();
                 //get report to print
-                var report = new PaymentReceiptA4Report(subscription, isCopy, clientApp);
+                var report = new PaymentReceiptA4Report( new SubscriptionReceiptData(subscription, isCopy));
                 Telerik.Reporting.InstanceReportSource reportSource = new();
                 reportSource.ReportDocument = report;
                 //print report
@@ -180,30 +182,52 @@ namespace Primary.SchoolApp.Services
             reportViewer.Show();
             await Task.Delay(0);
         }
-        //i,pression du bulletin d'un élève
+        //impression du bulletin d'un élève pour une évaluation
         public async Task PrintReportCardByStudentAsync(int studentId, int roomId, int evaluationId, int schoolYearId, int bookId)
         {
-            var reportCard = await reportCardService.GetEvaluationReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId);
+            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            reportViewer.LoadEvaluationReportCard(reportCard);
+            switch (eval.Code)
+            {
+                case "TERM01":
+                    var firstTermReportCard = await reportCardService.GetFirstTermReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId);
+                    reportViewer.LoadTermPrimaryReportCard(firstTermReportCard);
+                    break;
+                default:
+                    var evaluationReportCard = await reportCardService.GetEvaluationReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId);
+                    reportViewer.LoadEvaluationReportCard(evaluationReportCard);
+                    break;
+            }
             reportViewer.Show();
             await Task.Delay(0);
         }
-        // impression des bulletion d'une salle de classe
-        public async Task PrintReportCardByClassroomAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
+        // impression des bulletion d'une salle de classe pour une evaluation
+        public async Task PrintReportCardByClassRoomAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
         {
-            var reportCardList = await reportCardService.GetEvaluationReportCardByRoomAsync(roomId, evaluationId, schoolYearId, bookId);
+            var reportCardList = await reportCardService.GetEvaluationReportCardByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId);
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
             reportViewer.LoadEvaluationReportCard(reportCardList);
             reportViewer.Show();
             await Task.Delay(0);
         }
+
+
         // impression du procès verbal
-        public async Task PrintClassroomReportAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
+        public async Task PrintClassRoomReportAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
         {
-            ClassroomReport report= await reportCardService.GetClassroomReportAsync(roomId, evaluationId, schoolYearId, bookId);
+            ClassroomReport report= await reportCardService.GetEvaluationReportByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId);
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
             reportViewer.LoadClassroomReport(report);
+            reportViewer.Show();
+            await Task.Delay(0);
+        }
+
+        // impression des statistiques d'un groupe de classes par évaluation
+        public async Task PrintClassGroupReportAsync(int groupId, int evaluationId, int schoolYearId, int bookId)
+        {
+            ClassGroupReport report = await reportCardService.GetEvaluationReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId);
+            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
+            reportViewer.LoadClassGroupReport(report);
             reportViewer.Show();
             await Task.Delay(0);
         }

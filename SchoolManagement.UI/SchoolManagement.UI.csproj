@@ -23,6 +23,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Reporting\ReportCard\Subreport3NoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\TermPrimaryReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

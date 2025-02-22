@@ -24,8 +24,8 @@ namespace SchoolManagement.UI
         }
         private void InitLanguage()
         {
-            this.nameFrLabel.Text = Language.labelFrenchName;
-            this.nameEnLabel.Text = Language.labelEnglishName;
+            this.nameFrLabel.Text = "<html>" + Language.labelFrenchName + ":" + "<color=Red>*";
+            this.nameEnLabel.Text = "<html>" + Language.labelEnglishName + ":" + "<color=Red>*";
             this.sequenceLabel.Text = Language.labelSequence;
             this.saveButton.Text = Language.labelSave;
             this.closeButton.Text = Language.labelCancel;
@@ -90,16 +90,18 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";          
-
+            this.errorProvider.Clear();
             if (this.nameFrTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.nameFrTextBox,Language.messageFillField);
                 this.nameFrTextBox.Focus();
                 return false;
             }
             if (this.nameEnTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie de la version anglaise est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.nameEnTextBox,Language.messageFillField);
                 this.nameEnTextBox.Focus();
                 return false;
             }

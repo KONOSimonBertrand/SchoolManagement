@@ -43,6 +43,7 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox HighestAverageTextBox { get => highestAverageTextBox; }
         public Telerik.Reporting.TextBox LowestAverageLabel {  get => lowestAverageLabel; }
         public Telerik.Reporting.TextBox LowestAverageTextBox { get => lowestAverageTextBox; }
+        public Telerik.Reporting.TextBox DecisionTextBox { get => decisionTextBox; }
         public Telerik.Reporting.TextBox ExplanationCompetenceLabel {  get => explanationCompetenceLabel; }
         public Telerik.Reporting.TextBox ExpertCompetenceLabel { get => expertCompetenceLabel; }
         public Telerik.Reporting.TextBox AcquiredCompetenceLabel { get=>acquiredCompetenceLabel;}

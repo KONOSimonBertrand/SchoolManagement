@@ -39,6 +39,7 @@ namespace SchoolManagement.Application
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IMedicalService, MedicalService>();
             services.AddTransient<IStudentNoteService,StudentNoteService>();
+            services.AddTransient<ISchoolService, SchoolService>();
             return services;
         }
     }

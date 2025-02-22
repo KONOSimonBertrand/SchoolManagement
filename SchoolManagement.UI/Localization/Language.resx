@@ -975,8 +975,8 @@
   <data name="messageConfirmDelete" xml:space="preserve">
     <value>Are you sure you want to delete?</value>
   </data>
-  <data name="messageConfirmeDuplicateFee" xml:space="preserve">
-    <value>Are you sure you want to duplicate these fees for</value>
+  <data name="messageConfirmeEmployeeDuplicate" xml:space="preserve">
+    <value>Are you sure you want to duplicate this employee for the current year</value>
   </data>
   <data name="messageConfirmEnrollingWithoutPayment" xml:space="preserve">
     <value>Are you sure you want to save  enrolling without payment ?</value>
@@ -1005,8 +1005,8 @@
   <data name="messageEvaluationExist" xml:space="preserve">
     <value>This evaluation already exists</value>
   </data>
-  <data name="messageFeeAlreadyExist" xml:space="preserve">
-    <value>Fees already exist</value>
+  <data name="messageDataAlreadyExist" xml:space="preserve">
+    <value>This data already exists</value>
   </data>
   <data name="messageFeesExist" xml:space="preserve">
     <value>These fees already exist</value>
@@ -1375,5 +1375,119 @@
   </data>
   <data name="LabelDisciplinarySheets" xml:space="preserve">
     <value>Disciplinary Sheets</value>
+  </data>
+  <data name="LabelEvaluationStatistique" xml:space="preserve">
+    <value>Evaluation statistics</value>
+  </data>
+  <data name="LabelAnnualStatistic" xml:space="preserve">
+    <value>Annual statistics</value>
+  </data>
+  <data name="LabelDependsOn" xml:space="preserve">
+    <value>Depends on</value>
+  </data>
+  <data name="LabelNothing" xml:space="preserve">
+    <value>Nothing</value>
+  </data>
+  <data name="LabelEvaluationModel" xml:space="preserve">
+    <value>Evaluation model</value>
+  </data>
+  <data name="LabelCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="LabelPostBox" xml:space="preserve">
+    <value>Postbox</value>
+  </data>
+  <data name="LabelWebsite" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="LabelHeadMaster" xml:space="preserve">
+    <value>Head master</value>
+  </data>
+  <data name="LabelHeadMasterType" xml:space="preserve">
+    <value>Head master Type</value>
+  </data>
+  <data name="LabelHeadMasterName" xml:space="preserve">
+    <value>Head master name</value>
+  </data>
+  <data name="LabelHeadMasterSex" xml:space="preserve">
+    <value>Head master sex</value>
+  </data>
+  <data name="LabelStudentPictureDirectory" xml:space="preserve">
+    <value>Student photo directory</value>
+  </data>
+  <data name="LabelEmployeePictureDirectory" xml:space="preserve">
+    <value>Employee photo directory</value>
+  </data>
+  <data name="LabelLocalization" xml:space="preserve">
+    <value>Localization</value>
+  </data>
+  <data name="LabelMotto" xml:space="preserve">
+    <value>Motto</value>
+  </data>
+  <data name="LabelDirector" xml:space="preserve">
+    <value>Head master</value>
+  </data>
+  <data name="LabelThePrincipal" xml:space="preserve">
+    <value>The Principal</value>
+  </data>
+  <data name="LabelTheProviseur" xml:space="preserve">
+    <value>The Principal</value>
+  </data>
+  <data name="LabelTheDirector" xml:space="preserve">
+    <value>The Director</value>
+  </data>
+  <data name="LabelFirstModel" xml:space="preserve">
+    <value>First model</value>
+  </data>
+  <data name="LabelSecondModel" xml:space="preserve">
+    <value>Second model</value>
+  </data>
+  <data name="LabelThirdModel" xml:space="preserve">
+    <value>Third model</value>
+  </data>
+  <data name="messageClickToClose" xml:space="preserve">
+    <value>Click here to close</value>
+  </data>
+  <data name="LabelCustomerName" xml:space="preserve">
+    <value>Customer name</value>
+  </data>
+  <data name="LabelLisenceType" xml:space="preserve">
+    <value>Lisence type</value>
+  </data>
+  <data name="LabelLisence" xml:space="preserve">
+    <value>Lisence</value>
+  </data>
+  <data name="LabelInfinity" xml:space="preserve">
+    <value>Infinity</value>
+  </data>
+  <data name="LabelAnnualLisence" xml:space="preserve">
+    <value>Annual lisence</value>
+  </data>
+  <data name="LabelBiannualLisence" xml:space="preserve">
+    <value>Biannual lisence</value>
+  </data>
+  <data name="LabelMonthlyLisence" xml:space="preserve">
+    <value>Monthly lisence</value>
+  </data>
+  <data name="LabelQuarterlyLisence" xml:space="preserve">
+    <value>Quarterly lisence</value>
+  </data>
+  <data name="LabelUnknowLisence" xml:space="preserve">
+    <value>Unknow lisence</value>
+  </data>
+  <data name="LabelExpiryDate" xml:space="preserve">
+    <value>ExpiryDate</value>
+  </data>
+  <data name="LabelUnknowOrExpiredLisence" xml:space="preserve">
+    <value>Expired or unknow lisence</value>
+  </data>
+  <data name="messageEmployeeDuplicateAlreadyExist" xml:space="preserve">
+    <value>This employee has already been duplicated for the current year</value>
+  </data>
+  <data name="messageFeeDuplicateAlreadyExist" xml:space="preserve">
+    <value>These fees have already been duplicated for the current year</value>
+  </data>
+  <data name="messageConfirmeFeeDuplicate" xml:space="preserve">
+    <value>Are you sure you want to duplicate these fees for the current year</value>
   </data>
 </root>

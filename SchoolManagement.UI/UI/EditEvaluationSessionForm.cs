@@ -12,7 +12,6 @@ namespace SchoolManagement.UI
         public RadButton CloseButton { get => closeButton; }
         public RadTextBox FrenchNameTextBox { get => nameFrTextBox; }
         public RadTextBox EnglishNameTextBox { get=>nameEnTextBox; }
-        public RadTextBox CodeTextBox { get => codeTextBox; }
         public RadSpinEditor SequenceSpinEditor {  get => sequenceSpinEditor; }
         public RadLabel ErrorLabel { get => errorLabel; }
         public EditEvaluationSessionForm()
@@ -24,10 +23,9 @@ namespace SchoolManagement.UI
         }
         private void InitLanguage()
         {
-            this.nameFrLabel.Text = Language.labelFrenchName;
-            this.nameEnLabel.Text = Language.labelEnglishName;   
+            this.nameFrLabel.Text = "<html>" + Language.labelFrenchName + ":" + "<color=Red>*";
+            this.nameEnLabel.Text = "<html>" + Language.labelEnglishName + ":" + "<color=Red>*";
             this.sequenceLabel.Text=Language.labelSequence;
-            this.codeLabel.Text = Language.labelCode;
             this.saveButton.Text = Language.labelSave;
             this.closeButton.Text = Language.labelCancel;
         }
@@ -43,11 +41,6 @@ namespace SchoolManagement.UI
             this.nameEnLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameEnLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.codeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
-            this.codeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.codeLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            this.codeLabel.TextAlignment = ContentAlignment.BottomLeft;
-
             this.nameFrTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameFrTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.nameFrTextBox.ForeColor = Color.FromArgb(33, 33, 33);
@@ -55,10 +48,6 @@ namespace SchoolManagement.UI
             this.nameEnTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameEnTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.nameEnTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-
-            this.codeTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
-            this.codeTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.codeTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
@@ -81,11 +70,8 @@ namespace SchoolManagement.UI
 
             this.nameFrTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.nameEnTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
-            this.codeTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
-
             this.nameFrSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.nameEnSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-            this.codeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
@@ -112,13 +98,7 @@ namespace SchoolManagement.UI
                 this.errorLabel.Text = Language.messageFillField;
                 return false;
             }
-            if (this.codeTextBox.Text == "")
-            {
-                this.errorProvider.SetError(this.codeTextBox, Language.messageFillField);
-                this.errorLabel.Text = Language.messageFillField;
-                this.codeTextBox.Focus();
-                return false;
-            }
+           
             if (this.nameEnTextBox.Text == "")
             {
                 this.errorProvider.SetError(this.nameEnTextBox, Language.messageFillField);
@@ -126,7 +106,6 @@ namespace SchoolManagement.UI
                 this.nameEnTextBox.Focus();
                 return false;
             }
-
             return true;
         }
     }

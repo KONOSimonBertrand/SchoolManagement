@@ -12,8 +12,10 @@ namespace SchoolManagement.Core.Model
         public double Amount { get; set; }
         public string TransactionId { get; set; }
         public string Reason { get; set; }
-        public int EnrollingId {  get; set; }
-        public virtual EmployeeEnrolling Enrolling { get; set; }
+        public int EmployeeId {  get; set; }
+        public int SchoolYearId { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual SchoolYear SchoolYear { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not EmployeeAccountTransaction other) return false;

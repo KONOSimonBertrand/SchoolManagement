@@ -4,10 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
-using SchoolManagement.UI.CustomControls;
 using SchoolManagement.UI.Localization;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -151,14 +149,13 @@ namespace Primary.SchoolApp.UI
             }
 
             //load attendances
-            LoadAttendances(enrolling.Id);
+            LoadAttendances(enrolling.EmployeeId, enrolling.SchoolYearId);
         }
         // chargement de la liste des présences dans le datagridview
-        private async void LoadAttendances(int enrollingId)
+        private async void LoadAttendances(int employeeId,int schoolYearId)
         {
-            selectedEnrolling.Attendances = employeeService.GetAttendanceList(enrollingId).Result;
-            DataGridView.DataSource = selectedEnrolling.Attendances;
-            await Task.Delay(0);      
+            var attendances = await employeeService.GetAttendanceListByEmployee(employeeId,schoolYearId);
+            DataGridView.DataSource = attendances;
          }
         //Création des colonnes du datqgridview
         private void CreateGridViewColumn()
@@ -240,7 +237,7 @@ namespace Primary.SchoolApp.UI
                             var isDone = employeeService.DeleteAttendance(record.Id).Result;
                             if (isDone)
                             {
-                                LoadAttendances(selectedEnrolling.Id);
+                                LoadAttendances(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId);
                                 Log log = new()
                                 {
                                     UserAction = $"Suppression d'un pointage de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
@@ -290,7 +287,7 @@ namespace Primary.SchoolApp.UI
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                LoadAttendances(selectedEnrolling.Id);
+                LoadAttendances(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId);
             }
         }
         //affichage de UI pour la modification d'une présence

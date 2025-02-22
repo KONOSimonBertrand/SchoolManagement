@@ -51,9 +51,10 @@ namespace Primary.SchoolApp.UI
                 var studentRoom=Program.StudentRoomList.FirstOrDefault(x=>x.StudentId==selectedNote.StudentId);
                 var room=Program.SchoolRoomList.FirstOrDefault(x=>x.Id==studentRoom.RoomId);
                 var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id==room.ClassId);
+                var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
                 ClassTextBox.Text = room.Name;
                 //add class section
-                if (classOfRoom.DocumentLanguageId == 2)
+                if (classGroup.DocumentLanguageId == 2)
                 {
                     GroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                     GroupDropDownList.Items.Add(new RadListDataItem("Anglophone", 1));
@@ -61,7 +62,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    if (classOfRoom.DocumentLanguageId == 0)
+                    if (classGroup.DocumentLanguageId == 0)
                     {
                         GroupDropDownList.Items.Add(new RadListDataItem("Francophone", 0));
                         GroupDropDownList.SelectedIndex = 0;

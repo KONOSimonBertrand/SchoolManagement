@@ -1,14 +1,13 @@
 ﻿
 
-using SchoolManagement.Core.Model;
 using Telerik.Reporting;
 using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Reporting
 {
-    internal class PrimaryEvaluationReport:SchoolManagement.UI.Reporting.PrimaryEvaluationReport
+    internal class EvaluationPrimaryReportCardReport:SchoolManagement.UI.Reporting.PrimaryEvaluationReport
     {
-        public PrimaryEvaluationReport(ReportCard reportCard, ClientApp clientApp) { 
+        public EvaluationPrimaryReportCardReport(EvaluationReportCard reportCard) { 
             string img= reportCard.HeadSection.Language=="FR"? "head_paper_fr.png" : "head_paper_en.png"; 
             HeaderPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl(img);
             RePortTitleTextBox.Value= reportCard.HeadSection.ReportTitle;
@@ -21,12 +20,13 @@ namespace Primary.SchoolApp.Reporting
             ClassLabel.Value = reportCard.HeadSection.Language == "FR" ? "Classe:" : "Class:";
             ClassTextBox.Value = reportCard.HeadSection.ClassRoom;
             TeacherLabel.Value = reportCard.HeadSection.Language == "FR" ? "Titulaire:" : "Teacher:";
+            TeacherTexBox.Value = reportCard.HeadSection.Teacher;
             TotalLabel.Value = "Total".ToUpper();
             if (reportCard.HeadSection.Language == "FR")
             {
                 string bornLabel = reportCard.HeadSection.Student.Sex == "M" ? "Né le " : "Née le ";
                 BornTextBox.Value = bornLabel + reportCard.HeadSection.Student.BirthDate.ToShortDateString() + " à " + reportCard.HeadSection.Student.BirthPlace;
-                SubjectLabel.Value="Disciline".ToUpper();
+                SubjectLabel.Value="Discipline".ToUpper();
                 NotedOnLabel.Value = "Max";
                 NoteLabel.Value = "Note";
                 ObservationLabel.Value = "Observation";
@@ -46,7 +46,9 @@ namespace Primary.SchoolApp.Reporting
                 TeacherSignatureLabel.Value = "Enseignant(e)";
                 DeanSignatureLabel.Value = "Préfet  des Etudes";
                 DirectorSignatureLabel.Value = "Directeur";
-
+                var decisionMessagePassed = reportCard.HeadSection.Student.Sex == "M" ? "ADMIS" : "ADMISE";
+                var decisionMessageFailed = reportCard.HeadSection.Student.Sex == "M" ? "REFUSE" : "REFUSEE";
+                DecisionTextBox.Value = reportCard.FooterSection.StudentAverage >= 10 ? decisionMessagePassed : decisionMessageFailed;
             }
             else
             {
@@ -71,13 +73,14 @@ namespace Primary.SchoolApp.Reporting
                 TeacherSignatureLabel.Value = "Teacher";
                 DeanSignatureLabel.Value = "Dean of Studies";
                 DirectorSignatureLabel.Value = "Head Master";
+                DecisionTextBox.Value = reportCard.FooterSection.StudentAverage >= 10 ? "PASSED" : "FAILED";
             }
             
             
             //load data on sub report
             var noteReport = new InstanceReportSource
             {
-                ReportDocument = new Detail1NoteReport(reportCard)
+                ReportDocument = new Subreport1NoteReport(reportCard)
             };
 
             NotesSubReport.ReportSource = noteReport;
@@ -86,15 +89,16 @@ namespace Primary.SchoolApp.Reporting
 
             this.TotalMaxNoteTextBox.Value =reportCard.FooterSection.SumMaxNote.ToString();
             this.TotalNoteTextBox.Value =reportCard.FooterSection.SumNote.ToString();
+            if (reportCard.FooterSection.StudentAverage < 10) this.AverageTextBox.Style.Color = System.Drawing.Color.Red;
             this.AverageTextBox.Value =reportCard.FooterSection.StudentAverage.ToString();
             this.GeneralAverageTextBox.Value =reportCard.FooterSection.ClassAverage.ToString();
             this.HighestAverageTextBox.Value=reportCard.FooterSection.HighestAverage.ToString();
             this.LowestAverageTextBox.Value=reportCard.FooterSection.LowestAverage.ToString();
             this.RankTextBox.Value = reportCard.FooterSection.Position;
-            FacebookAddressLabel.Value = clientApp.Name;
-            ContactTextBox.Value = clientApp.Contact;
-            AddressTextBox.Value = clientApp.Address;
-            WebSiteTextBox.Value = clientApp.WebSite;
+            FacebookAddressLabel.Value = Program.CurrentSchool.Name;
+            ContactTextBox.Value = $"Tel:{Program.CurrentSchool.Phone}";
+            AddressTextBox.Value = Program.CurrentSchool.Address;
+            WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
             FaceBookPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
             WebSitePictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
             WebSitePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("website.png");

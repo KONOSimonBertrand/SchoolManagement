@@ -1,6 +1,6 @@
 namespace SchoolManagement.UI.Reporting
 {
-    partial class Detail1NoteReport
+    partial class Subreport1NoteReport
     {
         #region Component Designer generated code
         /// <summary>
@@ -35,7 +35,7 @@ namespace SchoolManagement.UI.Reporting
             this.notedOnTextBox,
             this.ratingTextBox,
             this.noteTextBox,
-            this.PositionTextBox});
+            this.positionTextBox});
             this.dataPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.2D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.dataPanel.Name = "dataPanel";
             this.dataPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.9D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
@@ -54,9 +54,9 @@ namespace SchoolManagement.UI.Reporting
             // 
             // notedOnTextBox
             // 
-            this.notedOnTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.028D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.notedOnTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.notedOnTextBox.Name = "notedOnTextBox";
-            this.notedOnTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.55D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
+            this.notedOnTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.589D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
             this.notedOnTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.notedOnTextBox.Style.Font.Bold = true;
             this.notedOnTextBox.Style.Font.Name = "Times New Roman";
@@ -67,9 +67,9 @@ namespace SchoolManagement.UI.Reporting
             // 
             // ratingTextBox
             // 
-            this.ratingTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.131D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.ratingTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.18D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.ratingTextBox.Name = "ratingTextBox";
-            this.ratingTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.433D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
+            this.ratingTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.4D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
             this.ratingTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.ratingTextBox.Style.Font.Name = "Times New Roman";
             this.ratingTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
@@ -79,9 +79,9 @@ namespace SchoolManagement.UI.Reporting
             // 
             // noteTextBox
             // 
-            this.noteTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.578D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.noteTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.59D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.noteTextBox.Name = "noteTextBox";
-            this.noteTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.55D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
+            this.noteTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.589D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
             this.noteTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.noteTextBox.Style.Font.Name = "Times New Roman";
             this.noteTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
@@ -89,17 +89,17 @@ namespace SchoolManagement.UI.Reporting
             this.noteTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.noteTextBox.Value = "=Note";
             // 
-            // PositionTextBox
+            // positionTextBox
             // 
-            this.PositionTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.564D), Telerik.Reporting.Drawing.Unit.Inch(0D));
-            this.PositionTextBox.Name = "PositionTextBox";
-            this.PositionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.433D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
-            this.PositionTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.PositionTextBox.Style.Font.Name = "Times New Roman";
-            this.PositionTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.PositionTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.PositionTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.PositionTextBox.Value = "=Rank";
+            this.positionTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.58D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.positionTextBox.Name = "positionTextBox";
+            this.positionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.4D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
+            this.positionTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.positionTextBox.Style.Font.Name = "Times New Roman";
+            this.positionTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.positionTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.positionTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.positionTextBox.Value = "=Rank";
             // 
             // objectDataSource1
             // 

@@ -94,10 +94,165 @@ SELECT note2,note2_coef,noted2_on,comment,subject_id,student_id,evaluation_id,sc
 *********************note de mise à jour chez yves*******************************************
 -  creer les colonnes "AverageFormula" et "ReportCardModel" dans la table schoolclasses
 - Ajout des colonnes "StudentId" et "SchoolYearId" dans la table "Subscriptions"
-
+- Qjouter les colones IsChecked et Mother dans la table evaluationsessions
 - Effectuer une mise a jour de  la table "Subscriptions" via le script ci-dessous
          UPDATE Subscriptions A 
          INNER JOIN studentsenrollings B ON A.EnrollingId=B.Id
          SET A.SchoolYearId=B.SchoolYearId, A.StudentId=B.StudentId
 - suppression de la cle etrangre "Enrolling_Subscriptioin_fk" dans la table "Subscriptions"
 - suppression de la colonne "EnrollingId" de la table "Subscriptions"
+- supprimer de la table schoolclasses les colonnes (DocumentLanguageId, NoteIsTruncate,ReportCardModel,AverageFormula) et les mettre dans la table schoolgroups 
+
+3 Modification de la table EmployeesRooms
+ - Exectuter le scritp ci-dessous
+ ALTER TABLE `db_primary`.`employeesrooms` 
+DROP FOREIGN KEY `room_enrolling_fk`,
+DROP FOREIGN KEY `enrolling_room_fk`;
+ALTER TABLE `db_primary`.`employeesrooms` 
+ADD COLUMN `EmployeeId` INT NULL AFTER `EnrollingId`,
+ADD COLUMN `SchoolYearId` INT NULL AFTER `EmployeeId`,
+ADD INDEX `room_enrolling_fk_idx` (`RoomId` ASC),
+ADD INDEX `employee_room_fk_idx` (`EmployeeId` ASC),
+ADD INDEX `schoolYear_employeeRoom_fk_idx` (`SchoolYearId` ASC),
+DROP INDEX `room_enrolling_fk_idx` ;
+;
+ALTER TABLE `db_primary`.`employeesrooms` 
+ADD CONSTRAINT `room_employeeRoom_fk`
+  FOREIGN KEY (`RoomId`)
+  REFERENCES `db_primary`.`schoolrooms` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `employee_employeeRoom_fk`
+  FOREIGN KEY (`EmployeeId`)
+  REFERENCES `db_primary`.`employees` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `schoolYear_employeeRoom_fk`
+  FOREIGN KEY (`SchoolYearId`)
+  REFERENCES `db_primary`.`schoolyears` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  - Effectuer une mise a jour de  la table "EmployeesRooms" via le script ci-dessous
+         UPDATE EmployeesRooms A 
+        INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
+         SET A.SchoolYearId=B.SchoolYearId, A.EmployeeId=B.EmployeeId
+                   
+- executer le script ci-dessous
+ALTER TABLE `db_primary`.`employeesrooms` 
+DROP COLUMN `EnrollingId`,
+CHANGE COLUMN `EmployeeId` `EmployeeId` INT(11) NOT NULL ,
+CHANGE COLUMN `SchoolYearId` `SchoolYearId` INT(11) NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`EmployeeId`, `SchoolYearId`, `RoomId`);
+;
+- Modifier la table EmployeesSubjects avec le script c-dessous
+ALTER TABLE `db_primary`.`employeessubjects` 
+ADD COLUMN `SchoolYearId` INT NULL AFTER `RoomId`,
+ADD COLUMN `EmployeeId` INT NULL AFTER `SchoolYearId`,
+ADD INDEX `employee_employeeSubject_fk_idx` (`EmployeeId` ASC),
+ADD INDEX `schoolYear_employeeSubject_fk_idx` (`SchoolYearId` ASC);
+;
+ALTER TABLE `db_primary`.`employeessubjects` 
+ADD CONSTRAINT `employee_employeeSubject_fk`
+  FOREIGN KEY (`EmployeeId`)
+  REFERENCES `db_primary`.`employees` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `schoolYear_employeeSubject_fk`
+  FOREIGN KEY (`SchoolYearId`)
+  REFERENCES `db_primary`.`schoolyears` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+  - executer
+  UPDATE employeessubjects A 
+         INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
+         SET A.SchoolYearId=B.SchoolYearId, A.EmployeeId=B.EmployeeId
+		 
+- Exectuter le script ci-dessous 
+ALTER TABLE `db_primary`.`employeesattendances` 
+ADD COLUMN `EmployeeId` INT NULL AFTER `EnrollingId`,
+ADD COLUMN `SchoolYearId` INT NULL AFTER `EmployeeId`,
+ADD INDEX `employee_attendance_fk_idx` (`EmployeeId` ASC),
+ADD INDEX `schoolYear_attendance_fk_idx` (`SchoolYearId` ASC);
+;
+ALTER TABLE `db_primary`.`employeesattendances` 
+ADD CONSTRAINT `employee_attendance_fk`
+  FOREIGN KEY (`EmployeeId`)
+  REFERENCES `db_primary`.`employees` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `schoolYear_attendance_fk`
+  FOREIGN KEY (`SchoolYearId`)
+  REFERENCES `db_primary`.`schoolyears` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `subject_attendance_fk`
+  FOREIGN KEY (`SubjectId`)
+  REFERENCES `db_primary`.`subjects` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+- Exectuter le script ci-dessous
+UPDATE employeesattendances  A
+INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
+SET A.SchoolYearId=B.SchoolYearId, A.EmployeeId=B.EmployeeId
+-Exectuter le script ci-dessous 
+ALTER TABLE `db_primary`.`employeesattendances` 
+DROP COLUMN `EnrollingId`;
+
+-Exectuter le script ci-dessous
+ALTER TABLE `db_primary`.`employeesnotes` 
+DROP FOREIGN KEY `enrolling_note_fk`;
+ALTER TABLE `db_primary`.`employeesnotes` 
+ADD COLUMN `EmployeeId` INT(11) NULL DEFAULT NULL AFTER `EnrollingId`,
+ADD COLUMN `SchoolYearId` INT(11) NULL DEFAULT NULL AFTER `EmployeeId`,
+ADD INDEX `employee_employeeNote_fk_idx` (`EmployeeId` ASC),
+ADD INDEX `schoolYear_employeeNote_fk_idx` (`SchoolYearId` ASC),
+DROP INDEX `enrolling_note_fk_idx` ;
+;
+ALTER TABLE `db_primary`.`employeesnotes` 
+ADD CONSTRAINT `employee_employeeNote_fk`
+  FOREIGN KEY (`EmployeeId`)
+  REFERENCES `db_primary`.`employees` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `schoolYear_employeeNote_fk`
+  FOREIGN KEY (`SchoolYearId`)
+  REFERENCES `db_primary`.`schoolyears` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+UPDATE employeesnotes  A
+INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
+SET A.SchoolYearId=B.SchoolYearId, A.EmployeeId=B.EmployeeId
+ALTER TABLE `db_primary`.`employeesnotes` 
+DROP COLUMN `EnrollingId`;
+
+-Exectuter le script c-dessous
+ALTER TABLE `db_primary`.`employeesaccounttransactions` 
+DROP FOREIGN KEY `Enrolling_account_fk`;
+ALTER TABLE `db_primary`.`employeesaccounttransactions` 
+ADD COLUMN `EmployeeId` INT(11) NULL DEFAULT NULL AFTER `EnrollingId`,
+ADD COLUMN `SchoolYearId` INT(11) NULL DEFAULT NULL AFTER `EmployeeId`,
+ADD INDEX `Employee_employeeAccount_fk_idx` (`EmployeeId` ASC),
+ADD INDEX `SchoolYear_employeeAccount_fk_idx` (`SchoolYearId` ASC),
+DROP INDEX `Enrolling_account_fk_idx` ;
+;
+ALTER TABLE `db_primary`.`employeesaccounttransactions` 
+ADD CONSTRAINT `Employee_employeeAccount_fk`
+  FOREIGN KEY (`EmployeeId`)
+  REFERENCES `db_primary`.`employees` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `SchoolYear_employeeAccount_fk`
+  FOREIGN KEY (`SchoolYearId`)
+  REFERENCES `db_primary`.`schoolyears` (`Id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+  
+-Exectuter le script c-dessous
+UPDATE employeesaccounttransactions  A
+INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
+SET A.SchoolYearId=B.SchoolYearId, A.EmployeeId=B.EmployeeId
+Supprimer lq colonne `EnrollingId`;

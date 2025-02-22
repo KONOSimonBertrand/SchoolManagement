@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Primary.SchoolApp.DTO
 {
-    internal class StudentEnrollingDTO
+    public  class StudentEnrollingDTO
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }

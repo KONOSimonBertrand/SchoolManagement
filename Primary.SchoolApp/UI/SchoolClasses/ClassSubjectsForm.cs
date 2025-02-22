@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System;
 using Telerik.WinControls.UI;
 using Telerik.WinControls;
+using System.Linq;
 namespace Primary.SchoolApp.UI
 {
     public partial class ClassSubjectsForm : SchoolManagement.UI.ClassSubjectsForm
@@ -226,7 +227,8 @@ namespace Primary.SchoolApp.UI
             this.DataGridView.Columns.Add(coefColumn);
             this.DataGridView.Columns.Add(noteOnColumn);
             this.DataGridView.Columns.Add(sequenceColumn);
-            if (selectedClass.DocumentLanguageId == 2)
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
+            if (classGroup.DocumentLanguageId == 2)
                 this.DataGridView.Columns.Add(sectionColumn);
         }
 

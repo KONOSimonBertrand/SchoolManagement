@@ -1,11 +1,6 @@
-﻿
-
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using Telerik.Reporting;
 using Telerik.Reporting.Drawing;
-using Telerik.WinControls.UI;
 using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Reporting
@@ -13,11 +8,10 @@ namespace Primary.SchoolApp.Reporting
     internal class ClassNoteReport:SchoolManagement.UI.Reporting.ClassNoteReport
     {
         public ClassNoteReport(ClassroomReport report) {
-            HeaderPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Stretch;
+           this.HeaderPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Stretch;
            this.ReportTitleTextBox.Value=report.HeaderSection.Items.FirstOrDefault(x=>x.Name== "ReportTitle").Value;
            this.SchoolYearTextBox.Value = report.HeaderSection.Items.FirstOrDefault(x => x.Name == "SchoolYear").Value;
            this.RoomTextBox.Value = report.HeaderSection.Items.FirstOrDefault(x => x.Name == "ClassRoom").Value;
-           this.ClassroomSizeTextBox.Value = report.HeaderSection.Items.FirstOrDefault(x => x.Name == "ClassRoomSize").Value;
            this.TotalCoefTextBox.Value = report.HeaderSection.Items.FirstOrDefault(x => x.Name == "SumMaxOrCoef").Value;
            
             this.ReportTable.ColumnGroups.Clear();
@@ -47,6 +41,10 @@ namespace Primary.SchoolApp.Reporting
                         textBoxTable.Size = new SizeU(Unit.Inch(2.842D), Unit.Inch(0.2D));
                         break;
                     case 2:
+                        textboxGroup.Size = new SizeU(Unit.Inch(0.9D), Unit.Inch(0.943D));
+                        textBoxTable.Size = new SizeU(Unit.Inch(0.9D), Unit.Inch(0.2D));
+                        break;
+                    case 3:
                         textboxGroup.Size = new SizeU(Unit.Inch(0.418D), Unit.Inch(0.943D));
                         textBoxTable.Size = new SizeU(Unit.Inch(0.418D), Unit.Inch(0.2D));
                         break;
@@ -54,7 +52,7 @@ namespace Primary.SchoolApp.Reporting
                         textBoxTable.Size = new SizeU(Unit.Inch(0.450D), Unit.Inch(0.2D));
                         break;
                 }
-                if (i > 2)
+                if (i > 3)
                 {
                     textboxGroup.Angle = 270D;
                     textboxGroup.Size = new SizeU(Unit.Inch(0.181D), Unit.Inch(0.943D));

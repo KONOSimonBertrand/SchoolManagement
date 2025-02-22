@@ -1,5 +1,4 @@
 ﻿
-using Microsoft.VisualBasic.ApplicationServices;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
@@ -80,23 +79,13 @@ namespace Primary.SchoolApp.UI
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                selectedEnrolling.Subjects.Clear();
-                foreach (var row in DataGridView.Rows)
-                {
-                    if (row.DataBoundItem is EmployeeSubject subject)
-                    {
-                        if (subject.IsChecked)
-                        {
-                            selectedEnrolling.Subjects.Add(subject);
-                        }
-                    }
-                }
-                var isDone = employeeService.AddSubjectList(selectedEnrolling.Id, selectedEnrolling.Subjects.ToList()).Result;
+                var subjectListToSave = DataGridView.Rows.Select(x => x.DataBoundItem as EmployeeSubject).Where(x => x.IsChecked).ToList();
+                var isDone = employeeService.AddSubjectList(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId, subjectListToSave).Result;
                 if (isDone)
                 {
                     Log log = new()
                     {
-                        UserAction = $"Mise à jour des matières allouées de l'employé {selectedEnrolling.Employee.FullName}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                        UserAction = $"Mise à jour des matières allouées de l'employé {selectedEnrolling.Employee.FullName}  par l'utisateur  {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress}",
                         UserId = clientApp.UserConnected.Id
                     };
                     logService.CreateLog(log);
@@ -169,18 +158,18 @@ namespace Primary.SchoolApp.UI
                 }
             }
 
-            LoadSubjects(enrolling.Id);
+            LoadSubjects(enrolling.EmployeeId,enrolling.SchoolYearId);
         }
 
-        private  async void LoadSubjects(int enrollingId)
+        private  async void LoadSubjects(int employeeId,int schoolYearId)
         {
-            selectedEnrolling.Subjects = employeeService.GetSubjectList(enrollingId).Result;
-            foreach (var subject in selectedEnrolling.Subjects)
+            var employeeSubjectList = await employeeService.GetSubjectListByEmployee(employeeId, schoolYearId);
+            foreach (var subject in employeeSubjectList)
             {
                 subject.IsChecked = true;
             }
             //get roomlist
-            var roomList = employeeService.GetRoomList(enrollingId).Result.Select(x => x.Room).ToList();
+            var roomList = employeeService.GetRoomListByEmployee(employeeId,schoolYearId).Result.Select(x => x.Room).ToList();
             //get class list
             List<SchoolClass> classList = new();
             foreach(var room in Program.SchoolRoomList)
@@ -206,17 +195,19 @@ namespace Primary.SchoolApp.UI
                             SubjectId = subject.Id,
                             RoomId = room.Id,
                             Room = room,
-                            Enrolling = selectedEnrolling,
-                            EnrollingId = selectedEnrolling.Id
+                            Employee = selectedEnrolling.Employee,
+                            EmployeeId = selectedEnrolling.Id,
+                            SchoolYear=selectedEnrolling.SchoolYear,
+                            SchoolYearId=selectedEnrolling.SchoolYearId,
                         };
-                        if (!selectedEnrolling.Subjects.Contains(employeeSubject))
+                        if (!employeeSubjectList.Contains(employeeSubject))
                         {
-                            selectedEnrolling.Subjects.Add(employeeSubject);
+                            employeeSubjectList.Add(employeeSubject);
                         }
                     }
                 }
             }        
-            DataGridView.DataSource = selectedEnrolling.Subjects;
+            DataGridView.DataSource = employeeSubjectList;
             await Task.Delay(0);
         }
         private void CreateGridViewColumn()

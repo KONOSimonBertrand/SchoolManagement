@@ -21,7 +21,7 @@ namespace SchoolManagement.UI
         }
         private void InitLanguage()
         {
-            this.nameLabel.Text = Language.labelDesignation;
+            this.nameLabel.Text = "<html>" + Language.labelDesignation + ":" + "<color=Red>*";
             this.saveButton.Text = Language.labelSave;
             this.closeButton.Text = Language.labelCancel;
         }
@@ -54,6 +54,7 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            this.errorLabel.ForeColor = Color.Red;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -62,12 +63,12 @@ namespace SchoolManagement.UI
         }
         public bool IsValidData()
         {
-            this.errorLabel.Text = "";
-            this.errorLabel.ForeColor = Color.Red;
-
-            if (this.nameTextBox.Text == "")
+            this.errorLabel.Text = string.Empty;
+            this.errorProvider.Clear();
+            if (this.nameTextBox.Text == string.Empty)
             {
-                this.errorLabel.Text = "La saisie de la désignation est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.nameTextBox, Language.messageFillField);
                 this.nameTextBox.Focus();
                 return false;
             }

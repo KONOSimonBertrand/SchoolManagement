@@ -4,7 +4,6 @@ using Primary.SchoolApp.Reporting.CashFlow;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -36,8 +35,9 @@ namespace Primary.SchoolApp
         //affiche l'apperçu d'un reçu d'inscription
         internal void LoadStudentEnrollingReceipt(StudentEnrolling enrolling, bool isCopy)
         {
+            var classGroup=Program.SchoolGroupList.FirstOrDefault(x=>x.Id==enrolling.SchoolClass.GroupId);
             InstanceReportSource reportSource = new();
-            reportSource.ReportDocument = new PaymentReceiptA4Report(enrolling, isCopy,clientApp);
+            reportSource.ReportDocument = new PaymentReceiptA4Report(new PaymentReceiptData(enrolling,isCopy,classGroup));
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
             reportViewer.RefreshReport();
@@ -45,7 +45,7 @@ namespace Primary.SchoolApp
         internal void LoadTuitionPaymentReceipt(TuitionPayment payment, bool isCopy)
         {
             InstanceReportSource reportSource = new();
-            reportSource.ReportDocument = new PaymentReceiptA4Report(payment, isCopy, clientApp);
+            reportSource.ReportDocument = new PaymentReceiptA4Report(new TuitionReceiptData(payment, isCopy));
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
             reportViewer.RefreshReport();
@@ -55,7 +55,7 @@ namespace Primary.SchoolApp
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new PaymentReceiptA4Report(subscription, isCopy, clientApp)
+                ReportDocument = new PaymentReceiptA4Report(new SubscriptionReceiptData(subscription, isCopy))
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -66,7 +66,7 @@ namespace Primary.SchoolApp
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new PaymentSummaryReport(enrolling, clientApp)
+                ReportDocument = new PaymentSummaryReport(enrolling)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -75,9 +75,10 @@ namespace Primary.SchoolApp
         //load student certificate
         internal void LoadSchoolCertificate(StudentEnrollingDTO enrolling)
         {
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x=>x.Id==enrolling.SchoolClass.GroupId);
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new SchoolCertificateReport(enrolling, clientApp)
+                ReportDocument = new SchoolCertificateReport( new(enrolling, classGroup))
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -88,7 +89,7 @@ namespace Primary.SchoolApp
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new BadgeReport(enrolling,expirationDate, clientApp)
+                ReportDocument = new BadgeReport(enrolling,expirationDate)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -99,7 +100,7 @@ namespace Primary.SchoolApp
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new BadgeReport(enrollingList, expirationDate, clientApp)
+                ReportDocument = new BadgeReport(enrollingList, expirationDate)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -112,11 +113,13 @@ namespace Primary.SchoolApp
 
             // get class
             var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id==selectedRoom.ClassId);
+            //get group 
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
             var language = "FR";
             if (classOfRoom != null) {
-                if (classOfRoom.DocumentLanguageId >0)
+                if (classGroup.DocumentLanguageId >0)
                 {
-                    if (classOfRoom.DocumentLanguageId == 1)
+                    if (classGroup.DocumentLanguageId == 1)
                     {
                         language = "EN";
                     }
@@ -179,23 +182,34 @@ namespace Primary.SchoolApp
 
         #region Report Card
         // affiche un bulletin d'une évaluation
-        internal void LoadEvaluationReportCard(ReportCard reportCard)
+        internal void LoadEvaluationReportCard(EvaluationReportCard reportCard)
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new PrimaryEvaluationReport(reportCard,clientApp)
+                ReportDocument = new EvaluationPrimaryReportCardReport(reportCard)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
             reportViewer.RefreshReport();
         }
-        internal void LoadEvaluationReportCard(List<ReportCard> reportCardList)
+        // affiche un bulletin d'un trimestre
+        internal void LoadTermPrimaryReportCard(TermReportCard reportCard)
+        {
+            InstanceReportSource reportSource = new()
+            {
+                ReportDocument = new TermPrimaryReportCardReport(reportCard)
+            };
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
+        }
+        internal void LoadEvaluationReportCard(List<EvaluationReportCard> reportCardList)
         {
             var reportBook = new ReportBook();
             foreach (var reportCard in reportCardList) {
                 InstanceReportSource reportSource = new()
                 {
-                    ReportDocument = new PrimaryEvaluationReport(reportCard, clientApp)
+                    ReportDocument = new EvaluationPrimaryReportCardReport(reportCard)
                 };
                 reportBook.ReportSources.Add(reportSource);
             }
@@ -209,11 +223,28 @@ namespace Primary.SchoolApp
             reportViewer.RefreshReport();
         }
 
+        // Affiche le PV d'une salle de classe
         internal void LoadClassroomReport(ClassroomReport report)
         {
             InstanceReportSource reportSource = new()
             {
                 ReportDocument = new ClassNoteReport(report)
+            };
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
+        }
+        /// <summary>
+        /// Affiche les statistiques d'un groupe de classes par évaluation.
+        /// Nombre d'élèves par salle de classe, Nombre d'élèves ayant composé
+        /// Nombre d'admis,abstention,recalé, moyenne général, etc
+        /// </summary>
+        /// <param name="report"></param>
+        internal void LoadClassGroupReport(ClassGroupReport report)
+        {
+            InstanceReportSource reportSource = new()
+            {
+                ReportDocument = new GroupNoteReport(report)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;

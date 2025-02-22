@@ -107,7 +107,7 @@ namespace Primary.SchoolApp.UI
                 var room = RoomDropDownList.SelectedItem.DataBoundItem as SchoolRoom;
                 var startHour = StartDateTimePicker.Value;
                 var endHour = EndDateTimePicker.Value;
-                if (!RecordExist(subject.Id, room.Id, startHour))
+                if (!RecordExist(subject.Id, room.Id, startHour,endHour))
                 {
 
                     selectedAttendance.RoomId = room.Id;
@@ -122,7 +122,7 @@ namespace Primary.SchoolApp.UI
                     {
                         Log log = new()
                         {
-                            UserAction = $"Mise à jour d'un pointage de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                            UserAction = $"Mise à jour d'un pointage de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
@@ -157,19 +157,15 @@ namespace Primary.SchoolApp.UI
             var subjectList = schoolClassService.GetClassSubjectList(classId).Result.Select(x => x.Subject).ToList();
             SubjectDropDownList.DataSource = subjectList;
             await Task.Delay(0);
-            Console.WriteLine("ksb");
         }
         
-        private bool RecordExist(int subjectId, int roomId, DateTime start)
+        private bool RecordExist(int subjectId, int roomId, DateTime start,DateTime end)
         {
-            if (selectedEnrolling.Attendances.Where(
-                x => x.SubjectId == subjectId && x.RoomId == roomId &&
-                x.StartHour.Date == start.Date && x.StartHour.Hour == start.Hour
-                ).Count() > 1)
-            {
-                return true;
-            }
-            return false;
+            var attendances = employeeService.GetAttendanceListByEmployee(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId).Result;
+            return attendances.Any(x => x.SubjectId == subjectId && x.RoomId == roomId &&
+                                  x.StartHour.Date == start.Date && x.StartHour.Hour == start.Hour &&
+                                  x.EndHour.Date == end.Date && x.EndHour.Hour == end.Hour
+                                );
         }
         // show school room UI for edit
         private void ShowSchoolRoomEditForm(SchoolRoom item)

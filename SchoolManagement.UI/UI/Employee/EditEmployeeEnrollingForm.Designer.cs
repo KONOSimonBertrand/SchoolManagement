@@ -380,6 +380,8 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditEmployeeEnrollingForm";
             Text = "EditEmployeeInscriptionForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();

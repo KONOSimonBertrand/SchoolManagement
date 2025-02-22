@@ -38,8 +38,13 @@ namespace Primary.SchoolApp.UI
                     SchoolGroup schoolGroup = new()
                     {
                         Name = NameTextBox.Text,
-                        Sequence = int.Parse(SequenceSpinEditor.Value.ToString())
+                        Sequence = int.Parse(SequenceSpinEditor.Value.ToString()),
+                        DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue,
+                        NoteIsTruncate = bool.Parse(IsTruncateDropDownList.SelectedValue.ToString()),
+                        ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString()),
+                        AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString())
                     };
+
                     bool isDone = schoolGroupService.CreateSchoolGroup(schoolGroup).Result;
                     if (isDone == true)
                     {

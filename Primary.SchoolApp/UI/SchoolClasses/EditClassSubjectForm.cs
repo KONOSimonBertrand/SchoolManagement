@@ -4,6 +4,7 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -77,7 +78,8 @@ namespace Primary.SchoolApp.UI
             AddSubjectButton.Enabled = false;
             SubjectDropDownList.Enabled = false;
             SectionDropDownList.Enabled = false;
-            if (selectedClass.DocumentLanguageId != 2)
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
+            if (classGroup.DocumentLanguageId != 2)
             {
                 this.SectionDropDownList.Items.Clear();
                 this.SectionDropDownList.Items.Add(new RadListDataItem(string.Empty, 0));

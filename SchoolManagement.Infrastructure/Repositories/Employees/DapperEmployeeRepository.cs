@@ -33,13 +33,13 @@ namespace SchoolManagement.Infrastructure.Repositories
                 idCard = employee.IdCard,
                 nationality = employee.Nationality,
                 religion = employee.Religion,
-                hiringDate = employee.HiringDate,              
+                hiringDate = employee.HiringDate,
             });
             await Task.Delay(0);
-            return result>0;
+            return result > 0;
         }
 
-        public async  Task<bool> AddEnrollingAsync(EmployeeEnrolling record)
+        public async Task<bool> AddEnrollingAsync(EmployeeEnrolling record)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" INSERT INTO EmployeesEnrollings(IdNumber,Date,EmployeeId,SchoolYearId,GroupId,JobId,Salary)  
@@ -52,7 +52,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 schoolYearId = record.SchoolYearId,
                 groupId = record.GroupId,
                 jobId = record.JobId,
-                salary=record.Salary,
+                salary = record.Salary,
             });
             await Task.Delay(0);
             return result > 0;
@@ -72,7 +72,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 groupId = record.GroupId,
                 jobId = record.JobId,
                 salary = record.Salary,
-                id= record.Id,
+                id = record.Id,
             });
             await Task.Delay(0);
             return result > 0;
@@ -83,7 +83,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT * FROM Employees 
                               WHERE IdNumber=@idNumber;";
-            var result = connection.Query<Employee>(query,new { idNumber }).FirstOrDefault();
+            var result = connection.Query<Employee>(query, new { idNumber }).FirstOrDefault();
             await Task.Delay(0);
             return result;
         }
@@ -97,8 +97,8 @@ namespace SchoolManagement.Infrastructure.Repositories
                               INNER JOIN EmployeeGroups D ON A.GroupId=D.Id 
                               INNER JOIN SchoolYears E ON A.SchoolYearId=E.Id 
                                WHERE A.EmployeeId=@employeeId AND A.SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<EmployeeEnrolling, Employee, Job, EmployeeGroup,SchoolYear, EmployeeEnrolling>(query,
-                (enrolling, employee, job, group,schoolYear) =>
+            var result = connection.Query<EmployeeEnrolling, Employee, Job, EmployeeGroup, SchoolYear, EmployeeEnrolling>(query,
+                (enrolling, employee, job, group, schoolYear) =>
                 {
                     enrolling.Employee = employee;
                     enrolling.Job = job;
@@ -106,7 +106,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                     enrolling.SchoolYear = schoolYear;
                     return enrolling;
                 },
-                new { employeeId,schoolYearId }
+                new { employeeId, schoolYearId }
                 ).FirstOrDefault();
             await Task.Delay(0);
             return result;
@@ -121,8 +121,8 @@ namespace SchoolManagement.Infrastructure.Repositories
                               INNER JOIN EmployeeGroups D ON A.GroupId=D.Id 
                               INNER JOIN SchoolYears E ON A.SchoolYearId=E.Id 
                               WHERE A.SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<EmployeeEnrolling, Employee, Job, EmployeeGroup,SchoolYear, EmployeeEnrolling>(query,
-                (enrolling,employee, job, group,schoolYear) =>
+            var result = connection.Query<EmployeeEnrolling, Employee, Job, EmployeeGroup, SchoolYear, EmployeeEnrolling>(query,
+                (enrolling, employee, job, group, schoolYear) =>
                 {
                     enrolling.Employee = employee;
                     enrolling.Job = job;
@@ -164,7 +164,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 nationality = employee.Nationality,
                 religion = employee.Religion,
                 hiringDate = employee.HiringDate,
-                id= employee.Id
+                id = employee.Id
             });
             await Task.Delay(0);
             return result > 0;
@@ -187,12 +187,12 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-        public async Task<bool> AddEmployeePictureAsync(int employeeId,string urlPicture)
+        public async Task<bool> AddEmployeePictureAsync(int employeeId, string urlPicture)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE Employees SET PictureUrl=@urlPicture WHERE Id=@employeeId";
             var result = connection.Execute(query, new
-            {              
+            {
                 urlPicture,
                 employeeId
             });
@@ -211,116 +211,166 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
-        public async  Task<bool> AddRoomListAsync(int enrollingId, IList<EmployeeRoom> roomList)
+        public async Task<bool> AddRoomListAsync(int employeeId, int schoolYearId, IList<EmployeeRoom> roomList)
         {
-            await DeleteRoomListAsync(enrollingId);
+            await DeleteRoomListAsync(employeeId, schoolYearId);
             int recordCount = 0;
             foreach (var room in roomList)
             {
-                if (await AddRoomAsync(enrollingId,room) == true)
+                if (await AddRoomAsync(employeeId, schoolYearId, room) == true)
                 {
                     recordCount++;
                 }
             }
             return recordCount == roomList.Count;
         }
-        private async Task<bool> AddRoomAsync(int enrollingId, EmployeeRoom room)
+        private async Task<bool> AddRoomAsync(int employeeId, int schoolYearId, EmployeeRoom room)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO EmployeesRooms(EnrollingId,RoomId,IsMasterRoom,DefaultSection) 
-                           VALUES(@enrollingId,@roomId,@isMasterRoom,@defaultSection) ;";
+            string query = @"INSERT INTO EmployeesRooms(EmployeeId,SchoolYearId,RoomId,IsMasterRoom,DefaultSection) 
+                           VALUES(@employeeId,@schoolYearId,@roomId,@isMasterRoom,@defaultSection) ;";
             var result = connection.Execute(query, new
             {
-                enrollingId,
+                employeeId,
+                schoolYearId,
                 roomId = room.RoomId,
-                isMasterRoom=room.IsMasterRoom,
-                defaultSection=room.DefaultSection
+                isMasterRoom = room.IsMasterRoom,
+                defaultSection = room.DefaultSection
             });
             await Task.Delay(0);
             return result > 0;
         }
-        private async Task<bool> DeleteRoomListAsync(int enrollingId)
+        private async Task<bool> DeleteRoomListAsync(int employeeId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"DELETE FROM EmployeesRooms WHERE EnrollingId=@enrollingId ;";
+            string query = @"DELETE FROM EmployeesRooms WHERE EmployeeId=@employeeId AND SchoolYearId=@schoolYearId ;";
             var result = connection.Execute(query, new
             {
-                enrollingId
+                employeeId,
+                schoolYearId
             });
             await Task.Delay(0);
             return result > 0;
         }
-        public async Task<IList<EmployeeRoom>> GetRoomListAsync(int enrollingId)
+        public async Task<IList<EmployeeRoom>> GetRoomListByEmployeeAsync(int employeeId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM EmployeesRooms A 
-                           INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
-                           INNER JOIN SchoolRooms C ON A.RoomId=C.Id
-                           WHERE A.EnrollingId=@enrollingId  ;";
-            var result = connection.Query<EmployeeRoom, EmployeeEnrolling, SchoolRoom, EmployeeRoom>(query,
-                (employeeRoom, enrolling, room) =>
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           INNER JOIN SchoolRooms D ON A.RoomId=D.Id
+                           WHERE A.EmployeeId=@employeeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeRoom, Employee, SchoolYear, SchoolRoom, EmployeeRoom>(query,
+                (employeeRoom, employee, schoolYear, room) =>
                 {
-                    employeeRoom.Enrolling= enrolling;
+                    employeeRoom.Employee = employee;
+                    employeeRoom.SchoolYear = schoolYear;
                     employeeRoom.Room = room;
                     return employeeRoom;
                 }
-                , new { enrollingId }).ToList();
+                , new { employeeId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
-
-        public async Task<IList<EmployeeSubject>> GetSubjectListAsync(int enrollingId)
+        public async Task<IList<EmployeeRoom>> GetRoomListBySchoolYearAsync(int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM EmployeesRooms A 
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           INNER JOIN SchoolRooms D ON A.RoomId=D.Id
+                           WHERE A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeRoom, Employee, SchoolYear, SchoolRoom, EmployeeRoom>(query,
+                (employeeRoom, employee, schoolYear, room) =>
+                {
+                    employeeRoom.Employee = employee;
+                    employeeRoom.SchoolYear = schoolYear;
+                    employeeRoom.Room = room;
+                    return employeeRoom;
+                }
+                , new { schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+        public async Task<IList<EmployeeSubject>> GetSubjectListByEmployeeAsync(int employeeId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM EmployeesSubjects A 
-                           INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
-                           INNER JOIN Subjects C ON A.SubjectId=C.Id
-                           INNER JOIN SchoolRooms D ON A.RoomId=D.Id
-                           WHERE A.EnrollingId=@enrollingId  ;";
-            var result = connection.Query<EmployeeSubject, EmployeeEnrolling,Subject, SchoolRoom, EmployeeSubject>(query,
-                (employeeSubject, enrolling,subject, room) =>
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           INNER JOIN Subjects D ON A.SubjectId=D.Id
+                           INNER JOIN SchoolRooms E ON A.RoomId=E.Id
+                           WHERE A.EmployeeId=@employeeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeSubject, Employee, SchoolYear, Subject, SchoolRoom, EmployeeSubject>(query,
+                (employeeSubject, employee, schoolYear, subject, room) =>
                 {
-                    employeeSubject.Enrolling = enrolling;
+                    employeeSubject.Employee = employee;
+                    employeeSubject.SchoolYear = schoolYear;
                     employeeSubject.Subject = subject;
                     employeeSubject.Room = room;
                     return employeeSubject;
                 }
-                , new { enrollingId }).ToList();
+                , new { employeeId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
-        private async Task<bool> AddSubjectAsync(int enrollingId, EmployeeSubject record)
+        public async Task<IList<EmployeeSubject>> GetSubjectListBySchoolYearAsync(int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO EmployeesSubjects(EnrollingId,SubjectId,RoomId) 
-                           VALUES(@enrollingId,@subjectId,@roomId) ;";
+            string query = @"SELECT * FROM EmployeesSubjects A 
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           INNER JOIN Subjects D ON A.SubjectId=D.Id
+                           INNER JOIN SchoolRooms E ON A.RoomId=E.Id
+                           WHERE A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeSubject, Employee, SchoolYear, Subject, SchoolRoom, EmployeeSubject>(query,
+                (employeeSubject, employee, schoolYear, subject, room) =>
+                {
+                    employeeSubject.Employee = employee;
+                    employeeSubject.SchoolYear = schoolYear;
+                    employeeSubject.Subject = subject;
+                    employeeSubject.Room = room;
+                    return employeeSubject;
+                }
+                , new { schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+
+        private async Task<bool> AddSubjectAsync(int employeeId, int schoolYearId, EmployeeSubject record)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"INSERT INTO EmployeesSubjects(EmployeeId,SchoolYearId,SubjectId,RoomId) 
+                           VALUES(@employeeId,@schoolYearId,@subjectId,@roomId) ;";
             var result = connection.Execute(query, new
             {
-                enrollingId,
-                subjectId=record.SubjectId,
+                employeeId,
+                schoolYearId,
+                subjectId = record.SubjectId,
                 roomId = record.RoomId
             });
             await Task.Delay(0);
             return result > 0;
         }
-        private async Task<bool> DeleteSubjectListAsync(int enrollingId)
+        private async Task<bool> DeleteSubjectListAsync(int employeeId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"DELETE FROM EmployeesSubjects WHERE EnrollingId=@enrollingId ;";
+            string query = @"DELETE FROM EmployeesSubjects WHERE EmployeeId=@employeeId AND SchoolYearId=@schoolYearId ;";
             var result = connection.Execute(query, new
             {
-                enrollingId
+                employeeId,
+                schoolYearId
             });
             await Task.Delay(0);
             return result > 0;
         }
-        public async Task<bool> AddSubjectListAsync(int enrollingId, IList<EmployeeSubject> subjectList)
+        public async Task<bool> AddSubjectListAsync(int employeeId, int schoolYearId, IList<EmployeeSubject> subjectList)
         {
-            await DeleteSubjectListAsync(enrollingId);
+            await DeleteSubjectListAsync(employeeId, schoolYearId);
             int recordCount = 0;
             foreach (var subject in subjectList)
             {
-                if (await AddSubjectAsync(enrollingId, subject) == true)
+                if (await AddSubjectAsync(employeeId, schoolYearId, subject) == true)
                 {
                     recordCount++;
                 }
@@ -328,23 +378,47 @@ namespace SchoolManagement.Infrastructure.Repositories
             return recordCount == subjectList.Count;
         }
 
-        public async Task<IList<EmployeeAttendance>> GetAttendanceListAsync(int enrollingId)
+        public async Task<IList<EmployeeAttendance>> GetAttendanceListByEmployeeAsync(int employeeId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM EmployeesAttendances A 
-                           INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id
-                           INNER JOIN Subjects C ON A.SubjectId=C.Id
-                           INNER JOIN SchoolRooms D ON A.RoomId=D.Id
-                           WHERE A.EnrollingId=@enrollingId  ;";
-            var result = connection.Query<EmployeeAttendance, EmployeeEnrolling, Subject, SchoolRoom, EmployeeAttendance>(query,
-                (attendance, enrolling, subject, room) =>
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           INNER JOIN Subjects D ON A.SubjectId=D.Id
+                           INNER JOIN SchoolRooms E ON A.RoomId=E.Id
+                           WHERE A.EmployeeId=@employeeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeAttendance, Employee, SchoolYear, Subject, SchoolRoom, EmployeeAttendance>(query,
+                (attendance, employee, schoolYear, subject, room) =>
                 {
-                    attendance.Enrolling = enrolling;
+                    attendance.Employee = employee;
+                    attendance.SchoolYear = schoolYear;
                     attendance.Subject = subject;
                     attendance.Room = room;
                     return attendance;
                 }
-                , new { enrollingId }).ToList();
+                , new { employeeId, schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+        public async Task<IList<EmployeeAttendance>> GetAttendanceListBySchoolYearAsync(int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM EmployeesAttendances A 
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           INNER JOIN Subjects D ON A.SubjectId=D.Id
+                           INNER JOIN SchoolRooms E ON A.RoomId=E.Id
+                           WHERE A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeAttendance, Employee, SchoolYear, Subject, SchoolRoom, EmployeeAttendance>(query,
+                (attendance, employee, schoolYear, subject, room) =>
+                {
+                    attendance.Employee = employee;
+                    attendance.SchoolYear = schoolYear;
+                    attendance.Subject = subject;
+                    attendance.Room = room;
+                    return attendance;
+                }
+                , new { schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -352,22 +426,23 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAttendanceAsync(EmployeeAttendance attendance)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO EmployeesAttendances(EnrollingId,SubjectId,RoomId,StartHour,EndHour,Description) 
-                           VALUES(@enrollingId,@subjectId,@roomId,@startHour,@endHour,@description) ;";
+            string query = @"INSERT INTO EmployeesAttendances(EmployeeId,SchoolYearId,SubjectId,RoomId,StartHour,EndHour,Description) 
+                           VALUES(@employeeId,@schoolYearId,@subjectId,@roomId,@startHour,@endHour,@description) ;";
             var result = connection.Execute(query, new
             {
-                enrollingId=attendance.EnrollingId,
-                subjectId=attendance.SubjectId,
-                roomId=attendance.RoomId,
+                employeeId = attendance.EmployeeId,
+                schoolYearId = attendance.SchoolYearId,
+                subjectId = attendance.SubjectId,
+                roomId = attendance.RoomId,
                 startHour = attendance.StartHour,
-                endHour = attendance.EndHour ,
-                description=attendance.Description
+                endHour = attendance.EndHour,
+                description = attendance.Description
             });
             await Task.Delay(0);
             return result > 0;
         }
 
-        public async  Task<bool> UpdateAttendanceAsync(EmployeeAttendance attendance)
+        public async Task<bool> UpdateAttendanceAsync(EmployeeAttendance attendance)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE EmployeesAttendances SET SubjectId=@subjectId,RoomId=@roomId,StartHour=@startHour,EndHour=@endHour, 
@@ -378,8 +453,8 @@ namespace SchoolManagement.Infrastructure.Repositories
                 roomId = attendance.RoomId,
                 startHour = attendance.StartHour,
                 endHour = attendance.EndHour,
-                description=attendance.Description,
-                attendanceId=attendance.Id
+                description = attendance.Description,
+                attendanceId = attendance.Id
             });
             await Task.Delay(0);
             return result > 0;
@@ -397,14 +472,15 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async  Task<bool> AddNoteAsync(EmployeeNote note)
+        public async Task<bool> AddNoteAsync(EmployeeNote note)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO EmployeesNotes(EnrollingId,Title,Date,Description) 
-                           VALUES(@enrollingId,@title,@date,@description) ;";
+            string query = @"INSERT INTO EmployeesNotes(EmployeeId,SchoolYearId,Title,Date,Description) 
+                           VALUES(@employeeId,@schoolYearId,@title,@date,@description) ;";
             var result = connection.Execute(query, new
             {
-                enrollingId = note.EnrollingId,
+                employeeId = note.EmployeeId,
+                schoolYearId = note.SchoolYearId,
                 title = note.Title,
                 date = note.Date,
                 description = note.Description
@@ -423,7 +499,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 title = note.Title,
                 date = note.Date,
                 description = note.Description,
-                noteId= note.Id
+                noteId = note.Id
             });
             await Task.Delay(0);
             return result > 0;
@@ -441,36 +517,76 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
-        public async Task<IList<EmployeeNote>> GetNoteListAsync(int enrollingId)
+        public async Task<IList<EmployeeNote>> GetNoteListByEmployeeAsync(int employeeId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM EmployeesNotes A 
-                           INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id                         
-                           WHERE A.EnrollingId=@enrollingId  ;";
-            var result = connection.Query<EmployeeNote, EmployeeEnrolling, EmployeeNote>(query,
-                (note, enrolling) =>
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id 
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           WHERE A.EmployeeId=@employeeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeNote, Employee, SchoolYear, EmployeeNote>(query,
+                (note, employee, schoolYear) =>
                 {
-                    note.Enrolling = enrolling;
+                    note.Employee = employee;
+                    note.SchoolYear = schoolYear;
                     return note;
                 }
-                , new { enrollingId }).ToList();
+                , new { employeeId, schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+        public async Task<IList<EmployeeNote>> GetNoteListBySchoolYearAsync(int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM EmployeesNotes A 
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id 
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
+                           WHERE  A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeNote, Employee, SchoolYear, EmployeeNote>(query,
+                (note, employee, schoolYear) =>
+                {
+                    note.Employee = employee;
+                    note.SchoolYear = schoolYear;
+                    return note;
+                }
+                , new { schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
 
-        public async Task<IList<EmployeeAccountTransaction>> GetAccountTransactionListAsync(int enrollingId)
+        public async Task<IList<EmployeeAccountTransaction>> GetAccountTransactionListByEmployeeAsync(int employeeId,int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM EmployeesAccountTransactions A 
-                           INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id                         
-                           WHERE A.EnrollingId=@enrollingId  ;";
-            var result = connection.Query<EmployeeAccountTransaction, EmployeeEnrolling, EmployeeAccountTransaction>(query,
-                (transaction, enrolling) =>
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id  
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id                         
+                           WHERE A.EmployeeId=@employeeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeAccountTransaction, Employee,SchoolYear, EmployeeAccountTransaction>(query,
+                (transaction, employee,schoolyear) =>
                 {
-                    transaction.Enrolling = enrolling;
+                    transaction.Employee=employee;
+                    transaction.SchoolYear = schoolyear;
                     return transaction;
                 }
-                , new { enrollingId }).ToList();
+                , new { employeeId,schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+        public async Task<IList<EmployeeAccountTransaction>> GetAccountTransactionListBySchoolYearAsync( int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM EmployeesAccountTransactions A 
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id  
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id                         
+                           WHERE A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<EmployeeAccountTransaction, Employee, SchoolYear, EmployeeAccountTransaction>(query,
+                (transaction, employee, schoolyear) =>
+                {
+                    transaction.Employee = employee;
+                    transaction.SchoolYear = schoolyear;
+                    return transaction;
+                }
+                , new {schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -478,31 +594,33 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAccountTransactionAsync(EmployeeAccountTransaction transaction)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO EmployeesAccountTransactions(Date,Amount,Reason,TransactionId,EnrollingId) 
-                           VALUES(@date,@amount,@reason,@transactionId,@enrollingId) ;";
+            string query = @"INSERT INTO EmployeesAccountTransactions(Date,Amount,Reason,TransactionId,EmployeeId,SchoolYearId) 
+                           VALUES(@date,@amount,@reason,@transactionId,@employeeId,@schoolYearId) ;";
             var result = connection.Execute(query, new
             {
                 date = transaction.Date,
-                amount = transaction.Amount,               
+                amount = transaction.Amount,
                 reason = transaction.Reason,
                 transactionId = transaction.TransactionId,
-                enrollingId = transaction.EnrollingId,
+                employeeId = transaction.EmployeeId,
+                schoolYearId= transaction.SchoolYearId
             });
             await Task.Delay(0);
             return result > 0;
         }
 
-
         public async Task<EmployeeAccountTransaction?> GetLastAccountTransactionAsync()
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM EmployeesAccountTransactions A 
-                           INNER JOIN EmployeesEnrollings B ON A.EnrollingId=B.Id                         
+                           INNER JOIN Employees B ON A.EmployeeId=B.Id  
+                           INNER JOIN SchoolYears C ON A.SchoolYearId=C.Id
                            ORDER BY A.Id DESC LIMIT 1 ;";
-            var result = connection.Query<EmployeeAccountTransaction, EmployeeEnrolling, EmployeeAccountTransaction>(query,
-                (transaction, enrolling) =>
+            var result = connection.Query<EmployeeAccountTransaction, Employee,SchoolYear, EmployeeAccountTransaction>(query,
+                (transaction, employee,schoolYear) =>
                 {
-                    transaction.Enrolling = enrolling;
+                    transaction.Employee = employee;
+                    transaction.SchoolYear = schoolYear;
                     return transaction;
                 }
                 ).FirstOrDefault();
@@ -510,7 +628,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async  Task<int> GetTotalAccountTransactionAsync()
+        public async Task<int> GetTotalAccountTransactionAsync()
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT COUNT(*) FROM EmployeesAccountTransactions ;";

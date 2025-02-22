@@ -1,4 +1,6 @@
 ﻿
+using Primary.SchoolApp.Utilities;
+using SchoolManagement.UI.Localization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -10,7 +12,20 @@ namespace Primary.SchoolApp.UI
         {
             InitializeComponent();
             this.Text = "A Propos de School App";
-
+            var serialKeytring = AppUtilities.ConvertHexToString(Program.CurrentSchool.SerialKey);
+            var serialKeyData = serialKeytring.Split('@');
+            if (serialKeyData.Length == 3)
+            {
+                serialKeyUserLabel.Text = $"{Language.labelUser}: {serialKeyData[0]}";
+                serialKeyTypeLabel.Text = $"{Language.LabelLisenceType}: {AppUtilities.ToLisenceType(serialKeyData[1])}";
+                serialKeyDurationLabel.Text = $"{Language.LabelExpiryDate}: {AppUtilities.GetExpiryDate(serialKeyData[1], serialKeyData[2])} ";
+            }
+            else
+            {
+                serialKeyUserLabel.Text = $"{Language.labelUser}:";
+                serialKeyTypeLabel.Text = $"{Language.LabelLisenceType}: ";
+                serialKeyDurationLabel.Text = $"{Language.LabelExpiryDate}: ";
+            }
             switch (ThemeResolutionService.ApplicationThemeName)
             {
                 case "Material":

@@ -218,7 +218,7 @@ namespace Primary.SchoolApp.UI
                 {
                     Log log = new()
                     {
-                        UserAction = $"Mise à  de l'inscription de l'employé {enrolling.Employee.FullName} pour l'année {enrolling.SchoolYear.Name}  par l'utilisateur {clientApp.UserConnected.UserName}",
+                        UserAction = $"Mise à  de l'inscription de l'employé {enrolling.Employee.FullName} pour l'année {enrolling.SchoolYear.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                         UserId = clientApp.UserConnected.Id
                     };
                     logService.CreateLog(log);

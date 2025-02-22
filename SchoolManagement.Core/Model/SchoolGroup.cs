@@ -11,7 +11,20 @@ namespace SchoolManagement.Core.Model
         public int Id { get; set; }
 
         public string? Name { get; set; }
-
+        public int DocumentLanguageId { get; set; } //type de document
+        public string DocumentLanguage
+        {
+            get
+            {
+                if (this.DocumentLanguageId == 0) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Français uniquement" : "French only";
+                if (this.DocumentLanguageId == 1) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Anglais uniquement" : "English only";
+                if (this.DocumentLanguageId == 2) return Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? "Français & Anglais" : "French & English";
+                return string.Empty;
+            }
+        }
+        public bool NoteIsTruncate { get; set; }
+        public int ReportCardModel { get; set; }
+        public int AverageFormula { get; set; }
 
         public int Sequence { get; set; }
         public virtual ICollection<SchoolClass> Classes { get; set; }
@@ -26,7 +39,7 @@ namespace SchoolManagement.Core.Model
         }
         public override string ToString()
         {
-            return Name;
+            return Name ?? "";
         }
     }
 }

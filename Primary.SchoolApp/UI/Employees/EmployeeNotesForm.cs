@@ -147,14 +147,13 @@ namespace Primary.SchoolApp.UI
             }
 
             //load notes
-            LoadNotes(enrolling.Id);
+            LoadNotes(enrolling.EmployeeId,enrolling.SchoolYearId);
         }
         // chargement de la liste des notes dans le datagridview
-        private async void LoadNotes(int enrollingId)
+        private async void LoadNotes(int employeeId,int schoolYearId)
         {
-            selectedEnrolling.Notes = employeeService.GetNoteList(enrollingId).Result;
-            DataGridView.DataSource = selectedEnrolling.Notes;
-            await Task.Delay(0);
+            var notes = await employeeService.GetNoteListByEmployee(employeeId, schoolYearId);
+            DataGridView.DataSource = notes;
         }
         //Création des colonnes du datqgridview
         private void CreateGridViewColumn()
@@ -170,16 +169,18 @@ namespace Primary.SchoolApp.UI
             DataGridView.EnableFiltering = true;
             GridViewTextBoxColumn subjectColumn = new("Title");
             GridViewDateTimeColumn dateColumn = new("Date");
-            
+            GridViewTextBoxColumn descriptionColumn = new("Description");
             subjectColumn.HeaderText = Language.labelNoteSubject;
             dateColumn.HeaderText = "Date";
-           
+            dateColumn.Width = 90;
             dateColumn.Format = DateTimePickerFormat.Custom;
             dateColumn.CustomFormat = "dd/MM/yyyy";
             dateColumn.FormatString = "{0:dd/MM/yyyy}";
-
+            subjectColumn.Width = 150;
+            descriptionColumn.Width = 300;
             this.DataGridView.Columns.Add(dateColumn);
             this.DataGridView.Columns.Add(subjectColumn);
+            this.DataGridView.Columns.Add(descriptionColumn);
             foreach (GridViewDataColumn col in this.DataGridView.Columns)
             {
                 col.HeaderTextAlignment = ContentAlignment.MiddleLeft;
@@ -218,7 +219,7 @@ namespace Primary.SchoolApp.UI
                             var isDone = employeeService.DeleteNote(record.Id).Result;
                             if (isDone)
                             {
-                                LoadNotes(selectedEnrolling.Id);
+                                LoadNotes(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId);
                                 Log log = new()
                                 {
                                     UserAction = $"Suppression d'une note de l'employé {selectedEnrolling.Employee.FullName}  par l'utilisateur {clientApp.UserConnected.UserName}",
@@ -268,7 +269,7 @@ namespace Primary.SchoolApp.UI
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                LoadNotes(selectedEnrolling.Id);
+                LoadNotes(selectedEnrolling.EmployeeId, selectedEnrolling.SchoolYearId);
             }
         }
         //affichage de UI pour la modification d'une présence

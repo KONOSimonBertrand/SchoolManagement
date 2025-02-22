@@ -313,7 +313,7 @@ namespace Primary.SchoolApp.UI
                     }
                     else
                     {
-                        this.ErrorLabel.Text = Language.messageFeeAlreadyExist;
+                        this.ErrorLabel.Text = Language.messageDataAlreadyExist;
                     }
                 }
                 else

@@ -8,7 +8,7 @@ namespace Primary.SchoolApp.Reporting
 {
     internal class BadgeReport : SchoolManagement.UI.Reporting.BadgeReport
     {
-        public BadgeReport(StudentEnrollingDTO dataSource, string expirationDate, ClientApp clientApp)
+        public BadgeReport(StudentEnrollingDTO dataSource, string expirationDate)
         {
 
             DataSource = dataSource;
@@ -21,16 +21,16 @@ namespace Primary.SchoolApp.Reporting
             StudentMatriculeTextBox.Value = dataSource.Student.IdNumber;
             StudentClassTextBox.Value = dataSource.ClassName;
             IdCardBarcode.Value = "=Fields.Student.FullName+\" \r\nMatricule:\"+Fields.Student.IdNumber+\"\r\nClasse:\"+Fields.SchoolClass.Name";
-            var urlDefault = $"\"{clientApp.StudentPitureFolder}\\\"+Fields.Student.IdNumber+\".jpg\"";
+            var urlDefault = $"\"{Program.CurrentSchool.StudentPictureDirectory}\\\"+Fields.Student.IdNumber+\".jpg\"";
             StudentPictureBox.Value = $"=IFS(Fields.PictureUrl IS NOT null,Fields.PictureUrl,Fields.Student.PictureUrl IS NOT null,Fields.Student.PictureUrl,{urlDefault})";
-            SchoolNameTextBox.Value=clientApp.Name;
-            SchoolContactTextBox.Value=clientApp.Contact;
+            SchoolNameTextBox.Value= Program.CurrentSchool.Name;
+            SchoolContactTextBox.Value= $"Tel:{Program.CurrentSchool.Phone}; Email:{Program.CurrentSchool.Email}";
             BadgePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("badge_panel.png");
             LogoPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("logo.png");
             SignaturePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("badge_signature.png");
 
         }
-        public BadgeReport(IEnumerable<StudentEnrollingDTO> dataSource, string expirationDate, ClientApp clientApp)
+        public BadgeReport(IEnumerable<StudentEnrollingDTO> dataSource, string expirationDate)
         {
 
             ExpirationDateTextBox.Value = expirationDate;
@@ -42,10 +42,10 @@ namespace Primary.SchoolApp.Reporting
             StudentMatriculeTextBox.Value ="=Student.IdNumber";
             StudentClassTextBox.Value = "=ClassName";
             IdCardBarcode.Value = "=Fields.Student.FullName+\" \r\nMatricule:\"+Fields.Student.IdNumber+\"\r\nClasse:\"+Fields.SchoolClass.Name";
-            var urlDefault = $"\"{clientApp.StudentPitureFolder}\\\"+Fields.Student.IdNumber+\".jpg\"";
+            var urlDefault = $"\"{Program.CurrentSchool.StudentPictureDirectory}\\\"+Fields.Student.IdNumber+\".jpg\"";
             StudentPictureBox.Value = $"=IFS(Fields.PictureUrl IS NOT null,Fields.PictureUrl,Fields.Student.PictureUrl IS NOT null,Fields.Student.PictureUrl,{urlDefault})";
-            SchoolNameTextBox.Value = clientApp.Name;
-            SchoolContactTextBox.Value = clientApp.Contact;
+            SchoolNameTextBox.Value = Program.CurrentSchool.Name;
+            SchoolContactTextBox.Value = $"Tel:{Program.CurrentSchool.Phone}; Email:{Program.CurrentSchool.Email}";
             BadgePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("badge_panel.png");
             LogoPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("logo.png");
             SignaturePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("badge_signature.png");
@@ -54,7 +54,7 @@ namespace Primary.SchoolApp.Reporting
             
         }
 
-        private Image getPicture(string firstUrl, string secondUrl,string thirdUrl, ClientApp clientApp) { 
+        private Image getPicture(string firstUrl, string secondUrl,string thirdUrl) { 
         Image picture = null;
             if (File.Exists(firstUrl))
             {

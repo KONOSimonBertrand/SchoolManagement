@@ -3,6 +3,7 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
+using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
@@ -31,14 +32,13 @@ namespace Primary.SchoolApp.UI
         {
             FrenchNameTextBox.Focus();
         }
-        internal void Init(EvaluationSession evaluationType)
+        internal void InitStartup(EvaluationSession session)
         {
-            this.evaluationType = evaluationType;
-            FrenchNameTextBox.Text = evaluationType.FrenchName;
-            evaluationTypeNameTracker = evaluationType.FrenchName;
-            EnglishNameTextBox.Text = evaluationType.EnglishName;
-            CodeTextBox.Text = evaluationType.Code;
-            SequenceSpinEditor.Value = evaluationType.Sequence;
+            this.evaluationType = session;
+            FrenchNameTextBox.Text = session.FrenchName;
+            evaluationTypeNameTracker = session.FrenchName;
+            EnglishNameTextBox.Text = session.EnglishName;
+            SequenceSpinEditor.Value = session.Sequence;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -47,7 +47,6 @@ namespace Primary.SchoolApp.UI
             {
                 if (EvaluationTypeExist(FrenchNameTextBox.Text) == false)
                 {
-                    evaluationType.Code = CodeTextBox.Text;
                     evaluationType.FrenchName = FrenchNameTextBox.Text;
                     evaluationType.EnglishName = EnglishNameTextBox.Text;
                     evaluationType.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());

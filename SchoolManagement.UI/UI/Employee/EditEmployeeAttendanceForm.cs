@@ -13,6 +13,7 @@ namespace SchoolManagement.UI
         public RadDateTimePicker AttendanceDateTimePicker {  get => dateTimePicker; }
         public RadDateTimePicker StartDateTimePicker {  get => startDateTimePicker; }
         public RadDateTimePicker EndDateTimePicker { get => endDateTimePicker; }
+        public ErrorProvider ErrorProvider { get => errorProvider; }
         public RadTextBox DescriptionTextBox { get => descriptionTextBox; }
         public RadButton RoomAddButton { get => roomAddButton; }
         public RadButton SubjectAddButton { get => subjectAddButton; }
@@ -161,39 +162,46 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
+            ErrorProvider.Clear();
             if (this.roomDropDownList.SelectedIndex < 0)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.roomDropDownList, Language.messageFillField);
                 this.roomDropDownList.Focus();
                 return false;
             }
             if (this.subjectDropDownList.SelectedIndex < 0)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.subjectDropDownList, Language.messageFillField);
                 this.subjectDropDownList.Focus();
                 return false;
             }
             if (this.dateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.dateTimePicker, Language.messageFillField);
                 this.dateTimePicker.Focus();
                 return false;
             }
             if (this.startDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.startDateTimePicker, Language.messageFillField);
                 this.startDateTimePicker.Focus();
                 return false;
             }
             if (this.endDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.endDateTimePicker, Language.messageFillField);
                 this.endDateTimePicker.Focus();
                 return false;
             }
             if (this.endDateTimePicker.Value < this.startDateTimePicker.Value)
             {
                 this.errorLabel.Text = Language.messageEndHourGreaterThanStartHour;
+                this.errorProvider.SetError(this.endDateTimePicker, Language.messageEndHourGreaterThanStartHour);
                 this.endDateTimePicker.Focus();
                 return false;
             }

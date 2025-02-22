@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             saveButton = new Telerik.WinControls.UI.RadButton();
             closeButton = new Telerik.WinControls.UI.RadButton();
             errorLabel = new Telerik.WinControls.UI.RadLabel();
@@ -48,6 +49,7 @@
             dateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
             subjectAddButton = new Telerik.WinControls.UI.RadButton();
             roomAddButton = new Telerik.WinControls.UI.RadButton();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
@@ -69,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)dateTimePicker).BeginInit();
             ((System.ComponentModel.ISupportInitialize)subjectAddButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)roomAddButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -76,7 +79,7 @@
             // 
             saveButton.Location = new Point(306, 319);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(109, 28);
+            saveButton.Size = new Size(109, 36);
             saveButton.TabIndex = 7;
             saveButton.Text = "Enregistrer";
             // 
@@ -85,7 +88,7 @@
             closeButton.DialogResult = DialogResult.Cancel;
             closeButton.Location = new Point(424, 319);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(101, 28);
+            closeButton.Size = new Size(101, 36);
             closeButton.TabIndex = 8;
             closeButton.Text = "Annuler";
             // 
@@ -119,7 +122,7 @@
             editPanel.Dock = DockStyle.Top;
             editPanel.Location = new Point(0, 0);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(536, 310);
+            editPanel.Size = new Size(540, 310);
             editPanel.TabIndex = 115;
             // 
             // subjectDropDownList
@@ -239,7 +242,7 @@
             endDateTimePicker.CalendarSize = new Size(290, 320);
             endDateTimePicker.Location = new Point(321, 170);
             endDateTimePicker.Name = "endDateTimePicker";
-            endDateTimePicker.Size = new Size(107, 24);
+            endDateTimePicker.Size = new Size(107, 36);
             endDateTimePicker.TabIndex = 6;
             endDateTimePicker.TabStop = false;
             endDateTimePicker.Text = "mercredi 14 août 2024";
@@ -250,7 +253,7 @@
             startDateTimePicker.CalendarSize = new Size(290, 320);
             startDateTimePicker.Location = new Point(183, 170);
             startDateTimePicker.Name = "startDateTimePicker";
-            startDateTimePicker.Size = new Size(107, 24);
+            startDateTimePicker.Size = new Size(107, 36);
             startDateTimePicker.TabIndex = 5;
             startDateTimePicker.TabStop = false;
             startDateTimePicker.Text = "mercredi 14 août 2024";
@@ -280,7 +283,7 @@
             dateTimePicker.CalendarSize = new Size(290, 320);
             dateTimePicker.Location = new Point(8, 170);
             dateTimePicker.Name = "dateTimePicker";
-            dateTimePicker.Size = new Size(167, 24);
+            dateTimePicker.Size = new Size(167, 36);
             dateTimePicker.TabIndex = 4;
             dateTimePicker.TabStop = false;
             dateTimePicker.Text = "mercredi 14 août 2024";
@@ -290,15 +293,19 @@
             // 
             subjectAddButton.Location = new Point(499, 100);
             subjectAddButton.Name = "subjectAddButton";
-            subjectAddButton.Size = new Size(26, 30);
+            subjectAddButton.Size = new Size(26, 36);
             subjectAddButton.TabIndex = 3;
             // 
             // roomAddButton
             // 
             roomAddButton.Location = new Point(499, 30);
             roomAddButton.Name = "roomAddButton";
-            roomAddButton.Size = new Size(26, 30);
+            roomAddButton.Size = new Size(26, 36);
             roomAddButton.TabIndex = 1;
+            // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
             // 
             // EditEmployeeAttendanceForm
             // 
@@ -308,7 +315,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             CancelButton = closeButton;
-            ClientSize = new Size(536, 381);
+            ClientSize = new Size(540, 383);
             Controls.Add(editPanel);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
@@ -340,6 +347,7 @@
             ((System.ComponentModel.ISupportInitialize)dateTimePicker).EndInit();
             ((System.ComponentModel.ISupportInitialize)subjectAddButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)roomAddButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -365,5 +373,6 @@
         private Telerik.WinControls.UI.RadDropDownList roomDropDownList;
         private Telerik.WinControls.UI.RadDropDownList subjectDropDownList;
         private Telerik.WinControls.UI.RadSeparator subjectSeparator;
+        private ErrorProvider errorProvider;
     }
 }

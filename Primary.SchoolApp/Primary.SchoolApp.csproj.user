@@ -17,10 +17,19 @@
     <Compile Update="Reporting\NoteReport\ClassNoteReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\NoteReport\Detail1NoteReport.cs">
+    <Compile Update="Reporting\NoteReport\Subreport1NoteReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\NoteReport\PrimaryEvaluationReport.cs">
+    <Compile Update="Reporting\NoteReport\GroupNoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\EvaluationPrimaryReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\Subreport3NoteReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\TermPrimaryReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="UI\CashFlowTypes\AddOtherCashFlowForm.cs">
@@ -29,10 +38,16 @@
     <Compile Update="UI\CustomControls\DisciplineSubjectInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\SchoolInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\StudentEnrollingInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Diciplines\EditDisciplineSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSerialKeyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EvaluationSessions\EvaluationSessionStateForm.cs">
@@ -213,6 +228,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SchoolGroups\AddSchoolGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolGroups\EditSchoolForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SchoolGroups\EditSchoolGroupForm.cs">

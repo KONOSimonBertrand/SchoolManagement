@@ -24,7 +24,6 @@ namespace Primary.SchoolApp.UI
             this.schoolClassService = schoolClassService;
             this.schoolGroupService = schoolGroupService;
             schoolClassNameTracker = string.Empty;
-            IsTruncateDropDownList.SelectedValue = 0;
             InitEvents();
 
         }
@@ -71,10 +70,6 @@ namespace Primary.SchoolApp.UI
                     schoolClass.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                     schoolClass.Group = GroupDropDownList.SelectedItem.DataBoundItem as SchoolGroup;
                     schoolClass.GroupId = schoolClass.Group.Id;
-                    schoolClass.DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue;
-                    schoolClass.ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString());
-                    schoolClass.AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString());
-                    schoolClass.NoteIsTruncate = IsTruncateDropDownList.SelectedValue.ToString()=="0"?false:true;
                     bool isDone = schoolClassService.UpdateSchoolClass(schoolClass).Result;
                     if (isDone == true)
                     {
@@ -110,10 +105,6 @@ namespace Primary.SchoolApp.UI
                 NameTextBox.Text = schoolClass.Name;
                 SequenceSpinEditor.Value = schoolClass.Sequence;
                 GroupDropDownList.SelectedValue = schoolClass.GroupId;
-                DocumentTemplateDropDownList.SelectedValue = schoolClass.DocumentLanguageId;
-                IsTruncateDropDownList.SelectedValue = schoolClass.NoteIsTruncate==true?1:0;
-                ReportCardDropDownList.SelectedValue = schoolClass.ReportCardModel;
-                AverageFormulaDropDownList.SelectedValue=schoolClass.AverageFormula;
             }
         }
         // show school grou UI for edit
@@ -124,7 +115,7 @@ namespace Primary.SchoolApp.UI
                 var form = Program.ServiceProvider.GetService<EditSchoolGroupForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelClassGroup;
                 form.Icon=this.Icon;
-                form.Init(schoolGroup);
+                form.InitStartup(schoolGroup);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = schoolGroupService.GetSchoolGroup(form.NameTextBox.Text).Result;

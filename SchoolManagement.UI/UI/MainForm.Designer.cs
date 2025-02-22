@@ -30,13 +30,13 @@ namespace SchoolManagement.UI
         /// </summary>
         private void InitializeComponent()
         {
-            SchedulerDailyPrintStyle schedulerDailyPrintStyle2 = new SchedulerDailyPrintStyle();
-            TableViewDefinition tableViewDefinition7 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition8 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition9 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition10 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition11 = new TableViewDefinition();
-            TableViewDefinition tableViewDefinition12 = new TableViewDefinition();
+            SchedulerDailyPrintStyle schedulerDailyPrintStyle1 = new SchedulerDailyPrintStyle();
+            TableViewDefinition tableViewDefinition1 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition2 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition3 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition4 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition5 = new TableViewDefinition();
+            TableViewDefinition tableViewDefinition6 = new TableViewDefinition();
             timeTableScheduler = new RadScheduler();
             mainPageView = new RadPageView();
             HomePage = new RadPageViewPage();
@@ -311,7 +311,7 @@ namespace SchoolManagement.UI
             timeTableScheduler.Dock = DockStyle.Fill;
             timeTableScheduler.Location = new Point(287, 0);
             timeTableScheduler.Name = "timeTableScheduler";
-            timeTableScheduler.PrintStyle = schedulerDailyPrintStyle2;
+            timeTableScheduler.PrintStyle = schedulerDailyPrintStyle1;
             timeTableScheduler.Size = new Size(1240, 702);
             timeTableScheduler.TabIndex = 2;
             // 
@@ -328,7 +328,7 @@ namespace SchoolManagement.UI
             mainPageView.Dock = DockStyle.Fill;
             mainPageView.Location = new Point(0, 0);
             mainPageView.Name = "mainPageView";
-            mainPageView.SelectedPage = HomePage;
+            mainPageView.SelectedPage = EmployeePage;
             mainPageView.Size = new Size(1548, 817);
             mainPageView.TabIndex = 1;
             // 
@@ -376,7 +376,7 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition7;
+            homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             homeGridView.Name = "homeGridView";
             homeGridView.Size = new Size(878, 710);
             homeGridView.TabIndex = 5;
@@ -532,7 +532,7 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            cashFlowGridView.MasterTemplate.ViewDefinition = tableViewDefinition8;
+            cashFlowGridView.MasterTemplate.ViewDefinition = tableViewDefinition2;
             cashFlowGridView.Name = "cashFlowGridView";
             cashFlowGridView.Size = new Size(1013, 708);
             cashFlowGridView.TabIndex = 5;
@@ -789,7 +789,7 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            disciplineGridView.MasterTemplate.ViewDefinition = tableViewDefinition9;
+            disciplineGridView.MasterTemplate.ViewDefinition = tableViewDefinition3;
             disciplineGridView.Name = "disciplineGridView";
             disciplineGridView.Size = new Size(1249, 708);
             disciplineGridView.TabIndex = 5;
@@ -937,7 +937,7 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            studentNoteGridView.MasterTemplate.ViewDefinition = tableViewDefinition10;
+            studentNoteGridView.MasterTemplate.ViewDefinition = tableViewDefinition4;
             studentNoteGridView.Name = "studentNoteGridView";
             studentNoteGridView.Size = new Size(1064, 710);
             studentNoteGridView.TabIndex = 7;
@@ -1246,7 +1246,7 @@ namespace SchoolManagement.UI
             EmployeePage.ItemSize = new SizeF(115F, 29F);
             EmployeePage.Location = new Point(6, 36);
             EmployeePage.Name = "EmployeePage";
-            EmployeePage.Size = new Size(1536, 773);
+            EmployeePage.Size = new Size(1536, 775);
             EmployeePage.Text = "ADMINISTRATION";
             // 
             // employeeMainPanel
@@ -1259,7 +1259,7 @@ namespace SchoolManagement.UI
             employeeMainPanel.Location = new Point(0, 65);
             employeeMainPanel.Margin = new Padding(0);
             employeeMainPanel.Name = "employeeMainPanel";
-            employeeMainPanel.Size = new Size(1536, 708);
+            employeeMainPanel.Size = new Size(1536, 710);
             employeeMainPanel.TabIndex = 4;
             // 
             // employeeMainListView
@@ -1272,7 +1272,7 @@ namespace SchoolManagement.UI
             employeeMainListView.Location = new Point(300, 0);
             employeeMainListView.Margin = new Padding(0);
             employeeMainListView.Name = "employeeMainListView";
-            employeeMainListView.Size = new Size(878, 708);
+            employeeMainListView.Size = new Size(878, 710);
             employeeMainListView.TabIndex = 3;
             // 
             // employeeGridView
@@ -1283,9 +1283,9 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            employeeGridView.MasterTemplate.ViewDefinition = tableViewDefinition11;
+            employeeGridView.MasterTemplate.ViewDefinition = tableViewDefinition5;
             employeeGridView.Name = "employeeGridView";
-            employeeGridView.Size = new Size(878, 708);
+            employeeGridView.Size = new Size(878, 710);
             employeeGridView.TabIndex = 5;
             // 
             // employeeLeftListView
@@ -1298,7 +1298,7 @@ namespace SchoolManagement.UI
             employeeLeftListView.Location = new Point(0, 0);
             employeeLeftListView.Margin = new Padding(0);
             employeeLeftListView.Name = "employeeLeftListView";
-            employeeLeftListView.Size = new Size(300, 708);
+            employeeLeftListView.Size = new Size(300, 710);
             employeeLeftListView.TabIndex = 1;
             // 
             // employeeInfoRightPanel
@@ -1307,7 +1307,7 @@ namespace SchoolManagement.UI
             employeeInfoRightPanel.Location = new Point(1178, 0);
             employeeInfoRightPanel.Margin = new Padding(4);
             employeeInfoRightPanel.Name = "employeeInfoRightPanel";
-            employeeInfoRightPanel.Size = new Size(358, 708);
+            employeeInfoRightPanel.Size = new Size(358, 710);
             employeeInfoRightPanel.TabIndex = 3;
             // 
             // employeeNavigationPanel
@@ -1440,7 +1440,7 @@ namespace SchoolManagement.UI
             // 
             // 
             // 
-            settingGridView.MasterTemplate.ViewDefinition = tableViewDefinition12;
+            settingGridView.MasterTemplate.ViewDefinition = tableViewDefinition6;
             settingGridView.Name = "settingGridView";
             settingGridView.Size = new Size(936, 708);
             settingGridView.TabIndex = 5;

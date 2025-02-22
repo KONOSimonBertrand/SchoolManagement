@@ -10,7 +10,8 @@ namespace SchoolManagement.Core.Model
     public class EmployeeAttendance
     {
         public int Id { get; set; }
-        public int EnrollingId {  get; set; }
+        public int EmployeeId {  get; set; }
+        public int SchoolYearId { get; set; }
         public int SubjectId {  get; set; }
         public int RoomId {  get; set; }
         public DateTime StartHour { get; set; }
@@ -23,7 +24,8 @@ namespace SchoolManagement.Core.Model
                 return EndHour-StartHour;
             }
         }
-        public virtual EmployeeEnrolling Enrolling { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual SchoolYear SchoolYear { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual SchoolRoom Room { get; set; }
 

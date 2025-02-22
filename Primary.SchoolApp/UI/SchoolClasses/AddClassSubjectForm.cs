@@ -68,7 +68,8 @@ namespace Primary.SchoolApp.UI
         {
             this.selectedClass = selectedClass;
             subjectList = schoolClassService.GetClassSubjectList(selectedClass.Id).Result;
-            if (selectedClass.DocumentLanguageId != 2)
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
+            if (classGroup.DocumentLanguageId != 2)
             {
                 this.SectionDropDownList.Items.Clear();
                 this.SectionDropDownList.Items.Add(new RadListDataItem(string.Empty, 0));

@@ -34,10 +34,7 @@
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             sequenceLabel = new Telerik.WinControls.UI.RadLabel();
             nameEnSeparator = new Telerik.WinControls.UI.RadSeparator();
-            codeSeparator = new Telerik.WinControls.UI.RadSeparator();
             nameFrSeparator = new Telerik.WinControls.UI.RadSeparator();
-            codeTextBox = new Telerik.WinControls.UI.RadTextBox();
-            codeLabel = new Telerik.WinControls.UI.RadLabel();
             nameEnTextBox = new Telerik.WinControls.UI.RadTextBox();
             nameEnLabel = new Telerik.WinControls.UI.RadLabel();
             nameFrTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -52,10 +49,7 @@
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameEnSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)codeSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameFrSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)codeTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)codeLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameEnTextBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameEnLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nameFrTextBox).BeginInit();
@@ -73,10 +67,7 @@
             editPanel.Controls.Add(sequenceSpinEditor);
             editPanel.Controls.Add(sequenceLabel);
             editPanel.Controls.Add(nameEnSeparator);
-            editPanel.Controls.Add(codeSeparator);
             editPanel.Controls.Add(nameFrSeparator);
-            editPanel.Controls.Add(codeTextBox);
-            editPanel.Controls.Add(codeLabel);
             editPanel.Controls.Add(nameEnTextBox);
             editPanel.Controls.Add(nameEnLabel);
             editPanel.Controls.Add(nameFrTextBox);
@@ -85,12 +76,12 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(573, 141);
+            editPanel.Size = new Size(573, 203);
             editPanel.TabIndex = 29;
             // 
             // sequenceSeparator
             // 
-            sequenceSeparator.Location = new Point(411, 127);
+            sequenceSeparator.Location = new Point(0, 195);
             sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
             sequenceSeparator.Name = "sequenceSeparator";
             sequenceSeparator.Size = new Size(135, 3);
@@ -99,7 +90,7 @@
             // 
             // sequenceSpinEditor
             // 
-            sequenceSpinEditor.Location = new Point(411, 97);
+            sequenceSpinEditor.Location = new Point(0, 164);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
             // 
@@ -107,12 +98,12 @@
             // 
             sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(135, 30);
-            sequenceSpinEditor.TabIndex = 4;
+            sequenceSpinEditor.TabIndex = 3;
             // 
             // sequenceLabel
             // 
             sequenceLabel.AutoSize = false;
-            sequenceLabel.Location = new Point(411, 67);
+            sequenceLabel.Location = new Point(0, 134);
             sequenceLabel.Margin = new Padding(4, 5, 4, 5);
             sequenceLabel.Name = "sequenceLabel";
             sequenceLabel.Size = new Size(135, 30);
@@ -128,15 +119,6 @@
             nameEnSeparator.TabIndex = 74;
             nameEnSeparator.TabStop = false;
             // 
-            // codeSeparator
-            // 
-            codeSeparator.Location = new Point(411, 60);
-            codeSeparator.Margin = new Padding(4, 5, 4, 5);
-            codeSeparator.Name = "codeSeparator";
-            codeSeparator.Size = new Size(135, 3);
-            codeSeparator.TabIndex = 73;
-            codeSeparator.TabStop = false;
-            // 
             // nameFrSeparator
             // 
             nameFrSeparator.Location = new Point(0, 60);
@@ -145,26 +127,6 @@
             nameFrSeparator.Size = new Size(403, 3);
             nameFrSeparator.TabIndex = 72;
             nameFrSeparator.TabStop = false;
-            // 
-            // codeTextBox
-            // 
-            codeTextBox.AutoSize = false;
-            codeTextBox.Location = new Point(411, 30);
-            codeTextBox.Margin = new Padding(4, 5, 4, 5);
-            codeTextBox.Name = "codeTextBox";
-            codeTextBox.ReadOnly = true;
-            codeTextBox.Size = new Size(135, 30);
-            codeTextBox.TabIndex = 1;
-            // 
-            // codeLabel
-            // 
-            codeLabel.AutoSize = false;
-            codeLabel.Location = new Point(411, 0);
-            codeLabel.Margin = new Padding(4, 5, 4, 5);
-            codeLabel.Name = "codeLabel";
-            codeLabel.Size = new Size(155, 30);
-            codeLabel.TabIndex = 70;
-            codeLabel.Text = "Abréviation:";
             // 
             // nameEnTextBox
             // 
@@ -207,7 +169,7 @@
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(7, 180);
+            errorLabel.Location = new Point(7, 244);
             errorLabel.Margin = new Padding(4, 5, 4, 5);
             errorLabel.Name = "errorLabel";
             errorLabel.Size = new Size(557, 30);
@@ -215,20 +177,20 @@
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(447, 149);
+            closeButton.Location = new Point(447, 213);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 30);
-            closeButton.TabIndex = 6;
+            closeButton.TabIndex = 5;
             closeButton.Text = "Annuler";
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(322, 149);
+            saveButton.Location = new Point(322, 213);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 30);
-            saveButton.TabIndex = 5;
+            saveButton.TabIndex = 4;
             saveButton.Text = "Enregistrer";
             // 
             // errorProvider
@@ -241,7 +203,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(573, 219);
+            ClientSize = new Size(573, 295);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -258,10 +220,7 @@
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameEnSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)codeSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameFrSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)codeTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)codeLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameEnTextBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameEnLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)nameFrTextBox).EndInit();
@@ -280,10 +239,7 @@
         private Telerik.WinControls.UI.RadSpinEditor sequenceSpinEditor;
         private Telerik.WinControls.UI.RadLabel sequenceLabel;
         private Telerik.WinControls.UI.RadSeparator nameEnSeparator;
-        private Telerik.WinControls.UI.RadSeparator codeSeparator;
         private Telerik.WinControls.UI.RadSeparator nameFrSeparator;
-        private Telerik.WinControls.UI.RadTextBox codeTextBox;
-        private Telerik.WinControls.UI.RadLabel codeLabel;
         private Telerik.WinControls.UI.RadTextBox nameEnTextBox;
         private Telerik.WinControls.UI.RadLabel nameEnLabel;
         private Telerik.WinControls.UI.RadTextBox nameFrTextBox;

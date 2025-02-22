@@ -28,7 +28,6 @@ namespace SchoolManagement.UI.Reporting
             this.schoolYearTextBox = new Telerik.Reporting.TextBox();
             this.reportTitleTextBox = new Telerik.Reporting.TextBox();
             this.roomTextBox = new Telerik.Reporting.TextBox();
-            this.classroomSizeTextBox = new Telerik.Reporting.TextBox();
             this.totalCoefTextBox = new Telerik.Reporting.TextBox();
             this.detail = new Telerik.Reporting.DetailSection();
             this.reportTable = new Telerik.Reporting.Table();
@@ -103,7 +102,6 @@ namespace SchoolManagement.UI.Reporting
             this.schoolYearTextBox,
             this.reportTitleTextBox,
             this.roomTextBox,
-            this.classroomSizeTextBox,
             this.totalCoefTextBox});
             this.pageHeaderSection1.Name = "pageHeaderSection1";
             // 
@@ -142,25 +140,14 @@ namespace SchoolManagement.UI.Reporting
             // 
             this.roomTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1D), Telerik.Reporting.Drawing.Unit.Inch(1.4D));
             this.roomTextBox.Name = "roomTextBox";
-            this.roomTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.roomTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.8D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
             this.roomTextBox.Style.Font.Bold = true;
             this.roomTextBox.Style.Font.Italic = false;
             this.roomTextBox.Style.Font.Name = "Segoe UI";
             this.roomTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
             this.roomTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
             this.roomTextBox.Value = "Class: 6";
-            // 
-            // classroomSizeTextBox
-            // 
-            this.classroomSizeTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.4D), Telerik.Reporting.Drawing.Unit.Inch(1.4D));
-            this.classroomSizeTextBox.Name = "classroomSizeTextBox";
-            this.classroomSizeTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.058D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.classroomSizeTextBox.Style.Font.Bold = true;
-            this.classroomSizeTextBox.Style.Font.Italic = false;
-            this.classroomSizeTextBox.Style.Font.Name = "Segoe UI";
-            this.classroomSizeTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
-            this.classroomSizeTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
-            this.classroomSizeTextBox.Value = "N on roll: 31";
+            
             // 
             // totalCoefTextBox
             // 
@@ -815,7 +802,6 @@ namespace SchoolManagement.UI.Reporting
         private Telerik.Reporting.TextBox reportTitleTextBox;
         private Telerik.Reporting.TextBox schoolYearTextBox;
         private Telerik.Reporting.TextBox roomTextBox;
-        private Telerik.Reporting.TextBox classroomSizeTextBox;
         private Telerik.Reporting.TextBox totalCoefTextBox;
         private Telerik.Reporting.TextBox reportTitleStatisticTextBox;
         private Telerik.Reporting.TextBox deanStudiesTextBox;

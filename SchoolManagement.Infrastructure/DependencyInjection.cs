@@ -40,6 +40,7 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<IContactRepository, DapperContactRepository>();
             services.AddTransient<IMedicalRepository, DapperMedicalRepository>();
             services.AddTransient<IStudentNoteRepository, DapperStudentNoteRepository>();
+            services.AddTransient<ISchoolRepository, DapperSchoolRepository>();
             services.AddDbContext<AppDbContext>();
             services.AddLogging(builder => builder.AddConsole());
             return services;

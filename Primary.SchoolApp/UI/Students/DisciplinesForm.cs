@@ -84,7 +84,7 @@ namespace Primary.SchoolApp.UI
                 }
                 else
                 {
-                    var url = clientApp.StudentPitureFolder + "/" + enrolling.Student.IdNumber;
+                    var url = Program.CurrentSchool.StudentPictureDirectory + "/" + enrolling.Student.IdNumber;
                     if (File.Exists(url))
                     {
 

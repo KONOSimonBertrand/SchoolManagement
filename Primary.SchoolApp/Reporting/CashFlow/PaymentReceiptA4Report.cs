@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using Telerik.Reporting.Drawing;
+using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Reporting
 {
@@ -15,40 +16,38 @@ namespace Primary.SchoolApp.Reporting
         public PaymentReceiptA4Report() {
             InitComponents();
         }
-        public PaymentReceiptA4Report(StudentEnrolling enrolling, bool isCopy, ClientApp clientApp)
+        public PaymentReceiptA4Report(PaymentReceiptData receiptData)
         {
             InitComponents();
-            if (enrolling != null)
+            if (receiptData.Enrolling != null)
             {
-                Console.WriteLine(enrolling.SchoolClass.DocumentLanguage);
-                CopyLabel.Visible = isCopy;
-                Copy2Label.Visible = isCopy;
-                InitVisiblity(enrolling.SchoolClass.DocumentLanguageId);
-
+                CopyLabel.Visible = receiptData.IsCopy;
+                Copy2Label.Visible = receiptData.IsCopy;
+                InitVisiblity(receiptData.SchoolGroup.DocumentLanguageId);
                 
-                PaymentIdNumberTextBox.Value = "#" + enrolling.Id;
+                PaymentIdNumberTextBox.Value = "#" + receiptData.Enrolling.Id;
                 PaymentIdNumber2TextBox.Value = PaymentIdNumberTextBox.Value;
-                PaymentDateTextBox.Value = enrolling.Date.ToShortDateString();
+                PaymentDateTextBox.Value = receiptData.Enrolling.Date.ToShortDateString();
                 PaymentDate2TextBox.Value = PaymentDateTextBox.Value;
-                StudentTextBox.Value = enrolling.Student.FullName;
+                StudentTextBox.Value = receiptData.Enrolling.Student.FullName;
                 Student2TextBox.Value = StudentTextBox.Value;
-                StudentIdNumberTextBox.Value = enrolling.Student.IdNumber;
+                StudentIdNumberTextBox.Value = receiptData.Enrolling.Student.IdNumber;
                 StudentIdNumber2TextBox.Value = StudentIdNumberTextBox.Value;
-                StudentClassTextBox.Value = enrolling.SchoolClass.Name;
-                StudentClass2TextBox.Value = enrolling.SchoolClass.Name;
-                SchoolYearTextBox.Value = enrolling.SchoolYear.Name;
+                StudentClassTextBox.Value = receiptData.Enrolling.SchoolClass.Name;
+                StudentClass2TextBox.Value = receiptData.Enrolling.SchoolClass.Name;
+                SchoolYearTextBox.Value = receiptData.Enrolling.SchoolYear.Name;
                 SchoolYear2TextBox.Value = SchoolYearTextBox.Value;
-                PaymentAmountTextBox.Value = enrolling.PaymentList.Sum(a => a.Amount).ToString() + " CFA";
+                PaymentAmountTextBox.Value = receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToString() + " CFA";
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;
-                var lFR = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.French, Currency.CFA) + ")";
-                var lEN = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English, Currency.CFA) + ")";
-                if (enrolling.SchoolClass.DocumentLanguageId==0)
+                var lFR = "(" + receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                var lEN = "(" + receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                if (receiptData.SchoolGroup.DocumentLanguageId==0)
                 {
                     PaymentAmountLeterTextBox.Value = lFR;
                 }
                 else
                 {
-                    if (enrolling.SchoolClass.DocumentLanguageId == 1)
+                    if (receiptData.SchoolGroup.DocumentLanguageId == 1)
                     {
                         PaymentAmountLeterTextBox.Value = lEN;
                     }
@@ -59,14 +58,14 @@ namespace Primary.SchoolApp.Reporting
                 }
                
                 PaymentAmountLeter2TextBox.Value = PaymentAmountLeterTextBox.Value;
-                PaymentBalanceTextBox.Value = enrolling.PaymentList.Sum(a => a.Balance).ToString() + " CFA";
+                PaymentBalanceTextBox.Value = receiptData.Enrolling.PaymentList.Sum(a => a.Balance).ToString() + " CFA";
                 PaymentBalance2TextBox.Value = PaymentBalanceTextBox.Value;
-                if (enrolling.PaymentList.Count != 0)
+                if (receiptData.Enrolling.PaymentList.Count != 0)
                 {
-                    if (enrolling.PaymentList.Count > 1)
+                    if (receiptData.Enrolling.PaymentList.Count > 1)
                     {
-                        var meanList = enrolling.PaymentList.Select(x => x.PaymentMean).Distinct().ToList();
-                        var reasonList = enrolling.PaymentList.Select(x => x.CashFlowType).Distinct().ToList();
+                        var meanList = receiptData.Enrolling.PaymentList.Select(x => x.PaymentMean).Distinct().ToList();
+                        var reasonList = receiptData.Enrolling.PaymentList.Select(x => x.CashFlowType).Distinct().ToList();
                         int i = 1;
                         int j = 1;
                         foreach (var reason in reasonList)
@@ -96,8 +95,8 @@ namespace Primary.SchoolApp.Reporting
                     }
                     else
                     {
-                        PaymentReasonTextBox.Value = enrolling.PaymentList.FirstOrDefault().CashFlowType.Name;
-                        PaymentMeanTextBox.Value = enrolling.PaymentList.FirstOrDefault().PaymentMean.FullName;
+                        PaymentReasonTextBox.Value = receiptData.Enrolling.PaymentList.FirstOrDefault().CashFlowType.Name;
+                        PaymentMeanTextBox.Value = receiptData.Enrolling.PaymentList.FirstOrDefault().PaymentMean.FullName;
                         PaymentsTable.Visible = false;
                         Payments2Table.Visible = false;
                     }
@@ -110,52 +109,52 @@ namespace Primary.SchoolApp.Reporting
                 PaymentMean2TextBox.Value = PaymentMeanTextBox.Value;
                 PaymentReason2TextBox.Value = PaymentReasonTextBox.Value;
 
-                PaymentsTable.DataSource = enrolling.PaymentList;
-                Payments2Table.DataSource = enrolling.PaymentList;
+                PaymentsTable.DataSource = receiptData.Enrolling.PaymentList;
+                Payments2Table.DataSource = receiptData.Enrolling.PaymentList;
                 PrintDateTextBox.Value = Language.labelPrintOn + "  " + DateTime.Now.ToString();
                 PrintDate2TextBox.Value = PrintDateTextBox.Value;
                 FirstCopyPanel.Location = new PointU(Unit.Inch(0.2D), Unit.Inch(0.5D));
                 SecondCopyPanel.Location = new PointU(Unit.Inch(0.2D), Unit.Inch(6D));
-                if (enrolling.PaymentList.Count > 1)
+                if (receiptData.Enrolling.PaymentList.Count > 1)
                 {
-                    SignatureDoneByPanel.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    SignatureSchoolPanel.Location = new PointU(Unit.Inch(4.8D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    SignatureDoneBy2Panel.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    SignatureSchool2Panel.Location = new PointU(Unit.Inch(4.8D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
+                    SignatureDoneByPanel.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    SignatureSchoolPanel.Location = new PointU(Unit.Inch(4.8D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    SignatureDoneBy2Panel.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    SignatureSchool2Panel.Location = new PointU(Unit.Inch(4.8D), Unit.Inch(4.1D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
 
-                    WebSiteTextBox.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    WebSite2TextBox.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    AdressTextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    Adress2TextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
+                    WebSiteTextBox.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    WebSite2TextBox.Location = new PointU(Unit.Inch(0D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    AdressTextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    Adress2TextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(4.9D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
 
-                    PhoneTextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    Phone2TextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    PrintDateTextBox.Location = new PointU(Unit.Inch(6.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
-                    PrintDate2TextBox.Location = new PointU(Unit.Inch(6.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * enrolling.PaymentList.Count);
+                    PhoneTextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    Phone2TextBox.Location = new PointU(Unit.Inch(1.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    PrintDateTextBox.Location = new PointU(Unit.Inch(6.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
+                    PrintDate2TextBox.Location = new PointU(Unit.Inch(6.1D), Unit.Inch(5D) - Unit.Inch(0.1D) * receiptData.Enrolling.PaymentList.Count);
                 }
                 FirstCopyPanel.Size = new SizeU(Unit.Inch(7.804D), Unit.Inch(5.1D));
                 SecondCopyPanel.Size = new SizeU(Unit.Inch(7.804D), Unit.Inch(5.1D));
-                SchoolNameTextBox.Value = clientApp.Name;
+                SchoolNameTextBox.Value = Program.CurrentSchool.Name;
                 SchoolName2TextBox.Value = SchoolNameTextBox.Value;
-                WebSiteTextBox.Value = clientApp.WebSite;
+                WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
                 WebSite2TextBox.Value = WebSiteTextBox.Value;
-                PhoneTextBox.Value = clientApp.Contact;
+                PhoneTextBox.Value = Program.CurrentSchool.Phone;
                 Phone2TextBox.Value = PhoneTextBox.Value;
-                AdressTextBox.Value = clientApp.Address;
+                AdressTextBox.Value = Program.CurrentSchool.Address;
                 Adress2TextBox.Value = AdressTextBox.Value;
-                LogoPictureBox.Value = clientApp.LogoUrl;
+                LogoPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("logo.png");
                 Logo2PictureBox.Value = LogoPictureBox.Value;
 
             }
 
         }
-        public PaymentReceiptA4Report(TuitionPayment payment, bool isCopy, ClientApp clientApp)
+        public PaymentReceiptA4Report(TuitionReceiptData receiptData)
         {
             InitComponents();
-            if (payment != null)
+            if (receiptData.TuitionPayment != null)
             {
-                CopyLabel.Visible = isCopy;
-                Copy2Label.Visible = isCopy;
+                CopyLabel.Visible = receiptData.IsCopy;
+                Copy2Label.Visible = receiptData.IsCopy;
                 PaymentsTableAmountLabel.Value = Language.labelAmount.ToUpper();
                 PaymentsTableAmount2Label.Value = PaymentsTableAmountLabel.Value;
                 PaymentsTableReasonLabel.Value = Language.labelReason.ToUpper();
@@ -164,33 +163,33 @@ namespace Primary.SchoolApp.Reporting
                 PaymentsTablePaymentPlace2Label.Value = PaymentsTablePaymentPlaceLabel.Value;
                 PaymentsTableBalanceLabel.Value = Language.labelUnPaid.ToUpper();
                 PaymentsTableBalance2Label.Value = PaymentsTableBalanceLabel.Value;
-                PaymentIdNumberTextBox.Value = payment.IdNumber;
+                PaymentIdNumberTextBox.Value = receiptData.TuitionPayment.IdNumber;
                 PaymentIdNumber2TextBox.Value = PaymentIdNumberTextBox.Value;
-                PaymentDateTextBox.Value = payment.Date.ToShortDateString();
+                PaymentDateTextBox.Value = receiptData.TuitionPayment.Date.ToShortDateString();
                 PaymentDate2TextBox.Value = PaymentDateTextBox.Value;
-                StudentTextBox.Value = payment.Enrolling.Student.FullName;
+                StudentTextBox.Value = receiptData.TuitionPayment.Enrolling.Student.FullName;
                 Student2TextBox.Value = StudentTextBox.Value;
-                StudentIdNumberTextBox.Value = payment.Enrolling.Student.IdNumber;
+                StudentIdNumberTextBox.Value = receiptData.TuitionPayment.Enrolling.Student.IdNumber;
                 StudentIdNumber2TextBox.Value = StudentIdNumberTextBox.Value;
-                StudentClassTextBox.Value = payment.Enrolling.SchoolClass.Name;
-                StudentClass2TextBox.Value = payment.Enrolling.SchoolClass.Name;
-                SchoolYearTextBox.Value = payment.Enrolling.SchoolYear.Name;
+                StudentClassTextBox.Value = receiptData.TuitionPayment.Enrolling.SchoolClass.Name;
+                StudentClass2TextBox.Value = receiptData.TuitionPayment.Enrolling.SchoolClass.Name;
+                SchoolYearTextBox.Value = receiptData.TuitionPayment.Enrolling.SchoolYear.Name;
                 SchoolYear2TextBox.Value = SchoolYearTextBox.Value;
-                PaymentAmountTextBox.Value = payment.Amount.ToString() + " F CFA";
+                PaymentAmountTextBox.Value = receiptData.TuitionPayment.Amount.ToString() + " F CFA";
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;
                 if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + payment.Amount.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.TuitionPayment.Amount.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
                 }
                 else
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + payment.Amount.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.TuitionPayment.Amount.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
                 }
                 PaymentAmountLeter2TextBox.Value = PaymentAmountLeterTextBox.Value;
-                PaymentBalanceTextBox.Value = payment.Balance.ToString() + " F CFA";
+                PaymentBalanceTextBox.Value = receiptData.TuitionPayment.Balance.ToString() + " F CFA";
                 PaymentBalance2TextBox.Value = PaymentBalanceTextBox.Value;
-                PaymentReasonTextBox.Value = payment.CashFlowType.Name;
-                PaymentMeanTextBox.Value=payment.PaymentMean.FullName;
+                PaymentReasonTextBox.Value = receiptData.TuitionPayment.CashFlowType.Name;
+                PaymentMeanTextBox.Value=receiptData.TuitionPayment.PaymentMean.FullName;
                 PaymentMean2TextBox.Value = PaymentMeanTextBox.Value;
                 PaymentReason2TextBox.Value = PaymentReasonTextBox.Value;
                 PaymentsTable.Visible=false;
@@ -201,30 +200,30 @@ namespace Primary.SchoolApp.Reporting
                 SecondCopyPanel.Location = new PointU(Unit.Inch(0.2D), Unit.Inch(6D));                
                 FirstCopyPanel.Size = new SizeU(Unit.Inch(7.804D), Unit.Inch(5.1D));
                 SecondCopyPanel.Size = new SizeU(Unit.Inch(7.804D), Unit.Inch(5.1D));
-                SchoolNameTextBox.Value = clientApp.Name;
+                SchoolNameTextBox.Value = Program.CurrentSchool.Name;
                 SchoolName2TextBox.Value = SchoolNameTextBox.Value;
-                WebSiteTextBox.Value = clientApp.WebSite;
+                WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
                 WebSite2TextBox.Value = WebSiteTextBox.Value;
-                PhoneTextBox.Value = clientApp.Contact;
+                PhoneTextBox.Value = Program.CurrentSchool.Phone;
                 Phone2TextBox.Value = PhoneTextBox.Value;
-                AdressTextBox.Value = clientApp.Address;
+                AdressTextBox.Value = Program.CurrentSchool.Address;
                 Adress2TextBox.Value = AdressTextBox.Value;
-                LogoPictureBox.Value = clientApp.LogoUrl;
+                LogoPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("logo.png");
                 Logo2PictureBox.Value = LogoPictureBox.Value;
 
             }
 
         }
-        public PaymentReceiptA4Report(Subscription subscription, bool isCopy, ClientApp clientApp)
+        public PaymentReceiptA4Report(SubscriptionReceiptData receiptData)
         {
             InitComponents();
-            if (subscription != null)
+            if (receiptData.Subscription != null)
             {
-                var studentRoom=Program.StudentRoomList.FirstOrDefault(x => x.StudentId==subscription.StudentId && x.SchoolYearId== subscription.SchoolYearId);
+                var studentRoom=Program.StudentRoomList.FirstOrDefault(x => x.StudentId==receiptData.Subscription.StudentId && x.SchoolYearId== receiptData.Subscription.SchoolYearId);
                 var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == studentRoom.RoomId);
                 var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
-                CopyLabel.Visible = isCopy;
-                Copy2Label.Visible = isCopy;
+                CopyLabel.Visible = receiptData.IsCopy;
+                Copy2Label.Visible = receiptData.IsCopy;
                 PaymentsTableAmountLabel.Value = Language.labelAmount.ToUpper();
                 PaymentsTableAmount2Label.Value = PaymentsTableAmountLabel.Value;
                 PaymentsTableReasonLabel.Value = Language.labelReason.ToUpper();
@@ -233,34 +232,34 @@ namespace Primary.SchoolApp.Reporting
                 PaymentsTablePaymentPlace2Label.Value = PaymentsTablePaymentPlaceLabel.Value;
                 PaymentsTableBalanceLabel.Value = Language.labelUnPaid.ToUpper();
                 PaymentsTableBalance2Label.Value = PaymentsTableBalanceLabel.Value;
-                PaymentIdNumberTextBox.Value = $"# {subscription.IdNumber}";
+                PaymentIdNumberTextBox.Value = $"# {receiptData.Subscription.IdNumber}";
                 PaymentIdNumber2TextBox.Value = PaymentIdNumberTextBox.Value;
-                PaymentDateTextBox.Value = subscription.StartDate.ToShortDateString();
+                PaymentDateTextBox.Value = receiptData.Subscription.StartDate.ToShortDateString();
                 PaymentDate2TextBox.Value = PaymentDateTextBox.Value;
-                StudentTextBox.Value = subscription.Student.FullName;
+                StudentTextBox.Value = receiptData.Subscription.Student.FullName;
                 Student2TextBox.Value = StudentTextBox.Value;
-                StudentIdNumberTextBox.Value = subscription.Student.IdNumber;
+                StudentIdNumberTextBox.Value = receiptData.Subscription.Student.IdNumber;
                 StudentIdNumber2TextBox.Value = StudentIdNumberTextBox.Value;
                 StudentClassTextBox.Value = classOfRoom.Name;
                 StudentClass2TextBox.Value = StudentClassTextBox.Value;
-                SchoolYearTextBox.Value = subscription.SchoolYear.Name;
+                SchoolYearTextBox.Value = receiptData.Subscription.SchoolYear.Name;
                 SchoolYear2TextBox.Value = SchoolYearTextBox.Value;
-                PaymentAmountTextBox.Value = subscription.Amount.ToString() + " F CFA";
+                PaymentAmountTextBox.Value = receiptData.Subscription.Amount.ToString() + " F CFA";
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;
                 if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + subscription.Amount.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.Subscription.Amount.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
                 }
                 else
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + subscription.Amount.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.Subscription.Amount.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
                 }
                 PaymentAmountLeter2TextBox.Value = PaymentAmountLeterTextBox.Value;
                 PaymentBalanceTextBox.Value = "0 F CFA";
                 PaymentBalance2TextBox.Value = PaymentBalanceTextBox.Value;
-                PaymentReasonTextBox.Value = subscription.CashFlowType.Name;
+                PaymentReasonTextBox.Value = receiptData.Subscription.CashFlowType.Name;
                 PaymentReason2TextBox.Value = PaymentReasonTextBox.Value;
-                PaymentMeanTextBox.Value = subscription.PaymentMean.FullName;
+                PaymentMeanTextBox.Value = receiptData.Subscription.PaymentMean.FullName;
                 PaymentMean2TextBox.Value = PaymentMeanTextBox.Value;
                 PaymentsTable.Visible = false;
                 Payments2Table.Visible = false;
@@ -270,15 +269,15 @@ namespace Primary.SchoolApp.Reporting
                 SecondCopyPanel.Location = new PointU(Unit.Inch(0.2D), Unit.Inch(6D));
                 FirstCopyPanel.Size = new SizeU(Unit.Inch(7.804D), Unit.Inch(5.1D));
                 SecondCopyPanel.Size = new SizeU(Unit.Inch(7.804D), Unit.Inch(5.1D));
-                SchoolNameTextBox.Value = clientApp.Name;
+                SchoolNameTextBox.Value = Program.CurrentSchool.Name;
                 SchoolName2TextBox.Value = SchoolNameTextBox.Value;
-                WebSiteTextBox.Value = clientApp.WebSite;
+                WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
                 WebSite2TextBox.Value = WebSiteTextBox.Value;
-                PhoneTextBox.Value = clientApp.Contact;
+                PhoneTextBox.Value = Program.CurrentSchool.Phone;
                 Phone2TextBox.Value = PhoneTextBox.Value;
-                AdressTextBox.Value = clientApp.Address;
+                AdressTextBox.Value = Program.CurrentSchool.Address;
                 Adress2TextBox.Value = AdressTextBox.Value;
-                LogoPictureBox.Value = clientApp.LogoUrl;
+                LogoPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("logo.png");
                 Logo2PictureBox.Value = LogoPictureBox.Value;
 
             }

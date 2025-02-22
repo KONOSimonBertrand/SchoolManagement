@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Telerik.WinControls;
+using Telerik.WinForms.Documents.Model.Notes;
 using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Services
@@ -12,7 +14,7 @@ namespace Primary.SchoolApp.Services
     public class LocalStudentNoteService
     {
         private readonly IStudentNoteService studentNoteService;
-  
+
         public LocalStudentNoteService(IStudentNoteService studentNoteService)
         {
             this.studentNoteService = studentNoteService;
@@ -27,15 +29,16 @@ namespace Primary.SchoolApp.Services
             var evaluation = extractedData.Where(x => x.BookId == bookId);
             var idStudentList = evaluation.Select(x => x.StudentId).Distinct().ToList();
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
             foreach (var studentId in idStudentList)
             {
                 //get student subject list
-                var idSubjectList = evaluation.Where(x=> x.StudentId == studentId).Select(x => x.SubjectId).Distinct();
+                var idSubjectList = evaluation.Where(x => x.StudentId == studentId).Select(x => x.SubjectId).Distinct();
                 //calcul de la moyenne
                 double sumCoef = 0;//somme de coefficients
                 double sumNote = 0;// somme de notes
                 double average = 0;
-                if (classOfRoom.AverageFormula == 0)
+                if (classGroup.AverageFormula == 0)
                 {
                     sumNote = evaluation.Where(x => x.StudentId == studentId).Sum(x => x.Note);
                     var sumMaxNote = evaluation.Where(x => x.StudentId == studentId).Sum(x => x.NotedOn);
@@ -58,26 +61,26 @@ namespace Primary.SchoolApp.Services
                 {
                     Id = studentId,
                     Note = average,
-                    NotedOn= sumNote,
+                    NotedOn = sumNote,
                     StudentId = studentId,
                     Student = student,
                 });
             }
             //get ordored average with position
-            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageOfRoom(room, bookId));
+            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
             foreach (var item in orderedAverageList)
             {
                 //get rating
                 var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
                 var rating = string.Empty;
                 //truncate or around note
-                var note = classOfRoom.NoteIsTruncate == false ? double.Parse(item.Note.ToString("F", System.Globalization.CultureInfo.CurrentCulture)) : AppUtilities.TruncateDouble(item.Note, 2);
+                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
                 if (systemRating != null)
                 {
 
-                    rating = GetLanguageOfRoom(room, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
                 }
-                averageList.Add(new(item.Student, note,item.NotedOn, rating, item.Position));
+                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
             }
             return averageList;
         }
@@ -87,6 +90,8 @@ namespace Primary.SchoolApp.Services
             var listOfNoteOrdored = new List<StudentNote>();
             var evaluationNoteList = new List<EvaluationRecord>();
             var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
+            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
             var extractedData = await studentNoteService.GetNotesByRoomAsync(roomId, evaluationId, schoolYearId);
             var notesToOrder = extractedData.Where(x => x.BookId == bookId).ToList();
             //get distinct subject id
@@ -95,50 +100,438 @@ namespace Primary.SchoolApp.Services
             foreach (var subjectId in subjectList)
             {
                 var notes = notesToOrder.Where(x => x.SubjectId == subjectId).ToList();
-                listOfNoteOrdored.AddRange(GenerateOrderedWithPosition(notes, GetLanguageOfRoom(room, bookId)));
+                listOfNoteOrdored.AddRange(GenerateOrderedWithPosition(notes, GetLanguageGroup(classGroup, bookId)));
             }
             foreach (var item in listOfNoteOrdored)
             {
                 var student = Program.StudentEnrollingList.Select(x => x.Student).FirstOrDefault(x => x.Id == item.StudentId);
                 //get subject, subject group
-                var classSubject = Program.ClassSubjectList.FirstOrDefault(x => x.ClassId==room.ClassId && x.SubjectId == item.SubjectId);
-                var subject= classSubject.Subject;
-                var subjectGroup=classSubject.Group;
+                var classSubject = Program.ClassSubjectList.FirstOrDefault(x => x.ClassId == room.ClassId && x.SubjectId == item.SubjectId);
+                var subject = classSubject.Subject;
+                var subjectGroup = classSubject.Group;
                 //get rating
                 var note20 = item.NotedOn == 20 ? item.Note : GetNote20(item.Note, item.NotedOn);
                 var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Note" && x.MinNote <= note20 && x.MaxNote >= note20);
                 var rating = string.Empty;
-                var noteWithMax=$"{item.Note}/{item.NotedOn}";
-                var noteAsString=item.Note.ToString();
+                var noteWithMax = $"{item.Note}/{item.NotedOn}";
+                var noteAsString = item.Note.ToString();
                 if (systemRating != null)
                 {
 
-                    rating = GetLanguageOfRoom(room, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
                 }
-                evaluationNoteList.Add(new(item.Id, student, subject,subjectGroup, item.Note,noteAsString,noteWithMax,item.NoteCoef,item.NotedOn, rating, item.Position));
+                evaluationNoteList.Add(new(item.Id, student, subject, subjectGroup, item.Note, noteAsString, noteWithMax, item.NoteCoef, item.NotedOn, rating, item.Position));
             }
             return evaluationNoteList;
         }
+        // récupération des notes du premier trimestre
+        public async Task<List<TermRecord>> GetFirstTermNoteListByRoom(int roomId, int schoolYearId, int bookId)
+        {
+            var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
+            var class_of_room = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var class_group = Program.SchoolGroupList.FirstOrDefault(x => x.Id == class_of_room.GroupId);
+            var term_note_list = new List<TermRecord>();
+            var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL01");
+            var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL02");
+            var eval03 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL03");
+            // extraction des données des évaluations du trimestre
+            var eval01_notes_task = GetEvaluationNoteListByRoom(roomId, eval01.Id, schoolYearId, bookId);
+            var eval02_notes_task = GetEvaluationNoteListByRoom(roomId, eval02.Id, schoolYearId, bookId);
+            var eval03_notes_task = GetEvaluationNoteListByRoom(roomId, eval03.Id, schoolYearId, bookId);
 
+            var eval01_notes = await eval01_notes_task;
+            var eval02_notes = await eval02_notes_task;
+            var eval03_notes = await eval03_notes_task;
+            List<EvaluationRecord> term_evaluation_notes = new();
+            term_evaluation_notes.AddRange(eval01_notes);
+            term_evaluation_notes.AddRange(eval01_notes);
+            term_evaluation_notes.AddRange(eval01_notes);
+
+            var students = term_evaluation_notes.Select(x => x.Student).Distinct();
+            var subjects = term_evaluation_notes.Select(x => x.Subject).Distinct();
+            var subjects_elements = term_evaluation_notes.Select(x => (x.Subject, x.NotedOn, x.NoteCoef, x.SubjectGroup));
+            List<StudentNote> students_notes = new();
+            var eval_note_list = new List<EvaluationRecord>();
+            // get note by subject and by student
+            foreach (var subject in subjects)
+            {
+                var notes_to_ordered = new List<StudentNote>();
+                int note_id = 0;
+                foreach (var student in students)
+                {
+                    var eval01_note = eval01_notes.FirstOrDefault(x => x.Student.Id == student.Id && x.Subject.Id == subject.Id);
+                    var eval02_note = eval02_notes.FirstOrDefault(x => x.Student.Id == student.Id && x.Subject.Id == subject.Id);
+                    var eval03_note = eval03_notes.FirstOrDefault(x => x.Student.Id == student.Id && x.Subject.Id == subject.Id);
+                    var final_note = GetFinalNote(eval01_note, eval02_note, eval03_note);
+                    eval_note_list.Add(final_note);
+                    notes_to_ordered.Add(
+                        new StudentNote()
+                        {
+                            Id = note_id++,
+                            Subject = subject,
+                            Note = final_note.Note,
+                            NoteCoef = final_note.NoteCoef,
+                            NotedOn = final_note.NotedOn,
+                            StudentId = student.Id,
+                            Student = student,
+                            SubjectId = subject.Id,
+                            BookId = bookId,
+                        });
+                }
+                // on récupère la liste ordonée
+                var notes_ordered = GenerateOrderedWithPosition(notes_to_ordered, GetLanguageGroup(class_group, bookId));
+                // add Term Record
+                foreach (var note in notes_ordered)
+                {
+                    var eval01_note = eval01_notes.FirstOrDefault(x => x.Student.Id == note.Student.Id && x.Subject.Id == subject.Id);
+                    var eval02_note = eval02_notes.FirstOrDefault(x => x.Student.Id == note.Student.Id && x.Subject.Id == subject.Id);
+                    var eval03_note = eval03_notes.FirstOrDefault(x => x.Student.Id == note.Student.Id && x.Subject.Id == subject.Id);
+                    //get rating
+                    var note20 = note.NotedOn == 20 ? note.Note : GetNote20(note.Note, note.NotedOn);
+                    var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Note" && x.MinNote <= note20 && x.MaxNote >= note20);
+                    term_note_list.Add(
+                    new TermRecord(
+                        note.Id,
+                        note.Student,
+                        note.Subject,
+                        subjects_elements.FirstOrDefault(x => x.Subject.Id == subject.Id).SubjectGroup,
+                        eval01_note != null ? eval01_note.Note : 0,
+                        eval01_note != null ? eval01_note.Note.ToString() : string.Empty,
+                        eval01_note != null ? eval01_note.NoteWithMax : string.Empty,
+                        eval02_note != null ? eval02_note.Note : 0,
+                        eval02_note != null ? eval02_note.Note.ToString() : string.Empty,
+                        eval02_note != null ? eval02_note.NoteWithMax : string.Empty,
+                        eval03_note != null ? eval03_note.Note : 0,
+                        eval03_note != null ? eval03_note.Note.ToString() : string.Empty,
+                        eval03_note != null ? eval03_note.NoteWithMax : string.Empty,
+                        note.Note,
+                        note.Note.ToString(),
+                        $"{note.Note}/{note.NotedOn}",
+                        note.NoteCoef,
+                        note.NotedOn,
+                        GetLanguageGroup(class_group, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName,
+                        note.Position
+                            )
+                        );
+                }
+            }
+
+            return term_note_list;
+        }
+       
+        // get final note
+        private double ComputeFinalNote(EvaluationRecord firstNote, EvaluationRecord secondNote, EvaluationRecord thirdNote)
+        {
+            double finalNote = 0;
+            if (firstNote != null)
+            {
+                if (secondNote != null)
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = (firstNote.Note + secondNote.Note + thirdNote.Note) / 3;
+                    }
+                    else
+                    {
+                        finalNote = (firstNote.Note + secondNote.Note) / 2;
+                    }
+                }
+                else
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = (firstNote.Note + thirdNote.Note) / 2;
+                    }
+                    else
+                    {
+                        finalNote = firstNote.Note;
+                    }
+                }
+            }
+            else
+            {
+                if (secondNote != null)
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = (secondNote.Note + thirdNote.Note) / 2;
+                    }
+                    else
+                    {
+                        finalNote = secondNote.Note;
+                    }
+                }
+                else
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = thirdNote.Note;
+                    }
+                }
+            }
+            return finalNote;
+        }
+        private double ComputeFinalAverage(AverageRecord firstAverage, AverageRecord secondAverage, AverageRecord thirdAverage)
+        {
+            double finalAverage = 0;
+            if (firstAverage != null)
+            {
+                if (secondAverage != null)
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = (firstAverage.Average + secondAverage.Average + thirdAverage.Average) / 3;
+                    }
+                    else
+                    {
+                        finalAverage = (firstAverage.Average + secondAverage.Average) / 2;
+                    }
+                }
+                else
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = (firstAverage.Average + thirdAverage.Average) / 2;
+                    }
+                    else
+                    {
+                        finalAverage = firstAverage.Average;
+                    }
+                }
+            }
+            else
+            {
+                if (secondAverage != null)
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = (secondAverage.Average + thirdAverage.Average) / 2;
+                    }
+                    else
+                    {
+                        finalAverage = secondAverage.Average;
+                    }
+                }
+                else
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = thirdAverage.Average;
+                    }
+                }
+            }
+            return finalAverage;
+        }
+        private EvaluationRecord GetFinalNote(EvaluationRecord firstNote, EvaluationRecord secondNote, EvaluationRecord thirdNote)
+        {
+
+            double finalNote;
+            if (firstNote != null)
+            {
+                if (secondNote != null)
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = (firstNote.Note + secondNote.Note + thirdNote.Note) / 3;
+                        return new EvaluationRecord(
+                            firstNote.Id,
+                            firstNote.Student,
+                            firstNote.Subject,
+                            firstNote.SubjectGroup, finalNote,
+                            finalNote.ToString(),
+                            $"{finalNote}/{firstNote.NotedOn}",
+                            firstNote.NoteCoef,
+                            firstNote.NotedOn,
+                            firstNote.Rating,
+                            firstNote.Position
+                            );
+                    }
+                    else
+                    {
+                        finalNote = (firstNote.Note + secondNote.Note) / 2;
+                        return new EvaluationRecord(
+                            firstNote.Id,
+                            firstNote.Student,
+                            firstNote.Subject,
+                            firstNote.SubjectGroup, finalNote,
+                            finalNote.ToString(),
+                            $"{finalNote}/{firstNote.NotedOn}",
+                            firstNote.NoteCoef,
+                            firstNote.NotedOn,
+                            firstNote.Rating,
+                            firstNote.Position
+                            );
+                    }
+                }
+                else
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = (firstNote.Note + thirdNote.Note) / 2;
+                        return new EvaluationRecord(
+                            firstNote.Id,
+                            firstNote.Student,
+                            firstNote.Subject,
+                            firstNote.SubjectGroup, finalNote,
+                            finalNote.ToString(),
+                            $"{finalNote}/{firstNote.NotedOn}",
+                            firstNote.NoteCoef,
+                            firstNote.NotedOn,
+                            firstNote.Rating,
+                            firstNote.Position
+                            );
+                    }
+                    else
+                    {
+                        finalNote = firstNote.Note;
+                        return new EvaluationRecord(
+                            firstNote.Id,
+                            firstNote.Student,
+                            firstNote.Subject,
+                            firstNote.SubjectGroup, finalNote,
+                            finalNote.ToString(),
+                            $"{finalNote}/{firstNote.NotedOn}",
+                            firstNote.NoteCoef,
+                            firstNote.NotedOn,
+                            firstNote.Rating,
+                            firstNote.Position
+                            );
+                    }
+                }
+            }
+            else
+            {
+                if (secondNote != null)
+                {
+                    if (thirdNote != null)
+                    {
+                        finalNote = (secondNote.Note + thirdNote.Note) / 2;
+                        return new EvaluationRecord(
+                            secondNote.Id,
+                            secondNote.Student,
+                            secondNote.Subject,
+                            secondNote.SubjectGroup, finalNote,
+                            finalNote.ToString(),
+                            $"{finalNote}/{secondNote.NotedOn}",
+                            secondNote.NoteCoef,
+                            secondNote.NotedOn,
+                            secondNote.Rating,
+                            secondNote.Position
+                            );
+                    }
+                    else
+                    {
+                        return secondNote;
+                    }
+                }
+                else
+                {
+                    return thirdNote;
+                }
+            }
+        }
+        private AverageRecord GetFinalAverage(AverageRecord firstAverage, AverageRecord secondAverage, AverageRecord thirdAverage)
+        {
+
+            double finalAverage;
+            if (firstAverage != null)
+            {
+                if (secondAverage != null)
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = (firstAverage.Average + secondAverage.Average + thirdAverage.Average) / 3;
+                        return new AverageRecord(
+                            firstAverage.Student,
+                            finalAverage,
+                            firstAverage.TotalMark,
+                            firstAverage.Rating,
+                            firstAverage.Position
+                            );
+                    }
+                    else
+                    {
+                        finalAverage = (firstAverage.Average + secondAverage.Average) / 2;
+                        return new AverageRecord(
+                           firstAverage.Student,
+                           finalAverage,
+                           firstAverage.TotalMark,
+                           firstAverage.Rating,
+                           firstAverage.Position
+                           );
+                    }
+                }
+                else
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = (firstAverage.Average + thirdAverage.Average) / 2;
+                        return new AverageRecord(
+                           firstAverage.Student,
+                           finalAverage,
+                           firstAverage.TotalMark,
+                           firstAverage.Rating,
+                           firstAverage.Position
+                           );
+                    }
+                    else
+                    {
+                        finalAverage = firstAverage.Average;
+                        return new AverageRecord(
+                           firstAverage.Student,
+                           finalAverage,
+                           firstAverage.TotalMark,
+                           firstAverage.Rating,
+                           firstAverage.Position
+                           );
+                    }
+                }
+            }
+            else
+            {
+                if (secondAverage != null)
+                {
+                    if (thirdAverage != null)
+                    {
+                        finalAverage = (secondAverage.Average + thirdAverage.Average) / 2;
+                        return new AverageRecord(
+                            secondAverage.Student,
+                            finalAverage,
+                            secondAverage.TotalMark,
+                            secondAverage.Rating,
+                            secondAverage.Position
+                            );
+                    }
+                    else
+                    {
+                        return secondAverage;
+                    }
+                }
+                else
+                {
+                    return thirdAverage;
+                }
+            }
+        }
         //get average for first tem
-        public async Task<List<AverageRecord>> GetFirstTermAverageListByRoom(int roomId,  int schoolYearId, int bookId)
+        public async Task<List<AverageRecord>> GetFirstTermAverageListByRoom(int roomId, int schoolYearId, int bookId)
         {
             var averageList = new List<AverageRecord>();
             var allEvalList = new List<AverageRecord>();
             var eval1 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL01");
             var eval2 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL02");
             var eval3 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL03");
-            var eval1AverageList=  await GetEvaluationAverageListByRoom(roomId,eval1.Id,schoolYearId,bookId);
+            var eval1AverageList = await GetEvaluationAverageListByRoom(roomId, eval1.Id, schoolYearId, bookId);
             var eval2AverageList = await GetEvaluationAverageListByRoom(roomId, eval2.Id, schoolYearId, bookId);
             var eval3AverageList = await GetEvaluationAverageListByRoom(roomId, eval3.Id, schoolYearId, bookId);
             allEvalList.AddRange(eval1AverageList);
             allEvalList.AddRange(eval2AverageList);
             allEvalList.AddRange(eval3AverageList);
-            var students = allEvalList.Select(x => x.Student).Distinct(); 
-            var notesToOrder= new List<StudentNote>();
+            var students = allEvalList.Select(x => x.Student).Distinct();
+            var notesToOrder = new List<StudentNote>();
             foreach (var student in students)
             {
-                var eval1Note= eval1AverageList.FirstOrDefault(x=>x.Student.Id==student.Id);
+                var eval1Note = eval1AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
                 var eval2Note = eval2AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
                 var eval3Note = eval3AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
                 double average = 0;
@@ -150,7 +543,7 @@ namespace Primary.SchoolApp.Services
                         if (eval3Note != null)
                         {
                             sumNote = (eval1Note.Average + eval2Note.Average + eval3Note.Average);
-                            average =sumNote/3;
+                            average = sumNote / 3;
                         }
                         else
                         {
@@ -160,10 +553,10 @@ namespace Primary.SchoolApp.Services
                     }
                     else
                     {
-                        if(eval3Note != null)
+                        if (eval3Note != null)
                         {
                             sumNote = (eval1Note.Average + eval3Note.Average);
-                            average = sumNote/2;
+                            average = sumNote / 2;
                         }
                         else
                         {
@@ -174,16 +567,16 @@ namespace Primary.SchoolApp.Services
                 }
                 else
                 {
-                    if(eval2Note!= null)
+                    if (eval2Note != null)
                     {
-                        if(eval3Note!= null)
+                        if (eval3Note != null)
                         {
                             sumNote = (eval2Note.Average + eval3Note.Average);
-                            average = sumNote/2;
+                            average = sumNote / 2;
                         }
                         else
                         {
-                            sumNote= eval2Note.Average;
+                            sumNote = eval2Note.Average;
                             average = sumNote;
                         }
                     }
@@ -192,7 +585,7 @@ namespace Primary.SchoolApp.Services
                         if (eval3Note != null)
                         {
                             sumNote = eval3Note.Average;
-                            average =sumNote;
+                            average = sumNote;
                         }
                     }
                 }
@@ -200,27 +593,28 @@ namespace Primary.SchoolApp.Services
                 {
                     Id = student.Id,
                     Note = average,
-                    NotedOn=sumNote,
+                    NotedOn = sumNote,
                     StudentId = student.Id,
                     Student = student,
                 });
             }
             var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            //get ordored average with position
-            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageOfRoom(room, bookId));
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
+            //get ordored average with position
+            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
             foreach (var item in orderedAverageList)
             {
                 //get rating
                 var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
                 var rating = string.Empty;
                 //truncate or around note
-                var note = classOfRoom.NoteIsTruncate == false ? double.Parse(item.Note.ToString("F", System.Globalization.CultureInfo.CurrentCulture)) : AppUtilities.TruncateDouble(item.Note, 2);
+                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
                 if (systemRating != null)
                 {
-                    rating = GetLanguageOfRoom(room, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
                 }
-                averageList.Add(new(item.Student, note,item.NotedOn, rating, item.Position));
+                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
             }
             return averageList;
         }
@@ -254,12 +648,12 @@ namespace Primary.SchoolApp.Services
                         if (eval3Note != null)
                         {
                             sumNote = (eval1Note.Average + eval2Note.Average + eval3Note.Average);
-                            average = sumNote/ 3;
+                            average = sumNote / 3;
                         }
                         else
                         {
                             sumNote = (eval1Note.Average + eval2Note.Average);
-                            average =sumNote /2;
+                            average = sumNote / 2;
                         }
                     }
                     else
@@ -267,7 +661,7 @@ namespace Primary.SchoolApp.Services
                         if (eval3Note != null)
                         {
                             sumNote = (eval1Note.Average + eval3Note.Average);
-                            average = sumNote/2;
+                            average = sumNote / 2;
                         }
                         else
                         {
@@ -283,7 +677,7 @@ namespace Primary.SchoolApp.Services
                         if (eval3Note != null)
                         {
                             sumNote = (eval2Note.Average + eval3Note.Average);
-                            average = sumNote/2;
+                            average = sumNote / 2;
                         }
                         else
                         {
@@ -304,27 +698,29 @@ namespace Primary.SchoolApp.Services
                 {
                     Id = student.Id,
                     Note = average,
-                    NotedOn=sumNote,
+                    NotedOn = sumNote,
                     StudentId = student.Id,
                     Student = student,
                 });
             }
             var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            //get ordored average with position
-            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageOfRoom(room, bookId));
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
+
+            //get ordored average with position
+            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
             foreach (var item in orderedAverageList)
             {
                 //get rating
                 var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
                 var rating = string.Empty;
                 //truncate or around note
-                var note = classOfRoom.NoteIsTruncate == false ? double.Parse(item.Note.ToString("F", System.Globalization.CultureInfo.CurrentCulture)) : AppUtilities.TruncateDouble(item.Note, 2);
+                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
                 if (systemRating != null)
                 {
-                    rating = GetLanguageOfRoom(room, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
                 }
-                averageList.Add(new(item.Student, note,item.NotedOn, rating, item.Position));
+                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
             }
             return averageList;
         }
@@ -356,7 +752,7 @@ namespace Primary.SchoolApp.Services
                     }
                     else
                     {
-                        sumNote= eval1Note.Average;
+                        sumNote = eval1Note.Average;
                         average = sumNote;
                     }
                 }
@@ -364,7 +760,7 @@ namespace Primary.SchoolApp.Services
                 {
                     if (eval2Note != null)
                     {
-                        sumNote= eval1Note.Average;
+                        sumNote = eval1Note.Average;
                         average = sumNote;
                     }
                 }
@@ -372,27 +768,28 @@ namespace Primary.SchoolApp.Services
                 {
                     Id = student.Id,
                     Note = average,
-                    NotedOn=sumNote,
+                    NotedOn = sumNote,
                     StudentId = student.Id,
                     Student = student,
                 });
             }
             var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            //get ordored average with position
-            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageOfRoom(room, bookId));
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
+            //get ordored average with position
+            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
             foreach (var item in orderedAverageList)
             {
                 //get rating
                 var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
                 var rating = string.Empty;
                 //truncate or around note
-                var note = classOfRoom.NoteIsTruncate == false ? double.Parse(item.Note.ToString("F", System.Globalization.CultureInfo.CurrentCulture)) : AppUtilities.TruncateDouble(item.Note, 2);
+                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
                 if (systemRating != null)
                 {
-                    rating = GetLanguageOfRoom(room, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
                 }
-                averageList.Add(new(item.Student, note,item.NotedOn, rating, item.Position));
+                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
             }
             return averageList;
         }
@@ -444,30 +841,18 @@ namespace Primary.SchoolApp.Services
             return listOrdered;
         }
 
-        //extraction de la langue associée au des documents de la  classe
-        public static string GetLanguageOfClass(SchoolClass selectedClass,int bookId)
+        //extraction de la langue associée aux documents du groupe de classe
+        public static string GetLanguageGroup(SchoolGroup selectedGroup, int bookId)
         {
-            if (selectedClass.DocumentLanguageId == 1 || selectedClass.DocumentLanguageId == 2 && bookId == 1)
-            {
-               return "EN";
-            }
-            return "FR";
-        }
-
-        //extraction de la langue associée au des documents de la salle de classe
-        public static string GetLanguageOfRoom(SchoolRoom selectedRoom, int bookId)
-        {
-            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == selectedRoom.ClassId);
-
-            if (classOfRoom.DocumentLanguageId == 1 || classOfRoom.DocumentLanguageId == 2 && bookId == 1)
+            if (selectedGroup.DocumentLanguageId == 1 || selectedGroup.DocumentLanguageId == 2 && bookId == 1)
             {
                 return "EN";
             }
             return "FR";
         }
-    
+
         // retourne la note sur 20. ceci est nécessaire pour des matières dont la note max est >20
-       public static double GetNote20(double note,double notedOn)
+        public static double GetNote20(double note, double notedOn)
         {
             double coef = 0;
             if (notedOn != 0) coef = 20 / notedOn;

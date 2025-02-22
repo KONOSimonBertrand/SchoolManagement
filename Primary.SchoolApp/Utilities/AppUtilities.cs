@@ -9,6 +9,10 @@ using Telerik.WinControls.UI.Export;
 using Telerik.WinControls.UI;
 using System.Threading;
 using System.Linq;
+using SchoolManagement.Core.Model;
+using System.Text;
+using static Telerik.WinControls.VirtualKeyboard.VirtualKeyboardNativeMethods;
+using SchoolManagement.UI.Localization;
 
 namespace Primary.SchoolApp.Utilities
 {
@@ -17,7 +21,7 @@ namespace Primary.SchoolApp.Utilities
         public static Color MainThemeColor;
         public static string MainFont = "Roboto";
         public static string MainFontMedium = "Roboto Medium";
-        public   readonly struct Relationship
+        public readonly struct Relationship
         {
             public int Id { get; }
             public string Name { get; }
@@ -27,7 +31,7 @@ namespace Primary.SchoolApp.Utilities
                 Name = name;
             }
         }
-       static readonly List<Relationship> relationshipFrenchList = new() {
+        static readonly List<Relationship> relationshipFrenchList = new() {
                 new Relationship(0,"Père"),
                 new Relationship(1,"Mère"),
                 new Relationship(2,"Sœur"),
@@ -92,20 +96,69 @@ namespace Primary.SchoolApp.Utilities
             return religions;
 
         }
-        public static String ToHex(String data)
-
+        public static String ConvertStringToHexString(string input)
         {
 
-            String output = String.Empty;
-
-            foreach (Char c in data)
-            {
-
-                output += ((int)c).ToString("X");
-
-            }
-            return output;
+            return string.Join("", Encoding.UTF8.GetBytes(input).Select(b => $"{b:X2}"));
         }
+
+        public static string ConvertHexToString(string hexInput)
+        {
+            return Encoding.UTF8.GetString(Enumerable.Range(0, hexInput.Length / 2).Select(_ => Convert.ToByte(hexInput.Substring(_ * 2, 2), 16)).ToArray());
+        }
+
+        public static bool SerialKeyIsOk(string customer, string serialKey)
+        {
+            bool status = false;
+            // un code est composé du nom du client, du type de licence
+            // et la durée de la licence(M=mensuel,T=trimestriel,S=semestriel,A=annuel,I=infini
+            var serialKeytring = ConvertHexToString(serialKey);
+            var serialKeyData = serialKeytring.Split('@');
+            if (serialKeyData.Length == 3)
+            {
+                var customerName = serialKeyData[0];
+                var codeType = serialKeyData[1];
+                var codeValue = serialKeyData[2];
+                try
+                {
+                    switch (codeType)
+                    {
+                        case "I":
+                            status = customer.ToLower() == customerName.ToLower();
+                            break;
+                        case "A":
+                            var isCustomerA = customer.ToLower() == customerName.ToLower();
+                            var startA = Convert.ToDateTime(codeValue);
+                            var isNoteExpiredA = startA.AddDays(360) > DateTime.Now;
+                            status = isCustomerA && isNoteExpiredA;
+                            break;
+                        case "S":
+                            var isCustomerS = customer.ToLower() == customerName.ToLower();
+                            var startS = Convert.ToDateTime(codeValue);
+                            var isNoteExpiredS = startS.AddDays(180) > DateTime.Now;
+                            status = isCustomerS && isNoteExpiredS;
+                            break;
+                        case "T":
+                            var isCustomerT = customer.ToLower() == customerName.ToLower();
+                            var startT = Convert.ToDateTime(codeValue);
+                            var isNoteExpiredT = startT.AddDays(90) > DateTime.Now;
+                            status = isCustomerT && isNoteExpiredT;
+                            break;
+                        case "M":
+                            var isCustomerM = customer.ToLower() == customerName.ToLower();
+                            var startM = Convert.ToDateTime(codeValue);
+                            var isNoteExpiredM = startM.AddDays(180) > DateTime.Now;
+                            status = isCustomerM && isNoteExpiredM;
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+                return status;
+            }
         public static Image GetImage(string category)
         {
             Image image = null;
@@ -450,7 +503,7 @@ namespace Primary.SchoolApp.Utilities
         }
         #endregion
 
-        public static double TruncateDouble(double value, int precision)
+        private static double TruncateDouble(double value, int precision)
         {
             var divisor = (decimal)Math.Pow(10, -1 * 2);
             decimal decimalValue = (decimal)value;
@@ -459,8 +512,8 @@ namespace Primary.SchoolApp.Utilities
         }
         public static string GetRelationshipName(int relationshipId)
         {
-            var relationship = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList.FirstOrDefault(x=>x.Id== relationshipId): relationshipFrenchList.FirstOrDefault(x => x.Id == relationshipId);
-            return relationship.Name;   
+            var relationship = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList.FirstOrDefault(x => x.Id == relationshipId) : relationshipFrenchList.FirstOrDefault(x => x.Id == relationshipId);
+            return relationship.Name;
         }
         public static List<Relationship> GetRelationshipList()
         {
@@ -468,13 +521,14 @@ namespace Primary.SchoolApp.Utilities
         }
         public static Image GetImageFromUrl(string imageName)
         {
-            var url = Application.StartupPath + @"\Images\"+imageName;
+            var url = Application.StartupPath + @"\Images\" + imageName;
             try
             {
                 var image = Image.FromFile(url);
                 return image;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 AddLog(ex.Message);
             }
             return null;
@@ -483,6 +537,76 @@ namespace Primary.SchoolApp.Utilities
         public static Image GetImage(Byte[] byteImage)
         {
             return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
+        }
+
+        // return truncate or rounding value
+        public static double GetTruncateOrRoundingValue(double value, SchoolGroup group)
+        {
+            double result = group.NoteIsTruncate ? TruncateDouble(value, 2) : RoundingValue(value);
+            return result;
+        }
+        public static double RoundingValue(double value)
+        {
+            return double.Parse(value.ToString("F", System.Globalization.CultureInfo.CurrentCulture));
+        }
+
+        public static string ToLisenceType(string key) => key switch
+        {
+            "I" => Language.LabelInfinity,
+            "A" => Language.LabelAnnualLisence,
+            "S" => Language.LabelBiannualLisence,
+            "T" => Language.LabelQuarterlyLisence,
+            "M" => Language.LabelMonthlyLisence,
+            _ => Language.LabelUnknowLisence,
+        };
+        public static string GetExpiryDate(string key, string data)
+        {
+            if (key == "I") return Language.LabelInfinity;
+            if (key == "A")
+            {
+                try
+                {
+                    var startA = Convert.ToDateTime(data);
+                    return startA.AddDays(360).ToShortDateString();
+                }
+                catch (Exception)
+                {
+                }
+            }
+            if (key == "S")
+            {
+                try
+                {
+                    var startA = Convert.ToDateTime(data);
+                    return startA.AddDays(180).ToShortDateString();
+                }
+                catch (Exception)
+                {
+                }
+            }
+            if (key == "T")
+            {
+                try
+                {
+                    var startA = Convert.ToDateTime(data);
+                    return startA.AddDays(90).ToShortDateString();
+                }
+                catch (Exception)
+                {
+                }
+            }
+            if (key == "M")
+            {
+                try
+                {
+                    var startA = Convert.ToDateTime(data);
+                    return startA.AddDays(30).ToShortDateString();
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return string.Empty;
         }
 
     }

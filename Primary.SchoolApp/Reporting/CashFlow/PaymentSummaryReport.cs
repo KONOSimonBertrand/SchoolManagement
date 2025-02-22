@@ -27,8 +27,7 @@ namespace Primary.SchoolApp.Reporting.CashFlow
             this.AmountLabel.Value=Language.labelAmount.ToUpper();
             this.ReasonLabel.Value = Language.labelReason.ToUpper();
         }
-        public PaymentSummaryReport(StudentEnrolling enrolling,ClientApp clientApp)
-        {
+        public PaymentSummaryReport(StudentEnrolling enrolling) {
             InitComponents();
             this.SchoolYearTextBox.Value=Language.labelSchoolYear+": "+ enrolling.SchoolYear.Name;
             this.StudentTextBox.Value=enrolling.Student.FullName;
@@ -48,10 +47,10 @@ namespace Primary.SchoolApp.Reporting.CashFlow
             {
                 this.TotalInLetterTextBox.Value = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English, Currency.CFA) + ")";
             }
-            this.ContactTextBox.Value = clientApp.Contact;
-            this.WebSiteTextBox.Value = clientApp.WebSite;
-            this.SchoolNameTextBox.Value = clientApp.Name;
-            this.AddressTextBox.Value = clientApp.Address;
+            this.ContactTextBox.Value =$"{Program.CurrentSchool.Phone}";
+            this.WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
+            this.SchoolNameTextBox.Value = Program.CurrentSchool.Name;
+            this.AddressTextBox.Value = Program.CurrentSchool.Address;
 
         }
     }
