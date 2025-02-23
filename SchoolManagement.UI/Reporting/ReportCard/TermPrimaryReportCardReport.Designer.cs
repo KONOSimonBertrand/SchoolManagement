@@ -266,7 +266,7 @@
             // 
             this.totalLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.83D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.totalLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.851D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.totalLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.totalLabel.Style.Font.Bold = true;
             this.totalLabel.Style.Font.Name = "Times New Roman";
@@ -279,7 +279,7 @@
             // 
             this.averageLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.averageLabel.Name = "averageLabel";
-            this.averageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.268D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.295D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.averageLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.averageLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.averageLabel.Style.Font.Bold = true;
@@ -293,7 +293,7 @@
             // 
             this.rankLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.332D));
             this.rankLabel.Name = "rankLabel";
-            this.rankLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.268D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.rankLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.295D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.rankLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.rankLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.rankLabel.Style.Font.Bold = true;
@@ -307,7 +307,7 @@
             // 
             this.generalAverageLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.498D));
             this.generalAverageLabel.Name = "generalAverageLabel";
-            this.generalAverageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.268D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.generalAverageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.295D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.generalAverageLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.generalAverageLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.generalAverageLabel.Style.Font.Bold = true;
@@ -321,7 +321,7 @@
             // 
             this.lowestAverageLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.83D));
             this.lowestAverageLabel.Name = "lowestAverageLabel";
-            this.lowestAverageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.268D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.lowestAverageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.295D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.lowestAverageLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lowestAverageLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lowestAverageLabel.Style.Font.Bold = true;
@@ -335,7 +335,7 @@
             // 
             this.highestAverageLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.664D));
             this.highestAverageLabel.Name = "highestAverageLabel";
-            this.highestAverageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.268D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.highestAverageLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.295D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.highestAverageLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.highestAverageLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.highestAverageLabel.Style.Font.Bold = true;
@@ -347,10 +347,9 @@
             // 
             // totalNotedOnTextBox
             // 
-            this.totalNotedOnTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.83D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.totalNotedOnTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.86D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.totalNotedOnTextBox.Name = "totalNotedOnTextBox";
             this.totalNotedOnTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.433D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
-            this.totalNotedOnTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
             this.totalNotedOnTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.totalNotedOnTextBox.Style.Font.Bold = true;
             this.totalNotedOnTextBox.Style.Font.Name = "Times New Roman";
@@ -415,7 +414,6 @@
             this.averageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.302D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
             this.averageFirstMonthTextBox.Name = "averageFirstMonthTextBox";
             this.averageFirstMonthTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.58D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
-            this.averageFirstMonthTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.averageFirstMonthTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.averageFirstMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.averageFirstMonthTextBox.Style.Font.Bold = true;
@@ -471,7 +469,6 @@
             this.positionFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.302D), Telerik.Reporting.Drawing.Unit.Inch(0.332D));
             this.positionFirstMonthTextBox.Name = "positionFirstMonthTextBox";
             this.positionFirstMonthTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.58D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
-            this.positionFirstMonthTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.positionFirstMonthTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.positionFirstMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.positionFirstMonthTextBox.Style.Font.Bold = true;
@@ -524,10 +521,9 @@
             // 
             // generalAverageFirstMonthTextBox
             // 
-            this.generalAverageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.272D), Telerik.Reporting.Drawing.Unit.Inch(0.498D));
+            this.generalAverageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.302D), Telerik.Reporting.Drawing.Unit.Inch(0.498D));
             this.generalAverageFirstMonthTextBox.Name = "generalAverageFirstMonthTextBox";
             this.generalAverageFirstMonthTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.58D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
-            this.generalAverageFirstMonthTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.generalAverageFirstMonthTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.generalAverageFirstMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.generalAverageFirstMonthTextBox.Style.Font.Bold = true;
@@ -580,10 +576,9 @@
             // 
             // lowestAverageFirstMonthTextBox
             // 
-            this.lowestAverageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.272D), Telerik.Reporting.Drawing.Unit.Inch(0.83D));
+            this.lowestAverageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.302D), Telerik.Reporting.Drawing.Unit.Inch(0.83D));
             this.lowestAverageFirstMonthTextBox.Name = "lowestAverageFirstMonthTextBox";
             this.lowestAverageFirstMonthTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.58D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
-            this.lowestAverageFirstMonthTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lowestAverageFirstMonthTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lowestAverageFirstMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lowestAverageFirstMonthTextBox.Style.Font.Bold = true;
@@ -636,10 +631,9 @@
             // 
             // bestAverageFirstMonthTextBox
             // 
-            this.bestAverageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.272D), Telerik.Reporting.Drawing.Unit.Inch(0.664D));
+            this.bestAverageFirstMonthTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.302D), Telerik.Reporting.Drawing.Unit.Inch(0.664D));
             this.bestAverageFirstMonthTextBox.Name = "bestAverageFirstMonthTextBox";
             this.bestAverageFirstMonthTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.58D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
-            this.bestAverageFirstMonthTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.bestAverageFirstMonthTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
             this.bestAverageFirstMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.bestAverageFirstMonthTextBox.Style.Font.Bold = true;
@@ -658,7 +652,7 @@
             this.bestAverageSecondMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.bestAverageSecondMonthTextBox.Style.Font.Bold = true;
             this.bestAverageSecondMonthTextBox.Style.Font.Name = "Times New Roman";
-            this.bestAverageSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            this.bestAverageSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageSecondMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageSecondMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.bestAverageSecondMonthTextBox.Value = "0";
@@ -672,7 +666,7 @@
             this.bestAverageThirdMonthTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.bestAverageThirdMonthTextBox.Style.Font.Bold = true;
             this.bestAverageThirdMonthTextBox.Style.Font.Name = "Times New Roman";
-            this.bestAverageThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            this.bestAverageThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageThirdMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageThirdMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.bestAverageThirdMonthTextBox.Value = "0";
@@ -685,7 +679,7 @@
             this.bestAverageTermTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.bestAverageTermTextBox.Style.Font.Bold = true;
             this.bestAverageTermTextBox.Style.Font.Name = "Times New Roman";
-            this.bestAverageTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            this.bestAverageTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.bestAverageTermTextBox.Value = "0";

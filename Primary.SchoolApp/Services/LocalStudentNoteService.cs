@@ -169,7 +169,7 @@ namespace Primary.SchoolApp.Services
                         {
                             Id = note_id++,
                             Subject = subject,
-                            Note = final_note.Note,
+                            Note = AppUtilities.GetTruncateOrRoundingValue(final_note.Note, class_group),
                             NoteCoef = final_note.NoteCoef,
                             NotedOn = final_note.NotedOn,
                             StudentId = student.Id,
