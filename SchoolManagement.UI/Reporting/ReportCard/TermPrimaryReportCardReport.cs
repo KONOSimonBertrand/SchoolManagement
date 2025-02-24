@@ -34,6 +34,7 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox TotalFirstNoteTextBox { get => totalFirstNoteTextBox; }
         public Telerik.Reporting.TextBox TotalSecondNoteTextBox { get => totalSecondNoteTextBox; }
         public Telerik.Reporting.TextBox TotalThirdNoteTextBox { get => totalThirdNoteTextBox; }
+        public Telerik.Reporting.TextBox TotalFinalNoteTextBox { get=>totalFinalNoteTextBox; }
         public Telerik.Reporting.TextBox AverageLabel { get => averageLabel; }
         public Telerik.Reporting.TextBox AverageFirstMonthTextBox { get => averageFirstMonthTextBox; }
         public Telerik.Reporting.TextBox AverageSecondMonthTextBox { get => averageSecondMonthTextBox; }
@@ -65,6 +66,16 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox AcquiredCompetenceLabel { get=>acquiredCompetenceLabel;}
         public Telerik.Reporting.TextBox EcaCompetenceLabel{ get => ecaCompetenceLabel;}
         public Telerik.Reporting.TextBox NaCompetenceLabel { get=>naCompetenceLabel;}
+        public Telerik.Reporting.TextBox TermStartTextBox {  get => termStartTextBox; }
+        public Telerik.Reporting.Panel AverageResumePanel {  get => averageResumePanel; }
+        public Telerik.Reporting.TextBox AverageResumeLabel {  get => averageResumeLabel; }
+        public Telerik.Reporting.TextBox AverageFirstTermLabel {  get => averageFirstTermLabel; }
+        public Telerik.Reporting.TextBox AverageSecondTermLabel { get => averageSecondTermLabel; }
+        public Telerik.Reporting.TextBox AverageThirdTermLabel { get => averageThirdTermLabel; }
+        public Telerik.Reporting.TextBox AverageFirstTermTextBox { get => averageFirstTermTextBox; }
+        public Telerik.Reporting.TextBox AverageSecondTermTextBox { get => averageSecondTermTextBox; }
+        public Telerik.Reporting.TextBox AverageThirdTermTextBox { get => averageThirdTermTextBox; }
+        public Telerik.Reporting.TextBox AverageAnnualTextBox { get => averageAnnualTextBox; }
         public Telerik.Reporting.TextBox ParentSignatureLabel { get => parentSignatureLabel; }
         public Telerik.Reporting.TextBox TeacherSignatureLabel { get => teacherSignatureLabel; }
         public Telerik.Reporting.TextBox DeanSignatureLabel { get => deanSignatureLabel; }

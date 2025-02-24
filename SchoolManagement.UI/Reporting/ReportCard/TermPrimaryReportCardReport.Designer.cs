@@ -23,7 +23,7 @@
             this.deanSignatureLabel = new Telerik.Reporting.TextBox();
             this.directorPanel = new Telerik.Reporting.Panel();
             this.directorSignatureLabel = new Telerik.Reporting.TextBox();
-            this.termStartTexBox = new Telerik.Reporting.TextBox();
+            this.termStartTextBox = new Telerik.Reporting.TextBox();
             this.resumePanel = new Telerik.Reporting.Panel();
             this.totalLabel = new Telerik.Reporting.TextBox();
             this.averageLabel = new Telerik.Reporting.TextBox();
@@ -57,6 +57,15 @@
             this.bestAverageThirdMonthTextBox = new Telerik.Reporting.TextBox();
             this.bestAverageTermTextBox = new Telerik.Reporting.TextBox();
             this.decisionTextBox = new Telerik.Reporting.TextBox();
+            this.averageResumePanel = new Telerik.Reporting.Panel();
+            this.averageResumeLabel = new Telerik.Reporting.TextBox();
+            this.averageFirstTermLabel = new Telerik.Reporting.TextBox();
+            this.averageSecondTermLabel = new Telerik.Reporting.TextBox();
+            this.averageThirdTermLabel = new Telerik.Reporting.TextBox();
+            this.averageAnnualTextBox = new Telerik.Reporting.TextBox();
+            this.averageSecondTermTextBox = new Telerik.Reporting.TextBox();
+            this.averageFirstTermTextBox = new Telerik.Reporting.TextBox();
+            this.averageThirdTermTextBox = new Telerik.Reporting.TextBox();
             this.explanationCompetenceLabel = new Telerik.Reporting.TextBox();
             this.expertCompetenceLabel = new Telerik.Reporting.TextBox();
             this.acquiredCompetenceLabel = new Telerik.Reporting.TextBox();
@@ -108,13 +117,14 @@
             this.teacherPanel,
             this.deanPanel,
             this.directorPanel,
-            this.termStartTexBox,
+            this.termStartTextBox,
             this.resumePanel,
             this.explanationCompetenceLabel,
             this.expertCompetenceLabel,
             this.acquiredCompetenceLabel,
             this.ecaCompetenceLabel,
-            this.naCompetenceLabel});
+            this.naCompetenceLabel,
+            this.averageResumePanel});
             this.groupFooterSection.Name = "groupFooterSection";
             this.groupFooterSection.Style.BackgroundImage.Repeat = Telerik.Reporting.Drawing.BackgroundRepeat.NoRepeat;
             // 
@@ -207,18 +217,18 @@
             this.directorSignatureLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.directorSignatureLabel.Value = "Head Master";
             // 
-            // termStartTexBox
+            // termStartTextBox
             // 
-            this.termStartTexBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.23D), Telerik.Reporting.Drawing.Unit.Inch(1.48D));
-            this.termStartTexBox.Name = "termStartTexBox";
-            this.termStartTexBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.87D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.termStartTexBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
-            this.termStartTexBox.Style.Font.Bold = true;
-            this.termStartTexBox.Style.Font.Italic = true;
-            this.termStartTexBox.Style.Font.Name = "Times New Roman";
-            this.termStartTexBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.termStartTexBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.termStartTexBox.Value = "Next term starts on the ";
+            this.termStartTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.23D), Telerik.Reporting.Drawing.Unit.Inch(1.48D));
+            this.termStartTextBox.Name = "termStartTextBox";
+            this.termStartTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.87D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.termStartTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.termStartTextBox.Style.Font.Bold = true;
+            this.termStartTextBox.Style.Font.Italic = true;
+            this.termStartTextBox.Style.Font.Name = "Times New Roman";
+            this.termStartTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.termStartTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.termStartTextBox.Value = "Next term starts on the ";
             // 
             // resumePanel
             // 
@@ -688,7 +698,7 @@
             // 
             this.decisionTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.996D));
             this.decisionTextBox.Name = "decisionTextBox";
-            this.decisionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(4.641D), Telerik.Reporting.Drawing.Unit.Inch(0.193D));
+            this.decisionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(4.641D), Telerik.Reporting.Drawing.Unit.Inch(0.345D));
             this.decisionTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
             this.decisionTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.decisionTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
@@ -749,6 +759,165 @@
             this.naCompetenceLabel.Style.Font.Name = "Times New Roman";
             this.naCompetenceLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.naCompetenceLabel.Value = "NA : Not Acquired";
+            // 
+            // averageResumePanel
+            // 
+            this.averageResumePanel.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.averageResumeLabel,
+            this.averageSecondTermLabel,
+            this.averageThirdTermLabel,
+            this.averageFirstTermLabel,
+            this.averageThirdTermTextBox,
+            this.averageFirstTermTextBox,
+            this.averageSecondTermTextBox,
+            this.averageAnnualTextBox});
+            this.averageResumePanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.501D), Telerik.Reporting.Drawing.Unit.Inch(0.838D));
+            this.averageResumePanel.Name = "averageResumePanel";
+            this.averageResumePanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.599D), Telerik.Reporting.Drawing.Unit.Inch(0.501D));
+            this.averageResumePanel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageResumePanel.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Point(1D);
+            // 
+            // averageResumeLabel
+            // 
+            this.averageResumeLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.averageResumeLabel.Name = "averageResumeLabel";
+            this.averageResumeLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.59D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageResumeLabel.Style.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.averageResumeLabel.Style.Font.Bold = true;
+            this.averageResumeLabel.Style.Font.Name = "Times New Roman";
+            this.averageResumeLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageResumeLabel.Style.Font.Underline = false;
+            this.averageResumeLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageResumeLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageResumeLabel.Value = "ANNUAL RESULT";
+            // 
+            // averageFirstTermLabel
+            // 
+            this.averageFirstTermLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.001D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
+            this.averageFirstTermLabel.Multiline = true;
+            this.averageFirstTermLabel.Name = "averageFirstTermLabel";
+            this.averageFirstTermLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageFirstTermLabel.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageFirstTermLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageFirstTermLabel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageFirstTermLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageFirstTermLabel.Style.Font.Bold = true;
+            this.averageFirstTermLabel.Style.Font.Name = "Times New Roman";
+            this.averageFirstTermLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageFirstTermLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageFirstTermLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageFirstTermLabel.Value = "TRIM1";
+            // 
+            // averageSecondTermLabel
+            // 
+            this.averageSecondTermLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.562D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
+            this.averageSecondTermLabel.Multiline = true;
+            this.averageSecondTermLabel.Name = "averageSecondTermLabel";
+            this.averageSecondTermLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageSecondTermLabel.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageSecondTermLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageSecondTermLabel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageSecondTermLabel.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageSecondTermLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageSecondTermLabel.Style.Font.Bold = true;
+            this.averageSecondTermLabel.Style.Font.Name = "Times New Roman";
+            this.averageSecondTermLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageSecondTermLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageSecondTermLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageSecondTermLabel.Value = "TRIM2";
+
+            // 
+            // averageThirdTermLabel
+            // 
+            this.averageThirdTermLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.123D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
+            this.averageThirdTermLabel.Multiline = true;
+            this.averageThirdTermLabel.Name = "averageThirdTermLabel";
+            this.averageThirdTermLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageThirdTermLabel.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageThirdTermLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageThirdTermLabel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageThirdTermLabel.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageThirdTermLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageThirdTermLabel.Style.Font.Bold = true;
+            this.averageThirdTermLabel.Style.Font.Name = "Times New Roman";
+            this.averageThirdTermLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageThirdTermLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageThirdTermLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageThirdTermLabel.Value = "TRIM3";
+
+            // 
+            // averageAnnualTextBox
+            // 
+            this.averageAnnualTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.684D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
+            this.averageAnnualTextBox.Multiline = true;
+            this.averageAnnualTextBox.Name = "averageAnnualTextBox";
+            this.averageAnnualTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.915D), Telerik.Reporting.Drawing.Unit.Inch(0.333D));
+            this.averageAnnualTextBox.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageAnnualTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageAnnualTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageAnnualTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageAnnualTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageAnnualTextBox.Style.Font.Bold = true;
+            this.averageAnnualTextBox.Style.Font.Name = "Times New Roman";
+            this.averageAnnualTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageAnnualTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageAnnualTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageAnnualTextBox.Value = " 0";
+            // 
+            // averageSecondTermTextBox
+            // 
+            this.averageSecondTermTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.562D), Telerik.Reporting.Drawing.Unit.Inch(0.335D));
+            this.averageSecondTermTextBox.Multiline = true;
+            this.averageSecondTermTextBox.Name = "averageSecondTermTextBox";
+            this.averageSecondTermTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageSecondTermTextBox.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageSecondTermTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageSecondTermTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageSecondTermTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageSecondTermTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageSecondTermTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageSecondTermTextBox.Style.Font.Bold = true;
+            this.averageSecondTermTextBox.Style.Font.Name = "Times New Roman";
+            this.averageSecondTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageSecondTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageSecondTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageSecondTermTextBox.Value = " 0";
+            // 
+            // averageFirstTermTextBox
+            // 
+            this.averageFirstTermTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.001D), Telerik.Reporting.Drawing.Unit.Inch(0.335D));
+            this.averageFirstTermTextBox.Multiline = true;
+            this.averageFirstTermTextBox.Name = "averageFirstTermTextBox";
+            this.averageFirstTermTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageFirstTermTextBox.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageFirstTermTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageFirstTermTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageFirstTermTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageFirstTermTextBox.Style.Font.Bold = true;
+            this.averageFirstTermTextBox.Style.Font.Name = "Times New Roman";
+            this.averageFirstTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageFirstTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageFirstTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageFirstTermTextBox.Value = "0";
+            // 
+            // averageThirdTermTextBox
+            // 
+            this.averageThirdTermTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.123D), Telerik.Reporting.Drawing.Unit.Inch(0.335D));
+            this.averageThirdTermTextBox.Multiline = true;
+            this.averageThirdTermTextBox.Name = "averageThirdTermTextBox";
+            this.averageThirdTermTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
+            this.averageThirdTermTextBox.Style.BackgroundColor = System.Drawing.Color.White;
+            this.averageThirdTermTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageThirdTermTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageThirdTermTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageThirdTermTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.averageThirdTermTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.averageThirdTermTextBox.Style.Font.Bold = true;
+            this.averageThirdTermTextBox.Style.Font.Name = "Times New Roman";
+            this.averageThirdTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.averageThirdTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.averageThirdTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.averageThirdTermTextBox.Value = " 0";
             // 
             // groupHeaderSection
             // 
@@ -1224,7 +1393,7 @@
         private Telerik.Reporting.TextBox facebookAddressLabel;
         private Telerik.Reporting.PictureBox facebookPictureBox;
         private Telerik.Reporting.TextBox schoolStatement;
-        private Telerik.Reporting.TextBox termStartTexBox;
+        private Telerik.Reporting.TextBox termStartTextBox;
         private Telerik.Reporting.TextBox secondNoteLabel;
         private Telerik.Reporting.TextBox thirdNoteLabel;
         private Telerik.Reporting.TextBox finalNoteLabel;
@@ -1264,6 +1433,15 @@
         private Telerik.Reporting.TextBox bestAverageThirdMonthTextBox;
         private Telerik.Reporting.TextBox bestAverageTermTextBox;
         private Telerik.Reporting.TextBox decisionTextBox;
+        private Telerik.Reporting.Panel averageResumePanel;
+        private Telerik.Reporting.TextBox averageFirstTermLabel;
+        private Telerik.Reporting.TextBox averageSecondTermLabel;
+        private Telerik.Reporting.TextBox averageThirdTermLabel;
+        private Telerik.Reporting.TextBox averageResumeLabel;
+        private Telerik.Reporting.TextBox averageThirdTermTextBox;
+        private Telerik.Reporting.TextBox averageFirstTermTextBox;
+        private Telerik.Reporting.TextBox averageSecondTermTextBox;
+        private Telerik.Reporting.TextBox averageAnnualTextBox;
         private Telerik.Reporting.TextBox explanationCompetenceLabel;
         private Telerik.Reporting.TextBox expertCompetenceLabel;
         private Telerik.Reporting.TextBox acquiredCompetenceLabel;

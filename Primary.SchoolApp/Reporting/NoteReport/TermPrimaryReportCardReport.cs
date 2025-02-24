@@ -56,6 +56,7 @@ namespace Primary.SchoolApp.Reporting
                 DirectorSignatureLabel.Value = "Directeur";
                 var decisionMessagePassed = reportCard.HeadSection.Student.Sex == "M" ? "ADMIS" : "ADMISE";
                 var decisionMessageFailed = reportCard.HeadSection.Student.Sex == "M" ? "REFUSE" : "REFUSEE";
+                TermStartTextBox.Value = "NB : Reprise des cours le :";
                 DecisionTextBox.Value = double.TryParse(footerTermAverageItem.Value, out termAverage) && termAverage >= 10 ? decisionMessagePassed : decisionMessageFailed;
             }
             else
@@ -86,6 +87,7 @@ namespace Primary.SchoolApp.Reporting
                 DeanSignatureLabel.Value = "Dean of Studies";
                 DirectorSignatureLabel.Value = "Head Master";
                 DecisionTextBox.Value = double.TryParse(footerTermAverageItem.Value,out termAverage) && termAverage >= 10 ? "PASSED" : "FAILED";
+                TermStartTextBox.Value = "Next term starts on the ";
             }
 
 
@@ -102,6 +104,8 @@ namespace Primary.SchoolApp.Reporting
             this.TotalNotedOnTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumNotedOn").Value;
             this.TotalFirstNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumFirstNote").Value;
             this.TotalSecondNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumSecondNote").Value;
+            this.TotalThirdNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumThirdNote").Value;
+            this.TotalFinalNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumFinalNote").Value;
             var footerFirstMonthAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "FirstMonthAverage");
             var footerSecondMonthAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SecondMonthAverage");
             var footerThirdMonthAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "ThirdMonthAverage");

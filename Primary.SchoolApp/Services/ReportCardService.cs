@@ -2,6 +2,7 @@
 
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -156,6 +157,38 @@ namespace Primary.SchoolApp.Services
             var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, teacherName, language);
             #endregion
             #region Detail Report
+            //extraction des matières avec note max et groupe de la classe de l'élève
+            var classroomSujectList = Program.ClassSubjectList.Where(x => x.ClassId == classOfRoom.Id);
+            //ectraction des matères sur lesquelles l'élève a été évalué
+            var student_subject_id_list = student_notes.Select(x => x.Subject.Id).Distinct().ToList();
+            //extraction de la liste des matières de la classe sur lesquelles l'élève n'a pas été évalué
+            var subject_noMark_id_List = classroomSujectList.Where(x => student_subject_id_list.Contains(x.SubjectId) == false && x.BookId == bookId).ToList();
+            // Création des notes pour des matières sur lesquelles l'élève n'a pas été évalué
+            foreach (var item in subject_noMark_id_List)
+            {
+                student_notes.Add(
+                    new(
+                        0, 
+                        student, 
+                        item.Subject,
+                        item.Group,
+                        0, 
+                        string.Empty,
+                        string.Empty,
+                        0,
+                        string.Empty,
+                        string.Empty,
+                        0,
+                        string.Empty,
+                         string.Empty,
+                         0,
+                        string.Empty,
+                         string.Empty,
+                        item.Coefficient, 
+                        item.NotedOn, 
+                        string.Empty, 
+                        string.Empty));
+            }
             var detailSection = new DetailTermReportCard(student_notes, subject_groups);
             #endregion
             #region Footer Report
@@ -167,11 +200,20 @@ namespace Primary.SchoolApp.Services
             footerItems.Add(new("SumNotedOn", sumNotedOn.ToString()));
             double sumFirstNote = student_notes.Where(x => x.FirstNoteAsString != string.Empty).Sum(x => x.FirstNote);
             footerItems.Add(sumFirstNote != 0 ? new("SumFirstNote", sumFirstNote.ToString()) : new("SumFirstNote", string.Empty));
-            double sumSecondNote = student_notes.Where(x => x.SecondNoteAsString != string.Empty).Sum(x => x.SecondNote);
+            double sumSecondNote =student_notes.Where(x => x.SecondNoteAsString != string.Empty).Sum(x => x.SecondNote);
             footerItems.Add(sumSecondNote != 0 ? new("SumSecondNote", sumSecondNote.ToString()) : new("SumSecondNote", string.Empty));
             double sumThirdNote = student_notes.Where(x => x.ThirdNoteAsString != string.Empty).Sum(x => x.ThirdNote);
             footerItems.Add(sumThirdNote!=0?new("SumThirdNote", sumThirdNote.ToString()): new("SumThirdNote", string.Empty));
-            double sumFinalNote = student_notes.Where(x => x.FirstNoteAsString != string.Empty).Sum(x => x.FinalNote);
+            double sf = 0;
+            foreach(var f in student_notes)
+            {
+                sf = sf + f.FinalNote;
+                Console.WriteLine($"matiere :{f.Subject.FrenchName}: {f.FinalNote}");
+                Console.WriteLine($"total :{sf}");
+            }
+            Console.WriteLine($"total f :{sf}");
+            double sumFinalNote = AppUtilities.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
+            footerItems.Add(sumFinalNote != 0 ? new("SumFinalNote", sumFinalNote.ToString()) : new("SumFinalNote", string.Empty));
             var term_averages = await term_averages_task;
             var eval01_averages = await eval01_averages_task;
             var eval02_averages = await eval02_averages_task;
