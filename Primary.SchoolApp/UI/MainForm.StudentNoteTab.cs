@@ -308,32 +308,26 @@ namespace Primary.SchoolApp
         {
             if (StudentNoteGridView.CurrentRow != null)
             {
-                if (selectedEvaluation != null)
-                {
-                    printService.PrintClassRoomReportAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                }
+                int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
+                printService.PrintClassRoomReportAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
             }
         }
         private void PrintGroupStatisticReportMenu_Click(object sender, EventArgs e)
         {
             if (StudentNoteGridView.CurrentRow != null)
             {
-                if (selectedEvaluation != null)
-                {
-                    var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id == selectedRoom.ClassId);
-                    printService.PrintClassGroupReportAsync(classOfRoom.GroupId, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                }
+                int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
+                var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id == selectedRoom.ClassId);
+                printService.PrintClassGroupReportAsync(classOfRoom.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
             }
         }
 
         private void PrintRoomReportCardMenu_Click(object sender, EventArgs e)
         {
-            if (StudentNoteGridView.CurrentRow != null)
+            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord averageRecord)
             {
-                if (selectedEvaluation != null)
-                {
-                    printService.PrintReportCardByClassRoomAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                }
+                int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
+                printService.PrintReportCardByClassRoomAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
             }
         }
 
@@ -469,22 +463,8 @@ namespace Primary.SchoolApp
                         }
                         else
                         {
-                            if (selectedFatherEvaluation.Code == "TERM01")
-                            {
-                                dataSource = await localStudentNoteService.GetFirstTermAverageListByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                            }
-                            else
-                            {
-                                if (selectedFatherEvaluation.Code == "TERM02")
-                                {
-                                    dataSource = await localStudentNoteService.GetSecondTermAverageListByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                                }
-                                else
-                                {
-                                    dataSource = await localStudentNoteService.GetThirdTermAverageListByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-                                }
+                            dataSource = await localStudentNoteService.GetTermAverageListByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId, selectedFatherEvaluation.Code);
 
-                            }
                         }
                         StudentNoteGridView.DataSource = dataSource;
                     }

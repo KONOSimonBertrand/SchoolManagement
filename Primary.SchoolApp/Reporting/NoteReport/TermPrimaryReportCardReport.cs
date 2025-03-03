@@ -3,6 +3,7 @@
 using static Primary.SchoolApp.DTO.DTOItem;
 using Telerik.Reporting;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Primary.SchoolApp.Reporting
 {
@@ -10,9 +11,10 @@ namespace Primary.SchoolApp.Reporting
     {
         public TermPrimaryReportCardReport(TermReportCard reportCard)
         {
+            var headTerms = GetHeadTerm( reportCard.HeadSection.EvaluationCode, reportCard.HeadSection.Language);
             string img = reportCard.HeadSection.Language == "FR" ? "head_paper_fr.png" : "head_paper_en.png";
             HeaderPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl(img);
-            RePortTitleTextBox.Value = reportCard.HeadSection.ReportTitle;
+            RePortTitleTextBox.Value = headTerms.GetValueOrDefault("Title");
             string schoolYearLabel = reportCard.HeadSection.Language == "FR" ? "Année scolaire" : "School year";
             SchoolYearTextBox.Value = $"{schoolYearLabel}: {reportCard.HeadSection.SchoolYear}";
             StudentLabel.Value = reportCard.HeadSection.Language == "FR" ? "Nom et prénoms:" : "Names of pupil:";
@@ -24,6 +26,9 @@ namespace Primary.SchoolApp.Reporting
             TeacherLabel.Value = reportCard.HeadSection.Language == "FR" ? "Titulaire:" : "Teacher:";
             TeacherTexBox.Value = reportCard.HeadSection.Teacher;
             TotalLabel.Value = "Total".ToUpper();
+            FirstNoteLabel.Value = headTerms.GetValueOrDefault("FirstMonth");
+            SecondNoteLabel.Value = headTerms.GetValueOrDefault("SecondMonth");
+            ThirdNoteLabel.Value = headTerms.GetValueOrDefault("ThirdMonth");
             var footerTermAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "TermAverage");
             double termAverage = 0;
             if (reportCard.HeadSection.Language == "FR")
@@ -32,9 +37,6 @@ namespace Primary.SchoolApp.Reporting
                 BornTextBox.Value = bornLabel + reportCard.HeadSection.Student.BirthDate.ToShortDateString() + " à " + reportCard.HeadSection.Student.BirthPlace;
                 SubjectLabel.Value = "Discipline".ToUpper();
                 NotedOnLabel.Value = "Max";
-                FirstNoteLabel.Value = "1ʳᵉ  MENS";
-                SecondNoteLabel.Value = "2ᵉ   MENS";
-                ThirdNoteLabel.Value = "3ᵉ    MENS";
                 FinalNoteLabel.Value = "TRIM";
                 CotationLabel.Value = "Cotation";
                 ObservationLabel.Value = "Observation";
@@ -64,9 +66,6 @@ namespace Primary.SchoolApp.Reporting
                 BornTextBox.Value = "Born on" + reportCard.HeadSection.Student.BirthDate.ToShortDateString() + " in " + reportCard.HeadSection.Student.BirthPlace;
                 SubjectLabel.Value = "Subject".ToUpper();
                 NotedOnLabel.Value = "Max";
-                FirstNoteLabel.Value = "1ˢᵗ MONTH";
-                SecondNoteLabel.Value = "2ⁿᵈ MONTH";
-                ThirdNoteLabel.Value = "3ʳᵈ MONTH";
                 FinalNoteLabel.Value = "TERM";
                 CotationLabel.Value = "Grading";
                 ObservationLabel.Value = "Remark";
@@ -137,6 +136,15 @@ namespace Primary.SchoolApp.Reporting
             this.PositionThirdMonthTextBox.Value= reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "ThirdMonthPosition").Value;
             this.PositionTermTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "TermPosition").Value;
 
+            if (reportCard.HeadSection.EvaluationCode != "TERM01")
+            {
+                AverageResumePanel.Visible = true;
+            }
+            else
+            {
+                AverageResumePanel.Visible = false;
+            }
+
             FacebookAddressLabel.Value = Program.CurrentSchool.Name;
             ContactTextBox.Value = $"Tel:{Program.CurrentSchool.Phone}";
             AddressTextBox.Value = Program.CurrentSchool.Address;
@@ -145,6 +153,33 @@ namespace Primary.SchoolApp.Reporting
             WebSitePictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
             WebSitePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("website.png");
             FaceBookPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("facebook.png");
+        }
+        // recupere les entetes selon langue
+        private Dictionary<string, string> GetHeadTerm(string termCode,string language)
+        {
+            Dictionary<string,string> terms = new();
+            switch (termCode)
+            {
+                case "TERM01":
+                    terms.Add("Title", language == "FR" ? "BULLETIN DU PREMIER TRIMESTRE" : "FIRST TERM SUMMARY MARK");
+                    terms.Add("FirstMonth", language == "FR" ? "1ʳᵉ  MENS" : "1ˢᵗ MONTH");
+                    terms.Add("SecondMonth", language == "FR" ? "2ᵉ   MENS" : "2ⁿᵈ MONTH");
+                    terms.Add("ThirdMonth", language == "FR" ? "3ᵉ    MENS" : "3ʳᵈ MONTH");
+                    break;
+                case "TERM02":
+                    terms.Add("Title", language == "FR" ? "BULLETIN DU DEUXIEME TRIMESTRE" : "SECOND TERM SUMMARY MARK");
+                    terms.Add("FirstMonth", language == "FR" ? "4ᵉ    MENS" : "4ᵗʰ MONTH");
+                    terms.Add("SecondMonth", language == "FR" ? "5ᵉ   MENS" : "5ᵗʰ MONTH");
+                    terms.Add("ThirdMonth", language == "FR" ? "6ᵉ    MENS" : "6ᵗʰ MONTH");
+                    break;
+                case "TERM03":
+                    terms.Add("Title", language == "FR" ? "BULLETIN DU TROISIEME TRIMESTRE" : "THIRD TERM SUMMARY MARK");
+                    terms.Add("FirstMonth", language == "FR" ? "7ᵉ    MENS" : "7ᵗʰ MONTH");
+                    terms.Add("SecondMonth", language == "FR" ? "8ᵉ   MENS" : "8ᵗʰ MONTH");
+                    terms.Add("ThirdMonth", language == "FR" ? "9ᵉ    MENS" : "9ᵗʰ MONTH");
+                    break;
+            }
+            return terms;
         }
     }
 }

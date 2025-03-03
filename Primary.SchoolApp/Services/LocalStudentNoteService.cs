@@ -1,13 +1,13 @@
 ﻿using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Telerik.WinControls;
-using Telerik.WinForms.Documents.Model.Notes;
 using static Primary.SchoolApp.DTO.DTOItem;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace Primary.SchoolApp.Services
 {
@@ -124,20 +124,21 @@ namespace Primary.SchoolApp.Services
             }
             return evaluationNoteList;
         }
-        // récupération des notes du premier trimestre
-        public async Task<List<TermRecord>> GetFirstTermNoteListByRoom(int roomId, int schoolYearId, int bookId)
+        // Récupération des notes du trimestre
+        public async Task<List<TermRecord>> GetTermNoteListByRoom(int roomId, int schoolYearId, int bookId, string termCode)
         {
+            var evaluationCodes = GetEvaluationCodeOfTerm(termCode);
             var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
             var class_of_room = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
             var class_group = Program.SchoolGroupList.FirstOrDefault(x => x.Id == class_of_room.GroupId);
             var term_note_list = new List<TermRecord>();
-            var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL01");
-            var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL02");
-            var eval03 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL03");
+            var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("FirstMonth"));
+            var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("SecondMonth"));
+            var eval03 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("ThirdMonth"));
             // extraction des données des évaluations du trimestre
-            var eval01_notes_task = GetEvaluationNoteListByRoom(roomId, eval01.Id, schoolYearId, bookId);
-            var eval02_notes_task = GetEvaluationNoteListByRoom(roomId, eval02.Id, schoolYearId, bookId);
-            var eval03_notes_task = GetEvaluationNoteListByRoom(roomId, eval03.Id, schoolYearId, bookId);
+            var eval01_notes_task = GetEvaluationNoteListByRoom(roomId, eval01 != null ? eval01.Id : 100, schoolYearId, bookId);
+            var eval02_notes_task = GetEvaluationNoteListByRoom(roomId, eval02 != null ? eval02.Id : 100, schoolYearId, bookId);
+            var eval03_notes_task = GetEvaluationNoteListByRoom(roomId, eval03 != null ? eval03.Id : 100, schoolYearId, bookId);
 
             var eval01_notes = await eval01_notes_task;
             var eval02_notes = await eval02_notes_task;
@@ -218,128 +219,56 @@ namespace Primary.SchoolApp.Services
 
             return term_note_list;
         }
-       
-        //get average for first tem
-        public async Task<List<AverageRecord>> GetFirstTermAverageListByRoom(int roomId, int schoolYearId, int bookId)
-        {
-            var averageList = new List<AverageRecord>();
-            var allEvalList = new List<AverageRecord>();
-            var eval1 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL01");
-            var eval2 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL02");
-            var eval3 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL03");
-            var eval1AverageList = await GetEvaluationAverageListByRoom(roomId, eval1.Id, schoolYearId, bookId);
-            var eval2AverageList = await GetEvaluationAverageListByRoom(roomId, eval2.Id, schoolYearId, bookId);
-            var eval3AverageList = await GetEvaluationAverageListByRoom(roomId, eval3.Id, schoolYearId, bookId);
-            allEvalList.AddRange(eval1AverageList);
-            allEvalList.AddRange(eval2AverageList);
-            allEvalList.AddRange(eval3AverageList);
-            var students = allEvalList.Select(x => x.Student).Distinct();
-            var notesToOrder = new List<StudentNote>();
-            foreach (var student in students)
-            {
-                var eval1Note = eval1AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                var eval2Note = eval2AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                var eval3Note = eval3AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                double average = ComputeFinalAverage(eval1Note, eval2Note, eval3Note);
-                notesToOrder.Add(new()
-                {
-                    Id = student.Id,
-                    Note = average,
-                    NotedOn = 20,
-                    StudentId = student.Id,
-                    Student = student,
-                });
-            }
-            var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
-            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
-            //get ordored average with position
-            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
-            foreach (var item in orderedAverageList)
-            {
-                //get rating
-                var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
-                var rating = string.Empty;
-                //truncate or around note
-                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
-                if (systemRating != null)
-                {
-                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
-                }
-                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
-            }
-            return averageList;
-        }
-        //get average for second tem
-        public async Task<List<AverageRecord>> GetSecondTermAverageListByRoom(int roomId, int schoolYearId, int bookId)
-        {
-            var averageList = new List<AverageRecord>();
-            var allEvalList = new List<AverageRecord>();
-            var eval1 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL04");
-            var eval2 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL05");
-            var eval3 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL06");
-            var eval1AverageList = await GetEvaluationAverageListByRoom(roomId, eval1.Id, schoolYearId, bookId);
-            var eval2AverageList = await GetEvaluationAverageListByRoom(roomId, eval2.Id, schoolYearId, bookId);
-            var eval3AverageList = await GetEvaluationAverageListByRoom(roomId, eval3.Id, schoolYearId, bookId);
-            allEvalList.AddRange(eval1AverageList);
-            allEvalList.AddRange(eval2AverageList);
-            allEvalList.AddRange(eval3AverageList);
-            var students = allEvalList.Select(x => x.Student).Distinct();
-            var notesToOrder = new List<StudentNote>();
-            foreach (var student in students)
-            {
-                var eval1Note = eval1AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                var eval2Note = eval2AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                var eval3Note = eval3AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                double average = ComputeFinalAverage(eval1Note, eval2Note, eval3Note);
-                notesToOrder.Add(new()
-                {
-                    Id = student.Id,
-                    Note = average,
-                    NotedOn = 20,
-                    StudentId = student.Id,
-                    Student = student,
-                });
-            }
-            var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
-            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
 
-            //get ordored average with position
-            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
-            foreach (var item in orderedAverageList)
-            {
-                //get rating
-                var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
-                var rating = string.Empty;
-                //truncate or around note
-                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
-                if (systemRating != null)
-                {
-                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
-                }
-                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
-            }
-            return averageList;
-        }
-        //get average for third tem
-        public async Task<List<AverageRecord>> GetThirdTermAverageListByRoom(int roomId, int schoolYearId, int bookId)
+        // Récupère des codes des évaluations d'un trimètre
+        public static Dictionary<string, string> GetEvaluationCodeOfTerm(string termCode)
         {
+            Dictionary<string, string> terms = new();
+            switch (termCode)
+            {
+                case "TERM01":
+                    terms.Add("FirstMonth", "EVAL01");
+                    terms.Add("SecondMonth", "EVAL02");
+                    terms.Add("ThirdMonth", "EVAL03");
+                    break;
+                case "TERM02":
+                    terms.Add("FirstMonth", "EVAL04");
+                    terms.Add("SecondMonth", "EVAL05");
+                    terms.Add("ThirdMonth", "EVAL06");
+                    break;
+                case "TERM03":
+                    terms.Add("FirstMonth", "EVAL07");
+                    terms.Add("SecondMonth", "EVAL08");
+                    terms.Add("ThirdMonth", "EVAL09");
+                    break;
+            }
+            return terms;
+        }
+
+        //get term average
+        public async Task<List<AverageRecord>> GetTermAverageListByRoom(int roomId, int schoolYearId, int bookId,string termCode)
+        {
+            var evaluationCodes = GetEvaluationCodeOfTerm(termCode);
             var averageList = new List<AverageRecord>();
             var allEvalList = new List<AverageRecord>();
-            var eval1 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL07");
-            var eval2 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == "EVAL08");
-            var eval1AverageList = await GetEvaluationAverageListByRoom(roomId, eval1.Id, schoolYearId, bookId);
-            var eval2AverageList = await GetEvaluationAverageListByRoom(roomId, eval2.Id, schoolYearId, bookId);
+            var eval1 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("FirstMonth"));
+            var eval2 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("SecondMonth"));
+            var eval3 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("ThirdMonth"));
+            var eval1AverageList = await GetEvaluationAverageListByRoom(roomId, eval1!=null?eval1.Id:100, schoolYearId, bookId);
+            var eval2AverageList = await GetEvaluationAverageListByRoom(roomId, eval2 != null ? eval2.Id : 100, schoolYearId, bookId);
+            var eval3AverageList = await GetEvaluationAverageListByRoom(roomId, eval3 != null ? eval3.Id : 100, schoolYearId, bookId);
             allEvalList.AddRange(eval1AverageList);
             allEvalList.AddRange(eval2AverageList);
+            allEvalList.AddRange(eval3AverageList);
             var students = allEvalList.Select(x => x.Student).Distinct();
             var notesToOrder = new List<StudentNote>();
             foreach (var student in students)
             {
                 var eval1Note = eval1AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
                 var eval2Note = eval2AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
-                double average = ComputeFinalAverage(eval1Note, eval2Note, null); notesToOrder.Add(new()
+                var eval3Note = eval3AverageList.FirstOrDefault(x => x.Student.Id == student.Id);
+                double average = ComputeFinalAverage(eval1Note, eval2Note, eval3Note);
+                notesToOrder.Add(new()
                 {
                     Id = student.Id,
                     Note = average,

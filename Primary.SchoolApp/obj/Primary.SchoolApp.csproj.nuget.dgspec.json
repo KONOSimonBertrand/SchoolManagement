@@ -26,8 +26,8 @@
           "net6.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\HP\\Documents\\Telerik Collection NuGet Package R2 2023 SP2 Retail": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -132,8 +132,8 @@
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\HP\\Documents\\Telerik Collection NuGet Package R2 2023 SP2 Retail": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -217,8 +217,8 @@
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\HP\\Documents\\Telerik Collection NuGet Package R2 2023 SP2 Retail": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -284,8 +284,8 @@
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\HP\\Documents\\Telerik Collection NuGet Package R2 2023 SP2 Retail": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -381,8 +381,8 @@
           "net6.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Users\\HP\\Documents\\Telerik Collection NuGet Package R2 2023 SP2 Retail": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

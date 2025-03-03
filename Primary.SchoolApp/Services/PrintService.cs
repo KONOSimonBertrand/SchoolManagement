@@ -187,16 +187,15 @@ namespace Primary.SchoolApp.Services
         {
             var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            switch (eval.Code)
-            {
-                case "TERM01":
-                    var firstTermReportCard = await reportCardService.GetFirstTermReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId);
-                    reportViewer.LoadTermPrimaryReportCard(firstTermReportCard);
-                    break;
-                default:
-                    var evaluationReportCard = await reportCardService.GetEvaluationReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId);
-                    reportViewer.LoadEvaluationReportCard(evaluationReportCard);
-                    break;
+            if (eval != null) {
+                if (eval.Code.Contains("TERM"))
+                {
+                    reportViewer.LoadTermReportCard(await reportCardService.GetTermReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId));
+                }
+                else
+                {
+                    reportViewer.LoadEvaluationReportCard(await reportCardService.GetEvaluationReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId));
+                }
             }
             reportViewer.Show();
             await Task.Delay(0);
@@ -204,9 +203,19 @@ namespace Primary.SchoolApp.Services
         // impression des bulletion d'une salle de classe pour une evaluation
         public async Task PrintReportCardByClassRoomAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
         {
-            var reportCardList = await reportCardService.GetEvaluationReportCardByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId);
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            reportViewer.LoadEvaluationReportCard(reportCardList);
+            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
+            if (eval != null)
+            {
+                if (eval.Code.Contains("TERM"))
+                {
+                    reportViewer.LoadTermReportCard(await reportCardService.GetTermReportCardByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
+                }
+                else
+                {
+                    reportViewer.LoadEvaluationReportCard(await reportCardService.GetEvaluationReportCardByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
+                }
+            }
             reportViewer.Show();
             await Task.Delay(0);
         }
@@ -215,9 +224,19 @@ namespace Primary.SchoolApp.Services
         // impression du procès verbal
         public async Task PrintClassRoomReportAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
         {
-            ClassroomReport report= await reportCardService.GetEvaluationReportByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId);
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            reportViewer.LoadClassroomReport(report);
+            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
+            if (eval != null)
+            {
+                if (eval.Code.Contains("TERM"))
+                {
+                    reportViewer.LoadClassroomReport(await reportCardService.GetTermReportByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
+                }
+                else
+                {
+                    reportViewer.LoadClassroomReport(await reportCardService.GetEvaluationReportByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
+                }
+            }
             reportViewer.Show();
             await Task.Delay(0);
         }
@@ -225,9 +244,20 @@ namespace Primary.SchoolApp.Services
         // impression des statistiques d'un groupe de classes par évaluation
         public async Task PrintClassGroupReportAsync(int groupId, int evaluationId, int schoolYearId, int bookId)
         {
-            ClassGroupReport report = await reportCardService.GetEvaluationReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId);
+
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            reportViewer.LoadClassGroupReport(report);
+            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
+            if (eval != null)
+            {
+                if (eval.Code.Contains("TERM"))
+                {
+                    reportViewer.LoadClassGroupReport(await reportCardService.GetTermReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId));
+                }
+                else
+                {
+                    reportViewer.LoadClassGroupReport(await reportCardService.GetEvaluationReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId));
+                }
+            }
             reportViewer.Show();
             await Task.Delay(0);
         }

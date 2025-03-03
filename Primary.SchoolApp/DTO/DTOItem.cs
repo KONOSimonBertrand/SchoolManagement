@@ -32,7 +32,7 @@ namespace Primary.SchoolApp.DTO
             string Rating, 
             string Position);
         public record SubjectGroupRecord(int Id,string Name);
-        public record HeadReportCard(string ReportTitle,string SchoolYear,Student Student,string ClassRoom,string Teacher,string Language);
+        public record HeadReportCard(string ReportTitle,string SchoolYear,Student Student,string ClassRoom,string Teacher,string Language,string EvaluationCode);
         public record DetailEvaluationReportCard(List<EvaluationRecord> NoteList,List<SubjectGroup> SubjectGroupList);
         public record DetailTermReportCard(List<TermRecord> NoteList, List<SubjectGroup> SubjectGroupList);
         public record EvaluationFooterReportCard(double SumNote,double SumCoef,double SumMaxNote,double StudentAverage,string Position,double ClassAverage,double HighestAverage, double LowestAverage);

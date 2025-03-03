@@ -193,7 +193,7 @@ namespace Primary.SchoolApp
             reportViewer.RefreshReport();
         }
         // affiche un bulletin d'un trimestre
-        internal void LoadTermPrimaryReportCard(TermReportCard reportCard)
+        internal void LoadTermReportCard(TermReportCard reportCard)
         {
             InstanceReportSource reportSource = new()
             {
@@ -223,6 +223,26 @@ namespace Primary.SchoolApp
             reportViewer.RefreshReport();
         }
 
+        internal void LoadTermReportCard(List<TermReportCard> reportCardList)
+        {
+            var reportBook = new ReportBook();
+            foreach (var reportCard in reportCardList)
+            {
+                InstanceReportSource reportSource = new()
+                {
+                    ReportDocument = new TermPrimaryReportCardReport(reportCard)
+                };
+                reportBook.ReportSources.Add(reportSource);
+            }
+
+            reportViewer.AutoSize = true;
+            InstanceReportSource reportSourceFinal = new InstanceReportSource
+            {
+                ReportDocument = reportBook
+            };
+            reportViewer.ReportSource = reportSourceFinal;
+            reportViewer.RefreshReport();
+        }
         // Affiche le PV d'une salle de classe
         internal void LoadClassroomReport(ClassroomReport report)
         {
