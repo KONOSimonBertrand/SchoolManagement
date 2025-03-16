@@ -9,7 +9,7 @@ namespace SchoolManagement.UI.Reporting
     {
         public Telerik.Reporting.PictureBox HeaderPictureBox { get => headerPictureBox; }
         public Telerik.Reporting.TextBox SchoolYearTextBox { get => schoolYearTextBox; }
-        public Telerik.Reporting.TextBox RePortTitleTextBox { get => reportTitleTextBox; }
+        public Telerik.Reporting.TextBox ReportTitleTextBox { get => reportTitleTextBox; }
         public Telerik.Reporting.TextBox StudentLabel { get => studentLabel; }
         public Telerik.Reporting.TextBox StudentTextBox { get => studentTextBox; }
         public Telerik.Reporting.TextBox StudentIdLabel { get => studentIdLabel; }

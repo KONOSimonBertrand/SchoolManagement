@@ -6,8 +6,10 @@ using Primary.SchoolApp.Reporting;
 using Primary.SchoolApp.Reporting.CashFlow;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using static Primary.SchoolApp.DTO.DTOItem;
 
@@ -244,22 +246,36 @@ namespace Primary.SchoolApp.Services
         // impression des statistiques d'un groupe de classes par évaluation
         public async Task PrintClassGroupReportAsync(int groupId, int evaluationId, int schoolYearId, int bookId)
         {
-
+            
             var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
             var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
             if (eval != null)
             {
                 if (eval.Code.Contains("TERM"))
                 {
-                    reportViewer.LoadClassGroupReport(await reportCardService.GetTermReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId));
+                    reportViewer.LoadClassGroupReport(await reportCardService.GetTermReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId).ConfigureAwait(false));
                 }
                 else
                 {
-                    reportViewer.LoadClassGroupReport(await reportCardService.GetEvaluationReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId));
+                    reportViewer.LoadClassGroupReport(await reportCardService.GetEvaluationReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId).ConfigureAwait(false));
                 }
             }
+            
             reportViewer.Show();
-            await Task.Delay(0);
+            
+        }
+
+        public async Task PrintDisciplinarySheetStudentReportAsync(int studentId, int roomId, int schoolYearId, int bookId)
+        {
+            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
+            var reportSource = await reportCardService.GetDisciplinarySheetByStudent(studentId, roomId, schoolYearId, bookId);
+            reportViewer.LoadDisciplinarySheet(reportSource);
+            reportViewer.Show();
+        }
+
+        public async Task PrintDisciplinarySheetRoomReportAsync(int roomId, int schoolYearId, int bookId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

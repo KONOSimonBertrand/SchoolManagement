@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
@@ -94,14 +95,17 @@ namespace Primary.SchoolApp.UI
         //loading initial data
         private void InitProgram()
         {
-            LoadInitialData();
+            var initTask=LoadInitialData();
+            initTask.ContinueWith(t => {
+               
+            });
+
             this.Invoke(new Action(this.Close));
             //load login form
             System.Windows.Forms.Application.Run(Program.ServiceProvider.GetRequiredService<LoginForm>());
-           
         }
         // extraction des données de base : année scolaire,classe, salle de classe, ....
-        private async void LoadInitialData()
+        private async Task LoadInitialData()
         {
             var getSchoolYearListTask = schoolYearService.GetSchoolYearList();
             var getSchoolGroupListTask = schoolGroupService.GetSchoolGroupList();

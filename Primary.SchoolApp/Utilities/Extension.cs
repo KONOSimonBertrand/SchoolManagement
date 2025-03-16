@@ -2,6 +2,7 @@
 using Primary.SchoolApp.DTO;
 using SchoolManagement.Core.Model;
 using System.Threading;
+using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Utilities
 {
@@ -193,5 +194,18 @@ namespace Primary.SchoolApp.Utilities
             return dto;
         }
 
+        public static DisciplineItemRecord AsDisciplineRecord(this Discipline discipline)
+        {
+            return new DisciplineItemRecord(
+                discipline.Id,
+                discipline.Date,
+                discipline.Reason,
+                discipline.Duration,
+                discipline.Subject,
+                discipline.Evaluation,
+                discipline.Student,
+                discipline.SchoolYear
+                );
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 
 using SchoolManagement.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -38,11 +39,15 @@ namespace Primary.SchoolApp.DTO
         public record EvaluationFooterReportCard(double SumNote,double SumCoef,double SumMaxNote,double StudentAverage,string Position,double ClassAverage,double HighestAverage, double LowestAverage);
         public record EvaluationReportCard(HeadReportCard HeadSection, DetailEvaluationReportCard DetailSection, EvaluationFooterReportCard FooterSection);
         public record TermReportCard(HeadReportCard HeadSection, DetailTermReportCard DetailSection, ReportFooter FooterSection);
+        public record StudentDisciplinarySheet(HeadReportCard HeadSection, DisciplineScheetReportDetail DetailSection, ReportFooter FooterSection);
         public record HeadClassroomReport(string ReportTitle, string SchoolYear, string ClassRoom,string ClassroomSize,string TotalCoef);
         public record HeadClassGroupReport(string ReportTitle, string SchoolYear, string ClassGroup);
         public record ClassroomReportDetail(DataTable DataTable);
         public record ClassGroupReportDetail(DataTable DataTable);
         public record ReportItem(string Name,string Value);
+        public record ReportHeader(List<ReportItem> Items);
+        public record ReportDetail(List<ReportItem> Items);
+        public record DisciplineScheetReportDetail(TermDisciplineItem FirstTermItem, TermDisciplineItem SecondTermItem, TermDisciplineItem ThirdTermItem, TermDisciplineItem ResumeItem);
         public record ReportFooter(List<ReportItem> Items);
         public record ClassroomReportHeader(List<ReportItem> Items,List<string>Columns);
         public record ClassGroupReportHeader(List<ReportItem> Items, List<string> Columns);
@@ -52,5 +57,30 @@ namespace Primary.SchoolApp.DTO
         public record PaymentReceiptData(StudentEnrolling Enrolling, bool IsCopy, SchoolGroup SchoolGroup);
         public record TuitionReceiptData(TuitionPayment TuitionPayment, bool IsCopy);
         public record SubscriptionReceiptData(Subscription Subscription, bool IsCopy);
+
+        public record DisciplineItemRecord(
+            int Id, 
+            DateTime Date,
+            string Reason, 
+            double Duration,
+            DisciplineSubject Subject,
+            EvaluationSession Evaluation,
+            Student Student,
+            SchoolYear SchoolYear
+     );
+
+    public record TermDisciplineItem(
+        List<DisciplineItemRecord> Disciplines,
+        string Average,
+        string Position,
+        string ClassAverage
+        );
+
+        public record AnnualDisciplineItem(
+        List<DisciplineItemRecord> Disciplines,
+        string Average,
+        string Position,
+        string ClassAverage
+        );
     }
 }

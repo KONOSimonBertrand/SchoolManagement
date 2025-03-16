@@ -14,7 +14,7 @@ namespace Primary.SchoolApp.Reporting
             var headTerms = GetHeadTerm( reportCard.HeadSection.EvaluationCode, reportCard.HeadSection.Language);
             string img = reportCard.HeadSection.Language == "FR" ? "head_paper_fr.png" : "head_paper_en.png";
             HeaderPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl(img);
-            RePortTitleTextBox.Value = headTerms.GetValueOrDefault("Title");
+            ReportTitleTextBox.Value = headTerms.GetValueOrDefault("Title");
             string schoolYearLabel = reportCard.HeadSection.Language == "FR" ? "Année scolaire" : "School year";
             SchoolYearTextBox.Value = $"{schoolYearLabel}: {reportCard.HeadSection.SchoolYear}";
             StudentLabel.Value = reportCard.HeadSection.Language == "FR" ? "Nom et prénoms:" : "Names of pupil:";

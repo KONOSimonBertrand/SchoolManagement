@@ -45,7 +45,7 @@ namespace Primary.SchoolApp
             GridViewDecimalColumn durationColumn = new("Duration");
             GridViewTextBoxColumn subjectColumn = new("Subject.DefaultName");
             GridViewTextBoxColumn reasonColumn = new("Reason");
-            GridViewTextBoxColumn evaluationColumn = new("Evaluation.DefaultName");
+            GridViewTextBoxColumn evaluationColumn = new($"Evaluation.{Language.fieldName}");
             dateColumn.Width = 80;
             studentIdNumberColumn.Width = 100;
             studentNameColumn.Width = 300;
@@ -151,7 +151,7 @@ namespace Primary.SchoolApp
                     e.Row.Cells["Student.IdNumber"].Value.ToString().ToLower().Contains(DisciplineSearchTextBox.Text.ToLower()) ||
                     e.Row.Cells["Subject.DefaultName"].Value.ToString().ToLower().Contains(DisciplineSearchTextBox.Text.ToLower())||
                      e.Row.Cells["Reason"].Value.ToString().ToLower().Contains(DisciplineSearchTextBox.Text.ToLower()) ||
-                e.Row.Cells["Evaluation.DefaultName"].Value.ToString().ToLower().Contains(DisciplineSearchTextBox.Text.ToLower());
+                e.Row.Cells[$"Evaluation.{Language.fieldName}"].Value.ToString().ToLower().Contains(DisciplineSearchTextBox.Text.ToLower());
             }
         }
         // add new discipline

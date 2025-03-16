@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telerik.Reporting;
 using Telerik.WinControls;
@@ -291,17 +292,32 @@ namespace Primary.SchoolApp
                     printRoomReportCardMenu.Click += PrintRoomReportCardMenu_Click;
                     printRoomReportMenu.Click += PrintRoomReportMenu_Click;
                     printGroupStatisticReportMenu.Click+= PrintGroupStatisticReportMenu_Click;
+                    printStudentDisciplinarySheetMenu.Click += PrintStudentDisciplinarySheetMenu_Click;
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                     e.ContextMenu.Items.Add(printStudentReportCardMenu);
                     e.ContextMenu.Items.Add(printRoomReportCardMenu);
-                    e.ContextMenu.Items.Add(printStudentDisciplinarySheetMenu);
-                    e.ContextMenu.Items.Add(printRoomDisciplinarySheetMenu);
+
+                    if (selectedFatherEvaluation != null)
+                    {
+                        e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                        e.ContextMenu.Items.Add(printStudentDisciplinarySheetMenu);
+                        e.ContextMenu.Items.Add(printRoomDisciplinarySheetMenu);
+
+                    }
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                     e.ContextMenu.Items.Add(printRoomReportMenu);
                     e.ContextMenu.Items.Add(printGroupStatisticReportMenu);
                 }
             }
                
+        }
+        // impression de la fiche de discipline
+        private void PrintStudentDisciplinarySheetMenu_Click(object sender, EventArgs e)
+        {
+            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
+            {
+                printService.PrintDisciplinarySheetStudentReportAsync(selectedRecord.Student.Id, selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+            }
         }
 
         private void PrintRoomReportMenu_Click(object sender, EventArgs e)
@@ -312,13 +328,20 @@ namespace Primary.SchoolApp
                 printService.PrintClassRoomReportAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
             }
         }
-        private void PrintGroupStatisticReportMenu_Click(object sender, EventArgs e)
+        private  async void PrintGroupStatisticReportMenu_Click(object sender, EventArgs e)
         {
             if (StudentNoteGridView.CurrentRow != null)
             {
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
                 int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
                 var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id == selectedRoom.ClassId);
-                printService.PrintClassGroupReportAsync(classOfRoom.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+                await printService.PrintClassGroupReportAsync(classOfRoom.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId).ConfigureAwait(false);
+                //var task=printService.PrintClassGroupReportAsync(classOfRoom.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+                //await task;
+                this.TaskWaitingBar.StopWaiting();
+                this.TaskWaitingBar.ResetWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
             }
         }
 

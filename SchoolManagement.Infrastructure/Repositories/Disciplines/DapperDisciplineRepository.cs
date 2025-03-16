@@ -46,7 +46,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
-
+        
         public async Task<bool> DeleteDisciplineAsync(int disciplineId)
         {
             var connection = dbConnectionFactory.CreateConnection();

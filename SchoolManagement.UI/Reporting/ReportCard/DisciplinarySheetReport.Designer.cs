@@ -61,7 +61,7 @@
             this.term2Month01Day07TextBox = new Telerik.Reporting.TextBox();
             this.term2Month01Day08TextBox = new Telerik.Reporting.TextBox();
             this.term2Month01Day09TextBox = new Telerik.Reporting.TextBox();
-            this.jMonthDay10 = new Telerik.Reporting.TextBox();
+            this.term2Month01Day10TextBox = new Telerik.Reporting.TextBox();
             this.term2Month01Day11TextBox = new Telerik.Reporting.TextBox();
             this.term2Month01Day12TextBox = new Telerik.Reporting.TextBox();
             this.term2Month01Day13TextBox = new Telerik.Reporting.TextBox();
@@ -176,7 +176,7 @@
             this.term2PositionTextBox = new Telerik.Reporting.TextBox();
             this.term2ClassAverageLabel = new Telerik.Reporting.TextBox();
             this.term2ClassAverageTextBox = new Telerik.Reporting.TextBox();
-            this.term2PrincipalVisa = new Telerik.Reporting.TextBox();
+            this.term2PrincipalVisaLabel = new Telerik.Reporting.TextBox();
             this.term2ClassWorkLabel = new Telerik.Reporting.TextBox();
             this.term2ConductLabel = new Telerik.Reporting.TextBox();
             this.term2WAwardLabel = new Telerik.Reporting.TextBox();
@@ -363,7 +363,7 @@
             this.term3PositionTextBox = new Telerik.Reporting.TextBox();
             this.term3ClassAverageLabel = new Telerik.Reporting.TextBox();
             this.term3ClassAverageTextBox = new Telerik.Reporting.TextBox();
-            this.term3PrincipalVisa = new Telerik.Reporting.TextBox();
+            this.term3PrincipalVisaLabel = new Telerik.Reporting.TextBox();
             this.term3ClassWorkLabel = new Telerik.Reporting.TextBox();
             this.term3ConductLabel = new Telerik.Reporting.TextBox();
             this.term3WAwardLabel = new Telerik.Reporting.TextBox();
@@ -395,9 +395,9 @@
             this.resumeWarningLabel = new Telerik.Reporting.TextBox();
             this.resumeSWarningLabel = new Telerik.Reporting.TextBox();
             this.resumeExclusionLabel = new Telerik.Reporting.TextBox();
-            this.textBox572 = new Telerik.Reporting.TextBox();
-            this.textBox573 = new Telerik.Reporting.TextBox();
-            this.textBox574 = new Telerik.Reporting.TextBox();
+            this.resumeTerm1Label = new Telerik.Reporting.TextBox();
+            this.resumeTerm2Label = new Telerik.Reporting.TextBox();
+            this.resumeTerm3Label = new Telerik.Reporting.TextBox();
             this.resumeDelayTerm1TextBox = new Telerik.Reporting.TextBox();
             this.resumeAbsenceTerm1TextBox = new Telerik.Reporting.TextBox();
             this.resumeDelayTerm2TextBox = new Telerik.Reporting.TextBox();
@@ -465,7 +465,7 @@
             this.term1Day31Label = new Telerik.Reporting.TextBox();
             this.term1AbsenceLabel = new Telerik.Reporting.TextBox();
             this.term1JAbsenceLabel = new Telerik.Reporting.TextBox();
-            this.term1AbsenceNJLabel = new Telerik.Reporting.TextBox();
+            this.term1NJAbsenceLabel = new Telerik.Reporting.TextBox();
             this.term1DetentionLabel = new Telerik.Reporting.TextBox();
             this.term1Month01Label = new Telerik.Reporting.TextBox();
             this.term1Month01Day02TextBox = new Telerik.Reporting.TextBox();
@@ -591,7 +591,7 @@
             this.term1PositionTextBox = new Telerik.Reporting.TextBox();
             this.term1ClassAverageLabel = new Telerik.Reporting.TextBox();
             this.term1ClassAverageTextBox = new Telerik.Reporting.TextBox();
-            this.term1PrincipalVisa = new Telerik.Reporting.TextBox();
+            this.term1PrincipalVisaLabel = new Telerik.Reporting.TextBox();
             this.term1ClassWorkLabel = new Telerik.Reporting.TextBox();
             this.term1WAwardLabel = new Telerik.Reporting.TextBox();
             this.term1WCreditLabel = new Telerik.Reporting.TextBox();
@@ -659,6 +659,7 @@
             this.addressTextBox = new Telerik.Reporting.TextBox();
             this.contactTextBox = new Telerik.Reporting.TextBox();
             this.webSiteTextBox = new Telerik.Reporting.TextBox();
+            this.facebookAddressLabel = new Telerik.Reporting.TextBox();
             this.webSitePictureBox = new Telerik.Reporting.PictureBox();
             this.choolNameTextBox = new Telerik.Reporting.TextBox();
             this.facebookPictureBox = new Telerik.Reporting.PictureBox();
@@ -669,7 +670,7 @@
             this.headerPictureBox = new Telerik.Reporting.PictureBox();
             this.reportTitleTextBox = new Telerik.Reporting.TextBox();
             this.studentLabel = new Telerik.Reporting.TextBox();
-            this.studentTexBox = new Telerik.Reporting.TextBox();
+            this.studentTextBox = new Telerik.Reporting.TextBox();
             this.studentShape = new Telerik.Reporting.Shape();
             this.teacherLabel = new Telerik.Reporting.TextBox();
             this.teacherTextBox = new Telerik.Reporting.TextBox();
@@ -751,7 +752,7 @@
             this.term2Month01Day07TextBox,
             this.term2Month01Day08TextBox,
             this.term2Month01Day09TextBox,
-            this.jMonthDay10,
+            this.term2Month01Day10TextBox,
             this.term2Month01Day11TextBox,
             this.term2Month01Day12TextBox,
             this.term2Month01Day13TextBox,
@@ -866,7 +867,7 @@
             this.term2PositionTextBox,
             this.term2ClassAverageLabel,
             this.term2ClassAverageTextBox,
-            this.term2PrincipalVisa,
+            this.term2PrincipalVisaLabel,
             this.term2ClassWorkLabel,
             this.term2ConductLabel,
             this.term2WAwardLabel,
@@ -1553,19 +1554,19 @@
             this.term2Month01Day09TextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.term2Month01Day09TextBox.Value = " ";
             // 
-            // jMonthDay10
+            // term2Month01Day10TextBox
             // 
-            this.jMonthDay10.Angle = 0D;
-            this.jMonthDay10.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.253D), Telerik.Reporting.Drawing.Unit.Inch(0.3D));
-            this.jMonthDay10.Name = "jMonthDay10";
-            this.jMonthDay10.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.2D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
-            this.jMonthDay10.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.jMonthDay10.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.jMonthDay10.Style.Font.Name = "Times New Roman";
-            this.jMonthDay10.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.jMonthDay10.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.jMonthDay10.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.jMonthDay10.Value = " ";
+            this.term2Month01Day10TextBox.Angle = 0D;
+            this.term2Month01Day10TextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.253D), Telerik.Reporting.Drawing.Unit.Inch(0.3D));
+            this.term2Month01Day10TextBox.Name = "jMonthDay10";
+            this.term2Month01Day10TextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.2D), Telerik.Reporting.Drawing.Unit.Inch(0.15D));
+            this.term2Month01Day10TextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term2Month01Day10TextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term2Month01Day10TextBox.Style.Font.Name = "Times New Roman";
+            this.term2Month01Day10TextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.term2Month01Day10TextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.term2Month01Day10TextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.term2Month01Day10TextBox.Value = " ";
             // 
             // term2Month01Day11TextBox
             // 
@@ -3175,22 +3176,22 @@
             this.term2ClassAverageTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.term2ClassAverageTextBox.Value = "/20";
             // 
-            // term2PrincipalVisa
+            // term2PrincipalVisaLabel
             // 
-            this.term2PrincipalVisa.Angle = 0D;
-            this.term2PrincipalVisa.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.655D), Telerik.Reporting.Drawing.Unit.Inch(1.15D));
-            this.term2PrincipalVisa.Name = "term2PrincipalVisa";
-            this.term2PrincipalVisa.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.384D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.term2PrincipalVisa.Style.BackgroundColor = System.Drawing.Color.LightGreen;
-            this.term2PrincipalVisa.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term2PrincipalVisa.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.None;
-            this.term2PrincipalVisa.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term2PrincipalVisa.Style.Font.Bold = true;
-            this.term2PrincipalVisa.Style.Font.Name = "Times New Roman";
-            this.term2PrincipalVisa.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.term2PrincipalVisa.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.term2PrincipalVisa.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.term2PrincipalVisa.Value = "PRINCIPAL\'S VISA";
+            this.term2PrincipalVisaLabel.Angle = 0D;
+            this.term2PrincipalVisaLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.655D), Telerik.Reporting.Drawing.Unit.Inch(1.15D));
+            this.term2PrincipalVisaLabel.Name = "term2PrincipalVisa";
+            this.term2PrincipalVisaLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.384D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.term2PrincipalVisaLabel.Style.BackgroundColor = System.Drawing.Color.LightGreen;
+            this.term2PrincipalVisaLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term2PrincipalVisaLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.None;
+            this.term2PrincipalVisaLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term2PrincipalVisaLabel.Style.Font.Bold = true;
+            this.term2PrincipalVisaLabel.Style.Font.Name = "Times New Roman";
+            this.term2PrincipalVisaLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.term2PrincipalVisaLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.term2PrincipalVisaLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.term2PrincipalVisaLabel.Value = "PRINCIPAL\'S VISA";
             // 
             // term2ClassWorkLabel
             // 
@@ -3707,7 +3708,7 @@
             this.term3PositionTextBox,
             this.term3ClassAverageLabel,
             this.term3ClassAverageTextBox,
-            this.term3PrincipalVisa,
+            this.term3PrincipalVisaLabel,
             this.term3ClassWorkLabel,
             this.term3ConductLabel,
             this.term3WAwardLabel,
@@ -3731,9 +3732,9 @@
             this.resumeWarningLabel,
             this.resumeSWarningLabel,
             this.resumeExclusionLabel,
-            this.textBox572,
-            this.textBox573,
-            this.textBox574,
+            this.resumeTerm1Label,
+            this.resumeTerm2Label,
+            this.resumeTerm3Label,
             this.resumeDelayTerm1TextBox,
             this.resumeAbsenceTerm1TextBox,
             this.resumeDelayTerm2TextBox,
@@ -6050,22 +6051,22 @@
             this.term3ClassAverageTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.term3ClassAverageTextBox.Value = "/20";
             // 
-            // term3PrincipalVisa
+            // term3PrincipalVisaLabel
             // 
-            this.term3PrincipalVisa.Angle = 0D;
-            this.term3PrincipalVisa.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.655D), Telerik.Reporting.Drawing.Unit.Inch(1.15D));
-            this.term3PrincipalVisa.Name = "term3PrincipalVisa";
-            this.term3PrincipalVisa.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.384D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.term3PrincipalVisa.Style.BackgroundColor = System.Drawing.Color.LightGreen;
-            this.term3PrincipalVisa.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term3PrincipalVisa.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.None;
-            this.term3PrincipalVisa.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term3PrincipalVisa.Style.Font.Bold = true;
-            this.term3PrincipalVisa.Style.Font.Name = "Times New Roman";
-            this.term3PrincipalVisa.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.term3PrincipalVisa.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.term3PrincipalVisa.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.term3PrincipalVisa.Value = "PRINCIPAL\'S VISA";
+            this.term3PrincipalVisaLabel.Angle = 0D;
+            this.term3PrincipalVisaLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.655D), Telerik.Reporting.Drawing.Unit.Inch(1.15D));
+            this.term3PrincipalVisaLabel.Name = "term3PrincipalVisa";
+            this.term3PrincipalVisaLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.384D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.term3PrincipalVisaLabel.Style.BackgroundColor = System.Drawing.Color.LightGreen;
+            this.term3PrincipalVisaLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term3PrincipalVisaLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.None;
+            this.term3PrincipalVisaLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term3PrincipalVisaLabel.Style.Font.Bold = true;
+            this.term3PrincipalVisaLabel.Style.Font.Name = "Times New Roman";
+            this.term3PrincipalVisaLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.term3PrincipalVisaLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.term3PrincipalVisaLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.term3PrincipalVisaLabel.Value = "PRINCIPAL\'S VISA";
             // 
             // term3ClassWorkLabel
             // 
@@ -6512,54 +6513,54 @@
             this.resumeExclusionLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.resumeExclusionLabel.Value = "EXCLUSIONS";
             // 
-            // textBox572
+            // resumeTerm1Label
             // 
-            this.textBox572.Angle = 0D;
-            this.textBox572.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.046D), Telerik.Reporting.Drawing.Unit.Inch(1.35D));
-            this.textBox572.Name = "textBox572";
-            this.textBox572.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.425D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.textBox572.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox572.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox572.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox572.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox572.Style.Font.Bold = true;
-            this.textBox572.Style.Font.Name = "Times New Roman";
-            this.textBox572.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
-            this.textBox572.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Justify;
-            this.textBox572.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox572.Value = "1ˢᵗ TERM";
+            this.resumeTerm1Label.Angle = 0D;
+            this.resumeTerm1Label.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.046D), Telerik.Reporting.Drawing.Unit.Inch(1.35D));
+            this.resumeTerm1Label.Name = "resumeTerm1Label";
+            this.resumeTerm1Label.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.425D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.resumeTerm1Label.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm1Label.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm1Label.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm1Label.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm1Label.Style.Font.Bold = true;
+            this.resumeTerm1Label.Style.Font.Name = "Times New Roman";
+            this.resumeTerm1Label.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
+            this.resumeTerm1Label.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Justify;
+            this.resumeTerm1Label.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.resumeTerm1Label.Value = "1ˢᵗ TERM";
             // 
-            // textBox573
+            // resumeTerm2Label
             // 
-            this.textBox573.Angle = 0D;
-            this.textBox573.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.471D), Telerik.Reporting.Drawing.Unit.Inch(1.35D));
-            this.textBox573.Name = "textBox573";
-            this.textBox573.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.425D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.textBox573.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox573.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox573.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox573.Style.Font.Bold = true;
-            this.textBox573.Style.Font.Name = "Times New Roman";
-            this.textBox573.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
-            this.textBox573.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Justify;
-            this.textBox573.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox573.Value = "2ⁿᵈ TERM";
+            this.resumeTerm2Label.Angle = 0D;
+            this.resumeTerm2Label.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.471D), Telerik.Reporting.Drawing.Unit.Inch(1.35D));
+            this.resumeTerm2Label.Name = "resumeTerm2Label";
+            this.resumeTerm2Label.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.425D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.resumeTerm2Label.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm2Label.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm2Label.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm2Label.Style.Font.Bold = true;
+            this.resumeTerm2Label.Style.Font.Name = "Times New Roman";
+            this.resumeTerm2Label.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
+            this.resumeTerm2Label.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Justify;
+            this.resumeTerm2Label.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.resumeTerm2Label.Value = "2ⁿᵈ TERM";
             // 
-            // textBox574
+            // resumeTerm3Label
             // 
-            this.textBox574.Angle = 0D;
-            this.textBox574.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.896D), Telerik.Reporting.Drawing.Unit.Inch(1.35D));
-            this.textBox574.Name = "textBox574";
-            this.textBox574.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.425D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.textBox574.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox574.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox574.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.textBox574.Style.Font.Bold = true;
-            this.textBox574.Style.Font.Name = "Times New Roman";
-            this.textBox574.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
-            this.textBox574.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Justify;
-            this.textBox574.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.textBox574.Value = "3ʳᵈ TERM";
+            this.resumeTerm3Label.Angle = 0D;
+            this.resumeTerm3Label.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.896D), Telerik.Reporting.Drawing.Unit.Inch(1.35D));
+            this.resumeTerm3Label.Name = "resumeTerm3Label";
+            this.resumeTerm3Label.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.425D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.resumeTerm3Label.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm3Label.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm3Label.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.resumeTerm3Label.Style.Font.Bold = true;
+            this.resumeTerm3Label.Style.Font.Name = "Times New Roman";
+            this.resumeTerm3Label.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(6D);
+            this.resumeTerm3Label.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Justify;
+            this.resumeTerm3Label.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.resumeTerm3Label.Value = "3ʳᵈ TERM";
             // 
             // resumeDelayTerm1TextBox
             // 
@@ -7114,7 +7115,7 @@
             this.term1Day31Label,
             this.term1AbsenceLabel,
             this.term1JAbsenceLabel,
-            this.term1AbsenceNJLabel,
+            this.term1NJAbsenceLabel,
             this.term1DetentionLabel,
             this.term1Month01Label,
             this.term1Month01Day02TextBox,
@@ -7240,7 +7241,7 @@
             this.term1PositionTextBox,
             this.term1ClassAverageLabel,
             this.term1ClassAverageTextBox,
-            this.term1PrincipalVisa,
+            this.term1PrincipalVisaLabel,
             this.term1ClassWorkLabel,
             this.term1WAwardLabel,
             this.term1WCreditLabel,
@@ -7807,20 +7808,20 @@
             this.term1JAbsenceLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.term1JAbsenceLabel.Value = "JA";
             // 
-            // term1AbsenceNJLabel
+            // term1NJAbsenceLabel
             // 
-            this.term1AbsenceNJLabel.Angle = 270D;
-            this.term1AbsenceNJLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(7.485D), Telerik.Reporting.Drawing.Unit.Inch(0D));
-            this.term1AbsenceNJLabel.Name = "term1AbsenceNJLabel";
-            this.term1AbsenceNJLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.277D), Telerik.Reporting.Drawing.Unit.Inch(0.3D));
-            this.term1AbsenceNJLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term1AbsenceNJLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term1AbsenceNJLabel.Style.Font.Bold = true;
-            this.term1AbsenceNJLabel.Style.Font.Name = "Times New Roman";
-            this.term1AbsenceNJLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.term1AbsenceNJLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.term1AbsenceNJLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.term1AbsenceNJLabel.Value = "ANJ";
+            this.term1NJAbsenceLabel.Angle = 270D;
+            this.term1NJAbsenceLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(7.485D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.term1NJAbsenceLabel.Name = "term1NJAbsenceLabel";
+            this.term1NJAbsenceLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.277D), Telerik.Reporting.Drawing.Unit.Inch(0.3D));
+            this.term1NJAbsenceLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term1NJAbsenceLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term1NJAbsenceLabel.Style.Font.Bold = true;
+            this.term1NJAbsenceLabel.Style.Font.Name = "Times New Roman";
+            this.term1NJAbsenceLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.term1NJAbsenceLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.term1NJAbsenceLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.term1NJAbsenceLabel.Value = "ANJ";
             // 
             // term1DetentionLabel
             // 
@@ -9586,22 +9587,22 @@
             this.term1ClassAverageTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.term1ClassAverageTextBox.Value = "/20";
             // 
-            // term1PrincipalVisa
+            // term1PrincipalVisaLabel
             // 
-            this.term1PrincipalVisa.Angle = 0D;
-            this.term1PrincipalVisa.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.655D), Telerik.Reporting.Drawing.Unit.Inch(1.3D));
-            this.term1PrincipalVisa.Name = "term1PrincipalVisa";
-            this.term1PrincipalVisa.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.384D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.term1PrincipalVisa.Style.BackgroundColor = System.Drawing.Color.LightGreen;
-            this.term1PrincipalVisa.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term1PrincipalVisa.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.None;
-            this.term1PrincipalVisa.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.term1PrincipalVisa.Style.Font.Bold = true;
-            this.term1PrincipalVisa.Style.Font.Name = "Times New Roman";
-            this.term1PrincipalVisa.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.term1PrincipalVisa.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.term1PrincipalVisa.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.term1PrincipalVisa.Value = "PRINCIPAL\'S VISA";
+            this.term1PrincipalVisaLabel.Angle = 0D;
+            this.term1PrincipalVisaLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.655D), Telerik.Reporting.Drawing.Unit.Inch(1.3D));
+            this.term1PrincipalVisaLabel.Name = "term1PrincipalVisa";
+            this.term1PrincipalVisaLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.384D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.term1PrincipalVisaLabel.Style.BackgroundColor = System.Drawing.Color.LightGreen;
+            this.term1PrincipalVisaLabel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term1PrincipalVisaLabel.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.None;
+            this.term1PrincipalVisaLabel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.term1PrincipalVisaLabel.Style.Font.Bold = true;
+            this.term1PrincipalVisaLabel.Style.Font.Name = "Times New Roman";
+            this.term1PrincipalVisaLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.term1PrincipalVisaLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.term1PrincipalVisaLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.term1PrincipalVisaLabel.Value = "PRINCIPAL\'S VISA";
             // 
             // term1ClassWorkLabel
             // 
@@ -10489,6 +10490,7 @@
             this.webSiteTextBox,
             this.webSitePictureBox,
             this.choolNameTextBox,
+            this.facebookAddressLabel,
             this.facebookPictureBox,
             this.schoolStatement});
             this.pageFooterSection1.Name = "pageFooterSection1";
@@ -10530,7 +10532,6 @@
             this.webSitePictureBox.Style.BackgroundImage.MimeType = "";
             this.webSitePictureBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.webSitePictureBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.webSitePictureBox.Value = ((object)(resources.GetObject("webSitePictureBox.Value")));
             // 
             // choolNameTextBox
             // 
@@ -10541,6 +10542,15 @@
             this.choolNameTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
             this.choolNameTextBox.Value = "Soft Éducation";
             // 
+            // facebookAddressLabel
+            // 
+            this.facebookAddressLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.189D), Telerik.Reporting.Drawing.Unit.Inch(0.38D));
+            this.facebookAddressLabel.Name = "facebookAddressLabel";
+            this.facebookAddressLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.613D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
+            this.facebookAddressLabel.Style.Font.Name = "Comic Sans MS";
+            this.facebookAddressLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.facebookAddressLabel.Value = "Soft Éducation";
+            // 
             // facebookPictureBox
             // 
             this.facebookPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.989D), Telerik.Reporting.Drawing.Unit.Inch(0.41D));
@@ -10550,7 +10560,6 @@
             this.facebookPictureBox.Style.BackgroundImage.MimeType = "";
             this.facebookPictureBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.facebookPictureBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.facebookPictureBox.Value = ((object)(resources.GetObject("facebookPictureBox.Value")));
             // 
             // schoolStatement
             // 
@@ -10576,7 +10585,7 @@
             this.headerPictureBox,
             this.reportTitleTextBox,
             this.studentLabel,
-            this.studentTexBox,
+            this.studentTextBox,
             this.studentShape,
             this.teacherLabel,
             this.teacherTextBox,
@@ -10607,7 +10616,6 @@
             this.headerPictureBox.Name = "headerPictureBox";
             this.headerPictureBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(8.1D), Telerik.Reporting.Drawing.Unit.Inch(0.94D));
             this.headerPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.ScaleProportional;
-            this.headerPictureBox.Value = ((object)(resources.GetObject("headerPictureBox.Value")));
             // 
             // reportTitleTextBox
             // 
@@ -10630,15 +10638,15 @@
             this.studentLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.studentLabel.Value = "Name and Surname : ";
             // 
-            // studentTexBox
+            // studentTextBox
             // 
-            this.studentTexBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.9D), Telerik.Reporting.Drawing.Unit.Inch(1.843D));
-            this.studentTexBox.Name = "studentTexBox";
-            this.studentTexBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(4.391D), Telerik.Reporting.Drawing.Unit.Inch(0.157D));
-            this.studentTexBox.Style.Font.Bold = true;
-            this.studentTexBox.Style.Font.Name = "Times New Roman";
-            this.studentTexBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.studentTexBox.Value = "KONO Simon Bertrand";
+            this.studentTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.9D), Telerik.Reporting.Drawing.Unit.Inch(1.843D));
+            this.studentTextBox.Name = "studentTexBox";
+            this.studentTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(4.391D), Telerik.Reporting.Drawing.Unit.Inch(0.157D));
+            this.studentTextBox.Style.Font.Bold = true;
+            this.studentTextBox.Style.Font.Name = "Times New Roman";
+            this.studentTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.studentTextBox.Value = "KONO Simon Bertrand";
             // 
             // studentShape
             // 
@@ -10761,11 +10769,12 @@
         private Telerik.Reporting.PictureBox headerPictureBox;
         private Telerik.Reporting.TextBox reportTitleTextBox;
         private Telerik.Reporting.TextBox studentLabel;
-        private Telerik.Reporting.TextBox studentTexBox;
+        private Telerik.Reporting.TextBox studentTextBox;
         private Telerik.Reporting.Shape studentShape;
         private Telerik.Reporting.TextBox addressTextBox;
         private Telerik.Reporting.TextBox contactTextBox;
         private Telerik.Reporting.TextBox webSiteTextBox;
+        private Telerik.Reporting.TextBox facebookAddressLabel;
         private Telerik.Reporting.PictureBox webSitePictureBox;
         private Telerik.Reporting.TextBox choolNameTextBox;
         private Telerik.Reporting.PictureBox facebookPictureBox;
@@ -10816,7 +10825,7 @@
         private Telerik.Reporting.TextBox term2Month01Day07TextBox;
         private Telerik.Reporting.TextBox term2Month01Day08TextBox;
         private Telerik.Reporting.TextBox term2Month01Day09TextBox;
-        private Telerik.Reporting.TextBox jMonthDay10;
+        private Telerik.Reporting.TextBox term2Month01Day10TextBox;
         private Telerik.Reporting.TextBox term2Month01Day11TextBox;
         private Telerik.Reporting.TextBox term2Month01Day12TextBox;
         private Telerik.Reporting.TextBox term2Month01Day13TextBox;
@@ -10931,7 +10940,7 @@
         private Telerik.Reporting.TextBox term2PositionTextBox;
         private Telerik.Reporting.TextBox term2ClassAverageLabel;
         private Telerik.Reporting.TextBox term2ClassAverageTextBox;
-        private Telerik.Reporting.TextBox term2PrincipalVisa;
+        private Telerik.Reporting.TextBox term2PrincipalVisaLabel;
         private Telerik.Reporting.TextBox term2ClassWorkLabel;
         private Telerik.Reporting.TextBox term2ConductLabel;
         private Telerik.Reporting.TextBox term2WAwardLabel;
@@ -11118,7 +11127,7 @@
         private Telerik.Reporting.TextBox term3PositionTextBox;
         private Telerik.Reporting.TextBox term3ClassAverageLabel;
         private Telerik.Reporting.TextBox term3ClassAverageTextBox;
-        private Telerik.Reporting.TextBox term3PrincipalVisa;
+        private Telerik.Reporting.TextBox term3PrincipalVisaLabel;
         private Telerik.Reporting.TextBox term3ClassWorkLabel;
         private Telerik.Reporting.TextBox term3ConductLabel;
         private Telerik.Reporting.TextBox term3WAwardLabel;
@@ -11157,9 +11166,9 @@
         private Telerik.Reporting.TextBox resumeWarningLabel;
         private Telerik.Reporting.TextBox resumeSWarningLabel;
         private Telerik.Reporting.TextBox resumeExclusionLabel;
-        private Telerik.Reporting.TextBox textBox572;
-        private Telerik.Reporting.TextBox textBox573;
-        private Telerik.Reporting.TextBox textBox574;
+        private Telerik.Reporting.TextBox resumeTerm1Label;
+        private Telerik.Reporting.TextBox resumeTerm2Label;
+        private Telerik.Reporting.TextBox resumeTerm3Label;
         private Telerik.Reporting.TextBox resumeDelayTerm1TextBox;
         private Telerik.Reporting.TextBox resumeAbsenceTerm1TextBox;
         private Telerik.Reporting.TextBox resumeDelayTerm2TextBox;
@@ -11222,7 +11231,7 @@
         private Telerik.Reporting.TextBox term1Day31Label;
         private Telerik.Reporting.TextBox term1AbsenceLabel;
         private Telerik.Reporting.TextBox term1JAbsenceLabel;
-        private Telerik.Reporting.TextBox term1AbsenceNJLabel;
+        private Telerik.Reporting.TextBox term1NJAbsenceLabel;
         private Telerik.Reporting.TextBox term1DetentionLabel;
         private Telerik.Reporting.TextBox term1Month01Label;
         private Telerik.Reporting.TextBox term1Month01Day02TextBox;
@@ -11348,7 +11357,7 @@
         private Telerik.Reporting.TextBox term1PositionTextBox;
         private Telerik.Reporting.TextBox term1ClassAverageLabel;
         private Telerik.Reporting.TextBox term1ClassAverageTextBox;
-        private Telerik.Reporting.TextBox term1PrincipalVisa;
+        private Telerik.Reporting.TextBox term1PrincipalVisaLabel;
         private Telerik.Reporting.TextBox term1ClassWorkLabel;
         private Telerik.Reporting.TextBox term1WAwardLabel;
         private Telerik.Reporting.TextBox term1WCreditLabel;

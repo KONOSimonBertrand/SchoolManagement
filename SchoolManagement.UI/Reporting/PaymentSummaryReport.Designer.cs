@@ -216,7 +216,7 @@ namespace SchoolManagement.UI.Reporting
             this.studentLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(12D);
             this.studentLabel.Value = "Elève  : ";
             // 
-            // studentTexBox
+            // studentTextBox
             // 
             this.studentTexBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.109D), Telerik.Reporting.Drawing.Unit.Inch(1.964D));
             this.studentTexBox.Name = "studentTexBox";

@@ -17,6 +17,9 @@
     <Compile Update="Reporting\NoteReport\ClassNoteReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Reporting\NoteReport\DisciplinarySheetReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\NoteReport\Subreport1NoteReport.cs">
       <SubType>Component</SubType>
     </Compile>

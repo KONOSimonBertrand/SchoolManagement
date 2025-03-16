@@ -270,6 +270,17 @@ namespace Primary.SchoolApp
             reportViewer.ReportSource = reportSource;
             reportViewer.RefreshReport();
         }
+        internal void LoadDisciplinarySheet(StudentDisciplinarySheet report)
+        {
+            InstanceReportSource reportSource = new()
+            {
+                ReportDocument = new DisciplinarySheetReport(report)
+            };
+            reportViewer.AutoSize = true;
+            reportViewer.ReportSource = reportSource;
+            reportViewer.RefreshReport();
+        }
+        
         #endregion
 
     }

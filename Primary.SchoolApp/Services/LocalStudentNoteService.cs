@@ -14,10 +14,12 @@ namespace Primary.SchoolApp.Services
     public class LocalStudentNoteService
     {
         private readonly IStudentNoteService studentNoteService;
+        private readonly IDisciplineService disciplineService;
 
-        public LocalStudentNoteService(IStudentNoteService studentNoteService)
+        public LocalStudentNoteService(IStudentNoteService studentNoteService, IDisciplineService disciplineService)
         {
             this.studentNoteService = studentNoteService;
+            this.disciplineService = disciplineService;
         }
         // récupération des notes d'une évaluation,calcul des moyennes et classement
         public async Task<List<AverageRecord>> GetEvaluationAverageListByRoom(int roomId, int evaluationId, int schoolYearId, int bookId)
@@ -657,5 +659,26 @@ namespace Primary.SchoolApp.Services
             }
         }
 
+       public async Task<List<DisciplineItemRecord>> GetDisciplineItems(int classId,int schoolYearId)
+        {
+            List<DisciplineItemRecord> disciplineItems = new();
+            var items = await disciplineService.GetDisciplineListByClass(classId, schoolYearId);
+            foreach(var item in items)
+            {
+                disciplineItems.Add(item.AsDisciplineRecord());
+            }
+            return disciplineItems;
+        }
+
+        public async Task<List<DisciplineItemRecord>> GetDisciplineItems(int schoolYearId)
+        {
+            List<DisciplineItemRecord> disciplineItems = new();
+            var items = await disciplineService.GetDisciplineListBySchoolYear(schoolYearId);
+            foreach (var item in items)
+            {
+                disciplineItems.Add(item.AsDisciplineRecord());
+            }
+            return disciplineItems;
+        }
     }
 }
