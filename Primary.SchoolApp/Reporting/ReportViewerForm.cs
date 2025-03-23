@@ -280,7 +280,28 @@ namespace Primary.SchoolApp
             reportViewer.ReportSource = reportSource;
             reportViewer.RefreshReport();
         }
-        
+        internal void LoadDisciplinarySheet(List<StudentDisciplinarySheet> reports)
+        {
+
+            var reportBook = new ReportBook();
+            foreach (var report in reports)
+            {
+                InstanceReportSource reportSource = new()
+                {
+                    ReportDocument = new DisciplinarySheetReport(report)
+                };
+                reportBook.ReportSources.Add(reportSource);
+            }
+
+            reportViewer.AutoSize = true;
+            InstanceReportSource reportSourceFinal = new ()
+            {
+                ReportDocument = reportBook
+            };
+            reportViewer.ReportSource = reportSourceFinal;
+            reportViewer.RefreshReport();
+        }
+
         #endregion
 
     }

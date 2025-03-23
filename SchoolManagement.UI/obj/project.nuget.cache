@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ruGz9pH2tHk=",
+  "dgSpecHash": "ZyAtdRkHW+o=",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\SchoolManagement.UI.csproj",
   "expectedPackageFiles": [
@@ -63,12 +63,5 @@
     "C:\\Users\\HP\\.nuget\\packages\\telerik.reporting\\17.1.23.718\\telerik.reporting.17.1.23.718.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\ui.for.winforms.allcontrols.net60\\2023.2.718\\ui.for.winforms.allcontrols.net60.2023.2.718.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Une erreur s’est produite lors de l’obtention des données de vulnérabilité du package : Impossible de charger l'index de service pour la source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  "logs": []
 }

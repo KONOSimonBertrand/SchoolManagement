@@ -275,7 +275,10 @@ namespace Primary.SchoolApp.Services
 
         public async Task PrintDisciplinarySheetRoomReportAsync(int roomId, int schoolYearId, int bookId)
         {
-            throw new NotImplementedException();
+            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
+            var reportSource = await reportCardService.GetDisciplinarySheetByClassRoom(roomId, schoolYearId, bookId);
+            reportViewer.LoadDisciplinarySheet(reportSource);
+            reportViewer.Show();
         }
     }
 }

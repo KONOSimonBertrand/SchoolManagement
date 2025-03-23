@@ -293,6 +293,7 @@ namespace Primary.SchoolApp
                     printRoomReportMenu.Click += PrintRoomReportMenu_Click;
                     printGroupStatisticReportMenu.Click+= PrintGroupStatisticReportMenu_Click;
                     printStudentDisciplinarySheetMenu.Click += PrintStudentDisciplinarySheetMenu_Click;
+                    printRoomDisciplinarySheetMenu.Click += PrintRoomDisciplinarySheetMenu_Click;
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                     e.ContextMenu.Items.Add(printStudentReportCardMenu);
                     e.ContextMenu.Items.Add(printRoomReportCardMenu);
@@ -311,6 +312,15 @@ namespace Primary.SchoolApp
             }
                
         }
+
+        private void PrintRoomDisciplinarySheetMenu_Click(object sender, EventArgs e)
+        {
+            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
+            {
+                printService.PrintDisciplinarySheetRoomReportAsync(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+            }
+        }
+
         // impression de la fiche de discipline
         private void PrintStudentDisciplinarySheetMenu_Click(object sender, EventArgs e)
         {
@@ -486,7 +496,7 @@ namespace Primary.SchoolApp
                         }
                         else
                         {
-                            dataSource = await localStudentNoteService.GetTermAverageListByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId, selectedFatherEvaluation.Code);
+                            dataSource = await localStudentNoteService.GetTermAverageListByRoom(selectedRoom.Id, selectedFatherEvaluation.Code, Program.CurrentSchoolYear.Id, selectedBookId);
 
                         }
                         StudentNoteGridView.DataSource = dataSource;

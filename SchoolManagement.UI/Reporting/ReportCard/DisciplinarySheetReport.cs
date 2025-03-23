@@ -700,6 +700,7 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox ContactTextBox { get => contactTextBox; }
         public Telerik.Reporting.TextBox WebSiteTextBox { get => webSiteTextBox; }
         public Telerik.Reporting.TextBox SchoolStatement { get => schoolStatement; }
+        public Telerik.Reporting.TextBox SchoolNameTextBox { get => this.schoolNameTextBox; }
         public Telerik.Reporting.TextBox FacebookAddressLabel { get => facebookAddressLabel; }
         public Telerik.Reporting.PictureBox WebSitePictureBox { get => webSitePictureBox; }
         public Telerik.Reporting.PictureBox FaceBookPictureBox { get => facebookPictureBox; }

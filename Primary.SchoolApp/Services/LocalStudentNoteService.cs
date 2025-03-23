@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static Primary.SchoolApp.DTO.DTOItem;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace Primary.SchoolApp.Services
 {
@@ -127,7 +126,7 @@ namespace Primary.SchoolApp.Services
             return evaluationNoteList;
         }
         // Récupération des notes du trimestre
-        public async Task<List<TermRecord>> GetTermNoteListByRoom(int roomId, int schoolYearId, int bookId, string termCode)
+        public async Task<List<TermRecord>> GetTermNoteListByRoom(int roomId, string termCode, int schoolYearId, int bookId)
         {
             var evaluationCodes = GetEvaluationCodeOfTerm(termCode);
             var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
@@ -248,7 +247,7 @@ namespace Primary.SchoolApp.Services
         }
 
         //get term average
-        public async Task<List<AverageRecord>> GetTermAverageListByRoom(int roomId, int schoolYearId, int bookId,string termCode)
+        public async Task<List<AverageRecord>> GetTermAverageListByRoom(int roomId, string termCode, int schoolYearId, int bookId)
         {
             var evaluationCodes = GetEvaluationCodeOfTerm(termCode);
             var averageList = new List<AverageRecord>();
@@ -299,6 +298,64 @@ namespace Primary.SchoolApp.Services
             }
             return averageList;
         }
+
+        // get annual average
+        public async Task<List<AverageRecord>> GetAnnualAverageListByRoom(int roomId,int schoolYearId, int bookId)
+        {
+            List<AverageRecord> averageList = new ();
+            var getFirstTermAverages = GetTermAverageListByRoom(roomId, "TERM01", schoolYearId, bookId);
+            var getSecondTermAverages = GetTermAverageListByRoom(roomId, "TERM02", schoolYearId, bookId);
+            var getThirdTermAverages = GetTermAverageListByRoom(roomId, "TERM03", schoolYearId, bookId);
+
+            var firstTermAverages = await getFirstTermAverages;
+            var secondTermAverages = await getSecondTermAverages;
+            var thirdTermAverages = await getThirdTermAverages;
+
+            List<Student> students = new();
+            students.AddRange(firstTermAverages.Select(x => x.Student));
+            students.AddRange(secondTermAverages.Select(x => x.Student));
+            students.AddRange(thirdTermAverages.Select(x => x.Student));
+            var composedStudents=students.DistinctBy(x=>x.Id);
+
+            var notesToOrder = new List<StudentNote>();
+            foreach (var student in composedStudents)
+            {
+                var noteTerm1 = firstTermAverages.FirstOrDefault(x => x.Student.Id == student.Id);
+                var noteTerm2 = secondTermAverages.FirstOrDefault(x => x.Student.Id == student.Id);
+                var noteTerm3 = thirdTermAverages.FirstOrDefault(x => x.Student.Id == student.Id);
+                double average = ComputeFinalAverage(noteTerm1, noteTerm2, noteTerm3);
+                notesToOrder.Add(new()
+                {
+                    Id = student.Id,
+                    Note = average,
+                    NotedOn = 20,
+                    StudentId = student.Id,
+                    Student = student,
+                });
+            }
+
+            var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
+            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
+            //get ordored average with position
+            var orderedAverageList = GenerateOrderedWithPosition(notesToOrder, GetLanguageGroup(classGroup, bookId));
+            foreach (var item in orderedAverageList)
+            {
+                //get rating
+                var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Moyenne" && x.MinNote <= item.Note && x.MaxNote >= item.Note);
+                var rating = string.Empty;
+                //truncate or around note
+                var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, classGroup);
+                if (systemRating != null)
+                {
+                    rating = GetLanguageGroup(classGroup, bookId) == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                }
+                averageList.Add(new(item.Student, note, item.NotedOn, rating, item.Position));
+            }
+
+            return averageList;
+        }
+
         // order de value and add de position
         public static IOrderedEnumerable<StudentNote> GenerateOrderedWithPosition(List<StudentNote> notes, string language)
         {

@@ -1,10 +1,6 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Telerik.WinControls.Svg.ExCSS;
-using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Reporting
@@ -490,7 +486,7 @@ namespace Primary.SchoolApp.Reporting
 
             #region Third Term
 
-            absences = GetItems((IEnumerable<DisciplineItemRecord>)report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 3 || d.Subject.Id == 4);
+            absences = GetItems(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 3 || d.Subject.Id == 4);
             unjustifiesAbsences = GetItems(absences, a => a.Subject.Id == 4);
             justifiesAbsences = GetItems(absences, a => a.Subject.Id == 3);
             delays = GetItems(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 1);
@@ -698,6 +694,59 @@ namespace Primary.SchoolApp.Reporting
 
             #endregion
 
+
+            #region Annual Resume
+
+            List<DisciplineItemRecord> annualDisciplines = new();
+            annualDisciplines.AddRange(report.DetailSection.FirstTermItem.Disciplines);
+            annualDisciplines.AddRange(report.DetailSection.SecondTermItem.Disciplines);
+            annualDisciplines.AddRange(report.DetailSection.ThirdTermItem.Disciplines);
+
+
+            ResumeDelayTerm1TextBox.Value = GetSum(report.DetailSection.FirstTermItem.Disciplines, d => d.Subject.Id == 1).ToString();
+            ResumeDelayTerm2TextBox.Value = GetSum(report.DetailSection.SecondTermItem.Disciplines, d => d.Subject.Id == 1).ToString();
+            ResumeDelayTerm3TextBox.Value = GetSum(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 1).ToString();
+            ResumeDelayTotalTextBox.Value = GetSum(annualDisciplines, d => d.Subject.Id == 1).ToString();
+
+            ResumeAbsenceTerm1TextBox.Value = GetSum(report.DetailSection.FirstTermItem.Disciplines, d => d.Subject.Id == 3 || d.Subject.Id == 4).ToString();
+            ResumeAbsenceTerm2TextBox.Value = GetSum(report.DetailSection.SecondTermItem.Disciplines, d => d.Subject.Id == 3 || d.Subject.Id == 4).ToString();
+            ResumeAbsenceTerm3TextBox.Value = GetSum(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 3 || d.Subject.Id == 4).ToString();
+            ResumeAbsenceTotalTextBox.Value = GetSum(annualDisciplines, d => d.Subject.Id == 3 || d.Subject.Id == 4).ToString();
+
+            ResumeWarningTerm1TextBox.Value = GetCount(report.DetailSection.FirstTermItem.Disciplines, d => d.Subject.Id == 5).ToString();
+            ResumeWarningTerm2TextBox.Value = GetCount(report.DetailSection.SecondTermItem.Disciplines, d => d.Subject.Id == 5).ToString();
+            ResumeWarningTerm3TextBox.Value = GetCount(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 5).ToString();
+            ResumeWarningTotalTextBox.Value= GetCount(annualDisciplines, d => d.Subject.Id == 5).ToString();
+
+            ResumeSWarningTerm1TextBox.Value = GetCount(report.DetailSection.FirstTermItem.Disciplines, d => d.Subject.Id == 6).ToString();
+            ResumeSWarningTerm2TextBox.Value = GetCount(report.DetailSection.SecondTermItem.Disciplines, d => d.Subject.Id == 6).ToString();
+            ResumeSWarningTerm3TextBox.Value = GetCount(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 6).ToString();
+            ResumeSWarningTotalTextBox.Value = GetCount(annualDisciplines, d => d.Subject.Id == 6).ToString();
+
+            ResumeDetentionTerm1TextBox.Value = GetSum(report.DetailSection.FirstTermItem.Disciplines, d => d.Subject.Id == 8).ToString();
+            ResumeDetentionTerm2TextBox.Value = GetSum(report.DetailSection.SecondTermItem.Disciplines, d => d.Subject.Id == 8).ToString();
+            ResumeDetentionTerm3TextBox.Value = GetSum(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 8).ToString();
+            ResumeDetentionTotalTextBox.Value = GetSum(annualDisciplines, d => d.Subject.Id == 8).ToString();
+
+            ResumeExclusionTerm1TextBox.Value = GetSum(report.DetailSection.FirstTermItem.Disciplines, d => d.Subject.Id == 7).ToString();
+            ResumeExclusionTerm2TextBox.Value = GetSum(report.DetailSection.SecondTermItem.Disciplines, d => d.Subject.Id == 7).ToString();
+            ResumeExclusionTerm3TextBox.Value = GetSum(report.DetailSection.ThirdTermItem.Disciplines, d => d.Subject.Id == 7).ToString();
+            ResumeExclusionTotalTextBox.Value= GetSum(annualDisciplines, d => d.Subject.Id == 7).ToString();
+
+            AnnualAverageTextBox.Value= $"{report.DetailSection.ResumeItem.Average}/20";
+            AnnualPositionTextBox.Value = report.DetailSection.ResumeItem.Position;
+            #endregion
+
+            FacebookAddressLabel.Value = Program.CurrentSchool.Name;
+            SchoolNameTextBox.Value= Program.CurrentSchool.Name;
+            ContactTextBox.Value = $"Tel:{Program.CurrentSchool.Phone}";
+            AddressTextBox.Value = Program.CurrentSchool.Address;
+            WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
+            FaceBookPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
+            WebSitePictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
+            WebSitePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("website.png");
+            FaceBookPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("facebook.png");
+
         }
 
         private void InitLanguage(string language)
@@ -778,8 +827,10 @@ namespace Primary.SchoolApp.Reporting
             Term3CSeriousWarningLabel.Value = language == "FR" ? "BLAMES" : "SERIOUS WARNING";
             Term3CExclusionLabel.Value = language == "FR" ? "EXCLUSION" : "EXCLUSION(IN DAYS)";
             Term3ReasonLabel.Value = language == "FR" ? "MOTIF" : "MOTIVE";
-           
-            AnnualResultLabel.Value = language == "FR" ? "RECAPITULATIF ANNUEL" : "ANNUAL RESULT";
+
+
+            AnnualResumeLabel.Value= language== "FR"? "RECAPITULATIF ANNUEL" : "ANNUAL RESULT";
+            AnnualResultLabel.Value = language == "FR" ? "RESULTATS ANNUELS" : "ANNUAL RESULT";
             ResumeTerm1Label.Value = language == "FR" ? "1ᵉʳTRIM" : "1ˢᵗ TERM";
             ResumeTerm2Label.Value = language == "FR" ? "2ᵉTRIM" : "2ⁿᵈ TERM";
             ResumeTerm3Label.Value = language == "FR" ? "3ᵉTRIM" : "3ʳᵈ TERM";
@@ -806,5 +857,12 @@ namespace Primary.SchoolApp.Reporting
         {
             return items.Where(condition).Sum(d => d.Duration);
         }
+
+        // Retourne le nombre (retenues, retards,absences,...) selon la condition
+        private int GetCount(IEnumerable<DisciplineItemRecord> items, Func<DisciplineItemRecord, bool> condition)
+        {
+            return items.Where(condition).Count();
+        }
+
     }
 }

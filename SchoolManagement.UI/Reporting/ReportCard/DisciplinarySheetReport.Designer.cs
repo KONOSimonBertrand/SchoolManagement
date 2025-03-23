@@ -661,7 +661,7 @@
             this.webSiteTextBox = new Telerik.Reporting.TextBox();
             this.facebookAddressLabel = new Telerik.Reporting.TextBox();
             this.webSitePictureBox = new Telerik.Reporting.PictureBox();
-            this.choolNameTextBox = new Telerik.Reporting.TextBox();
+            this.schoolNameTextBox = new Telerik.Reporting.TextBox();
             this.facebookPictureBox = new Telerik.Reporting.PictureBox();
             this.schoolStatement = new Telerik.Reporting.TextBox();
             this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
@@ -6830,7 +6830,7 @@
             this.resumeAbsenceTotalTextBox.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
             this.resumeAbsenceTotalTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.resumeAbsenceTotalTextBox.Style.BorderStyle.Right = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.resumeAbsenceTotalTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.resumeAbsenceTotalTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
             this.resumeAbsenceTotalTextBox.Style.Font.Bold = true;
             this.resumeAbsenceTotalTextBox.Style.Font.Name = "Times New Roman";
             this.resumeAbsenceTotalTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(7D);
@@ -10489,7 +10489,7 @@
             this.contactTextBox,
             this.webSiteTextBox,
             this.webSitePictureBox,
-            this.choolNameTextBox,
+            this.schoolNameTextBox,
             this.facebookAddressLabel,
             this.facebookPictureBox,
             this.schoolStatement});
@@ -10533,14 +10533,14 @@
             this.webSitePictureBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.webSitePictureBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             // 
-            // choolNameTextBox
+            // schoolNameTextBox
             // 
-            this.choolNameTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.189D), Telerik.Reporting.Drawing.Unit.Inch(0.38D));
-            this.choolNameTextBox.Name = "choolNameTextBox";
-            this.choolNameTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.613D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
-            this.choolNameTextBox.Style.Font.Name = "Comic Sans MS";
-            this.choolNameTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
-            this.choolNameTextBox.Value = "Soft Éducation";
+            this.schoolNameTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.189D), Telerik.Reporting.Drawing.Unit.Inch(0.38D));
+            this.schoolNameTextBox.Name = "choolNameTextBox";
+            this.schoolNameTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.613D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.schoolNameTextBox.Style.Font.Name = "Comic Sans MS";
+            this.schoolNameTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.schoolNameTextBox.Value = "Soft Éducation";
             // 
             // facebookAddressLabel
             // 
@@ -10776,7 +10776,7 @@
         private Telerik.Reporting.TextBox webSiteTextBox;
         private Telerik.Reporting.TextBox facebookAddressLabel;
         private Telerik.Reporting.PictureBox webSitePictureBox;
-        private Telerik.Reporting.TextBox choolNameTextBox;
+        private Telerik.Reporting.TextBox schoolNameTextBox;
         private Telerik.Reporting.PictureBox facebookPictureBox;
         private Telerik.Reporting.TextBox schoolStatement;
         private Telerik.Reporting.Panel panel1;

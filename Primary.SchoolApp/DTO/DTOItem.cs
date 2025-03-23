@@ -47,7 +47,7 @@ namespace Primary.SchoolApp.DTO
         public record ReportItem(string Name,string Value);
         public record ReportHeader(List<ReportItem> Items);
         public record ReportDetail(List<ReportItem> Items);
-        public record DisciplineScheetReportDetail(TermDisciplineItem FirstTermItem, TermDisciplineItem SecondTermItem, TermDisciplineItem ThirdTermItem, TermDisciplineItem ResumeItem);
+        public record DisciplineScheetReportDetail(TermDisciplineItem FirstTermItem, TermDisciplineItem SecondTermItem, TermDisciplineItem ThirdTermItem, AnnualDisciplineItem ResumeItem);
         public record ReportFooter(List<ReportItem> Items);
         public record ClassroomReportHeader(List<ReportItem> Items,List<string>Columns);
         public record ClassGroupReportHeader(List<ReportItem> Items, List<string> Columns);
