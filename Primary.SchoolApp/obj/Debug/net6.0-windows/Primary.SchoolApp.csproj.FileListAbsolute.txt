@@ -196,3 +196,4 @@ C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-win
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.UI.AddDisciplineForm.resources
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.UI.MedicalRecordsForm.resources
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net6.0-windows\Images\website.png
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net6.0-windows\Primary.SchoolApp.UI.WaitingForm.resources

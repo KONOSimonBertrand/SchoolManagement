@@ -13,6 +13,7 @@ using SchoolManagement.Core.Model;
 using System.Text;
 using static Telerik.WinControls.VirtualKeyboard.VirtualKeyboardNativeMethods;
 using SchoolManagement.UI.Localization;
+using System.Diagnostics;
 
 namespace Primary.SchoolApp.Utilities
 {
@@ -489,7 +490,6 @@ namespace Primary.SchoolApp.Utilities
             {
                 AddLogMessage(logMessage, w);
             }
-
         }
         private static void AddLogMessage(string logMessage, TextWriter w)
         {
@@ -501,6 +501,14 @@ namespace Primary.SchoolApp.Utilities
             w.WriteLine("-------------------------------");
 
         }
+
+        public static string GetCurrentMethodName()
+        {
+            StackTrace stackTrace = new StackTrace();
+            StackFrame stackFrame = stackTrace.GetFrame(1);
+            return stackFrame.GetMethod().DeclaringType + " :: " + stackFrame.GetMethod().Name;
+        }
+
         #endregion
 
         private static double TruncateDouble(double value, int precision)

@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.Services;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
@@ -8,7 +6,6 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 using Telerik.WinControls.UI;

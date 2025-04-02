@@ -9,15 +9,15 @@ namespace Primary.SchoolApp.DTO
 {
     public class DTOItem
     {
-        public record AverageRecord(Student Student,double Average,double TotalMark,string Rating,string Position);
-        public record EvaluationRecord(int Id,Student Student,Subject Subject, SubjectGroup SubjectGroup,double Note,string NoteAsString,string NoteWithMax,double NoteCoef, double NotedOn,string Rating,string Position);
+        public record AverageRecord(Student Student, double Average, double TotalMark, string Rating, string Position);
+        public record EvaluationRecord(int Id, Student Student, Subject Subject, SubjectGroup SubjectGroup, double Note, string NoteAsString, string NoteWithMax, double NoteCoef, double NotedOn, string Rating, string Position);
         public record TermRecord(
-            int Id, 
-            Student Student, 
-            Subject Subject, 
-            SubjectGroup SubjectGroup, 
-            double FirstNote, 
-            string FirstNoteAsString, 
+            int Id,
+            Student Student,
+            Subject Subject,
+            SubjectGroup SubjectGroup,
+            double FirstNote,
+            string FirstNoteAsString,
             string FirstNoteWithMax,
             double SecondNote,
             string SecondNoteAsString,
@@ -28,28 +28,28 @@ namespace Primary.SchoolApp.DTO
             double FinalNote,
             string FinalNoteAsString,
             string FinalNoteWithMax,
-            double NoteCoef, 
-            double NotedOn, 
-            string Rating, 
+            double NoteCoef,
+            double NotedOn,
+            string Rating,
             string Position);
-        public record SubjectGroupRecord(int Id,string Name);
-        public record HeadReportCard(string ReportTitle,string SchoolYear,Student Student,string ClassRoom,string Teacher,string Language,string EvaluationCode);
-        public record DetailEvaluationReportCard(List<EvaluationRecord> NoteList,List<SubjectGroup> SubjectGroupList);
+        public record SubjectGroupRecord(int Id, string Name);
+        public record HeadReportCard(string ReportTitle, string SchoolYear, Student Student, string ClassRoom, string Teacher, string Language, string EvaluationCode);
+        public record DetailEvaluationReportCard(List<EvaluationRecord> NoteList, List<SubjectGroup> SubjectGroupList);
         public record DetailTermReportCard(List<TermRecord> NoteList, List<SubjectGroup> SubjectGroupList);
-        public record EvaluationFooterReportCard(double SumNote,double SumCoef,double SumMaxNote,double StudentAverage,string Position,double ClassAverage,double HighestAverage, double LowestAverage);
+        public record EvaluationFooterReportCard(double SumNote, double SumCoef, double SumMaxNote, double StudentAverage, string Position, double ClassAverage, double HighestAverage, double LowestAverage);
         public record EvaluationReportCard(HeadReportCard HeadSection, DetailEvaluationReportCard DetailSection, EvaluationFooterReportCard FooterSection);
         public record TermReportCard(HeadReportCard HeadSection, DetailTermReportCard DetailSection, ReportFooter FooterSection);
         public record StudentDisciplinarySheet(HeadReportCard HeadSection, DisciplineScheetReportDetail DetailSection, ReportFooter FooterSection);
-        public record HeadClassroomReport(string ReportTitle, string SchoolYear, string ClassRoom,string ClassroomSize,string TotalCoef);
+        public record HeadClassroomReport(string ReportTitle, string SchoolYear, string ClassRoom, string ClassroomSize, string TotalCoef);
         public record HeadClassGroupReport(string ReportTitle, string SchoolYear, string ClassGroup);
         public record ClassroomReportDetail(DataTable DataTable);
         public record ClassGroupReportDetail(DataTable DataTable);
-        public record ReportItem(string Name,string Value);
+        public record ReportItem(string Name, string Value);
         public record ReportHeader(List<ReportItem> Items);
         public record ReportDetail(List<ReportItem> Items);
         public record DisciplineScheetReportDetail(TermDisciplineItem FirstTermItem, TermDisciplineItem SecondTermItem, TermDisciplineItem ThirdTermItem, AnnualDisciplineItem ResumeItem);
         public record ReportFooter(List<ReportItem> Items);
-        public record ClassroomReportHeader(List<ReportItem> Items,List<string>Columns);
+        public record ClassroomReportHeader(List<ReportItem> Items, List<string> Columns);
         public record ClassGroupReportHeader(List<ReportItem> Items, List<string> Columns);
         public record ClassroomReport(ClassroomReportHeader HeaderSection, ClassroomReportDetail DetailSection, ReportFooter FooterSection);
         public record ClassGroupReport(ClassGroupReportHeader HeaderSection, ClassGroupReportDetail DetailSection, ReportFooter FooterSection);
@@ -59,9 +59,9 @@ namespace Primary.SchoolApp.DTO
         public record SubscriptionReceiptData(Subscription Subscription, bool IsCopy);
 
         public record DisciplineItemRecord(
-            int Id, 
+            int Id,
             DateTime Date,
-            string Reason, 
+            string Reason,
             double Duration,
             DisciplineSubject Subject,
             EvaluationSession Evaluation,
@@ -69,12 +69,12 @@ namespace Primary.SchoolApp.DTO
             SchoolYear SchoolYear
      );
 
-    public record TermDisciplineItem(
-        List<DisciplineItemRecord> Disciplines,
-        string Average,
-        string Position,
-        string ClassAverage
-        );
+        public record TermDisciplineItem(
+            List<DisciplineItemRecord> Disciplines,
+            string Average,
+            string Position,
+            string ClassAverage
+            );
 
         public record AnnualDisciplineItem(
         List<DisciplineItemRecord> Disciplines,
@@ -82,5 +82,23 @@ namespace Primary.SchoolApp.DTO
         string Position,
         string ClassAverage
         );
+    
+        public record RecapNoteItem(
+            string StudentMatricule,
+            string StudentName,
+            string StudentRoom,
+            string SubjectName,
+            double FirstTermAverage,
+            string FirstTermAveragAsString,
+            double SecondTermAverage,
+            string SecondTermAverageAsString,
+            double ThirdTermAverage,
+            string ThirdTermAverageAsString,
+            double AnnualAverage,
+            string AnnualAverageAsString,
+            string Appreciation,
+            string Position
+            );
+    
     }
 }

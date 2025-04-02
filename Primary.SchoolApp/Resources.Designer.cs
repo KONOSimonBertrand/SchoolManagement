@@ -1261,6 +1261,16 @@ namespace Primary.SchoolApp {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] Waiting {
+            get {
+                object obj = ResourceManager.GetObject("Waiting", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap watch_blue {

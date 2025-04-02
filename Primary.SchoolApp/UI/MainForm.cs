@@ -18,7 +18,6 @@ using System.Drawing;
 using Telerik.Windows.Diagrams.Core;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Services;
-using System.Threading.Tasks;
 using System.ComponentModel;
 namespace Primary.SchoolApp
 {
@@ -62,6 +61,7 @@ namespace Primary.SchoolApp
         private readonly IContactService contactService;
         private readonly IMedicalService medicalService;
         private readonly IStudentNoteService studentNoteService;
+        private readonly ReportCardService reportCardService;
         public MainForm(ISchoolYearService schoolYearService, ISchoolGroupService schoolGroupService,
             ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
             , IPaymentMeanService paymentMeanService, ISchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
@@ -69,7 +69,7 @@ namespace Primary.SchoolApp
             ClientApp clientApp, ILogService logService, IRatingSystemService ratingSystemService, IJobService jobService, IEmployeeGroupService employeeGroupService,
             IUserService userService, IEmployeeService employeeService, IModuleService moduleService, ICountryService countryService, ITimeTableService timeTableService,
             IStudentEnrollingService studentEnrollingService, IPrintService printService, ICashFlowService cashFlowService, ISubscriptionService subscriptionService,
-            IDisciplineService disciplineService, IContactService contactService, IMedicalService medicalService, IStudentNoteService studentNoteService
+            IDisciplineService disciplineService, IContactService contactService, IMedicalService medicalService, IStudentNoteService studentNoteService, ReportCardService reportCardService
             )
         {
             this.schoolYearService = schoolYearService;
@@ -101,6 +101,7 @@ namespace Primary.SchoolApp
             this.studentNoteService = studentNoteService;
             localEnrollingService = new LocalEnrollingService();
             localStudentNoteService=Program.ServiceProvider.GetService<LocalStudentNoteService>();
+            this.reportCardService = reportCardService;
             mainBackgroundWorker = new()
             {
                 WorkerReportsProgress = true,

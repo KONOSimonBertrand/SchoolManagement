@@ -221,64 +221,6 @@ namespace Primary.SchoolApp.Services
             reportViewer.Show();
             await Task.Delay(0);
         }
-
-
-        // impression du procès verbal
-        public async Task PrintClassRoomReportAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
-        {
-            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
-            if (eval != null)
-            {
-                if (eval.Code.Contains("TERM"))
-                {
-                    reportViewer.LoadClassroomReport(await reportCardService.GetTermReportByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
-                }
-                else
-                {
-                    reportViewer.LoadClassroomReport(await reportCardService.GetEvaluationReportByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
-                }
-            }
-            reportViewer.Show();
-            await Task.Delay(0);
-        }
-
-        // impression des statistiques d'un groupe de classes par évaluation
-        public async Task PrintClassGroupReportAsync(int groupId, int evaluationId, int schoolYearId, int bookId)
-        {
-            
-            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
-            if (eval != null)
-            {
-                if (eval.Code.Contains("TERM"))
-                {
-                    reportViewer.LoadClassGroupReport(await reportCardService.GetTermReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId).ConfigureAwait(false));
-                }
-                else
-                {
-                    reportViewer.LoadClassGroupReport(await reportCardService.GetEvaluationReportByClassGroupAsync(groupId, evaluationId, schoolYearId, bookId).ConfigureAwait(false));
-                }
-            }
-            
-            reportViewer.Show();
-            
-        }
-
-        public async Task PrintDisciplinarySheetStudentReportAsync(int studentId, int roomId, int schoolYearId, int bookId)
-        {
-            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            var reportSource = await reportCardService.GetDisciplinarySheetByStudent(studentId, roomId, schoolYearId, bookId);
-            reportViewer.LoadDisciplinarySheet(reportSource);
-            reportViewer.Show();
-        }
-
-        public async Task PrintDisciplinarySheetRoomReportAsync(int roomId, int schoolYearId, int bookId)
-        {
-            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            var reportSource = await reportCardService.GetDisciplinarySheetByClassRoom(roomId, schoolYearId, bookId);
-            reportViewer.LoadDisciplinarySheet(reportSource);
-            reportViewer.Show();
-        }
+       
     }
 }

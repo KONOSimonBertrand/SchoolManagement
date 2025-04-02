@@ -1374,7 +1374,7 @@
   <data name="LabelDisciplinarySheets" xml:space="preserve">
     <value>Disciplinary Sheets</value>
   </data>
-  <data name="LabelEvaluationStatistique" xml:space="preserve">
+  <data name="LabelEvaluationStatistic" xml:space="preserve">
     <value>Evaluation statistics</value>
   </data>
   <data name="LabelAnnualStatistic" xml:space="preserve">
@@ -1487,5 +1487,20 @@
   </data>
   <data name="messageConfirmeFeeDuplicate" xml:space="preserve">
     <value>Are you sure you want to duplicate these fees for the current year</value>
+  </data>
+  <data name="LabelAnnualSummaryNotes" xml:space="preserve">
+    <value>Annual Summary of Notes</value>
+  </data>
+  <data name="LabelTerm1" xml:space="preserve">
+    <value>Term 1</value>
+  </data>
+  <data name="LabelTerm2" xml:space="preserve">
+    <value>Term 2</value>
+  </data>
+  <data name="LabelTerm3" xml:space="preserve">
+    <value>Term 3</value>
+  </data>
+  <data name="LabelQuarterlyStatistic" xml:space="preserve">
+    <value>Evaluation statistics</value>
   </data>
 </root>

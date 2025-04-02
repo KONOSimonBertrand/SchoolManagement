@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             classSeparator = new Telerik.WinControls.UI.RadSeparator();
             sequenceSpinEditor = new Telerik.WinControls.UI.RadSpinEditor();
             sequenceLabel = new Telerik.WinControls.UI.RadLabel();
@@ -41,9 +42,9 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
-            sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)classSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).BeginInit();
@@ -56,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -78,6 +78,15 @@
             editPanel.Name = "editPanel";
             editPanel.Size = new Size(739, 140);
             editPanel.TabIndex = 19;
+            // 
+            // sequenceSeparator
+            // 
+            sequenceSeparator.Location = new Point(2, 128);
+            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
+            sequenceSeparator.Name = "sequenceSeparator";
+            sequenceSeparator.Size = new Size(345, 4);
+            sequenceSeparator.TabIndex = 116;
+            sequenceSeparator.TabStop = false;
             // 
             // classSeparator
             // 
@@ -202,15 +211,6 @@
             saveButton.TabIndex = 111;
             saveButton.Text = "Enregistrer";
             // 
-            // sequenceSeparator
-            // 
-            sequenceSeparator.Location = new Point(2, 128);
-            sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
-            sequenceSeparator.Name = "sequenceSeparator";
-            sequenceSeparator.Size = new Size(345, 4);
-            sequenceSeparator.TabIndex = 116;
-            sequenceSeparator.TabStop = false;
-            // 
             // EditSchoolRoomForm
             // 
             AcceptButton = saveButton;
@@ -222,11 +222,14 @@
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "EditSchoolRoomForm";
             Text = "EditSchoolRoomForm";
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)classSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceSpinEditor).EndInit();
             ((System.ComponentModel.ISupportInitialize)sequenceLabel).EndInit();
@@ -239,7 +242,6 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)sequenceSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }

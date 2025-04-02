@@ -332,6 +332,9 @@
     <Compile Update="UI\Students\MedicalRecordsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\RecapNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\SubscriptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -378,6 +381,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Users\UserRoomsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\WaitingForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

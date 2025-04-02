@@ -295,6 +295,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Annual Summary of Notes.
+        /// </summary>
+        public static string LabelAnnualSummaryNotes {
+            get {
+                return ResourceManager.GetString("LabelAnnualSummaryNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Appreciation.
         /// </summary>
         public static string labelAppreciation {
@@ -1080,9 +1089,9 @@ namespace SchoolManagement.UI.Localization {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Evaluation statistics.
         /// </summary>
-        public static string LabelEvaluationStatistique {
+        public static string LabelEvaluationStatistic {
             get {
-                return ResourceManager.GetString("LabelEvaluationStatistique", resourceCulture);
+                return ResourceManager.GetString("LabelEvaluationStatistic", resourceCulture);
             }
         }
         
@@ -2104,6 +2113,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Quarterly Statistics.
+        /// </summary>
+        public static string LabelQuarterlyStatistic {
+            get {
+                return ResourceManager.GetString("LabelQuarterlyStatistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Read.
         /// </summary>
         public static string labelRead {
@@ -2793,6 +2811,33 @@ namespace SchoolManagement.UI.Localization {
         public static string labelTeacherOut {
             get {
                 return ResourceManager.GetString("labelTeacherOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Term 1.
+        /// </summary>
+        public static string LabelTerm1 {
+            get {
+                return ResourceManager.GetString("LabelTerm1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Term 2.
+        /// </summary>
+        public static string LabelTerm2 {
+            get {
+                return ResourceManager.GetString("LabelTerm2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Term 3.
+        /// </summary>
+        public static string LabelTerm3 {
+            get {
+                return ResourceManager.GetString("LabelTerm3", resourceCulture);
             }
         }
         

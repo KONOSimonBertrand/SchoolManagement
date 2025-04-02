@@ -99,7 +99,7 @@ namespace Primary.SchoolApp
             services.AddTransient<EvaluationSessionStateForm>();
             services.AddTransient<LocalStudentNoteService>();
             services.AddTransient<ReportCardService>();
-           
+            services.AddTransient<RecapNotesForm>();
             return services;
         }
     }

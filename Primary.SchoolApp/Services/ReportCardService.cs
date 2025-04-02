@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Telerik.WinControls.Svg.ExCSS;
 using static Primary.SchoolApp.DTO.DTOItem;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
@@ -912,7 +913,7 @@ namespace Primary.SchoolApp.Services
             // récupération des classes du groupe
             var classList = Program.SchoolClassList.Where(c => c.GroupId == groupId);
             // récupération des salles de classe du groupe
-            var classroomList = Program.SchoolRoomList.Where(r => classList.Any(c => c.Id == r.ClassId)).OrderBy(r => r.Name);
+            var classroomList = Program.SchoolRoomList.Where(r => classList.Any(c => c.Id == r.ClassId)).OrderBy(r => r.Sequence);
             // create columns and data structure for report
             DataTable dataTable = new();
             List<string> columns = new()
@@ -1039,7 +1040,7 @@ namespace Primary.SchoolApp.Services
             // récupération des classes du groupe
             var classList = Program.SchoolClassList.Where(c => c.GroupId == groupId);
             // récupération des salles de classe du groupe
-            var classroomList = Program.SchoolRoomList.Where(r => classList.Any(c => c.Id == r.ClassId)).OrderBy(r => r.Name);
+            var classroomList = Program.SchoolRoomList.Where(r => classList.Any(c => c.Id == r.ClassId)).OrderBy(r => r.Sequence);
             // create columns and data structure for report
             DataTable dataTable = new();
             dataTable.Columns.Add("Id", typeof(string));
@@ -1103,8 +1104,7 @@ namespace Primary.SchoolApp.Services
                     getEvaluationAveragesTask.Add((room, eval), localStudentNoteService.GetEvaluationAverageListByRoom(room.Id, eval.Id, schoolYearId, bookId));
                 }
             }
-            var termAveragesTaskResult = await Task.WhenAll(getTermAveragesTask.Values);
-            var evaluationAveragesTaskResult = await Task.WhenAll(getEvaluationAveragesTask.Values);
+           
             //watch.Stop();
             // Console.WriteLine($"Le temps de traitement est de {watch.ElapsedMilliseconds}");
 
@@ -1246,6 +1246,258 @@ namespace Primary.SchoolApp.Services
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["Failed"].ToString(), out double failedSum))
             {
                 double failedP = termStudentComposed > 0 ? failedSum * 100 / termStudentComposed : 0;
+                dataTable.Rows[classroomList.Count()]["FailedP"] = AppUtilities.RoundingValue(failedP);
+            }
+
+            // create head report
+            ClassGroupReportHeader headerSection = new(
+                      new() {
+                          new("Language",language),
+                          new("ReportTitle",reportTitle),
+                          new("SchoolYear",schoolYearLabel),
+                          new("ClassGroup",classGroupLabel)
+                      }, columns
+                );
+            //create detail of report
+            ClassGroupReportDetail detailSection = new(dataTable);
+            // create footer report         
+            ReportFooter footerSection = new(
+                      new() {
+                          new(string.Empty,string.Empty),
+                      }
+                );
+
+            return new(headerSection, detailSection, footerSection);
+        }
+
+
+        // Statistiques d'une  année d'un groupe de classes
+        public async Task<ClassGroupReport> GetAnnualReportByClassGroupAsync(int groupId,  int schoolYearId, int bookId)
+        {
+            // get data of head report
+
+            var terms = Program.EvaluationSessionParentList;
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == groupId);
+            var reportTitle = "STATISTIQUES ANNUELLES";
+            var schoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == schoolYearId);
+            var language = "FR";
+            var schoolYearLabel = $"Année scolaire {schoolYear.Name}";
+            var classGroupLabel = classGroup.Name;
+            if (classGroup.DocumentLanguageId == 1 || bookId == 1)
+            {
+                reportTitle = "ANNUAL STATISTIC REPORT";
+                schoolYearLabel = $"Academic year {schoolYear.Name}";
+                classGroupLabel = classGroup.Name;
+                language = "EN";
+            }
+            // récupération des classes du groupe
+            var classList = Program.SchoolClassList.Where(c => c.GroupId == groupId);
+            // récupération des salles de classe du groupe
+            var classroomList = Program.SchoolRoomList.Where(r => classList.Any(c => c.Id == r.ClassId)).OrderBy(r => r.Sequence);
+            // create columns and data structure for report
+            DataTable dataTable = new();
+            dataTable.Columns.Add("Id", typeof(string));
+            dataTable.Columns.Add("Classroom", typeof(string));
+            dataTable.Columns.Add("ClassSize", typeof(int));
+
+            List<string> columns = new()
+            {
+                "N°",
+                language == "FR" ? "CLASSE" : "CLASS",
+                language == "FR" ? "NOMBRE D'ELEVES" : "NUMBER OF STUDENT",
+            };
+
+            foreach (var term in terms)
+            {
+                columns.Add(language == "FR" ? $"COMPOSE {term.FrenchName}" : $"COMPOSED {term.EnglishName}");
+                columns.Add(language == "FR" ? $"ABSTENTION {term.FrenchName}" : $"ABSTENTION {term.EnglishName}");
+                columns.Add(language == "FR" ? $"MOYENNE GENERALE {term.FrenchName}" : $"GENERAL AVERAGE {term.EnglishName}");
+                columns.Add(language == "FR" ? $"ADMIS {term.FrenchName}" : $"ADMITTED {term.EnglishName}");
+                columns.Add(language == "FR" ? $"RECALE {term.FrenchName}" : $"FAILED {term.EnglishName}");
+                columns.Add(language == "FR" ? $"% ADMIS {term.FrenchName}" : $"% ADMITED {term.EnglishName}");
+                columns.Add(language == "FR" ? $"% RECALE {term.FrenchName}" : $"% FAILED {term.EnglishName}");
+
+                dataTable.Columns.Add($"Composed{term.Code}", typeof(int));
+                dataTable.Columns.Add($"Abstention{term.Code}", typeof(int));
+                dataTable.Columns.Add($"GeneralAverage{term.Code}", typeof(double));
+                dataTable.Columns.Add($"Admitted{term.Code}", typeof(int));
+                dataTable.Columns.Add($"Failed{term.Code}", typeof(int));
+                dataTable.Columns.Add($"AdmittedP{term.Code}", typeof(double));
+                dataTable.Columns.Add($"FailedP{term.Code}", typeof(double));
+            }
+
+            columns.AddRange(
+                new List<string>() {
+                    language == "FR" ? "COMPOSE" : "COMPOSED",
+                    language == "FR" ? "ABSTENTION" : "ABSTENTION",
+                    language == "FR" ? "MOYENNE GENERALE" : "GENERAL AVERAGE",
+                    language == "FR" ? "ADMIS" : "ADMITTED",
+                    language == "FR" ? "RECALE" : "FAILED",
+                    language == "FR" ? "% ADMIS" : "% ADMITED",
+                    language == "FR" ? "% RECALE" : "% FAILED"
+                }
+                );
+
+            dataTable.Columns.Add("Composed", typeof(int));
+            dataTable.Columns.Add("Abstention", typeof(int));
+            dataTable.Columns.Add("GeneralAverage", typeof(double));
+            dataTable.Columns.Add("Admitted", typeof(int));
+            dataTable.Columns.Add("Failed", typeof(int));
+            dataTable.Columns.Add("AdmittedP", typeof(double));
+            dataTable.Columns.Add("FailedP", typeof(double));
+            Dictionary<SchoolRoom, Task<List<AverageRecord>>> getAnnualAveragesTask = new();
+            Dictionary<(SchoolRoom,EvaluationSession), Task<List<AverageRecord>>> getTermAveragesTask = new();
+            // Création des lignes 
+            foreach (var room in classroomList)
+            {
+                getAnnualAveragesTask.Add(room, localStudentNoteService.GetAnnualAverageListByRoom(room.Id, schoolYearId, bookId));
+                foreach (var term in terms)
+                {
+                    getTermAveragesTask.Add((room,term), localStudentNoteService.GetTermAverageListByRoom(room.Id, term.Code, schoolYearId, bookId));
+                }
+            }
+            var annualAveragesTaskResult = await Task.WhenAll(getAnnualAveragesTask.Values);
+            var termAveragesTaskResult = await Task.WhenAll(getTermAveragesTask.Values);
+            // injection des données
+            int rowId = 1;
+            int currentColum = 2;//
+            double annualtudentComposed = 0;
+            int roomComposed = 0;
+            object[] lastRow = new object[columns.Count]; // ligne des totaux
+            // Initialisation de la ligne des totaux
+            lastRow[0] = string.Empty;
+            lastRow[1] = "TOTAL";
+            for (int i = 2; i < columns.Count; i++)
+            {
+                lastRow[i] = 0;
+            }
+
+            foreach (var room in classroomList)
+            {
+                if (getAnnualAveragesTask.TryGetValue(room, out Task<List<AverageRecord>> annualTask))
+                {
+                    var roomSize = Program.StudentRoomList.Count(x => x.RoomId == room.Id && x.SchoolYearId == schoolYearId);
+                    object[] row = new object[columns.Count];
+                    row[0] = rowId; // numéro de la ligne
+                    row[1] = room.Name;   // nom de la classe
+                    row[2] = roomSize;  // effectif de la classe
+                    lastRow[2] = int.Parse(lastRow[2].ToString()) + roomSize;
+                    //extraction des moyennes de la classe
+
+                    foreach (var term in terms)
+                    {
+                        if (getTermAveragesTask.TryGetValue((room, term), out Task<List<AverageRecord>> termTask))
+                        {
+                            var termAverages = await termTask;
+                            double composedCount = termAverages.Count;
+                            double abstentionCount = roomSize - composedCount;
+                            double generalAverage = composedCount > 0 ? termAverages.Sum(x => x.Average) / composedCount : 0;
+                            double admittedCount = termAverages.Count(x => x.Average >= 10);
+                            double failedCount = termAverages.Count(x => x.Average < 10);
+                            double admittedCountP = composedCount > 0 ? admittedCount * 100 / composedCount : 0;
+                            double failedCountP = composedCount > 0 ? failedCount * 100 / composedCount : 0;
+
+                            row[currentColum += 1] = composedCount;
+                            lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + composedCount;
+                            row[currentColum += 1] = abstentionCount;
+                            lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + abstentionCount;
+                            row[currentColum += 1] = AppUtilities.GetTruncateOrRoundingValue(generalAverage, classGroup);
+                            row[currentColum += 1] = admittedCount;
+                            lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + admittedCount;
+                            row[currentColum += 1] = failedCount;
+                            lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + failedCount;
+                            row[currentColum += 1] = AppUtilities.RoundingValue(admittedCountP);
+                            row[currentColum += 1] = AppUtilities.RoundingValue(failedCountP);
+                        }
+                    }
+                    var annualAverages = await annualTask;
+                    double studentCount = annualAverages.Count;
+                    // Nombre d'élèves ayant composé
+                    row[currentColum += 1] = studentCount;
+                    lastRow[currentColum] = double.Parse(lastRow[currentColum].ToString()) + studentCount;
+                    annualtudentComposed += studentCount;
+                    roomComposed = studentCount > 0 ? roomComposed + 1 : roomComposed;
+                    // Nombre d'élèves n'ayant pas composé
+                    row[currentColum += 1] = roomSize - studentCount;
+                    lastRow[currentColum] = double.Parse(lastRow[currentColum].ToString()) + (roomSize - studentCount);
+                    // moyenne général pour le trimestre 
+                    var termGeneralAverage = studentCount > 0 ? AppUtilities.RoundingValue(annualAverages.Sum(x => x.Average) / studentCount) : 0;
+                    row[currentColum += 1] = termGeneralAverage;
+                    lastRow[currentColum] = termGeneralAverage + double.Parse(lastRow[currentColum].ToString());
+                    // Nombre d'admis pour le trimestre
+                    double termAdmittedCount = annualAverages.Count(a => a.Average >= 10);
+                    row[currentColum += 1] = termAdmittedCount;
+                    lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + termAdmittedCount;
+                    // Nombre de recalés pour le trimestre
+                    double termFailedCount = annualAverages.Count(a => a.Average < 10);
+                    row[currentColum += 1] = termFailedCount;
+                    lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + termFailedCount;
+                    // Pourcentage des admis pour le trimestre
+                    var termAdmittedCountP = studentCount > 0 ? AppUtilities.RoundingValue(termAdmittedCount * 100 / studentCount) : 0;
+                    row[currentColum += 1] = termAdmittedCountP;
+
+                    // Pourcentage des recalés pour le trimestre
+                    var termFailedCountP = studentCount > 0 ? AppUtilities.RoundingValue(termFailedCount * 100 / studentCount) : 0;
+                    row[currentColum += 1] = termFailedCountP;
+                    dataTable.Rows.Add(row);
+                    rowId++;
+                    currentColum = 2;
+
+                }
+            }
+            dataTable.Rows.Add(lastRow);
+
+            // Mise à jour des totaux liés aux évaluations
+            double averagesSum = 0;
+            int averagesCount = 0;
+            foreach (var term in terms)
+            {
+                double admittedP = 0;
+                double failedP = 0;
+                if (double.TryParse(dataTable.Rows[classroomList.Count()][$"Composed{term.Code}"].ToString(), out double composedCount))
+                {
+                    if (double.TryParse(dataTable.Rows[classroomList.Count()][$"Admitted{term.Code}"].ToString(), out double admittedCount))
+                    {
+                        admittedP = composedCount > 0 ? admittedCount * 100 / composedCount : 0;
+                    }
+                    if (double.TryParse(dataTable.Rows[classroomList.Count()][$"Failed{term.Code}"].ToString(), out double failedCount))
+                    {
+                        failedP = composedCount > 0 ? failedCount * 100 / composedCount : 0;
+                    }
+                }
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    var average = double.Parse(row[$"GeneralAverage{term.Code}"].ToString());
+                    averagesCount = average > 0 ? averagesCount + 1 : averagesCount;
+                    averagesSum += average;
+
+                }
+                dataTable.Rows[classroomList.Count()][$"GeneralAverage{term.Code}"] = AppUtilities.RoundingValue(averagesCount > 0 ? averagesSum / averagesCount : 0);
+                averagesSum = 0;
+                averagesCount = 0;
+
+                dataTable.Rows[classroomList.Count()][$"AdmittedP{term.Code}"] = AppUtilities.RoundingValue(admittedP);
+
+                dataTable.Rows[classroomList.Count()][$"FailedP{term.Code}"] = AppUtilities.RoundingValue(failedP);
+            }
+
+            // Mise à jour des totaux liés au trimestre
+            if (double.TryParse(dataTable.Rows[classroomList.Count()]["GeneralAverage"].ToString(), out double averageSum))
+            {
+                double average = roomComposed > 0 ? averageSum / roomComposed : 0;
+                dataTable.Rows[classroomList.Count()]["GeneralAverage"] = AppUtilities.RoundingValue(average);
+            }
+
+            if (double.TryParse(dataTable.Rows[classroomList.Count()]["Admitted"].ToString(), out double admittedSum))
+            {
+                double admittedP = annualtudentComposed > 0 ? admittedSum * 100 / annualtudentComposed : 0;
+                dataTable.Rows[classroomList.Count()]["AdmittedP"] = AppUtilities.RoundingValue(admittedP);
+            }
+
+            if (double.TryParse(dataTable.Rows[classroomList.Count()]["Failed"].ToString(), out double failedSum))
+            {
+                double failedP = annualtudentComposed > 0 ? failedSum * 100 / annualtudentComposed : 0;
                 dataTable.Rows[classroomList.Count()]["FailedP"] = AppUtilities.RoundingValue(failedP);
             }
 

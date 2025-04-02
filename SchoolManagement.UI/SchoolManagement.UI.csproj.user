@@ -119,6 +119,9 @@
     <Compile Update="UI\EvaluationSessionStateForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\RecapNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Student\EditStudentClassForm.cs">
       <SubType>Form</SubType>
     </Compile>

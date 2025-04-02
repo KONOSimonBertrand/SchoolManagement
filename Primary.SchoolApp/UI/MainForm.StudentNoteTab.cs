@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
-using MySqlX.XDevAPI;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.UI;
 using Primary.SchoolApp.Utilities;
@@ -14,7 +13,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Telerik.Reporting;
+using Telerik.Reporting.Processing;
 using Telerik.WinControls;
 using Telerik.WinControls.Enumerations;
 using Telerik.WinControls.UI;
@@ -27,9 +26,17 @@ namespace Primary.SchoolApp
         private SchoolRoom selectedRoom;
         private EvaluationSession selectedEvaluation;
         private EvaluationSession selectedFatherEvaluation;
-        private int selectedBookId=0;
+        private int selectedBookId = 0;
         private bool updatingStudentNoteToggleState = false;
         private bool eventFireBySelectedRoom = true;
+        private readonly Dictionary<int?, List<RecapNoteItem>>recapNotesTaskResult = new();
+        private readonly  Dictionary<int?,List<StudentDisciplinarySheet>>disciplinarySheetTaskResult= new();
+        private readonly Dictionary<int?, ClassroomReport> classroomReportTaskResult= new();
+        private readonly Dictionary<int?, ClassGroupReport> classGroupReportTaskResult = new();
+        private readonly Dictionary<int?, List<TermReportCard>> termReportCardTaskResult = new();
+        private readonly Dictionary<int?, List<EvaluationReportCard>> evaluationReportCardTaskResult = new();
+        private string selectedArea = "room";
+        private int runningTaskCount = 0;
         private void InitStudentNotePage()
         {
             InitStudentNoteGridView();
@@ -57,7 +64,7 @@ namespace Primary.SchoolApp
         {
             var groups = new BindingList<ListViewDataItemGroup>();
             StudentNoteLeftListView.ShowCheckBoxes = false;
-            foreach(var father in Program.EvaluationSessionParentList.OrderBy(e=>e.Sequence))
+            foreach (var father in Program.EvaluationSessionParentList.OrderBy(e => e.Sequence))
             {
                 var group = new ListViewDataItemGroup
                 {
@@ -75,17 +82,17 @@ namespace Primary.SchoolApp
                     Text = child.FrenchName,
                     Key = child.Id,
                     Tag = child,
-                    Group=groups.FirstOrDefault(g=> ((EvaluationSession) g.Tag).Id==child.Mother)
+                    Group = groups.FirstOrDefault(g => ((EvaluationSession)g.Tag).Id == child.Mother)
                 };
                 StudentNoteLeftListView.Items.Add(dataItem);
             }
-            StudentNoteLeftListView.SelectedIndex =-1;
-            if(StudentNoteLeftListView.SelectedItem!= null)
+            StudentNoteLeftListView.SelectedIndex = -1;
+            if (StudentNoteLeftListView.SelectedItem != null)
             {
-                var sessionId= int.Parse(StudentNoteLeftListView.SelectedItem.Key.ToString());
-                selectedEvaluation = Program.EvaluationSessionList.FirstOrDefault(x=>x.Id== sessionId);
+                var sessionId = int.Parse(StudentNoteLeftListView.SelectedItem.Key.ToString());
+                selectedEvaluation = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == sessionId);
             }
-           
+
         }
         // create columns to load average list
         private void InitStudentNoteGridViewForAverages()
@@ -106,7 +113,7 @@ namespace Primary.SchoolApp
             averageColumn.HeaderText = Language.LabelAverage;
             ratingColumn.HeaderText = Language.LabelGrading;
             PositionColumn.HeaderText = Language.LabelPosition;
-           
+
             this.StudentNoteGridView.Columns.Add(studentIdNumberColumn);
             this.StudentNoteGridView.Columns.Add(studentNameColumn);
             this.StudentNoteGridView.Columns.Add(averageColumn);
@@ -181,12 +188,13 @@ namespace Primary.SchoolApp
             StudentNoteSearchTextBox.TextChanged += (o, ev) => { StudentNoteGridView.MasterTemplate.Refresh(); };
             StudentNoteGridView.CustomFiltering += StudentNoteGridView_CustomFiltering;
             StudentNoteGridView.ContextMenuOpening += StudentNoteGridView_ContextMenuOpening;
-            StudentNoteGroupDropDownList.SelectedValueChanged += (o, ev) => {
+            StudentNoteGroupDropDownList.SelectedValueChanged += (o, ev) =>
+            {
                 if (StudentNoteGroupDropDownList.SelectedIndex != -1)
                 {
                     if (!eventFireBySelectedRoom)
                     {
-                        LoadDataToStudentNoteGridView(); 
+                        LoadDataToStudentNoteGridView();
                     }
                     eventFireBySelectedRoom = false;
                 }
@@ -204,7 +212,7 @@ namespace Primary.SchoolApp
                     StudentNoteSearchTextBox.Text = string.Empty;
                     selectedRoom = room;
                     var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
-                    var classGroup= Program.SchoolGroupList.FirstOrDefault(x=>x.Id==classOfRoom.GroupId);
+                    var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
                     if (classOfRoom != null)
                     {
 
@@ -263,116 +271,531 @@ namespace Primary.SchoolApp
                 {
                     var data = StudentNoteGridView.CurrentRow.DataBoundItem as AverageRecord;
                     var classOfRoom = Program.SchoolClassList.First(x => x.Id == selectedRoom.ClassId);
-                    RadMenuItem printStudentReportCardMenu = new($"{Language.LabelReportCard} {data.Student.FullName}")
+                    RadMenuItem showStudentReportCardMenu = new($"{Language.LabelReportCard} {data.Student.FullName}")
                     {
                         Image = AppUtilities.GetImage("View")
                     };
-                    RadMenuItem printRoomReportCardMenu = new($" {Language.LabelReportCards} {selectedRoom.Name}")
+                    RadMenuItem showRoomReportCardMenu = new($" {Language.LabelReportCards} {selectedRoom.Name}")
                     {
                         Image = AppUtilities.GetImage("View")
                     };
-                    RadMenuItem printStudentDisciplinarySheetMenu = new($" {Language.labelDisciplinarySheet} {data.Student.FullName}")
+                    RadMenuItem showStudentDisciplinarySheetMenu = new($" {Language.labelDisciplinarySheet} {data.Student.FullName}")
                     {
                         Image = AppUtilities.GetImage("View")
                     };
-                    RadMenuItem printRoomDisciplinarySheetMenu = new($" {Language.LabelDisciplinarySheets} {selectedRoom.Name}")
+                    RadMenuItem showRoomDisciplinarySheetMenu = new($" {Language.LabelDisciplinarySheets} {selectedRoom.Name}")
                     {
                         Image = AppUtilities.GetImage("View")
                     };
-                    RadMenuItem printRoomReportMenu = new($" {Language.LabelClassroomReport} {selectedRoom.Name}")
+                    RadMenuItem showRoomReportMenu = new($" {Language.LabelClassroomReport} {selectedRoom.Name}")
                     {
                         Image = AppUtilities.GetImage("View")
                     };
                     var group = Program.SchoolGroupList.FirstOrDefault(s => s.Id == classOfRoom.GroupId);
-                    RadMenuItem printGroupStatisticReportMenu = new($" {Language.LabelEvaluationStatistique} {group.Name}")
+                    var statisticTitle = selectedFatherEvaluation != null ? Language.LabelQuarterlyStatistic : Language.LabelEvaluationStatistic;
+                    RadMenuItem showGroupStatisticReportMenu = new($" {statisticTitle} {group.Name}")
                     {
                         Image = AppUtilities.GetImage("View")
                     };
-                    printStudentReportCardMenu.Click += PrintStudentReportCardMenu_Click;
-                    printRoomReportCardMenu.Click += PrintRoomReportCardMenu_Click;
-                    printRoomReportMenu.Click += PrintRoomReportMenu_Click;
-                    printGroupStatisticReportMenu.Click+= PrintGroupStatisticReportMenu_Click;
-                    printStudentDisciplinarySheetMenu.Click += PrintStudentDisciplinarySheetMenu_Click;
-                    printRoomDisciplinarySheetMenu.Click += PrintRoomDisciplinarySheetMenu_Click;
+                    RadMenuItem showGroupAnnualStatisticReportMenu = new($" {Language.LabelAnnualStatistic} {group.Name}")
+                    {
+                        Image = AppUtilities.GetImage("View")
+                    };
+                    RadMenuItem showRoomAnnualRecapMenu = new($" {Language.LabelAnnualSummaryNotes} {selectedRoom.Name}")
+                    {
+                        Image = AppUtilities.GetImage("View")
+                    };
+                    RadMenuItem showClassAnnualRecapMenu = new($" {Language.LabelAnnualSummaryNotes} {classOfRoom.Name}")
+                    {
+                        Image = AppUtilities.GetImage("View")
+                    };
+                    RadMenuItem showGroupAnnualRecapMenu = new($" {Language.LabelAnnualSummaryNotes} {group.Name}")
+                    {
+                        Image = AppUtilities.GetImage("View")
+                    };
+                    showStudentReportCardMenu.Click += async (sender,e)=>await ShowStudentReportCardMenu_Click(sender, e);
+                    showRoomReportCardMenu.Click += async(sender,e)=> await ShowRoomReportCardMenu_Click(sender,e);
+                    showRoomReportMenu.Click += async (sender, e) => await ShowClassRoomReportMenu_Click(sender,e);
+                    showGroupStatisticReportMenu.Click += async (sender, e) => await ShowGroupStatisticReportMenu_Click(sender, e);
+                    showGroupAnnualStatisticReportMenu.Click += async (sender, e) => await ShowAnnualStatisticReportMenu_Click(sender, e);
+                    showStudentDisciplinarySheetMenu.Click +=  async(sender,e)=> await ShowStudentDisciplinarySheetMenu_Click(sender,e);
+                    showRoomDisciplinarySheetMenu.Click += async (sender, e) => await ShowRoomDisciplinarySheetMenu_Click(sender, e);
+                    showRoomAnnualRecapMenu.Click += async (sender, e) => await ShowRoomAnnualRecapMenu_Click(sender,e);
+                    showClassAnnualRecapMenu.Click += async (sender, e) => await ShowClassAnnualRecapMenu_Click(sender, e);
+                    showGroupAnnualRecapMenu.Click +=  async (sender, e) => await ShowGroupAnnualRecapMenu_Click(sender, e);
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                    e.ContextMenu.Items.Add(printStudentReportCardMenu);
-                    e.ContextMenu.Items.Add(printRoomReportCardMenu);
+                    e.ContextMenu.Items.Add(showStudentReportCardMenu);
+                    e.ContextMenu.Items.Add(showRoomReportCardMenu);
+
 
                     if (selectedFatherEvaluation != null)
                     {
                         e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                        e.ContextMenu.Items.Add(printStudentDisciplinarySheetMenu);
-                        e.ContextMenu.Items.Add(printRoomDisciplinarySheetMenu);
-
+                        e.ContextMenu.Items.Add(showStudentDisciplinarySheetMenu);
+                        e.ContextMenu.Items.Add(showRoomDisciplinarySheetMenu);
                     }
                     e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
-                    e.ContextMenu.Items.Add(printRoomReportMenu);
-                    e.ContextMenu.Items.Add(printGroupStatisticReportMenu);
+                    e.ContextMenu.Items.Add(showRoomReportMenu);
+                    e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                    e.ContextMenu.Items.Add(showGroupStatisticReportMenu);
+                    if (selectedFatherEvaluation != null)
+                    {
+                        e.ContextMenu.Items.Add(showGroupAnnualStatisticReportMenu);
+                        e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                        e.ContextMenu.Items.Add(showRoomAnnualRecapMenu);
+                        e.ContextMenu.Items.Add(showClassAnnualRecapMenu);
+                        e.ContextMenu.Items.Add(showGroupAnnualRecapMenu);
+
+                    }
                 }
             }
-               
+
         }
 
-        private void PrintRoomDisciplinarySheetMenu_Click(object sender, EventArgs e)
-        {
-            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
-            {
-                printService.PrintDisciplinarySheetRoomReportAsync(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-            }
-        }
-
-        // impression de la fiche de discipline
-        private void PrintStudentDisciplinarySheetMenu_Click(object sender, EventArgs e)
-        {
-            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
-            {
-                printService.PrintDisciplinarySheetStudentReportAsync(selectedRecord.Student.Id, selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
-            }
-        }
-
-        private void PrintRoomReportMenu_Click(object sender, EventArgs e)
+        private async Task ShowAnnualStatisticReportMenu_Click(object sender, EventArgs e)
         {
             if (StudentNoteGridView.CurrentRow != null)
             {
-                int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
-                printService.PrintClassRoomReportAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+                selectedArea = "annual";
+                if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+                {
+                    this.TaskWaitingBar.StartWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+                }
+                var task = Task.Run(ShowStatisticReport);
+                runningTaskCount++;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                await task;
+                if (classGroupReportTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.LoadClassGroupReport(result);
+                    form.WindowState = FormWindowState.Maximized;
+                    form.Show();
+                    disciplinarySheetTaskResult.Remove(task.Id);
+                }
             }
+
         }
-        private  async void PrintGroupStatisticReportMenu_Click(object sender, EventArgs e)
+        // Affichage des statistique d'un groupe
+        private void ShowStatisticReport()
         {
-            if (StudentNoteGridView.CurrentRow != null)
+            Task<ClassGroupReport> getDataTask = null;
+            var selectedClass = Program.SchoolClassList.FirstOrDefault(c => c.Id == selectedRoom.ClassId);
+
+            if (selectedArea == "annual")
             {
-                this.TaskWaitingBar.StartWaiting();
-                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+                getDataTask = reportCardService.GetAnnualReportByClassGroupAsync(selectedClass.GroupId, Program.CurrentSchoolYear.Id, selectedBookId);
+            }
+            else
+            {
                 int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
-                var classOfRoom=Program.SchoolClassList.FirstOrDefault(x=>x.Id == selectedRoom.ClassId);
-                await printService.PrintClassGroupReportAsync(classOfRoom.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId).ConfigureAwait(false);
-                //var task=printService.PrintClassGroupReportAsync(classOfRoom.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
-                //await task;
+                var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evalId);
+
+                if (eval.Code.Contains("TERM"))
+                {
+                    getDataTask = reportCardService.GetTermReportByClassGroupAsync(selectedClass.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+                }
+                else
+                {
+                    getDataTask = reportCardService.GetEvaluationReportByClassGroupAsync(selectedClass.GroupId, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+                }
+            }
+                
+            classGroupReportTaskResult.Add(Task.CurrentId, getDataTask.Result);
+            runningTaskCount--;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            if (runningTaskCount == 0)
+            {
                 this.TaskWaitingBar.StopWaiting();
                 this.TaskWaitingBar.ResetWaiting();
                 this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
             }
         }
-
-        private void PrintRoomReportCardMenu_Click(object sender, EventArgs e)
+        private async Task ShowRoomAnnualRecapMenu_Click(object sender, EventArgs e)
         {
-            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord averageRecord)
+            if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
             {
-                int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
-                printService.PrintReportCardByClassRoomAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+            }
+            selectedArea = "room";
+            var task = Task.Run(ShowRecapNotes);
+            runningTaskCount++;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            await task;
+            if (recapNotesTaskResult.TryGetValue(task.Id, out var result))
+            {
+                var form = Program.ServiceProvider.GetService<RecapNotesForm>();
+                form.Text = Language.LabelAnnualSummaryNotes + ": " + Program.CurrentSchoolYear.Name;
+                form.Icon = this.Icon;
+                form.WindowState = FormWindowState.Maximized;
+                form.InitStartUp(result, selectedRoom, "room");
+                form.Show();
+                recapNotesTaskResult.Remove(task.Id);
+            }
+        }
+        private async Task ShowClassAnnualRecapMenu_Click(object sender, EventArgs e)
+        {
+            if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+            {
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+            }
+            selectedArea = "class";
+            var task = Task.Run(ShowRecapNotes);
+            runningTaskCount++;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            await task;
+            if (recapNotesTaskResult.TryGetValue(task.Id, out var result))
+            {
+                var form = Program.ServiceProvider.GetService<RecapNotesForm>();
+                form.Text = Language.LabelAnnualSummaryNotes + ": " + Program.CurrentSchoolYear.Name;
+                form.Icon = this.Icon;
+                form.WindowState = FormWindowState.Maximized;
+                form.InitStartUp(result, selectedRoom, "class");
+                form.Show();
+                recapNotesTaskResult.Remove(task.Id);
+            }
+        }
+        private async Task ShowGroupAnnualRecapMenu_Click(object sender, EventArgs e)
+        {
+
+            if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+            {
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+            }
+            selectedArea = "group";
+            var task=Task.Run(ShowRecapNotes);
+            runningTaskCount++;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            await task;
+            if (recapNotesTaskResult.TryGetValue(task.Id, out var result)) {
+                var form = Program.ServiceProvider.GetService<RecapNotesForm>();
+                form.Text = Language.LabelAnnualSummaryNotes + ": " + Program.CurrentSchoolYear.Name;
+                form.Icon = this.Icon;
+                form.WindowState = FormWindowState.Maximized;
+                form.InitStartUp(result, selectedRoom, "group");
+                form.Show();
+                recapNotesTaskResult.Remove(task.Id);
+            } 
+        }
+
+        private void ShowRecapNotes()
+        {
+            Task<List<RecapNoteItem>> getDataTask = null ;
+            switch (selectedArea)
+            {
+                case "room":
+                    getDataTask = localStudentNoteService.GetRecapNotesByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    break;
+                case "class":
+                    getDataTask = localStudentNoteService.GetRecapNotesByClass(selectedRoom.ClassId, Program.CurrentSchoolYear.Id, selectedBookId);
+                    break;
+                case "group":
+                    var selectedClass = Program.SchoolClassList.FirstOrDefault(c => c.Id == selectedRoom.ClassId);
+                    getDataTask = localStudentNoteService.GetRecapNotesByGroup(selectedClass.GroupId, Program.CurrentSchoolYear.Id, selectedBookId);
+                    break;
+                default:
+                    getDataTask = localStudentNoteService.GetRecapNotesByRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    break;
+            }
+            recapNotesTaskResult.Add(Task.CurrentId, getDataTask.Result);
+            runningTaskCount--;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            if (runningTaskCount == 0) {
+                this.TaskWaitingBar.StopWaiting();
+                this.TaskWaitingBar.ResetWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
+            }
+        }
+        private void ShowStudentDisciplinarySheet()
+        {
+            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
+            {
+                var getDataTask = reportCardService.GetDisciplinarySheetByStudent(selectedRecord.Student.Id,selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                disciplinarySheetTaskResult.Add(Task.CurrentId, new() { getDataTask.Result });
+                runningTaskCount--;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                if (runningTaskCount == 0)
+                {
+                    this.TaskWaitingBar.StopWaiting();
+                    this.TaskWaitingBar.ResetWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
+                }
+            }
+           
+        }
+        private void ShowClassroomDisciplinarySheet()
+        {
+            var getDataTask = reportCardService.GetDisciplinarySheetByClassRoom(selectedRoom.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+            disciplinarySheetTaskResult.Add(Task.CurrentId, getDataTask.Result);
+            runningTaskCount--;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            if (runningTaskCount == 0)
+            {
+                this.TaskWaitingBar.StopWaiting();
+                this.TaskWaitingBar.ResetWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
+            }
+        }
+        // Affiche les fiches de disciplines des élèves d'une salle de classe
+        private async Task ShowRoomDisciplinarySheetMenu_Click(object sender, EventArgs e)
+        {
+            if (StudentNoteGridView.CurrentRow != null)
+            {
+                if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+                {
+                    this.TaskWaitingBar.StartWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+                }
+                selectedArea = "room";
+
+                var task = Task.Run(ShowClassroomDisciplinarySheet);
+                runningTaskCount++;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                await task;
+                if (disciplinarySheetTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.WindowState = FormWindowState.Maximized;
+                    form.LoadDisciplinarySheet(result);
+                    form.Show();
+                    disciplinarySheetTaskResult.Remove(task.Id);
+                }
+            } 
+        }
+
+        // Affiche la fiche de discipline d'un élève
+        private async Task ShowStudentDisciplinarySheetMenu_Click(object sender, EventArgs e)
+        {
+            if (StudentNoteGridView.CurrentRow != null)
+            {
+                if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+                {
+                    this.TaskWaitingBar.StartWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+                }
+                selectedArea = "room";
+
+                var task = Task.Run(ShowStudentDisciplinarySheet);
+                runningTaskCount++;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                await task;
+                if (disciplinarySheetTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.WindowState = FormWindowState.Maximized;
+                    form.LoadDisciplinarySheet(result);
+                    form.Show();
+                    disciplinarySheetTaskResult.Remove(task.Id);
+                }
             }
         }
 
-        private void PrintStudentReportCardMenu_Click(object sender, EventArgs e)
+        private async Task ShowClassRoomReportMenu_Click(object sender, EventArgs e)
         {
 
-            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord averageRecord) {
-                
-                int evalId= selectedEvaluation != null? selectedEvaluation.Id:selectedFatherEvaluation.Id;
-                printService.PrintReportCardByStudentAsync(averageRecord.Student.Id, selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+            if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+            {
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
             }
-            
+            var task = Task.Run(ShowClassroomReport);
+            runningTaskCount++;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            await task;
+            if (classroomReportTaskResult.TryGetValue(task.Id, out var result))
+            {
+                var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                form.Icon = this.Icon;
+                form.LoadClassroomReport(result);
+                form.WindowState = FormWindowState.Maximized;
+                form.Show();
+                disciplinarySheetTaskResult.Remove(task.Id);
+            }
+        }
+        // Affiche le procès verbale d'une évaluation ou d'un trimestre
+        private void ShowClassroomReport()
+        {
+            Task<ClassroomReport> getDataTask = null;
+            int evalId = selectedEvaluation != null ? selectedEvaluation.Id : selectedFatherEvaluation.Id;
+            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evalId);
+            if (eval.Code.Contains("TERM"))
+            {
+                getDataTask = reportCardService.GetTermReportByClassRoomAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+            }
+            else
+            {
+                getDataTask = reportCardService.GetEvaluationReportByClassRoomAsync(selectedRoom.Id, evalId, Program.CurrentSchoolYear.Id, selectedBookId);
+            }
+            classroomReportTaskResult.Add(Task.CurrentId, getDataTask.Result);
+            runningTaskCount--;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            if (runningTaskCount == 0)
+            {
+                this.TaskWaitingBar.StopWaiting();
+                this.TaskWaitingBar.ResetWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
+            }
+        }
+        private async Task ShowGroupStatisticReportMenu_Click(object sender, EventArgs e)
+        {
+            if (StudentNoteGridView.CurrentRow != null)
+            {
+                selectedArea = "evaluation";
+                if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+                {
+                    this.TaskWaitingBar.StartWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+                }
+                var task = Task.Run(ShowStatisticReport);
+                runningTaskCount++;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                await task;
+                if (classGroupReportTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.WindowState = FormWindowState.Maximized;
+                    form.LoadClassGroupReport(result);
+                    form.Show();
+                    disciplinarySheetTaskResult.Remove(task.Id);
+                }
+            }
+        }
+
+        private async Task ShowRoomReportCardMenu_Click(object sender, EventArgs e)
+        {
+            Task task;
+            selectedArea = "room";
+            if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+            {
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+            }
+
+            task = selectedEvaluation != null ? Task.Run(ShowEvaluationReportCard) : Task.Run(ShowTermReportCard);
+            runningTaskCount++;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            await task;
+            if (selectedEvaluation != null)
+            {
+                if (evaluationReportCardTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.LoadEvaluationReportCard(result);
+                    form.WindowState = FormWindowState.Maximized;
+                    form.Show();
+                    evaluationReportCardTaskResult.Remove(task.Id);
+                }
+            }
+            else
+            {
+                if (termReportCardTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.LoadTermReportCard(result);
+                    form.WindowState = FormWindowState.Maximized;
+                    form.Show();
+                    termReportCardTaskResult.Remove(task.Id);
+                }
+            }
+        }
+        private async Task ShowStudentReportCardMenu_Click(object sender, EventArgs e)
+        {
+            Task task;
+            selectedArea = "student";
+            if (this.TaskWaitingBar.Visibility == ElementVisibility.Hidden)
+            {
+                this.TaskWaitingBar.StartWaiting();
+                this.TaskWaitingBar.Visibility = ElementVisibility.Visible;
+            }
+
+            task = selectedEvaluation != null?Task.Run(ShowEvaluationReportCard): Task.Run(ShowTermReportCard);
+            runningTaskCount++;
+            this.TaskWaitingBar.Text = runningTaskCount.ToString();
+            await task;
+            if(selectedEvaluation != null)
+            {
+                if (evaluationReportCardTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.LoadEvaluationReportCard(result);
+                    form.WindowState = FormWindowState.Maximized;
+                    form.Show();
+                    evaluationReportCardTaskResult.Remove(task.Id);
+                }
+            }
+            else
+            {
+                if (termReportCardTaskResult.TryGetValue(task.Id, out var result))
+                {
+                    var form = Program.ServiceProvider.GetService<ReportViewerForm>();
+                    form.Icon = this.Icon;
+                    form.LoadTermReportCard(result);
+                    form.WindowState = FormWindowState.Maximized;
+                    form.Show();
+                    termReportCardTaskResult.Remove(task.Id);
+                }
+            }
+        }
+        private void ShowEvaluationReportCard()
+        {
+
+            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
+            {
+                if (selectedArea == "student")
+                {
+                    var task = reportCardService.GetEvaluationReportCardByStudentAsync(selectedRecord.Student.Id, selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    evaluationReportCardTaskResult.Add(Task.CurrentId, new() { task.Result });
+                }
+                else
+                {
+                    var task = reportCardService.GetEvaluationReportCardByClassRoomAsync(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    evaluationReportCardTaskResult.Add(Task.CurrentId, task.Result);
+                }
+                runningTaskCount--;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                if (runningTaskCount == 0)
+                {
+                    this.TaskWaitingBar.StopWaiting();
+                    this.TaskWaitingBar.ResetWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
+                }
+            }
+        }
+        private void ShowTermReportCard()
+        {
+
+            if (StudentNoteGridView.CurrentRow != null && StudentNoteGridView.CurrentRow.DataBoundItem is AverageRecord selectedRecord)
+            {
+                if (selectedArea == "student")
+                {
+                    var task = reportCardService.GetTermReportCardByStudentAsync(selectedRecord.Student.Id, selectedRoom.Id, selectedFatherEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    termReportCardTaskResult.Add(Task.CurrentId, new() { task.Result });
+                }
+                else
+                {
+                    var task = reportCardService.GetTermReportCardByClassRoomAsync(selectedRoom.Id, selectedFatherEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
+                    termReportCardTaskResult.Add(Task.CurrentId, task.Result);
+                }
+                runningTaskCount--;
+                this.TaskWaitingBar.Text = runningTaskCount.ToString();
+                if (runningTaskCount == 0)
+                {
+                    this.TaskWaitingBar.StopWaiting();
+                    this.TaskWaitingBar.ResetWaiting();
+                    this.TaskWaitingBar.Visibility = ElementVisibility.Hidden;
+                }
+            }
         }
 
         private void StudentNoteGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
@@ -385,11 +808,11 @@ namespace Primary.SchoolApp
                     e.Visible &= e.Row.Cells["Student.IdNumber"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower()) ||
                     e.Row.Cells["Student.FullName"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower()) ||
                     e.Row.Cells["Rating"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["Position"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower()) ;
+                     e.Row.Cells["Position"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower());
                 }
                 else
                 {
-                    if (e.Row.Cells.Count==6)
+                    if (e.Row.Cells.Count == 6)
                     {
                         e.Visible &= e.Row.Cells["Student.IdNumber"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower()) ||
                        e.Row.Cells["Student.FullName"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower()) ||
@@ -398,7 +821,7 @@ namespace Primary.SchoolApp
                        e.Row.Cells[$"Subject.{GetSubjectField()}"].Value.ToString().ToLower().Contains(StudentNoteSearchTextBox.Text.ToLower());
                     }
                 }
-                
+
             }
         }
 
@@ -422,7 +845,7 @@ namespace Primary.SchoolApp
             LoadDataToStudentNoteGridView();
             this.updatingStudentNoteToggleState = false;
 
-            
+
         }
         private void StudentNoteToggleButton_ToggleStateChanging(object sender, StateChangingEventArgs args)
         {
@@ -435,13 +858,13 @@ namespace Primary.SchoolApp
         {
             if (e.Item.Tag != null)
             {
-                if(e.Item.Tag is EvaluationSession session)
+                if (e.Item.Tag is EvaluationSession session)
                 {
                     if (Program.EvaluationSessionParentList.Any(x => x.Id == session.Id))
                     {
                         selectedFatherEvaluation = session;
                         selectedEvaluation = null;
-                        StudentNoteListViewToggleButton.Enabled=false;
+                        StudentNoteListViewToggleButton.Enabled = false;
                     }
                     else
                     {
@@ -452,9 +875,9 @@ namespace Primary.SchoolApp
                     LoadDataToStudentNoteGridView();
                 }
             }
-            
+
         }
-        
+
         // show ui to import notes
         private void StudentNoteImportNoteMenu_Click(object sender, EventArgs e)
         {
@@ -464,7 +887,7 @@ namespace Primary.SchoolApp
                 {
                     if (selectedRoom != null)
                     {
-                       
+
                     }
                     else
                     {
@@ -482,16 +905,19 @@ namespace Primary.SchoolApp
             }
         }
         //load note in data grid
-        private async void  LoadDataToStudentNoteGridView()
+        private async void LoadDataToStudentNoteGridView()
         {
-            if (StudentNoteLeftListView.SelectedItem != null) {
-                if (StudentNoteRoomDropDownList.SelectedItem != null) {
-                    selectedBookId = StudentNoteGroupDropDownList.SelectedItem!=null? int.Parse(StudentNoteGroupDropDownList.SelectedItem.Value.ToString()):0;
+            if (StudentNoteLeftListView.SelectedItem != null)
+            {
+                if (StudentNoteRoomDropDownList.SelectedItem != null)
+                {
+                    selectedBookId = StudentNoteGroupDropDownList.SelectedItem != null ? int.Parse(StudentNoteGroupDropDownList.SelectedItem.Value.ToString()) : 0;
                     if (StudentNoteIconViewToggleButton.ToggleState == ToggleState.On)
                     {
                         InitStudentNoteGridViewForAverages();
                         List<DTOItem.AverageRecord> dataSource;
-                        if (selectedEvaluation != null) {
+                        if (selectedEvaluation != null)
+                        {
                             dataSource = await localStudentNoteService.GetEvaluationAverageListByRoom(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);
                         }
                         else
@@ -522,9 +948,9 @@ namespace Primary.SchoolApp
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if(selectedEvaluation!= null)
+                if (selectedEvaluation != null)
                 {
-                    if(selectedRoom != null)
+                    if (selectedRoom != null)
                     {
                         var evalState = evaluationSessionService.GetEvaluationSessionStateAsync(selectedEvaluation.Id, Program.CurrentSchoolYear.Id).Result;
                         if (evalState != null)
@@ -533,9 +959,9 @@ namespace Primary.SchoolApp
                             {
                                 selectedBookId = StudentNoteGroupDropDownList.SelectedItem != null ? int.Parse(StudentNoteGroupDropDownList.SelectedItem.Value.ToString()) : 0;
                                 var form = Program.ServiceProvider.GetService<AddStudentNotesForm>();
-                                var evaluationName= Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? selectedEvaluation.EnglishName : selectedEvaluation.FrenchName;
+                                var evaluationName = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? selectedEvaluation.EnglishName : selectedEvaluation.FrenchName;
                                 form.Text = $"{Language.labelSchoolYear} {Program.CurrentSchoolYear.Name} {evaluationName}";
-                                form.InitStartup(selectedRoom, selectedEvaluation,selectedBookId);
+                                form.InitStartup(selectedRoom, selectedEvaluation, selectedBookId);
                                 form.Icon = this.Icon;
                                 form.Show();
                             }
@@ -578,7 +1004,7 @@ namespace Primary.SchoolApp
                                 selectedBookId = StudentNoteGroupDropDownList.SelectedItem != null ? int.Parse(StudentNoteGroupDropDownList.SelectedItem.Value.ToString()) : 0;
                                 var form = Program.ServiceProvider.GetService<AddStudentNoteForm>();
                                 form.Text = Language.labelAdd + ":.." + Language.labelNote;
-                                form.InitStartup(selectedRoom, selectedEvaluation,selectedBookId);
+                                form.InitStartup(selectedRoom, selectedEvaluation, selectedBookId);
                                 form.Icon = this.Icon;
                                 if (form.ShowDialog(this) == DialogResult.OK)
                                 {
@@ -605,7 +1031,7 @@ namespace Primary.SchoolApp
             {
                 RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
             }
-            
+
         }
         // edit selected note
         private void StudentNoteEditMenu_Click(object sender, EventArgs e)
