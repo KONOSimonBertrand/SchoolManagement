@@ -102,6 +102,30 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
+        public async Task<IList<Discipline>> GetDisciplineListByRoomAsync(int roomId, int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM Disciplines A 
+                            INNER JOIN  DisciplineSubjects B ON A.SubjectId=B.Id
+                            INNER JOIN  EvaluationSessions C ON A.EvaluationId=C.Id
+                            INNER JOIN  Students D ON A.StudentId=D.Id
+                            INNER JOIN  SchoolYears E ON A.SchoolYearId=E.Id
+                            WHERE A.SchoolYearId=@schoolYearId  
+                            AND A.StudentId IN(SELECT StudentId FROM StudentsRooms WHERE SchoolYearId=@schoolYearId AND RoomId=@roomId) 
+                            ORDER BY A.Date DESC ;";
+            var result = connection.Query<Discipline, DisciplineSubject, EvaluationSession, Student, SchoolYear, Discipline>(query
+                , (discipline, subject, evaluation, student, schoolYear) =>
+                {
+                    discipline.Subject = subject;
+                    discipline.Evaluation = evaluation;
+                    discipline.Student = student;
+                    discipline.SchoolYear = schoolYear;
+                    return discipline;
+                }
+                , new { roomId, schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
         public async Task<IList<Discipline>> GetDisciplineListByClassAsync(int classId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();

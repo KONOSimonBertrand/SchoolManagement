@@ -186,7 +186,7 @@ namespace Primary.SchoolApp
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new EvaluationPrimaryReportCardReport(reportCard)
+                ReportDocument = new PrimaryEvaluationReportCardReport(reportCard)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -197,7 +197,7 @@ namespace Primary.SchoolApp
         {
             InstanceReportSource reportSource = new()
             {
-                ReportDocument = new TermPrimaryReportCardReport(reportCard)
+                ReportDocument = new PrimaryTermReportCardReport(reportCard)
             };
             reportViewer.AutoSize = true;
             reportViewer.ReportSource = reportSource;
@@ -207,15 +207,25 @@ namespace Primary.SchoolApp
         {
             var reportBook = new ReportBook();
             foreach (var reportCard in reportCardList) {
-                InstanceReportSource reportSource = new()
+
+                InstanceReportSource reportSource = new();
+                switch (reportCard.HeadSection.ClassRoom.SchoolClass.ReportCardModel)
                 {
-                    ReportDocument = new EvaluationPrimaryReportCardReport(reportCard)
-                };
+                    case 0:
+                        reportSource.ReportDocument = new PrimaryEvaluationReportCardReport(reportCard);
+                        break;
+                    case 1:
+                        reportSource.ReportDocument = new GardenEvaluationReportCardReport(reportCard);
+                        break;
+                    default:
+                        reportSource.ReportDocument = new PrimaryEvaluationReportCardReport(reportCard);
+                        break;
+                }
                 reportBook.ReportSources.Add(reportSource);
             }
             
             reportViewer.AutoSize = true;
-            InstanceReportSource reportSourceFinal = new InstanceReportSource
+            InstanceReportSource reportSourceFinal = new ()
             {
                 ReportDocument = reportBook
             };
@@ -230,13 +240,33 @@ namespace Primary.SchoolApp
             {
                 InstanceReportSource reportSource = new()
                 {
-                    ReportDocument = new TermPrimaryReportCardReport(reportCard)
+                    ReportDocument = new PrimaryTermReportCardReport(reportCard)
                 };
                 reportBook.ReportSources.Add(reportSource);
             }
 
             reportViewer.AutoSize = true;
             InstanceReportSource reportSourceFinal = new InstanceReportSource
+            {
+                ReportDocument = reportBook
+            };
+            reportViewer.ReportSource = reportSourceFinal;
+            reportViewer.RefreshReport();
+        }
+        internal void LoadAnnualReportCard(List<TermReportCard> reportCardList)
+        {
+            var reportBook = new ReportBook();
+            foreach (var reportCard in reportCardList)
+            {
+                InstanceReportSource reportSource = new()
+                {
+                    ReportDocument = new PrimaryAnnualReportCardReport(reportCard)
+                };
+                reportBook.ReportSources.Add(reportSource);
+            }
+
+            reportViewer.AutoSize = true;
+            InstanceReportSource reportSourceFinal = new ()
             {
                 ReportDocument = reportBook
             };

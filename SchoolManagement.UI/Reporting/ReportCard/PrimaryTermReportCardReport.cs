@@ -5,7 +5,7 @@ namespace SchoolManagement.UI.Reporting
     /// <summary>
     /// Summary description for PrimaryEvaluationReport.
     /// </summary>
-    public partial class TermPrimaryReportCardReport : Telerik.Reporting.Report
+    public partial class PrimaryTermReportCardReport : Telerik.Reporting.Report
     {
         public Telerik.Reporting.PictureBox HeaderPictureBox { get => headerPictureBox; }
         public Telerik.Reporting.TextBox SchoolYearTextBox { get => schoolYearTextBox; }
@@ -87,7 +87,7 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox FacebookAddressLabel { get => facebookAddressLabel; }
         public Telerik.Reporting.PictureBox WebSitePictureBox { get => webSitePictureBox; }
         public Telerik.Reporting.PictureBox FaceBookPictureBox { get => facebookPictureBox; }
-        public TermPrimaryReportCardReport()
+        public PrimaryTermReportCardReport()
         {
             //
             // Required for telerik Reporting designer support

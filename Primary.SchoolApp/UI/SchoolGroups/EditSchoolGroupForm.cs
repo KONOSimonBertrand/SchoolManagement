@@ -43,7 +43,6 @@ namespace Primary.SchoolApp.UI
                         schoolGroup.Name = NameTextBox.Text;
                         schoolGroup.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                         schoolGroup.DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue;
-                        schoolGroup.ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString());
                         schoolGroup.AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString());
                         schoolGroup.NoteIsTruncate = IsTruncateDropDownList.SelectedValue.ToString() == "0" ? false : true;
 
@@ -82,7 +81,6 @@ namespace Primary.SchoolApp.UI
                 SequenceSpinEditor.Value = schoolGroup.Sequence;
                 DocumentTemplateDropDownList.SelectedValue = schoolGroup.DocumentLanguageId;
                 IsTruncateDropDownList.SelectedValue = schoolGroup.NoteIsTruncate == true ? 1 : 0;
-                ReportCardDropDownList.SelectedValue = schoolGroup.ReportCardModel;
                 AverageFormulaDropDownList.SelectedValue = schoolGroup.AverageFormula;
 
             }

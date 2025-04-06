@@ -2,6 +2,18 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Reporting\ReportCard\GardenEvaluationReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\GardenOneNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\GardenThreeNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\GardenTermReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="UI\CustomControls\SchoolInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -20,7 +32,7 @@
     <Compile Update="Reporting\ReportCard\DisciplinarySheetReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\ReportCard\Subreport1NoteReport.cs">
+    <Compile Update="Reporting\ReportCard\PrimayOneNoteSubReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\ReportCard\PrimaryEvaluationReport.cs">
@@ -120,6 +132,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\RecapNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Student\EditEvaluationCommentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Student\EditStudentClassForm.cs">

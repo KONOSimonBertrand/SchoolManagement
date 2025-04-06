@@ -1,6 +1,6 @@
 ﻿namespace SchoolManagement.UI.Reporting
 {
-    partial class TermPrimaryReportCardReport
+    partial class PrimaryTermReportCardReport
     {
         #region Component Designer generated code
         /// <summary>
@@ -10,7 +10,7 @@
         private void InitializeComponent()
         {
             Telerik.Reporting.TypeReportSource typeReportSource1 = new Telerik.Reporting.TypeReportSource();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TermPrimaryReportCardReport));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrimaryTermReportCardReport));
             Telerik.Reporting.Group group1 = new Telerik.Reporting.Group();
             Telerik.Reporting.Drawing.TextWatermark textWatermark1 = new Telerik.Reporting.Drawing.TextWatermark();
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
@@ -378,7 +378,7 @@
             this.totalFinalNoteTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.totalFinalNoteTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.totalFinalNoteTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.totalFinalNoteTextBox.Value = "0";
+            this.totalFinalNoteTextBox.Value = "";
             // 
             // totalThirdNoteTextBox
             // 
@@ -391,7 +391,7 @@
             this.totalThirdNoteTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.totalThirdNoteTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.totalThirdNoteTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.totalThirdNoteTextBox.Value = "0";
+            this.totalThirdNoteTextBox.Value = "";
             // 
             // totalSecondNoteTextBox
             // 
@@ -404,7 +404,7 @@
             this.totalSecondNoteTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.totalSecondNoteTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.totalSecondNoteTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.totalSecondNoteTextBox.Value = "0";
+            this.totalSecondNoteTextBox.Value = "";
             // 
             // totalFirstNoteTextBox
             // 
@@ -417,7 +417,7 @@
             this.totalFirstNoteTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.totalFirstNoteTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.totalFirstNoteTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.totalFirstNoteTextBox.Value = "0";
+            this.totalFirstNoteTextBox.Value = "";
             // 
             // averageFirstMonthTextBox
             // 
@@ -431,7 +431,7 @@
             this.averageFirstMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.averageFirstMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.averageFirstMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.averageFirstMonthTextBox.Value = "0";
+            this.averageFirstMonthTextBox.Value = "";
             // 
             // averageSecondMonthTextBox
             // 
@@ -445,7 +445,7 @@
             this.averageSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.averageSecondMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.averageSecondMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.averageSecondMonthTextBox.Value = "0";
+            this.averageSecondMonthTextBox.Value = "";
             // 
             // averageThirdMonthTextBox
             // 
@@ -459,7 +459,7 @@
             this.averageThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.averageThirdMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.averageThirdMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.averageThirdMonthTextBox.Value = "0";
+            this.averageThirdMonthTextBox.Value = "";
             // 
             // averageTermTextBox
             // 
@@ -472,7 +472,7 @@
             this.averageTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.averageTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.averageTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.averageTermTextBox.Value = "0";
+            this.averageTermTextBox.Value = "";
             // 
             // positionFirstMonthTextBox
             // 
@@ -486,7 +486,7 @@
             this.positionFirstMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.positionFirstMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.positionFirstMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.positionFirstMonthTextBox.Value = "0";
+            this.positionFirstMonthTextBox.Value = "";
             // 
             // positionSecondMonthTextBox
             // 
@@ -500,7 +500,7 @@
             this.positionSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.positionSecondMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.positionSecondMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.positionSecondMonthTextBox.Value = "0";
+            this.positionSecondMonthTextBox.Value = "";
             // 
             // positionThirdMonthTextBox
             // 
@@ -514,7 +514,7 @@
             this.positionThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.positionThirdMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.positionThirdMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.positionThirdMonthTextBox.Value = "0";
+            this.positionThirdMonthTextBox.Value = "";
             // 
             // positionTermTextBox
             // 
@@ -527,7 +527,7 @@
             this.positionTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.positionTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.positionTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.positionTermTextBox.Value = "0";
+            this.positionTermTextBox.Value = "";
             // 
             // generalAverageFirstMonthTextBox
             // 
@@ -541,7 +541,7 @@
             this.generalAverageFirstMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.generalAverageFirstMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.generalAverageFirstMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.generalAverageFirstMonthTextBox.Value = "0";
+            this.generalAverageFirstMonthTextBox.Value = "";
             // 
             // generalAverageSecondMonthTextBox
             // 
@@ -555,7 +555,7 @@
             this.generalAverageSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.generalAverageSecondMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.generalAverageSecondMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.generalAverageSecondMonthTextBox.Value = "0";
+            this.generalAverageSecondMonthTextBox.Value = "";
             // 
             // generalAverageThirdMonthTextBox
             // 
@@ -569,7 +569,7 @@
             this.generalAverageThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.generalAverageThirdMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.generalAverageThirdMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.generalAverageThirdMonthTextBox.Value = "0";
+            this.generalAverageThirdMonthTextBox.Value = "";
             // 
             // generalAverageTermTextBox
             // 
@@ -582,7 +582,7 @@
             this.generalAverageTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.generalAverageTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.generalAverageTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.generalAverageTermTextBox.Value = "0";
+            this.generalAverageTermTextBox.Value = "";
             // 
             // lowestAverageFirstMonthTextBox
             // 
@@ -596,7 +596,7 @@
             this.lowestAverageFirstMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.lowestAverageFirstMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.lowestAverageFirstMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.lowestAverageFirstMonthTextBox.Value = "0";
+            this.lowestAverageFirstMonthTextBox.Value = "";
             // 
             // lowestAverageSecondMonthTextBox
             // 
@@ -610,7 +610,7 @@
             this.lowestAverageSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.lowestAverageSecondMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.lowestAverageSecondMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.lowestAverageSecondMonthTextBox.Value = "0";
+            this.lowestAverageSecondMonthTextBox.Value = "";
             // 
             // lowestAverageThirdMonthTextBox
             // 
@@ -624,7 +624,7 @@
             this.lowestAverageThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.lowestAverageThirdMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.lowestAverageThirdMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.lowestAverageThirdMonthTextBox.Value = "0";
+            this.lowestAverageThirdMonthTextBox.Value = "";
             // 
             // lowestAverageTermTextBox
             // 
@@ -637,7 +637,7 @@
             this.lowestAverageTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.lowestAverageTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.lowestAverageTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.lowestAverageTermTextBox.Value = "0";
+            this.lowestAverageTermTextBox.Value = "";
             // 
             // bestAverageFirstMonthTextBox
             // 
@@ -651,7 +651,7 @@
             this.bestAverageFirstMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageFirstMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageFirstMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.bestAverageFirstMonthTextBox.Value = "0";
+            this.bestAverageFirstMonthTextBox.Value = "";
             // 
             // bestAverageSecondMonthTextBox
             // 
@@ -665,7 +665,7 @@
             this.bestAverageSecondMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageSecondMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageSecondMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.bestAverageSecondMonthTextBox.Value = "0";
+            this.bestAverageSecondMonthTextBox.Value = "";
             // 
             // bestAverageThirdMonthTextBox
             // 
@@ -679,7 +679,7 @@
             this.bestAverageThirdMonthTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageThirdMonthTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageThirdMonthTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.bestAverageThirdMonthTextBox.Value = "0";
+            this.bestAverageThirdMonthTextBox.Value = "";
             // 
             // bestAverageTermTextBox
             // 
@@ -692,7 +692,7 @@
             this.bestAverageTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.bestAverageTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.bestAverageTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.bestAverageTermTextBox.Value = "0";
+            this.bestAverageTermTextBox.Value = "";
             // 
             // decisionTextBox
             // 
@@ -829,7 +829,7 @@
             // 
             // averageThirdTermLabel
             // 
-            this.averageThirdTermLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.123D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
+            this.averageThirdTermLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.13D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
             this.averageThirdTermLabel.Multiline = true;
             this.averageThirdTermLabel.Name = "averageThirdTermLabel";
             this.averageThirdTermLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));
@@ -848,7 +848,7 @@
             // 
             // averageAnnualTextBox
             // 
-            this.averageAnnualTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.684D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
+            this.averageAnnualTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.691D), Telerik.Reporting.Drawing.Unit.Inch(0.168D));
             this.averageAnnualTextBox.Multiline = true;
             this.averageAnnualTextBox.Name = "averageAnnualTextBox";
             this.averageAnnualTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.915D), Telerik.Reporting.Drawing.Unit.Inch(0.333D));
@@ -898,11 +898,11 @@
             this.averageFirstTermTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.averageFirstTermTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.averageFirstTermTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.averageFirstTermTextBox.Value = "0";
+            this.averageFirstTermTextBox.Value = "";
             // 
             // averageThirdTermTextBox
             // 
-            this.averageThirdTermTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.123D), Telerik.Reporting.Drawing.Unit.Inch(0.335D));
+            this.averageThirdTermTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.13D), Telerik.Reporting.Drawing.Unit.Inch(0.335D));
             this.averageThirdTermTextBox.Multiline = true;
             this.averageThirdTermTextBox.Name = "averageThirdTermTextBox";
             this.averageThirdTermTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.561D), Telerik.Reporting.Drawing.Unit.Inch(0.166D));

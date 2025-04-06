@@ -69,6 +69,7 @@ namespace Primary.SchoolApp.UI
                     schoolClass.Name = NameTextBox.Text;
                     schoolClass.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
                     schoolClass.Group = GroupDropDownList.SelectedItem.DataBoundItem as SchoolGroup;
+                    schoolClass.ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString());
                     schoolClass.GroupId = schoolClass.Group.Id;
                     bool isDone = schoolClassService.UpdateSchoolClass(schoolClass).Result;
                     if (isDone == true)
@@ -105,6 +106,8 @@ namespace Primary.SchoolApp.UI
                 NameTextBox.Text = schoolClass.Name;
                 SequenceSpinEditor.Value = schoolClass.Sequence;
                 GroupDropDownList.SelectedValue = schoolClass.GroupId;
+                ReportCardDropDownList.SelectedValue = schoolClass.ReportCardModel;
+
             }
         }
         // show school grou UI for edit

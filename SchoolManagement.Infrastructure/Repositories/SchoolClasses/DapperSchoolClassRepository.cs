@@ -18,10 +18,11 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAsync(SchoolClass schoolClass)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO SchoolClasses(Name,GroupId,Sequence) VALUES(@name,@groupId,@sequence);";
+            string query = @"INSERT INTO SchoolClasses(Name,ReportCardModel,GroupId,Sequence) VALUES(@name,@reportCardModel,@groupId,@sequence);";
             var result = connection.Execute(query, new
             {
                 schoolClass.Name,
+                schoolClass.ReportCardModel,
                 schoolClass.GroupId,
                 schoolClass.Sequence
             });
@@ -161,10 +162,11 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> UpdateAsync(SchoolClass schoolClass)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"UPDATE SchoolClasses SET Name=@name,GroupId=@groupId,Sequence=@sequence WHERE Id=@id ;";
+            string query = @"UPDATE SchoolClasses SET Name=@name,ReportCardModel=@reportCardModel,GroupId=@groupId,Sequence=@sequence WHERE Id=@id ;";
             var result = connection.Execute(query, new
             {
                 schoolClass.Name,
+                schoolClass.ReportCardModel,
                 schoolClass.GroupId,
                 schoolClass.Sequence,
                 schoolClass.Id

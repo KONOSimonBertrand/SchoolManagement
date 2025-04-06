@@ -197,3 +197,4 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditSchoolForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditSerialKeyForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.RecapNotesForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net6.0-windows\SchoolManagement.UI.EditEvaluationCommentsForm.resources

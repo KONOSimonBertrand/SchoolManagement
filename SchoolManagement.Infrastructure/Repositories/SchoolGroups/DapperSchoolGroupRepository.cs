@@ -1,6 +1,4 @@
-﻿
-
-using Dapper;
+﻿using Dapper;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
@@ -17,14 +15,13 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAsync(SchoolGroup schoolGroup)
         {
             using var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO SchoolGroups(Name,DocumentLanguageId,ReportCardModel,AverageFormula,NoteIsTruncate,Sequence ) 
-                              VALUES(@name,@documentLanguageId,@reportCardModel,@averageFormula,@noteIsTruncate, @sequence) ;";
+            string query = @"INSERT INTO SchoolGroups(Name,DocumentLanguageId,AverageFormula,NoteIsTruncate,Sequence ) 
+                              VALUES(@name,@documentLanguageId,@averageFormula,@noteIsTruncate, @sequence) ;";
             var result = connection.Execute(query,
              new
              {
                  schoolGroup.Name,
                  schoolGroup.DocumentLanguageId,
-                 schoolGroup.ReportCardModel,
                  schoolGroup.AverageFormula,
                  schoolGroup.NoteIsTruncate,
                  schoolGroup.Sequence,
@@ -55,15 +52,13 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> UpdateAsync(SchoolGroup schoolGroup)
         {
             using var connection = dbConnectionFactory.CreateConnection();
-            string query = @"UPDATE SchoolGroups SET Name=@name,DocumentLanguageId=@documentLanguageId,ReportCardModel=@reportCardModel,
+            string query = @"UPDATE SchoolGroups SET Name=@name,DocumentLanguageId=@documentLanguageId,
                              AverageFormula=@averageFormula,NoteIsTruncate=@noteIsTruncate,Sequence=@sequence WHERE Id=@id ;";
             var result = connection.Execute(query,
-
                 new
                 {
                     schoolGroup.Name,
                     schoolGroup.DocumentLanguageId,
-                    schoolGroup.ReportCardModel,
                     schoolGroup.AverageFormula,
                     schoolGroup.NoteIsTruncate,
                     schoolGroup.Sequence,

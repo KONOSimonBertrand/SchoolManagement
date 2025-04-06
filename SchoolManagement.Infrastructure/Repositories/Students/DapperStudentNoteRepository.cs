@@ -259,9 +259,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<List<StudentNote>> GetNotesByClassAsync(int classId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" SELECT * FROM StudentNotes WHERE StudentId 
-                               IN (SELECT StudentId FROM StudentsEnrollings WHERE classId=@classId AND SchoolYearId=@schoolYearId)
-                               AND SchoolYearId=@schoolYearId;";
+            string query = @" SELECT * FROM StudentNotes WHERE   SchoolYearId=@schoolYearId AND StudentId 
+                               IN (SELECT StudentId FROM StudentsEnrollings WHERE classId=@classId AND SchoolYearId=@schoolYearId) ;";
             var result = connection.Query<StudentNote>(query, new { classId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
@@ -269,9 +268,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<List<StudentNote>> GetNotesByClassAsync(int classId,int evaluationId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" SELECT * FROM StudentNotes WHERE StudentId 
-                               IN (SELECT StudentId FROM StudentsEnrollings WHERE classId=@classId AND SchoolYearId=@schoolYearId)
-                               AND SchoolYearId=@schoolYearId AND EvaluationId=@evaluationId ;";
+            string query = @" SELECT * FROM StudentNotes WHERE SchoolYearId=@schoolYearId AND EvaluationId=@evaluationId
+                                AND StudentId IN (SELECT StudentId FROM StudentsEnrollings WHERE classId=@classId AND SchoolYearId=@schoolYearId);";
             var result = connection.Query<StudentNote>(query, new { classId,evaluationId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
@@ -279,9 +277,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<List<StudentNote>> GetNotesByRoomAsync(int roomId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" SELECT * FROM StudentNotes WHERE StudentId 
-                               IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId)
-                               AND SchoolYearId=@schoolYearId;";
+            string query = @" SELECT * FROM StudentNotes WHERE SchoolYearId=@schoolYearId AND 
+                               AND StudentId IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId) ;";
             var result = connection.Query<StudentNote>(query, new { roomId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
@@ -289,9 +286,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<List<StudentNote>> GetNotesByRoomAsync(int roomId,int evaluationId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" SELECT * FROM StudentNotes WHERE StudentId 
-                               IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId)
-                               AND SchoolYearId=@schoolYearId  AND EvaluationId=@evaluationId;";
+            string query = @" SELECT * FROM StudentNotes WHERE SchoolYearId=@schoolYearId  AND EvaluationId=@evaluationId AND StudentId 
+                                IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId) ;";
             var result = connection.Query<StudentNote>(query, new { roomId,evaluationId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;

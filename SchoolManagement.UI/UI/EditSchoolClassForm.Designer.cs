@@ -44,6 +44,9 @@
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
             errorProvider = new ErrorProvider(components);
+            reportCardSeparator = new Telerik.WinControls.UI.RadSeparator();
+            reportCardDropDownList = new Telerik.WinControls.UI.RadDropDownList();
+            reportCardLabel = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
@@ -60,6 +63,9 @@
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)reportCardSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)reportCardDropDownList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)reportCardLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -84,7 +90,7 @@
             // 
             // sequenceSeparator
             // 
-            sequenceSeparator.Location = new Point(6, 131);
+            sequenceSeparator.Location = new Point(356, 131);
             sequenceSeparator.Margin = new Padding(4, 5, 4, 5);
             sequenceSeparator.Name = "sequenceSeparator";
             sequenceSeparator.Size = new Size(109, 4);
@@ -93,7 +99,7 @@
             // 
             // sequenceSpinEditor
             // 
-            sequenceSpinEditor.Location = new Point(6, 100);
+            sequenceSpinEditor.Location = new Point(356, 100);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
             // 
@@ -101,7 +107,7 @@
             // 
             sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(109, 30);
-            sequenceSpinEditor.TabIndex = 7;
+            sequenceSpinEditor.TabIndex = 3;
             // 
             // codeSeparator
             // 
@@ -180,7 +186,7 @@
             // sequenceLabel
             // 
             sequenceLabel.AutoSize = false;
-            sequenceLabel.Location = new Point(6, 69);
+            sequenceLabel.Location = new Point(356, 69);
             sequenceLabel.Margin = new Padding(4, 5, 4, 5);
             sequenceLabel.Name = "sequenceLabel";
             sequenceLabel.Size = new Size(105, 30);
@@ -202,7 +208,7 @@
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 36);
-            closeButton.TabIndex = 9;
+            closeButton.TabIndex = 5;
             closeButton.Text = "Annuler";
             // 
             // saveButton
@@ -211,12 +217,50 @@
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 36);
-            saveButton.TabIndex = 8;
+            saveButton.TabIndex = 4;
             saveButton.Text = "Enregistrer";
             // 
             // errorProvider
             // 
             errorProvider.ContainerControl = this;
+            // 
+            // reportCardSeparator
+            // 
+            reportCardSeparator.Location = new Point(4, 133);
+            reportCardSeparator.Margin = new Padding(4, 5, 4, 5);
+            reportCardSeparator.Name = "reportCardSeparator";
+            reportCardSeparator.Size = new Size(344, 4);
+            reportCardSeparator.TabIndex = 126;
+            reportCardSeparator.TabStop = false;
+            // 
+            // reportCardDropDownList
+            // 
+            reportCardDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            reportCardDropDownList.DropDownAnimationEnabled = true;
+            reportCardDropDownList.DropDownHeight = 159;
+            reportCardDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+            reportCardDropDownList.Location = new Point(4, 100);
+            reportCardDropDownList.Margin = new Padding(4, 5, 4, 5);
+            reportCardDropDownList.MinimumSize = new Size(0, 30);
+            reportCardDropDownList.Name = "reportCardDropDownList";
+            reportCardDropDownList.Size = new Size(344, 30);
+            reportCardDropDownList.TabIndex = 2;
+            ((Telerik.WinControls.UI.RadDropDownListElement)reportCardDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)reportCardDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)reportCardDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)reportCardDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)reportCardDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
+            ((Telerik.WinControls.Primitives.BorderPrimitive)reportCardDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
+            // reportCardLabel
+            // 
+            reportCardLabel.AutoSize = false;
+            reportCardLabel.Location = new Point(4, 69);
+            reportCardLabel.Margin = new Padding(4, 5, 4, 5);
+            reportCardLabel.Name = "reportCardLabel";
+            reportCardLabel.Size = new Size(344, 30);
+            reportCardLabel.TabIndex = 125;
+            reportCardLabel.Text = "Modèle de bulletin:";
             // 
             // EditSchoolClassForm
             // 
@@ -225,6 +269,9 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(722, 197);
+            Controls.Add(reportCardSeparator);
+            Controls.Add(reportCardDropDownList);
+            Controls.Add(reportCardLabel);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -252,8 +299,12 @@
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
+            ((System.ComponentModel.ISupportInitialize)reportCardSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)reportCardDropDownList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)reportCardLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -273,5 +324,8 @@
         private Telerik.WinControls.UI.RadButton saveButton;
         private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
         private ErrorProvider errorProvider;
+        private Telerik.WinControls.UI.RadSeparator reportCardSeparator;
+        private Telerik.WinControls.UI.RadDropDownList reportCardDropDownList;
+        private Telerik.WinControls.UI.RadLabel reportCardLabel;
     }
 }

@@ -286,6 +286,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Annual report cards.
+        /// </summary>
+        public static string LabelAnnualReportCard {
+            get {
+                return ResourceManager.GetString("LabelAnnualReportCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Annual statistics.
         /// </summary>
         public static string LabelAnnualStatistic {
@@ -2190,6 +2199,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelReligion {
             get {
                 return ResourceManager.GetString("labelReligion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reminder.
+        /// </summary>
+        public static string LabelReminder {
+            get {
+                return ResourceManager.GetString("LabelReminder", resourceCulture);
             }
         }
         

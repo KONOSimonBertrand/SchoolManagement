@@ -67,6 +67,7 @@ namespace Primary.SchoolApp.UI
                     schoolClass.Group = GroupDropDownList.SelectedItem.DataBoundItem as SchoolGroup;
                     schoolClass.GroupId = schoolClass.Group.Id;
                     schoolClass.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
+                    schoolClass.ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString());
                     bool isDone = schoolClassService.CreateSchoolClass(schoolClass).Result;
                     if (isDone == true)
                     {

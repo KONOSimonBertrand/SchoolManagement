@@ -5,7 +5,7 @@ namespace SchoolManagement.UI.Reporting
     /// <summary>
     /// Summary description for Detail1NoteReport.
     /// </summary>
-    public partial class Subreport3NoteReport : Report
+    public partial class PrimaryThreeNoteSubreport : Report
     {
         public Telerik.Reporting.TextBox NotedOnTextBox { get => noteMaxTextBox; }
         public Telerik.Reporting.TextBox FirstNoteTextBox { get => firstNoteTextBox; }
@@ -16,7 +16,7 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox SubjectTextBox {  get => subjectTextBox; }
       
         public Telerik.Reporting.TextBox PositionTextBox { get => positionTextBox; }
-        public Subreport3NoteReport()
+        public PrimaryThreeNoteSubreport()
         {
             //
             // Required for telerik Reporting designer support

@@ -16,6 +16,7 @@ namespace SchoolManagement.Application
         public Task<bool> DeleteDiscipline(int disciplineId);
         public Task<IList<Discipline>> GetDisciplineListByStudent(int studentId,int schoolYear);
         public Task<IList<Discipline>> GetDisciplineListBySchoolYear(int schoolYearId);
+        public Task<IList<Discipline>> GetDisciplineListByRoom(int roomId, int schoolYearId);
         public Task<IList<Discipline>> GetDisciplineListByClass(int classId, int schoolYearId);
         public Task<Discipline?> GetDiscipline(int enrollingId,int subjectId,DateTime date);
     }

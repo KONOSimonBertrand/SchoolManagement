@@ -23,7 +23,6 @@ namespace SchoolManagement.Core.Model
             }
         }
         public bool NoteIsTruncate { get; set; }
-        public int ReportCardModel { get; set; }
         public int AverageFormula { get; set; }
 
         public int Sequence { get; set; }

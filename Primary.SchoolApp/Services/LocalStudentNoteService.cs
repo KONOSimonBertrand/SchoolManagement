@@ -489,7 +489,7 @@ namespace Primary.SchoolApp.Services
             }
             return finalNote;
         }
-        private double ComputeFinalAverage(AverageRecord firstAverage, AverageRecord secondAverage, AverageRecord thirdAverage)
+        public static double ComputeFinalAverage(AverageRecord firstAverage, AverageRecord secondAverage, AverageRecord thirdAverage)
         {
             double finalAverage = 0;
             if (firstAverage != null)
@@ -541,7 +541,7 @@ namespace Primary.SchoolApp.Services
             return finalAverage;
         }
 
-        private double ComputeFinalAverage(TermRecord firstAverage, TermRecord secondAverage, TermRecord thirdAverage)
+        public static  double ComputeFinalAverage(TermRecord firstAverage, TermRecord secondAverage, TermRecord thirdAverage)
         {
             double finalAverage = 0;
             if (firstAverage != null)
@@ -592,7 +592,7 @@ namespace Primary.SchoolApp.Services
             }
             return finalAverage;
         }
-        private double GetNotedOn(TermRecord firstAverage, TermRecord secondAverage, TermRecord thirdAverage)
+        public static double GetNotedOn(TermRecord firstAverage, TermRecord secondAverage, TermRecord thirdAverage)
         {
             if (firstAverage != null) return firstAverage.NotedOn;
             if (secondAverage != null) return secondAverage.NotedOn;
@@ -600,7 +600,7 @@ namespace Primary.SchoolApp.Services
             return 0;
 
         }
-        private double GetNoteCoef(TermRecord firstAverage, TermRecord secondAverage, TermRecord thirdAverage)
+        public static double GetNoteCoef(TermRecord firstAverage, TermRecord secondAverage, TermRecord thirdAverage)
         {
             if (firstAverage != null) return firstAverage.NoteCoef;
             if (secondAverage != null) return secondAverage.NoteCoef;
@@ -800,7 +800,7 @@ namespace Primary.SchoolApp.Services
             }
         }
 
-        public async Task<List<DisciplineItemRecord>> GetDisciplineItems(int classId, int schoolYearId)
+        public async Task<List<DisciplineItemRecord>> GetDisciplineItemsByClass(int classId, int schoolYearId)
         {
             List<DisciplineItemRecord> disciplineItems = new();
             var items = await disciplineService.GetDisciplineListByClass(classId, schoolYearId);
@@ -811,7 +811,18 @@ namespace Primary.SchoolApp.Services
             return disciplineItems;
         }
 
-        public async Task<List<DisciplineItemRecord>> GetDisciplineItems(int schoolYearId)
+        public async Task<List<DisciplineItemRecord>> GetDisciplineItemsByRoom(int roomId, int schoolYearId)
+        {
+            List<DisciplineItemRecord> disciplineItems = new();
+            var items = await disciplineService.GetDisciplineListByRoom(roomId, schoolYearId);
+            foreach (var item in items)
+            {
+                disciplineItems.Add(item.AsDisciplineRecord());
+            }
+            return disciplineItems;
+        }
+
+        public async Task<List<DisciplineItemRecord>> GetDisciplineItemsBySchoolYear(int schoolYearId)
         {
             List<DisciplineItemRecord> disciplineItems = new();
             var items = await disciplineService.GetDisciplineListBySchoolYear(schoolYearId);

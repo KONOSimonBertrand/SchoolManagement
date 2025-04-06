@@ -41,7 +41,6 @@ namespace Primary.SchoolApp.UI
                         Sequence = int.Parse(SequenceSpinEditor.Value.ToString()),
                         DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue,
                         NoteIsTruncate = bool.Parse(IsTruncateDropDownList.SelectedValue.ToString()),
-                        ReportCardModel = int.Parse(ReportCardDropDownList.SelectedValue.ToString()),
                         AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString())
                     };
 

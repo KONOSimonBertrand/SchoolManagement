@@ -1,6 +1,6 @@
 namespace SchoolManagement.UI.Reporting
 {
-    partial class Subreport3NoteReport
+    partial class PrimaryThreeNoteSubreport
     {
         #region Component Designer generated code
         /// <summary>

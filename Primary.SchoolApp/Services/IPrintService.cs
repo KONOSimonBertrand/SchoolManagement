@@ -15,8 +15,6 @@ namespace Primary.SchoolApp.Services
         internal Task PrintSchoolCertificateAsync(StudentEnrollingDTO enrolling);
         internal Task PrintStudentBadgeAsync(StudentEnrollingDTO enrolling,string expirationDate);
         internal Task PrintClassBadgeAsync(IEnumerable<StudentEnrollingDTO> enrollingList, string expirationDate);
-        internal Task PrintReportCardByStudentAsync(int studentId, int roomId, int evaluationId, int schoolYearId, int bookId);
-        internal Task PrintReportCardByClassRoomAsync(int roomId, int evaluationId, int schoolYearId, int bookId);
 
     }
 }

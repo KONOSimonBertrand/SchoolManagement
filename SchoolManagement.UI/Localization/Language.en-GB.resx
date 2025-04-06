@@ -1503,4 +1503,10 @@
   <data name="LabelQuarterlyStatistic" xml:space="preserve">
     <value>Evaluation statistics</value>
   </data>
+  <data name="LabelAnnualReportCard" xml:space="preserve">
+    <value>Annual report cards</value>
+  </data>
+  <data name="LabelReminder" xml:space="preserve">
+    <value>Reminder</value>
+  </data>
 </root>

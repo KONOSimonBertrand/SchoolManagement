@@ -7,12 +7,13 @@ using System.Collections.Generic;
 
 namespace Primary.SchoolApp.Reporting
 {
-    internal class TermPrimaryReportCardReport : SchoolManagement.UI.Reporting.TermPrimaryReportCardReport
+    internal class PrimaryTermReportCardReport : SchoolManagement.UI.Reporting.PrimaryTermReportCardReport
     {
-        public TermPrimaryReportCardReport(TermReportCard reportCard)
+        public PrimaryTermReportCardReport(TermReportCard reportCard)
         {
             var headTerms = GetHeadTerm( reportCard.HeadSection.EvaluationCode, reportCard.HeadSection.Language);
             string img = reportCard.HeadSection.Language == "FR" ? "head_paper_fr.png" : "head_paper_en.png";
+
             HeaderPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl(img);
             ReportTitleTextBox.Value = headTerms.GetValueOrDefault("Title");
             string schoolYearLabel = reportCard.HeadSection.Language == "FR" ? "Année scolaire" : "School year";
@@ -22,13 +23,16 @@ namespace Primary.SchoolApp.Reporting
             StudentIdLabel.Value = reportCard.HeadSection.Language == "FR" ? "Matricule:" : "ID:";
             StudentIdTextBox.Value = reportCard.HeadSection.Student.IdNumber;
             ClassLabel.Value = reportCard.HeadSection.Language == "FR" ? "Classe:" : "Class:";
-            ClassTextBox.Value = reportCard.HeadSection.ClassRoom;
+            ClassTextBox.Value = reportCard.HeadSection.ClassRoom.Name;
             TeacherLabel.Value = reportCard.HeadSection.Language == "FR" ? "Titulaire:" : "Teacher:";
             TeacherTexBox.Value = reportCard.HeadSection.Teacher;
             TotalLabel.Value = "Total".ToUpper();
             FirstNoteLabel.Value = headTerms.GetValueOrDefault("FirstMonth");
             SecondNoteLabel.Value = headTerms.GetValueOrDefault("SecondMonth");
             ThirdNoteLabel.Value = headTerms.GetValueOrDefault("ThirdMonth");
+            this.AverageFirstTermLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM 1" : "TERM 1";
+            this.AverageSecondTermLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM 2" : "TERM 2";
+            this.AverageThirdTermLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM 3" : "TERM 3";
             var footerTermAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "TermAverage");
             double termAverage = 0;
             if (reportCard.HeadSection.Language == "FR")
@@ -60,6 +64,7 @@ namespace Primary.SchoolApp.Reporting
                 var decisionMessageFailed = reportCard.HeadSection.Student.Sex == "M" ? "REFUSE" : "REFUSEE";
                 TermStartTextBox.Value = "NB : Reprise des cours le :";
                 DecisionTextBox.Value = double.TryParse(footerTermAverageItem.Value, out termAverage) && termAverage >= 10 ? decisionMessagePassed : decisionMessageFailed;
+                AverageResumeLabel.Value = reportCard.HeadSection.EvaluationCode != "TERM03" ? "RAPPEL" : "RESULTAT ANNUEL";
             }
             else
             {
@@ -87,13 +92,14 @@ namespace Primary.SchoolApp.Reporting
                 DirectorSignatureLabel.Value = "Head Master";
                 DecisionTextBox.Value = double.TryParse(footerTermAverageItem.Value,out termAverage) && termAverage >= 10 ? "PASSED" : "FAILED";
                 TermStartTextBox.Value = "Next term starts on the ";
+                AverageResumeLabel.Value= reportCard.HeadSection.EvaluationCode!="TERM03"?"REMINDER":"ANNUAL RESULT";
             }
 
 
             //load data on sub report
             var noteReport = new InstanceReportSource
             {
-                ReportDocument = new Subreport3NoteReport(reportCard)
+                ReportDocument = new PrimaryThreeNoteSubreport(reportCard)
             };
 
             NotesSubReport.ReportSource = noteReport;
@@ -114,7 +120,7 @@ namespace Primary.SchoolApp.Reporting
             if (double.TryParse(footerTermAverageItem.Value, out termAverage) && termAverage < 10) AverageTermTextBox.Style.Color = System.Drawing.Color.Red;
             AverageFirstMonthTextBox.Value = footerFirstMonthAverageItem.Value;
             AverageSecondMonthTextBox.Value = footerSecondMonthAverageItem.Value;
-            AverageThirdMonthTextBox.Value = footerSecondMonthAverageItem.Value; 
+            AverageThirdMonthTextBox.Value = footerThirdMonthAverageItem.Value; 
             AverageTermTextBox.Value = footerTermAverageItem.Value;
             this.GeneralAverageFirstMonthTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "FirstMonthClassAverage").Value;
             this.GeneralAverageSecondMonthTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SecondMonthClassAverage").Value;
@@ -139,6 +145,23 @@ namespace Primary.SchoolApp.Reporting
             if (reportCard.HeadSection.EvaluationCode != "TERM01")
             {
                 AverageResumePanel.Visible = true;
+                this.AverageFirstTermTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "FirstTermAverage").Value;
+                if (reportCard.HeadSection.EvaluationCode == "TERM02")
+                {
+                    this.AverageSecondTermLabel.Value = string.Empty;
+                    this.AverageThirdTermLabel.Value = string.Empty;
+
+                    this.AverageSecondTermTextBox.Value = string.Empty;
+                    this.AverageThirdTermTextBox.Value = string.Empty;
+                    this.AverageAnnualTextBox.Value = string.Empty;
+                }
+                else
+                {
+                    this.AverageSecondTermTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SecondTermAverage").Value;
+                    this.AverageThirdTermTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "ThirdTermAverage").Value;
+                   this.AverageAnnualTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "AnnualAverage").Value;
+                }
+
             }
             else
             {

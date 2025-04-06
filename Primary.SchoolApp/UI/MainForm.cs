@@ -200,6 +200,7 @@ namespace Primary.SchoolApp
             EmployeeMainListView.DataSource = Program.EmployeeEnrollingList;
             EmployeeLeftListView.ListViewElement.SynchronizeVisualItems();
             EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
+            StudentNoteRoomDropDownList.DataSource = GetUserConnectedClassrooms();
             InitCashFlowGridViewForData();
             LoadDataForDisciplineGridView();
             LoadDataToStudentNoteGridView();
@@ -278,6 +279,7 @@ namespace Primary.SchoolApp
                     }
                     Program.CashBoxInList = getCashBoxInTask.Result;
                     Program.CashBoxOutList = getCashBoxOutTask.Result;
+                    
                 }
 
             }

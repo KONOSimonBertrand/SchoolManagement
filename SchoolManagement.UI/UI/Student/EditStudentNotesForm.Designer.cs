@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditStudentNotesForm));
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
             subjectsCommandBar = new Telerik.WinControls.UI.RadCommandBar();
             commandBarRowElement1 = new Telerik.WinControls.UI.CommandBarRowElement();
             commandBarStripElement1 = new Telerik.WinControls.UI.CommandBarStripElement();
@@ -50,7 +50,7 @@
             subjectDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             subjectLabel = new Telerik.WinControls.UI.RadLabel();
             commandPanel = new Telerik.WinControls.UI.RadPanel();
-            filterTextBox = new CustomControls.SearchTextBox();
+            filterTextBox = new SchoolManagement.UI.CustomControls.SearchTextBox();
             filterLabel = new Telerik.WinControls.UI.RadLabel();
             dataGridView = new Telerik.WinControls.UI.RadGridView();
             commandBarStripElement2 = new Telerik.WinControls.UI.CommandBarStripElement();
@@ -81,7 +81,7 @@
             subjectsCommandBar.Location = new Point(0, 0);
             subjectsCommandBar.Name = "subjectsCommandBar";
             subjectsCommandBar.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] { commandBarRowElement1 });
-            subjectsCommandBar.Size = new Size(1065, 56);
+            subjectsCommandBar.Size = new Size(1065, 31);
             subjectsCommandBar.TabIndex = 66;
             // 
             // commandBarRowElement1
@@ -180,7 +180,7 @@
             informationPanel.Controls.Add(subjectDropDownList);
             informationPanel.Controls.Add(subjectLabel);
             informationPanel.Dock = DockStyle.Top;
-            informationPanel.Location = new Point(0, 56);
+            informationPanel.Location = new Point(0, 31);
             informationPanel.Name = "informationPanel";
             informationPanel.Size = new Size(1065, 55);
             informationPanel.TabIndex = 68;
@@ -247,7 +247,7 @@
             commandPanel.Controls.Add(filterTextBox);
             commandPanel.Controls.Add(filterLabel);
             commandPanel.Dock = DockStyle.Top;
-            commandPanel.Location = new Point(0, 111);
+            commandPanel.Location = new Point(0, 86);
             commandPanel.Margin = new Padding(4, 5, 4, 5);
             commandPanel.Name = "commandPanel";
             commandPanel.Size = new Size(1065, 45);
@@ -273,7 +273,7 @@
             // dataGridView
             // 
             dataGridView.Dock = DockStyle.Fill;
-            dataGridView.Location = new Point(0, 156);
+            dataGridView.Location = new Point(0, 131);
             dataGridView.Margin = new Padding(4, 5, 4, 5);
             // 
             // 
@@ -281,9 +281,9 @@
             dataGridView.MasterTemplate.AllowAddNewRow = false;
             dataGridView.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
             dataGridView.MasterTemplate.Caption = null;
-            dataGridView.MasterTemplate.ViewDefinition = tableViewDefinition2;
+            dataGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(1065, 417);
+            dataGridView.Size = new Size(1065, 442);
             dataGridView.TabIndex = 2;
             // 
             // commandBarStripElement2

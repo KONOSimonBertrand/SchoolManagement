@@ -18,7 +18,7 @@ namespace Primary.SchoolApp.Reporting
             ReportTitleTextBox.Value = report.HeadSection.ReportTitle;
             StudentTextBox.Value = report.HeadSection.Student.FullName;
             StudentIdTextBox.Value = report.HeadSection.Student.IdNumber;
-            ClassTextBox.Value = report.HeadSection.ClassRoom;
+            ClassTextBox.Value = report.HeadSection.ClassRoom.Name;
             string bornLabel = report.HeadSection.Student.Sex == "M" ? "Né le " : "Née le ";
             string bornValueEN= BornTextBox.Value = "Born on" + report.HeadSection.Student.BirthDate.ToShortDateString() + " in " + report.HeadSection.Student.BirthPlace;
             string bornValueFR= bornLabel + report.HeadSection.Student.BirthDate.ToShortDateString() + " à " + report.HeadSection.Student.BirthPlace;

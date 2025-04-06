@@ -12,6 +12,8 @@ namespace SchoolManagement.UI
         public RadTextBox NameTextBox { get => nameTextBox; }
         public RadDropDownList GroupDropDownList { get => groupDropDownList; }
         public RadSpinEditor SequenceSpinEditor { get => sequenceSpinEditor; }
+        public RadDropDownList ReportCardDropDownList { get => reportCardDropDownList; }
+
         public RadButton AddGroupButton { get => addGroupButton; }
         public RadLabel ErrorLabel { get => errorLabel; }
         public ErrorProvider ErrorProvider { get => errorProvider; }
@@ -28,7 +30,9 @@ namespace SchoolManagement.UI
             this.sequenceLabel.Text = Language.labelSequence;
             this.groupLabel.Text = "<html>" + Language.labelGroup + ":" + "<color=Red>*";
             this.saveButton.Text = Language.labelSave;
+            this.reportCardLabel.Text = "<html>" + Language.LabelReportCardModel + ":" + "<color=Red>*";
             this.closeButton.Text = Language.labelCancel;
+           
         }
         private void InitEvent()
         {
@@ -44,7 +48,6 @@ namespace SchoolManagement.UI
         private void InitComponent()
         {
            
-
             this.groupLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
             this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
@@ -72,6 +75,28 @@ namespace SchoolManagement.UI
             this.groupDropDownList.RootElement.CustomFontSize = 10.5f;
             this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.groupDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+
+            this.reportCardLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
+            this.reportCardLabel.LabelElement.CustomFontSize = 10.5f;
+            this.reportCardLabel.ForeColor = Color.FromArgb(89, 89, 89);
+            this.reportCardLabel.TextAlignment = ContentAlignment.BottomLeft;
+
+            this.reportCardDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
+            this.reportCardDropDownList.RootElement.CustomFontSize = 10.5f;
+            this.reportCardDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            this.reportCardDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+
+
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelFoundationModel, 0));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelKindergartenModel, 1));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelPrimaryModel, 2));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelHighSchoolModel, 3));
+            this.reportCardSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+
+            this.reportCardDropDownList.SelectedIndex = 0;
+
+
+
             this.groupDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -85,6 +110,8 @@ namespace SchoolManagement.UI
             this.sequenceLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.groupLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.nameLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+            this.reportCardLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+
             this.groupSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.codeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
@@ -124,7 +151,12 @@ namespace SchoolManagement.UI
                 this.groupDropDownList.Focus();
                 return false;
             }
-
+            if (this.reportCardDropDownList.SelectedIndex < 0)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(reportCardDropDownList, Language.messageFillField);
+                this.nameTextBox.Focus();
+            }
             return true;
         }
 

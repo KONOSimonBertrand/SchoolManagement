@@ -39,6 +39,11 @@ namespace SchoolManagement.Application
         {
             return await disciplineReadRepository.GetDisciplineListByStudentAsync(studentId,schoolYearId);
         }
+        public async Task<IList<Discipline>> GetDisciplineListByRoom(int roomId, int schoolYearId)
+        {
+            return await disciplineReadRepository.GetDisciplineListByRoomAsync(roomId, schoolYearId);
+        }
+
         public async Task<IList<Discipline>> GetDisciplineListByClass(int classId, int schoolYearId)
         {
             return await disciplineReadRepository.GetDisciplineListByClassAsync(classId, schoolYearId);

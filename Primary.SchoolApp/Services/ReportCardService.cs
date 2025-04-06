@@ -3,6 +3,7 @@ using SchoolManagement.Core.Model;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using Telerik.WinControls.Svg.ExCSS;
 using static Primary.SchoolApp.DTO.DTOItem;
@@ -25,6 +26,7 @@ namespace Primary.SchoolApp.Services
         {
             // extraction des moyennes de la classe
             var evaluationAverageTask = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, evaluationId, schoolYearId, bookId);
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
             #region Head Report
             // get data of head report
             var evaluation = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
@@ -50,8 +52,10 @@ namespace Primary.SchoolApp.Services
                     teacherName = teacher.Employee.Sex == "M" ? $"Mr.  {teacher.Employee.FullName}" : $"Mrs.  {teacher.Employee.FullName}";
                 }
             }
+            var disciplineItems = await getDisciplinesTask;
+            var disciplinarySheet = disciplineItems.Where(d => d.Student.Id == studentId && d.Evaluation.Id==evaluationId).ToList();
             // create head of report card
-            var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, teacherName, language, evaluation.Code);
+            var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom, teacherName, language, evaluation.Code,disciplinarySheet);
             #endregion
             #region Detail Report
 
@@ -116,9 +120,26 @@ namespace Primary.SchoolApp.Services
         //bulletin  trimestrielle d'un élève
         public async Task<TermReportCard> GetTermReportCardByStudentAsync(int studentId, int roomId, int termId, int schoolYearId, int bookId)
         {
-
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
             var term = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == termId);
+            var evaluationIds = Program.EvaluationSessionList.Where(e => e.Mother == termId).Select(e => e.Id);
             string termCode = term != null ? term.Code : string.Empty;
+            // liste des trimestres antérieurs
+            List<string> reminderTerms = new();
+            Dictionary<string, Task<List<AverageRecord>>> reminderTermsTask = new();
+            Dictionary<string, List<AverageRecord>> reminderTermsTaskResult = new();
+            if (termCode == "TERM02")
+            {
+                reminderTerms.Add("TERM01");
+            }
+            else
+            {
+                if (termCode == "TERM03")
+                {
+                    reminderTerms.Add("TERM01");
+                    reminderTerms.Add("TERM02");
+                }
+            }
             var evaluationCodes = LocalStudentNoteService.GetEvaluationCodeOfTerm(termCode);
             var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("FirstMonth"));
             var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("SecondMonth"));
@@ -126,6 +147,10 @@ namespace Primary.SchoolApp.Services
             // Extraction des notes du trimestre
             var term_notes_task = localStudentNoteService.GetTermNoteListByRoom(roomId, termCode, schoolYearId, bookId);
             var term_averages_task = localStudentNoteService.GetTermAverageListByRoom(roomId, termCode, schoolYearId, bookId);
+            foreach (var code in reminderTerms)
+            {
+                reminderTermsTask.Add(code, localStudentNoteService.GetTermAverageListByRoom(roomId, code, schoolYearId, bookId));
+            }
             // extraction des moyennes des évaluations
             var eval01_averages_task = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, eval01 != null ? eval01.Id : 100, schoolYearId, bookId);
             var eval02_averages_task = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, eval02 != null ? eval02.Id : 100, schoolYearId, bookId);
@@ -157,8 +182,10 @@ namespace Primary.SchoolApp.Services
                     teacherName = teacher.Employee.Sex == "M" ? $"Mr.  {teacher.Employee.FullName}" : $"Mrs.  {teacher.Employee.FullName}";
                 }
             }
+            var disciplineItems = await getDisciplinesTask;
+            var disciplinarySheet=disciplineItems.Where(d=>d.Student.Id==studentId && evaluationIds.Contains(d.Evaluation.Id)).ToList();   
             // create head of report card
-            var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, teacherName, language, termCode);
+            var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom, teacherName, language, termCode, disciplinarySheet);
             #endregion
             #region Detail Report
             //extraction des matières avec note max et groupe de la classe de l'élève
@@ -259,6 +286,53 @@ namespace Primary.SchoolApp.Services
             footerItems.Add(new("ThirdMonthLowestAverage", thirdMonthLowestAverage.ToString()));
             double termLowestAverage = term_averages.Any() ? term_averages.Select(x => x.Average).OrderBy(x => x).First() : 0;
             footerItems.Add(new("TermLowestAverage", termLowestAverage.ToString()));
+
+           
+            // extraction des moyennes des trimestres antérieurs
+            foreach (var code in reminderTerms)
+            {
+                if (reminderTermsTask.TryGetValue(code, out Task<List<AverageRecord>> task))
+                {
+                    var taskResult = await task;
+                    reminderTermsTaskResult.Add(code, taskResult);
+                }
+            }
+            if (reminderTermsTaskResult.TryGetValue("TERM01", out List<AverageRecord> term1Averages))
+            {
+                var term1Average = term1Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                footerItems.Add(new("FirstTermAverage", term1Average != null ? term1Average.Average.ToString() : string.Empty));
+            }
+            if (reminderTermsTaskResult.TryGetValue("TERM02", out List<AverageRecord> term2Averages))
+            {
+                var term2Average = term2Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                footerItems.Add(new("SecondTermAverage", term2Average != null ? term2Average.Average.ToString() : string.Empty));
+            }
+            if (termCode == "TERM03")
+            {
+                footerItems.Add(new("ThirdTermAverage",termAverage.ToString()));
+                var term01 = footerItems.FirstOrDefault(x => x.Name == "FirstTermAverage" && x.Value!=string.Empty);
+                var term02 = footerItems.FirstOrDefault(x => x.Name == "SecondTermAverage" && x.Value != string.Empty);
+                double annualAverage = 0;
+                if (term01 != null)
+                {
+                    if (term02 != null)
+                    {
+                        annualAverage = (termAverage + double.Parse(term01.Value) + double.Parse(term02.Value)) / 3;
+                    }
+                    else
+                    {
+                        annualAverage = (termAverage + double.Parse(term01.Value)) / 2;
+                    }
+                }
+                else
+                {
+                    if (term02 != null)
+                    {
+                        annualAverage = (termAverage + double.Parse(term02.Value)) / 2;
+                    }
+                }
+                footerItems.Add(new("AnnualAverage", AppUtilities.GetTruncateOrRoundingValue(annualAverage,classGroup).ToString()));
+            }
             var footerSection = new ReportFooter(footerItems);
             #endregion
             return new TermReportCard(headReportSection, detailSection, footerSection);
@@ -268,15 +342,18 @@ namespace Primary.SchoolApp.Services
         public async Task<List<EvaluationReportCard>> GetEvaluationReportCardByClassRoomAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
         {
             List<EvaluationReportCard> result = new();
-            // extraction des moyennes de la classe
-            var evaluationAverageList = await localStudentNoteService.GetEvaluationAverageListByRoom(roomId, evaluationId, schoolYearId, bookId);
-            //extraction des notes de la classe;
-            var evaluationNoteList = await localStudentNoteService.GetEvaluationNoteListByRoom(roomId, evaluationId, schoolYearId, bookId);
+
             var evaluation = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
-            var classroom = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == classroom.ClassId);
-            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
+            var selectedClassroom = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
+            var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == selectedClassroom.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
             var schoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == schoolYearId);
+
+            // extraction des moyennes de la classe
+            var getEvaluationAveragesTask = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, evaluationId, schoolYearId, bookId);
+            //extraction des notes de la classe;
+            var getEvaluationNotesTask = localStudentNoteService.GetEvaluationNoteListByRoom(roomId, evaluationId, schoolYearId, bookId);
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
             var reportTitle = $"BULLETIN {evaluation.FrenchName}";
             var language = "FR";
             if (classGroup.DocumentLanguageId == 1 || bookId == 1)
@@ -284,17 +361,20 @@ namespace Primary.SchoolApp.Services
                 reportTitle = $"{evaluation.EnglishName} SUMMARY MARK";
                 language = "EN";
             }
+            var evaluationAverageList = await getEvaluationAveragesTask;
             //extraction de la liste des élèves ayant composé
             var students = evaluationAverageList.Select(x => x.Student).ToList();
             //extraction des matières avec note max et groupe de la classe de l'élève
-            var classroomSujectList = Program.ClassSubjectList.Where(x => x.ClassId == classOfRoom.Id);
+            var classroomSujectList = Program.ClassSubjectList.Where(x => x.ClassId == selectedClass.Id);
             //extraction des groupes de matières de la classe de l'élève
             var groupList = classroomSujectList.Where(x => x.BookId == bookId).OrderBy(x => x.Sequence).Select(x => x.Group).DistinctBy(x => x.Id).ToList();
-
+            var evaluationNoteList = await getEvaluationNotesTask;
+            var disciplineItems=await getDisciplinesTask;
             foreach (var student in students)
             {
                 // create head of report card
-                var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, "", language, evaluation.Code);
+                var disciplinarySheet = disciplineItems.Where(d => d.Student.Id == student.Id && d.Evaluation.Id==evaluationId).ToList();
+                var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, selectedClassroom, "", language, evaluation.Code, disciplinarySheet);
                 #region Detail Report
 
 
@@ -354,9 +434,27 @@ namespace Primary.SchoolApp.Services
         //bulletins scolaires d'un trimestre d'une salle de classe
         public async Task<List<TermReportCard>> GetTermReportCardByClassRoomAsync(int roomId, int termId, int schoolYearId, int bookId)
         {
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
             List<TermReportCard> reportCards = new();
+            // liste des trimestres antérieurs
+            List<string> reminderTerms = new();
+            Dictionary<string, Task<List<AverageRecord>>> reminderTermsTask = new();
+            Dictionary<string, List<AverageRecord>> reminderTermsTaskResult = new();
             var term = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == termId);
             string termCode = term != null ? term.Code : string.Empty;
+            if (termCode == "TERM02")
+            {
+                reminderTerms.Add("TERM01");
+            }
+            else
+            {
+                if (termCode == "TERM03")
+                {
+                    reminderTerms.Add("TERM01");
+                    reminderTerms.Add("TERM02");
+                }
+            }
+            var evaluationIds = Program.EvaluationSessionChildList.Where(e => e.Mother == termId).Select(d=>d.Id);
             var evaluationCodes = LocalStudentNoteService.GetEvaluationCodeOfTerm(termCode);
             var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("FirstMonth"));
             var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("SecondMonth"));
@@ -364,18 +462,22 @@ namespace Primary.SchoolApp.Services
             // Extraction des notes du trimestre
             var term_notes_task = localStudentNoteService.GetTermNoteListByRoom(roomId, termCode, schoolYearId, bookId);
             var term_averages_task = localStudentNoteService.GetTermAverageListByRoom(roomId, termCode, schoolYearId, bookId);
+            foreach (var code in reminderTerms)
+            {
+                reminderTermsTask.Add(code, localStudentNoteService.GetTermAverageListByRoom(roomId, code, schoolYearId, bookId));
+            }
             // extraction des moyennes des évaluations
             var eval01_averages_task = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, eval01 != null ? eval01.Id : 100, schoolYearId, bookId);
             var eval02_averages_task = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, eval02 != null ? eval02.Id : 100, schoolYearId, bookId);
             var eval03_averages_task = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, eval03 != null ? eval03.Id : 100, schoolYearId, bookId);
             // Récupération des info de la salle de classe;
-            var classroom = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
-            var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == classroom.ClassId);
-            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
+            var selectedClassroom = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
+            var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == selectedClassroom.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
             var schoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == schoolYearId);
             var teacher = Program.EmployeeRoomList.FirstOrDefault(x => x.RoomId == roomId && x.IsMasterRoom && x.DefaultSection == bookId);
             //extraction des matières avec note max et groupe de la classe de l'élève
-            var classroomSujectList = Program.ClassSubjectList.Where(x => x.ClassId == classOfRoom.Id);
+            var classroomSujectList = Program.ClassSubjectList.Where(x => x.ClassId == selectedClass.Id);
             var teacherName = string.Empty;
             if (teacher != null)
             {
@@ -397,13 +499,23 @@ namespace Primary.SchoolApp.Services
             var students = term_notes.Select(x => x.Student).Distinct().ToList();
             // extraction des groupes de matiières
             var subject_groups = term_notes.Select(x => x.SubjectGroup).Distinct().ToList();
-
+            // extraction des moyennes des trimestres antérieurs
+            foreach (var code in reminderTerms)
+            {
+                if (reminderTermsTask.TryGetValue(code, out Task<List<AverageRecord>> task))
+                {
+                    var taskResult = await task;
+                    reminderTermsTaskResult.Add(code, taskResult);
+                }
+            }
+            var disciplineItems = await getDisciplinesTask;
             // Production des bulletins
             foreach (var student in students)
             {
                 var student_notes = term_notes.Where(x => x.Student.Id == student.Id).ToList();
+                var disciplinarySheet=disciplineItems.Where(d=>d.Student.Id==student.Id && evaluationIds.Contains(d.Evaluation.Id)).ToList();
                 // create head of report card
-                var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, teacherName, language, termCode);
+                var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, selectedClassroom, teacherName, language, termCode, disciplinarySheet);
                 #region Detail Report
 
                 //ectraction des matères sur lesquelles l'élève a été évalué
@@ -504,6 +616,43 @@ namespace Primary.SchoolApp.Services
                 footerItems.Add(new("ThirdMonthLowestAverage", thirdMonthLowestAverage.ToString()));
                 double termLowestAverage = term_averages.Any() ? term_averages.Select(x => x.Average).OrderBy(x => x).First() : 0;
                 footerItems.Add(new("TermLowestAverage", termLowestAverage.ToString()));
+                
+                if (reminderTermsTaskResult.TryGetValue("TERM01", out List<AverageRecord> term1Averages))
+                {
+                    var term1Average = term1Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                    footerItems.Add(new("FirstTermAverage", term1Average != null ? term1Average.Average.ToString() : string.Empty));
+                }
+                if (reminderTermsTaskResult.TryGetValue("TERM02", out List<AverageRecord> term2Averages))
+                {
+                    var term2Average = term2Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                    footerItems.Add(new("SecondTermAverage", term2Average != null ? term2Average.Average.ToString() : string.Empty));
+                }
+                if (termCode == "TERM03")
+                {
+                    footerItems.Add(new("ThirdTermAverage", termAverage.ToString()));
+                    var term01 = footerItems.FirstOrDefault(x => x.Name == "FirstTermAverage" && x.Value != string.Empty);
+                    var term02 = footerItems.FirstOrDefault(x => x.Name == "SecondTermAverage" && x.Value != string.Empty);
+                    double annualAverage = 0;
+                    if (term01 != null)
+                    {
+                        if (term02 != null)
+                        {
+                            annualAverage = (termAverage + double.Parse(term01.Value) + double.Parse(term02.Value)) / 3;
+                        }
+                        else
+                        {
+                            annualAverage = (termAverage + double.Parse(term01.Value)) / 2;
+                        }
+                    }
+                    else
+                    {
+                        if (term02 != null)
+                        {
+                            annualAverage = (termAverage + double.Parse(term02.Value)) / 2;
+                        }
+                    }
+                    footerItems.Add(new("AnnualAverage", AppUtilities.GetTruncateOrRoundingValue(annualAverage, classGroup).ToString()));
+                }
                 var footerSection = new ReportFooter(footerItems);
                 #endregion
 
@@ -511,17 +660,269 @@ namespace Primary.SchoolApp.Services
                 reportCards.Add(new TermReportCard(headReportSection, detailSection, footerSection));
             }
 
+            return reportCards;
+        }
+        // Bulletins scolaires d'une année d'une salle de classe
+        public async Task<List<TermReportCard>> GetAnnualReportCardByClassRoomAsync(int roomId, int schoolYearId, int bookId)
+        {
+            List<TermReportCard> reportCards = new();
+            List<TermRecord> annualNoteListe = new();
+            // Récupération des info de la salle de classe;
+            var selectedClassroom = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
+            var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == selectedClassroom.ClassId);
+            var selectedClassGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
+            var language = LocalStudentNoteService.GetLanguageGroup(selectedClassGroup, bookId);
+            var schoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == schoolYearId);
+            var teacher = Program.EmployeeRoomList.FirstOrDefault(x => x.RoomId == roomId && x.IsMasterRoom && x.DefaultSection == bookId);
+            var teacherName = string.Empty;
+            if (teacher != null)
+            {
+                if (language == "FR")
+                {
+                    teacherName = teacher.Employee.Sex == "M" ? $"M.  {teacher.Employee.FullName}" : $"Mme.  {teacher.Employee.FullName}";
+                }
+                else
+                {
+                    teacherName = teacher.Employee.Sex == "M" ? $"Mr.  {teacher.Employee.FullName}" : $"Mrs.  {teacher.Employee.FullName}";
+                }
+            }
+            var reportTitle = string.Empty;
+
+            //extraction des matières avec note max et groupe de la classe de l'élève
+            var classroomSujectList = Program.ClassSubjectList.Where(x => x.ClassId == selectedClass.Id);
+
+            // extraction élements disciplinaire 
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
+
+            // extraction des moyennes annuelles
+            var getAnnualAveragesTask = localStudentNoteService.GetAnnualAverageListByRoom(roomId, schoolYearId, bookId);
+
+            // extraction des moyennes trimestrielles
+            var getFirstTermAveragesTask = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM01", schoolYearId, bookId);
+            var getSecondTermAveragesTask = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM02", schoolYearId, bookId);
+            var getThirdTermAveragesTask = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM03", schoolYearId, bookId);
+
+            // Extraction des notes par trimestre
+            var getFirstTermNotesTask = localStudentNoteService.GetTermNoteListByRoom(roomId, "TERM01", schoolYearId, bookId);
+            var getSecondTermNotesTask = localStudentNoteService.GetTermNoteListByRoom(roomId, "TERM02", schoolYearId, bookId);
+            var getThirdTermNotesTask = localStudentNoteService.GetTermNoteListByRoom(roomId, "TERM03", schoolYearId, bookId);
+
+            var term1Notes = await getFirstTermNotesTask;
+            var term2Notes = await getSecondTermNotesTask;
+            var term3Notes = await getThirdTermNotesTask;
+
+            // Extraction de la liste des élèves
+            List<Student> students = new();
+            students.AddRange(term1Notes.Select(x => x.Student));
+            students.AddRange(term2Notes.Select(x => x.Student));
+            students.AddRange(term3Notes.Select(x => x.Student));
+            var composedStudents = students.DistinctBy(x => x.Id);
+
+            // Extraction de la liste des matières
+            List<Subject> subjects = new();
+            subjects.AddRange(term1Notes.Select(x => x.Subject));
+            subjects.AddRange(term2Notes.Select(x => x.Subject));
+            subjects.AddRange(term3Notes.Select(x => x.Subject));
+            var composedSubjects = subjects.DistinctBy(x => x.Id);
+
+            foreach (var subject in composedSubjects)
+            {
+                List<StudentNote> notesToOrder = new();
+                List<TermRecord> termRecords = new();
+                foreach (var student in composedStudents)
+                {
+                    var term1Note = term1Notes.Find(x => x.Student.Id == student.Id && x.Subject.Id == subject.Id);
+                    var term2Note = term2Notes.Find(x => x.Student.Id == student.Id && x.Subject.Id == subject.Id);
+                    var term3Note = term3Notes.Find(x => x.Student.Id == student.Id && x.Subject.Id == subject.Id);
+                    // get final note
+                    var finalNote = LocalStudentNoteService.ComputeFinalAverage(term1Note, term2Note, term3Note);
+                    finalNote = AppUtilities.GetTruncateOrRoundingValue(finalNote, selectedClassGroup);
+                    // get notedOn 
+                    var notedOn = LocalStudentNoteService.GetNotedOn(term1Note, term2Note, term3Note);
+                    // get noteCoef 
+                    var noteCoef = LocalStudentNoteService.GetNoteCoef(term1Note, term2Note, term3Note);
+                    // get subject group 
+                    var subjectGroup = classroomSujectList.FirstOrDefault(x => x.SubjectId == subject.Id);
+                    termRecords.Add(
+                        new(
+                            0,
+                            student,
+                            subject,
+                            subjectGroup.Group,
+                            term1Note != null ? term1Note.FinalNote : 0,
+                            term1Note != null ? term1Note.FinalNote.ToString() : string.Empty,
+                            term1Note != null ? $"{term1Note.FinalNote}/{notedOn}" : string.Empty,
+                            term2Note != null ? term2Note.FinalNote : 0,
+                            term2Note != null ? term2Note.FinalNote.ToString() : string.Empty,
+                            term2Note != null ? $"{term2Note.FinalNote}/{notedOn}" : string.Empty,
+                            term3Note != null ? term3Note.FinalNote : 0,
+                            term3Note != null ? term3Note.FinalNote.ToString() : string.Empty,
+                            term3Note != null ? $"{term3Note.FinalNote}/{notedOn}" : string.Empty,
+                            finalNote,
+                            finalNote.ToString(),
+                            $"{finalNote}/{notedOn}",
+                            noteCoef,
+                            notedOn,
+                            string.Empty,
+                            string.Empty
+                            )
+                        );
+                    notesToOrder.Add(
+                        new StudentNote()
+                        {
+                            StudentId = student.Id,
+                            SubjectId = subject.Id,
+                            Student = student,
+                            Subject = subject,
+                            Note = finalNote,
+                            NotedOn = 20,
+                        }
+                        );
+                }
+                // On génère une liste ordonnée par ordre de mérite
+                var orderedAverageList = LocalStudentNoteService.GenerateOrderedWithPosition(notesToOrder, language);
+                foreach (var item in orderedAverageList)
+                {
+                    //truncate or around note
+                    var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, selectedClassGroup);
+                    //get rating
+                    var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Note" && x.MinNote <= note && x.MaxNote >= note);
+                    var rating = string.Empty;
+                    if (systemRating != null)
+                    {
+                        rating = language == "FR" ? systemRating.FrenchName : systemRating.EnglishName;
+                    }
+
+                    var termNote = termRecords.Find(x => x.Student.Id == item.Student.Id);
+
+                    annualNoteListe.Add(
+                        new(
+                            0,
+                            termNote.Student,
+                            termNote.Subject,
+                            termNote.SubjectGroup,
+                            termNote.FirstNote,
+                            termNote.FirstNoteAsString,
+                            termNote.FirstNoteWithMax,
+                            termNote.SecondNote,
+                            termNote.SecondNoteAsString,
+                            termNote.SecondNoteWithMax,
+                            termNote.ThirdNote,
+                            termNote.ThirdNoteAsString,
+                            termNote.ThirdNoteWithMax,
+                            termNote.FinalNote,
+                            termNote.FinalNoteAsString,
+                            termNote.FinalNoteWithMax,
+                            termNote.NoteCoef,
+                            termNote.NotedOn,
+                            rating,
+                            item.Position
+                            )
+                        );
+                }
+            }
 
 
+            // extraction des groupes de matiières
+            var subject_groups = annualNoteListe.Select(x => x.SubjectGroup).Distinct().ToList();
+            var disciplineItems = await getDisciplinesTask;
+            // Production des bulletins
+            foreach (var student in composedStudents)
+            {
+                var student_notes = annualNoteListe.Where(x => x.Student.Id == student.Id).ToList();
+                var disciplinarySheet = disciplineItems.Where(d => d.Student.Id == student.Id).ToList();
+                // create head of report card
+                var headReportSection = new HeadReportCard(reportTitle, schoolYear.Name, student, selectedClassroom, teacherName, language, string.Empty,disciplinarySheet);
+                #region Detail Report
 
 
+                var detailSection = new DetailTermReportCard(student_notes, subject_groups);
+
+                #endregion
+
+                #region Footer Report
+                // calcul de la moyenne
+                List<ReportItem> footerItems = new();
+                double sumCoef = student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.NoteCoef);
+                footerItems.Add(new("SumCoef", sumCoef.ToString()));
+                double sumNotedOn = student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.NotedOn);
+                footerItems.Add(new("SumNotedOn", sumNotedOn.ToString()));
+                double sumFirstNote = student_notes.Where(x => x.FirstNoteAsString != string.Empty).Sum(x => x.FirstNote);
+                sumFirstNote = AppUtilities.GetTruncateOrRoundingValue(sumFirstNote, selectedClassGroup);
+                footerItems.Add(sumFirstNote != 0 ? new("SumFirstNote", sumFirstNote.ToString()) : new("SumFirstNote", string.Empty));
+                double sumSecondNote = student_notes.Where(x => x.SecondNoteAsString != string.Empty).Sum(x => x.SecondNote);
+                sumSecondNote = AppUtilities.GetTruncateOrRoundingValue(sumSecondNote, selectedClassGroup);
+                footerItems.Add(sumSecondNote != 0 ? new("SumSecondNote", sumSecondNote.ToString()) : new("SumSecondNote", string.Empty));
+                double sumThirdNote = student_notes.Where(x => x.ThirdNoteAsString != string.Empty).Sum(x => x.ThirdNote);
+                sumThirdNote = AppUtilities.GetTruncateOrRoundingValue(sumThirdNote, selectedClassGroup);
+                footerItems.Add(sumThirdNote != 0 ? new("SumThirdNote", sumThirdNote.ToString()) : new("SumThirdNote", string.Empty));
+
+                double sumFinalNote = AppUtilities.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
+                footerItems.Add(sumFinalNote != 0 ? new("SumFinalNote", sumFinalNote.ToString()) : new("SumFinalNote", string.Empty));
+
+                // Récupération des moyennes trimestrielles
+                var term1Averages = await getFirstTermAveragesTask;
+                var term2Averages = await getSecondTermAveragesTask;
+                var term3Averages = await getThirdTermAveragesTask;
+                // Récupération des moyennes annuelles
+                var annualAverages = await getAnnualAveragesTask;
 
 
+                var term01_averages_student = term1Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                var term02_averages_student = term2Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                var term03_averages_student = term3Averages.FirstOrDefault(x => x.Student.Id == student.Id);
+                var annual_averages_student = annualAverages.FirstOrDefault(x => x.Student.Id == student.Id);
+                double firstTermAverage = term01_averages_student != null ? term01_averages_student.Average : 0;
+                footerItems.Add(firstTermAverage != 0 ? new("FirstTermAverage", firstTermAverage.ToString()) : new("FirstTermAverage", string.Empty));
+                double secondTermAverage = term02_averages_student != null ? term02_averages_student.Average : 0;
+                footerItems.Add(secondTermAverage != 0 ? new("SecondTermAverage", secondTermAverage.ToString()) : new("SecondTermAverage", string.Empty));
+                double thirdAverageAverage = term03_averages_student != null ? term03_averages_student.Average : 0;
+                footerItems.Add(thirdAverageAverage != 0 ? new("ThirdTermAverage", thirdAverageAverage.ToString()) : new("ThirdTermAverage", string.Empty));
+                double annualAverage = annual_averages_student != null ? annual_averages_student.Average : 0;
+                footerItems.Add(annualAverage != 0 ? new("AnnualAverage", annualAverage.ToString()) : new("AnnualAverage", string.Empty));
+                string firstTermPosition = term01_averages_student != null ? term01_averages_student.Position : string.Empty;
+                footerItems.Add(new("FirstTermPosition", firstTermPosition));
+                string secondTermPosition = term02_averages_student != null ? term02_averages_student.Position : string.Empty;
+                footerItems.Add(new("SecondTermPosition", secondTermPosition));
+                string thirdTermPosition = term03_averages_student != null ? term03_averages_student.Position : string.Empty;
+                footerItems.Add(new("ThirdTermPosition", thirdTermPosition));
+                string termPosition = annual_averages_student != null ? annual_averages_student.Position : string.Empty;
+                footerItems.Add(new("AnnualPosition", termPosition));
+                double firstTermClassAverage = term1Averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(term1Averages.Sum(x => x.Average) / term1Averages.Count, selectedClassGroup) : 0;
+                footerItems.Add(new("FirstTermClassAverage", firstTermClassAverage.ToString()));
+                double secondTermClassAverage = term2Averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(term2Averages.Sum(x => x.Average) / term2Averages.Count, selectedClassGroup) : 0;
+                footerItems.Add(new("SecondTermClassAverage", secondTermClassAverage.ToString()));
+                double thirdTermClassAverage = term3Averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(term3Averages.Sum(x => x.Average) / term3Averages.Count, selectedClassGroup) : 0;
+                footerItems.Add(new("ThirdTermClassAverage", thirdTermClassAverage.ToString()));
+                double annualClassAverage = AppUtilities.GetTruncateOrRoundingValue(annualAverages.Sum(x => x.Average) / annualAverages.Count, selectedClassGroup);
+                footerItems.Add(new("AnnualClassAverage", annualClassAverage.ToString()));
+                double firstTermHighestAverage = term1Averages.Select(x => x.Average).OrderByDescending(x => x).First();
+                footerItems.Add(new("FirstTermHighestAverage", firstTermHighestAverage.ToString()));
+                double secondTermHighestAverage = term2Averages.Any() ? term2Averages.Select(x => x.Average).OrderByDescending(x => x).First() : 0;
+                footerItems.Add(new("SecondTermHighestAverage", secondTermHighestAverage.ToString()));
+                double thirdTermHighestAverage = term3Averages.Any() ? term3Averages.Select(x => x.Average).OrderByDescending(x => x).First() : 0;
+                footerItems.Add(new("ThirdTermHighestAverage", thirdTermHighestAverage.ToString()));
+                double annualHighestAverage = annualAverages.Any() ? annualAverages.Select(x => x.Average).OrderByDescending(x => x).First() : 0;
+                footerItems.Add(new("AnnualHighestAverage", annualHighestAverage.ToString()));
+                double firstTermLowestAverage = term1Averages.Any() ? term1Averages.Select(x => x.Average).OrderBy(x => x).First() : 0;
+                footerItems.Add(new("FirstTermLowestAverage", firstTermLowestAverage.ToString()));
+                double secondTermLowestAverage = term2Averages.Any() ? term2Averages.Select(x => x.Average).OrderBy(x => x).First() : 0;
+                footerItems.Add(new("SecondTermLowestAverage", secondTermLowestAverage.ToString()));
+                double thirdTermLowestAverage = term3Averages.Any() ? term3Averages.Select(x => x.Average).OrderBy(x => x).First() : 0;
+                footerItems.Add(new("ThirdTermLowestAverage", thirdTermLowestAverage.ToString()));
+                double annualLowestAverage = annualAverages.Any() ? annualAverages.Select(x => x.Average).OrderBy(x => x).First() : 0;
+                footerItems.Add(new("AnnualLowestAverage", annualLowestAverage.ToString()));
+                var footerSection = new ReportFooter(footerItems);
+                #endregion
 
-
+                // ajout du bulletin
+                reportCards.Add(new TermReportCard(headReportSection, detailSection, footerSection));
+            }
 
             return reportCards;
         }
+
+
         // Procès verbal  d'une l'évaluation pour salle de classe
         public async Task<ClassroomReport> GetEvaluationReportByClassRoomAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
         {
@@ -1104,7 +1505,7 @@ namespace Primary.SchoolApp.Services
                     getEvaluationAveragesTask.Add((room, eval), localStudentNoteService.GetEvaluationAverageListByRoom(room.Id, eval.Id, schoolYearId, bookId));
                 }
             }
-           
+
             //watch.Stop();
             // Console.WriteLine($"Le temps de traitement est de {watch.ElapsedMilliseconds}");
 
@@ -1272,7 +1673,7 @@ namespace Primary.SchoolApp.Services
 
 
         // Statistiques d'une  année d'un groupe de classes
-        public async Task<ClassGroupReport> GetAnnualReportByClassGroupAsync(int groupId,  int schoolYearId, int bookId)
+        public async Task<ClassGroupReport> GetAnnualReportByClassGroupAsync(int groupId, int schoolYearId, int bookId)
         {
             // get data of head report
 
@@ -1346,14 +1747,14 @@ namespace Primary.SchoolApp.Services
             dataTable.Columns.Add("AdmittedP", typeof(double));
             dataTable.Columns.Add("FailedP", typeof(double));
             Dictionary<SchoolRoom, Task<List<AverageRecord>>> getAnnualAveragesTask = new();
-            Dictionary<(SchoolRoom,EvaluationSession), Task<List<AverageRecord>>> getTermAveragesTask = new();
+            Dictionary<(SchoolRoom, EvaluationSession), Task<List<AverageRecord>>> getTermAveragesTask = new();
             // Création des lignes 
             foreach (var room in classroomList)
             {
                 getAnnualAveragesTask.Add(room, localStudentNoteService.GetAnnualAverageListByRoom(room.Id, schoolYearId, bookId));
                 foreach (var term in terms)
                 {
-                    getTermAveragesTask.Add((room,term), localStudentNoteService.GetTermAverageListByRoom(room.Id, term.Code, schoolYearId, bookId));
+                    getTermAveragesTask.Add((room, term), localStudentNoteService.GetTermAverageListByRoom(room.Id, term.Code, schoolYearId, bookId));
                 }
             }
             var annualAveragesTaskResult = await Task.WhenAll(getAnnualAveragesTask.Values);
@@ -1531,7 +1932,7 @@ namespace Primary.SchoolApp.Services
             var student = Program.StudentEnrollingList.Select(x => x.Student).FirstOrDefault(x => x.Id == studentId);
             var schoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == schoolYearId);
             var teacher = Program.EmployeeRoomList.FirstOrDefault(x => x.RoomId == roomId && x.IsMasterRoom && x.DefaultSection == bookId);
-            var getDisciplinesTask = localStudentNoteService.GetDisciplineItems(classOfRoom.Id, schoolYearId);
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByClass(classOfRoom.Id, schoolYearId);
             var getFirstTermAverages = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM01", schoolYearId, bookId);
             var getSecondTermAverages = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM02", schoolYearId, bookId);
             var getThirdTermAverages = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM03", schoolYearId, bookId);
@@ -1554,7 +1955,7 @@ namespace Primary.SchoolApp.Services
                 }
             }
             // create head of report card
-            var headSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, teacherName, language, string.Empty);
+            var headSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom, teacherName, language, string.Empty,null);
 
             // create detail section
             var disciplineItems = await getDisciplinesTask;
@@ -1620,17 +2021,17 @@ namespace Primary.SchoolApp.Services
         // Fiche de discipline d'une salle de classe
         public async Task<List<StudentDisciplinarySheet>> GetDisciplinarySheetByClassRoom(int roomId, int schoolYearId, int bookId)
         {
-            List<StudentDisciplinarySheet> reportSheets= new();
+            List<StudentDisciplinarySheet> reportSheets = new();
             var classroom = Program.SchoolRoomList.FirstOrDefault(x => x.Id == roomId);
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == classroom.ClassId);
             var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
             var schoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == schoolYearId);
             var teacher = Program.EmployeeRoomList.FirstOrDefault(x => x.RoomId == roomId && x.IsMasterRoom && x.DefaultSection == bookId);
-            var getDisciplinesTask = localStudentNoteService.GetDisciplineItems(classOfRoom.Id, schoolYearId);
+            var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByClass(classOfRoom.Id, schoolYearId);
             var getFirstTermAverages = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM01", schoolYearId, bookId);
             var getSecondTermAverages = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM02", schoolYearId, bookId);
             var getThirdTermAverages = localStudentNoteService.GetTermAverageListByRoom(roomId, "TERM03", schoolYearId, bookId);
-            var getAnnualAverages= localStudentNoteService.GetAnnualAverageListByRoom(roomId, schoolYearId, bookId);
+            var getAnnualAverages = localStudentNoteService.GetAnnualAverageListByRoom(roomId, schoolYearId, bookId);
             var teacherName = string.Empty;
             if (teacher != null)
             {
@@ -1654,11 +2055,11 @@ namespace Primary.SchoolApp.Services
             var firstTermAverages = await getFirstTermAverages;
             var secondTermAverages = await getSecondTermAverages;
             var thirdTermAverages = await getThirdTermAverages;
-            var annualAverages= await getAnnualAverages;
-            foreach ( var student in students)
+            var annualAverages = await getAnnualAverages;
+            foreach (var student in students)
             {
                 // create head of report card
-                var headSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom.Name, teacherName, language, string.Empty);
+                var headSection = new HeadReportCard(reportTitle, schoolYear.Name, student, classroom, teacherName, language, string.Empty,null);
 
                 // create detail section
                 var firstTermStudentDisciplineItem = disciplineItems.Where(x => x.Student.Id == student.Id && x.Date.Month >= 9 && x.Date.Month <= 12);

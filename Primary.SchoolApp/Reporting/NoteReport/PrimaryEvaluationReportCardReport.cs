@@ -5,9 +5,9 @@ using static Primary.SchoolApp.DTO.DTOItem;
 
 namespace Primary.SchoolApp.Reporting
 {
-    internal class EvaluationPrimaryReportCardReport:SchoolManagement.UI.Reporting.PrimaryEvaluationReport
+    internal class PrimaryEvaluationReportCardReport:SchoolManagement.UI.Reporting.PrimaryEvaluationReport
     {
-        public EvaluationPrimaryReportCardReport(EvaluationReportCard reportCard) { 
+        public PrimaryEvaluationReportCardReport(EvaluationReportCard reportCard) { 
             string img= reportCard.HeadSection.Language=="FR"? "head_paper_fr.png" : "head_paper_en.png"; 
             HeaderPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl(img);
             RePortTitleTextBox.Value= reportCard.HeadSection.ReportTitle;
@@ -18,7 +18,7 @@ namespace Primary.SchoolApp.Reporting
             StudentIdLabel.Value = reportCard.HeadSection.Language == "FR" ? "Matricule:" : "ID:";
             StudentIdTextBox.Value= reportCard.HeadSection.Student.IdNumber;
             ClassLabel.Value = reportCard.HeadSection.Language == "FR" ? "Classe:" : "Class:";
-            ClassTextBox.Value = reportCard.HeadSection.ClassRoom;
+            ClassTextBox.Value = reportCard.HeadSection.ClassRoom.Name;
             TeacherLabel.Value = reportCard.HeadSection.Language == "FR" ? "Titulaire:" : "Teacher:";
             TeacherTexBox.Value = reportCard.HeadSection.Teacher;
             TotalLabel.Value = "Total".ToUpper();
@@ -80,7 +80,7 @@ namespace Primary.SchoolApp.Reporting
             //load data on sub report
             var noteReport = new InstanceReportSource
             {
-                ReportDocument = new Subreport1NoteReport(reportCard)
+                ReportDocument = new PrimaryOneNoteSubReport(reportCard)
             };
 
             NotesSubReport.ReportSource = noteReport;

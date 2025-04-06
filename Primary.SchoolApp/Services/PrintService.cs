@@ -9,7 +9,6 @@ using SchoolManagement.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using static Primary.SchoolApp.DTO.DTOItem;
 
@@ -19,12 +18,10 @@ namespace Primary.SchoolApp.Services
     {
         private readonly ClientApp clientApp;
         private readonly IUserService userService;
-        private readonly ReportCardService reportCardService;
-        public PrintService(ClientApp clientApp, IUserService userService, ReportCardService reportCardService)
+        public PrintService(ClientApp clientApp, IUserService userService)
         {
             this.clientApp = clientApp;
             this.userService = userService;
-            this.reportCardService = reportCardService;
         }
 
         public async Task PrintPaymentSummaryAsync(StudentEnrolling enrolling)
@@ -184,43 +181,6 @@ namespace Primary.SchoolApp.Services
             reportViewer.Show();
             await Task.Delay(0);
         }
-        //impression du bulletin d'un élève pour une évaluation
-        public async Task PrintReportCardByStudentAsync(int studentId, int roomId, int evaluationId, int schoolYearId, int bookId)
-        {
-            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
-            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            if (eval != null) {
-                if (eval.Code.Contains("TERM"))
-                {
-                    reportViewer.LoadTermReportCard(await reportCardService.GetTermReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId));
-                }
-                else
-                {
-                    reportViewer.LoadEvaluationReportCard(await reportCardService.GetEvaluationReportCardByStudentAsync(studentId, roomId, evaluationId, schoolYearId, bookId));
-                }
-            }
-            reportViewer.Show();
-            await Task.Delay(0);
-        }
-        // impression des bulletion d'une salle de classe pour une evaluation
-        public async Task PrintReportCardByClassRoomAsync(int roomId, int evaluationId, int schoolYearId, int bookId)
-        {
-            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
-            var eval = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
-            if (eval != null)
-            {
-                if (eval.Code.Contains("TERM"))
-                {
-                    reportViewer.LoadTermReportCard(await reportCardService.GetTermReportCardByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
-                }
-                else
-                {
-                    reportViewer.LoadEvaluationReportCard(await reportCardService.GetEvaluationReportCardByClassRoomAsync(roomId, evaluationId, schoolYearId, bookId));
-                }
-            }
-            reportViewer.Show();
-            await Task.Delay(0);
-        }
-       
+        
     }
 }

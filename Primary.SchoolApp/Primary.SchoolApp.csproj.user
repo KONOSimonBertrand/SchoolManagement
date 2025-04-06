@@ -14,25 +14,37 @@
     <Compile Update="Reporting\CashFlow\PaymentSummaryReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Reporting\NoteReport\GardenEvaluationReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\GardenOneNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\GardenThreeNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\PrimaryAnnualReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\NoteReport\ClassNoteReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\NoteReport\DisciplinarySheetReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\NoteReport\Subreport1NoteReport.cs">
+    <Compile Update="Reporting\NoteReport\PrimaryOneNoteSubReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\NoteReport\GroupNoteReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\NoteReport\EvaluationPrimaryReportCardReport.cs">
+    <Compile Update="Reporting\NoteReport\PrimaryEvaluationReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\NoteReport\Subreport3NoteReport.cs">
+    <Compile Update="Reporting\NoteReport\PrimaryThreeNoteSubreport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\NoteReport\TermPrimaryReportCardReport.cs">
+    <Compile Update="Reporting\NoteReport\PrimaryTermReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="UI\CashFlowTypes\AddOtherCashFlowForm.cs">
@@ -305,6 +317,9 @@
     <Compile Update="UI\Students\EditDisciplineForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\EditEvaluationCommentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\EditMedicalRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,9 +396,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Users\UserRoomsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI\WaitingForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
