@@ -41,11 +41,11 @@ namespace SchoolManagement.Infrastructure.Repositories
                 noteCoef = studentNote.NoteCoef,
                 notedOn = studentNote.NotedOn,
                 comment = studentNote.Comment,
-                subjectId=studentNote.SubjectId,
+                subjectId = studentNote.SubjectId,
                 studentId = studentNote.StudentId,
                 evaluationId = studentNote.EvaluationId,
                 schoolYearId = studentNote.SchoolYearId,
-                bookId= studentNote.BookId,
+                bookId = studentNote.BookId,
                 date = studentNote.Date,
             });
             await Task.Delay(0);
@@ -78,16 +78,16 @@ namespace SchoolManagement.Infrastructure.Repositories
                               INNER JOIN Students C ON A.StudentId=C.Id  
                               INNER JOIN SchoolYears D ON A.SchoolYearId=D.Id
                               WHERE A.EvaluationId=@evaluationId AND A.StudentId=@studentId AND A.SchoolYearId=@schoolYearId AND A.BookId=@bookId   ;";
-            var result = connection.Query<EvaluationComment,EvaluationSession, Student,SchoolYear, EvaluationComment>(query
+            var result = connection.Query<EvaluationComment, EvaluationSession, Student, SchoolYear, EvaluationComment>(query
                ,
-               (comment,evaluation, student,schoolYear) =>
+               (comment, evaluation, student, schoolYear) =>
                {
-                 comment.Evaluation=evaluation;
-                 comment.Student=student;
-                 comment.SchoolYear=schoolYear;
+                   comment.Evaluation = evaluation;
+                   comment.Student = student;
+                   comment.SchoolYear = schoolYear;
                    return comment;
                }
-               , new {evaluationId, studentId, schoolYearId,bookId }).FirstOrDefault();
+               , new { evaluationId, studentId, schoolYearId, bookId }).FirstOrDefault();
             await Task.Delay(0);
             return result;
         }
@@ -109,11 +109,32 @@ namespace SchoolManagement.Infrastructure.Repositories
                    comment.SchoolYear = schoolYear;
                    return comment;
                }
-               , new { evaluationId, schoolYearId}).ToList();
+               , new { evaluationId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
-
+        public async Task<List<EvaluationComment>> GetCommentsByClassroomAsync(int roomId,int evaluationId, int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" SELECT * FROM EvaluationComments A  
+                              INNER JOIN EvaluationSessions B ON A.EvaluationId=B.Id
+                              INNER JOIN Students C ON A.StudentId=C.Id  
+                              INNER JOIN SchoolYears D ON A.SchoolYearId=D.Id
+                              WHERE A.EvaluationId=@evaluationId AND A.SchoolYearId=@schoolYearId 
+                              AND A.StudentId IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId);";
+            var result = connection.Query<EvaluationComment, EvaluationSession, Student, SchoolYear, EvaluationComment>(query
+               ,
+               (comment, evaluation, student, schoolYear) =>
+               {
+                   comment.Evaluation = evaluation;
+                   comment.Student = student;
+                   comment.SchoolYear = schoolYear;
+                   return comment;
+               }
+               , new { roomId,evaluationId, schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
         public async Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
@@ -167,9 +188,9 @@ namespace SchoolManagement.Infrastructure.Repositories
                               INNER JOIN Students D ON A.StudentId=D.Id  
                               INNER JOIN SchoolYears E ON A.SchoolYearId=E.Id
                               WHERE  A.SubjectId=@subjectId AND A.StudentId=@studentId AND A.EvaluationId=@evaluationId AND A.SchoolYearId=@schoolYearId AND A.BookId=@bookId   ;";
-            var result = connection.Query<StudentNote,Subject, EvaluationSession, Student, SchoolYear, StudentNote>(query
+            var result = connection.Query<StudentNote, Subject, EvaluationSession, Student, SchoolYear, StudentNote>(query
                ,
-               (studentNote,subject, evaluation, student, schoolYear) =>
+               (studentNote, subject, evaluation, student, schoolYear) =>
                {
                    studentNote.Subject = subject;
                    studentNote.Evaluation = evaluation;
@@ -177,7 +198,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                    studentNote.SchoolYear = schoolYear;
                    return studentNote;
                }
-               , new {subjectId, studentId, evaluationId, schoolYearId, bookId }).FirstOrDefault();
+               , new { subjectId, studentId, evaluationId, schoolYearId, bookId }).FirstOrDefault();
             await Task.Delay(0);
             return result;
         }
@@ -220,7 +241,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                    studentNote.SchoolYear = schoolYear;
                    return studentNote;
                }
-               , new { evaluationId, schoolYearId}).ToList();
+               , new { evaluationId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -229,7 +250,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT * FROM StudentNotes WHERE  SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<StudentNote>(query,new {schoolYearId}).ToList();
+            var result = connection.Query<StudentNote>(query, new { schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -265,12 +286,12 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-        public async Task<List<StudentNote>> GetNotesByClassAsync(int classId,int evaluationId, int schoolYearId)
+        public async Task<List<StudentNote>> GetNotesByClassAsync(int classId, int evaluationId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT * FROM StudentNotes WHERE SchoolYearId=@schoolYearId AND EvaluationId=@evaluationId
                                 AND StudentId IN (SELECT StudentId FROM StudentsEnrollings WHERE classId=@classId AND SchoolYearId=@schoolYearId);";
-            var result = connection.Query<StudentNote>(query, new { classId,evaluationId, schoolYearId }).ToList();
+            var result = connection.Query<StudentNote>(query, new { classId, evaluationId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -283,12 +304,12 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-        public async Task<List<StudentNote>> GetNotesByRoomAsync(int roomId,int evaluationId, int schoolYearId)
+        public async Task<List<StudentNote>> GetNotesByRoomAsync(int roomId, int evaluationId, int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT * FROM StudentNotes WHERE SchoolYearId=@schoolYearId  AND EvaluationId=@evaluationId AND StudentId 
                                 IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId) ;";
-            var result = connection.Query<StudentNote>(query, new { roomId,evaluationId, schoolYearId }).ToList();
+            var result = connection.Query<StudentNote>(query, new { roomId, evaluationId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -296,7 +317,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT * FROM StudentNotes  WHERE StudentId=@studentId AND SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<StudentNote>(query,new { studentId, schoolYearId}).ToList();
+            var result = connection.Query<StudentNote>(query, new { studentId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -304,7 +325,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" SELECT * FROM StudentNotes WHERE  SubjectId=@subjectId AND SchoolYearId=@schoolYearId  ;";
-            var result = connection.Query<StudentNote>(query, new { subjectId,schoolYearId}).ToList();
+            var result = connection.Query<StudentNote>(query, new { subjectId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }
@@ -315,13 +336,13 @@ namespace SchoolManagement.Infrastructure.Repositories
             var result = connection.Execute(query, new
             {
                 comment = evaluationComment.Comment,
-                id=evaluationComment.Id
+                id = evaluationComment.Id
             });
             await Task.Delay(0);
             return result > 0;
         }
 
-        public  async Task<bool> UpdateNoteAsync(StudentNote studentNote)
+        public async Task<bool> UpdateNoteAsync(StudentNote studentNote)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE StudentNotes SET Note=@note,NoteCoef=@noteCoef,NotedOn=@notedOn,Comment=@comment WHERE Id=@id;";
@@ -331,7 +352,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 noteCoef = studentNote.NoteCoef,
                 notedOn = studentNote.NotedOn,
                 comment = studentNote.Comment,
-                id=studentNote.Id
+                id = studentNote.Id
             });
             await Task.Delay(0);
             return result > 0;

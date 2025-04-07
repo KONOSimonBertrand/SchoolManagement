@@ -185,7 +185,8 @@
             groupDropDownList.DisplayName = "commandBarDropDownList1";
             groupDropDownList.DropDownAnimationEnabled = true;
             groupDropDownList.DropDownHeight = 133;
-            groupDropDownList.MinSize = new Size(288, 28);
+            groupDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+            groupDropDownList.MinSize = new Size(150, 28);
             groupDropDownList.Name = "groupDropDownList";
             groupDropDownList.Text = "Section";
             // 

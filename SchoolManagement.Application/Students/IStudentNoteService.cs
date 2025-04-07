@@ -28,6 +28,6 @@ namespace SchoolManagement.Application
         public Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int schoolYearId);
         public Task<List<EvaluationComment>> GetCommentsByStudentAsync(int studentId, int schoolYearId);
         public Task<List<EvaluationComment>> GetCommentsByEvaluationAsync(int evaluationId, int schoolYearId);
-
+        public Task<List<EvaluationComment>> GetCommentsByClassroomAsync(int roomId,int evaluationId, int schoolYearId);
     }
 }
