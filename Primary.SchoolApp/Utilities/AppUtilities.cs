@@ -11,7 +11,6 @@ using System.Threading;
 using System.Linq;
 using SchoolManagement.Core.Model;
 using System.Text;
-using static Telerik.WinControls.VirtualKeyboard.VirtualKeyboardNativeMethods;
 using SchoolManagement.UI.Localization;
 using System.Diagnostics;
 

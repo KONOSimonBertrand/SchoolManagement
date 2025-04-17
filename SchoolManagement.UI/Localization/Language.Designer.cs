@@ -1177,6 +1177,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à File information.
+        /// </summary>
+        public static string LabelFileInformation {
+            get {
+                return ResourceManager.GetString("LabelFileInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Filter.
         /// </summary>
         public static string LabelFilter {
@@ -1830,6 +1839,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelNotedOn {
             get {
                 return ResourceManager.GetString("labelNotedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Student&apos;mark from external file.
+        /// </summary>
+        public static string LabelNoteFromExternalFile {
+            get {
+                return ResourceManager.GetString("LabelNoteFromExternalFile", resourceCulture);
             }
         }
         
@@ -3882,6 +3900,15 @@ namespace SchoolManagement.UI.Localization {
         public static string MessageSelectEvaluation {
             get {
                 return ResourceManager.GetString("MessageSelectEvaluation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please choose .xls or .xlsx file only..
+        /// </summary>
+        public static string MessageSelectExcelFileOnly {
+            get {
+                return ResourceManager.GetString("MessageSelectExcelFileOnly", resourceCulture);
             }
         }
         

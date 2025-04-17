@@ -208,7 +208,7 @@
             discountTextBox.Size = new Size(217, 36);
             discountTextBox.TabIndex = 5;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(488, 0);

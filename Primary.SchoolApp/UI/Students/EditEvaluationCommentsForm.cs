@@ -120,9 +120,9 @@ namespace Primary.SchoolApp.UI
             //don't add  header's item
             if (!e.ContextMenuProvider.ToString().Contains("Header"))
             {
-                if (DataGridView.CurrentRow.DataBoundItem is StudentNote note)
+                if (DataGridView.CurrentRow.DataBoundItem is EvaluationComment comment)
                 {
-                    if (note.Id != 0)
+                    if (comment.Id != 0)
                     {
                         Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
                         RadMenuItem deleteMenu = new(Language.labelDelete)

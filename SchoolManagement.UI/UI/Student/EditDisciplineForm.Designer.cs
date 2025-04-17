@@ -143,7 +143,7 @@
             classTextBox.Size = new Size(171, 30);
             classTextBox.TabIndex = 1;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(546, 0);

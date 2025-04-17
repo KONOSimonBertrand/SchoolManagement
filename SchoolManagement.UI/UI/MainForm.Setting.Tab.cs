@@ -129,7 +129,7 @@ namespace SchoolManagement.UI
             studentNoteSearchTextBox.NullText = Language.messageResearch;
             studentNoteAddNoteMenu.Text=Language.LabelOneNote;
             studentNoteAddNotesMenu.Text = Language.LabelNoteList;
-            studentNoteImportNoteMenu.Text = Language.LabelImportNotes;
+            studentNoteImportNoteMenu.Text = Language.LabelNoteFromExternalFile;
             studentNoteAddCommentMenu.Text=Language.LabelObservations;
             reportSchoolYearLabel.Text = Language.labelSchoolYear + ":";
             reportSearchTextBox.NullText = Language.messageResearch;

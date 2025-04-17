@@ -226,7 +226,7 @@ namespace SchoolManagement.UI.Reporting
             this.studentTexBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(12D);
             this.studentTexBox.Value = "KONO Simon Bertrand";
             // 
-            // classLabel
+            // classroomLabel
             // 
             this.classLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.388D), Telerik.Reporting.Drawing.Unit.Inch(2.174D));
             this.classLabel.Name = "classLabel";

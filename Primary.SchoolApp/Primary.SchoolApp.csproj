@@ -4,7 +4,7 @@
 
     <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
@@ -12,12 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="ClosedXML" Version="0.104.2" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
-    <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2023.2.718" />
-	  <PackageReference Include="Telerik.Reporting" Version="17.1.23.718" />
-	  <PackageReference Include="Telerik.ReportViewer.WinForms" Version="17.1.23.718" />
-	  <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+	  <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+	  <PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="19.0.25.313" />
+	  <PackageReference Include="Telerik.Reporting.OpenXmlRendering3" Version="19.0.25.313" />
   </ItemGroup>
 
   <ItemGroup>

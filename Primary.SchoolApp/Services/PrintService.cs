@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Reporting;
 using Primary.SchoolApp.Reporting.CashFlow;
+using Primary.SchoolApp.UI;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System;

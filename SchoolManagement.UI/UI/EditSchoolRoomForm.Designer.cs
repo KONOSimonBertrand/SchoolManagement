@@ -155,7 +155,7 @@
             nameSeparator.TabIndex = 67;
             nameSeparator.TabStop = false;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(358, 0);

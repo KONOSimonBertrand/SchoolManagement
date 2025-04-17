@@ -23,16 +23,19 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows"
+          "net7.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Users\\HP\\Documents\\Telerik NuGet Package\\2025 Q1": {},
+          "C:\\Users\\HP\\Documents\\Telerik NuGet Package\\R2 2023 SP2": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://packagesource": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
             "projectReferences": {}
           }
         },
@@ -49,16 +52,36 @@
         "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "dependencies": {
+            "System.Resources.Extensions": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Telerik.ReportViewer.WinForms": {
+              "target": "Package",
+              "version": "[19.0.25.313, )"
+            },
             "Telerik.Reporting": {
               "target": "Package",
-              "version": "[17.1.23.718, )"
+              "version": "[19.0.25.313, )"
+            },
+            "Telerik.Reporting.OpenXmlRendering": {
+              "target": "Package",
+              "version": "[19.0.25.313, )"
+            },
+            "Telerik.Reporting.OpenXmlRendering3": {
+              "target": "Package",
+              "version": "[19.0.25.313, )"
             },
             "UI.for.WinForms.AllControls.Net60": {
               "target": "Package",
-              "version": "[2023.2.718, )"
+              "version": "[2025.1.211, )"
+            },
+            "UI.for.WinForms.AllControls.Net70": {
+              "target": "Package",
+              "version": "[2024.3.924, )"
             }
           },
           "imports": [

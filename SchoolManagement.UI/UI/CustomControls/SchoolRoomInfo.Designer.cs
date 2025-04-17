@@ -145,7 +145,7 @@
             classSeparator.TabIndex = 12;
             classSeparator.TabStop = false;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Dock = DockStyle.Top;

@@ -13,7 +13,11 @@
     <SourceRoot Include="C:\Users\HP\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)telerik.licensing\1.4.6\build\Telerik.Licensing.props" Condition="Exists('$(NuGetPackageRoot)telerik.licensing\1.4.6\build\Telerik.Licensing.props')" />
+  </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgUI_for_WinForms_AllControls_Net60 Condition=" '$(PkgUI_for_WinForms_AllControls_Net60)' == '' ">C:\Users\HP\.nuget\packages\ui.for.winforms.allcontrols.net60\2023.2.718</PkgUI_for_WinForms_AllControls_Net60>
+    <PkgUI_for_WinForms_AllControls_Net70 Condition=" '$(PkgUI_for_WinForms_AllControls_Net70)' == '' ">C:\Users\HP\.nuget\packages\ui.for.winforms.allcontrols.net70\2024.3.924</PkgUI_for_WinForms_AllControls_Net70>
+    <PkgUI_for_WinForms_AllControls_Net60 Condition=" '$(PkgUI_for_WinForms_AllControls_Net60)' == '' ">C:\Users\HP\.nuget\packages\ui.for.winforms.allcontrols.net60\2025.1.211</PkgUI_for_WinForms_AllControls_Net60>
   </PropertyGroup>
 </Project>

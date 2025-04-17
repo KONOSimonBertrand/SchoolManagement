@@ -13,8 +13,9 @@ namespace SchoolManagement.UI
         public CommandBarButton ExportToExelButton { get => exportToExelButton; }
         public CommandBarLabel GroupLabel { get => groupLabel; }
         public CommandBarDropDownList GroupDropDownList {  get => groupDropDownList; }
-        public CommandBarLabel ClassroomLabel {  get => classLabel; }
+        public CommandBarLabel ClassroomLabel {  get => classroomLabel; }
         public RadDropDownList SubjectDropDownList {  get => subjectDropDownList; }
+        public CommandBarDropDownList ClassroomDropDownList { get => classroomDropDownList; }
         public SearchTextBox FilterTextBox { get => filterTextBox; }
         public RadGridView DataGridView { get => dataGridView; }
         public RadTextBox NoteMaxTextBox { get => noteMaxTextBox; }
@@ -31,9 +32,9 @@ namespace SchoolManagement.UI
         private void InitLanguage()
         {
             filterLabel.Text = Language.LabelFilter+":";
-            groupLabel.Text=Language.labelSection+ ":";
-            classLabel.Text=Language.LabelClassroom + ":";
+            groupLabel.Text = "<html>" + Language.labelSection+ ":" + "<color=Red>*";
             subjectLabel.Text= "<html>" + Language.labelSubject + ":" + "<color=Red>*";
+            classroomLabel.Text = "<html>" + Language.LabelClassroom+ ":" + "<color=Red>*";
             noteMaxLabel.Text=Language.labelMaxNote + ":";
             noteCoefLabel.Text = Language.labelCoefficient + ":";
         }

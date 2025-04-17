@@ -38,6 +38,7 @@ namespace Primary.SchoolApp.UI
         {
             SubjectDropDownList.SelectedValueChanged += SubjectDropDownList_SelectedValueChanged;
             GroupDropDownList.SelectedValueChanged += GroupDropDownList_SelectedValueChanged;
+            ClassroomDropDownList.SelectedValueChanged += ClassroomDropDownList_SelectedValueChanged;
             DataGridView.CellEndEdit += GridView_CellEndEdit;
             DataGridView.CellValidating += GridView_CellValidating;
             DataGridView.CustomFiltering += DataGridView_CustomFiltering;
@@ -206,25 +207,57 @@ namespace Primary.SchoolApp.UI
         // évènement relatif à la sélection d'une section
         private void GroupDropDownList_SelectedValueChanged(object sender, System.EventArgs e)
         {
-            if (GroupDropDownList.SelectedItem != null)
+
+            if (GroupDropDownList.SelectedIndex >= 0)
             {
-                selectedBookId = int.Parse(GroupDropDownList.SelectedValue.ToString());
-                var subjects = Program.ClassSubjectList.Where(x => x.ClassId == selectedRoom.ClassId && x.BookId == selectedBookId).Select(x => x.Subject);
-                SubjectDropDownList.DataSource = subjects.OrderBy(x => x.FrenchName);
+                if (int.TryParse(GroupDropDownList.SelectedValue.ToString(), out int result))
+                {
+                    selectedBookId = result;
+                    var subjects = Program.ClassSubjectList.Where(x => x.ClassId == selectedRoom.ClassId && x.BookId == selectedBookId).Select(x => x.Subject);
+                    SubjectDropDownList.DataSource = subjects.OrderBy(x => x.FrenchName);
+                }
             }
         }
-
+        private void ClassroomDropDownList_SelectedValueChanged(object sender, Telerik.WinControls.UI.Data.ValueChangedEventArgs e)
+        {
+            if (ClassroomDropDownList.SelectedItem != null)
+            {
+                if (ClassroomDropDownList.SelectedItem.DataBoundItem is SchoolRoom room)
+                {
+                    selectedRoom = room;
+                    students = Program.StudentRoomList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.RoomId == room.Id).Select(x => x.Student).OrderBy(x => x.FullName).ToList();
+                    LoadClassGroup(room);
+                }
+            }
+        }
         internal void InitStartup(SchoolRoom room, EvaluationSession session,int bookId)
         {
             selectedRoom = room;
             selectedSession = session;
             selectedBookId=bookId;
             EvaluationLabel.Text = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? session.EnglishName : session.FrenchName;
-            ClassroomLabel.Text = room.Name;
             students = Program.StudentRoomList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.RoomId == room.Id).Select(x => x.Student).OrderBy(x=>x.FullName).ToList();
             var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
             var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == classOfRoom.GroupId);
-            if (classOfRoom != null)
+            ClassroomDropDownList.DataSource = MainForm.GetUserConnectedClassrooms();
+            ClassroomDropDownList.ValueMember = "Id";
+            ClassroomDropDownList.DisplayMember = "Name";
+            ClassroomDropDownList.SelectedValue = room.Id;
+            LoadClassGroup(room);
+            students = Program.StudentRoomList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.RoomId == room.Id).Select(x => x.Student).OrderBy(x => x.FullName).ToList();
+            var subjects = Program.ClassSubjectList.Where(x => x.ClassId == room.ClassId && x.BookId == selectedBookId).Select(x => x.Subject);
+            SubjectDropDownList.DataSource = Thread.CurrentThread.CurrentUICulture.Name != "en-GB" ? subjects.OrderBy(x=>x.FrenchName): subjects.OrderBy(x => x.EnglishName);
+            SubjectDropDownList.SelectedIndex = -1;
+            InitEvent();
+
+        }
+
+        private void LoadClassGroup(SchoolRoom classroom)
+        {
+            var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == classroom.ClassId);
+            var classGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
+            GroupDropDownList.Items.Clear();
+            if (selectedClass != null)
             {
                 if (classGroup.DocumentLanguageId == 2)
                 {
@@ -242,12 +275,8 @@ namespace Primary.SchoolApp.UI
                         GroupDropDownList.Items.Add(new RadListDataItem("Anglophone", 0));
                     }
                 }
-                GroupDropDownList.SelectedIndex =bookId;
+                GroupDropDownList.SelectedIndex = selectedBookId;
             }
-            var subjects = Program.ClassSubjectList.Where(x => x.ClassId == room.ClassId && x.BookId == selectedBookId).Select(x => x.Subject);
-            SubjectDropDownList.DataSource = subjects.OrderBy(x=>x.FrenchName);
-            SubjectDropDownList.SelectedIndex = -1;
-            InitEvent();
 
         }
         // création des colonnes du data grid view

@@ -473,7 +473,7 @@
             ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)classDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
             ((Telerik.WinControls.Primitives.BorderPrimitive)classDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(0, 0);

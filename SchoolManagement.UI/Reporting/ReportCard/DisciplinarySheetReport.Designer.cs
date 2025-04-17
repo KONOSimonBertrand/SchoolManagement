@@ -10674,7 +10674,7 @@
             this.teacherTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.teacherTextBox.Value = "Mr ZEE alphonse";
             // 
-            // classLabel
+            // classroomLabel
             // 
             this.classLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.9D), Telerik.Reporting.Drawing.Unit.Inch(2.2D));
             this.classLabel.Name = "classLabel";

@@ -134,6 +134,9 @@
     <Compile Update="UI\RecapNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\ReportViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Student\EditEvaluationCommentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +227,9 @@
     <Compile Update="UI\Student\EditStudentNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Student\ImportNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Student\StudentItemsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Localization\Language.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

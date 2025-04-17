@@ -6,12 +6,3 @@
 
 -red:EF5A6F
 
-add_image
-
- <PackageReference Include="Telerik.ReportViewer.WinForms" Version="17.1.23.718"/>
-  <PackageReference Include="Telerik.Reporting" Version="17.1.23.718"/>
-  <PackageReference Include="System.Data.SqlClient" Version="4.8.6"/>
- <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2023.2.718" />
- Telerik.Reporting.17.1.23.718
- 
- 

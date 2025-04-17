@@ -4,18 +4,13 @@
 
     <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2023.2.718" />
-	<PackageReference Include="Telerik.Reporting" Version="17.1.23.718" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Localization\Language.Designer.cs">
@@ -54,9 +49,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Telerik.WinControls">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for WinForms R3 2022\Bin60\Telerik.WinControls.dll</HintPath>
-    </Reference>
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.4" />
+    <PackageReference Include="Telerik.Reporting" Version="19.0.25.313" />
+    <PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="19.0.25.313" />
+    <PackageReference Include="Telerik.Reporting.OpenXmlRendering3" Version="19.0.25.313" />
+    <PackageReference Include="Telerik.ReportViewer.WinForms" Version="19.0.25.313" />
+    <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2025.1.211" />
+    <PackageReference Include="UI.for.WinForms.AllControls.Net70" Version="2024.3.924" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties ShouldAddDPIScalingManifest="" /></VisualStudio></ProjectExtensions>

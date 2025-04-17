@@ -98,6 +98,9 @@ namespace SchoolManagement.UI.Utilities
                         case "Save":
                             image = Resources.floppy_disk_blue;
                             break;
+                        case "Import":
+                            image = GetImage(Resources.import_blue);
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
@@ -138,6 +141,9 @@ namespace SchoolManagement.UI.Utilities
                             break;
                         case "Save":
                             image = Resources.floppy_disk_blue_grey;
+                            break;
+                        case "Import":
+                            image = GetImage(Resources.import_blue_grey);
                             break;
                     }
                     break;
@@ -180,6 +186,9 @@ namespace SchoolManagement.UI.Utilities
                         case "Save":
                             image = Resources.floppy_disk_pink;
                             break;
+                        case "Import":
+                            image = GetImage(Resources.import_pink);
+                            break;
                     }
                     break;
                 case "MaterialTeal":
@@ -221,13 +230,19 @@ namespace SchoolManagement.UI.Utilities
                         case "Save":
                             image = Resources.floppy_disk_teal;
                             break;
+                        case "Import":
+                            image = GetImage(Resources.import_teal);
+                            break;
                     }
                     break;
             }
             return image;
         }
-    
-       
+
+        private static Image GetImage(Byte[] byteImage)
+        {
+            return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
+        }
 
     }
 }

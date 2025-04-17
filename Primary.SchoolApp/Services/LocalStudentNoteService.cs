@@ -1,17 +1,13 @@
-﻿using Primary.SchoolApp.Utilities;
+﻿using ClosedXML.Excel;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
-using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Telerik.WinControls;
-using Telerik.WinControls.Svg.ExCSS;
-using Telerik.WinControls.Tests;
-using Telerik.WinForms.Documents.Model.Notes;
 using static Primary.SchoolApp.DTO.DTOItem;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace Primary.SchoolApp.Services
 {
@@ -1488,6 +1484,64 @@ namespace Primary.SchoolApp.Services
             //Console.WriteLine($"Le temps de traitement est de {watch.ElapsedMilliseconds}");
             return recapNotes;
 
+        }
+
+
+        public async Task<DataTable> ImportNotes(string filePath,int roomId,int bookId)
+        {
+            DataTable dataTable = new();
+            var classroom = Program.SchoolRoomList.FirstOrDefault(c => c.Id == roomId);
+            var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == classroom.ClassId);
+            var selectedGroup = Program.SchoolGroupList.FirstOrDefault(x => x.Id == selectedClass.GroupId);
+            var language = GetLanguageGroup(selectedGroup, bookId);
+            dataTable = ExcelToDataTable(filePath,true);
+            await Task.Delay(0); 
+            return dataTable;
+        }
+
+
+        private static DataTable ExcelToDataTable(string excelFileName, bool useHeader)
+        {
+            var dataTable= new DataTable();
+            using (var workbook = new XLWorkbook(excelFileName))
+            {
+                var worksheet = workbook.Worksheets.FirstOrDefault();
+                var rowCount = worksheet.Rows().Count();
+                var columnCount = worksheet.Columns().Count();
+                // Si le nombre de lignes est inférieur  à 2 on arrête le processus.
+                if (rowCount <2)
+                {
+                    return new DataTable(); 
+                }
+                // Si le nombre de colonnes est inférieur  à 3 on arrête le processus.
+                if (columnCount < 3)
+                {
+                    return new DataTable();
+                }
+                // Create columns
+                var headerRow= worksheet.Row(1);
+                for (int i = 1; i <= columnCount; i++)
+                {
+                    var dataColumn= new DataColumn(headerRow.Cell(i).Value.ToString(),typeof(string));
+                    dataTable.Columns.Add(dataColumn);
+                }
+                // Load data row
+                for (int i = 2; i <= rowCount; i++)
+                {
+                    var selectedRow = worksheet.Row(i);
+                    var dataRow = new object[columnCount];
+                    int k= 0;
+                    for (int j = 1; j < columnCount; j++)
+                    {
+                        dataRow[k] = selectedRow.Cell(j).Value;
+                        k++;
+                    }
+                    dataTable.Rows.Add(dataRow);   
+                }
+               
+            }
+                
+                return dataTable;
         }
 
     }

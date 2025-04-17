@@ -567,7 +567,7 @@
             schoolYearLabel.TabIndex = 33;
             schoolYearLabel.Text = "Année scolaire:";
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(448, 0);

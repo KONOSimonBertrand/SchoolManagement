@@ -1025,7 +1025,25 @@ namespace Primary.SchoolApp
                 {
                     if (selectedRoom != null)
                     {
-
+                        var evalState = evaluationSessionService.GetEvaluationSessionStateAsync(selectedEvaluation.Id, Program.CurrentSchoolYear.Id).Result;
+                        if (evalState != null)
+                        {
+                            if (!evalState.IsClosed)
+                            {
+                                selectedBookId = StudentNoteGroupDropDownList.SelectedItem != null ? int.Parse(StudentNoteGroupDropDownList.SelectedItem.Value.ToString()) : 0;
+                                var form = Program.ServiceProvider.GetService<ImportNotesForm>();
+                                var evaluationName = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? selectedEvaluation.EnglishName : selectedEvaluation.FrenchName;
+                                form.Text = $"{Language.labelSchoolYear} {Program.CurrentSchoolYear.Name} {evaluationName}";
+                                form.InitStartup(selectedRoom, selectedEvaluation, selectedBookId);
+                                form.Icon = this.Icon;
+                                form.WindowState = FormWindowState.Maximized;
+                                form.Show();
+                            }
+                            else
+                            {
+                                RadMessageBox.Show(this, Language.MessageClosedEvaluation, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                            }
+                        }
                     }
                     else
                     {
@@ -1109,6 +1127,7 @@ namespace Primary.SchoolApp
                                 form.Text = $"{Language.labelSchoolYear} {Program.CurrentSchoolYear.Name} {evaluationName}";
                                 form.InitStartup(selectedRoom, selectedEvaluation, selectedBookId);
                                 form.Icon = this.Icon;
+                                form.WindowState = FormWindowState.Maximized;
                                 form.Show();
                             }
                             else

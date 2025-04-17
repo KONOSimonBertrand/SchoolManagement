@@ -39,7 +39,8 @@
             printButton = new Telerik.WinControls.UI.CommandBarButton();
             exportToExelButton = new Telerik.WinControls.UI.CommandBarButton();
             groupSeparator = new Telerik.WinControls.UI.CommandBarSeparator();
-            classLabel = new Telerik.WinControls.UI.CommandBarLabel();
+            classroomLabel = new Telerik.WinControls.UI.CommandBarLabel();
+            classroomDropDownList = new Telerik.WinControls.UI.CommandBarDropDownList();
             groupLabel = new Telerik.WinControls.UI.CommandBarLabel();
             groupDropDownList = new Telerik.WinControls.UI.CommandBarDropDownList();
             informationPanel = new Telerik.WinControls.UI.RadPanel();
@@ -53,8 +54,6 @@
             filterTextBox = new SchoolManagement.UI.CustomControls.SearchTextBox();
             filterLabel = new Telerik.WinControls.UI.RadLabel();
             dataGridView = new Telerik.WinControls.UI.RadGridView();
-            commandBarStripElement2 = new Telerik.WinControls.UI.CommandBarStripElement();
-            commandBarStripElement3 = new Telerik.WinControls.UI.CommandBarStripElement();
             errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)subjectsCommandBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)informationPanel).BeginInit();
@@ -81,7 +80,7 @@
             subjectsCommandBar.Location = new Point(0, 0);
             subjectsCommandBar.Name = "subjectsCommandBar";
             subjectsCommandBar.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] { commandBarRowElement1 });
-            subjectsCommandBar.Size = new Size(1065, 31);
+            subjectsCommandBar.Size = new Size(1069, 56);
             subjectsCommandBar.TabIndex = 66;
             // 
             // commandBarRowElement1
@@ -98,7 +97,7 @@
             // 
             commandBarStripElement1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             commandBarStripElement1.DisplayName = "commandBarStripElement1";
-            commandBarStripElement1.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] { evaluationLabel, commandBarSeparator1, printButton, exportToExelButton, groupSeparator, classLabel, groupLabel, groupDropDownList });
+            commandBarStripElement1.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] { evaluationLabel, commandBarSeparator1, printButton, exportToExelButton, groupSeparator, classroomLabel, classroomDropDownList, groupLabel, groupDropDownList });
             commandBarStripElement1.Name = "commandBarStripElement1";
             commandBarStripElement1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             commandBarStripElement1.UseCompatibleTextRendering = false;
@@ -149,11 +148,19 @@
             groupSeparator.Name = "groupSeparator";
             groupSeparator.VisibleInOverflowMenu = false;
             // 
-            // classLabel
+            // classroomLabel
             // 
-            classLabel.DisplayName = "Classroom";
-            classLabel.Name = "classLabel";
-            classLabel.Text = "Salle de classe";
+            classroomLabel.DisplayName = "Classroom";
+            classroomLabel.Name = "classroomLabel";
+            classroomLabel.Text = "Salle de classe";
+            // 
+            // classroomDropDownList
+            // 
+            classroomDropDownList.DisplayName = "commandBarDropDownList1";
+            classroomDropDownList.DropDownAnimationEnabled = true;
+            classroomDropDownList.MinSize = new Size(250, 22);
+            classroomDropDownList.Name = "classroomDropDownList";
+            classroomDropDownList.Text = "";
             // 
             // groupLabel
             // 
@@ -168,7 +175,7 @@
             groupDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             groupDropDownList.MinSize = new Size(230, 22);
             groupDropDownList.Name = "groupDropDownList";
-            groupDropDownList.Text = "Section";
+            groupDropDownList.Text = "";
             // 
             // informationPanel
             // 
@@ -180,9 +187,9 @@
             informationPanel.Controls.Add(subjectDropDownList);
             informationPanel.Controls.Add(subjectLabel);
             informationPanel.Dock = DockStyle.Top;
-            informationPanel.Location = new Point(0, 31);
+            informationPanel.Location = new Point(0, 56);
             informationPanel.Name = "informationPanel";
-            informationPanel.Size = new Size(1065, 55);
+            informationPanel.Size = new Size(1069, 55);
             informationPanel.TabIndex = 68;
             // 
             // noteCoefTextBox
@@ -247,10 +254,10 @@
             commandPanel.Controls.Add(filterTextBox);
             commandPanel.Controls.Add(filterLabel);
             commandPanel.Dock = DockStyle.Top;
-            commandPanel.Location = new Point(0, 86);
+            commandPanel.Location = new Point(0, 111);
             commandPanel.Margin = new Padding(4, 5, 4, 5);
             commandPanel.Name = "commandPanel";
-            commandPanel.Size = new Size(1065, 45);
+            commandPanel.Size = new Size(1069, 45);
             commandPanel.TabIndex = 69;
             // 
             // filterTextBox
@@ -273,7 +280,7 @@
             // dataGridView
             // 
             dataGridView.Dock = DockStyle.Fill;
-            dataGridView.Location = new Point(0, 131);
+            dataGridView.Location = new Point(0, 156);
             dataGridView.Margin = new Padding(4, 5, 4, 5);
             // 
             // 
@@ -283,18 +290,8 @@
             dataGridView.MasterTemplate.Caption = null;
             dataGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(1065, 442);
+            dataGridView.Size = new Size(1069, 419);
             dataGridView.TabIndex = 2;
-            // 
-            // commandBarStripElement2
-            // 
-            commandBarStripElement2.DisplayName = "commandBarStripElement2";
-            commandBarStripElement2.Name = "commandBarStripElement2";
-            // 
-            // commandBarStripElement3
-            // 
-            commandBarStripElement3.DisplayName = "commandBarStripElement3";
-            commandBarStripElement3.Name = "commandBarStripElement3";
             // 
             // errorProvider
             // 
@@ -305,7 +302,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1065, 573);
+            ClientSize = new Size(1069, 575);
             Controls.Add(dataGridView);
             Controls.Add(commandPanel);
             Controls.Add(informationPanel);
@@ -350,17 +347,16 @@
         private Telerik.WinControls.UI.RadPanel commandPanel;
         private Telerik.WinControls.UI.RadLabel filterLabel;
         private Telerik.WinControls.UI.RadGridView dataGridView;
-        private Telerik.WinControls.UI.CommandBarStripElement commandBarStripElement2;
         private Telerik.WinControls.UI.CommandBarDropDownList groupDropDownList;
         private Telerik.WinControls.UI.CommandBarSeparator groupSeparator;
         private Telerik.WinControls.UI.CommandBarLabel groupLabel;
-        private Telerik.WinControls.UI.CommandBarStripElement commandBarStripElement3;
-        private Telerik.WinControls.UI.CommandBarLabel classLabel;
+        private Telerik.WinControls.UI.CommandBarLabel classroomLabel;
         private CustomControls.SearchTextBox filterTextBox;
         private Telerik.WinControls.UI.RadTextBox noteMaxTextBox;
         private Telerik.WinControls.UI.RadLabel noteMaxLabel;
         private Telerik.WinControls.UI.RadTextBox noteCoefTextBox;
         private Telerik.WinControls.UI.RadLabel noteCoefLabel;
         private ErrorProvider errorProvider;
+        private Telerik.WinControls.UI.CommandBarDropDownList classroomDropDownList;
     }
 }

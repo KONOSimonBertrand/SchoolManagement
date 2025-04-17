@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\SchoolManagement.Core.csproj" />
+  <event action="Analyze" type="Success" name="SchoolManagement.Core" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Core\SchoolManagement.Core.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\SchoolManagement.Infrastructure.csproj" />
+  <event action="Analyze" type="Success" name="SchoolManagement.Infrastructure" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Infrastructure\SchoolManagement.Infrastructure.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\SchoolManagement.Application.csproj" />
+  <event action="Analyze" type="Success" name="SchoolManagement.Application" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.Application\SchoolManagement.Application.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\SchoolManagement.UI.csproj" />
+  <event action="Analyze" type="Success" name="Language.en-GB.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\Localization\Language.en-GB.resx" />
+  <event action="Analyze" type="Success" name="Language.fr-FR.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\Localization\Language.fr-FR.resx" />
+  <event action="Analyze" type="Success" name="Language.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\Localization\Language.resx" />
+  <event action="Analyze" type="Success" name="SchoolReportFirstTerm_SM_FEM_EN.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\Reporting\SchoolReportFirstTerm_SM_FEM_EN.resx" />
+  <event action="Analyze" type="Success" name="CashFlowTypeInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\CashFlowTypeInfo.resx" />
+  <event action="Analyze" type="Success" name="DateNavigator.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\DateNavigator.resx" />
+  <event action="Analyze" type="Success" name="DisciplineSubjectInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\DisciplineSubjectInfo.resx" />
+  <event action="Analyze" type="Success" name="EmployeeEnrollingInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\EmployeeEnrollingInfo.resx" />
+  <event action="Analyze" type="Success" name="EmployeeGroupInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\EmployeeGroupInfo.resx" />
+  <event action="Analyze" type="Success" name="EvaluationSessionInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\EvaluationSessionInfo.resx" />
+  <event action="Analyze" type="Success" name="JobInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\JobInfo.resx" />
+  <event action="Analyze" type="Success" name="PaymentMeanInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\PaymentMeanInfo.resx" />
+  <event action="Analyze" type="Success" name="RatingSystemInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\RatingSystemInfo.resx" />
+  <event action="Analyze" type="Success" name="SchoolClassInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SchoolClassInfo.resx" />
+  <event action="Analyze" type="Success" name="SchoolGroupInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SchoolGroupInfo.resx" />
+  <event action="Analyze" type="Success" name="SchoolInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SchoolInfo.resx" />
+  <event action="Analyze" type="Success" name="SchoolingCostInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SchoolingCostInfo.resx" />
+  <event action="Analyze" type="Success" name="SchoolRoomInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SchoolRoomInfo.resx" />
+  <event action="Analyze" type="Success" name="SchoolYearInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SchoolYearInfo.resx" />
+  <event action="Analyze" type="Success" name="StudentEnrollingInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\StudentEnrollingInfo.resx" />
+  <event action="Analyze" type="Success" name="SubjectGroupInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SubjectGroupInfo.resx" />
+  <event action="Analyze" type="Success" name="SubjectInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SubjectInfo.resx" />
+  <event action="Analyze" type="Success" name="SubscriptionFeesInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\SubscriptionFeesInfo.resx" />
+  <event action="Analyze" type="Success" name="UserInfo.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\CustomControls\UserInfo.resx" />
+  <event action="Analyze" type="Success" name="EditEmployeeAccountTransactionForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Employee\EditEmployeeAccountTransactionForm.resx" />
+  <event action="Analyze" type="Success" name="EditEmployeeAttendanceForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Employee\EditEmployeeAttendanceForm.resx" />
+  <event action="Analyze" type="Success" name="EditEmployeeEnrollingForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Employee\EditEmployeeEnrollingForm.resx" />
+  <event action="Analyze" type="Success" name="EditEmployeeForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Employee\EditEmployeeForm.resx" />
+  <event action="Analyze" type="Success" name="EditEmployeeNoteForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Employee\EditEmployeeNoteForm.resx" />
+  <event action="Analyze" type="Success" name="EmployeeItemsForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Employee\EmployeeItemsForm.resx" />
+  <event action="Analyze" type="Success" name="EditDisciplineForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditDisciplineForm.resx" />
+  <event action="Analyze" type="Success" name="EditEvaluationCommentsForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditEvaluationCommentsForm.resx" />
+  <event action="Analyze" type="Success" name="EditStatusForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditStatusForm.resx" />
+  <event action="Analyze" type="Success" name="EditStudentClassForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditStudentClassForm.resx" />
+  <event action="Analyze" type="Success" name="EditStudentEnrollingForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditStudentEnrollingForm.resx" />
+  <event action="Analyze" type="Success" name="EditStudentForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditStudentForm.resx" />
+  <event action="Analyze" type="Success" name="EditStudentNoteForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditStudentNoteForm.resx" />
+  <event action="Analyze" type="Success" name="EditStudentNotesForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditStudentNotesForm.resx" />
+  <event action="Analyze" type="Success" name="EditSubscriptionForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\EditSubscriptionForm.resx" />
+  <event action="Analyze" type="Success" name="ImportNotesForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\ImportNotesForm.resx" />
+  <event action="Analyze" type="Success" name="StudentItemsForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\Student\StudentItemsForm.resx" />
+  <event action="Analyze" type="Success" name="EditUserForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\User\EditUserForm.resx" />
+  <event action="Analyze" type="Success" name="EditUserPasswordForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\User\EditUserPasswordForm.resx" />
+  <event action="Analyze" type="Success" name="UserModulesForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\User\UserModulesForm.resx" />
+  <event action="Analyze" type="Success" name="UserRoomsForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\User\UserRoomsForm.resx" />
+  <event action="Analyze" type="Success" name="ClassSubjectsForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\ClassSubjectsForm.resx" />
+  <event action="Analyze" type="Success" name="EditBadgeForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditBadgeForm.resx" />
+  <event action="Analyze" type="Success" name="EditCashFlowTypeForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditCashFlowTypeForm.resx" />
+  <event action="Analyze" type="Success" name="EditClassSubjectForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditClassSubjectForm.resx" />
+  <event action="Analyze" type="Success" name="EditContactForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditContactForm.resx" />
+  <event action="Analyze" type="Success" name="EditDisciplineSubjectForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditDisciplineSubjectForm.resx" />
+  <event action="Analyze" type="Success" name="EditEmployeeGroupForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditEmployeeGroupForm.resx" />
+  <event action="Analyze" type="Success" name="EditEvaluationSessionForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditEvaluationSessionForm.resx" />
+  <event action="Analyze" type="Success" name="EditJobForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditJobForm.resx" />
+  <event action="Analyze" type="Success" name="EditMedicalRecordForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditMedicalRecordForm.resx" />
+  <event action="Analyze" type="Success" name="EditOtherCashFlowForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditOtherCashFlowForm.resx" />
+  <event action="Analyze" type="Success" name="EditPaymentMeanForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditPaymentMeanForm.resx" />
+  <event action="Analyze" type="Success" name="EditRatingSystemForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditRatingSystemForm.resx" />
+  <event action="Analyze" type="Success" name="EditSchoolClassForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSchoolClassForm.resx" />
+  <event action="Analyze" type="Success" name="EditSchoolForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSchoolForm.resx" />
+  <event action="Analyze" type="Success" name="EditSchoolGroupForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSchoolGroupForm.resx" />
+  <event action="Analyze" type="Success" name="EditSchoolingCostForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSchoolingCostForm.resx" />
+  <event action="Analyze" type="Success" name="EditSchoolRoomForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSchoolRoomForm.resx" />
+  <event action="Analyze" type="Success" name="EditSchoolYearForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSchoolYearForm.resx" />
+  <event action="Analyze" type="Success" name="EditSerialKeyForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSerialKeyForm.resx" />
+  <event action="Analyze" type="Success" name="EditSubjectForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSubjectForm.resx" />
+  <event action="Analyze" type="Success" name="EditSubjectGroupForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSubjectGroupForm.resx" />
+  <event action="Analyze" type="Success" name="EditSubscriptionFeeForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditSubscriptionFeeForm.resx" />
+  <event action="Analyze" type="Success" name="EditTimeTableForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditTimeTableForm.resx" />
+  <event action="Analyze" type="Success" name="EditTuitionDiscountForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditTuitionDiscountForm.resx" />
+  <event action="Analyze" type="Success" name="EditTuitionPaymentForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EditTuitionPaymentForm.resx" />
+  <event action="Analyze" type="Success" name="EvaluationSessionStateForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\EvaluationSessionStateForm.resx" />
+  <event action="Analyze" type="Success" name="LoginForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\LoginForm.resx" />
+  <event action="Analyze" type="Success" name="MainForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\MainForm.resx" />
+  <event action="Analyze" type="Success" name="RecapNotesForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\RecapNotesForm.resx" />
+  <event action="Analyze" type="Success" name="ReportViewerForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\ReportViewerForm.resx" />
+  <event action="Analyze" type="Success" name="UploadPictureForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\UI\UploadPictureForm.resx" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="App.config" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\App.config" />
+  <event action="Analyze" type="Success" name="Resources.resx" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\Resources.resx" />
+  <event action="Analyze" type="Success" name="SchoolManagement.UI" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\SchoolManagement.UI.csproj" />
+  <event>Get project references.</event>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\Primary.SchoolApp.csproj" />
+  <event action="Analyze" type="Success" name="AddDisciplineForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\UI\Students\AddDisciplineForm.resx" />
+  <event action="Analyze" type="Success" name="MedicalRecordsForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\UI\Students\MedicalRecordsForm.resx" />
+  <event action="Analyze" type="Success" name="AboutAppForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\UI\AboutAppForm.resx" />
+  <event action="Analyze" type="Success" name="StartForm.resx" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\UI\StartForm.resx" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="App.config" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\App.config" />
+  <event action="Analyze" type="Success" name="Resources.resx" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\Resources.resx" />
+  <event action="Analyze" type="Success" name="Primary.SchoolApp" path="C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\Primary.SchoolApp.csproj" />
+  <event action="Analyze" type="Success" name="SchoolManagement" path="C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.sln" />
+</log>

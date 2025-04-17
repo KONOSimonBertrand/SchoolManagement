@@ -34,7 +34,7 @@ namespace SchoolManagement.UI.Reporting
             this.pageFooterSection1 = new Telerik.Reporting.PageFooterSection();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
-            // classLabel
+            // classroomLabel
             // 
             this.classLabel.Name = "classLabel";
             this.classLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(5.652D), Telerik.Reporting.Drawing.Unit.Inch(0.943D));

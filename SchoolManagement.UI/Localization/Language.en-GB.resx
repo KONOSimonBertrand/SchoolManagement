@@ -1509,4 +1509,13 @@
   <data name="LabelReminder" xml:space="preserve">
     <value>Reminder</value>
   </data>
+  <data name="MessageSelectExcelFileOnly" xml:space="preserve">
+    <value>Please choose .xls or .xlsx file only.</value>
+  </data>
+  <data name="LabelNoteFromExternalFile" xml:space="preserve">
+    <value>Student'mark from external file</value>
+  </data>
+  <data name="LabelFileInformation" xml:space="preserve">
+    <value>File information</value>
+  </data>
 </root>

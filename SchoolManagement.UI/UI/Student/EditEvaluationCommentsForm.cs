@@ -3,7 +3,6 @@
 using SchoolManagement.UI.CustomControls;
 using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
-using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -54,7 +53,6 @@ namespace SchoolManagement.UI
 
             exportToExelButton.Image = ViewUtilities.GetImage("Excel");
             printButton.Image = ViewUtilities.GetImage("Printer");
-            saveButton.Image = ViewUtilities.GetImage("Save");
         }
         public bool IsValidData()
         {

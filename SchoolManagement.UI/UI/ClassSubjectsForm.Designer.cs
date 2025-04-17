@@ -89,7 +89,7 @@
             commandBarStripElement1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             commandBarStripElement1.UseCompatibleTextRendering = false;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.DisplayName = "commandBarLabel1";
             classLabel.Name = "classLabel";

@@ -36,7 +36,6 @@
             commandBarStripElement1 = new Telerik.WinControls.UI.CommandBarStripElement();
             evaluationLabel = new Telerik.WinControls.UI.CommandBarLabel();
             commandBarSeparator1 = new Telerik.WinControls.UI.CommandBarSeparator();
-            saveButton = new Telerik.WinControls.UI.CommandBarButton();
             commandBarSeparator2 = new Telerik.WinControls.UI.CommandBarSeparator();
             printButton = new Telerik.WinControls.UI.CommandBarButton();
             exportToExelButton = new Telerik.WinControls.UI.CommandBarButton();
@@ -71,7 +70,7 @@
             subjectsCommandBar.Margin = new Padding(4);
             subjectsCommandBar.Name = "subjectsCommandBar";
             subjectsCommandBar.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] { commandBarRowElement1 });
-            subjectsCommandBar.Size = new Size(1065, 59);
+            subjectsCommandBar.Size = new Size(1065, 34);
             subjectsCommandBar.TabIndex = 66;
             // 
             // commandBarRowElement1
@@ -88,7 +87,7 @@
             // 
             commandBarStripElement1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             commandBarStripElement1.DisplayName = "commandBarStripElement1";
-            commandBarStripElement1.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] { evaluationLabel, commandBarSeparator1, saveButton, commandBarSeparator2, printButton, exportToExelButton, groupSeparator, classLabel, classroomDropDownList, groupLabel, groupDropDownList });
+            commandBarStripElement1.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] { evaluationLabel, commandBarSeparator1, commandBarSeparator2, printButton, exportToExelButton, groupSeparator, classLabel, classroomDropDownList, groupLabel, groupDropDownList });
             commandBarStripElement1.Name = "commandBarStripElement1";
             commandBarStripElement1.OverflowMenuMaxSize = new Size(338, 0);
             commandBarStripElement1.OverflowMenuMinSize = new Size(62, 31);
@@ -112,17 +111,6 @@
             commandBarSeparator1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             commandBarSeparator1.UseCompatibleTextRendering = false;
             commandBarSeparator1.VisibleInOverflowMenu = false;
-            // 
-            // saveButton
-            // 
-            saveButton.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            saveButton.DisplayName = "commandBarButton1";
-            saveButton.Image = (Image)resources.GetObject("saveButton.Image");
-            saveButton.Name = "saveButton";
-            saveButton.Text = "Enregistrer";
-            saveButton.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            saveButton.ToolTipText = "Cliquer ici pour enregistrer";
-            saveButton.UseCompatibleTextRendering = false;
             // 
             // commandBarSeparator2
             // 
@@ -160,7 +148,7 @@
             groupSeparator.Name = "groupSeparator";
             groupSeparator.VisibleInOverflowMenu = false;
             // 
-            // classLabel
+            // classroomLabel
             // 
             classLabel.DisplayName = "commandBarLabel1";
             classLabel.Name = "classLabel";
@@ -194,7 +182,7 @@
             // 
             informationPanel.BackColor = Color.FromArgb(191, 219, 255);
             informationPanel.Dock = DockStyle.Top;
-            informationPanel.Location = new Point(0, 59);
+            informationPanel.Location = new Point(0, 34);
             informationPanel.Margin = new Padding(4);
             informationPanel.Name = "informationPanel";
             informationPanel.Size = new Size(1065, 12);
@@ -205,7 +193,7 @@
             commandPanel.Controls.Add(filterTextBox);
             commandPanel.Controls.Add(filterLabel);
             commandPanel.Dock = DockStyle.Top;
-            commandPanel.Location = new Point(0, 71);
+            commandPanel.Location = new Point(0, 46);
             commandPanel.Margin = new Padding(5, 6, 5, 6);
             commandPanel.Name = "commandPanel";
             commandPanel.Size = new Size(1065, 56);
@@ -231,7 +219,7 @@
             // dataGridView
             // 
             dataGridView.Dock = DockStyle.Fill;
-            dataGridView.Location = new Point(0, 127);
+            dataGridView.Location = new Point(0, 102);
             dataGridView.Margin = new Padding(5, 6, 5, 6);
             // 
             // 
@@ -241,7 +229,7 @@
             dataGridView.MasterTemplate.Caption = null;
             dataGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(1065, 446);
+            dataGridView.Size = new Size(1065, 471);
             dataGridView.TabIndex = 3;
             // 
             // commandBarStripElement2
@@ -295,7 +283,6 @@
         private Telerik.WinControls.UI.RadLabel filterLabel;
         private Telerik.WinControls.UI.RadGridView dataGridView;
         private Telerik.WinControls.UI.CommandBarStripElement commandBarStripElement2;
-        private Telerik.WinControls.UI.CommandBarButton saveButton;
         private Telerik.WinControls.UI.CommandBarSeparator commandBarSeparator2;
         private Telerik.WinControls.UI.CommandBarDropDownList groupDropDownList;
         private Telerik.WinControls.UI.CommandBarSeparator groupSeparator;

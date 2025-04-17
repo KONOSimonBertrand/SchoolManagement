@@ -47,6 +47,9 @@
     <Compile Update="Reporting\NoteReport\PrimaryTermReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="UI\ReportViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\CashFlowTypes\AddOtherCashFlowForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,9 +91,6 @@
     </Compile>
     <Compile Update="Reporting\NoteReport\ClassNoteReportEmpty.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="Reporting\ReportViewerForm.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\AboutAppForm.cs">
       <SubType>Form</SubType>
@@ -342,6 +342,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\EditTuitionDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\ImportNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\MedicalRecordsForm.cs">
