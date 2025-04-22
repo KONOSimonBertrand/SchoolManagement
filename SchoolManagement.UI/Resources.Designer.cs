@@ -101,6 +101,16 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] about_white {
+            get {
+                object obj = ResourceManager.GetObject("about_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap add_blue {
@@ -117,6 +127,116 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("add_blue_grey", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_contact_blue {
+            get {
+                object obj = ResourceManager.GetObject("add_contact_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_contact_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("add_contact_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_contact_pink {
+            get {
+                object obj = ResourceManager.GetObject("add_contact_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_contact_teal {
+            get {
+                object obj = ResourceManager.GetObject("add_contact_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_contact_white {
+            get {
+                object obj = ResourceManager.GetObject("add_contact_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_image_White {
+            get {
+                object obj = ResourceManager.GetObject("add_image_White", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_payment_blue {
+            get {
+                object obj = ResourceManager.GetObject("add_payment_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_payment_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("add_payment_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_payment_pink {
+            get {
+                object obj = ResourceManager.GetObject("add_payment_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_payment_teal {
+            get {
+                object obj = ResourceManager.GetObject("add_payment_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_payment_white {
+            get {
+                object obj = ResourceManager.GetObject("add_payment_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -141,6 +261,16 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] add_white {
+            get {
+                object obj = ResourceManager.GetObject("add_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Background {
@@ -151,12 +281,122 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] black_no_borders {
+            get {
+                object obj = ResourceManager.GetObject("black_no_borders", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap blue_grey_green_small {
             get {
                 object obj = ResourceManager.GetObject("blue_grey_green_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] cancel_blue {
+            get {
+                object obj = ResourceManager.GetObject("cancel_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] cancel_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("cancel_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] cancel_pink {
+            get {
+                object obj = ResourceManager.GetObject("cancel_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] cancel_teal {
+            get {
+                object obj = ResourceManager.GetObject("cancel_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] cancel_white {
+            get {
+                object obj = ResourceManager.GetObject("cancel_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_blue {
+            get {
+                object obj = ResourceManager.GetObject("check_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("check_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_pink {
+            get {
+                object obj = ResourceManager.GetObject("check_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_teal {
+            get {
+                object obj = ResourceManager.GetObject("check_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] check_white {
+            get {
+                object obj = ResourceManager.GetObject("check_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -197,6 +437,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("close_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] close_white {
+            get {
+                object obj = ResourceManager.GetObject("close_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -251,6 +501,16 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] create_file_white {
+            get {
+                object obj = ResourceManager.GetObject("create_file_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap default_small {
@@ -301,62 +561,22 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap edit {
+        internal static byte[] delete_white {
             get {
-                object obj = ResourceManager.GetObject("edit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("delete_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap edit_blue {
+        internal static byte[] duplicate_white {
             get {
-                object obj = ResourceManager.GetObject("edit_blue", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap edit_blue_grey {
-            get {
-                object obj = ResourceManager.GetObject("edit_blue_grey", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap edit_pink {
-            get {
-                object obj = ResourceManager.GetObject("edit_pink", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap edit_teal {
-            get {
-                object obj = ResourceManager.GetObject("edit_teal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap excel {
-            get {
-                object obj = ResourceManager.GetObject("excel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("duplicate_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -401,12 +621,12 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap excel1 {
+        internal static byte[] excel_white {
             get {
-                object obj = ResourceManager.GetObject("excel1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("excel_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -501,6 +721,76 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] floppy_disk_white {
+            get {
+                object obj = ResourceManager.GetObject("floppy_disk_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] folder_blue {
+            get {
+                object obj = ResourceManager.GetObject("folder_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] folder_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("folder_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] folder_pink {
+            get {
+                object obj = ResourceManager.GetObject("folder_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] folder_teal {
+            get {
+                object obj = ResourceManager.GetObject("folder_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] folder_white {
+            get {
+                object obj = ResourceManager.GetObject("folder_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] grey_no_borders {
+            get {
+                object obj = ResourceManager.GetObject("grey_no_borders", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap heartbeat_green {
@@ -567,6 +857,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("hide_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] hide_white {
+            get {
+                object obj = ResourceManager.GetObject("hide_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -643,6 +943,56 @@ namespace SchoolManagement.UI {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
+        internal static byte[] id_card_blue {
+            get {
+                object obj = ResourceManager.GetObject("id_card_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] id_card_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("id_card_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] id_card_pink {
+            get {
+                object obj = ResourceManager.GetObject("id_card_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] id_card_teal {
+            get {
+                object obj = ResourceManager.GetObject("id_card_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] id_card_white {
+            get {
+                object obj = ResourceManager.GetObject("id_card_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
         internal static byte[] import_blue {
             get {
                 object obj = ResourceManager.GetObject("import_blue", resourceCulture);
@@ -676,6 +1026,16 @@ namespace SchoolManagement.UI {
         internal static byte[] import_teal {
             get {
                 object obj = ResourceManager.GetObject("import_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] import_white {
+            get {
+                object obj = ResourceManager.GetObject("import_white", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -717,6 +1077,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("lock_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] lock_white {
+            get {
+                object obj = ResourceManager.GetObject("lock_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -777,6 +1147,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("pencil_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] pencil_white {
+            get {
+                object obj = ResourceManager.GetObject("pencil_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -853,6 +1233,16 @@ namespace SchoolManagement.UI {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
+        internal static byte[] printer_white {
+            get {
+                object obj = ResourceManager.GetObject("printer_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
         internal static byte[] Roboto {
             get {
                 object obj = ResourceManager.GetObject("Roboto", resourceCulture);
@@ -871,12 +1261,122 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] search_blue {
+            get {
+                object obj = ResourceManager.GetObject("search_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] search_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("search_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] search_pink {
+            get {
+                object obj = ResourceManager.GetObject("search_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] search_teal {
+            get {
+                object obj = ResourceManager.GetObject("search_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] search_white {
+            get {
+                object obj = ResourceManager.GetObject("search_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap teal_red_small {
             get {
                 object obj = ResourceManager.GetObject("teal_red_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] theme_dark {
+            get {
+                object obj = ResourceManager.GetObject("theme_dark", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] undo_blue {
+            get {
+                object obj = ResourceManager.GetObject("undo_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] undo_blue_grey {
+            get {
+                object obj = ResourceManager.GetObject("undo_blue_grey", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] undo_pink {
+            get {
+                object obj = ResourceManager.GetObject("undo_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] undo_teal {
+            get {
+                object obj = ResourceManager.GetObject("undo_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] undo_white {
+            get {
+                object obj = ResourceManager.GetObject("undo_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -921,6 +1421,16 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] unlock_white {
+            get {
+                object obj = ResourceManager.GetObject("unlock_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap user_blue {
@@ -961,42 +1471,12 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        ///   Recherche une ressource localisée de type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap view_blue {
+        internal static byte[] user_white {
             get {
-                object obj = ResourceManager.GetObject("view_blue", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap view_blue_grey {
-            get {
-                object obj = ResourceManager.GetObject("view_blue_grey", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap view_pink {
-            get {
-                object obj = ResourceManager.GetObject("view_pink", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap view_teal {
-            get {
-                object obj = ResourceManager.GetObject("view_teal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("user_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -1037,6 +1517,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("watch_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] watch_white {
+            get {
+                object obj = ResourceManager.GetObject("watch_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

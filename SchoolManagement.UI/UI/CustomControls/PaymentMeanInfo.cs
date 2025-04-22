@@ -81,7 +81,7 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.editButton.Image = Resources.edit;
+            this.editButton.Image = ViewUtilities.GetImage("Edit");
             this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
 
             this.closeButton.RootElement.EnableElementShadow = false;

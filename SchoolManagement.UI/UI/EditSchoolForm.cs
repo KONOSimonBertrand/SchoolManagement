@@ -132,66 +132,51 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.mottoTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.mottoTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.mottoTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.evaluationModelDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.evaluationModelDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.evaluationModelDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.evaluationModelDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.cityTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.cityTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.cityTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.postBoxTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.postBoxTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.postBoxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.addressTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.addressTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.phoneTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.phoneTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.websiteTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.websiteTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.websiteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.emailTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.emailTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.facebookTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.facebookTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.facebookTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.headMasterTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.headMasterTypeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.headMasterTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.headMasterTypeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.headMasterNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.headMasterNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.headMasterNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.headMasterSexDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.headMasterSexDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.headMasterSexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.headMasterSexDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.studentPictureDirectoryTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.studentPictureDirectoryTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.studentPictureDirectoryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.employeePictureDirectoryTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.employeePictureDirectoryTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.employeePictureDirectoryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -230,7 +215,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.errorLabel.ForeColor = Color.Red;
             this.evaluationModelDropDownList.Items.Add(new RadListDataItem(Language.LabelFirstModel, 0));
@@ -246,6 +230,31 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;
+            this.ThemeNameChanged += EditSchoolForm_ThemeNameChanged;
+        }
+
+        private void EditSchoolForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.mottoTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.evaluationModelDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.cityTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.postBoxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.websiteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.facebookTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.headMasterTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.headMasterNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.headMasterSexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.studentPictureDirectoryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.employeePictureDirectoryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

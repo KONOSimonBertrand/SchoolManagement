@@ -123,15 +123,12 @@ namespace SchoolManagement.UI
 
             this.idNumberTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.idNumberTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.idNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.firstNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.firstNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.firstNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.lastNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.lastNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.lastNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.birthdayDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.birthdayDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -141,42 +138,33 @@ namespace SchoolManagement.UI
 
             this.birthdayDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.birthdayDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.birthdayDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sexDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.sexDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.sexDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.nationalityDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.nationalityDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.nationalityDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.nationalityDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.religionDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.religionDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.religionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.religionDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.phoneTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.phoneTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.emailTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.emailTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.addressTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.addressTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.birthPlaceTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.birthPlaceTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.birthPlaceTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.idCardTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.idCardTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
             this.editPanel.RootElement.EnableElementShadow = false;
             this.idNumberSplitContainer.RootElement.EnableElementShadow = false;
             this.sexSplitContainer.RootElement.EnableElementShadow = false;
@@ -266,7 +254,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.religionDropDownList.DataSource = ViewUtilities.Religions();
             this.religionDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.religionDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -283,7 +270,28 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditStudentForm_ThemeNameChanged;
+        }
 
+        private void EditStudentForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.idNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.firstNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.lastNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.birthdayDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.nationalityDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.religionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.birthPlaceTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

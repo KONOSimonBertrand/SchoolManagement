@@ -25,9 +25,19 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             this.formatDropDownList.SelectedIndexChanged += FormatDropDownList_SelectedIndexChanged;
-
+            this.ThemeNameChanged += EditBadgeForm_ThemeNameChanged;
         }
 
+        private void EditBadgeForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.forDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.startDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.closeButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }
+        }
 
         private void FormatDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
@@ -87,7 +97,6 @@ namespace SchoolManagement.UI
 
             this.forDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.forDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.forDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.forDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.forDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
@@ -104,7 +113,6 @@ namespace SchoolManagement.UI
             this.startDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
             this.startDateTimePicker.DateTimePickerElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.startDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.startDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.endDateTimePicker.CustomFormat = "dd-MM-yyyy";
@@ -135,11 +143,9 @@ namespace SchoolManagement.UI
             formatDropDownList.SelectedValue = 0;
             this.saveButton.ButtonElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.closeButton.ButtonElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.closeButton.ButtonElement.CustomFontSize = 10.5f;
-            this.closeButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.startDateTimePicker.Value = DateTime.Now;
             this.endDateTimePicker.Value = DateTime.Now.AddYears(1);
         }

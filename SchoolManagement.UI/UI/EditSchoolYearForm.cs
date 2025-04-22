@@ -78,11 +78,9 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.startFirstQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.startFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startFirstQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.startFirstQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -92,7 +90,6 @@ namespace SchoolManagement.UI
 
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.endFirstQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.endFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endFirstQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.endFirstQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -102,7 +99,6 @@ namespace SchoolManagement.UI
 
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.startSecondQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.startSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startSecondQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.startSecondQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -112,7 +108,6 @@ namespace SchoolManagement.UI
 
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.endSecondQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.endSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endSecondQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.endSecondQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -122,7 +117,6 @@ namespace SchoolManagement.UI
 
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.startThirdQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.startThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startThirdQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.startThirdQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -132,7 +126,6 @@ namespace SchoolManagement.UI
 
             this.endThirdQuarterDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.endThirdQuarterDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.endThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endThirdQuarterDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.endThirdQuarterDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -161,7 +154,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.startFirstQuarterDateTimePicker.Value = DateTime.Now;
             this.endFirstQuarterDateTimePicker.Value = DateTime.Now;
             this.startSecondQuarterDateTimePicker.Value = DateTime.Now;
@@ -174,6 +166,23 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;
+            this.ThemeNameChanged += EditSchoolYearForm_ThemeNameChanged;
+        }
+
+        private void EditSchoolYearForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.startFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.endFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.endThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.startSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.endSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.startThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -183,83 +192,97 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
+            this.errorProvider.Clear();
             if (this.nameTextBox.Text.Length < 9 || this.nameTextBox.Text.Length > 9)
             {
-                this.errorLabel.Text = "Format incorrect! Exemple: 2019-2020";
+                this.errorLabel.Text = Language.LabelBadFormatExample;
+                errorProvider.SetError(nameTextBox, Language.LabelBadFormatExample);
                 this.nameTextBox.Focus();
                 return false;
             }
 
             if (this.nameTextBox.Text.Contains("-") == false)
             {
-                this.errorLabel.Text = "Format incorrect! Exemple: 2019-2020";
+                this.errorLabel.Text = Language.LabelBadFormatExample   ;
+                errorProvider.SetError(nameTextBox, Language.LabelBadFormatExample);
                 this.nameTextBox.Focus();
                 return false;
             }
 
             if (int.TryParse(this.nameTextBox.Text.Substring(0, 4), out int y) == false)
             {
-                this.errorLabel.Text = "Format incorrect! Exemple: 2019-2020";
+                this.errorLabel.Text = Language.LabelBadFormatExample;
+                errorProvider.SetError(nameTextBox, Language.LabelBadFormatExample);
                 this.nameTextBox.Focus();
                 return false;
             }
             if (this.nameTextBox.Text == "")
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(nameTextBox, Language.messageFillField);
                 this.nameTextBox.Focus();
                 return false;
             }
             if (this.startFirstQuarterDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(this.startFirstQuarterDateTimePicker, Language.messageFillField);
                 this.startFirstQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endFirstQuarterDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(endFirstQuarterDateTimePicker, Language.messageFillField);
                 this.endFirstQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.startSecondQuarterDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(this.startSecondQuarterDateTimePicker, Language.messageFillField);
                 this.startSecondQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endSecondQuarterDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(this.endSecondQuarterDateTimePicker, Language.messageFillField);
                 this.endSecondQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.startThirdQuarterDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(this.startThirdQuarterDateTimePicker, Language.messageFillField);
                 this.startThirdQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endThirdQuarterDateTimePicker.Text == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                errorProvider.SetError(this.endThirdQuarterDateTimePicker, Language.messageFillField);
                 this.endThirdQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endFirstQuarterDateTimePicker.Value < this.startFirstQuarterDateTimePicker.Value)
             {
                 this.errorLabel.Text = Language.messageEndDateGreaterThanStartDate;
+                errorProvider.SetError(this.endFirstQuarterDateTimePicker, Language.messageEndDateGreaterThanStartDate);
                 this.endFirstQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endSecondQuarterDateTimePicker.Value < this.startSecondQuarterDateTimePicker.Value)
             {
                 this.errorLabel.Text = Language.messageEndDateGreaterThanStartDate;
+                errorProvider.SetError(this.endSecondQuarterDateTimePicker, Language.messageEndDateGreaterThanStartDate);
                 this.endSecondQuarterDateTimePicker.Focus();
                 return false;
             }
             if (this.endThirdQuarterDateTimePicker.Value < this.startThirdQuarterDateTimePicker.Value)
             {
                 this.errorLabel.Text = Language.messageEndDateGreaterThanStartDate;
+                errorProvider.SetError(this.endThirdQuarterDateTimePicker, Language.messageEndDateGreaterThanStartDate);
                 this.endThirdQuarterDateTimePicker.Focus();
                 return false;
             }

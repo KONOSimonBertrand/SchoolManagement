@@ -128,7 +128,7 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.editButton.Image = Resources.edit;
+            this.editButton.Image = ViewUtilities.GetImage("Edit");
             this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
 
             this.schoolYearLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

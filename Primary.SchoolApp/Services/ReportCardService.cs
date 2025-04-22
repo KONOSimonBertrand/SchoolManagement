@@ -1,4 +1,5 @@
 ﻿using Primary.SchoolApp.Utilities;
+using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System.Collections.Generic;
 using System.Data;
@@ -15,11 +16,13 @@ namespace Primary.SchoolApp.Services
     public class ReportCardService
     {
         private readonly LocalStudentNoteService localStudentNoteService;
+        private readonly IStudentNoteService studentNoteService;
         private Dictionary<SchoolRoom, List<AverageRecord>> averageStore;
-        public ReportCardService(LocalStudentNoteService localStudentNoteService)
+        public ReportCardService(LocalStudentNoteService localStudentNoteService,IStudentNoteService studentNoteService)
         {
             this.localStudentNoteService = localStudentNoteService;
             averageStore = new Dictionary<SchoolRoom, List<AverageRecord>>();
+            this.studentNoteService = studentNoteService;
         }
         //bulletin scolaire d'une évaluation d'un élève
         public async Task<EvaluationReportCard> GetEvaluationReportCardByStudentAsync(int studentId, int roomId, int evaluationId, int schoolYearId, int bookId)
@@ -27,6 +30,8 @@ namespace Primary.SchoolApp.Services
             // extraction des moyennes de la classe
             var evaluationAverageTask = localStudentNoteService.GetEvaluationAverageListByRoom(roomId, evaluationId, schoolYearId, bookId);
             var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
+            // Extraction des commentaires
+            var getCommentTask = studentNoteService.GetCommentsByClassroomAsync(roomId, evaluationId, bookId, schoolYearId);
             #region Head Report
             // get data of head report
             var evaluation = Program.EvaluationSessionList.FirstOrDefault(x => x.Id == evaluationId);
@@ -113,7 +118,9 @@ namespace Primary.SchoolApp.Services
             var lowestAverage = evaluationAverage.LastOrDefault().Average;
             var cAverage = evaluationAverage.Sum(x => x.Average) / evaluationAverage.Count;
             double classAverage = AppUtilities.GetTruncateOrRoundingValue(cAverage, classGroup);
-            var footerSection = new EvaluationFooterReportCard(sumNote, sumCoef, sumMaxNote, average, position, classAverage, highestAverage, lowestAverage);
+            var comments = await getCommentTask;
+            var comment = comments.FirstOrDefault(c => c.StudentId == studentId)?.Comment;
+            var footerSection = new EvaluationFooterReportCard(sumNote, sumCoef, sumMaxNote, average, position, classAverage, highestAverage, lowestAverage, comment);
             #endregion
             return new EvaluationReportCard(headReportSection, detailSection, footerSection);
         }
@@ -144,6 +151,8 @@ namespace Primary.SchoolApp.Services
             var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("FirstMonth"));
             var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("SecondMonth"));
             var eval03 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("ThirdMonth"));
+            // Extraction des commentaires
+            var term_comments_task = studentNoteService.GetCommentsByClassroomAsync(roomId, termId, bookId, schoolYearId);
             // Extraction des notes du trimestre
             var term_notes_task = localStudentNoteService.GetTermNoteListByRoom(roomId, termCode, schoolYearId, bookId);
             var term_averages_task = localStudentNoteService.GetTermAverageListByRoom(roomId, termCode, schoolYearId, bookId);
@@ -256,12 +265,20 @@ namespace Primary.SchoolApp.Services
             footerItems.Add(termAverage != 0 ? new("TermAverage", termAverage.ToString()) : new("TermAverage", string.Empty));
             string firstMonthPosition = eval01_averages_student != null ? eval01_averages_student.Position : string.Empty;
             footerItems.Add(new("FirstMonthPosition", firstMonthPosition));
+            string firstMonthPositionWithStudentCount = eval01_averages_student != null ? firstMonthPosition + '/' + eval01_averages.Count : string.Empty;
+            footerItems.Add(new("FirstMonthPositionWithStudentCount", firstMonthPositionWithStudentCount));
             string secondMonthPosition = eval02_averages_student != null ? eval02_averages_student.Position : string.Empty;
+            string secondMonthPositionWithStudentCount = eval02_averages_student != null ? secondMonthPosition + '/' + eval02_averages.Count : string.Empty;
+            footerItems.Add(new("SecondMonthPositionWithStudentCount", secondMonthPositionWithStudentCount));
             footerItems.Add(new("SecondMonthPosition", secondMonthPosition));
             string thirdMonthPosition = eval03_averages_student != null ? eval03_averages_student.Position : string.Empty;
             footerItems.Add(new("ThirdMonthPosition", thirdMonthPosition));
+            string thirdMonthPositionWithStudentCount = eval03_averages_student != null ? thirdMonthPosition + '/' + eval03_averages.Count : string.Empty;
+            footerItems.Add(new("ThirdMonthPositionWithStudentCount", thirdMonthPositionWithStudentCount));
             string termPosition = term_averages_student != null ? term_averages_student.Position : string.Empty;
             footerItems.Add(new("TermPosition", termPosition));
+            string termPositionWithStudentCount = term_averages_student != null ? termPosition + '/' + term_averages.Count : string.Empty;
+            footerItems.Add(new("TermPositionWithStudentCount", termPositionWithStudentCount));
             double firstMonthClassAverage = eval01_averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(eval01_averages.Sum(x => x.Average) / eval01_averages.Count, classGroup) : 0;
             footerItems.Add(new("FirstMonthClassAverage", firstMonthClassAverage.ToString()));
             double secondMonthClassAverage = eval02_averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(eval02_averages.Sum(x => x.Average) / eval02_averages.Count, classGroup) : 0;
@@ -287,7 +304,9 @@ namespace Primary.SchoolApp.Services
             double termLowestAverage = term_averages.Any() ? term_averages.Select(x => x.Average).OrderBy(x => x).First() : 0;
             footerItems.Add(new("TermLowestAverage", termLowestAverage.ToString()));
 
-           
+            var comments = await term_comments_task;
+            var comment = comments.FirstOrDefault(c => c.StudentId == studentId)?.Comment;
+            footerItems.Add(new("Comment", comment));
             // extraction des moyennes des trimestres antérieurs
             foreach (var code in reminderTerms)
             {
@@ -354,6 +373,8 @@ namespace Primary.SchoolApp.Services
             //extraction des notes de la classe;
             var getEvaluationNotesTask = localStudentNoteService.GetEvaluationNoteListByRoom(roomId, evaluationId, schoolYearId, bookId);
             var getDisciplinesTask = localStudentNoteService.GetDisciplineItemsByRoom(roomId, schoolYearId);
+            // Extraction des commenataires
+            var getEvaluationCommentsTask = studentNoteService.GetCommentsByClassroomAsync(roomId, evaluationId, bookId, schoolYearId);
             var reportTitle = $"BULLETIN {evaluation.FrenchName}";
             var language = "FR";
             if (classGroup.DocumentLanguageId == 1 || bookId == 1)
@@ -370,6 +391,7 @@ namespace Primary.SchoolApp.Services
             var groupList = classroomSujectList.Where(x => x.BookId == bookId).OrderBy(x => x.Sequence).Select(x => x.Group).DistinctBy(x => x.Id).ToList();
             var evaluationNoteList = await getEvaluationNotesTask;
             var disciplineItems=await getDisciplinesTask;
+            var comments= await getEvaluationCommentsTask;
             foreach (var student in students)
             {
                 // create head of report card
@@ -425,7 +447,8 @@ namespace Primary.SchoolApp.Services
                 var lowestAverage = evaluationAverageList.LastOrDefault().Average;
                 var cAverage = evaluationAverageList.Sum(x => x.Average) / evaluationAverageList.Count;
                 double classAverage = AppUtilities.GetTruncateOrRoundingValue(cAverage, classGroup);
-                var footerSection = new EvaluationFooterReportCard(sumNote, sumCoef, sumMaxNote, average, position, classAverage, highestAverage, lowestAverage);
+                var comment=comments.FirstOrDefault(c=>c.StudentId == student.Id)?.Comment;
+                var footerSection = new EvaluationFooterReportCard(sumNote, sumCoef, sumMaxNote, average, position, classAverage, highestAverage, lowestAverage,comment);
                 #endregion
                 result.Add(new EvaluationReportCard(headReportSection, detailSection, footerSection));
             }
@@ -459,9 +482,12 @@ namespace Primary.SchoolApp.Services
             var eval01 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("FirstMonth"));
             var eval02 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("SecondMonth"));
             var eval03 = Program.EvaluationSessionList.FirstOrDefault(x => x.Code == evaluationCodes.GetValueOrDefault("ThirdMonth"));
+
             // Extraction des notes du trimestre
             var term_notes_task = localStudentNoteService.GetTermNoteListByRoom(roomId, termCode, schoolYearId, bookId);
             var term_averages_task = localStudentNoteService.GetTermAverageListByRoom(roomId, termCode, schoolYearId, bookId);
+            // Extraction des commentaires
+            var term_comments_task = studentNoteService.GetCommentsByClassroomAsync(roomId, termId,bookId, schoolYearId);
             foreach (var code in reminderTerms)
             {
                 reminderTermsTask.Add(code, localStudentNoteService.GetTermAverageListByRoom(roomId, code, schoolYearId, bookId));
@@ -509,6 +535,7 @@ namespace Primary.SchoolApp.Services
                 }
             }
             var disciplineItems = await getDisciplinesTask;
+            var term_comments= await term_comments_task;
             // Production des bulletins
             foreach (var student in students)
             {
@@ -586,12 +613,20 @@ namespace Primary.SchoolApp.Services
                 footerItems.Add(termAverage != 0 ? new("TermAverage", termAverage.ToString()) : new("TermAverage", string.Empty));
                 string firstMonthPosition = eval01_averages_student != null ? eval01_averages_student.Position : string.Empty;
                 footerItems.Add(new("FirstMonthPosition", firstMonthPosition));
+                string firstMonthPositionWithStudentCount = eval01_averages_student != null ? firstMonthPosition + '/' + eval01_averages.Count : string.Empty;
+                footerItems.Add(new("FirstMonthPositionWithStudentCount", firstMonthPositionWithStudentCount));
                 string secondMonthPosition = eval02_averages_student != null ? eval02_averages_student.Position : string.Empty;
                 footerItems.Add(new("SecondMonthPosition", secondMonthPosition));
+                string secondMonthPositionWithStudentCount = eval02_averages_student != null ? secondMonthPosition + '/' + eval02_averages.Count : string.Empty;
+                footerItems.Add(new("SecondMonthPositionWithStudentCount", secondMonthPositionWithStudentCount));
                 string thirdMonthPosition = eval03_averages_student != null ? eval03_averages_student.Position : string.Empty;
                 footerItems.Add(new("ThirdMonthPosition", thirdMonthPosition));
+                string thirdMonthPositionWithStudentCount = eval03_averages_student != null ? thirdMonthPosition + '/' + eval03_averages.Count : string.Empty;
+                footerItems.Add(new("ThirdMonthPositionWithStudentCount", thirdMonthPositionWithStudentCount));
                 string termPosition = term_averages_student != null ? term_averages_student.Position : string.Empty;
                 footerItems.Add(new("TermPosition", termPosition));
+                string termPositionWithStudentCount = term_averages_student != null ? termPosition + '/' + term_averages.Count : string.Empty;
+                footerItems.Add(new("TermPositionWithStudentCount", termPositionWithStudentCount));
                 double firstMonthClassAverage = eval01_averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(eval01_averages.Sum(x => x.Average) / eval01_averages.Count, classGroup) : 0;
                 footerItems.Add(new("FirstMonthClassAverage", firstMonthClassAverage.ToString()));
                 double secondMonthClassAverage = eval02_averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(eval02_averages.Sum(x => x.Average) / eval02_averages.Count, classGroup) : 0;
@@ -653,7 +688,12 @@ namespace Primary.SchoolApp.Services
                     }
                     footerItems.Add(new("AnnualAverage", AppUtilities.GetTruncateOrRoundingValue(annualAverage, classGroup).ToString()));
                 }
+
+                var comment = term_comments.FirstOrDefault(c => c.StudentId == student.Id)?.Comment;
+                footerItems.Add(new("Comment",comment));
                 var footerSection = new ReportFooter(footerItems);
+               
+                
                 #endregion
 
                 // ajout du bulletin
@@ -706,6 +746,10 @@ namespace Primary.SchoolApp.Services
             var getFirstTermNotesTask = localStudentNoteService.GetTermNoteListByRoom(roomId, "TERM01", schoolYearId, bookId);
             var getSecondTermNotesTask = localStudentNoteService.GetTermNoteListByRoom(roomId, "TERM02", schoolYearId, bookId);
             var getThirdTermNotesTask = localStudentNoteService.GetTermNoteListByRoom(roomId, "TERM03", schoolYearId, bookId);
+
+            // Extraction des commentaires
+
+            var getCommentsTask = studentNoteService.GetCommentsBySchoolYearAsync(roomId, bookId, schoolYearId);
 
             var term1Notes = await getFirstTermNotesTask;
             var term2Notes = await getSecondTermNotesTask;
@@ -775,7 +819,8 @@ namespace Primary.SchoolApp.Services
                             Student = student,
                             Subject = subject,
                             Note = finalNote,
-                            NotedOn = 20,
+                            NotedOn = notedOn,
+                            NoteCoef= noteCoef
                         }
                         );
                 }
@@ -785,8 +830,9 @@ namespace Primary.SchoolApp.Services
                 {
                     //truncate or around note
                     var note = AppUtilities.GetTruncateOrRoundingValue(item.Note, selectedClassGroup);
+                    var note20 = LocalStudentNoteService.GetNote20(note, item.NotedOn);
                     //get rating
-                    var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Note" && x.MinNote <= note && x.MaxNote >= note);
+                    var systemRating = Program.RatingSystemList.FirstOrDefault(x => x.Domain == "Note" && x.MinNote <= note20 && x.MaxNote >= note20);
                     var rating = string.Empty;
                     if (systemRating != null)
                     {
@@ -826,6 +872,14 @@ namespace Primary.SchoolApp.Services
             // extraction des groupes de matiières
             var subject_groups = annualNoteListe.Select(x => x.SubjectGroup).Distinct().ToList();
             var disciplineItems = await getDisciplinesTask;
+            // Récupération des moyennes trimestrielles
+            var term1Averages = await getFirstTermAveragesTask;
+            var term2Averages = await getSecondTermAveragesTask;
+            var term3Averages = await getThirdTermAveragesTask;
+            // Récupération des moyennes annuelles
+            var annualAverages = await getAnnualAveragesTask;
+            //Récupération des commentaire
+            var comments= await getCommentsTask;
             // Production des bulletins
             foreach (var student in composedStudents)
             {
@@ -856,18 +910,10 @@ namespace Primary.SchoolApp.Services
                 double sumThirdNote = student_notes.Where(x => x.ThirdNoteAsString != string.Empty).Sum(x => x.ThirdNote);
                 sumThirdNote = AppUtilities.GetTruncateOrRoundingValue(sumThirdNote, selectedClassGroup);
                 footerItems.Add(sumThirdNote != 0 ? new("SumThirdNote", sumThirdNote.ToString()) : new("SumThirdNote", string.Empty));
-
                 double sumFinalNote = AppUtilities.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
                 footerItems.Add(sumFinalNote != 0 ? new("SumFinalNote", sumFinalNote.ToString()) : new("SumFinalNote", string.Empty));
 
-                // Récupération des moyennes trimestrielles
-                var term1Averages = await getFirstTermAveragesTask;
-                var term2Averages = await getSecondTermAveragesTask;
-                var term3Averages = await getThirdTermAveragesTask;
-                // Récupération des moyennes annuelles
-                var annualAverages = await getAnnualAveragesTask;
-
-
+              
                 var term01_averages_student = term1Averages.FirstOrDefault(x => x.Student.Id == student.Id);
                 var term02_averages_student = term2Averages.FirstOrDefault(x => x.Student.Id == student.Id);
                 var term03_averages_student = term3Averages.FirstOrDefault(x => x.Student.Id == student.Id);
@@ -882,12 +928,21 @@ namespace Primary.SchoolApp.Services
                 footerItems.Add(annualAverage != 0 ? new("AnnualAverage", annualAverage.ToString()) : new("AnnualAverage", string.Empty));
                 string firstTermPosition = term01_averages_student != null ? term01_averages_student.Position : string.Empty;
                 footerItems.Add(new("FirstTermPosition", firstTermPosition));
+                string firstTermPositionWithStudentCount = term01_averages_student != null ? firstTermPosition + '/' + term1Averages.Count : string.Empty;
+                footerItems.Add(new("FirstTermPositionWithStudentCount", firstTermPositionWithStudentCount));
                 string secondTermPosition = term02_averages_student != null ? term02_averages_student.Position : string.Empty;
                 footerItems.Add(new("SecondTermPosition", secondTermPosition));
+                string secondTermPositionWithStudentCount = term02_averages_student != null ? secondTermPosition + '/' + term2Averages.Count : string.Empty;
+                footerItems.Add(new("SecondTermPositionWithStudentCount", secondTermPositionWithStudentCount));
                 string thirdTermPosition = term03_averages_student != null ? term03_averages_student.Position : string.Empty;
                 footerItems.Add(new("ThirdTermPosition", thirdTermPosition));
-                string termPosition = annual_averages_student != null ? annual_averages_student.Position : string.Empty;
-                footerItems.Add(new("AnnualPosition", termPosition));
+                string thirdTermPositionWithStudentCount = term03_averages_student != null ? thirdTermPosition + '/' + term3Averages.Count : string.Empty;
+                footerItems.Add(new("ThirdTermPositionWithStudentCount", thirdTermPositionWithStudentCount));
+                string annualPosition = annual_averages_student != null ? annual_averages_student.Position : string.Empty;
+                footerItems.Add(new("AnnualPosition", annualPosition));
+                string annualPositionWithStudentCount = annual_averages_student != null ? annualPosition + '/' + annualAverages.Count : string.Empty;
+                footerItems.Add(new("AnnualPositionWithStudentCount", annualPositionWithStudentCount));
+
                 double firstTermClassAverage = term1Averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(term1Averages.Sum(x => x.Average) / term1Averages.Count, selectedClassGroup) : 0;
                 footerItems.Add(new("FirstTermClassAverage", firstTermClassAverage.ToString()));
                 double secondTermClassAverage = term2Averages.Count != 0 ? AppUtilities.GetTruncateOrRoundingValue(term2Averages.Sum(x => x.Average) / term2Averages.Count, selectedClassGroup) : 0;
@@ -912,6 +967,10 @@ namespace Primary.SchoolApp.Services
                 footerItems.Add(new("ThirdTermLowestAverage", thirdTermLowestAverage.ToString()));
                 double annualLowestAverage = annualAverages.Any() ? annualAverages.Select(x => x.Average).OrderBy(x => x).First() : 0;
                 footerItems.Add(new("AnnualLowestAverage", annualLowestAverage.ToString()));
+                // on récupère le dernier commentaire s'il y a plussieurs
+                var student_comments=comments.Where(c=>c.StudentId==student.Id).OrderByDescending(c=>c.Id);
+                var comment= student_comments.FirstOrDefault()?.Comment;
+                footerItems.Add(new("Comment", comment));
                 var footerSection = new ReportFooter(footerItems);
                 #endregion
 

@@ -127,10 +127,6 @@
             endDateTimePicker.Location = new Point(164, 172);
             endDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             endDateTimePicker.Name = "endDateTimePicker";
-            // 
-            // 
-            // 
-            endDateTimePicker.RootElement.MinSize = new Size(0, 0);
             endDateTimePicker.Size = new Size(147, 36);
             endDateTimePicker.TabIndex = 2;
             endDateTimePicker.TabStop = false;
@@ -144,10 +140,6 @@
             startDateTimePicker.Location = new Point(0, 172);
             startDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             startDateTimePicker.Name = "startDateTimePicker";
-            // 
-            // 
-            // 
-            startDateTimePicker.RootElement.MinSize = new Size(0, 0);
             startDateTimePicker.Size = new Size(147, 36);
             startDateTimePicker.TabIndex = 1;
             startDateTimePicker.TabStop = false;
@@ -187,13 +179,12 @@
             // forDropDownList
             // 
             forDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            forDropDownList.DropDownAnimationEnabled = true;
             forDropDownList.DropDownHeight = 159;
             forDropDownList.Location = new Point(3, 35);
             forDropDownList.Margin = new Padding(4, 5, 4, 5);
             forDropDownList.MinimumSize = new Size(0, 30);
             forDropDownList.Name = "forDropDownList";
-            forDropDownList.Size = new Size(309, 35);
+            forDropDownList.Size = new Size(309, 30);
             forDropDownList.TabIndex = 0;
             ((Telerik.WinControls.UI.RadDropDownListElement)forDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)forDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -215,13 +206,12 @@
             // formatDropDownList
             // 
             formatDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            formatDropDownList.DropDownAnimationEnabled = true;
             formatDropDownList.DropDownHeight = 159;
             formatDropDownList.Location = new Point(0, 102);
             formatDropDownList.Margin = new Padding(4, 5, 4, 5);
             formatDropDownList.MinimumSize = new Size(0, 30);
             formatDropDownList.Name = "formatDropDownList";
-            formatDropDownList.Size = new Size(309, 35);
+            formatDropDownList.Size = new Size(309, 30);
             formatDropDownList.TabIndex = 0;
             ((Telerik.WinControls.UI.RadDropDownListElement)formatDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)formatDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -260,7 +250,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(363, 266);
+            ClientSize = new Size(375, 273);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
             Controls.Add(editPanel);

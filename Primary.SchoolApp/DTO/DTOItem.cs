@@ -36,7 +36,7 @@ namespace Primary.SchoolApp.DTO
         public record HeadReportCard(string ReportTitle, string SchoolYear, Student Student, SchoolRoom ClassRoom, string Teacher, string Language, string EvaluationCode,List<DisciplineItemRecord> DisciplinarySheet);
         public record DetailEvaluationReportCard(List<EvaluationRecord> NoteList, List<SubjectGroup> SubjectGroupList);
         public record DetailTermReportCard(List<TermRecord> NoteList, List<SubjectGroup> SubjectGroupList);
-        public record EvaluationFooterReportCard(double SumNote, double SumCoef, double SumMaxNote, double StudentAverage, string Position, double ClassAverage, double HighestAverage, double LowestAverage);
+        public record EvaluationFooterReportCard(double SumNote, double SumCoef, double SumMaxNote, double StudentAverage, string Position, double ClassAverage, double HighestAverage, double LowestAverage,string Comment);
         public record EvaluationReportCard(HeadReportCard HeadSection, DetailEvaluationReportCard DetailSection, EvaluationFooterReportCard FooterSection);
         public record TermReportCard(HeadReportCard HeadSection, DetailTermReportCard DetailSection, ReportFooter FooterSection);
         public record StudentDisciplinarySheet(HeadReportCard HeadSection, DisciplineScheetReportDetail DetailSection, ReportFooter FooterSection);

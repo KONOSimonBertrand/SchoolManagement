@@ -18,7 +18,7 @@ namespace SchoolManagement.UI.Reporting
             this.teacherSignatureLabel = new Telerik.Reporting.TextBox();
             this.deanSignatureLabel = new Telerik.Reporting.TextBox();
             this.directorSignatureLabel = new Telerik.Reporting.TextBox();
-            this.panel1 = new Telerik.Reporting.Panel();
+            this.resumePanel = new Telerik.Reporting.Panel();
             this.totalLabel = new Telerik.Reporting.TextBox();
             this.averageLabel = new Telerik.Reporting.TextBox();
             this.rankLabel = new Telerik.Reporting.TextBox();
@@ -36,6 +36,8 @@ namespace SchoolManagement.UI.Reporting
             this.acquiredCompetenceLabel = new Telerik.Reporting.TextBox();
             this.ecaCompetenceLabel = new Telerik.Reporting.TextBox();
             this.naCompetenceLabel = new Telerik.Reporting.TextBox();
+            this.teacherCommentLabel = new Telerik.Reporting.TextBox();
+            this.teacherCommentTextBox = new Telerik.Reporting.TextBox();
             this.groupHeaderSection = new Telerik.Reporting.GroupHeaderSection();
             this.subjectPanel = new Telerik.Reporting.Panel();
             this.subjectLabel = new Telerik.Reporting.TextBox();
@@ -55,6 +57,7 @@ namespace SchoolManagement.UI.Reporting
             this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
             this.headPanel = new Telerik.Reporting.Panel();
             this.schoolYearTextBox = new Telerik.Reporting.TextBox();
+            this.headerPictureBox = new Telerik.Reporting.PictureBox();
             this.reportTitleTextBox = new Telerik.Reporting.TextBox();
             this.studentLabel = new Telerik.Reporting.TextBox();
             this.teacherLabel = new Telerik.Reporting.TextBox();
@@ -74,9 +77,7 @@ namespace SchoolManagement.UI.Reporting
             this.totalLeftEarlyTextBox = new Telerik.Reporting.TextBox();
             this.studentTextBox = new Telerik.Reporting.TextBox();
             this.bornTextBox = new Telerik.Reporting.TextBox();
-            this.headerPictureBox = new Telerik.Reporting.PictureBox();
-            this.teacherCommentLabel = new Telerik.Reporting.TextBox();
-            this.teacherCommentTextBox = new Telerik.Reporting.TextBox();
+            this.decisionTextBox = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // groupFooterSection
@@ -87,7 +88,7 @@ namespace SchoolManagement.UI.Reporting
             this.teacherSignatureLabel,
             this.deanSignatureLabel,
             this.directorSignatureLabel,
-            this.panel1});
+            this.resumePanel});
             this.groupFooterSection.Name = "groupFooterSection";
             this.groupFooterSection.Style.BackgroundImage.Repeat = Telerik.Reporting.Drawing.BackgroundRepeat.NoRepeat;
             // 
@@ -143,9 +144,9 @@ namespace SchoolManagement.UI.Reporting
             this.directorSignatureLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.directorSignatureLabel.Value = "Head Master\'s Visa";
             // 
-            // panel1
+            // resumePanel
             // 
-            this.panel1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.resumePanel.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.totalLabel,
             this.averageLabel,
             this.rankLabel,
@@ -164,11 +165,12 @@ namespace SchoolManagement.UI.Reporting
             this.ecaCompetenceLabel,
             this.naCompetenceLabel,
             this.teacherCommentLabel,
-            this.teacherCommentTextBox});
-            this.panel1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.2D), Telerik.Reporting.Drawing.Unit.Inch(0D));
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.9D), Telerik.Reporting.Drawing.Unit.Inch(1.969D));
-            this.panel1.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.teacherCommentTextBox,
+            this.decisionTextBox});
+            this.resumePanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.2D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.resumePanel.Name = "resumePanel";
+            this.resumePanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.9D), Telerik.Reporting.Drawing.Unit.Inch(1.97D));
+            this.resumePanel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             // 
             // totalLabel
             // 
@@ -393,6 +395,33 @@ namespace SchoolManagement.UI.Reporting
             this.naCompetenceLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
             this.naCompetenceLabel.Value = "NA  : Skills Non Acquired [ 00 – 09 ]";
             // 
+            // teacherCommentLabel
+            // 
+            this.teacherCommentLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(1D));
+            this.teacherCommentLabel.Name = "teacherCommentLabel";
+            this.teacherCommentLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.9D), Telerik.Reporting.Drawing.Unit.Inch(0.259D));
+            this.teacherCommentLabel.Style.BackgroundColor = System.Drawing.Color.SkyBlue;
+            this.teacherCommentLabel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.teacherCommentLabel.Style.Font.Bold = true;
+            this.teacherCommentLabel.Style.Font.Name = "Calibri";
+            this.teacherCommentLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            this.teacherCommentLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.teacherCommentLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.teacherCommentLabel.Value = "TEACHER’S COMMENT";
+            // 
+            // teacherCommentTextBox
+            // 
+            this.teacherCommentTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.005D), Telerik.Reporting.Drawing.Unit.Inch(1.261D));
+            this.teacherCommentTextBox.Name = "teacherCommentTextBox";
+            this.teacherCommentTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.891D), Telerik.Reporting.Drawing.Unit.Inch(0.709D));
+            this.teacherCommentTextBox.Style.BackgroundColor = System.Drawing.Color.AliceBlue;
+            this.teacherCommentTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.teacherCommentTextBox.Style.Font.Bold = true;
+            this.teacherCommentTextBox.Style.Font.Name = "Calibri";
+            this.teacherCommentTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.teacherCommentTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.teacherCommentTextBox.Value = " ";
+            // 
             // groupHeaderSection
             // 
             this.groupHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Cm(0.617D);
@@ -507,7 +536,7 @@ namespace SchoolManagement.UI.Reporting
             // 
             this.addressTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.872D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.addressTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.872D), Telerik.Reporting.Drawing.Unit.Inch(0.171D));
             this.addressTextBox.Style.Font.Name = "Comic Sans MS";
             this.addressTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
             this.addressTextBox.Value = "Douala-Nyalla (Total Nkolbong- Automobile Technical Control Centre)";
@@ -516,7 +545,7 @@ namespace SchoolManagement.UI.Reporting
             // 
             this.contactTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
             this.contactTextBox.Name = "contactTextBox";
-            this.contactTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.872D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
+            this.contactTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.872D), Telerik.Reporting.Drawing.Unit.Inch(0.171D));
             this.contactTextBox.Style.Font.Name = "Comic Sans MS";
             this.contactTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
             this.contactTextBox.Value = "Tel. (237) 243 23 23 23 / 698 96 80 98 / 677 55 44 41      ";
@@ -525,7 +554,7 @@ namespace SchoolManagement.UI.Reporting
             // 
             this.webSiteTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.3D), Telerik.Reporting.Drawing.Unit.Inch(0.41D));
             this.webSiteTextBox.Name = "webSiteTextBox";
-            this.webSiteTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.391D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
+            this.webSiteTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.023D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
             this.webSiteTextBox.Style.Color = System.Drawing.Color.DodgerBlue;
             this.webSiteTextBox.Style.Font.Name = "Comic Sans MS";
             this.webSiteTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
@@ -544,16 +573,16 @@ namespace SchoolManagement.UI.Reporting
             // 
             // facebookAddressLabel
             // 
-            this.facebookAddressLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.9D), Telerik.Reporting.Drawing.Unit.Inch(0.41D));
+            this.facebookAddressLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.523D), Telerik.Reporting.Drawing.Unit.Inch(0.41D));
             this.facebookAddressLabel.Name = "facebookAddressLabel";
-            this.facebookAddressLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
+            this.facebookAddressLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.023D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
             this.facebookAddressLabel.Style.Font.Name = "Comic Sans MS";
             this.facebookAddressLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
             this.facebookAddressLabel.Value = "Soft Éducation";
             // 
             // facebookPictureBox
             // 
-            this.facebookPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.7D), Telerik.Reporting.Drawing.Unit.Inch(0.41D));
+            this.facebookPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.323D), Telerik.Reporting.Drawing.Unit.Inch(0.41D));
             this.facebookPictureBox.MimeType = "image/png";
             this.facebookPictureBox.Name = "facebookPictureBox";
             this.facebookPictureBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.2D), Telerik.Reporting.Drawing.Unit.Inch(0.18D));
@@ -618,6 +647,13 @@ namespace SchoolManagement.UI.Reporting
             this.schoolYearTextBox.Style.Font.Name = "Calibri";
             this.schoolYearTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
             this.schoolYearTextBox.Value = "Année scolaire : 2020 - 2021";
+            // 
+            // headerPictureBox
+            // 
+            this.headerPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1D), Telerik.Reporting.Drawing.Unit.Inch(0.1D));
+            this.headerPictureBox.MimeType = "";
+            this.headerPictureBox.Name = "headerPictureBox";
+            this.headerPictureBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(8.1D), Telerik.Reporting.Drawing.Unit.Inch(0.94D));
             // 
             // reportTitleTextBox
             // 
@@ -799,7 +835,7 @@ namespace SchoolManagement.UI.Reporting
             // totalAbsentTextBox
             // 
             this.totalAbsentTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.9D), Telerik.Reporting.Drawing.Unit.Inch(2.7D));
-            this.totalAbsentTextBox.Name = "totalAbsentTextbox";
+            this.totalAbsentTextBox.Name = "totalAbsentTextBox";
             this.totalAbsentTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.3D), Telerik.Reporting.Drawing.Unit.Inch(0.2D));
             this.totalAbsentTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.totalAbsentTextBox.Style.Font.Bold = true;
@@ -862,39 +898,20 @@ namespace SchoolManagement.UI.Reporting
             this.bornTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.bornTextBox.Value = "Nee le 02/05/2016 a YAOUNDE CAMEROUN PARIS";
             // 
-            // headerPictureBox
+            // decisionTextBox
             // 
-            this.headerPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1D), Telerik.Reporting.Drawing.Unit.Inch(0.1D));
-            this.headerPictureBox.MimeType = "image/png";
-            this.headerPictureBox.Name = "headerPictureBox";
-            this.headerPictureBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(8.1D), Telerik.Reporting.Drawing.Unit.Inch(0.94D));
-            // 
-            // teacherCommentLabel
-            // 
-            this.teacherCommentLabel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(1D));
-            this.teacherCommentLabel.Name = "teacherCommentLabel";
-            this.teacherCommentLabel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.9D), Telerik.Reporting.Drawing.Unit.Inch(0.259D));
-            this.teacherCommentLabel.Style.BackgroundColor = System.Drawing.Color.SkyBlue;
-            this.teacherCommentLabel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.teacherCommentLabel.Style.Font.Bold = true;
-            this.teacherCommentLabel.Style.Font.Name = "Calibri";
-            this.teacherCommentLabel.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
-            this.teacherCommentLabel.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
-            this.teacherCommentLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.teacherCommentLabel.Value = "TEACHER’S COMMENT";
-            // 
-            // teacherCommentTextBox
-            // 
-            this.teacherCommentTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.005D), Telerik.Reporting.Drawing.Unit.Inch(1.261D));
-            this.teacherCommentTextBox.Name = "teacherCommentTextBox";
-            this.teacherCommentTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.891D), Telerik.Reporting.Drawing.Unit.Inch(0.709D));
-            this.teacherCommentTextBox.Style.BackgroundColor = System.Drawing.Color.AliceBlue;
-            this.teacherCommentTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
-            this.teacherCommentTextBox.Style.Font.Bold = true;
-            this.teacherCommentTextBox.Style.Font.Name = "Calibri";
-            this.teacherCommentTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
-            this.teacherCommentTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
-            this.teacherCommentTextBox.Value = " ";
+            this.decisionTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(6.65D), Telerik.Reporting.Drawing.Unit.Inch(0.394D));
+            this.decisionTextBox.Name = "decisionTextBox";
+            this.decisionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.181D), Telerik.Reporting.Drawing.Unit.Inch(0.22D));
+            this.decisionTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.None;
+            this.decisionTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.None;
+            this.decisionTextBox.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.decisionTextBox.Style.Font.Bold = true;
+            this.decisionTextBox.Style.Font.Name = "Calibri";
+            this.decisionTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(9D);
+            this.decisionTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Center;
+            this.decisionTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.decisionTextBox.Value = " ";
             // 
             // GardenEvaluationSchoolReport_EN
             // 
@@ -970,7 +987,7 @@ namespace SchoolManagement.UI.Reporting
         private Telerik.Reporting.TextBox totalLateTextBox;
         private Telerik.Reporting.TextBox totalLeftEarlyTextBox;
         private Telerik.Reporting.TextBox noteLabel;
-        private Telerik.Reporting.Panel panel1;
+        private Telerik.Reporting.Panel resumePanel;
         private Telerik.Reporting.TextBox totalLabel;
         private Telerik.Reporting.TextBox averageLabel;
         private Telerik.Reporting.TextBox rankLabel;
@@ -992,5 +1009,6 @@ namespace SchoolManagement.UI.Reporting
         private Telerik.Reporting.TextBox bornTextBox;
         private Telerik.Reporting.TextBox teacherCommentLabel;
         private Telerik.Reporting.TextBox teacherCommentTextBox;
+        private Telerik.Reporting.TextBox decisionTextBox;
     }
 }

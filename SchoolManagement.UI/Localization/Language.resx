@@ -1352,8 +1352,8 @@
   <data name="LabelHighSchoolModel" xml:space="preserve">
     <value>High school model</value>
   </data>
-  <data name="LabelKindergartenModel" xml:space="preserve">
-    <value>Kindergarten model</value>
+  <data name="LabelKindergartenModelWithMark" xml:space="preserve">
+    <value>Kindergarten model with mark</value>
   </data>
   <data name="LabelFoundationModel" xml:space="preserve">
     <value>Foundation model</value>
@@ -1519,5 +1519,14 @@
   </data>
   <data name="LabelFileInformation" xml:space="preserve">
     <value>File information</value>
+  </data>
+  <data name="LabelDefaultModel" xml:space="preserve">
+    <value>Default model</value>
+  </data>
+  <data name="LabelKindergartenModelWithoutMark" xml:space="preserve">
+    <value>Kindergarten model without marks</value>
+  </data>
+  <data name="LabelBadFormatExample" xml:space="preserve">
+    <value>Incorrect format! Example: 2019-2020</value>
   </data>
 </root>

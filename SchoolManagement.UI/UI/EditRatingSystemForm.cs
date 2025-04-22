@@ -44,6 +44,23 @@ namespace SchoolManagement.UI
             //this.nameFrDropDownList.SelectedIndexChanged += NameDropDownListSelectedIndexChanged;
             minNoteTextBox.TextChanging += TxtChanging;
             maxNoteTextBox.TextChanging += TxtChanging;
+            this.ThemeNameChanged += EditRatingSystemForm_ThemeNameChanged;
+        }
+
+        private void EditRatingSystemForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.minNoteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.maxNoteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.nameFrDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.nameEnDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.descriptionFrDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.descriptionEnDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.domainDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -146,35 +163,28 @@ namespace SchoolManagement.UI
 
             this.minNoteTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.minNoteTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.minNoteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.maxNoteTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.maxNoteTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.maxNoteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.nameFrDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.nameFrDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.nameFrDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.nameFrDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.nameEnDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.nameEnDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.nameEnDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.nameEnDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.descriptionFrDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionFrDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.descriptionFrDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.descriptionFrDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.descriptionEnDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionEnDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.descriptionEnDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.descriptionEnDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.domainDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.domainDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.domainDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.domainDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -201,7 +211,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             var nameFrList = new List<string>
             {
                 "A+",

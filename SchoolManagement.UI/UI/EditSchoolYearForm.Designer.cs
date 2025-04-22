@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
             endThirdQuarterSeparator = new Telerik.WinControls.UI.RadSeparator();
             startThirdQuarterSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -53,6 +54,7 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)endThirdQuarterSeparator).BeginInit();
@@ -79,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -109,7 +112,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(438, 280);
+            editPanel.Size = new Size(450, 280);
             editPanel.TabIndex = 26;
             // 
             // endThirdQuarterSeparator
@@ -137,10 +140,6 @@
             endThirdQuarterDateTimePicker.Location = new Point(217, 237);
             endThirdQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             endThirdQuarterDateTimePicker.Name = "endThirdQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            endThirdQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
             endThirdQuarterDateTimePicker.Size = new Size(203, 30);
             endThirdQuarterDateTimePicker.TabIndex = 6;
             endThirdQuarterDateTimePicker.TabStop = false;
@@ -164,10 +163,6 @@
             startThirdQuarterDateTimePicker.Location = new Point(0, 237);
             startThirdQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             startThirdQuarterDateTimePicker.Name = "startThirdQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            startThirdQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
             startThirdQuarterDateTimePicker.Size = new Size(203, 30);
             startThirdQuarterDateTimePicker.TabIndex = 5;
             startThirdQuarterDateTimePicker.TabStop = false;
@@ -209,10 +204,6 @@
             endSecondQuarterDateTimePicker.Location = new Point(217, 167);
             endSecondQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             endSecondQuarterDateTimePicker.Name = "endSecondQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            endSecondQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
             endSecondQuarterDateTimePicker.Size = new Size(203, 30);
             endSecondQuarterDateTimePicker.TabIndex = 4;
             endSecondQuarterDateTimePicker.TabStop = false;
@@ -236,10 +227,6 @@
             startSecondQuarterDateTimePicker.Location = new Point(0, 167);
             startSecondQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             startSecondQuarterDateTimePicker.Name = "startSecondQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            startSecondQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
             startSecondQuarterDateTimePicker.Size = new Size(203, 30);
             startSecondQuarterDateTimePicker.TabIndex = 3;
             startSecondQuarterDateTimePicker.TabStop = false;
@@ -281,10 +268,6 @@
             endFirstQuarterDateTimePicker.Location = new Point(217, 98);
             endFirstQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             endFirstQuarterDateTimePicker.Name = "endFirstQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            endFirstQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
             endFirstQuarterDateTimePicker.Size = new Size(203, 30);
             endFirstQuarterDateTimePicker.TabIndex = 2;
             endFirstQuarterDateTimePicker.TabStop = false;
@@ -308,10 +291,6 @@
             startFirstQuarterDateTimePicker.Location = new Point(0, 98);
             startFirstQuarterDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             startFirstQuarterDateTimePicker.Name = "startFirstQuarterDateTimePicker";
-            // 
-            // 
-            // 
-            startFirstQuarterDateTimePicker.RootElement.MinSize = new Size(0, 0);
             startFirstQuarterDateTimePicker.Size = new Size(203, 30);
             startFirstQuarterDateTimePicker.TabIndex = 1;
             startFirstQuarterDateTimePicker.TabStop = false;
@@ -383,13 +362,17 @@
             saveButton.TabIndex = 7;
             saveButton.Text = "Enregistrer";
             // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
             // EditSchoolYearForm
             // 
             AcceptButton = saveButton;
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(438, 372);
+            ClientSize = new Size(450, 340);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -424,6 +407,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -455,5 +439,6 @@
         private Telerik.WinControls.UI.RadLabel endFirstQuarterLabel;
         private Telerik.WinControls.UI.RadDateTimePicker startFirstQuarterDateTimePicker;
         private Telerik.WinControls.UI.RadLabel startFirstQuarterLabel;
+        private ErrorProvider errorProvider;
     }
 }

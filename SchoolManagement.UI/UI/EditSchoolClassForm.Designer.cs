@@ -85,7 +85,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(722, 143);
+            editPanel.Size = new Size(752, 143);
             editPanel.TabIndex = 18;
             // 
             // sequenceSeparator
@@ -102,10 +102,6 @@
             sequenceSpinEditor.Location = new Point(356, 100);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
-            // 
-            // 
-            // 
-            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(109, 30);
             sequenceSpinEditor.TabIndex = 3;
             // 
@@ -130,7 +126,6 @@
             // groupDropDownList
             // 
             groupDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            groupDropDownList.DropDownAnimationEnabled = true;
             groupDropDownList.DropDownHeight = 159;
             groupDropDownList.Location = new Point(356, 30);
             groupDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -236,7 +231,6 @@
             // reportCardDropDownList
             // 
             reportCardDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            reportCardDropDownList.DropDownAnimationEnabled = true;
             reportCardDropDownList.DropDownHeight = 159;
             reportCardDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             reportCardDropDownList.Location = new Point(4, 100);
@@ -268,7 +262,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(722, 197);
+            ClientSize = new Size(752, 197);
             Controls.Add(reportCardSeparator);
             Controls.Add(reportCardDropDownList);
             Controls.Add(reportCardLabel);

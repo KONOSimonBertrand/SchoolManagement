@@ -51,20 +51,20 @@ namespace SchoolManagement.UI.CustomControls
 
         private void InitLanguage()
         {
-            this.roomLabel.Text =Language.labelRoom;
-            this.enrollingDateLabel.Text=Language.labelEnrollingDate;
-            this.BirthdayLabel.Text = Language.labelBirthDate;
-            this.birthPlaceLabel.Text = Language.labelBirthPlace;
-            this.idCardLabel.Text = Language.labelIdCard;
-            this.phoneLabel.Text = Language.labelPhone;
-            this.emailLabel.Text = Language.labelMail;
-            this.addressLabel.Text = Language.labelAddress;
-            this.contactsLabel.Text = Language.labelRooms;
-            this.healthLabel.Text = Language.labelSubjects;
-            this.disciplineLabel.Text = Language.labelNotes;
-            this.subscriptionLabel.Text = Language.labelAttendances;
-            this.nationalityLabel.Text = Language.labelNativeCountry;
-            this.sexLabel.Text = Language.labelSex;
+            this.roomLabel.Text =Language.labelRoom+":";
+            this.enrollingDateLabel.Text=Language.labelEnrollingDate+":";
+            this.BirthdayLabel.Text = Language.labelBirthDate + ":";
+            this.birthPlaceLabel.Text = Language.labelBirthPlace + ":";
+            this.idCardLabel.Text = Language.labelIdCard + ":";
+            this.phoneLabel.Text = Language.labelPhone + ":";
+            this.emailLabel.Text = Language.labelMail + ":";
+            this.addressLabel.Text = Language.labelAddress + ":";
+            this.contactsLabel.Text = Language.labelRooms + ":";
+            this.healthLabel.Text = Language.labelSubjects + ":";
+            this.disciplineLabel.Text = Language.labelNotes + ":";
+            this.subscriptionLabel.Text = Language.labelAttendances + ":";
+            this.nationalityLabel.Text = Language.labelNativeCountry + ":";
+            this.sexLabel.Text = Language.labelSex + ":";
         }
 
         private void InitComponents()
@@ -82,126 +82,105 @@ namespace SchoolManagement.UI.CustomControls
 
             this.studentLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
+            //this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.contactsLabel.Image = Utilities.ViewUtilities.GetImage("View");
-            this.contactsLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.contactsLabel.Image = Utilities.ViewUtilities.GetImage("Folder");
+            this.contactsLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
             this.contactsLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.contactsLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.contactsLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.healthLabel.Image = Utilities.ViewUtilities.GetImage("View");
-            this.healthLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.healthLabel.Image = Utilities.ViewUtilities.GetImage("Folder");
+            this.healthLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
             this.healthLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.healthLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.healthLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.disciplineLabel.Image = Utilities.ViewUtilities.GetImage("View");
-            this.disciplineLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.disciplineLabel.Image = Utilities.ViewUtilities.GetImage("Folder");
+            this.disciplineLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
             this.disciplineLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.disciplineLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.disciplineLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.subscriptionLabel.Image = Utilities.ViewUtilities.GetImage("View");
-            this.subscriptionLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.subscriptionLabel.Image = Utilities.ViewUtilities.GetImage("Folder");
+            this.subscriptionLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
             this.subscriptionLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.subscriptionLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.subscriptionLabel.LabelElement.CustomFontSize = 10.5f;
 
             this.studentTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.studentTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.BirthdayLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.BirthdayLabel.LabelElement.CustomFontSize = 10.5f;
-            this.BirthdayLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.BirthdayLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.roomLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.roomLabel.LabelElement.CustomFontSize = 10.5f;
-            this.roomLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.roomLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.enrollingDateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.enrollingDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.enrollingDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.enrollingDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.birthPlaceLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.birthPlaceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.birthPlaceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.birthPlaceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sexLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sexLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sexLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sexLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nationalityLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nationalityLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nationalityLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nationalityLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.idCardLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.idCardLabel.LabelElement.CustomFontSize = 10.5f;
-            this.idCardLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.idCardLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.phoneLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.phoneLabel.LabelElement.CustomFontSize = 10.5f;
-            this.phoneLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.phoneLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.emailLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.emailLabel.LabelElement.CustomFontSize = 10.5f;
-            this.emailLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.emailLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.addressLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.addressLabel.LabelElement.CustomFontSize = 10.5f;
-            this.addressLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.addressLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.roomTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.roomTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.roomTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.enrollingDateTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.enrollingDateTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.enrollingDateTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.birthdayTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.birthdayTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.birthdayTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.birthPlaceTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.birthPlaceTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.birthPlaceTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sexTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sexTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.sexTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.nationalityTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nationalityTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nationalityTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.idCardTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.idCardTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.phoneTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.phoneTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.emailTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.emailTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.addressTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.addressTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)

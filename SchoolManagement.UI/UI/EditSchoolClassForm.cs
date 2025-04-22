@@ -38,6 +38,18 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             groupDropDownList.SelectedIndexChanged += GroupDropDownList_SelectedIndexChanged;
+            this.ThemeNameChanged += EditSchoolClassForm_ThemeNameChanged;
+        }
+
+        private void EditSchoolClassForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.reportCardDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -46,8 +58,7 @@ namespace SchoolManagement.UI
         }
 
         private void InitComponent()
-        {
-           
+        {          
             this.groupLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
             this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
@@ -73,7 +84,6 @@ namespace SchoolManagement.UI
 
             this.groupDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.groupDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.reportCardLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
@@ -83,19 +93,17 @@ namespace SchoolManagement.UI
 
             this.reportCardDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.reportCardDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.reportCardDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.reportCardDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
 
-            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelFoundationModel, 0));
-            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelKindergartenModel, 1));
-            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelPrimaryModel, 2));
-            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelHighSchoolModel, 3));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelDefaultModel, 0));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelKindergartenModelWithMark, 1));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelKindergartenModelWithoutMark, 2));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelPrimaryModel, 3));
+            this.reportCardDropDownList.Items.Add(new RadListDataItem(Language.LabelHighSchoolModel, 4));
             this.reportCardSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
 
             this.reportCardDropDownList.SelectedIndex = 0;
-
-
 
             this.groupDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
@@ -117,7 +125,6 @@ namespace SchoolManagement.UI
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             addGroupButton.RootElement.ToolTipText = Language.messageClickToAddGroup;
             addGroupButton.Image = ViewUtilities.GetImage("Add");

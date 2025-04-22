@@ -42,7 +42,24 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.durationTextBox.TextChanging += TextChanging;
+            this.ThemeNameChanged += EditDisciplineForm_ThemeNameChanged;
         }
+
+        private void EditDisciplineForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.durationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.reasonDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.evaluationDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }
+        }
+
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -50,7 +67,7 @@ namespace SchoolManagement.UI
         private void InitComponent()
         {
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
+            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
 
             //reasonDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 30);
             reasonDropDownList.DropDownListElement.EnableElementShadow = false;
@@ -100,11 +117,9 @@ namespace SchoolManagement.UI
 
             this.durationTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.durationTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.durationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.classTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
             this.dateTimePicker.CustomFormat = "dd-MM-yyyy";
@@ -114,26 +129,21 @@ namespace SchoolManagement.UI
 
             this.dateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.dateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.studentDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.studentDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.studentDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.reasonDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.reasonDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.reasonDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.reasonDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.subjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.subjectDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.subjectDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.evaluationDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.evaluationDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.evaluationDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.evaluationDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.reasonDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -169,7 +179,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             LoadReasonList();

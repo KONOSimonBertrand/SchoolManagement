@@ -349,49 +349,49 @@ namespace Primary.SchoolApp
                     var classOfRoom = Program.SchoolClassList.First(x => x.Id == selectedRoom.ClassId);
                     RadMenuItem showStudentReportCardMenu = new($"{Language.LabelReportCard} {data.Student.FullName}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showRoomReportCardMenu = new($" {Language.LabelReportCards} {selectedRoom.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showRoomAnnualReportCardMenu = new($" {Language.LabelAnnualReportCard} {selectedRoom.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showStudentDisciplinarySheetMenu = new($" {Language.labelDisciplinarySheet} {data.Student.FullName}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showRoomDisciplinarySheetMenu = new($" {Language.LabelDisciplinarySheets} {selectedRoom.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showRoomReportMenu = new($" {Language.LabelClassroomReport} {selectedRoom.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     var group = Program.SchoolGroupList.FirstOrDefault(s => s.Id == classOfRoom.GroupId);
                     var statisticTitle = selectedFatherEvaluation != null ? Language.LabelQuarterlyStatistic : Language.LabelEvaluationStatistic;
                     RadMenuItem showGroupStatisticReportMenu = new($" {statisticTitle} {group.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showGroupAnnualStatisticReportMenu = new($" {Language.LabelAnnualStatistic} {group.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showRoomAnnualRecapMenu = new($" {Language.LabelAnnualSummaryNotes} {selectedRoom.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showClassAnnualRecapMenu = new($" {Language.LabelAnnualSummaryNotes} {classOfRoom.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     RadMenuItem showGroupAnnualRecapMenu = new($" {Language.LabelAnnualSummaryNotes} {group.Name}")
                     {
-                        Image = AppUtilities.GetImage("View")
+                        Image = AppUtilities.GetImage("Watch")
                     };
                     showStudentReportCardMenu.Click += async (sender, e) => await ShowStudentReportCardMenu_Click(sender, e);
                     showRoomReportCardMenu.Click += async (sender, e) => await ShowRoomReportCardMenu_Click(sender, e);

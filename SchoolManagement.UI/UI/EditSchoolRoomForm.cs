@@ -33,6 +33,18 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             classDropDownList.SelectedIndexChanged += ClassDropDownList_SelectedIndexChanged;
+            this.ThemeNameChanged += EditSchoolRoomForm_ThemeNameChanged;
+
+        }
+
+        private void EditSchoolRoomForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark") {
+                this.classDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }           
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -56,11 +68,11 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+           
 
             this.classDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.classDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.classDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            
             this.classDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.sequenceLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
@@ -70,7 +82,7 @@ namespace SchoolManagement.UI
 
             this.sequenceSpinEditor.SpinElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+            
             this.sequenceSpinEditor.SpinElement.ShowBorder = false;
             this.editPanel.RootElement.EnableElementShadow = false;
 
@@ -79,7 +91,6 @@ namespace SchoolManagement.UI
             {
                 c.RootElement.EnableElementShadow = false;
             }
-
 
             this.nameLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.sequenceLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
@@ -91,8 +102,7 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
+           
             addClassButton.RootElement.ToolTipText = "Cliquer ici pour ajouter une nouvelle classe";
             addClassButton.Image = ViewUtilities.GetImage("Add");
             addClassButton.ImageAlignment = ContentAlignment.MiddleCenter;
@@ -107,17 +117,19 @@ namespace SchoolManagement.UI
         public  bool IsValidData()
         {
             this.errorLabel.Text = "";
+            this.errorProvider.Clear();
             if (this.nameTextBox.Text == "")
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.nameTextBox, Language.messageFillField);
                 this.nameTextBox.Focus();
                 return false;
             }
 
-
             if (this.classDropDownList.SelectedIndex < 0)
             {
-                this.errorLabel.Text = Language.messageFillField; 
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(classDropDownList, Language.messageFillField);
                 this.classDropDownList.Focus();
                 return false;
             }

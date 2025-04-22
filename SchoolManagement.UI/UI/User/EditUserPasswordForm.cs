@@ -44,12 +44,10 @@ namespace SchoolManagement.UI
 
             this.newPasswordTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.newPasswordTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.newPasswordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             this.oldPasswordTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.oldPasswordTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.oldPasswordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -68,7 +66,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             showPasswordToggleButton.RootElement.ToolTipText = Language.messageClickToSeePassword;
             showPasswordToggleButton.Image = ViewUtilities.GetImage("Watch");
@@ -82,7 +79,19 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             showPasswordToggleButton.CheckStateChanged += ShowPasswordToggleButton_CheckStateChanged; ;
-           
+            this.ThemeNameChanged += EditUserPasswordForm_ThemeNameChanged;
+        }
+
+        private void EditUserPasswordForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.oldPasswordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.newPasswordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
+
         }
 
         private void ShowPasswordToggleButton_CheckStateChanged(object sender, EventArgs e)
@@ -107,16 +116,18 @@ namespace SchoolManagement.UI
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
-
+            this.errorProvider.Clear();
             if (this.oldPasswordTextBox.Text.Trim() == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.oldPasswordTextBox, Language.messageFillField);
                 this.oldPasswordTextBox.Focus();
                 return false;
             }
             if (this.newPasswordTextBox.Text.Trim() == string.Empty)
             {
                 this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.newPasswordTextBox, Language.messageFillField);
                 this.newPasswordTextBox.Focus();
                 return false;
             }

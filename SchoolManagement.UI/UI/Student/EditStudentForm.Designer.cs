@@ -156,7 +156,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(879, 298);
+            editPanel.Size = new Size(891, 298);
             editPanel.TabIndex = 82;
             // 
             // addressSplitContainer
@@ -165,11 +165,7 @@
             addressSplitContainer.Dock = DockStyle.Top;
             addressSplitContainer.Location = new Point(0, 204);
             addressSplitContainer.Name = "addressSplitContainer";
-            // 
-            // 
-            // 
-            addressSplitContainer.RootElement.MinSize = new Size(25, 25);
-            addressSplitContainer.Size = new Size(879, 68);
+            addressSplitContainer.Size = new Size(891, 68);
             addressSplitContainer.SplitterWidth = 0;
             addressSplitContainer.TabIndex = 99;
             addressSplitContainer.TabStop = false;
@@ -186,11 +182,7 @@
             addressSplitPanel.Controls.Add(idCardLabel);
             addressSplitPanel.Location = new Point(0, 0);
             addressSplitPanel.Name = "addressSplitPanel";
-            // 
-            // 
-            // 
-            addressSplitPanel.RootElement.MinSize = new Size(25, 25);
-            addressSplitPanel.Size = new Size(879, 68);
+            addressSplitPanel.Size = new Size(891, 68);
             addressSplitPanel.TabIndex = 0;
             addressSplitPanel.TabStop = false;
             // 
@@ -252,7 +244,6 @@
             // religionDropDownList
             // 
             religionDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            religionDropDownList.DropDownAnimationEnabled = true;
             religionDropDownList.DropDownHeight = 159;
             religionDropDownList.Location = new Point(232, 32);
             religionDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -302,11 +293,7 @@
             phoneSplitContainer.Dock = DockStyle.Top;
             phoneSplitContainer.Location = new Point(0, 136);
             phoneSplitContainer.Name = "phoneSplitContainer";
-            // 
-            // 
-            // 
-            phoneSplitContainer.RootElement.MinSize = new Size(25, 25);
-            phoneSplitContainer.Size = new Size(879, 68);
+            phoneSplitContainer.Size = new Size(891, 68);
             phoneSplitContainer.SplitterWidth = 0;
             phoneSplitContainer.TabIndex = 97;
             phoneSplitContainer.TabStop = false;
@@ -324,11 +311,7 @@
             phoneSplitPanel.Controls.Add(addressLabel);
             phoneSplitPanel.Location = new Point(0, 0);
             phoneSplitPanel.Name = "phoneSplitPanel";
-            // 
-            // 
-            // 
-            phoneSplitPanel.RootElement.MinSize = new Size(25, 25);
-            phoneSplitPanel.Size = new Size(879, 68);
+            phoneSplitPanel.Size = new Size(891, 68);
             phoneSplitPanel.TabIndex = 0;
             phoneSplitPanel.TabStop = false;
             // 
@@ -423,11 +406,7 @@
             sexSplitContainer.Dock = DockStyle.Top;
             sexSplitContainer.Location = new Point(0, 68);
             sexSplitContainer.Name = "sexSplitContainer";
-            // 
-            // 
-            // 
-            sexSplitContainer.RootElement.MinSize = new Size(25, 25);
-            sexSplitContainer.Size = new Size(879, 68);
+            sexSplitContainer.Size = new Size(891, 68);
             sexSplitContainer.SplitterWidth = 0;
             sexSplitContainer.TabIndex = 61;
             sexSplitContainer.TabStop = false;
@@ -448,11 +427,7 @@
             sexSplitPanel.Controls.Add(sexLabel);
             sexSplitPanel.Location = new Point(0, 0);
             sexSplitPanel.Name = "sexSplitPanel";
-            // 
-            // 
-            // 
-            sexSplitPanel.RootElement.MinSize = new Size(25, 25);
-            sexSplitPanel.Size = new Size(879, 68);
+            sexSplitPanel.Size = new Size(891, 68);
             sexSplitPanel.TabIndex = 1;
             sexSplitPanel.TabStop = false;
             // 
@@ -468,7 +443,6 @@
             // nationalityDropDownList
             // 
             nationalityDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            nationalityDropDownList.DropDownAnimationEnabled = true;
             nationalityDropDownList.DropDownHeight = 159;
             nationalityDropDownList.Location = new Point(616, 30);
             nationalityDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -546,10 +520,6 @@
             birthdayDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             birthdayDateTimePicker.MinimumSize = new Size(0, 30);
             birthdayDateTimePicker.Name = "birthdayDateTimePicker";
-            // 
-            // 
-            // 
-            birthdayDateTimePicker.RootElement.MinSize = new Size(0, 30);
             birthdayDateTimePicker.Size = new Size(148, 30);
             birthdayDateTimePicker.TabIndex = 4;
             birthdayDateTimePicker.TabStop = false;
@@ -569,7 +539,6 @@
             // sexDropDownList
             // 
             sexDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            sexDropDownList.DropDownAnimationEnabled = true;
             sexDropDownList.DropDownHeight = 159;
             sexDropDownList.Location = new Point(10, 30);
             sexDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -600,11 +569,7 @@
             idNumberSplitContainer.Dock = DockStyle.Top;
             idNumberSplitContainer.Location = new Point(0, 0);
             idNumberSplitContainer.Name = "idNumberSplitContainer";
-            // 
-            // 
-            // 
-            idNumberSplitContainer.RootElement.MinSize = new Size(25, 25);
-            idNumberSplitContainer.Size = new Size(879, 68);
+            idNumberSplitContainer.Size = new Size(891, 68);
             idNumberSplitContainer.SplitterWidth = 0;
             idNumberSplitContainer.TabIndex = 60;
             idNumberSplitContainer.TabStop = false;
@@ -622,11 +587,7 @@
             idNumberSplitPanel.Controls.Add(idNumberLabel);
             idNumberSplitPanel.Location = new Point(0, 0);
             idNumberSplitPanel.Name = "idNumberSplitPanel";
-            // 
-            // 
-            // 
-            idNumberSplitPanel.RootElement.MinSize = new Size(25, 25);
-            idNumberSplitPanel.Size = new Size(879, 68);
+            idNumberSplitPanel.Size = new Size(891, 68);
             idNumberSplitPanel.TabIndex = 1;
             idNumberSplitPanel.TabStop = false;
             // 
@@ -753,7 +714,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(879, 355);
+            ClientSize = new Size(891, 371);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

@@ -30,6 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            websiteSeparator = new Telerik.WinControls.UI.RadSeparator();
+            websiteTextBox = new Telerik.WinControls.UI.RadTextBox();
+            websiteLabel = new Telerik.WinControls.UI.RadLabel();
             evaluationModelSeparator = new Telerik.WinControls.UI.RadSeparator();
             evaluationModelLabel = new Telerik.WinControls.UI.RadLabel();
             evaluationModelDropDownList = new Telerik.WinControls.UI.RadDropDownList();
@@ -76,11 +79,11 @@
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
             errorProvider = new ErrorProvider(components);
-            websiteSeparator = new Telerik.WinControls.UI.RadSeparator();
-            websiteTextBox = new Telerik.WinControls.UI.RadTextBox();
-            websiteLabel = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)websiteSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)websiteTextBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)websiteLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelDropDownList).BeginInit();
@@ -127,9 +130,6 @@
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)websiteSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)websiteTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)websiteLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -184,8 +184,36 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(1126, 369);
+            editPanel.Size = new Size(1138, 369);
             editPanel.TabIndex = 117;
+            // 
+            // websiteSeparator
+            // 
+            websiteSeparator.Location = new Point(5, 213);
+            websiteSeparator.Margin = new Padding(4, 5, 4, 5);
+            websiteSeparator.Name = "websiteSeparator";
+            websiteSeparator.Size = new Size(340, 4);
+            websiteSeparator.TabIndex = 138;
+            websiteSeparator.TabStop = false;
+            // 
+            // websiteTextBox
+            // 
+            websiteTextBox.AutoSize = false;
+            websiteTextBox.Location = new Point(5, 182);
+            websiteTextBox.Margin = new Padding(4, 5, 4, 5);
+            websiteTextBox.Name = "websiteTextBox";
+            websiteTextBox.Size = new Size(340, 30);
+            websiteTextBox.TabIndex = 7;
+            // 
+            // websiteLabel
+            // 
+            websiteLabel.AutoSize = false;
+            websiteLabel.Location = new Point(5, 148);
+            websiteLabel.Margin = new Padding(4, 5, 4, 5);
+            websiteLabel.Name = "websiteLabel";
+            websiteLabel.Size = new Size(340, 30);
+            websiteLabel.TabIndex = 137;
+            websiteLabel.Text = "Site web:";
             // 
             // evaluationModelSeparator
             // 
@@ -209,7 +237,6 @@
             // evaluationModelDropDownList
             // 
             evaluationModelDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            evaluationModelDropDownList.DropDownAnimationEnabled = true;
             evaluationModelDropDownList.DropDownHeight = 159;
             evaluationModelDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             evaluationModelDropDownList.Location = new Point(903, 39);
@@ -303,7 +330,6 @@
             // headMasterSexDropDownList
             // 
             headMasterSexDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            headMasterSexDropDownList.DropDownAnimationEnabled = true;
             headMasterSexDropDownList.DropDownHeight = 159;
             headMasterSexDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             headMasterSexDropDownList.Location = new Point(835, 253);
@@ -369,7 +395,6 @@
             // headMasterTypeDropDownList
             // 
             headMasterTypeDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            headMasterTypeDropDownList.DropDownAnimationEnabled = true;
             headMasterTypeDropDownList.DropDownHeight = 159;
             headMasterTypeDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             headMasterTypeDropDownList.Location = new Point(5, 253);
@@ -641,34 +666,6 @@
             // 
             errorProvider.ContainerControl = this;
             // 
-            // websiteSeparator
-            // 
-            websiteSeparator.Location = new Point(5, 213);
-            websiteSeparator.Margin = new Padding(4, 5, 4, 5);
-            websiteSeparator.Name = "websiteSeparator";
-            websiteSeparator.Size = new Size(340, 4);
-            websiteSeparator.TabIndex = 138;
-            websiteSeparator.TabStop = false;
-            // 
-            // websiteTextBox
-            // 
-            websiteTextBox.AutoSize = false;
-            websiteTextBox.Location = new Point(5, 182);
-            websiteTextBox.Margin = new Padding(4, 5, 4, 5);
-            websiteTextBox.Name = "websiteTextBox";
-            websiteTextBox.Size = new Size(340, 30);
-            websiteTextBox.TabIndex = 7;
-            // 
-            // websiteLabel
-            // 
-            websiteLabel.AutoSize = false;
-            websiteLabel.Location = new Point(5, 148);
-            websiteLabel.Margin = new Padding(4, 5, 4, 5);
-            websiteLabel.Name = "websiteLabel";
-            websiteLabel.Size = new Size(340, 30);
-            websiteLabel.TabIndex = 137;
-            websiteLabel.Text = "Site web:";
-            // 
             // EditSchoolForm
             // 
             AcceptButton = saveButton;
@@ -676,7 +673,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(1126, 418);
+            ClientSize = new Size(1138, 420);
             Controls.Add(editPanel);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
@@ -688,6 +685,9 @@
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)websiteSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)websiteTextBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)websiteLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelDropDownList).EndInit();
@@ -734,9 +734,6 @@
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
-            ((System.ComponentModel.ISupportInitialize)websiteSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)websiteTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)websiteLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }

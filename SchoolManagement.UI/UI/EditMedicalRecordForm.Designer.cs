@@ -85,7 +85,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(508, 300);
+            editPanel.Size = new Size(520, 300);
             editPanel.TabIndex = 71;
             // 
             // studentSeparator
@@ -148,14 +148,13 @@
             // healthSubjectDropDownList
             // 
             healthSubjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            healthSubjectDropDownList.DropDownAnimationEnabled = true;
             healthSubjectDropDownList.DropDownHeight = 159;
             healthSubjectDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             healthSubjectDropDownList.Location = new Point(179, 97);
             healthSubjectDropDownList.Margin = new Padding(4, 5, 4, 5);
             healthSubjectDropDownList.MinimumSize = new Size(0, 30);
             healthSubjectDropDownList.Name = "healthSubjectDropDownList";
-            healthSubjectDropDownList.Size = new Size(321, 35);
+            healthSubjectDropDownList.Size = new Size(321, 30);
             healthSubjectDropDownList.TabIndex = 2;
             ((Telerik.WinControls.UI.RadDropDownListElement)healthSubjectDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)healthSubjectDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -181,11 +180,7 @@
             dateTimePicker.Margin = new Padding(4, 5, 4, 5);
             dateTimePicker.MinimumSize = new Size(0, 30);
             dateTimePicker.Name = "dateTimePicker";
-            // 
-            // 
-            // 
-            dateTimePicker.RootElement.MinSize = new Size(0, 30);
-            dateTimePicker.Size = new Size(171, 36);
+            dateTimePicker.Size = new Size(171, 30);
             dateTimePicker.TabIndex = 1;
             dateTimePicker.TabStop = false;
             dateTimePicker.Text = "lundi 29 janvier 2018";
@@ -258,7 +253,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(508, 350);
+            ClientSize = new Size(520, 358);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

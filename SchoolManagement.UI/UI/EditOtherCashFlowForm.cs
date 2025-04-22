@@ -41,6 +41,20 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.amountTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
+            this.ThemeNameChanged += EditOtherCashFlowForm_ThemeNameChanged;
+        }
+
+        private void EditOtherCashFlowForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.cashFlowTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.noteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }
         }
 
         private void TxtChanging(object sender, TextChangingEventArgs e)
@@ -76,7 +90,6 @@ namespace SchoolManagement.UI
 
             this.cashFlowTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.cashFlowTypeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.cashFlowTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.cashFlowTypeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.cashFlowTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
@@ -94,7 +107,6 @@ namespace SchoolManagement.UI
 
             this.dateTimePicker.DateTimePickerElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.dateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.noteLabel.LabelElement.CustomFontSize = 10.5f;
@@ -104,15 +116,12 @@ namespace SchoolManagement.UI
 
             this.doneByTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.doneByTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.amountTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.noteTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
 
@@ -140,7 +149,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             errorLabel.ForeColor = Color.Red;
             this.dateTimePicker.Value = DateTime.Now;

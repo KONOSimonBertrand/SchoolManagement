@@ -156,6 +156,7 @@ namespace SchoolManagement.UI
             settingSearchPanel = new RadPanel();
             settingSearchTextBox = new SchoolManagement.UI.CustomControls.SearchTextBox();
             settingEmptyPanel = new RadPanel();
+            windows11DarkTheme1 = new Telerik.WinControls.Themes.Windows11DarkTheme();
             ((System.ComponentModel.ISupportInitialize)timeTableScheduler).BeginInit();
             ((System.ComponentModel.ISupportInitialize)mainPageView).BeginInit();
             mainPageView.SuspendLayout();
@@ -312,7 +313,7 @@ namespace SchoolManagement.UI
             timeTableScheduler.Location = new Point(287, 0);
             timeTableScheduler.Name = "timeTableScheduler";
             timeTableScheduler.PrintStyle = schedulerDailyPrintStyle1;
-            timeTableScheduler.Size = new Size(1240, 702);
+            timeTableScheduler.Size = new Size(1240, 401);
             timeTableScheduler.TabIndex = 2;
             // 
             // mainPageView
@@ -329,7 +330,7 @@ namespace SchoolManagement.UI
             mainPageView.Location = new Point(0, 0);
             mainPageView.Name = "mainPageView";
             mainPageView.SelectedPage = HomePage;
-            mainPageView.Size = new Size(1548, 785);
+            mainPageView.Size = new Size(1548, 514);
             mainPageView.TabIndex = 1;
             // 
             // HomePage
@@ -339,7 +340,7 @@ namespace SchoolManagement.UI
             HomePage.ItemSize = new SizeF(59F, 28F);
             HomePage.Location = new Point(10, 37);
             HomePage.Name = "HomePage";
-            HomePage.Size = new Size(1527, 737);
+            HomePage.Size = new Size(1527, 466);
             HomePage.Text = "ACCUEIL";
             // 
             // homeMainPanel
@@ -352,7 +353,7 @@ namespace SchoolManagement.UI
             homeMainPanel.Location = new Point(0, 65);
             homeMainPanel.Margin = new Padding(0);
             homeMainPanel.Name = "homeMainPanel";
-            homeMainPanel.Size = new Size(1527, 672);
+            homeMainPanel.Size = new Size(1527, 401);
             homeMainPanel.TabIndex = 3;
             // 
             // homeMainListView
@@ -365,7 +366,7 @@ namespace SchoolManagement.UI
             homeMainListView.Location = new Point(300, 0);
             homeMainListView.Margin = new Padding(0);
             homeMainListView.Name = "homeMainListView";
-            homeMainListView.Size = new Size(869, 672);
+            homeMainListView.Size = new Size(869, 401);
             homeMainListView.TabIndex = 3;
             // 
             // homeGridView
@@ -378,7 +379,7 @@ namespace SchoolManagement.UI
             // 
             homeGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             homeGridView.Name = "homeGridView";
-            homeGridView.Size = new Size(869, 672);
+            homeGridView.Size = new Size(869, 401);
             homeGridView.TabIndex = 5;
             // 
             // homeLeftListView
@@ -391,7 +392,7 @@ namespace SchoolManagement.UI
             homeLeftListView.Location = new Point(0, 0);
             homeLeftListView.Margin = new Padding(0);
             homeLeftListView.Name = "homeLeftListView";
-            homeLeftListView.Size = new Size(300, 672);
+            homeLeftListView.Size = new Size(300, 401);
             homeLeftListView.TabIndex = 1;
             // 
             // homeInfoRightPanel
@@ -400,7 +401,7 @@ namespace SchoolManagement.UI
             homeInfoRightPanel.Location = new Point(1169, 0);
             homeInfoRightPanel.Margin = new Padding(4);
             homeInfoRightPanel.Name = "homeInfoRightPanel";
-            homeInfoRightPanel.Size = new Size(358, 672);
+            homeInfoRightPanel.Size = new Size(358, 401);
             homeInfoRightPanel.TabIndex = 3;
             // 
             // homeNavigationPanel
@@ -451,7 +452,7 @@ namespace SchoolManagement.UI
             // homeSchoolYearDropDownList
             // 
             homeSchoolYearDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            homeSchoolYearDropDownList.Location = new Point(99, 18);
+            homeSchoolYearDropDownList.Location = new Point(105, 18);
             homeSchoolYearDropDownList.MinimumSize = new Size(0, 24);
             homeSchoolYearDropDownList.Name = "homeSchoolYearDropDownList";
             homeSchoolYearDropDownList.NullText = "Années";
@@ -468,7 +469,7 @@ namespace SchoolManagement.UI
             // 
             // homeAddButton
             // 
-            homeAddButton.Location = new Point(259, 14);
+            homeAddButton.Location = new Point(302, 14);
             homeAddButton.Margin = new Padding(4);
             homeAddButton.Name = "homeAddButton";
             homeAddButton.Size = new Size(93, 36);
@@ -477,7 +478,7 @@ namespace SchoolManagement.UI
             // 
             // homeExportToExcelButton
             // 
-            homeExportToExcelButton.Location = new Point(360, 14);
+            homeExportToExcelButton.Location = new Point(403, 14);
             homeExportToExcelButton.Margin = new Padding(4);
             homeExportToExcelButton.Name = "homeExportToExcelButton";
             homeExportToExcelButton.Size = new Size(93, 36);
@@ -487,7 +488,7 @@ namespace SchoolManagement.UI
             // homeIconViewToggleButton
             // 
             homeIconViewToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
-            homeIconViewToggleButton.Location = new Point(501, 14);
+            homeIconViewToggleButton.Location = new Point(544, 14);
             homeIconViewToggleButton.Margin = new Padding(4);
             homeIconViewToggleButton.Name = "homeIconViewToggleButton";
             homeIconViewToggleButton.Size = new Size(32, 36);
@@ -496,7 +497,7 @@ namespace SchoolManagement.UI
             // homeListViewToggleButton
             // 
             homeListViewToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
-            homeListViewToggleButton.Location = new Point(536, 14);
+            homeListViewToggleButton.Location = new Point(579, 14);
             homeListViewToggleButton.Margin = new Padding(4);
             homeListViewToggleButton.Name = "homeListViewToggleButton";
             homeListViewToggleButton.Size = new Size(32, 36);
@@ -507,9 +508,9 @@ namespace SchoolManagement.UI
             CashFlowPage.Controls.Add(cashFlowMainPanel);
             CashFlowPage.Controls.Add(cashFlowNavigationPanel);
             CashFlowPage.ItemSize = new SizeF(122F, 28F);
-            CashFlowPage.Location = new Point(6, 36);
+            CashFlowPage.Location = new Point(10, 37);
             CashFlowPage.Name = "CashFlowPage";
-            CashFlowPage.Size = new Size(1536, 773);
+            CashFlowPage.Size = new Size(1527, 466);
             CashFlowPage.Text = "FLUX DE TRESORERIE";
             // 
             // cashFlowMainPanel
@@ -521,7 +522,7 @@ namespace SchoolManagement.UI
             cashFlowMainPanel.Location = new Point(0, 65);
             cashFlowMainPanel.Margin = new Padding(0);
             cashFlowMainPanel.Name = "cashFlowMainPanel";
-            cashFlowMainPanel.Size = new Size(1536, 708);
+            cashFlowMainPanel.Size = new Size(1527, 401);
             cashFlowMainPanel.TabIndex = 4;
             // 
             // cashFlowGridView
@@ -533,15 +534,15 @@ namespace SchoolManagement.UI
             // 
             cashFlowGridView.MasterTemplate.ViewDefinition = tableViewDefinition2;
             cashFlowGridView.Name = "cashFlowGridView";
-            cashFlowGridView.Size = new Size(1013, 708);
+            cashFlowGridView.Size = new Size(1004, 401);
             cashFlowGridView.TabIndex = 5;
             // 
             // cashFlowInfoRightPanel
             // 
             cashFlowInfoRightPanel.Dock = DockStyle.Right;
-            cashFlowInfoRightPanel.Location = new Point(1266, 0);
+            cashFlowInfoRightPanel.Location = new Point(1257, 0);
             cashFlowInfoRightPanel.Name = "cashFlowInfoRightPanel";
-            cashFlowInfoRightPanel.Size = new Size(270, 708);
+            cashFlowInfoRightPanel.Size = new Size(270, 401);
             cashFlowInfoRightPanel.TabIndex = 3;
             // 
             // cashFlowLeftListView
@@ -552,7 +553,7 @@ namespace SchoolManagement.UI
             cashFlowLeftListView.Location = new Point(0, 0);
             cashFlowLeftListView.Margin = new Padding(0);
             cashFlowLeftListView.Name = "cashFlowLeftListView";
-            cashFlowLeftListView.Size = new Size(253, 708);
+            cashFlowLeftListView.Size = new Size(253, 401);
             cashFlowLeftListView.TabIndex = 1;
             // 
             // cashFlowNavigationPanel
@@ -566,7 +567,7 @@ namespace SchoolManagement.UI
             cashFlowNavigationPanel.Location = new Point(0, 0);
             cashFlowNavigationPanel.Margin = new Padding(0);
             cashFlowNavigationPanel.Name = "cashFlowNavigationPanel";
-            cashFlowNavigationPanel.Size = new Size(1536, 65);
+            cashFlowNavigationPanel.Size = new Size(1527, 65);
             cashFlowNavigationPanel.TabIndex = 1;
             // 
             // cashFlowSchoolYearDropDownList
@@ -610,7 +611,7 @@ namespace SchoolManagement.UI
             cashFlowSearchPanel.Controls.Add(cashFlowSearchTextBox);
             cashFlowSearchPanel.Controls.Add(cashFlowEmptyPanel);
             cashFlowSearchPanel.Dock = DockStyle.Right;
-            cashFlowSearchPanel.Location = new Point(960, 0);
+            cashFlowSearchPanel.Location = new Point(951, 0);
             cashFlowSearchPanel.Margin = new Padding(4);
             cashFlowSearchPanel.Name = "cashFlowSearchPanel";
             cashFlowSearchPanel.Size = new Size(576, 65);
@@ -621,7 +622,7 @@ namespace SchoolManagement.UI
             cashFlowSearchTextBox.Location = new Point(2, 18);
             cashFlowSearchTextBox.Name = "cashFlowSearchTextBox";
             cashFlowSearchTextBox.NullText = "Rechercher par ....";
-            cashFlowSearchTextBox.Size = new Size(430, 30);
+            cashFlowSearchTextBox.Size = new Size(430, 20);
             cashFlowSearchTextBox.TabIndex = 0;
             // 
             // cashFlowEmptyPanel
@@ -641,7 +642,7 @@ namespace SchoolManagement.UI
             TimeTablePage.ItemSize = new SizeF(111F, 28F);
             TimeTablePage.Location = new Point(10, 37);
             TimeTablePage.Name = "TimeTablePage";
-            TimeTablePage.Size = new Size(1527, 767);
+            TimeTablePage.Size = new Size(1527, 466);
             TimeTablePage.Text = "EMPLOI DU TEMPS";
             // 
             // timeTableMainContainer
@@ -652,7 +653,7 @@ namespace SchoolManagement.UI
             timeTableMainContainer.Location = new Point(0, 65);
             timeTableMainContainer.Margin = new Padding(0);
             timeTableMainContainer.Name = "timeTableMainContainer";
-            timeTableMainContainer.Size = new Size(1527, 702);
+            timeTableMainContainer.Size = new Size(1527, 401);
             timeTableMainContainer.TabIndex = 5;
             // 
             // timeTableLeftPanel
@@ -662,7 +663,7 @@ namespace SchoolManagement.UI
             timeTableLeftPanel.Dock = DockStyle.Left;
             timeTableLeftPanel.Location = new Point(0, 0);
             timeTableLeftPanel.Name = "timeTableLeftPanel";
-            timeTableLeftPanel.Size = new Size(287, 702);
+            timeTableLeftPanel.Size = new Size(287, 401);
             timeTableLeftPanel.TabIndex = 2;
             // 
             // timeTableLeftListView
@@ -673,7 +674,7 @@ namespace SchoolManagement.UI
             timeTableLeftListView.Location = new Point(0, 24);
             timeTableLeftListView.Margin = new Padding(0);
             timeTableLeftListView.Name = "timeTableLeftListView";
-            timeTableLeftListView.Size = new Size(287, 678);
+            timeTableLeftListView.Size = new Size(287, 377);
             timeTableLeftListView.TabIndex = 2;
             // 
             // timeTableSearchDropDownList
@@ -762,9 +763,9 @@ namespace SchoolManagement.UI
             DisciplinePage.Controls.Add(disciplineMainPanel);
             DisciplinePage.Controls.Add(disciplineNavigationPanel);
             DisciplinePage.ItemSize = new SizeF(72F, 28F);
-            DisciplinePage.Location = new Point(6, 36);
+            DisciplinePage.Location = new Point(10, 37);
             DisciplinePage.Name = "DisciplinePage";
-            DisciplinePage.Size = new Size(1536, 773);
+            DisciplinePage.Size = new Size(1527, 466);
             DisciplinePage.Text = "DISCIPLINE";
             // 
             // disciplineMainPanel
@@ -775,7 +776,7 @@ namespace SchoolManagement.UI
             disciplineMainPanel.Location = new Point(0, 65);
             disciplineMainPanel.Margin = new Padding(0);
             disciplineMainPanel.Name = "disciplineMainPanel";
-            disciplineMainPanel.Size = new Size(1536, 708);
+            disciplineMainPanel.Size = new Size(1527, 401);
             disciplineMainPanel.TabIndex = 5;
             // 
             // disciplineGridView
@@ -787,7 +788,7 @@ namespace SchoolManagement.UI
             // 
             disciplineGridView.MasterTemplate.ViewDefinition = tableViewDefinition3;
             disciplineGridView.Name = "disciplineGridView";
-            disciplineGridView.Size = new Size(1249, 708);
+            disciplineGridView.Size = new Size(1240, 401);
             disciplineGridView.TabIndex = 5;
             // 
             // disciplineLeftPanel
@@ -797,7 +798,7 @@ namespace SchoolManagement.UI
             disciplineLeftPanel.Dock = DockStyle.Left;
             disciplineLeftPanel.Location = new Point(0, 0);
             disciplineLeftPanel.Name = "disciplineLeftPanel";
-            disciplineLeftPanel.Size = new Size(287, 708);
+            disciplineLeftPanel.Size = new Size(287, 401);
             disciplineLeftPanel.TabIndex = 2;
             // 
             // disciplineLeftListView
@@ -808,7 +809,7 @@ namespace SchoolManagement.UI
             disciplineLeftListView.Location = new Point(0, 24);
             disciplineLeftListView.Margin = new Padding(0);
             disciplineLeftListView.Name = "disciplineLeftListView";
-            disciplineLeftListView.Size = new Size(287, 684);
+            disciplineLeftListView.Size = new Size(287, 377);
             disciplineLeftListView.TabIndex = 81;
             // 
             // disciplineSearchDropDownList
@@ -833,7 +834,7 @@ namespace SchoolManagement.UI
             disciplineNavigationPanel.Location = new Point(0, 0);
             disciplineNavigationPanel.Margin = new Padding(0);
             disciplineNavigationPanel.Name = "disciplineNavigationPanel";
-            disciplineNavigationPanel.Size = new Size(1536, 65);
+            disciplineNavigationPanel.Size = new Size(1527, 65);
             disciplineNavigationPanel.TabIndex = 2;
             // 
             // disciplineSchoolYearDropDownList
@@ -856,7 +857,7 @@ namespace SchoolManagement.UI
             // 
             // disciplineAddButton
             // 
-            disciplineAddButton.Location = new Point(259, 14);
+            disciplineAddButton.Location = new Point(291, 14);
             disciplineAddButton.Margin = new Padding(4);
             disciplineAddButton.Name = "disciplineAddButton";
             disciplineAddButton.Size = new Size(93, 32);
@@ -865,7 +866,7 @@ namespace SchoolManagement.UI
             // 
             // disciplineExportToExcelButton
             // 
-            disciplineExportToExcelButton.Location = new Point(360, 14);
+            disciplineExportToExcelButton.Location = new Point(392, 14);
             disciplineExportToExcelButton.Margin = new Padding(4);
             disciplineExportToExcelButton.Name = "disciplineExportToExcelButton";
             disciplineExportToExcelButton.Size = new Size(93, 32);
@@ -877,7 +878,7 @@ namespace SchoolManagement.UI
             disciplineSearchPanel.Controls.Add(disciplineSearchTextBox);
             disciplineSearchPanel.Controls.Add(disciplineEmptyPanel);
             disciplineSearchPanel.Dock = DockStyle.Right;
-            disciplineSearchPanel.Location = new Point(960, 0);
+            disciplineSearchPanel.Location = new Point(951, 0);
             disciplineSearchPanel.Margin = new Padding(4);
             disciplineSearchPanel.Name = "disciplineSearchPanel";
             disciplineSearchPanel.Size = new Size(576, 65);
@@ -888,7 +889,7 @@ namespace SchoolManagement.UI
             disciplineSearchTextBox.Location = new Point(2, 18);
             disciplineSearchTextBox.Name = "disciplineSearchTextBox";
             disciplineSearchTextBox.NullText = "Rechercher par ....";
-            disciplineSearchTextBox.Size = new Size(430, 30);
+            disciplineSearchTextBox.Size = new Size(430, 20);
             disciplineSearchTextBox.TabIndex = 0;
             // 
             // disciplineEmptyPanel
@@ -906,9 +907,9 @@ namespace SchoolManagement.UI
             StudentNotePage.Controls.Add(studentNoteMainPanel);
             StudentNotePage.Controls.Add(studentNoteNavigationPanel);
             StudentNotePage.ItemSize = new SizeF(110F, 28F);
-            StudentNotePage.Location = new Point(6, 36);
+            StudentNotePage.Location = new Point(10, 37);
             StudentNotePage.Name = "StudentNotePage";
-            StudentNotePage.Size = new Size(1536, 775);
+            StudentNotePage.Size = new Size(1527, 466);
             StudentNotePage.Text = "NOTES SCOLAIRES";
             // 
             // studentNoteMainPanel
@@ -920,7 +921,7 @@ namespace SchoolManagement.UI
             studentNoteMainPanel.Location = new Point(0, 65);
             studentNoteMainPanel.Margin = new Padding(0);
             studentNoteMainPanel.Name = "studentNoteMainPanel";
-            studentNoteMainPanel.Size = new Size(1536, 710);
+            studentNoteMainPanel.Size = new Size(1527, 401);
             studentNoteMainPanel.TabIndex = 4;
             // 
             // studentNoteGridView
@@ -933,7 +934,7 @@ namespace SchoolManagement.UI
             // 
             studentNoteGridView.MasterTemplate.ViewDefinition = tableViewDefinition4;
             studentNoteGridView.Name = "studentNoteGridView";
-            studentNoteGridView.Size = new Size(1064, 710);
+            studentNoteGridView.Size = new Size(1055, 401);
             studentNoteGridView.TabIndex = 7;
             // 
             // studentNoteLeftListView
@@ -945,16 +946,16 @@ namespace SchoolManagement.UI
             studentNoteLeftListView.Location = new Point(0, 0);
             studentNoteLeftListView.Margin = new Padding(0);
             studentNoteLeftListView.Name = "studentNoteLeftListView";
-            studentNoteLeftListView.Size = new Size(253, 710);
+            studentNoteLeftListView.Size = new Size(253, 401);
             studentNoteLeftListView.TabIndex = 6;
             // 
             // studentNoteInfoRightPanel
             // 
             studentNoteInfoRightPanel.Dock = DockStyle.Right;
-            studentNoteInfoRightPanel.Location = new Point(1317, 0);
+            studentNoteInfoRightPanel.Location = new Point(1308, 0);
             studentNoteInfoRightPanel.Margin = new Padding(4);
             studentNoteInfoRightPanel.Name = "studentNoteInfoRightPanel";
-            studentNoteInfoRightPanel.Size = new Size(219, 710);
+            studentNoteInfoRightPanel.Size = new Size(219, 401);
             studentNoteInfoRightPanel.TabIndex = 3;
             // 
             // studentNoteNavigationPanel
@@ -974,7 +975,7 @@ namespace SchoolManagement.UI
             studentNoteNavigationPanel.Location = new Point(0, 0);
             studentNoteNavigationPanel.Margin = new Padding(0);
             studentNoteNavigationPanel.Name = "studentNoteNavigationPanel";
-            studentNoteNavigationPanel.Size = new Size(1536, 65);
+            studentNoteNavigationPanel.Size = new Size(1527, 65);
             studentNoteNavigationPanel.TabIndex = 1;
             // 
             // studentNoteGroupDropDownList
@@ -1100,7 +1101,7 @@ namespace SchoolManagement.UI
             studentNoteSearchPanel.Controls.Add(studentNoteSearchTextBox);
             studentNoteSearchPanel.Controls.Add(studentNoteEmptyPanel);
             studentNoteSearchPanel.Dock = DockStyle.Right;
-            studentNoteSearchPanel.Location = new Point(1082, 0);
+            studentNoteSearchPanel.Location = new Point(1073, 0);
             studentNoteSearchPanel.Margin = new Padding(4);
             studentNoteSearchPanel.Name = "studentNoteSearchPanel";
             studentNoteSearchPanel.Size = new Size(454, 65);
@@ -1111,7 +1112,7 @@ namespace SchoolManagement.UI
             studentNoteSearchTextBox.Location = new Point(2, 18);
             studentNoteSearchTextBox.Name = "studentNoteSearchTextBox";
             studentNoteSearchTextBox.NullText = "Rechercher par ....";
-            studentNoteSearchTextBox.Size = new Size(430, 30);
+            studentNoteSearchTextBox.Size = new Size(430, 20);
             studentNoteSearchTextBox.TabIndex = 0;
             // 
             // studentNoteEmptyPanel
@@ -1530,7 +1531,7 @@ namespace SchoolManagement.UI
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1548, 785);
+            ClientSize = new Size(1548, 514);
             Controls.Add(mainPageView);
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
@@ -1823,5 +1824,6 @@ namespace SchoolManagement.UI
         private RadListView disciplineLeftListView;
         private RadDropDownList studentNoteGroupDropDownList;
         private RadLabel studentNoteGroupLabel;
+        private Telerik.WinControls.Themes.Windows11DarkTheme windows11DarkTheme1;
     }
 }

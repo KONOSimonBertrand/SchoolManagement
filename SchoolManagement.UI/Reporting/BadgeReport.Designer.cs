@@ -79,7 +79,7 @@ namespace SchoolManagement.UI.Reporting
             this.studentPictureBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(2.4D), Telerik.Reporting.Drawing.Unit.Cm(3.2D));
             this.studentPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Stretch;
             // 
-            // logoPictureBox
+            // headerPictureBox
             // 
             this.logoPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(13.7D), Telerik.Reporting.Drawing.Unit.Cm(0.05D));
             this.logoPictureBox.MimeType = "image/png";

@@ -192,7 +192,7 @@ namespace Primary.SchoolApp
                 RadMenuItem showFolder = new(Language.labelShowDiscipline);
                 editMenu.Image = AppUtilities.GetImage("Edit");
                 deleteMenu.Image = AppUtilities.GetImage("Delete");
-                showFolder.Image = AppUtilities.GetImage("View");
+                showFolder.Image = AppUtilities.GetImage("Folder");
                 editMenu.Enabled = Program.UserConnected.Modules.Any(x=>x.ModuleId==7 && x.AllowUpdate==true);
                 deleteMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowDelete == true);
                 DisciplineAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowCreate == true);

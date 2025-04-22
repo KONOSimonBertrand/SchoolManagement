@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Primary.SchoolApp.Reporting
 {
-    internal class PrimaryTermReportCardReport : SchoolManagement.UI.Reporting.PrimaryTermReportCardReport
+    internal class PrimaryTermReportCardReport : SchoolManagement.UI.Reporting.PrimaryTermReport
     {
         public PrimaryTermReportCardReport(TermReportCard reportCard)
         {
@@ -30,6 +30,7 @@ namespace Primary.SchoolApp.Reporting
             FirstNoteLabel.Value = headTerms.GetValueOrDefault("FirstMonth");
             SecondNoteLabel.Value = headTerms.GetValueOrDefault("SecondMonth");
             ThirdNoteLabel.Value = headTerms.GetValueOrDefault("ThirdMonth");
+            FinalNoteLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM" : "TERM";
             this.AverageFirstTermLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM 1" : "TERM 1";
             this.AverageSecondTermLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM 2" : "TERM 2";
             this.AverageThirdTermLabel.Value = reportCard.HeadSection.Language == "FR" ? "TRIM 3" : "TERM 3";
@@ -41,7 +42,7 @@ namespace Primary.SchoolApp.Reporting
                 BornTextBox.Value = bornLabel + reportCard.HeadSection.Student.BirthDate.ToShortDateString() + " à " + reportCard.HeadSection.Student.BirthPlace;
                 SubjectLabel.Value = "Discipline".ToUpper();
                 NotedOnLabel.Value = "Max";
-                FinalNoteLabel.Value = "TRIM";
+               
                 CotationLabel.Value = "Cotation";
                 ObservationLabel.Value = "Observation";
                 SubjectGroupTextBox.Value = "=FrenchName";

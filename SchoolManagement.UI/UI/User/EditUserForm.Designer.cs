@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
             emailSeparator = new Telerik.WinControls.UI.RadSeparator();
             passwordSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -48,6 +49,7 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)emailSeparator).BeginInit();
@@ -69,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -94,7 +97,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(8, 10, 8, 10);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(761, 206);
+            editPanel.Size = new Size(785, 206);
             editPanel.TabIndex = 78;
             // 
             // emailSeparator
@@ -145,7 +148,6 @@
             // employeeDropDownList
             // 
             employeeDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            employeeDropDownList.DropDownAnimationEnabled = true;
             employeeDropDownList.DropDownHeight = 389;
             employeeDropDownList.ItemHeight = 45;
             employeeDropDownList.Location = new Point(2, 30);
@@ -285,6 +287,10 @@
             saveButton.TabIndex = 7;
             saveButton.Text = "Enregistrer";
             // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
             // EditUserForm
             // 
             AcceptButton = saveButton;
@@ -292,7 +298,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(761, 302);
+            ClientSize = new Size(785, 295);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -321,6 +327,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -347,5 +354,6 @@
         private Telerik.WinControls.UI.RadSeparator emailSeparator;
         private Telerik.WinControls.UI.RadTextBox emailTextBox;
         private Telerik.WinControls.UI.RadLabel emailLabel;
+        private ErrorProvider errorProvider;
     }
 }

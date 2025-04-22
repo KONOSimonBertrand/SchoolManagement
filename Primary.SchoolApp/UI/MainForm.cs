@@ -318,6 +318,7 @@ namespace Primary.SchoolApp
         private void ThemeResolutionService_ApplicationThemeChanged(object sender, ThemeChangedEventArgs args)
         {
             InitAppointmentBackground();
+           
         }
         // Affichage de l'IU pricipale
         private void MainForm_Shown(object sender, EventArgs e)
@@ -666,23 +667,23 @@ namespace Primary.SchoolApp
                 RadMenuItem menuGenerateSchoolBadge = new(Language.LabelGenerateBadge);
                 menuEdit.Image = AppUtilities.GetImage("Edit");
                 menuPrint.Image = AppUtilities.GetImage("Printer");
-                menuAddPicture.Image = AppUtilities.GetImage("Add");
-                menuAddPayment.Image = AppUtilities.GetImage("Add");
-                menuShowPayments.Image = AppUtilities.GetImage("View");
+                menuAddPicture.Image = AppUtilities.GetImage("Image");
+                menuAddPayment.Image = AppUtilities.GetImage("Payment");
+                menuShowPayments.Image = AppUtilities.GetImage("Folder");
                 menuPrintPaymentSummary.Image = AppUtilities.GetImage("Printer");
-                menuShowDiscounts.Image = AppUtilities.GetImage("View");
+                menuShowDiscounts.Image = AppUtilities.GetImage("Folder");
                 menuAddDiscount.Image = AppUtilities.GetImage("Add");
-                menuShowSubscriptions.Image = AppUtilities.GetImage("View");
+                menuShowSubscriptions.Image = AppUtilities.GetImage("Folder");
                 menuAddSubscription.Image = AppUtilities.GetImage("Add");
                 menuAddDiscipline.Image = AppUtilities.GetImage("Add");
-                menuShowDisciplines.Image = AppUtilities.GetImage("View");
-                menuAddContact.Image = AppUtilities.GetImage("Add");
-                menuShowContacts.Image = AppUtilities.GetImage("View");
+                menuShowDisciplines.Image = AppUtilities.GetImage("Folder");
+                menuAddContact.Image = AppUtilities.GetImage("Contact");
+                menuShowContacts.Image = AppUtilities.GetImage("Folder");
                 menuAddHealthInfo.Image = AppUtilities.GetImage("Add");
-                menuShowMedicalFile.Image = AppUtilities.GetImage("View");
+                menuShowMedicalFile.Image = AppUtilities.GetImage("Folder");
                 menuPrintCertificate.Image = AppUtilities.GetImage("Printer");
                 menuChangeStudentRoom.Image= AppUtilities.GetImage("Edit");
-                menuGenerateSchoolBadge.Image = AppUtilities.GetImage("View");
+                menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
                 menuSchoolFee.Items.Add(menuAddPayment);
                 menuSchoolFee.Items.Add(menuShowPayments);
                 menuSchoolFee.Items.Add(menuPrintPaymentSummary);
@@ -1008,23 +1009,23 @@ namespace Primary.SchoolApp
             RadMenuItem menuGenerateSchoolBadge = new(Language.LabelGenerateBadge);
             menuEdit.Image = AppUtilities.GetImage("Edit");
             menuPrint.Image = AppUtilities.GetImage("Printer");
-            menuAddPicture.Image = AppUtilities.GetImage("Add");
-            menuAddPayment.Image = AppUtilities.GetImage("Add");
-            menuShowPayments.Image = AppUtilities.GetImage("View");
+            menuAddPicture.Image = AppUtilities.GetImage("Image");
+            menuAddPayment.Image = AppUtilities.GetImage("Payment");
+            menuShowPayments.Image = AppUtilities.GetImage("Folder");
             menuAddDiscount.Image = AppUtilities.GetImage("Add");
-            menuShowDiscounts.Image = AppUtilities.GetImage("View");
+            menuShowDiscounts.Image = AppUtilities.GetImage("Folder");
             menuPrintPaymentSummary.Image = AppUtilities.GetImage("Printer");
-            menuShowSubscriptions.Image = AppUtilities.GetImage("View");
+            menuShowSubscriptions.Image = AppUtilities.GetImage("Folder");
             menuAddSubscription.Image = AppUtilities.GetImage("Add");
             menuAddDiscipline.Image = AppUtilities.GetImage("Add");
-            menuShowDisciplines.Image = AppUtilities.GetImage("View");
-            menuAddContact.Image = AppUtilities.GetImage("Add");
-            menuShowContacts.Image = AppUtilities.GetImage("View");
+            menuShowDisciplines.Image = AppUtilities.GetImage("Folder");
+            menuAddContact.Image = AppUtilities.GetImage("Contact");
+            menuShowContacts.Image = AppUtilities.GetImage("Folder");
             menuAddHealthInfo.Image = AppUtilities.GetImage("Add");
-            menuShowMedicalFile.Image = AppUtilities.GetImage("View");
+            menuShowMedicalFile.Image = AppUtilities.GetImage("Folder");
             menuPrintCertificate.Image = AppUtilities.GetImage("Printer");
             menuChangeStudentRoom.Image= AppUtilities.GetImage("Edit");
-            menuGenerateSchoolBadge.Image = AppUtilities.GetImage("View");
+            menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
             menuSchoolFee.Items.Add(menuAddPayment);
             menuSchoolFee.Items.Add(menuShowPayments);
             menuSchoolFee.Items.Add(menuPrintPaymentSummary);
@@ -1565,7 +1566,11 @@ namespace Primary.SchoolApp
                 }
 
             }
-            
+
+            studentEnrollingInfo.ContactsLabel.Image = AppUtilities.GetImage("Folder"); 
+            studentEnrollingInfo.DisciplineFileLabel.Image = AppUtilities.GetImage("Folder");
+            studentEnrollingInfo.HealthFileLabel.Image = AppUtilities.GetImage("Folder");
+            studentEnrollingInfo.SubscriptionsLabel.Image = AppUtilities.GetImage("Folder");
 
             studentEnrollingInfo.RoomTextBox.Text = getRoom.Result.Room.Name;
             studentEnrollingInfo.ContactsLabel.Text = $"{Language.labelContacts}: {getContacts.Result.Count}";

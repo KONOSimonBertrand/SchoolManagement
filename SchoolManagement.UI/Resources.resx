@@ -190,27 +190,6 @@
   <data name="delete_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\delete_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\edit_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\edit_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\edit_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="edit_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\edit_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="excel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="excel_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\excel_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -361,18 +340,6 @@
   <data name="user_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\user_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="view_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\view_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\view_blue_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\view_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="view_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\view_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="watch_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\watch_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -414,5 +381,185 @@
   </data>
   <data name="import_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\import_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="theme_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\theme_dark.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="black_no_borders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\black_no_borders.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grey_no_borders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\grey_no_borders.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="about_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\about_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="user_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\user_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="watch_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\watch_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="printer_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\printer_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pencil_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\pencil_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_image_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_image_White.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="create_file_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\create_file_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lock_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\lock_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="unlock_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\unlock_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="close_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\close_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="delete_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\delete_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="excel_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\excel_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="duplicate_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\duplicate_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hide_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\hide_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undo_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undo_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undo_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undo_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undo_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\undo_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cancel_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cancel_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cancel_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cancel_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cancel_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\cancel_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="search_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="search_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="search_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="search_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="search_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\search_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="check_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\check_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_payment_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_payment_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_payment_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_payment_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_payment_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_payment_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_payment_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_payment_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_payment_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_payment_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_contact_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_contact_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_contact_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_contact_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_contact_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_contact_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_contact_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_contact_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_contact_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_contact_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="add_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\add_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="import_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\import_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="folder_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\folder_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="folder_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\folder_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="folder_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\folder_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="folder_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\folder_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="folder_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\folder_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="id_card_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\id_card_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="id_card_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\id_card_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="id_card_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\id_card_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="id_card_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\id_card_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="id_card_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\id_card_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="floppy_disk_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\floppy_disk_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

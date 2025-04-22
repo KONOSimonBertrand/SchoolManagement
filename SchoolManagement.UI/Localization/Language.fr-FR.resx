@@ -1350,8 +1350,8 @@
   <data name="LabelHighSchoolModel" xml:space="preserve">
     <value>Modèle du secondaire</value>
   </data>
-  <data name="LabelKindergartenModel" xml:space="preserve">
-    <value>Modèle de la maternelle</value>
+  <data name="LabelKindergartenModelWithMark" xml:space="preserve">
+    <value>Modèle de la maternelle avec notes</value>
   </data>
   <data name="LabelFoundationModel" xml:space="preserve">
     <value>Modèle de base</value>
@@ -1517,5 +1517,14 @@
   </data>
   <data name="LabelFileInformation" xml:space="preserve">
     <value>Informations sur le fichier</value>
+  </data>
+  <data name="LabelDefaultModel" xml:space="preserve">
+    <value>Modèle par défaut</value>
+  </data>
+  <data name="LabelKindergartenModelWithoutMark" xml:space="preserve">
+    <value>Modèle de la maternelle sans notes</value>
+  </data>
+  <data name="LabelBadFormatExample" xml:space="preserve">
+    <value>Format incorrect! Exemple: 2019-2020</value>
   </data>
 </root>

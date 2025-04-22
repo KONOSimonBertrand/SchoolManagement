@@ -59,7 +59,31 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.amountTextBox.TextChanging += AmountTextBox_TextChanging;
+            this.ThemeNameChanged += EditTuitionPaymentForm_ThemeNameChanged;
         }
+
+        private void EditTuitionPaymentForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.cashFlowTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.paymentMeanDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.unPaidTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.costTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.transactionIdTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.paidTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
+        }
+
         private void AmountTextBox_TextChanging(object sender, TextChangingEventArgs e)
         {
             e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
@@ -74,7 +98,7 @@ namespace SchoolManagement.UI
             
             studentDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 40);
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
+            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
@@ -154,34 +178,27 @@ namespace SchoolManagement.UI
 
             this.dateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.dateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.studentDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.studentDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.studentDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
 
             this.classTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.doneByTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.doneByTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.cashFlowTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.cashFlowTypeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.cashFlowTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.cashFlowTypeDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.paymentMeanDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.paymentMeanDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.paymentMeanDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.paymentMeanDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.cashFlowTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -189,7 +206,6 @@ namespace SchoolManagement.UI
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.transactionDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.transactionDateTimePicker.CustomFormat = "d/MM/yyyy";
@@ -198,24 +214,19 @@ namespace SchoolManagement.UI
 
             this.unPaidTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.unPaidTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.unPaidTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.costTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.costTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.costTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.discountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.discountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.paidTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.paidTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.paidTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             this.transactionIdTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.transactionIdTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.transactionIdTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
 
@@ -269,7 +280,6 @@ namespace SchoolManagement.UI
             this.transactionIdSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.studentDropDownList.DisplayMember = "FullNameWithIdNumber";
             this.studentDropDownList.ValueMember = "Id";

@@ -135,6 +135,30 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
+
+        public async Task<List<EvaluationComment>> GetCommentsByClassroomAsync(int roomId, int evaluationId,int bookId, int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" SELECT * FROM EvaluationComments A  
+                              INNER JOIN EvaluationSessions B ON A.EvaluationId=B.Id
+                              INNER JOIN Students C ON A.StudentId=C.Id  
+                              INNER JOIN SchoolYears D ON A.SchoolYearId=D.Id
+                              WHERE A.EvaluationId=@evaluationId AND A.SchoolYearId=@schoolYearId AND BookId=@bookId 
+                              AND A.StudentId IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId);";
+            var result = connection.Query<EvaluationComment, EvaluationSession, Student, SchoolYear, EvaluationComment>(query
+               ,
+               (comment, evaluation, student, schoolYear) =>
+               {
+                   comment.Evaluation = evaluation;
+                   comment.Student = student;
+                   comment.SchoolYear = schoolYear;
+                   return comment;
+               }
+               , new { roomId, evaluationId,bookId, schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+
         public async Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int schoolYearId)
         {
             var connection = dbConnectionFactory.CreateConnection();
@@ -153,6 +177,29 @@ namespace SchoolManagement.Infrastructure.Repositories
                    return comment;
                }
                , new { schoolYearId }).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+
+        public async Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int roomId,  int bookId, int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" SELECT * FROM EvaluationComments A  
+                              INNER JOIN EvaluationSessions B ON A.EvaluationId=B.Id
+                              INNER JOIN Students C ON A.StudentId=C.Id  
+                              INNER JOIN SchoolYears D ON A.SchoolYearId=D.Id
+                              WHERE A.SchoolYearId=@schoolYearId AND BookId=@bookId 
+                              AND A.StudentId IN (SELECT StudentId FROM StudentsRooms WHERE RoomId=@roomId AND SchoolYearId=@schoolYearId);";
+            var result = connection.Query<EvaluationComment, EvaluationSession, Student, SchoolYear, EvaluationComment>(query
+               ,
+               (comment, evaluation, student, schoolYear) =>
+               {
+                   comment.Evaluation = evaluation;
+                   comment.Student = student;
+                   comment.SchoolYear = schoolYear;
+                   return comment;
+               }
+               , new { roomId,bookId, schoolYearId }).ToList();
             await Task.Delay(0);
             return result;
         }

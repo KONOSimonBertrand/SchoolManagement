@@ -84,10 +84,6 @@
             // 
             labelSubject.Location = new Point(10, 5);
             labelSubject.MinimumSize = new Size(0, 30);
-            // 
-            // 
-            // 
-            labelSubject.RootElement.MinSize = new Size(0, 30);
             labelSubject.Size = new Size(37, 30);
             labelSubject.Text = "Cours:";
             // 
@@ -95,10 +91,6 @@
             // 
             labelLocation.Location = new Point(10, 73);
             labelLocation.MinimumSize = new Size(0, 30);
-            // 
-            // 
-            // 
-            labelLocation.RootElement.MinSize = new Size(0, 30);
             labelLocation.Size = new Size(63, 30);
             labelLocation.Text = "Enseignant:";
             // 
@@ -106,10 +98,6 @@
             // 
             labelBackground.Location = new Point(10, 141);
             labelBackground.MinimumSize = new Size(0, 40);
-            // 
-            // 
-            // 
-            labelBackground.RootElement.MinSize = new Size(0, 40);
             labelBackground.Size = new Size(38, 40);
             labelBackground.Text = "Statut:";
             // 
@@ -191,10 +179,6 @@
             // 
             labelStatus.Location = new Point(228, 141);
             labelStatus.MinimumSize = new Size(0, 40);
-            // 
-            // 
-            // 
-            labelStatus.RootElement.MinSize = new Size(0, 40);
             labelStatus.Size = new Size(30, 40);
             labelStatus.Text = "Jour:";
             // 
@@ -318,7 +302,6 @@
             // 
             // daysDropDownList
             // 
-            daysDropDownList.DropDownAnimationEnabled = true;
             daysDropDownList.Location = new Point(228, 171);
             daysDropDownList.Name = "daysDropDownList";
             // 
@@ -333,7 +316,6 @@
             // 
             // teacherDropDownList
             // 
-            teacherDropDownList.DropDownAnimationEnabled = true;
             teacherDropDownList.Location = new Point(10, 103);
             teacherDropDownList.Name = "teacherDropDownList";
             // 
@@ -348,7 +330,6 @@
             // 
             // subjectDropDownList
             // 
-            subjectDropDownList.DropDownAnimationEnabled = true;
             subjectDropDownList.Location = new Point(10, 35);
             subjectDropDownList.Name = "subjectDropDownList";
             // 
@@ -375,7 +356,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(497, 513);
+            ClientSize = new Size(509, 501);
             Controls.Add(errorLabel);
             Controls.Add(teacherTimeOut);
             Controls.Add(teacherTimeIn);

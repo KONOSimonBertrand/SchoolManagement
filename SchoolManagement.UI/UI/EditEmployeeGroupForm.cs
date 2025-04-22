@@ -28,6 +28,17 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditEmployeeGroupForm_ThemeNameChanged;
+        }
+
+        private void EditEmployeeGroupForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void InitComponent()
@@ -39,7 +50,6 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -53,7 +63,6 @@ namespace SchoolManagement.UI
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.errorLabel.ForeColor = Color.Red;
         }
 

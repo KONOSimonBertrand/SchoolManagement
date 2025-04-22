@@ -65,11 +65,9 @@ namespace SchoolManagement.UI
 
             this.coefTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.coefTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.coefTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteOnTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteOnTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteOnTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
@@ -78,19 +76,16 @@ namespace SchoolManagement.UI
 
             this.groupDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.groupDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.groupDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.groupDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.subjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.subjectDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.subjectDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.subjectDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.sectionDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.sectionDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.sectionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.sectionDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.sectionDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
@@ -119,7 +114,6 @@ namespace SchoolManagement.UI
             this.sectionSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             addGroupButton.RootElement.ToolTipText = Language.messageClickToAddGroup;
             addGroupButton.Image = Resources.plus;
@@ -148,8 +142,22 @@ namespace SchoolManagement.UI
             this.coefTextBox.TextChanging += new TextChangingEventHandler(TextBox_Changing);
             subjectDropDownList.SelectedIndexChanged += SubjectDropDownList_SelectedIndexChanged;
             groupDropDownList.SelectedIndexChanged += GroupDropDownList_SelectedIndexChanged;
-
+            this.ThemeNameChanged += EditClassSubjectForm_ThemeNameChanged;
         }
+
+        private void EditClassSubjectForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.coefTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.noteOnTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sectionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            }
+        }
+
         private void TextBox_Changing(object sender, TextChangingEventArgs e)
         {
             e.Cancel = !ViewUtilities.IsNumber(e.NewValue);

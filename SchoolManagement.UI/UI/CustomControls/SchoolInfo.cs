@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.UI.Localization;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -51,21 +52,21 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.editButton.Image = Resources.edit;
+            this.editButton.Image = ViewUtilities.GetImage("Edit");
             this.editButton.RootElement.ToolTipText = Language.messageClickToEdit;
 
             this.closeButton.RootElement.EnableElementShadow = false;
             this.closeButton.ButtonElement.Padding = new Padding(0);
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.closeButton.Image = Resources.not_clean;
+            this.closeButton.Image = ViewUtilities.GetImage("Close");
             this.closeButton.RootElement.ToolTipText = Language.messageClickToClose;
 
             this.serialKeyButton.RootElement.EnableElementShadow = false;
             this.serialKeyButton.ButtonElement.Padding = new Padding(0);
             this.serialKeyButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.serialKeyButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.serialKeyButton.Image = Resources.edit;
+            this.serialKeyButton.Image = ViewUtilities.GetImage("Edit");
             this.serialKeyButton.RootElement.ToolTipText = Language.messageClickToEdit;
 
             closeButton.ImageAlignment = ContentAlignment.MiddleCenter;

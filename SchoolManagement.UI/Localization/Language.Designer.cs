@@ -376,6 +376,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Incorrect format! Example: 2019-2020.
+        /// </summary>
+        public static string LabelBadFormatExample {
+            get {
+                return ResourceManager.GetString("LabelBadFormatExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Biannual lisence.
         /// </summary>
         public static string LabelBiannualLisence {
@@ -678,6 +687,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelDay {
             get {
                 return ResourceManager.GetString("labelDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Default model.
+        /// </summary>
+        public static string LabelDefaultModel {
+            get {
+                return ResourceManager.GetString("LabelDefaultModel", resourceCulture);
             }
         }
         
@@ -1600,11 +1618,20 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Kindergarten model.
+        ///   Recherche une chaîne localisée semblable à Kindergarten model with mark.
         /// </summary>
-        public static string LabelKindergartenModel {
+        public static string LabelKindergartenModelWithMark {
             get {
-                return ResourceManager.GetString("LabelKindergartenModel", resourceCulture);
+                return ResourceManager.GetString("LabelKindergartenModelWithMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Kindergarten model without marks.
+        /// </summary>
+        public static string LabelKindergartenModelWithoutMark {
+            get {
+                return ResourceManager.GetString("LabelKindergartenModelWithoutMark", resourceCulture);
             }
         }
         

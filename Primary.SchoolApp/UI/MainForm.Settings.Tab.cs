@@ -656,9 +656,9 @@ namespace Primary.SchoolApp
                 var defautModule = modules.FirstOrDefault(m => m.IsDefault == true);
                 userInfo.DefaultModuleTextBox.Text = defautModule != null ? defautModule.Module.Name : string.Empty;
                 userInfo.ModuleCount.Text = $"{Language.labelModules}: {modules.Count.ToString()}/ {Program.ModuleList.Count}";
-                userInfo.ModuleCount.Image = Utilities.AppUtilities.GetImage("View");
+                userInfo.ModuleCount.Image = Utilities.AppUtilities.GetImage("Folder");
                 userInfo.RoomCount.Text = $"{Language.labelRooms}: {rooms.Count.ToString()}/{Program.SchoolRoomList.Count}";
-                userInfo.RoomCount.Image = Utilities.AppUtilities.GetImage("View");
+                userInfo.RoomCount.Image = Utilities.AppUtilities.GetImage("Folder");
             }
         }
         // affiche les info d'un objet de discipline 
@@ -2326,7 +2326,7 @@ namespace Primary.SchoolApp
                         SetVisibleSelectedSettingPageUserControl(schoolClassInfo);
                         schoolClassInfo.CloseButton.Image = AppUtilities.GetImage("Close");
                         schoolClassInfo.EditButton.Image = AppUtilities.GetImage("Edit");
-                        schoolClassInfo.SubjectsCountLabel.Image = AppUtilities.GetImage("View");
+                        schoolClassInfo.SubjectsCountLabel.Image = AppUtilities.GetImage("Folder");
                         break;
                     case 4:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddRoom;
@@ -2343,7 +2343,7 @@ namespace Primary.SchoolApp
                         SetVisibleSelectedSettingPageUserControl(schoolRoomInfo);
                         schoolRoomInfo.CloseButton.Image = AppUtilities.GetImage("Close");
                         schoolRoomInfo.EditButton.Image = AppUtilities.GetImage("Edit");
-                        schoolRoomInfo.StudentsCountLabel.Image = AppUtilities.GetImage("View");
+                        schoolRoomInfo.StudentsCountLabel.Image = AppUtilities.GetImage("Folder");
                         break;
                     case 5:
                         this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddCashflowType;
@@ -2930,7 +2930,7 @@ namespace Primary.SchoolApp
                         break;
                     case 3:
                         RadMenuItem menuShowSubjectOfClass = new(Language.labelSubjectTaught);
-                        menuShowSubjectOfClass.Image = AppUtilities.GetImage("View");
+                        menuShowSubjectOfClass.Image = AppUtilities.GetImage("Folder");
                         menuShowSubjectOfClass.ToolTipText = Language.messageClickToSee;
                         menuShowSubjectOfClass.Click += MenuShowSubjectOfClass_Click;
                         RadMenuItem menuGenerateEmptyClassReport = new(Language.labelGenerateEmptyClassReport);
@@ -2941,7 +2941,7 @@ namespace Primary.SchoolApp
                         break;
                     case 4:
                         RadMenuItem menuShowStudentOfClass = new(Language.titleStudentList);
-                        menuShowStudentOfClass.Image = AppUtilities.GetImage("View");
+                        menuShowStudentOfClass.Image = AppUtilities.GetImage("Folder");
                         menuShowStudentOfClass.ToolTipText = Language.messageClickToSee;
                         menuShowStudentOfClass.Click += MenuShowStudentOfClass_Click; ;
                         RadMenuItem menuGenerateEmptyRoomReport = new(Language.labelGenerateEmptyClassReport);
@@ -2981,11 +2981,11 @@ namespace Primary.SchoolApp
                           break;
                     case 15:
                         RadMenuItem menuShowUserModule = new(Language.labelUserModule);
-                        menuShowUserModule.Image = AppUtilities.GetImage("View");
+                        menuShowUserModule.Image = AppUtilities.GetImage("Folder");
                         menuShowUserModule.ToolTipText = Language.messageClickToSee;
                         menuShowUserModule.Click += MenuShowUserModule_Click;
                         RadMenuItem menuShowUserRoom = new(Language.labelUserRoom);
-                        menuShowUserRoom.Image = AppUtilities.GetImage("View");
+                        menuShowUserRoom.Image = AppUtilities.GetImage("Folder");
                         menuShowUserRoom.ToolTipText = Language.messageClickToSee;
                         menuShowUserRoom.Click += MenuShowUserRoom_Click;
                         e.ContextMenu.Items.Add(menuShowUserModule);

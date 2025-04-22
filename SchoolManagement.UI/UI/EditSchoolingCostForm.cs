@@ -49,6 +49,23 @@ namespace SchoolManagement.UI
             schoolYearDropDownList.SelectedIndexChanged += SchoolYearDropDownList_SelectedIndexChanged;
             this.amountTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
             this.trancheNumberTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
+            this.ThemeNameChanged += EditSchoolingCostForm_ThemeNameChanged;
+        }
+
+        private void EditSchoolingCostForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.tranchesGroupBox.ForeColor = Color.FromArgb(89, 89, 89);
+                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.trancheNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.schoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.classDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.costPayableDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.costTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -95,34 +112,27 @@ namespace SchoolManagement.UI
 
             this.tranchesGroupBox.GroupBoxElement.CustomFont = ViewUtilities.MainFont;
             this.tranchesGroupBox.GroupBoxElement.CustomFontSize = 10.5f;
-            this.tranchesGroupBox.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.trancheNumberTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.trancheNumberTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.trancheNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.schoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.schoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.schoolYearDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.classDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.classDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.classDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.classDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.costTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.costTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.costTypeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.costPayableDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.costPayableDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.costPayableDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.costPayableDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.costTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -162,7 +172,6 @@ namespace SchoolManagement.UI
             this.trancheNumberSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont =ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour ajouter une nouvelle année scolaire";
             addSchoolYearButton.Image = Resources.plus;

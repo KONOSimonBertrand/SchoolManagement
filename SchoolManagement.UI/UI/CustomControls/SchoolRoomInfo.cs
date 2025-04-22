@@ -1,5 +1,6 @@
 ﻿
 using SchoolManagement.UI.Localization;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -61,7 +62,7 @@ namespace SchoolManagement.UI.CustomControls
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
             this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("View");
+            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("Watch");
             this.studentsCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.studentsCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.studentsCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
@@ -77,7 +78,7 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.editButton.Image = Resources.edit;
+            this.editButton.Image = ViewUtilities.GetImage("Edit");
             this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
 
             this.closeButton.RootElement.EnableElementShadow = false;

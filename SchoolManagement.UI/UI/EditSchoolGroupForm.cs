@@ -46,11 +46,9 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
             this.sequenceSpinEditor.SpinElement.ShowBorder = false;
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -75,12 +73,10 @@ namespace SchoolManagement.UI
 
             this.isTruncateDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.isTruncateDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.isTruncateDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.isTruncateDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.averageFormulaDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.averageFormulaDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.averageFormulaDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.averageFormulaDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -120,6 +116,19 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;
+            this.ThemeNameChanged += EditSchoolGroupForm_ThemeNameChanged;
+        }
+
+        private void EditSchoolGroupForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+                this.isTruncateDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.averageFormulaDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

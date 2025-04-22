@@ -127,7 +127,7 @@ namespace SchoolManagement.UI.Reporting
             this.shape5});
             this.groupHeaderSection.Name = "groupHeaderSection";
             // 
-            // logoPictureBox
+            // headerPictureBox
             // 
             this.headerPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.1D), Telerik.Reporting.Drawing.Unit.Inch(0.1D));
             this.headerPictureBox.MimeType = "image/png";
@@ -195,7 +195,7 @@ namespace SchoolManagement.UI.Reporting
             this.dateLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.dateLabel.Value = "DATE";
             // 
-            // reportTitleTtextBox
+            // reportTitleTextBox
             // 
             this.reportTitleTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.588D), Telerik.Reporting.Drawing.Unit.Inch(1.522D));
             this.reportTitleTextBox.Name = "reportTitleTtextBox";

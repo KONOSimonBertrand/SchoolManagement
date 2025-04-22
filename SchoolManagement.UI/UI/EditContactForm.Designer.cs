@@ -141,7 +141,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(697, 362);
+            editPanel.Size = new Size(709, 362);
             editPanel.TabIndex = 70;
             // 
             // dataGridView
@@ -169,10 +169,6 @@
             addressSplitContainer.Controls.Add(addressSplitPanel);
             addressSplitContainer.Location = new Point(0, 287);
             addressSplitContainer.Name = "addressSplitContainer";
-            // 
-            // 
-            // 
-            addressSplitContainer.RootElement.MinSize = new Size(25, 25);
             addressSplitContainer.Size = new Size(691, 69);
             addressSplitContainer.SplitterWidth = 0;
             addressSplitContainer.TabIndex = 100;
@@ -185,10 +181,6 @@
             addressSplitPanel.Controls.Add(addressLabel);
             addressSplitPanel.Location = new Point(0, 0);
             addressSplitPanel.Name = "addressSplitPanel";
-            // 
-            // 
-            // 
-            addressSplitPanel.RootElement.MinSize = new Size(25, 25);
             addressSplitPanel.Size = new Size(691, 69);
             addressSplitPanel.TabIndex = 0;
             addressSplitPanel.TabStop = false;
@@ -226,10 +218,6 @@
             phoneSplitContainer.Controls.Add(phoneSplitPanel);
             phoneSplitContainer.Location = new Point(0, 218);
             phoneSplitContainer.Name = "phoneSplitContainer";
-            // 
-            // 
-            // 
-            phoneSplitContainer.RootElement.MinSize = new Size(25, 25);
             phoneSplitContainer.Size = new Size(691, 69);
             phoneSplitContainer.SplitterWidth = 0;
             phoneSplitContainer.TabIndex = 98;
@@ -245,10 +233,6 @@
             phoneSplitPanel.Controls.Add(phoneLabel);
             phoneSplitPanel.Location = new Point(0, 0);
             phoneSplitPanel.Name = "phoneSplitPanel";
-            // 
-            // 
-            // 
-            phoneSplitPanel.RootElement.MinSize = new Size(25, 25);
             phoneSplitPanel.Size = new Size(691, 69);
             phoneSplitPanel.TabIndex = 0;
             phoneSplitPanel.TabStop = false;
@@ -314,10 +298,6 @@
             jobSplitContainer.Controls.Add(jobSplitPanel);
             jobSplitContainer.Location = new Point(0, 143);
             jobSplitContainer.Name = "jobSplitContainer";
-            // 
-            // 
-            // 
-            jobSplitContainer.RootElement.MinSize = new Size(25, 25);
             jobSplitContainer.Size = new Size(691, 70);
             jobSplitContainer.SplitterWidth = 0;
             jobSplitContainer.TabIndex = 62;
@@ -333,10 +313,6 @@
             jobSplitPanel.Controls.Add(jobLabel);
             jobSplitPanel.Location = new Point(0, 0);
             jobSplitPanel.Name = "jobSplitPanel";
-            // 
-            // 
-            // 
-            jobSplitPanel.RootElement.MinSize = new Size(25, 25);
             jobSplitPanel.Size = new Size(691, 70);
             jobSplitPanel.TabIndex = 1;
             jobSplitPanel.TabStop = false;
@@ -362,7 +338,6 @@
             // relationshipDropDownList
             // 
             relationshipDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            relationshipDropDownList.DropDownAnimationEnabled = true;
             relationshipDropDownList.DropDownHeight = 159;
             relationshipDropDownList.Location = new Point(418, 30);
             relationshipDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -411,10 +386,6 @@
             idCardSplitContainer.Controls.Add(idCardSplitPanel);
             idCardSplitContainer.Location = new Point(0, 67);
             idCardSplitContainer.Name = "idCardSplitContainer";
-            // 
-            // 
-            // 
-            idCardSplitContainer.RootElement.MinSize = new Size(25, 25);
             idCardSplitContainer.Size = new Size(691, 69);
             idCardSplitContainer.SplitterWidth = 0;
             idCardSplitContainer.TabIndex = 61;
@@ -434,10 +405,6 @@
             idCardSplitPanel.Controls.Add(idCardLabel);
             idCardSplitPanel.Location = new Point(0, 0);
             idCardSplitPanel.Name = "idCardSplitPanel";
-            // 
-            // 
-            // 
-            idCardSplitPanel.RootElement.MinSize = new Size(25, 25);
             idCardSplitPanel.Size = new Size(691, 69);
             idCardSplitPanel.TabIndex = 1;
             idCardSplitPanel.TabStop = false;
@@ -481,7 +448,6 @@
             // sexDropDownList
             // 
             sexDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            sexDropDownList.DropDownAnimationEnabled = true;
             sexDropDownList.DropDownHeight = 159;
             sexDropDownList.Location = new Point(551, 30);
             sexDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -601,7 +567,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(697, 417);
+            ClientSize = new Size(709, 418);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

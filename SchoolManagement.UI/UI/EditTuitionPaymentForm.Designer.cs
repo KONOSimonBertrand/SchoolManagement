@@ -175,7 +175,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(931, 270);
+            editPanel.Size = new Size(943, 270);
             editPanel.TabIndex = 29;
             // 
             // paidTextBox
@@ -214,10 +214,6 @@
             transactionDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             transactionDateTimePicker.MinimumSize = new Size(0, 30);
             transactionDateTimePicker.Name = "transactionDateTimePicker";
-            // 
-            // 
-            // 
-            transactionDateTimePicker.RootElement.MinSize = new Size(0, 30);
             transactionDateTimePicker.Size = new Size(140, 30);
             transactionDateTimePicker.TabIndex = 12;
             transactionDateTimePicker.TabStop = false;
@@ -366,7 +362,6 @@
             // studentDropDownList
             // 
             studentDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            studentDropDownList.DropDownAnimationEnabled = true;
             studentDropDownList.DropDownHeight = 249;
             studentDropDownList.ItemHeight = 38;
             studentDropDownList.Location = new Point(8, 30);
@@ -403,7 +398,6 @@
             // paymentMeanDropDownList
             // 
             paymentMeanDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            paymentMeanDropDownList.DropDownAnimationEnabled = true;
             paymentMeanDropDownList.DropDownHeight = 249;
             paymentMeanDropDownList.ItemHeight = 38;
             paymentMeanDropDownList.Location = new Point(146, 164);
@@ -509,7 +503,6 @@
             // cashFlowTypeDropDownList
             // 
             cashFlowTypeDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cashFlowTypeDropDownList.DropDownAnimationEnabled = true;
             cashFlowTypeDropDownList.DropDownHeight = 199;
             cashFlowTypeDropDownList.ItemHeight = 30;
             cashFlowTypeDropDownList.Location = new Point(146, 97);
@@ -552,10 +545,6 @@
             dateTimePicker.Margin = new Padding(5, 6, 5, 6);
             dateTimePicker.MinimumSize = new Size(0, 30);
             dateTimePicker.Name = "dateTimePicker";
-            // 
-            // 
-            // 
-            dateTimePicker.RootElement.MinSize = new Size(0, 30);
             dateTimePicker.Size = new Size(140, 30);
             dateTimePicker.TabIndex = 3;
             dateTimePicker.TabStop = false;
@@ -602,7 +591,7 @@
             schoolYearLabel.TabIndex = 33;
             schoolYearLabel.Text = "Année scolaire:";
             // 
-            // classroomLabel
+            // classLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(434, 0);
@@ -661,7 +650,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(931, 325);
+            ClientSize = new Size(943, 332);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

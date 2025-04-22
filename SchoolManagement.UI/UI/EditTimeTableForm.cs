@@ -2,6 +2,7 @@
 using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using System.Runtime.CompilerServices;
+using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Telerik.WinControls.UI.Scheduler.Dialogs;
 
@@ -66,7 +67,6 @@ namespace SchoolManagement.UI
 
             this.cmbBackground.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.cmbBackground.RootElement.CustomFontSize = 10.5f;
-            this.cmbBackground.ForeColor = Color.FromArgb(33, 33, 33);
             this.cmbBackground.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             //this.cmbBackground.RootElement.EnableElementShadow = false;
 
@@ -196,6 +196,16 @@ namespace SchoolManagement.UI
         {
             subjectDropDownList.SelectedIndexChanged += SubjectDropDownList_SelectedIndexChanged;
             teacherDropDownList.SelectedIndexChanged += TeacherDropDownList_SelectedIndexChanged;
+            this.ThemeNameChanged += EditTimeTableForm_ThemeNameChanged;
+        }
+
+        private void EditTimeTableForm_ThemeNameChanged(object source, Telerik.WinControls.ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.cmbBackground.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void TeacherDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)

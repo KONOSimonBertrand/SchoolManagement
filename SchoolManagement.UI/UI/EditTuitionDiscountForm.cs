@@ -50,6 +50,22 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.discountTextBox.TextChanging += AmountTextBox_TextChanging;
+            this.ThemeNameChanged += EditTuitionDiscountForm_ThemeNameChanged;
+        }
+
+        private void EditTuitionDiscountForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.costTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.reasonTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.ordoredByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.costTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void InitComponent()
@@ -90,7 +106,6 @@ namespace SchoolManagement.UI
 
             this.studentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.studentTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
@@ -99,26 +114,21 @@ namespace SchoolManagement.UI
 
             this.costTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.costTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.costTypeDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.costTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.discountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.discountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.reasonTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.reasonTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.reasonTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.costTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.costTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.costTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.ordoredByTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.ordoredByTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.ordoredByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
 
@@ -159,7 +169,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.errorLabel.ForeColor = Color.Red;
         }
         private void AmountTextBox_TextChanging(object sender, TextChangingEventArgs e)

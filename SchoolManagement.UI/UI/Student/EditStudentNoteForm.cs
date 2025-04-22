@@ -51,13 +51,33 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += (s, e) => { this.Close(); };
             noteTextBox.TextChanging += (s, e) => { e.Cancel=!ViewUtilities.IsNumber(e.NewValue); };
+            this.ThemeNameChanged += EditStudentNoteForm_ThemeNameChanged;
+        }
+
+        private void EditStudentNoteForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.evaluationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.commentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.noteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.noteMaxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.noteCoefTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void InitComponent()
         {
             studentDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 40);
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
+            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
 
             this.studentDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
             this.subjectDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -114,46 +134,36 @@ namespace SchoolManagement.UI
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.studentDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.studentDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.studentDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.classTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.subjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.subjectDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.subjectDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.evaluationTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.evaluationTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.evaluationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.groupDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.groupDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.groupDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.commentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.commentTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.commentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteCoefTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteCoefTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteCoefTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteMaxTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteMaxTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteMaxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
 
@@ -199,7 +209,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.errorLabel.ForeColor = Color.Red;
         }

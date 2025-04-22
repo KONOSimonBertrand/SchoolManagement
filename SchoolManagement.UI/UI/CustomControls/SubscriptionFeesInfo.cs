@@ -75,14 +75,14 @@ namespace SchoolManagement.UI.CustomControls
             this.closeButton.ButtonElement.Padding = new Padding(0);
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.closeButton.Image = Resources.not_clean;
+            this.closeButton.Image = ViewUtilities.GetImage("Close");
             this.closeButton.RootElement.ToolTipText = "Cliquer ici pour fermer";
 
             this.editButton.RootElement.EnableElementShadow = false;
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
-            this.editButton.Image = Resources.edit;
+            this.editButton.Image = ViewUtilities.GetImage("Edit");
             this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
 
             this.schoolYearLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

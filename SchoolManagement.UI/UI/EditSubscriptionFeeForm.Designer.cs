@@ -88,7 +88,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(686, 144);
+            editPanel.Size = new Size(698, 144);
             editPanel.TabIndex = 21;
             // 
             // durationSeparator
@@ -114,10 +114,6 @@
             durationSpinEditor.Location = new Point(169, 100);
             durationSpinEditor.MinimumSize = new Size(0, 30);
             durationSpinEditor.Name = "durationSpinEditor";
-            // 
-            // 
-            // 
-            durationSpinEditor.RootElement.MinSize = new Size(0, 30);
             durationSpinEditor.Size = new Size(135, 30);
             durationSpinEditor.TabIndex = 5;
             // 
@@ -180,7 +176,6 @@
             // subscriptionTypeDropDownList
             // 
             subscriptionTypeDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            subscriptionTypeDropDownList.DropDownAnimationEnabled = true;
             subscriptionTypeDropDownList.DropDownHeight = 159;
             subscriptionTypeDropDownList.Location = new Point(243, 30);
             subscriptionTypeDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -207,7 +202,6 @@
             // schoolYearDropDownList
             // 
             schoolYearDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            schoolYearDropDownList.DropDownAnimationEnabled = true;
             schoolYearDropDownList.DropDownHeight = 159;
             schoolYearDropDownList.Location = new Point(5, 30);
             schoolYearDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -277,7 +271,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(686, 228);
+            ClientSize = new Size(698, 230);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

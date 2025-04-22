@@ -429,14 +429,14 @@ namespace SchoolManagement.UI.Reporting
             this.copyLabel.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.copyLabel.Value = "COPY";
             // 
-            // logoPictureBox
+            // headerPictureBox
             // 
             this.logoPictureBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0.043D));
             this.logoPictureBox.MimeType = "image/png";
             this.logoPictureBox.Name = "logoPictureBox";
             this.logoPictureBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.8D), Telerik.Reporting.Drawing.Unit.Inch(0.543D));
             this.logoPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.ScaleProportional;
-            //this.logoPictureBox.Value = ((object)(resources.GetObject("logoPictureBox.Value")));
+            //this.headerPictureBox.Value = ((object)(resources.GetObject("headerPictureBox.Value")));
             // 
             // paymentCostTypeLabelFR
             // 

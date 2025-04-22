@@ -50,6 +50,22 @@ namespace SchoolManagement.UI
             this.sexDropDownList.GotFocus += ControlGetFocus;
             this.studentTextBox.GotFocus += ControlGetFocus;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditContactForm_ThemeNameChanged;
+        }
+
+        private void EditContactForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.fullNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            this.jobTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.relationshipDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -110,41 +126,32 @@ namespace SchoolManagement.UI
 
             this.studentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.studentTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.idCardTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.idCardTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.fullNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.fullNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.fullNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sexDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.sexDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.sexDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.jobTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.jobTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.jobTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.relationshipDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.relationshipDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.relationshipDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.relationshipDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.phoneTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.phoneTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.emailTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.emailTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.addressTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.addressTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             this.idCardSplitContainer.RootElement.EnableElementShadow = false;
@@ -226,7 +233,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
            
         }
         private void ControlGetFocus(object sender, EventArgs e)

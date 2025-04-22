@@ -168,7 +168,7 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.edit_blue;
+                            image = GetImage(Resources.pencil_blue);
                             break;
                         case "Watch":
                             image = Resources.watch_blue;
@@ -203,8 +203,8 @@ namespace Primary.SchoolApp.Utilities
                         case "Duplicate":
                             image = Resources.duplicate_blue;
                             break;
-                        case "View":
-                            image = Resources.view_blue;
+                        case "Folder":
+                            image = GetImage(Resources.folder_blue);
                             break;
                         case "Hide":
                             image = Resources.hide_blue;
@@ -221,13 +221,22 @@ namespace Primary.SchoolApp.Utilities
                         case "Check":
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_blue);
                             break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_blue);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_blue);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_blue);
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.edit_blue_grey;
+                            image = GetImage(Resources.pencil_blue_grey);
                             break;
                         case "Watch":
                             image = Resources.watch_blue_grey;
@@ -262,8 +271,8 @@ namespace Primary.SchoolApp.Utilities
                         case "Duplicate":
                             image = Resources.duplicate_blue_grey;
                             break;
-                        case "View":
-                            image = Resources.view_blue_grey;
+                        case "Folder":
+                            image = GetImage(Resources.folder_blue_grey);
                             break;
                         case "Hide":
                             image = Resources.hide_blue_grey;
@@ -280,13 +289,22 @@ namespace Primary.SchoolApp.Utilities
                         case "Check":
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_blue_grey);
                             break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_blue_grey);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_blue_grey);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_blue_grey);
+                            break;
                     }
                     break;
                 case "MaterialPink":
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.edit_pink;
+                            image = GetImage(Resources.pencil_pink);
                             break;
                         case "Watch":
                             image = Resources.watch_pink;
@@ -321,8 +339,8 @@ namespace Primary.SchoolApp.Utilities
                         case "Duplicate":
                             image = Resources.duplicate_pink;
                             break;
-                        case "View":
-                            image = Resources.view_pink;
+                        case "Folder":
+                            image = GetImage(Resources.folder_pink);
                             break;
                         case "Hide":
                             image = Resources.hide_pink;
@@ -339,13 +357,22 @@ namespace Primary.SchoolApp.Utilities
                         case "Check":
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_pink);
                             break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_pink);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_pink);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_pink);
+                            break;
                     }
                     break;
                 case "MaterialTeal":
                     switch (category)
                     {
                         case "Edit":
-                            image = Resources.edit_teal;
+                            image = GetImage(Resources.pencil_teal);
                             break;
                         case "Watch":
                             image = Resources.watch_teal;
@@ -380,8 +407,8 @@ namespace Primary.SchoolApp.Utilities
                         case "Duplicate":
                             image = Resources.duplicate_teal;
                             break;
-                        case "View":
-                            image = Resources.view_teal;
+                        case "Folder":
+                            image = GetImage(Resources.folder_teal);
                             break;
                         case "Hide":
                             image = Resources.hide_teal;
@@ -398,8 +425,86 @@ namespace Primary.SchoolApp.Utilities
                         case "Check":
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_teal);
                             break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_teal);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_teal);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_teal);
+                            break;
                     }
                     break;
+                case "Windows11Dark":
+                    switch (category)
+                    {
+                        case "Edit":
+                            image =GetImage(Resources.pencil_white);
+                            break;
+                        case "Watch":
+                            image = GetImage(Resources.watch_white);
+                            break;
+                        case "Image":
+                            image = GetImage(Resources.add_image_White);
+                            break;
+                        case "File":
+                            image = GetImage(Resources.create_file_white);
+                            break;
+                        case "Lock":
+                            image = GetImage(Resources.lock_white);
+                            break;
+                        case "Unlock":
+                            image = GetImage(Resources.unlock_white);
+                            break;
+                        case "Close":
+                            image = GetImage(Resources.close_white);
+                            break;
+                        case "Printer":
+                            image = GetImage(Resources.printer_white);
+                            break;
+                        case "Add":
+                            image = GetImage(Resources.add_white);
+                            break;
+                        case "Delete":
+                            image = GetImage(Resources.delete_white);
+                            break;
+                        case "Excel":
+                            image = GetImage(Resources.excel_white);
+                            break;
+                        case "Duplicate":
+                            image = GetImage(Resources.duplicate_white);
+                            break;
+                        case "Folder":
+                            image = GetImage(Resources.folder_white);
+                            break;
+                        case "Hide":
+                            image = GetImage(Resources.hide_white);
+                            break;
+                        case "Undo":
+                            image = GetImage(Resources.undo_white);
+                            break;
+                        case "Cancel":
+                            image = GetImage(Resources.cancel_white);
+                            break;
+                        case "Search":
+                            image = GetImage(Resources.search_white);
+                            break;
+                        case "Check":
+                            image = GetImage(Resources.check_white);
+                            break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_white);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_white);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_white);
+                            break;
+                    }
+                    break;
+
             }
             return image;
         }

@@ -112,7 +112,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(737, 209);
+            editPanel.Size = new Size(749, 209);
             editPanel.TabIndex = 69;
             // 
             // studentSeparator
@@ -143,7 +143,7 @@
             classTextBox.Size = new Size(171, 30);
             classTextBox.TabIndex = 1;
             // 
-            // classroomLabel
+            // classLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(546, 0);
@@ -156,7 +156,6 @@
             // studentDropDownList
             // 
             studentDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            studentDropDownList.DropDownAnimationEnabled = true;
             studentDropDownList.DropDownHeight = 159;
             studentDropDownList.Location = new Point(0, 30);
             studentDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -192,7 +191,6 @@
             // subjectDropDownList
             // 
             subjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            subjectDropDownList.DropDownAnimationEnabled = true;
             subjectDropDownList.DropDownHeight = 159;
             subjectDropDownList.Location = new Point(153, 99);
             subjectDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -238,7 +236,6 @@
             // evaluationDropDownList
             // 
             evaluationDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            evaluationDropDownList.DropDownAnimationEnabled = true;
             evaluationDropDownList.DropDownHeight = 159;
             evaluationDropDownList.Location = new Point(362, 164);
             evaluationDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -275,7 +272,6 @@
             // reasonDropDownList
             // 
             reasonDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            reasonDropDownList.DropDownAnimationEnabled = true;
             reasonDropDownList.DropDownHeight = 159;
             reasonDropDownList.Location = new Point(0, 164);
             reasonDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -326,10 +322,6 @@
             dateTimePicker.Margin = new Padding(4, 5, 4, 5);
             dateTimePicker.MinimumSize = new Size(0, 30);
             dateTimePicker.Name = "dateTimePicker";
-            // 
-            // 
-            // 
-            dateTimePicker.RootElement.MinSize = new Size(0, 30);
             dateTimePicker.Size = new Size(147, 30);
             dateTimePicker.TabIndex = 2;
             dateTimePicker.TabStop = false;
@@ -395,7 +387,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(737, 262);
+            ClientSize = new Size(749, 278);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

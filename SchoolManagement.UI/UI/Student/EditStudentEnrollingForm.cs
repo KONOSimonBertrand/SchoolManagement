@@ -36,7 +36,7 @@ namespace SchoolManagement.UI
         private void InitComponent()
         {
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
+            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
             this.errorLabel.ForeColor = Color.Red;
 
             this.classDropDownList.RootElement.EnableElementShadow = false;
@@ -101,11 +101,9 @@ namespace SchoolManagement.UI
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.oldSchoolTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.oldSchoolTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.oldSchoolTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.doneByTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.doneByTextBox.TextBoxElement.CustomFontSize = 10.5f;
@@ -113,7 +111,6 @@ namespace SchoolManagement.UI
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
             this.dateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -124,17 +121,14 @@ namespace SchoolManagement.UI
 
             this.dateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.dateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.studentDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.studentDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.studentDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
 
             this.repeaterDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.repeaterDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.repeaterDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.repeaterDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
 
@@ -200,7 +194,6 @@ namespace SchoolManagement.UI
             this.doneBySeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.schoolYearSplitContainer.RootElement.EnableElementShadow = false;
             this.studentSplitContainer.RootElement.EnableElementShadow = false;
@@ -260,7 +253,24 @@ namespace SchoolManagement.UI
             classDropDownList.SelectedIndexChanged += ClassDropDownList_SelectedIndexChanged;
             roomDropDownList.SelectedIndexChanged += RoomDropDownList_SelectedIndexChanged;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditStudentEnrollingForm_ThemeNameChanged;
         }
+
+        private void EditStudentEnrollingForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.oldSchoolTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
+                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.repeaterDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
+        }
+
         private void TextBox_Changing(object sender, TextChangingEventArgs e)
         {
             e.Cancel = !ViewUtilities.IsNumber(e.NewValue);

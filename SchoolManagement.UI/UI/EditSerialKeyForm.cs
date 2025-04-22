@@ -33,6 +33,16 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditSerialKeyForm_ThemeNameChanged;
+        }
+
+        private void EditSerialKeyForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.serialKeyTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }
         }
 
         private void InitComponent()
@@ -64,7 +74,7 @@ namespace SchoolManagement.UI
 
             this.serialKeyTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.serialKeyTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.serialKeyTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+      
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -81,7 +91,7 @@ namespace SchoolManagement.UI
             this.serialKeySeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+           
 
             this.errorLabel.ForeColor = Color.Red;
             this.serialKeyUserLabel.Text=string.Empty;

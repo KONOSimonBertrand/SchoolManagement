@@ -37,6 +37,21 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditCashFlowTypeForm_ThemeNameChanged;
+        }
+
+        private void EditCashFlowTypeForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.descriptionTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.categoryDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.domainDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -70,21 +85,18 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+          
 
             this.descriptionTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.descriptionTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.categoryDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.categoryDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.categoryDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.categoryDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.categoryDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.domainDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.domainDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.domainDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.domainDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.domainDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
@@ -96,7 +108,6 @@ namespace SchoolManagement.UI
 
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
             this.sequenceSpinEditor.SpinElement.ShowBorder = false;
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -124,7 +135,6 @@ namespace SchoolManagement.UI
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             var scItemText = Language.labelSchoolingFee;
             var stItemText = Language.labelSubscription;
             var deItemText = Language.LabelExpense;

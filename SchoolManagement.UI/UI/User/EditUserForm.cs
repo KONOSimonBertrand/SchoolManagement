@@ -68,24 +68,19 @@ namespace SchoolManagement.UI
 
             this.employeeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.employeeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.employeeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.employeeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.loginTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.loginTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.loginTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.passwordTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.passwordTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.passwordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.emailTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.emailTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -123,7 +118,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.saveButton.Text=Language.labelSave;
         }
 
@@ -131,19 +125,33 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             employeeDropDownList.SelectedIndexChanged += EmployeeDropDownList_SelectedIndexChanged;
+            this.ThemeNameChanged += EditUserForm_ThemeNameChanged;
+        }
 
+        private void EditUserForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.loginTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+                this.employeeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.passwordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void EmployeeDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
             if (employeeDropDownList.SelectedIndex < 0)
             {
-                addEmployeeButton.Image = Resources.plus;
+                addEmployeeButton.Image = ViewUtilities.GetImage("Add");
                 addEmployeeButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer un nouvel employé";
             }
             else
             {
-                addEmployeeButton.Image = Resources.edit;
+                addEmployeeButton.Image = ViewUtilities.GetImage("Edit");
                 addEmployeeButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de l'employé";
             }
         }
@@ -152,22 +160,25 @@ namespace SchoolManagement.UI
         {
             this.errorLabel.Text = "";
             this.errorLabel.ForeColor = Color.Red;
-
+            this.errorProvider.Clear();
             if (this.nameTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie du nom est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.nameTextBox, Language.messageFillField);
                 this.nameTextBox.Focus();
                 return false;
             }
             if (this.loginTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie du login est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.loginTextBox, Language.messageFillField);
                 this.loginTextBox.Focus();
                 return false;
             }
             if (this.passwordTextBox.Text == "")
             {
-                this.errorLabel.Text = "La saisie du mot de passe est requise!";
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(passwordTextBox, Language.messageFillField);
                 this.passwordTextBox.Focus();
                 return false;
             }

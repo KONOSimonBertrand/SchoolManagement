@@ -138,7 +138,7 @@
             editPanel.Dock = DockStyle.Top;
             editPanel.Location = new Point(0, 0);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(823, 273);
+            editPanel.Size = new Size(835, 273);
             editPanel.TabIndex = 30;
             // 
             // noteMaxSeparator
@@ -153,7 +153,6 @@
             // studentDropDownList
             // 
             studentDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            studentDropDownList.DropDownAnimationEnabled = true;
             studentDropDownList.DropDownHeight = 199;
             studentDropDownList.ItemHeight = 30;
             studentDropDownList.Location = new Point(12, 30);
@@ -176,7 +175,6 @@
             // subjectDropDownList
             // 
             subjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            subjectDropDownList.DropDownAnimationEnabled = true;
             subjectDropDownList.DropDownHeight = 199;
             subjectDropDownList.ItemHeight = 30;
             subjectDropDownList.Location = new Point(8, 161);
@@ -199,7 +197,6 @@
             // groupDropDownList
             // 
             groupDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            groupDropDownList.DropDownAnimationEnabled = true;
             groupDropDownList.DropDownHeight = 199;
             groupDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             groupDropDownList.ItemHeight = 30;
@@ -450,7 +447,7 @@
             schoolYearLabel.TabIndex = 33;
             schoolYearLabel.Text = "Année scolaire:";
             // 
-            // classroomLabel
+            // classLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(453, 2);
@@ -510,7 +507,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(823, 336);
+            ClientSize = new Size(835, 335);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

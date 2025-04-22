@@ -39,6 +39,19 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditMedicalRecordForm_ThemeNameChanged;
+        }
+
+        private void EditMedicalRecordForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.descriptionTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.healthSubjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void InitComponent()
@@ -71,12 +84,11 @@ namespace SchoolManagement.UI
 
             this.studentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.studentTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+            
 
 
             this.descriptionTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.descriptionTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
             this.dateTimePicker.CustomFormat = "dd-MM-yyyy";
@@ -91,7 +103,6 @@ namespace SchoolManagement.UI
 
             this.healthSubjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.healthSubjectDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.healthSubjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.healthSubjectDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.healthSubjectDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -117,7 +128,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
         }
 
         private void LoadReasonList()

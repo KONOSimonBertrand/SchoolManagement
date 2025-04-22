@@ -20,5 +20,7 @@ namespace SchoolManagement.Core.Repositories
         Task<List<StudentNote>> GetNotesByClassAsync(int classId, int evaluationId, int schoolYearId);
         Task<List<StudentNote>> GetNotesByRoomAsync(int roomId, int evaluationId, int schoolYearId);
         Task<List<EvaluationComment>> GetCommentsByClassroomAsync(int roomId, int evaluationId, int schoolYearId);
+        Task<List<EvaluationComment>> GetCommentsByClassroomAsync(int roomId, int evaluationId, int bookId, int schoolYearId);
+        Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int roomId, int bookId, int schoolYearId);
     }
 }

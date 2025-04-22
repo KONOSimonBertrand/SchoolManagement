@@ -36,6 +36,15 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditStudentClassForm_ThemeNameChanged  ;
+        }
+
+        private void EditStudentClassForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -105,7 +114,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.classDropDownList.DisplayMember = "Name";
             this.classDropDownList.ValueMember = "Id";

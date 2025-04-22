@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
             sequenceSeparator = new Telerik.WinControls.UI.RadSeparator();
             classSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -42,6 +43,7 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)sequenceSeparator).BeginInit();
@@ -57,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -76,7 +79,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(739, 140);
+            editPanel.Size = new Size(751, 140);
             editPanel.TabIndex = 19;
             // 
             // sequenceSeparator
@@ -102,10 +105,6 @@
             sequenceSpinEditor.Location = new Point(2, 97);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
-            // 
-            // 
-            // 
-            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(345, 30);
             sequenceSpinEditor.TabIndex = 114;
             // 
@@ -131,7 +130,6 @@
             // classDropDownList
             // 
             classDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            classDropDownList.DropDownAnimationEnabled = true;
             classDropDownList.DropDownHeight = 159;
             classDropDownList.Location = new Point(351, 30);
             classDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -155,7 +153,7 @@
             nameSeparator.TabIndex = 67;
             nameSeparator.TabStop = false;
             // 
-            // classroomLabel
+            // classLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(358, 0);
@@ -187,15 +185,15 @@
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(0, 190);
+            errorLabel.Location = new Point(0, 151);
             errorLabel.Margin = new Padding(4, 5, 4, 5);
             errorLabel.Name = "errorLabel";
-            errorLabel.Size = new Size(731, 30);
+            errorLabel.Size = new Size(483, 30);
             errorLabel.TabIndex = 113;
             // 
             // closeButton
             // 
-            closeButton.Location = new Point(586, 150);
+            closeButton.Location = new Point(616, 150);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 30);
@@ -204,12 +202,16 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(461, 150);
+            saveButton.Location = new Point(491, 150);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 30);
             saveButton.TabIndex = 111;
             saveButton.Text = "Enregistrer";
+            // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
             // 
             // EditSchoolRoomForm
             // 
@@ -217,7 +219,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(739, 227);
+            ClientSize = new Size(751, 195);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -242,6 +244,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -262,5 +265,6 @@
         private Telerik.WinControls.UI.RadSpinEditor sequenceSpinEditor;
         private Telerik.WinControls.UI.RadSeparator classSeparator;
         private Telerik.WinControls.UI.RadSeparator sequenceSeparator;
+        private ErrorProvider errorProvider;
     }
 }

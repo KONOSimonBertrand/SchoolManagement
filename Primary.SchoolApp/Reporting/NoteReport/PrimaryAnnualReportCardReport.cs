@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Primary.SchoolApp.Reporting
 {
-    internal class PrimaryAnnualReportCardReport : SchoolManagement.UI.Reporting.PrimaryTermReportCardReport
+    internal class PrimaryAnnualReportCardReport : SchoolManagement.UI.Reporting.PrimaryTermReport
     {
         public PrimaryAnnualReportCardReport(TermReportCard reportCard)
         {
@@ -109,17 +109,21 @@ namespace Primary.SchoolApp.Reporting
             this.TotalSecondNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumSecondNote").Value;
             this.TotalThirdNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumThirdNote").Value;
             this.TotalFinalNoteTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SumFinalNote").Value;
+            
             var footerFirstMonthAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "FirstTermAverage");
             var footerSecondMonthAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SecondTermAverage");
             var footerThirdMonthAverageItem = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "ThirdTermAverage");
+            
             if (double.TryParse(footerFirstMonthAverageItem.Value, out double av1) && av1 < 10) AverageFirstMonthTextBox.Style.Color = System.Drawing.Color.Red;
             if (double.TryParse(footerSecondMonthAverageItem.Value, out double av2) && av2 < 10) AverageSecondMonthTextBox.Style.Color = System.Drawing.Color.Red;
             if (double.TryParse(footerThirdMonthAverageItem.Value, out double av3) && av3 < 10) AverageThirdMonthTextBox.Style.Color = System.Drawing.Color.Red;
             if (double.TryParse(footerTermAverageItem.Value, out termAverage) && termAverage < 10) AverageTermTextBox.Style.Color = System.Drawing.Color.Red;
+           
             AverageFirstMonthTextBox.Value = footerFirstMonthAverageItem.Value;
             AverageSecondMonthTextBox.Value = footerSecondMonthAverageItem.Value;
             AverageThirdMonthTextBox.Value = footerThirdMonthAverageItem.Value;
             AverageTermTextBox.Value = footerTermAverageItem.Value;
+            
             this.GeneralAverageFirstMonthTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "FirstTermClassAverage").Value;
             this.GeneralAverageSecondMonthTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "SecondTermClassAverage").Value;
             this.GeneralAverageThirdMonthTextBox.Value = reportCard.FooterSection.Items.FirstOrDefault(x => x.Name == "ThirdTermClassAverage").Value;

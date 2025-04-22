@@ -66,7 +66,6 @@ namespace SchoolManagement.UI
 
             taskWaitingBar.Padding = new Padding(0);
             taskWaitingBar.MinSize = new Size(150, 8);
-            //taskWaitingBar.WaitingIndicatorSize = new System.Drawing.Size(15, 16);
             taskWaitingBar.EnableElementShadow = false;
             taskWaitingBar.Visibility=ElementVisibility.Hidden;
             waitingLabel.Padding = new Padding(0);
@@ -80,8 +79,11 @@ namespace SchoolManagement.UI
             stripElement.ItemContainer.ButtonsPanel.Margin = new Padding(0, 0, 40, 0);
             themesDropDown.Items.AddRange(new RadListDataItem[]
             {
-                new ("Material") { Image = Resources.default_small }, new("MaterialPink") { Image = Resources.pink_blue_small },
-                new ("MaterialTeal") { Image = Resources.teal_red_small }, new("MaterialBlueGrey") { Image = Resources.blue_grey_green_small }
+                new ("Material") { Image = Resources.default_small }, 
+                new("MaterialPink") { Image = Resources.pink_blue_small },
+                new ("MaterialTeal") { Image = Resources.teal_red_small },
+                new("MaterialBlueGrey") { Image = Resources.blue_grey_green_small },
+                new("Windows11Dark"){Image=ViewUtilities.GetImage(Resources.theme_dark)},
             });
             themesDropDown.SelectedValue = "Material";
             ThemeResolutionService.ApplicationThemeName = "Material";
@@ -146,7 +148,7 @@ namespace SchoolManagement.UI
             homeMainPanel.BackgroundImageLayout = ImageLayout.Stretch;
             homeMainPanel.PanelElement.PanelFill.Visibility = ElementVisibility.Hidden;
 
-            homeNavigationPanel.BackgroundImage = Resources.fasha_no_borders;
+            homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
             homeNavigationPanel.BackgroundImageLayout = ImageLayout.Stretch;
             homeNavigationPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             homeNavigationPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
@@ -199,12 +201,10 @@ namespace SchoolManagement.UI
             homeSchoolYearDropDownList.RootElement.EnableElementShadow = false;
             homeSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             homeSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            homeSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             homeSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             homeSchoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             homeSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            homeSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             homeSchoolYearLabel.TextAlignment = ContentAlignment.BottomCenter;
 
             homeGridView.TableElement.CellSpacing = 10;
@@ -260,6 +260,8 @@ namespace SchoolManagement.UI
                     break;
 
                 default:
+                    aboutButton.Image = ViewUtilities.GetImage( Resources.about_white);
+                    userSplitButtonElement.Image = ViewUtilities.GetImage(Resources.user_white);
                     this.Icon = Resources.icon_pink;
                     break;
             }
@@ -267,7 +269,21 @@ namespace SchoolManagement.UI
         private void InitEventsHomePage()
         {
             homeMainListView.VisualItemFormatting += HomeMainListView_VisualItemFormatting;
+            ThemeResolutionService.ApplicationThemeChanged += ThemeResolutionService_ApplicationThemeChanged;
         }
+
+        private void ThemeResolutionService_ApplicationThemeChanged(object sender, ThemeChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName == "Windows11Dark")
+            {
+                homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+            }
+            else
+            {
+                homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+            }
+        }
+
         private void HomeMainListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
         {
             IconListViewGroupVisualItem groupItem = e.VisualItem as IconListViewGroupVisualItem;

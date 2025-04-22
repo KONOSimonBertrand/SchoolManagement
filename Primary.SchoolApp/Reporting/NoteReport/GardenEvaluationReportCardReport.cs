@@ -100,6 +100,7 @@ namespace Primary.SchoolApp.Reporting
             this.GeneralAverageTextBox.Value = reportCard.FooterSection.ClassAverage.ToString() + "/20";
             this.HighestAverageTextBox.Value = reportCard.FooterSection.HighestAverage.ToString() + "/20";
             this.LowestAverageTextBox.Value = reportCard.FooterSection.LowestAverage.ToString() + "/20";
+            this.TeacherCommentTextBox.Value = reportCard.FooterSection.Comment;
             this.RankTextBox.Value = reportCard.FooterSection.Position;
             FacebookAddressLabel.Value = Program.CurrentSchool.Name;
             ContactTextBox.Value = $"Tel:{Program.CurrentSchool.Phone}";
@@ -109,9 +110,6 @@ namespace Primary.SchoolApp.Reporting
             WebSitePictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
             WebSitePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("website.png");
             FaceBookPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("facebook.png");
-
-
-
         }
     }
 }

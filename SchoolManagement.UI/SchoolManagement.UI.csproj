@@ -21,7 +21,7 @@
     <Compile Update="Reporting\ReportCard\PrimaryThreeNoteSubReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Reporting\ReportCard\PrimaryTermReportCardReport.cs">
+    <Compile Update="Reporting\ReportCard\PrimaryTermReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Resources.Designer.cs">

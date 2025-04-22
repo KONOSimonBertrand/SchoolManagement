@@ -106,7 +106,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(863, 146);
+            editPanel.Size = new Size(887, 146);
             editPanel.TabIndex = 19;
             // 
             // sectionSeparator
@@ -121,14 +121,13 @@
             // sectionDropDownList
             // 
             sectionDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            sectionDropDownList.DropDownAnimationEnabled = true;
             sectionDropDownList.DropDownHeight = 199;
             sectionDropDownList.ItemHeight = 30;
             sectionDropDownList.Location = new Point(421, 108);
             sectionDropDownList.Margin = new Padding(5, 6, 5, 6);
             sectionDropDownList.MinimumSize = new Size(0, 30);
             sectionDropDownList.Name = "sectionDropDownList";
-            sectionDropDownList.Size = new Size(213, 35);
+            sectionDropDownList.Size = new Size(213, 30);
             sectionDropDownList.TabIndex = 7;
             ((Telerik.WinControls.UI.RadDropDownListElement)sectionDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)sectionDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -169,7 +168,6 @@
             // groupDropDownList
             // 
             groupDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            groupDropDownList.DropDownAnimationEnabled = true;
             groupDropDownList.DropDownHeight = 199;
             groupDropDownList.ItemHeight = 30;
             groupDropDownList.Location = new Point(421, 34);
@@ -285,7 +283,6 @@
             // subjectDropDownList
             // 
             subjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            subjectDropDownList.DropDownAnimationEnabled = true;
             subjectDropDownList.DropDownHeight = 159;
             subjectDropDownList.Location = new Point(3, 34);
             subjectDropDownList.Margin = new Padding(4, 5, 4, 5);
@@ -309,11 +306,7 @@
             sequenceSpinEditor.Location = new Point(243, 101);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
-            // 
-            // 
-            // 
-            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
-            sequenceSpinEditor.Size = new Size(104, 36);
+            sequenceSpinEditor.Size = new Size(104, 30);
             sequenceSpinEditor.TabIndex = 6;
             // 
             // sequenceLabel
@@ -350,7 +343,7 @@
             // closeButton
             // 
             closeButton.DialogResult = DialogResult.Cancel;
-            closeButton.Location = new Point(725, 158);
+            closeButton.Location = new Point(752, 158);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 36);
@@ -359,7 +352,7 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(600, 158);
+            saveButton.Location = new Point(627, 158);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 36);
@@ -373,7 +366,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(863, 207);
+            ClientSize = new Size(887, 208);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

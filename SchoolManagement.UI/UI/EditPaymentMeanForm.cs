@@ -51,15 +51,12 @@ namespace SchoolManagement.UI
 
             this.nameTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.accountTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.accountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.accountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sequenceSpinEditor.SpinElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
             this.sequenceSpinEditor.SpinElement.ShowBorder = false;
 
             this.levelLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
@@ -70,7 +67,6 @@ namespace SchoolManagement.UI
 
             this.typeDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.typeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.typeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.typeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.typeDropDownList.Items.Add(new RadListDataItem("Banque", "Banque"));
@@ -94,7 +90,6 @@ namespace SchoolManagement.UI
             this.shortNameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.errorLabel.ForeColor = Color.Red;
 
         }
@@ -102,8 +97,21 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;
+            this.ThemeNameChanged += EditPaymentMeanForm_ThemeNameChanged;
         }
 
+        private void EditPaymentMeanForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.accountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+                this.typeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
+        }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {

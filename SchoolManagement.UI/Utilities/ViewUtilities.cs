@@ -89,8 +89,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Printer":
                             image = Resources.printer_blue;
                             break;
-                        case "View":
-                            image= Resources.view_blue;
+                        case "Folder":
+                            image= GetImage(Resources.folder_blue);
                             break;
                         case "Hide":
                             image = Resources.hide_blue;
@@ -100,6 +100,15 @@ namespace SchoolManagement.UI.Utilities
                             break;
                         case "Import":
                             image = GetImage(Resources.import_blue);
+                            break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_blue);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_blue);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_blue);
                             break;
                     }
                     break;
@@ -133,8 +142,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Printer":
                             image = Resources.printer_blue_grey;
                             break;
-                        case "View":
-                            image = Resources.view_blue_grey;
+                        case "Folder":
+                            image = GetImage(Resources.folder_blue_grey);
                             break;
                         case "Hide":
                             image = Resources.hide_blue_grey;
@@ -144,6 +153,15 @@ namespace SchoolManagement.UI.Utilities
                             break;
                         case "Import":
                             image = GetImage(Resources.import_blue_grey);
+                            break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_blue_grey);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_blue_grey);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_blue_grey);
                             break;
                     }
                     break;
@@ -177,8 +195,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Printer":
                             image = Resources.printer_pink;
                             break;
-                        case "View":
-                            image = Resources.view_pink;
+                        case "Folder":
+                            image = GetImage(Resources.folder_pink);
                             break;
                         case "Hide":
                             image = Resources.hide_pink;
@@ -188,6 +206,15 @@ namespace SchoolManagement.UI.Utilities
                             break;
                         case "Import":
                             image = GetImage(Resources.import_pink);
+                            break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_pink);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_pink);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_pink);
                             break;
                     }
                     break;
@@ -221,8 +248,8 @@ namespace SchoolManagement.UI.Utilities
                         case "Printer":
                             image = Resources.printer_teal;
                             break;
-                        case "View":
-                            image = Resources.view_teal;
+                        case "Folder":
+                            image = GetImage(Resources.folder_teal);
                             break;
                         case "Hide":
                             image = Resources.hide_teal;
@@ -233,13 +260,96 @@ namespace SchoolManagement.UI.Utilities
                         case "Import":
                             image = GetImage(Resources.import_teal);
                             break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_teal);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_teal);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_teal);
+                            break;
+                    }
+                    break;
+                case "Windows11Dark":
+                    switch (category)
+                    {
+                        case "Edit":
+                            image = GetImage(Resources.pencil_white);
+                            break;
+                        case "Watch":
+                            image = GetImage(Resources.watch_white);
+                            break;
+                        case "Image":
+                            image = GetImage(Resources.add_image_White);
+                            break;
+                        case "File":
+                            image = GetImage(Resources.create_file_white);
+                            break;
+                        case "Lock":
+                            image = GetImage(Resources.lock_white);
+                            break;
+                        case "Unlock":
+                            image = GetImage(Resources.unlock_white);
+                            break;
+                        case "Close":
+                            image = GetImage(Resources.close_white);
+                            break;
+                        case "Printer":
+                            image = GetImage(Resources.printer_white);
+                            break;
+                        case "Add":
+                            image = GetImage(Resources.add_white);
+                            break;
+                        case "Delete":
+                            image = GetImage(Resources.delete_white);
+                            break;
+                        case "Excel":
+                            image = GetImage(Resources.excel_white);
+                            break;
+                        case "Duplicate":
+                            image = GetImage(Resources.duplicate_white);
+                            break;
+                        case "Folder":
+                            image = GetImage(Resources.folder_white);
+                            break;
+                        case "Hide":
+                            image = GetImage(Resources.hide_white);
+                            break;
+                        case "Save":
+                            image = GetImage(Resources.floppy_disk_white);
+                            break;
+                        case "Undo":
+                            image = GetImage(Resources.undo_white);
+                            break;
+                        case "Cancel":
+                            image = GetImage(Resources.cancel_white);
+                            break;
+                        case "Search":
+                            image = GetImage(Resources.search_white);
+                            break;
+                        case "Import":
+                            image = GetImage(Resources.import_white);
+                            break;
+                        case "Check":
+                            image = GetImage(Resources.check_white);
+                            break;
+                        case "Payment":
+                            image = GetImage(Resources.add_payment_white);
+                            break;
+                        case "Contact":
+                            image = GetImage(Resources.add_contact_white);
+                            break;
+                        case "Card":
+                            image = GetImage(Resources.id_card_white);
+                            break;
                     }
                     break;
             }
             return image;
         }
 
-        private static Image GetImage(Byte[] byteImage)
+        public static Image GetImage(Byte[] byteImage)
         {
             return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
         }

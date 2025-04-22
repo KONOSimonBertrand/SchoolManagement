@@ -1,5 +1,6 @@
 ﻿
 using SchoolManagement.UI.Localization;
+using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -32,9 +33,9 @@ namespace SchoolManagement.UI
             this.addSubjectCommandBarButton.ToolTipText = "Cliquer ici pour ajouter une nouvelle matière";
             this.dataPanel.RootElement.EnableElementShadow = false;
 
-            printCommandBarButton.Image = Resources.print;
-            addSubjectCommandBarButton.Image = Resources.plus;
-            exportCommandBarButton.Image=Resources.excel;
+            printCommandBarButton.Image = ViewUtilities.GetImage("Printer");
+            addSubjectCommandBarButton.Image = ViewUtilities.GetImage("Add");
+            exportCommandBarButton.Image = ViewUtilities.GetImage("Excel");
             foreach (RadControl c in this.dataPanel.Controls)
             {
                 c.RootElement.EnableElementShadow = false;

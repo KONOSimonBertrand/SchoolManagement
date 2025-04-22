@@ -1,5 +1,4 @@
 ﻿
-using MediaFoundation;
 using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
@@ -61,21 +60,17 @@ namespace SchoolManagement.UI
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.durationSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.durationSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.durationSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
             this.durationSpinEditor.SpinElement.ShowBorder = false;
 
             this.schoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.schoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.schoolYearDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.subscriptionTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.subscriptionTypeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.subscriptionTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.subscriptionTypeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.schoolYearDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -96,7 +91,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour ajouter une nouvelle année scolaire";
             addSchoolYearButton.Image = Resources.plus;
@@ -122,9 +116,23 @@ namespace SchoolManagement.UI
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.amountTextBox.TextChanging += AmountTextBox_TextChanging; ;
             schoolYearDropDownList.SelectedIndexChanged += SchoolYearDropDownList_SelectedIndexChanged; ;
-            subscriptionTypeDropDownList.SelectedIndexChanged += SubscriptionTypeDropDownList_SelectedIndexChanged; ;
+            subscriptionTypeDropDownList.SelectedIndexChanged += SubscriptionTypeDropDownList_SelectedIndexChanged;
+            this.ThemeNameChanged += EditSubscriptionFeeForm_ThemeNameChanged;
 
 
+        }
+
+        private void EditSubscriptionFeeForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+                this.durationSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
+                this.schoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.subscriptionTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+
+            }
         }
 
         private void SubscriptionTypeDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)

@@ -182,28 +182,7 @@ namespace Primary.SchoolApp
         }
 
         #region Report Card
-        // affiche un bulletin d'une évaluation
-        internal void LoadEvaluationReportCard(EvaluationReportCard reportCard)
-        {
-            InstanceReportSource reportSource = new()
-            {
-                ReportDocument = new PrimaryEvaluationReportCardReport(reportCard)
-            };
-            ReportViewer.AutoSize = true;
-            ReportViewer.ReportSource = reportSource;
-            ReportViewer.RefreshReport();
-        }
-        // affiche un bulletin d'un trimestre
-        internal void LoadTermReportCard(TermReportCard reportCard)
-        {
-            InstanceReportSource reportSource = new()
-            {
-                ReportDocument = new PrimaryTermReportCardReport(reportCard)
-            };
-            ReportViewer.AutoSize = true;
-            ReportViewer.ReportSource = reportSource;
-            ReportViewer.RefreshReport();
-        }
+       
         internal void LoadEvaluationReportCard(List<EvaluationReportCard> reportCardList)
         {
             var reportBook = new ReportBook();
@@ -240,15 +219,25 @@ namespace Primary.SchoolApp
             var reportBook = new ReportBook();
             foreach (var reportCard in reportCardList)
             {
-                InstanceReportSource reportSource = new()
+
+                InstanceReportSource reportSource = new();
+                switch (reportCard.HeadSection.ClassRoom.SchoolClass.ReportCardModel)
                 {
-                    ReportDocument = new PrimaryTermReportCardReport(reportCard)
-                };
+                    case 0:
+                        reportSource.ReportDocument = new PrimaryTermReportCardReport(reportCard);
+                        break;
+                    case 1:
+                        reportSource.ReportDocument = new GardenTermReportCardReport(reportCard);
+                        break;
+                    default:
+                        reportSource.ReportDocument = new PrimaryTermReportCardReport(reportCard);
+                        break;
+                }
                 reportBook.ReportSources.Add(reportSource);
             }
 
             ReportViewer.AutoSize = true;
-            InstanceReportSource reportSourceFinal = new InstanceReportSource
+            InstanceReportSource reportSourceFinal = new ()
             {
                 ReportDocument = reportBook
             };
@@ -260,10 +249,20 @@ namespace Primary.SchoolApp
             var reportBook = new ReportBook();
             foreach (var reportCard in reportCardList)
             {
-                InstanceReportSource reportSource = new()
+
+                InstanceReportSource reportSource = new();
+                switch (reportCard.HeadSection.ClassRoom.SchoolClass.ReportCardModel)
                 {
-                    ReportDocument = new PrimaryAnnualReportCardReport(reportCard)
-                };
+                    case 0:
+                        reportSource.ReportDocument = new PrimaryAnnualReportCardReport(reportCard);
+                        break;
+                    case 1:
+                        reportSource.ReportDocument = new GardenAnnualReportCardReport(reportCard);
+                        break;
+                    default:
+                        reportSource.ReportDocument = new PrimaryAnnualReportCardReport(reportCard);
+                        break;
+                }
                 reportBook.ReportSources.Add(reportSource);
             }
 

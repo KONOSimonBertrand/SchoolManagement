@@ -76,7 +76,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(683, 203);
+            editPanel.Size = new Size(707, 203);
             editPanel.TabIndex = 35;
             // 
             // sequenceSeparator
@@ -120,10 +120,6 @@
             sequenceSpinEditor.Location = new Point(0, 164);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
-            // 
-            // 
-            // 
-            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(109, 30);
             sequenceSpinEditor.TabIndex = 5;
             // 
@@ -169,10 +165,10 @@
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(13, 248);
+            errorLabel.Location = new Point(0, 213);
             errorLabel.Margin = new Padding(4, 5, 4, 5);
             errorLabel.Name = "errorLabel";
-            errorLabel.Size = new Size(660, 30);
+            errorLabel.Size = new Size(425, 30);
             errorLabel.TabIndex = 116;
             // 
             // closeButton
@@ -205,7 +201,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(683, 282);
+            ClientSize = new Size(707, 259);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

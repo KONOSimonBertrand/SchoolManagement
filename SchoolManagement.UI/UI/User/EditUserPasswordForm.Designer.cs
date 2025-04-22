@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
             showPasswordToggleButton = new Telerik.WinControls.UI.RadToggleButton();
             oldPasswordSeparator = new Telerik.WinControls.UI.RadSeparator();
@@ -39,6 +40,7 @@
             errorLabel = new Telerik.WinControls.UI.RadLabel();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
+            errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)showPasswordToggleButton).BeginInit();
@@ -51,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this).BeginInit();
             SuspendLayout();
             // 
@@ -67,7 +70,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(8, 10, 8, 10);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(388, 142);
+            editPanel.Size = new Size(400, 142);
             editPanel.TabIndex = 79;
             // 
             // showPasswordToggleButton
@@ -164,6 +167,10 @@
             saveButton.TabIndex = 2;
             saveButton.Text = "Enregistrer";
             // 
+            // errorProvider
+            // 
+            errorProvider.ContainerControl = this;
+            // 
             // EditUserPasswordForm
             // 
             AcceptButton = saveButton;
@@ -171,7 +178,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(388, 222);
+            ClientSize = new Size(400, 219);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -192,6 +199,7 @@
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)this).EndInit();
             ResumeLayout(false);
         }
@@ -209,5 +217,6 @@
         private Telerik.WinControls.UI.RadButton closeButton;
         private Telerik.WinControls.UI.RadButton saveButton;
         private Telerik.WinControls.UI.RadToggleButton showPasswordToggleButton;
+        private ErrorProvider errorProvider;
     }
 }

@@ -165,7 +165,7 @@
             editPanel.Dock = DockStyle.Top;
             editPanel.Location = new Point(0, 0);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(807, 338);
+            editPanel.Size = new Size(819, 338);
             editPanel.TabIndex = 30;
             // 
             // transactionDateSeparator
@@ -184,10 +184,6 @@
             transactionDateTimePicker.Location = new Point(641, 232);
             transactionDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             transactionDateTimePicker.Name = "transactionDateTimePicker";
-            // 
-            // 
-            // 
-            transactionDateTimePicker.RootElement.MinSize = new Size(0, 0);
             transactionDateTimePicker.Size = new Size(147, 36);
             transactionDateTimePicker.TabIndex = 11;
             transactionDateTimePicker.TabStop = false;
@@ -322,10 +318,6 @@
             endDateTimePicker.Location = new Point(159, 166);
             endDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             endDateTimePicker.Name = "endDateTimePicker";
-            // 
-            // 
-            // 
-            endDateTimePicker.RootElement.MinSize = new Size(0, 0);
             endDateTimePicker.Size = new Size(147, 36);
             endDateTimePicker.TabIndex = 7;
             endDateTimePicker.TabStop = false;
@@ -354,13 +346,12 @@
             // studentDropDownList
             // 
             studentDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            studentDropDownList.DropDownAnimationEnabled = true;
             studentDropDownList.DropDownHeight = 159;
             studentDropDownList.Location = new Point(0, 30);
             studentDropDownList.Margin = new Padding(4, 5, 4, 5);
             studentDropDownList.MinimumSize = new Size(0, 30);
             studentDropDownList.Name = "studentDropDownList";
-            studentDropDownList.Size = new Size(440, 35);
+            studentDropDownList.Size = new Size(440, 30);
             studentDropDownList.TabIndex = 0;
             ((Telerik.WinControls.UI.RadDropDownListElement)studentDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)studentDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -390,13 +381,12 @@
             // paymentMeanDropDownList
             // 
             paymentMeanDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            paymentMeanDropDownList.DropDownAnimationEnabled = true;
             paymentMeanDropDownList.DropDownHeight = 159;
             paymentMeanDropDownList.Location = new Point(0, 232);
             paymentMeanDropDownList.Margin = new Padding(4, 5, 4, 5);
             paymentMeanDropDownList.MinimumSize = new Size(0, 30);
             paymentMeanDropDownList.Name = "paymentMeanDropDownList";
-            paymentMeanDropDownList.Size = new Size(441, 35);
+            paymentMeanDropDownList.Size = new Size(441, 30);
             paymentMeanDropDownList.TabIndex = 9;
             ((Telerik.WinControls.UI.RadDropDownListElement)paymentMeanDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)paymentMeanDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -475,13 +465,12 @@
             // subscriptionDropDownList
             // 
             subscriptionDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            subscriptionDropDownList.DropDownAnimationEnabled = true;
             subscriptionDropDownList.DropDownHeight = 159;
             subscriptionDropDownList.Location = new Point(0, 100);
             subscriptionDropDownList.Margin = new Padding(4, 5, 4, 5);
             subscriptionDropDownList.MinimumSize = new Size(0, 30);
             subscriptionDropDownList.Name = "subscriptionDropDownList";
-            subscriptionDropDownList.Size = new Size(515, 35);
+            subscriptionDropDownList.Size = new Size(515, 30);
             subscriptionDropDownList.TabIndex = 3;
             ((Telerik.WinControls.UI.RadDropDownListElement)subscriptionDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)subscriptionDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -517,10 +506,6 @@
             startDateTimePicker.Location = new Point(0, 166);
             startDateTimePicker.Margin = new Padding(4, 5, 4, 5);
             startDateTimePicker.Name = "startDateTimePicker";
-            // 
-            // 
-            // 
-            startDateTimePicker.RootElement.MinSize = new Size(0, 0);
             startDateTimePicker.Size = new Size(151, 36);
             startDateTimePicker.TabIndex = 6;
             startDateTimePicker.TabStop = false;
@@ -567,7 +552,7 @@
             schoolYearLabel.TabIndex = 33;
             schoolYearLabel.Text = "Année scolaire:";
             // 
-            // classroomLabel
+            // classLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(448, 0);
@@ -626,7 +611,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(807, 393);
+            ClientSize = new Size(819, 404);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

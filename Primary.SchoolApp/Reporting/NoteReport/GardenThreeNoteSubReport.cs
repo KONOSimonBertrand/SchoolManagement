@@ -10,10 +10,10 @@ namespace Primary.SchoolApp.Reporting
         {
             this.Filters.Clear();
             this.Filters.Add(new Filter("=Fields.SubjectGroup.Id", FilterOperator.Equal, "= Parameters.GroupID.Value"));
-            FirstNoteTextBox.Value = "=FirstNoteAsString";
-            SecondNoteTextBox.Value = "=SecondNoteAsString";
-            ThirdNoteTextBox.Value = "=ThirdNoteAsString";
-            FinalNoteTextBox.Value = "=FinalNoteAsString";
+            FirstNoteTextBox.Value = "=FirstNoteWithMax";
+            SecondNoteTextBox.Value = "=SecondNoteWithMax";
+            ThirdNoteTextBox.Value = "=ThirdNoteWithMax";
+            FinalNoteTextBox.Value = "=FinalNoteWithMax";
             RatingTextBox.Value = "=Rating";
             SubjectTextBox.Value = reportCard.HeadSection.Language == "FR" ? "=Subject.FrenchName" : "=Subject.EnglishName";
             DataSource = reportCard.DetailSection.NoteList;

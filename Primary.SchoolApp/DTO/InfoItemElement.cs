@@ -108,7 +108,6 @@ namespace Primary.SchoolApp.DTO
             base.Synchronize();
 
             InfoItem item = (InfoItem)this.Data.DataBoundItem;
-           // this.imageElement.Image = AppUtilities.GetImage("View");
             this.headerElement.Text = item.Title;
             this.descriptionElement.Text=item.Description;
             this.headerElement.ForeColor= item.Color=="Red"? Color.Red:Color.Green;

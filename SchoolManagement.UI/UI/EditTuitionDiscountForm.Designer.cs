@@ -121,7 +121,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(788, 270);
+            editPanel.Size = new Size(800, 270);
             editPanel.TabIndex = 21;
             // 
             // schoolYearSeparator
@@ -208,7 +208,7 @@
             discountTextBox.Size = new Size(217, 36);
             discountTextBox.TabIndex = 5;
             // 
-            // classroomLabel
+            // classLabel
             // 
             classLabel.AutoSize = false;
             classLabel.Location = new Point(488, 0);
@@ -278,13 +278,12 @@
             // costTypeDropDownList
             // 
             costTypeDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            costTypeDropDownList.DropDownAnimationEnabled = true;
             costTypeDropDownList.DropDownHeight = 159;
             costTypeDropDownList.Location = new Point(5, 97);
             costTypeDropDownList.Margin = new Padding(4, 5, 4, 5);
             costTypeDropDownList.MinimumSize = new Size(0, 30);
             costTypeDropDownList.Name = "costTypeDropDownList";
-            costTypeDropDownList.Size = new Size(328, 35);
+            costTypeDropDownList.Size = new Size(328, 30);
             costTypeDropDownList.TabIndex = 3;
             ((Telerik.WinControls.UI.RadDropDownListElement)costTypeDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)costTypeDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -398,7 +397,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(788, 325);
+            ClientSize = new Size(800, 351);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

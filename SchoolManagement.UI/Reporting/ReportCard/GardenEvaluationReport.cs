@@ -36,10 +36,12 @@ namespace SchoolManagement.UI.Reporting
         public Telerik.Reporting.TextBox LowestAverageLabel { get => lowestAverageLabel; }
         public Telerik.Reporting.TextBox LowestAverageTextBox { get => lowestAverageTextBox; }
         public Telerik.Reporting.TextBox TeacherCommentLabel { get => teacherCommentLabel; }
+        public Telerik.Reporting.TextBox TeacherCommentTextBox {  get => teacherCommentTextBox; }
         public Telerik.Reporting.TextBox TotalDayAttendanceLabel {  get => totalDayAttendanceLabel; }
         public Telerik.Reporting.TextBox TotalDayAttendanceTextBox{ get => totalDayAttendanceTextBox; }
         public Telerik.Reporting.TextBox TotalAbsentLabel { get => totalAbsentLabel; }
         public Telerik.Reporting.TextBox TotalAbsentTextBox { get => totalAbsentTextBox; }
+        public Telerik.Reporting.TextBox DecisionTextBox { get => decisionTextBox; }
         public Telerik.Reporting.TextBox TotalLateLabel { get => totalLateLabel; }
         public Telerik.Reporting.TextBox TotalLateTextBox { get => totalLateTextBox; }
         public Telerik.Reporting.TextBox TotalLeftEarlyLabel { get => totalLeftEarlyLabel; }

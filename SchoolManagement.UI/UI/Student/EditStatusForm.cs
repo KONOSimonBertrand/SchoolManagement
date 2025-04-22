@@ -27,6 +27,15 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.ThemeNameChanged += EditStatusForm_ThemeNameChanged;
+        }
+
+        private void EditStatusForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
+            {
+                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -58,7 +67,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             List<string> frenchReasons = new();
             frenchReasons.Add("Fait partie des effectifs");

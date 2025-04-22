@@ -50,9 +50,19 @@ namespace SchoolManagement.Application
             return await studentNoteReadRepository.GetCommentsByClassroomAsync(roomId,evaluationId, schoolYearId);
         }
 
+        public async Task<List<EvaluationComment>> GetCommentsByClassroomAsync(int roomId, int evaluationId,int bookId, int schoolYearId)
+        {
+            return await studentNoteReadRepository.GetCommentsByClassroomAsync(roomId, evaluationId,bookId, schoolYearId);
+        }
+
         public async Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int schoolYearId)
         {
             return await studentNoteReadRepository.GetCommentsBySchoolYearAsync(schoolYearId);
+        }
+
+        public async Task<List<EvaluationComment>> GetCommentsBySchoolYearAsync(int roomId,int bookId,int schoolYearId)
+        {
+            return await studentNoteReadRepository.GetCommentsBySchoolYearAsync(roomId,bookId,schoolYearId);
         }
 
         public async Task<List<EvaluationComment>> GetCommentsByStudentAsync(int studentId, int schoolYearId)

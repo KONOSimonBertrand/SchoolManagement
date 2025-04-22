@@ -14,10 +14,16 @@
     <Compile Update="Reporting\CashFlow\PaymentSummaryReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Reporting\NoteReport\GardenAnnualReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\NoteReport\GardenEvaluationReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\NoteReport\GardenOneNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\GardenTermReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Reporting\NoteReport\GardenThreeNoteSubReport.cs">
