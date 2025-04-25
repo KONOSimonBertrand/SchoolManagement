@@ -25,7 +25,6 @@ namespace SchoolManagement.UI
         {
             InitializeComponent();
             InitComponent();
-            InitEvent();
             InitLanguage();
         }
 
@@ -38,44 +37,34 @@ namespace SchoolManagement.UI
             noteMaxLabel.Text=Language.labelMaxNote + ":";
             noteCoefLabel.Text = Language.labelCoefficient + ":";
         }
-        private void InitEvent()
-        {
-           
-        }
+        
         private void InitComponent()
         {
             this.subjectDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
             this.filterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.filterLabel.LabelElement.CustomFontSize = 10.5f;
             this.filterLabel.TextAlignment = ContentAlignment.BottomLeft;
-            this.filterLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.noteCoefLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteCoefLabel.LabelElement.CustomFontSize = 10.5f;
             this.noteCoefLabel.TextAlignment = ContentAlignment.BottomLeft;
-            this.noteCoefLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.noteMaxLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteMaxLabel.LabelElement.CustomFontSize = 10.5f;
             this.noteMaxLabel.TextAlignment = ContentAlignment.BottomLeft;
-            this.noteMaxLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.subjectLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subjectLabel.LabelElement.CustomFontSize = 10.5f;
             this.subjectLabel.TextAlignment = ContentAlignment.BottomLeft;
-            this.subjectLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.noteCoefTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteCoefTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteCoefTextBox.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.noteMaxTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteMaxTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteMaxTextBox.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.subjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.subjectDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.subjectDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             foreach (RadControl c in this.informationPanel.Controls)

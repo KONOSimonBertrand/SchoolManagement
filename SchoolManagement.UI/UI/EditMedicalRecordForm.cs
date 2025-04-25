@@ -39,20 +39,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditMedicalRecordForm_ThemeNameChanged;
         }
 
-        private void EditMedicalRecordForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.descriptionTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.healthSubjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
+      
 
         private void InitComponent()
         {
@@ -63,23 +52,19 @@ namespace SchoolManagement.UI
 
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.healthSubjectLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.healthSubjectLabel.LabelElement.CustomFontSize = 10.5f;
-            this.healthSubjectLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.healthSubjectLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 
             this.descriptionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionLabel.LabelElement.CustomFontSize = 10.5f;
-            this.descriptionLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.descriptionLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.studentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -98,7 +83,6 @@ namespace SchoolManagement.UI
 
             this.dateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.dateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             this.healthSubjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;

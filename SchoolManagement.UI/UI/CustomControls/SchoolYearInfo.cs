@@ -37,30 +37,24 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.startDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.startDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.endDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.startDateTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.startDateTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.startDateTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.endDateTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.endDateTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.endDateTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)

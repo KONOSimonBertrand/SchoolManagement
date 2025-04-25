@@ -44,25 +44,9 @@ namespace SchoolManagement.UI
             //this.nameFrDropDownList.SelectedIndexChanged += NameDropDownListSelectedIndexChanged;
             minNoteTextBox.TextChanging += TxtChanging;
             maxNoteTextBox.TextChanging += TxtChanging;
-            this.ThemeNameChanged += EditRatingSystemForm_ThemeNameChanged;
         }
 
-        private void EditRatingSystemForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.minNoteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.maxNoteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nameFrDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nameEnDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.descriptionFrDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.descriptionEnDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.domainDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
-
+        
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close(); 
@@ -128,37 +112,30 @@ namespace SchoolManagement.UI
 
             this.nameFrLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameFrLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameFrLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameFrLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameEnLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameEnLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameEnLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameEnLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.descriptionFrLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionFrLabel.LabelElement.CustomFontSize = 10.5f;
-            this.descriptionFrLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.descriptionFrLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.descriptionEnLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionEnLabel.LabelElement.CustomFontSize = 10.5f;
-            this.descriptionEnLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.descriptionEnLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.minNoteLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.minNoteLabel.LabelElement.CustomFontSize = 10.5f;
-            this.minNoteLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.minNoteLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.maxNoteLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.maxNoteLabel.LabelElement.CustomFontSize = 10.5f;
-            this.maxNoteLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.maxNoteLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.domainLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.domainLabel.LabelElement.CustomFontSize = 10.5f;
-            this.domainLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.domainLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.minNoteTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;

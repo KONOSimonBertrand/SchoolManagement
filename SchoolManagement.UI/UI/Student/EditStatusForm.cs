@@ -27,17 +27,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditStatusForm_ThemeNameChanged;
         }
 
-        private void EditStatusForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
-
+       
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -48,12 +40,10 @@ namespace SchoolManagement.UI
             this.errorLabel.ForeColor = Color.Red;
             this.reasonLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.reasonLabel.LabelElement.CustomFontSize = 10.5f;
-            this.reasonLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.reasonLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.reasonDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.reasonDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.reasonDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.reasonDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
             this.reasonDropDownList.RootElement.EnableElementShadow = false;
 

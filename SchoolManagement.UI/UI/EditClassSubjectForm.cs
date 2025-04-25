@@ -35,32 +35,26 @@ namespace SchoolManagement.UI
 
             this.groupLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
-            this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.groupLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sectionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sectionLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sectionLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sectionLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.subjectLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subjectLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subjectLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.subjectLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.noteOnLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteOnLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteOnLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteOnLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.coefLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.coefLabel.LabelElement.CustomFontSize = 10.5f;
-            this.coefLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.coefLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sequenceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.coefTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -71,7 +65,6 @@ namespace SchoolManagement.UI
 
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
             this.sequenceSpinEditor.SpinElement.ShowBorder = false;
 
             this.groupDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
@@ -142,21 +135,9 @@ namespace SchoolManagement.UI
             this.coefTextBox.TextChanging += new TextChangingEventHandler(TextBox_Changing);
             subjectDropDownList.SelectedIndexChanged += SubjectDropDownList_SelectedIndexChanged;
             groupDropDownList.SelectedIndexChanged += GroupDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditClassSubjectForm_ThemeNameChanged;
         }
 
-        private void EditClassSubjectForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.coefTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.noteOnTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sectionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
+      
 
         private void TextBox_Changing(object sender, TextChangingEventArgs e)
         {

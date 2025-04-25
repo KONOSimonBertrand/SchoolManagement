@@ -49,25 +49,9 @@ namespace SchoolManagement.UI
             schoolYearDropDownList.SelectedIndexChanged += SchoolYearDropDownList_SelectedIndexChanged;
             this.amountTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
             this.trancheNumberTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
-            this.ThemeNameChanged += EditSchoolingCostForm_ThemeNameChanged;
         }
 
-        private void EditSchoolingCostForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.tranchesGroupBox.ForeColor = Color.FromArgb(89, 89, 89);
-                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.trancheNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.schoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.classDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.costPayableDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.costTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
-
+      
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -82,22 +66,18 @@ namespace SchoolManagement.UI
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.costTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.costTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.costTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.costPayableLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.costPayableLabel.LabelElement.CustomFontSize = 10.5f;
-            this.costPayableLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.costPayableLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -107,7 +87,6 @@ namespace SchoolManagement.UI
 
             this.trancheNumberLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.trancheNumberLabel.LabelElement.CustomFontSize = 10.5f;
-            this.trancheNumberLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.trancheNumberLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.tranchesGroupBox.GroupBoxElement.CustomFont = ViewUtilities.MainFont;

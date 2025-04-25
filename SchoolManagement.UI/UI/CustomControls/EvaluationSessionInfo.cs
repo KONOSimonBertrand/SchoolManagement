@@ -33,12 +33,10 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)

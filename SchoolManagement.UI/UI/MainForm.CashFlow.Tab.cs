@@ -42,12 +42,10 @@ namespace SchoolManagement.UI
             cashFlowSchoolYearDropDownList.RootElement.EnableElementShadow = false;
             cashFlowSchoolYearDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             cashFlowSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            cashFlowSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             cashFlowSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             cashFlowSchoolYearLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             cashFlowSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            cashFlowSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             cashFlowGridView.TableElement.CellSpacing = 10;
             cashFlowGridView.RootElement.EnableElementShadow = false;

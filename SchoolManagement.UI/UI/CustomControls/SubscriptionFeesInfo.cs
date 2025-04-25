@@ -40,30 +40,24 @@ namespace SchoolManagement.UI.CustomControls
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.subscriptionTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subscriptionTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subscriptionTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.subscriptionTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.AmountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.AmountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.AmountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.AmountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.subscriptionTypeTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.subscriptionTypeTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.subscriptionTypeTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities. MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -76,14 +70,14 @@ namespace SchoolManagement.UI.CustomControls
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.closeButton.Image = ViewUtilities.GetImage("Close");
-            this.closeButton.RootElement.ToolTipText = "Cliquer ici pour fermer";
+            this.closeButton.RootElement.ToolTipText = Language.messageClickToClose;
 
             this.editButton.RootElement.EnableElementShadow = false;
             this.editButton.ButtonElement.Padding = new Padding(0);
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.editButton.Image = ViewUtilities.GetImage("Edit");
-            this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
+            this.editButton.RootElement.ToolTipText = Language.messageClickToEdit;
 
             this.schoolYearLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.subscriptionTypeLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

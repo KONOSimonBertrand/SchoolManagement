@@ -47,28 +47,24 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.accountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.accountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.accountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.accountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.typeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.typeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.typeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.typeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+
             this.typeTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.typeTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.typeTextBox.ForeColor = Color.FromArgb(33, 33, 33);
+
             this.accountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.accountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.accountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             this.editPanel.RootElement.EnableElementShadow = false;

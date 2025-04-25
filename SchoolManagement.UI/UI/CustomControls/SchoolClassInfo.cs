@@ -47,24 +47,20 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.groupLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
-            this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.groupLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.groupTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.groupTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.subjectsCountLabel.Image =Utilities.ViewUtilities.GetImage("Watch");
-            this.subjectsCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.subjectsCountLabel.Image =Utilities.ViewUtilities.GetImage("Show");
+            this.subjectsCountLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
             this.subjectsCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.subjectsCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.subjectsCountLabel.LabelElement.CustomFontSize = 10.5f;

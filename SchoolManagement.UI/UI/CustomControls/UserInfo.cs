@@ -36,27 +36,24 @@ namespace SchoolManagement.UI.CustomControls
 
             this.loginLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.loginLabel.LabelElement.CustomFontSize = 10.5f;
-            this.loginLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.loginLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.defaultModuleLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.defaultModuleLabel.LabelElement.CustomFontSize = 10.5f;
-            this.defaultModuleLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.defaultModuleLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 
-            this.moduleCountLabel.Image = Utilities.ViewUtilities.GetImage("Watch");
+            this.moduleCountLabel.Image = Utilities.ViewUtilities.GetImage("Show");
             this.moduleCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.moduleCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.moduleCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.moduleCountLabel.LabelElement.CustomFontSize = 10.5f;
 
-            this.roomCountLabel.Image = Utilities.ViewUtilities.GetImage("Watch");
+            this.roomCountLabel.Image = Utilities.ViewUtilities.GetImage("Show");
             this.roomCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
             this.roomCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.roomCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
@@ -65,15 +62,12 @@ namespace SchoolManagement.UI.CustomControls
 
             this.loginTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.loginTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.loginTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.defaultModuleTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.defaultModuleTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.defaultModuleTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -86,14 +80,14 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.editButton.Image = ViewUtilities.GetImage("Edit");
-            this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
+            this.editButton.RootElement.ToolTipText = Language.messageClickToEdit;
 
             this.closeButton.RootElement.EnableElementShadow = false;
             this.closeButton.ButtonElement.Padding = new Padding(0);
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.closeButton.Image = ViewUtilities.GetImage("Close");
-            this.closeButton.RootElement.ToolTipText = "Cliquer ici pour fermer";
+            this.closeButton.RootElement.ToolTipText = Language.messageClickToClose;
 
             this.loginLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.defaultModuleLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

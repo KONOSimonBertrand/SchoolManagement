@@ -33,20 +33,10 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             classDropDownList.SelectedIndexChanged += ClassDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditSchoolRoomForm_ThemeNameChanged;
 
         }
 
-        private void EditSchoolRoomForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark") {
-                this.classDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }           
-        }
-
+       
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -58,12 +48,10 @@ namespace SchoolManagement.UI
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -77,7 +65,6 @@ namespace SchoolManagement.UI
 
             this.sequenceLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sequenceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sequenceSpinEditor.SpinElement.CustomFont = Utilities.ViewUtilities.MainFont;

@@ -48,30 +48,24 @@ namespace SchoolManagement.UI
             this.errorLabel.ForeColor = Color.Red;
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.amountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.reasonLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.reasonLabel.LabelElement.CustomFontSize = 10.5f;
-            this.reasonLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.reasonLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.reasonTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.reasonTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.reasonTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.transactionDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.transactionDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.transactionDateTimePicker.DateTimePickerElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)
@@ -91,7 +85,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.transactionDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.transactionDateTimePicker.Value = DateTime.Now;
             this.transactionDateTimePicker.CustomFormat = "dd/MM/yyyy";

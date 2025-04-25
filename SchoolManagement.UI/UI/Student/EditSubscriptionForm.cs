@@ -54,30 +54,8 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.discountTextBox.TextChanging += new TextChangingEventHandler(TextBox_Changing);
-            this.ThemeNameChanged += EditSubscriptionForm_ThemeNameChanged;
         }
 
-        private void EditSubscriptionForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.startDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.endDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.transactionDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.paymentMeanDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.durationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.transactionIdTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.subscriptionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.feeTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
@@ -91,66 +69,51 @@ namespace SchoolManagement.UI
         {
             studentDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 40);
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            //this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.subscriptionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subscriptionLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subscriptionLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.subscriptionLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.discountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.discountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.discountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             
 
             this.feeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.feeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.feeLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.doneByLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.doneByLabel.LabelElement.CustomFontSize = 10.5f;
-            this.doneByLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.paymentMeanLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.paymentMeanLabel.LabelElement.CustomFontSize = 10.5f;
-            this.paymentMeanLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.transactionIdLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.transactionIdLabel.LabelElement.CustomFontSize = 10.5f;
-            this.transactionIdLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.transactionDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.transactionDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.transactionDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
 
             this.durationLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.durationLabel.LabelElement.CustomFontSize = 10.5f;
-            this.durationLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.endDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.startDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.startDateTimePicker.CustomFormat = "dd/MM/yyyy";

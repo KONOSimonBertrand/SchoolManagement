@@ -33,12 +33,10 @@ namespace SchoolManagement.UI
         {
             this.nameFrLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameFrLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameFrLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameFrLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameEnLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameEnLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameEnLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameEnLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameFrTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -53,7 +51,6 @@ namespace SchoolManagement.UI
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sequenceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -79,21 +76,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditEvaluationSessionForm_ThemeNameChanged;
         }
 
-        private void EditEvaluationSessionForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.nameFrTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nameEnTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
-
+       
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();

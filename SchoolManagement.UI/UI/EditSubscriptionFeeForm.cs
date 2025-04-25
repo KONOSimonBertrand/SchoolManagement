@@ -40,22 +40,18 @@ namespace SchoolManagement.UI
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.amountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.subscriptionTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subscriptionTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subscriptionTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.subscriptionTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.durationLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.durationLabel.LabelElement.CustomFontSize = 10.5f;
-            this.durationLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.durationLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -117,24 +113,11 @@ namespace SchoolManagement.UI
             this.amountTextBox.TextChanging += AmountTextBox_TextChanging; ;
             schoolYearDropDownList.SelectedIndexChanged += SchoolYearDropDownList_SelectedIndexChanged; ;
             subscriptionTypeDropDownList.SelectedIndexChanged += SubscriptionTypeDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditSubscriptionFeeForm_ThemeNameChanged;
 
 
         }
 
-        private void EditSubscriptionFeeForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.durationSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-                this.schoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.subscriptionTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
-
+        
         private void SubscriptionTypeDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
             if (subscriptionTypeDropDownList.SelectedIndex < 0)

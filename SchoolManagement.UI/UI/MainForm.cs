@@ -164,11 +164,11 @@ namespace SchoolManagement.UI
             homeEmptyPanel.BackColor = Color.Transparent;
             homeEmptyPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
 
-            homeAddButton.ButtonElement.ToolTipText = "Cliquer ici pour inscrire un élève";
+            homeAddButton.ButtonElement.ToolTipText = Language.MessageClickToAddEnrolling;
             homeAddButton.TextAlignment = ContentAlignment.MiddleCenter;
 
             homeExportToExcelButton.TextAlignment = ContentAlignment.MiddleCenter;
-            homeExportToExcelButton.ButtonElement.ToolTipText = "Cliquer ici pour exporter les données vers excel";
+            homeExportToExcelButton.ButtonElement.ToolTipText = Language.messageClickToExport;
 
             homeSearchTextBox.NullText = "Rechercher par Matricule, par Nom, par classe,par groupe";
             homeIconViewToggleButton.ButtonElement.ToolTipText = "Vue grille";
@@ -277,10 +277,24 @@ namespace SchoolManagement.UI
             if (ThemeResolutionService.ApplicationThemeName == "Windows11Dark")
             {
                 homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.cashFlowNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.disciplineNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.employeeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.reportNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.studentNoteNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.timeTableNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                this.settingNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
             }
             else
             {
                 homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.cashFlowNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.disciplineNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.employeeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.reportNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.studentNoteNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.timeTableNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                this.settingNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
             }
         }
 

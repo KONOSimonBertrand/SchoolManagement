@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.UI.CustomControls;
+using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -43,11 +44,11 @@ namespace SchoolManagement.UI
             studentNoteEmptyPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             studentNoteEmptyPanel.RootElement.EnableElementShadow = false;
 
-            studentNoteAddButton.RootElement.ToolTipText = "Cliquer ici pour ajouter des notes";
+            studentNoteAddButton.RootElement.ToolTipText =Language.messageClickToAdd;
             studentNoteAddButton.TextAlignment = ContentAlignment.MiddleCenter;
 
             studentNoteExportToExcelButton.TextAlignment = ContentAlignment.MiddleCenter;
-            studentNoteExportToExcelButton.ButtonElement.ToolTipText = "Cliquer ici pour exporter les données vers excel";
+            studentNoteExportToExcelButton.ButtonElement.ToolTipText = Language.messageClickToExport;
 
             studentNoteSearchTextBox.NullText = "Rechercher par élève et par matière";
             studentNoteIconViewToggleButton.ButtonElement.ToolTipText = "Vue groupée";
@@ -80,34 +81,28 @@ namespace SchoolManagement.UI
             studentNoteSchoolYearDropDownList.RootElement.EnableElementShadow = false;
             studentNoteSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             studentNoteSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            studentNoteSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             studentNoteSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             studentNoteRoomDropDownList.RootElement.EnableElementShadow = false;
             studentNoteRoomDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             studentNoteRoomDropDownList.RootElement.CustomFontSize = 10.5f;
-            studentNoteRoomDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             studentNoteRoomDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             studentNoteGroupDropDownList.RootElement.EnableElementShadow = false;
             studentNoteGroupDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             studentNoteGroupDropDownList.RootElement.CustomFontSize = 10.5f;
-            studentNoteGroupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             studentNoteGroupDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             studentNoteSchoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             studentNoteSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            studentNoteSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             studentNoteSchoolYearLabel.TextAlignment = ContentAlignment.BottomCenter;
 
             studentNoteRoomLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             studentNoteRoomLabel.LabelElement.CustomFontSize = 10.5f;
-            studentNoteRoomLabel.ForeColor = Color.FromArgb(89, 89, 89);
             studentNoteRoomLabel.TextAlignment = ContentAlignment.BottomCenter;
 
             studentNoteGroupLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             studentNoteGroupLabel.LabelElement.CustomFontSize = 10.5f;
-            studentNoteGroupLabel.ForeColor = Color.FromArgb(89, 89, 89);
             studentNoteGroupLabel.TextAlignment = ContentAlignment.BottomCenter;
 
             studentNoteGridView.TableElement.CellSpacing = 10;

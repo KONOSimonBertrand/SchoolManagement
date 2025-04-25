@@ -46,24 +46,20 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.classTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
-            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("Watch");
-            this.studentsCountLabel.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.studentsCountLabel.Image = Utilities.ViewUtilities.GetImage("Show");
+            this.studentsCountLabel.TextImageRelation = TextImageRelation.ImageBeforeText;
             this.studentsCountLabel.LabelElement.LabelImage.Padding = new Padding(0, -3, 0, 0);
             this.studentsCountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFontMedium;
             this.studentsCountLabel.LabelElement.CustomFontSize = 10.5f;
@@ -79,14 +75,14 @@ namespace SchoolManagement.UI.CustomControls
             this.editButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.editButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.editButton.Image = ViewUtilities.GetImage("Edit");
-            this.editButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations";
+            this.editButton.RootElement.ToolTipText = Language.messageClickToEdit;
 
             this.closeButton.RootElement.EnableElementShadow = false;
             this.closeButton.ButtonElement.Padding = new Padding(0);
             this.closeButton.ImageAlignment = ContentAlignment.MiddleCenter;
             this.closeButton.DisplayStyle = Telerik.WinControls.DisplayStyle.Image;
             this.closeButton.Image = Resources.not_clean;
-            this.closeButton.RootElement.ToolTipText = "Cliquer ici pour fermer";
+            this.closeButton.RootElement.ToolTipText = Language.messageClickToClose;
 
             this.nameLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.classLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);

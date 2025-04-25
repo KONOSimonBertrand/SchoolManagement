@@ -63,30 +63,24 @@ namespace SchoolManagement.UI
 
             this.languageLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.languageLabel.LabelElement.CustomFontSize = 10.5f;
-            this.languageLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.languageLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.userNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.userNameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.userNameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.userNameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.userNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.userNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.userNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.passwordLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.passwordLabel.LabelElement.CustomFontSize = 10.5f;
-            this.passwordLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.passwordLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.passwordTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.passwordTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.passwordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.languageDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.languageDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.languageDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.languageDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -106,11 +100,9 @@ namespace SchoolManagement.UI
             
             this.connectionButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.connectionButton.ButtonElement.CustomFontSize = 10.5f;
-            this.connectionButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.cancelButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.cancelButton.ButtonElement.CustomFontSize = 10.5f;
-            this.cancelButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             languageDropDownList.SelectedIndex = 0;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(LanguageDropDownList.SelectedValue.ToString());
            

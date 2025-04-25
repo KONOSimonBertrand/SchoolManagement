@@ -51,85 +51,54 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += (s, e) => { this.Close(); };
             noteTextBox.TextChanging += (s, e) => { e.Cancel=!ViewUtilities.IsNumber(e.NewValue); };
-            this.ThemeNameChanged += EditStudentNoteForm_ThemeNameChanged;
         }
 
-        private void EditStudentNoteForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.evaluationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.commentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.noteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.noteMaxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.noteCoefTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void InitComponent()
         {
             studentDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 40);
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
 
             this.studentDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
             this.subjectDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.evaluationLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.evaluationLabel.LabelElement.CustomFontSize = 10.5f;
-            this.evaluationLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            //this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.subjectLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subjectLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subjectLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.subjectLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.groupLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
-            this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.groupLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.commentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.commentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.commentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.commentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.noteLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.noteCoefLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteCoefLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteCoefLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteCoefLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.noteMaxLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteMaxLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteMaxLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteMaxLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;

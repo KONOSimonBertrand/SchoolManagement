@@ -59,30 +59,8 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.amountTextBox.TextChanging += AmountTextBox_TextChanging;
-            this.ThemeNameChanged += EditTuitionPaymentForm_ThemeNameChanged;
         }
 
-        private void EditTuitionPaymentForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.cashFlowTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.paymentMeanDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.unPaidTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.costTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.transactionIdTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.paidTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void AmountTextBox_TextChanging(object sender, TextChangingEventArgs e)
         {
@@ -98,41 +76,33 @@ namespace SchoolManagement.UI
             
             studentDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 40);
             studentDropDownList.DropDownListElement.EnableElementShadow = false;
-            //studentDropDownList.DropDownListElement.FindDescendant<Telerik.WinControls.Primitives.FillPrimitive>().BackColor = Color.Transparent;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.cashFlowTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.cashFlowTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.cashFlowTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.cashFlowTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.amountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.transactionDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.transactionDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.transactionDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.transactionDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.unPaidLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -142,32 +112,26 @@ namespace SchoolManagement.UI
 
             this.costLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.costLabel.LabelElement.CustomFontSize = 10.5f;
-            this.costLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.costLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.doneByLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.doneByLabel.LabelElement.CustomFontSize = 10.5f;
-            this.doneByLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.doneByLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.paymentMeanLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.paymentMeanLabel.LabelElement.CustomFontSize = 10.5f;
-            this.paymentMeanLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.paymentMeanLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.discountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.discountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.discountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.discountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.paidLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.paidLabel.LabelElement.CustomFontSize = 10.5f;
-            this.paidLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.paidLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.transactionIdLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.transactionIdLabel.LabelElement.CustomFontSize = 10.5f;
-            this.transactionIdLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.transactionIdLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;

@@ -34,12 +34,10 @@ namespace SchoolManagement.UI
         {
             this.nameFrLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameFrLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameFrLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameFrLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameEnLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameEnLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameEnLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameEnLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameFrTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -55,7 +53,6 @@ namespace SchoolManagement.UI
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sequenceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -75,7 +72,6 @@ namespace SchoolManagement.UI
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.errorLabel.ForeColor = Color.Red;
 
         }
@@ -83,19 +79,8 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditDisciplineSubjectForm_ThemeNameChanged;
         }
 
-        private void EditDisciplineSubjectForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.nameEnTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nameFrTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {

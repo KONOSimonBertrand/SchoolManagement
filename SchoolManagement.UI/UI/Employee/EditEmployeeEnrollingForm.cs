@@ -64,37 +64,30 @@ namespace SchoolManagement.UI
 
             this.employeeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.employeeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.employeeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.employeeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
 
             this.groupLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
-            this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.groupLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.jobLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.jobLabel.LabelElement.CustomFontSize = 10.5f;
-            this.jobLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.jobLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.salaryLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.salaryLabel.LabelElement.CustomFontSize = 10.5f;
-            this.salaryLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.salaryLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
             this.dateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -104,27 +97,22 @@ namespace SchoolManagement.UI
 
             this.dateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.dateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.employeeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.employeeDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.employeeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.employeeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.jobDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.jobDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.jobDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.jobDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.groupDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.groupDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.groupDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
 
             this.salaryTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.salaryTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.salaryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.employeeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
             this.groupDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -154,7 +142,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             addEmployeeButton.RootElement.ToolTipText = Language.messageClickToAddEmployee;
             addEmployeeButton.Image = ViewUtilities.GetImage("Add");

@@ -38,20 +38,9 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             groupDropDownList.SelectedIndexChanged += GroupDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditSchoolClassForm_ThemeNameChanged;
         }
 
-        private void EditSchoolClassForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.reportCardDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.groupDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
-
+      
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -61,26 +50,21 @@ namespace SchoolManagement.UI
         {          
             this.groupLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupLabel.LabelElement.CustomFontSize = 10.5f;
-            this.groupLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.groupLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sequenceLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sequenceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sequenceSpinEditor.SpinElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
-            this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.groupDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.groupDropDownList.RootElement.CustomFontSize = 10.5f;
@@ -88,7 +72,6 @@ namespace SchoolManagement.UI
 
             this.reportCardLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.reportCardLabel.LabelElement.CustomFontSize = 10.5f;
-            this.reportCardLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.reportCardLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.reportCardDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;

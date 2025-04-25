@@ -76,7 +76,6 @@ namespace SchoolManagement.UI
             settingSearchModuleDropDownList.RootElement.EnableElementShadow = false;
             settingSearchModuleDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             settingSearchModuleDropDownList.RootElement.CustomFontSize = 10.5f;
-            settingSearchModuleDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             settingSearchModuleDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
             settingSearchModuleDropDownList.DropDownListElement.ArrowButton.Visibility = ElementVisibility.Hidden;
 

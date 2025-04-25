@@ -44,12 +44,10 @@ namespace SchoolManagement.UI
             disciplineSchoolYearDropDownList.RootElement.EnableElementShadow = false;
             disciplineSchoolYearDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             disciplineSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            disciplineSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             disciplineSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             disciplineSchoolYearLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             disciplineSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            disciplineSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             disciplineGridView.TableElement.CellSpacing = 10;
             disciplineGridView.RootElement.EnableElementShadow = false;

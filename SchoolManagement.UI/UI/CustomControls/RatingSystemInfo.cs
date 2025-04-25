@@ -32,30 +32,24 @@ namespace SchoolManagement.UI.CustomControls
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.noteMinLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteMinLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteMinLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteMinLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.noteMaxLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.noteMaxLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteMaxLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteMaxLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteMaxTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteMaxTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteMaxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.noteMinTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.noteMinTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.noteMinTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)

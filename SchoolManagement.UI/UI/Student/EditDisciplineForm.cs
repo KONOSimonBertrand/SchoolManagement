@@ -42,24 +42,9 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.durationTextBox.TextChanging += TextChanging;
-            this.ThemeNameChanged += EditDisciplineForm_ThemeNameChanged;
         }
 
-        private void EditDisciplineForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.durationTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.reasonDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.evaluationDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
-
+       
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Visible = false;

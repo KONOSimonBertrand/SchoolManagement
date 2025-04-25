@@ -63,62 +63,50 @@ namespace SchoolManagement.UI
 
             this.idNumberLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.idNumberLabel.LabelElement.CustomFontSize = 10.5f;
-            this.idNumberLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.idNumberLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.lastNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.lastNameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.lastNameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.lastNameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.firstNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.firstNameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.firstNameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.firstNameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.birthdayLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.birthdayLabel.LabelElement.CustomFontSize = 10.5f;
-            this.birthdayLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.birthdayLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sexLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sexLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sexLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sexLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.phoneLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.phoneLabel.LabelElement.CustomFontSize = 10.5f;
-            this.phoneLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.phoneLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.emailLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.emailLabel.LabelElement.CustomFontSize = 10.5f;
-            this.emailLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.emailLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.addressLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.addressLabel.LabelElement.CustomFontSize = 10.5f;
-            this.addressLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.addressLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.birthplaceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.birthplaceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.birthplaceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.birthplaceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.idCardLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.idCardLabel.LabelElement.CustomFontSize = 10.5f;
-            this.idCardLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.idCardLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.religionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.religionLabel.LabelElement.CustomFontSize = 10.5f;
-            this.religionLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.religionLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nationalityLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nationalityLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nationalityLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nationalityLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.idNumberTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -270,30 +258,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditStudentForm_ThemeNameChanged;
         }
 
-        private void EditStudentForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.idNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.firstNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.lastNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.birthdayDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nationalityDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.religionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.birthPlaceTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
-
+        
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();

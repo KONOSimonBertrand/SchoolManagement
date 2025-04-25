@@ -53,53 +53,42 @@ namespace SchoolManagement.UI.CustomControls
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.costTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.costTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.costTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.amountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.trancheNumberLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.trancheNumberLabel.LabelElement.CustomFontSize = 10.5f;
-            this.trancheNumberLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.trancheNumberLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.trancheValueLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.trancheValueLabel.LabelElement.CustomFontSize = 10.5f;
-            this.trancheValueLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.trancheValueLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.trancheNumberTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.trancheNumberTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.trancheNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.classTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.classTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.classTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.costTypeTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.costTypeTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             this.editPanel.RootElement.EnableElementShadow = false;

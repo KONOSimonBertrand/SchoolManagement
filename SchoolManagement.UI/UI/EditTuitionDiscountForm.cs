@@ -50,66 +50,41 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.discountTextBox.TextChanging += AmountTextBox_TextChanging;
-            this.ThemeNameChanged += EditTuitionDiscountForm_ThemeNameChanged;
         }
 
-        private void EditTuitionDiscountForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.costTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.discountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.reasonTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.ordoredByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.costTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void InitComponent()
         {
 
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.costTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.costTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            //this.costTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 
             this.discountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.discountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.discountLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            //this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.reasonLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.reasonLabel.LabelElement.CustomFontSize = 10.5f;
-            this.reasonLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            //this.restToPayLabel.TextAlignment = ContentAlignment.BottomLeft;
+           
             this.costLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.costLabel.LabelElement.CustomFontSize = 10.5f;
-            this.costLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.ordoredByLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.ordoredByLabel.LabelElement.CustomFontSize = 10.5f;
-            this.ordoredByLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.studentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.studentTextBox.TextBoxElement.CustomFontSize = 10.5f;
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.costTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;

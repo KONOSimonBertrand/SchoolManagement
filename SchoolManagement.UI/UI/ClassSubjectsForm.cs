@@ -30,7 +30,6 @@ namespace SchoolManagement.UI
 
         private void InitComponent()
         {
-            this.addSubjectCommandBarButton.ToolTipText = "Cliquer ici pour ajouter une nouvelle matière";
             this.dataPanel.RootElement.EnableElementShadow = false;
 
             printCommandBarButton.Image = ViewUtilities.GetImage("Printer");

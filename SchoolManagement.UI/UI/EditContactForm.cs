@@ -50,24 +50,9 @@ namespace SchoolManagement.UI
             this.sexDropDownList.GotFocus += ControlGetFocus;
             this.studentTextBox.GotFocus += ControlGetFocus;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditContactForm_ThemeNameChanged;
         }
 
-        private void EditContactForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            this.studentTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.fullNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-            this.jobTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.relationshipDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-        }
-
+       
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -85,12 +70,10 @@ namespace SchoolManagement.UI
           
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.idCardLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.idCardLabel.LabelElement.CustomFontSize = 10.5f;
-            this.idCardLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.idCardLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.fullNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -99,29 +82,23 @@ namespace SchoolManagement.UI
 
             this.sexLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sexLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sexLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.jobLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.jobLabel.LabelElement.CustomFontSize = 10.5f;
-            this.jobLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.relationshipLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.relationshipLabel.LabelElement.CustomFontSize = 10.5f;
-            this.relationshipLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.phoneLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.phoneLabel.LabelElement.CustomFontSize = 10.5f;
-            this.phoneLabel.ForeColor = Color.FromArgb(89, 89, 89);
             //this.phoneLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.emailLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.emailLabel.LabelElement.CustomFontSize = 10.5f;
-            this.emailLabel.ForeColor = Color.FromArgb(89, 89, 89);
             //this.emailLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.addressLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.addressLabel.LabelElement.CustomFontSize = 10.5f;
-            this.addressLabel.ForeColor = Color.FromArgb(89, 89, 89);
             //this.addressLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.studentTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;

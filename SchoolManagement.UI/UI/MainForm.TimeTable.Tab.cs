@@ -51,12 +51,10 @@ namespace SchoolManagement.UI
             timeTableSchoolYearDropDownList.RootElement.EnableElementShadow = false;
             timeTableSchoolYearDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             timeTableSchoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
-            timeTableSchoolYearDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             timeTableSchoolYearDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             timeTableSchoolYearLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             timeTableSchoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            timeTableSchoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             timeTableMainContainer.BackgroundImage = Resources.Background;
             timeTableMainContainer.BackgroundImageLayout = ImageLayout.Stretch;
@@ -69,7 +67,6 @@ namespace SchoolManagement.UI
 
             timeTableScheduler.Backgrounds.Clear();
 
-            //ScheduleRadScheduler.GroupType = GroupType.Resource;
             timeTableScheduler.ShowAppointmentStatus = false;
             foreach (Resource r in timeTableScheduler.Resources)
             {
@@ -79,7 +76,6 @@ namespace SchoolManagement.UI
             timeTableScheduler.SchedulerElement.RefreshViewElement();
             timeTableScheduler.ActiveView.ResourcesPerView = 5;
             timeTableScheduler.ActiveViewType = SchedulerViewType.Week;
-            //ScheduleRadScheduler.PrintStyle = new SchedulerDailyPrintStyle(ScheduleRadScheduler.ActiveView.StartDate, ScheduleRadScheduler.ActiveView.EndDate);
             SchedulerDayViewBase view = timeTableScheduler.ActiveView as SchedulerDayViewBase;
             if (view != null)
             {

@@ -33,43 +33,30 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditSerialKeyForm_ThemeNameChanged;
         }
 
-        private void EditSerialKeyForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.serialKeyTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
+        
 
         private void InitComponent()
         {
             this.serialKeyUserLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.serialKeyUserLabel.LabelElement.CustomFontSize = 10.5f;
-            this.serialKeyUserLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.serialKeyUserLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.serialKeyLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.serialKeyLabel.LabelElement.CustomFontSize = 10.5f;
-            this.serialKeyLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.serialKeyLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.serialKeyUserLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.serialKeyUserLabel.LabelElement.CustomFontSize = 10.5f;
-            this.serialKeyUserLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.serialKeyUserLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.serialKeyTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.serialKeyTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.serialKeyTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.serialKeyTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.serialKeyDurationLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.serialKeyDurationLabel.LabelElement.CustomFontSize = 10.5f;
-            this.serialKeyDurationLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.serialKeyDurationLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.serialKeyTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;

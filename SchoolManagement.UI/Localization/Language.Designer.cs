@@ -3346,6 +3346,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click here to add new enrolling.
+        /// </summary>
+        public static string MessageClickToAddEnrolling {
+            get {
+                return ResourceManager.GetString("MessageClickToAddEnrolling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click here to add an evaluation session.
         /// </summary>
         public static string messageClickToAddEvaluationSession {

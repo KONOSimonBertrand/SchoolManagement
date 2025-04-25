@@ -55,75 +55,60 @@ namespace SchoolManagement.UI
 
             this.idNumberLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.idNumberLabel.LabelElement.CustomFontSize = 10.5f;
-            this.idNumberLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.idNumberLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.lastNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.lastNameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.lastNameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.lastNameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.firstNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.firstNameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.firstNameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.firstNameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.birthdayLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.birthdayLabel.LabelElement.CustomFontSize = 10.5f;
-            this.birthdayLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.birthdayLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.sexLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sexLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sexLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sexLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.phoneLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.phoneLabel.LabelElement.CustomFontSize = 10.5f;
-            this.phoneLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.phoneLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.emailLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.emailLabel.LabelElement.CustomFontSize = 10.5f;
-            this.emailLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.emailLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.addressLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.addressLabel.LabelElement.CustomFontSize = 10.5f;
-            this.addressLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.addressLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.hiringDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.hiringDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.hiringDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.hiringDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.idCardLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.idCardLabel.LabelElement.CustomFontSize = 10.5f;
-            this.idCardLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.idCardLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.religionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.religionLabel.LabelElement.CustomFontSize = 10.5f;
-            this.religionLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.religionLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nationalityLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nationalityLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nationalityLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nationalityLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.idNumberTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.idNumberTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.idNumberTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.firstNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.firstNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.firstNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.lastNameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.lastNameTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.lastNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.birthdayDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.birthdayDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -133,34 +118,27 @@ namespace SchoolManagement.UI
 
             this.birthdayDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.birthdayDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.birthdayDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.sexDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.sexDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.sexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.sexDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.nationalityDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.nationalityDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.nationalityDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.nationalityDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.religionDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.religionDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.religionDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.religionDropDownList.RootElement.Padding = new Padding(3, 0, 0, 0);
 
             this.phoneTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.phoneTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.emailTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.emailTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.addressTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.addressTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.hiringDateDateTimePicker.Format = DateTimePickerFormat.Custom;
             this.hiringDateDateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -170,11 +148,9 @@ namespace SchoolManagement.UI
 
             this.hiringDateDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
             this.hiringDateDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.hiringDateDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.idCardTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.idCardTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.idCardTextBox.ForeColor = Color.FromArgb(33, 33, 33);
             this.editPanel.RootElement.EnableElementShadow = false;
             this.idNumberSplitContainer.RootElement.EnableElementShadow = false;
             this.sexSplitContainer.RootElement.EnableElementShadow = false;
@@ -263,7 +239,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.religionDropDownList.DataSource = ViewUtilities.Religions();
             this.religionDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.religionDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;

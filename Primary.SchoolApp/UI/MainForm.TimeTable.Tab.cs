@@ -277,7 +277,7 @@ namespace Primary.SchoolApp
         private void TimeTableScheduler_AppointmentEditDialogShowing(object sender, AppointmentEditDialogShowingEventArgs e)
         {
             
-            if (TimeTableLeftListView.SelectedItem.Tag is SchoolRoom room)
+            if (TimeTableLeftListView.SelectedItem?.Tag is SchoolRoom room)
             {
                 var form = Program.ServiceProvider.GetService<EditTimeTableForm>();
                 form.Icon = this.Icon;

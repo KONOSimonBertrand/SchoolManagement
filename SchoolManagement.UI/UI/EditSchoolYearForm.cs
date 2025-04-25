@@ -43,37 +43,30 @@ namespace SchoolManagement.UI
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.startFirstQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startFirstQuarterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.startFirstQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startFirstQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.endFirstQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endFirstQuarterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endFirstQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endFirstQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.startSecondQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startSecondQuarterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.startSecondQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startSecondQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.endSecondQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endSecondQuarterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endSecondQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endSecondQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.startThirdQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startThirdQuarterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.startThirdQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.startThirdQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.endThirdQuarterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endThirdQuarterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endThirdQuarterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.endThirdQuarterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -166,25 +159,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;
-            this.ThemeNameChanged += EditSchoolYearForm_ThemeNameChanged;
         }
 
-        private void EditSchoolYearForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.startFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.endFirstQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.endThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.startSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.endSecondQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.startThirdQuarterDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
-
+        
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();

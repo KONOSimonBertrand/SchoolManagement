@@ -25,19 +25,9 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             this.formatDropDownList.SelectedIndexChanged += FormatDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditBadgeForm_ThemeNameChanged;
         }
 
-        private void EditBadgeForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.forDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.startDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.closeButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
+        
 
         private void FormatDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
@@ -81,19 +71,15 @@ namespace SchoolManagement.UI
 
             this.forLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.forLabel.LabelElement.CustomFontSize = 10.5f;
-            this.forLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.formatLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.formatLabel.LabelElement.CustomFontSize = 10.5f;
-            this.formatLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.startDateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.startDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.startDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.endDateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.endDateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endDateLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.forDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.forDropDownList.RootElement.CustomFontSize = 10.5f;
@@ -102,7 +88,6 @@ namespace SchoolManagement.UI
 
             this.formatDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.formatDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.formatDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.formatDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.formatDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
@@ -121,7 +106,6 @@ namespace SchoolManagement.UI
             this.endDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
             this.endDateTimePicker.DateTimePickerElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.endDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
-            this.endDateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.editPanel.RootElement.EnableElementShadow = false;
             foreach (RadControl c in this.editPanel.Controls)

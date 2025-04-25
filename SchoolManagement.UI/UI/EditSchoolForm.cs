@@ -57,47 +57,38 @@ namespace SchoolManagement.UI
         {
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.mottoLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.mottoLabel.LabelElement.CustomFontSize = 10.5f;
-            this.mottoLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.mottoLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.evaluationModelLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.evaluationModelLabel.LabelElement.CustomFontSize = 10.5f;
-            this.evaluationModelLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.evaluationModelLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.cityLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.cityLabel.LabelElement.CustomFontSize = 10.5f;
-            this.cityLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.cityLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.postBoxLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.postBoxLabel.LabelElement.CustomFontSize = 10.5f;
-            this.postBoxLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.postBoxLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.addressLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.addressLabel.LabelElement.CustomFontSize = 10.5f;
-            this.addressLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.addressLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.phoneLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.phoneLabel.LabelElement.CustomFontSize = 10.5f;
-            this.phoneLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.phoneLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.websiteLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.websiteLabel.LabelElement.CustomFontSize = 10.5f;
-            this.websiteLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.websiteLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.emailLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.emailLabel.LabelElement.CustomFontSize = 10.5f;
-            this.emailLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.emailLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.facebookLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -107,27 +98,22 @@ namespace SchoolManagement.UI
 
             this.headMasterTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.headMasterTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.headMasterTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.headMasterTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.headMasterNameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.headMasterNameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.headMasterNameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.headMasterNameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.headMasterSexLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.headMasterSexLabel.LabelElement.CustomFontSize = 10.5f;
-            this.headMasterSexLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.headMasterSexLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.studentPictureDirectoryLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentPictureDirectoryLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentPictureDirectoryLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentPictureDirectoryLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.employeePictureDirectoryLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.employeePictureDirectoryLabel.LabelElement.CustomFontSize = 10.5f;
-            this.employeePictureDirectoryLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.employeePictureDirectoryLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -230,32 +216,8 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;
-            this.ThemeNameChanged += EditSchoolForm_ThemeNameChanged;
         }
 
-        private void EditSchoolForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.mottoTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.evaluationModelDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.cityTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.postBoxTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.addressTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.phoneTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.websiteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.facebookTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.headMasterTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.headMasterNameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.headMasterSexDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.studentPictureDirectoryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.employeePictureDirectoryTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {

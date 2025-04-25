@@ -43,27 +43,22 @@ namespace SchoolManagement.UI
 
             this.employeeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.employeeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.employeeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.employeeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.loginLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.loginLabel.LabelElement.CustomFontSize = 10.5f;
-            this.loginLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.loginLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.passwordLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.passwordLabel.LabelElement.CustomFontSize = 10.5f;
-            this.passwordLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.passwordLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.emailLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.emailLabel.LabelElement.CustomFontSize = 10.5f;
-            this.emailLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.emailLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.employeeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
@@ -125,22 +120,8 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             employeeDropDownList.SelectedIndexChanged += EmployeeDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditUserForm_ThemeNameChanged;
         }
 
-        private void EditUserForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.loginTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.employeeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.passwordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.emailTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void EmployeeDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {

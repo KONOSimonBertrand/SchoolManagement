@@ -230,6 +230,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Card":
                             image = GetImage(Resources.id_card_blue);
                             break;
+                        case "Show":
+                            image = GetImage(Resources.show_blue);
+                            break;
                     }
                     break;
                 case "MaterialBlueGrey":
@@ -297,6 +300,9 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Card":
                             image = GetImage(Resources.id_card_blue_grey);
+                            break;
+                        case "Show":
+                            image = GetImage(Resources.show_blue_grey);
                             break;
                     }
                     break;
@@ -366,6 +372,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Card":
                             image = GetImage(Resources.id_card_pink);
                             break;
+                        case "Show":
+                            image = GetImage(Resources.show_pink);
+                            break;
                     }
                     break;
                 case "MaterialTeal":
@@ -434,6 +443,9 @@ namespace Primary.SchoolApp.Utilities
                         case "Card":
                             image = GetImage(Resources.id_card_teal);
                             break;
+                        case "Show":
+                            image = GetImage(Resources.show_teal);
+                            break;
                     }
                     break;
                 case "Windows11Dark":
@@ -501,6 +513,9 @@ namespace Primary.SchoolApp.Utilities
                             break;
                         case "Card":
                             image = GetImage(Resources.id_card_white);
+                            break;
+                        case "Show":
+                            image = GetImage(Resources.show_white);
                             break;
                     }
                     break;

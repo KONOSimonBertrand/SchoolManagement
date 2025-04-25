@@ -36,16 +36,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditStudentClassForm_ThemeNameChanged  ;
         }
 
-        private void EditStudentClassForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
+       
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
@@ -82,18 +75,15 @@ namespace SchoolManagement.UI
             this.errorLabel.ForeColor = Color.Red;
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
             this.classDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.roomLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.roomLabel.LabelElement.CustomFontSize = 10.5f;
-            this.roomLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.roomLabel.TextAlignment = ContentAlignment.BottomLeft;
             this.roomDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 

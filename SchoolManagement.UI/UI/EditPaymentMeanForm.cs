@@ -36,17 +36,14 @@ namespace SchoolManagement.UI
         {
             this.nameLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.accountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.accountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.accountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.accountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.typeLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.typeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.typeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.typeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = Utilities.ViewUtilities.MainFont;
@@ -61,7 +58,6 @@ namespace SchoolManagement.UI
 
             this.levelLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.levelLabel.LabelElement.CustomFontSize = 10.5f;
-            this.levelLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.levelLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 
@@ -97,21 +93,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             closeButton.Click += CloseButton_Click;
-            this.ThemeNameChanged += EditPaymentMeanForm_ThemeNameChanged;
         }
 
-        private void EditPaymentMeanForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.accountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-                this.typeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
+        
 
         private void CloseButton_Click(object sender, EventArgs e)
         {

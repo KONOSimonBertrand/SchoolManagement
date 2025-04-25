@@ -562,4 +562,19 @@
   <data name="floppy_disk_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\floppy_disk_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="show_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\show_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="show_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\show_blue_grey.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="show_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\show_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="show_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\show_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="show_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\show_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

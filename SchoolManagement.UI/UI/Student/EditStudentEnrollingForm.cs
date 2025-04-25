@@ -42,52 +42,42 @@ namespace SchoolManagement.UI
             this.classDropDownList.RootElement.EnableElementShadow = false;
             this.studentLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.studentLabel.LabelElement.CustomFontSize = 10.5f;
-            this.studentLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.studentLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolYearLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolYearLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolYearLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.classLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.classLabel.LabelElement.CustomFontSize = 10.5f;
-            this.classLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.classLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.roomLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.roomLabel.LabelElement.CustomFontSize = 10.5f;
-            this.roomLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.roomLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.oldSchoolLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.oldSchoolLabel.LabelElement.CustomFontSize = 10.5f;
-            this.oldSchoolLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.oldSchoolLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.repeaterLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.repeaterLabel.LabelElement.CustomFontSize = 10.5f;
-            this.repeaterLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.repeaterLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.amountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.doneByLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.doneByLabel.LabelElement.CustomFontSize = 10.5f;
-            this.doneByLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.doneByLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolFeeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.schoolFeeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.schoolFeeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.schoolFeeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolFeeValueLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -96,7 +86,6 @@ namespace SchoolManagement.UI
 
             this.divisionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.divisionLabel.LabelElement.CustomFontSize = 10.5f;
-            this.divisionLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.divisionLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.schoolYearTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -107,7 +96,6 @@ namespace SchoolManagement.UI
 
             this.doneByTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.doneByTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
@@ -253,23 +241,9 @@ namespace SchoolManagement.UI
             classDropDownList.SelectedIndexChanged += ClassDropDownList_SelectedIndexChanged;
             roomDropDownList.SelectedIndexChanged += RoomDropDownList_SelectedIndexChanged;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            this.ThemeNameChanged += EditStudentEnrollingForm_ThemeNameChanged;
         }
 
-        private void EditStudentEnrollingForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.schoolYearTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.oldSchoolTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.studentDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.repeaterDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
+        
 
         private void TextBox_Changing(object sender, TextChangingEventArgs e)
         {

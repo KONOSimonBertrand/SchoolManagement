@@ -27,35 +27,27 @@ namespace SchoolManagement.UI
         {
             labelLocation.LabelElement.CustomFont = ViewUtilities.MainFont;
             labelLocation.LabelElement.CustomFontSize = 10.5f;
-            labelLocation.ForeColor = Color.FromArgb(89, 89, 89);
 
             labelStatus.LabelElement.CustomFont = ViewUtilities.MainFont;
             labelStatus.LabelElement.CustomFontSize = 10.5f;
-            labelStatus.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.labelStartTime.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.labelStartTime.LabelElement.CustomFontSize = 10.5f;
-            this.labelStartTime.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.labelEndTime.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.labelEndTime.LabelElement.CustomFontSize = 10.5f;
-            this.labelEndTime.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.labelTeacherTimeIn.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.labelTeacherTimeIn.LabelElement.CustomFontSize = 10.5f;
-            this.labelTeacherTimeIn.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.labelTeacherTimeOut.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.labelTeacherTimeOut.LabelElement.CustomFontSize = 10.5f;
-            this.labelTeacherTimeOut.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.labelSubject.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.labelSubject.LabelElement.CustomFontSize = 10.5f;
-            this.labelSubject.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.labelBackground.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.labelBackground.LabelElement.CustomFontSize = 10.5f;
-            this.labelBackground.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.subjectDropDownList.AutoCompleteMode = AutoCompleteMode.Suggest;
             this.addSubjectButton.ButtonElement.Padding = new Padding(0);
@@ -89,7 +81,6 @@ namespace SchoolManagement.UI
             addSubjectButton.Location = new Point(580, 38);
             addSubjectButton.TabIndex = 1;
             addSubjectButton.Height = subjectDropDownList.Height;
-           // addSubjectButton.Image = ViewUtilities.GetImage("Add");
             #endregion Subject Row
             #region Teacher Row
             labelLocation.MinimumSize = new Size(0, 30);
@@ -103,7 +94,6 @@ namespace SchoolManagement.UI
 
             addTeacherButton.Location = new Point(580, 106);
             addTeacherButton.TabIndex = 3;
-            //addTeacherButton.Image = ViewUtilities.GetImage("Add");
             addTeacherButton.Height = teacherDropDownList.Height;
             #endregion Teacher Row
 
@@ -121,7 +111,6 @@ namespace SchoolManagement.UI
             labelStartTime.Location = new Point(10, 240);
             labelStartTime.Size = new Size(71, 30);
             timeStart.Location = new Point(10, 270);
-            //timeStart.Size = new Size(102, 20);
 
             labelTeacherTimeIn.Location = new Point(160, 240);
             teacherTimeIn.Location = new Point(160, 270);
@@ -196,17 +185,8 @@ namespace SchoolManagement.UI
         {
             subjectDropDownList.SelectedIndexChanged += SubjectDropDownList_SelectedIndexChanged;
             teacherDropDownList.SelectedIndexChanged += TeacherDropDownList_SelectedIndexChanged;
-            this.ThemeNameChanged += EditTimeTableForm_ThemeNameChanged;
         }
 
-        private void EditTimeTableForm_ThemeNameChanged(object source, Telerik.WinControls.ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.cmbBackground.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
 
         private void TeacherDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {

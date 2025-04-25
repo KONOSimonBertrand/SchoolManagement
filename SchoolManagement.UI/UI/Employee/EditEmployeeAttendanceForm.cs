@@ -81,34 +81,27 @@ namespace SchoolManagement.UI
         {
             this.roomLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.roomLabel.LabelElement.CustomFontSize = 10.5f;
-            this.roomLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.subjectLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.subjectLabel.LabelElement.CustomFontSize = 10.5f;
-            this.subjectLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.dateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.startLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.startLabel.LabelElement.CustomFontSize = 10.5f;
-            this.startLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.endLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.endLabel.LabelElement.CustomFontSize = 10.5f;
-            this.endLabel.ForeColor = Color.FromArgb(89, 89, 89);
 
             this.roomDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.roomDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.roomDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.roomDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.roomDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.roomDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.subjectDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.subjectDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.subjectDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
             this.subjectDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.subjectDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.subjectDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
@@ -145,11 +138,9 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
             this.closeButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.closeButton.ButtonElement.CustomFontSize = 10.5f;
-            this.closeButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
 
 
             this.editPanel.RootElement.EnableElementShadow = false;

@@ -41,7 +41,6 @@ namespace SchoolManagement.UI
         {
             this.nameLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.nameLabel.LabelElement.CustomFontSize = 10.5f;
-            this.nameLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.nameLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
@@ -53,22 +52,18 @@ namespace SchoolManagement.UI
 
             this.sequenceLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceLabel.LabelElement.CustomFontSize = 10.5f;
-            this.sequenceLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.sequenceLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.documentTemplateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.documentTemplateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.documentTemplateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.documentTemplateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.isTruncateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.isTruncateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.isTruncateLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.isTruncateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.averageFormulaLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.averageFormulaLabel.LabelElement.CustomFontSize = 10.5f;
-            this.averageFormulaLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.averageFormulaLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.isTruncateDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
@@ -99,7 +94,6 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
             this.documentTemplateDropDownList.Items.Add(new RadListDataItem(Language.labelFrenchOnly, 0));
             this.documentTemplateDropDownList.Items.Add(new RadListDataItem(Language.labelEnglishOnly, 1));
             this.documentTemplateDropDownList.Items.Add(new RadListDataItem(Language.labelFrenchAndEnglish, 2));
@@ -116,20 +110,9 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;
-            this.ThemeNameChanged += EditSchoolGroupForm_ThemeNameChanged;
         }
 
-        private void EditSchoolGroupForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.nameTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.sequenceSpinEditor.ForeColor = Color.FromArgb(33, 33, 33);
-                this.isTruncateDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.averageFormulaDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-        }
+        
 
         private void CloseButton_Click(object sender, EventArgs e)
         {

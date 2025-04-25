@@ -41,22 +41,9 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             this.amountTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
-            this.ThemeNameChanged += EditOtherCashFlowForm_ThemeNameChanged;
         }
 
-        private void EditOtherCashFlowForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.cashFlowTypeDropDownList.ForeColor = Color.FromArgb(33, 33, 33);
-                this.dateTimePicker.ForeColor = Color.FromArgb(33, 33, 33);
-                this.doneByTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.noteTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.amountTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-            }
-        }
-
+        
         private void TxtChanging(object sender, TextChangingEventArgs e)
         {
             e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
@@ -71,13 +58,10 @@ namespace SchoolManagement.UI
         {
             this.doneByLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.doneByLabel.LabelElement.CustomFontSize = 10.5f;
-            this.doneByLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.doneByLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.dateLabel.LabelElement.CustomFontSize = 10.5f;
-            this.dateLabel.ForeColor = Color.FromArgb(89, 89, 89);
-            //this.dateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             cashFlowTypeDropDownList.DropDownListElement.MinSize = new System.Drawing.Size(200, 40);
             cashFlowTypeDropDownList.DropDownListElement.EnableElementShadow = false;
@@ -85,7 +69,6 @@ namespace SchoolManagement.UI
 
             this.cashFlowTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.cashFlowTypeLabel.LabelElement.CustomFontSize = 10.5f;
-            this.cashFlowTypeLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.cashFlowTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.cashFlowTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
@@ -96,7 +79,6 @@ namespace SchoolManagement.UI
 
             this.amountLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.amountLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
@@ -110,7 +92,6 @@ namespace SchoolManagement.UI
 
             this.noteLabel.LabelElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.noteLabel.LabelElement.CustomFontSize = 10.5f;
-            this.noteLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.noteLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 

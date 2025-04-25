@@ -33,12 +33,10 @@ namespace SchoolManagement.UI
 
             this.oldPasswordLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.oldPasswordLabel.LabelElement.CustomFontSize = 10.5f;
-            this.oldPasswordLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.oldPasswordLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.newPasswordLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.newPasswordLabel.LabelElement.CustomFontSize = 10.5f;
-            this.newPasswordLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.newPasswordLabel.TextAlignment = ContentAlignment.BottomLeft;
 
 
@@ -68,7 +66,7 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
 
             showPasswordToggleButton.RootElement.ToolTipText = Language.messageClickToSeePassword;
-            showPasswordToggleButton.Image = ViewUtilities.GetImage("Watch");
+            showPasswordToggleButton.Image = ViewUtilities.GetImage("Show");
             showPasswordToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
             showPasswordToggleButton.ButtonElement.Padding = new Padding(0);
 
@@ -79,25 +77,13 @@ namespace SchoolManagement.UI
         {
             closeButton.Click += CloseButton_Click;
             showPasswordToggleButton.CheckStateChanged += ShowPasswordToggleButton_CheckStateChanged; ;
-            this.ThemeNameChanged += EditUserPasswordForm_ThemeNameChanged;
         }
 
-        private void EditUserPasswordForm_ThemeNameChanged(object source, ThemeNameChangedEventArgs args)
-        {
-            if (ThemeResolutionService.ApplicationThemeName != "Windows11Dark")
-            {
-                this.oldPasswordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-                this.saveButton.ButtonElement.ForeColor = Color.FromArgb(33, 33, 33);
-                this.newPasswordTextBox.ForeColor = Color.FromArgb(33, 33, 33);
-
-            }
-
-        }
 
         private void ShowPasswordToggleButton_CheckStateChanged(object sender, EventArgs e)
         {
             if (showPasswordToggleButton.ToggleState == Telerik.WinControls.Enumerations.ToggleState.Off) {
-                showPasswordToggleButton.Image = ViewUtilities.GetImage("Watch");
+                showPasswordToggleButton.Image = ViewUtilities.GetImage("Show");
                 showPasswordToggleButton.RootElement.ToolTipText = Language.messageClickToSeePassword;
                 newPasswordTextBox.PasswordChar = '*';
             }
