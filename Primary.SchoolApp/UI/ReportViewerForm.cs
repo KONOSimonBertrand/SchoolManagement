@@ -193,10 +193,14 @@ namespace Primary.SchoolApp
                 switch (reportCard.HeadSection.ClassRoom.SchoolClass.ReportCardModel)
                 {
                     case 0:
+                    case 3:
                         reportSource.ReportDocument = new PrimaryEvaluationReportCardReport(reportCard);
                         break;
                     case 1:
                         reportSource.ReportDocument = new GardenEvaluationReportCardReport(reportCard);
+                        break;
+                    case 2:
+                        reportSource.ReportDocument = new FoundationEvaluationReportCardReport(reportCard);
                         break;
                     default:
                         reportSource.ReportDocument = new PrimaryEvaluationReportCardReport(reportCard);
@@ -224,10 +228,15 @@ namespace Primary.SchoolApp
                 switch (reportCard.HeadSection.ClassRoom.SchoolClass.ReportCardModel)
                 {
                     case 0:
+                    case 3:
                         reportSource.ReportDocument = new PrimaryTermReportCardReport(reportCard);
                         break;
+
                     case 1:
                         reportSource.ReportDocument = new GardenTermReportCardReport(reportCard);
+                        break;
+                    case 2:
+                        reportSource.ReportDocument = new FoundationTermReportCardReport(reportCard);
                         break;
                     default:
                         reportSource.ReportDocument = new PrimaryTermReportCardReport(reportCard);
@@ -254,10 +263,14 @@ namespace Primary.SchoolApp
                 switch (reportCard.HeadSection.ClassRoom.SchoolClass.ReportCardModel)
                 {
                     case 0:
+                    case 3:
                         reportSource.ReportDocument = new PrimaryAnnualReportCardReport(reportCard);
                         break;
                     case 1:
                         reportSource.ReportDocument = new GardenAnnualReportCardReport(reportCard);
+                        break;
+                    case 2:
+                        reportSource.ReportDocument = new FoundationAnnualReportCardReport(reportCard);
                         break;
                     default:
                         reportSource.ReportDocument = new PrimaryAnnualReportCardReport(reportCard);

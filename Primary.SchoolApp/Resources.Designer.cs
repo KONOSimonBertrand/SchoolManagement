@@ -1001,6 +1001,16 @@ namespace Primary.SchoolApp {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] icon_black {
+            get {
+                object obj = ResourceManager.GetObject("icon_black", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon icon_blue {
@@ -1021,32 +1031,12 @@ namespace Primary.SchoolApp {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_blue1 {
-            get {
-                object obj = ResourceManager.GetObject("icon_blue1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon icon_green {
             get {
                 object obj = ResourceManager.GetObject("icon_green", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_green1 {
-            get {
-                object obj = ResourceManager.GetObject("icon_green1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1061,32 +1051,12 @@ namespace Primary.SchoolApp {
         }
         
         /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_orange1 {
-            get {
-                object obj = ResourceManager.GetObject("icon_orange1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon icon_pink {
             get {
                 object obj = ResourceManager.GetObject("icon_pink", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_pink1 {
-            get {
-                object obj = ResourceManager.GetObject("icon_pink1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -1103,30 +1073,20 @@ namespace Primary.SchoolApp {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_red1 {
-            get {
-                object obj = ResourceManager.GetObject("icon_red1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_red2 {
-            get {
-                object obj = ResourceManager.GetObject("icon_red2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_teal {
             get {
                 object obj = ResourceManager.GetObject("icon_teal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] icon_white {
+            get {
+                object obj = ResourceManager.GetObject("icon_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -1416,6 +1376,96 @@ namespace Primary.SchoolApp {
         internal static byte[] printer_white {
             get {
                 object obj = ResourceManager.GetObject("printer_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] report {
+            get {
+                object obj = ResourceManager.GetObject("report", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_black {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_black", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_blue {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_green {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_orange {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_orange", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_pink {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_red {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_teal {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_white {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_white", resourceCulture);
                 return ((byte[])(obj));
             }
         }

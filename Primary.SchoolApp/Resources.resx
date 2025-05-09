@@ -286,38 +286,20 @@
   <data name="icon_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_blue.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_blue1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\icon_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_blue_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_blue_grey.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_green.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_green1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\icon_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_orange.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_orange1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\icon_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_pink.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_pink1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\icon_pink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_red.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_red1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\icon_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_red2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Images\icon_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\icon_teal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -639,5 +621,38 @@
   </data>
   <data name="show_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\show_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_black.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_black.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_orange.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_white.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\icon_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\report.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -1,8 +1,6 @@
 ﻿
 using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
-using System.Runtime.CompilerServices;
-using Telerik.WinControls;
 using Telerik.WinControls.UI;
 using Telerik.WinControls.UI.Scheduler.Dialogs;
 
@@ -10,7 +8,7 @@ namespace SchoolManagement.UI
 {
     public partial class EditTimeTableForm : EditAppointmentDialog
     {
-        public RadDropDownList SubjectDropDownList { get=>subjectDropDownList; set => subjectDropDownList = value; }
+        public RadDropDownList SubjectDropDownList { get=>subjectDropDownList;  }
         public RadDropDownList TeacherDropDownList { get => teacherDropDownList; }
         public RadDropDownList DayDropDownList { get => daysDropDownList;   }
         public RadLabel ErrorLabel { get => errorLabel; }

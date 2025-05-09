@@ -772,6 +772,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Detailed View.
+        /// </summary>
+        public static string LabelDetailView {
+            get {
+                return ResourceManager.GetString("LabelDetailView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Head master.
         /// </summary>
         public static string LabelDirector {
@@ -1366,6 +1375,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Group view.
+        /// </summary>
+        public static string LabelGroupView {
+            get {
+                return ResourceManager.GetString("LabelGroupView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Head master.
         /// </summary>
         public static string LabelHeadMaster {
@@ -1506,6 +1524,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelHome {
             get {
                 return ResourceManager.GetString("labelHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Icon view.
+        /// </summary>
+        public static string LabelIconView {
+            get {
+                return ResourceManager.GetString("LabelIconView", resourceCulture);
             }
         }
         
@@ -3139,6 +3166,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à List  view.
+        /// </summary>
+        public static string LabelViewList {
+            get {
+                return ResourceManager.GetString("LabelViewList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Website.
         /// </summary>
         public static string LabelWebsite {
@@ -3171,6 +3207,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelYes {
             get {
                 return ResourceManager.GetString("labelYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à EN.
+        /// </summary>
+        public static string LanguageName {
+            get {
+                return ResourceManager.GetString("LanguageName", resourceCulture);
             }
         }
         

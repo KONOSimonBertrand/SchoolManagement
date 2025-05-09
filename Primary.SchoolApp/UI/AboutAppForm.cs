@@ -31,27 +31,27 @@ namespace Primary.SchoolApp.UI
                 case "Material":
 
                     this.Icon =Resources.icon_orange;
-                    logoPictureBox.Image =Resources.icon_orange1;
+                    logoPictureBox.Image = AppUtilities.GetImage(Resources.schoolapp_orange);
                     break;
                 case "MaterialBlueGrey":
 
                     this.Icon =Resources.icon_green;
-                    logoPictureBox.Image =Resources.icon_green1;
+                    logoPictureBox.Image = AppUtilities.GetImage(Resources.schoolapp_green);
                     break;
                 case "MaterialPink":
 
                     this.Icon =Resources.icon_blue;
-                    logoPictureBox.Image =Resources.icon_blue1;
+                    logoPictureBox.Image = AppUtilities.GetImage(Resources.schoolapp_blue);
                     break;
                 case "MaterialTeal":
 
                     this.Icon =Resources.icon_red;
-                    logoPictureBox.Image =Resources.icon_red1;
+                    logoPictureBox.Image =AppUtilities.GetImage(Resources.schoolapp_red);
                     break;
 
                 default:
-                    this.Icon =Resources.icon_pink;
-                    logoPictureBox.Image =Resources.icon_pink1;
+                    this.Icon =AppUtilities.GetIcon(Resources.icon_white);
+                    logoPictureBox.Image =AppUtilities.GetImage(Resources.schoolapp_white);
                     break;
             }
         }

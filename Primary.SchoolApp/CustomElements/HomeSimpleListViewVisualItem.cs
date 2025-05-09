@@ -6,7 +6,6 @@ using System;
 using System.Drawing;
 using System.Linq;
 using Telerik.WinControls.UI;
-using Telerik.Windows.Documents.Spreadsheet.Expressions.Functions;
 
 namespace Primary.SchoolApp.CustomElements
 {

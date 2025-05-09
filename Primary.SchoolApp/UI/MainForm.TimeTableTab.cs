@@ -18,7 +18,7 @@ namespace Primary.SchoolApp
 {
     public partial class MainForm
     {
-        string timeTableLeftViewForToolTipText = "";
+        // string timeTableLeftViewForToolTipText = "";
         SchedulerBindingDataSource scheduleSource = new();
         private void InitTimeTablePage()
         {          
@@ -298,7 +298,12 @@ namespace Primary.SchoolApp
                     e.AppointmentEditDialog = null;
                     RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
                 }
-            }            
+            }
+            else
+            {
+                e.Cancel=true;
+                RadMessageBox.Show(this, Language.MessageSelectClassroom, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
         }
         //load room list to left listview of timetable page
         private void LoadRoomListToTimeTableLeftListView()

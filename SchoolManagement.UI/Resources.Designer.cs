@@ -871,6 +871,16 @@ namespace SchoolManagement.UI {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] icon_black {
+            get {
+                object obj = ResourceManager.GetObject("icon_black", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Icon semblable à (Icône).
         /// </summary>
         internal static System.Drawing.Icon icon_blue {
@@ -937,6 +947,16 @@ namespace SchoolManagement.UI {
             get {
                 object obj = ResourceManager.GetObject("icon_teal", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] icon_white {
+            get {
+                object obj = ResourceManager.GetObject("icon_white", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -1256,6 +1276,86 @@ namespace SchoolManagement.UI {
         internal static byte[] Roboto_Medium {
             get {
                 object obj = ResourceManager.GetObject("Roboto_Medium", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_black {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_black", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_blue {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_blue", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_green {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_green", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_orange {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_orange", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_pink {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_pink", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_red {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_teal {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_teal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Byte[].
+        /// </summary>
+        internal static byte[] schoolapp_white {
+            get {
+                object obj = ResourceManager.GetObject("schoolapp_white", resourceCulture);
                 return ((byte[])(obj));
             }
         }

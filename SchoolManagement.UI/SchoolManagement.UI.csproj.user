@@ -2,6 +2,12 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Reporting\ReportCard\FoundationEvaluationReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\ReportCard\FoundationOneNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\ReportCard\GardenEvaluationReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Update="UI\RecapNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\GeneralReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\ReportViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,19 +266,19 @@
     <Compile Update="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.Discipline.Tab.cs">
+    <Compile Update="UI\MainForm.DisciplineTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.Report.Tab.cs">
+    <Compile Update="UI\MainForm.ReportTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.Setting.Tab.cs">
+    <Compile Update="UI\MainForm.SettingTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\MainForm.StudentNoteTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.TimeTable.Tab.cs">
+    <Compile Update="UI\MainForm.TimeTableTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\EditSchoolRoomForm.cs">

@@ -125,13 +125,15 @@ namespace SchoolManagement.Infrastructure.Repositories
                            INNER JOIN Subjects AS B ON A.subjectId=B.Id  
                            INNER JOIN SubjectGroups AS C ON A.GroupId=C.Id
                            INNER JOIN SchoolClasses AS D ON A.ClassId=D.Id 
+                           INNER JOIN SchoolGroups AS E ON D.GroupId=E.Id
                            ORDER BY A.Sequence;";
-            var result = connection.Query<ClassSubject, Subject, SubjectGroup, SchoolClass, ClassSubject>(query,
-                (classSubject, subject, subjectGroup, schoolClass) =>
+            var result = connection.Query<ClassSubject, Subject, SubjectGroup, SchoolClass,SchoolGroup, ClassSubject>(query,
+                (classSubject, subject, subjectGroup, schoolClass,schoolGroup) =>
                 {
                     classSubject.Subject = subject;
                     classSubject.Group = subjectGroup;
                     classSubject.Class = schoolClass;
+                    classSubject.Class.Group = schoolGroup;
                     return classSubject;
                 }
                 ).ToList();

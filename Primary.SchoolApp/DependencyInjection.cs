@@ -102,6 +102,8 @@ namespace Primary.SchoolApp
             services.AddTransient<RecapNotesForm>();
             services.AddTransient<EditEvaluationCommentsForm>();
             services.AddTransient<ImportNotesForm>();
+            services.AddTransient<GeneralReportForm>();
+            services.AddTransient<ListingService>();
             return services;
         }
     }

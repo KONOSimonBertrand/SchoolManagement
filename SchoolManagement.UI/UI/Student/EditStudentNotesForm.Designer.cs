@@ -179,7 +179,7 @@
             // 
             // informationPanel
             // 
-            informationPanel.BackColor = Color.FromArgb(191, 219, 255);
+           
             informationPanel.Controls.Add(noteCoefTextBox);
             informationPanel.Controls.Add(noteCoefLabel);
             informationPanel.Controls.Add(noteMaxTextBox);

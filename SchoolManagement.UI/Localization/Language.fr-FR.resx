@@ -1530,4 +1530,19 @@
   <data name="MessageClickToAddEnrolling" xml:space="preserve">
     <value>Cliquer ici pour ajouter une inscription</value>
   </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>FR</value>
+  </data>
+  <data name="LabelViewList" xml:space="preserve">
+    <value>Vue liste</value>
+  </data>
+  <data name="LabelDetailView" xml:space="preserve">
+    <value>Vue détail</value>
+  </data>
+  <data name="LabelGroupView" xml:space="preserve">
+    <value>Vue Group</value>
+  </data>
+  <data name="LabelIconView" xml:space="preserve">
+    <value>Vue icône</value>
+  </data>
 </root>

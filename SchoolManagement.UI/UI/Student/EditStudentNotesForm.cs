@@ -26,6 +26,7 @@ namespace SchoolManagement.UI
             InitializeComponent();
             InitComponent();
             InitLanguage();
+            InitEvents();
         }
 
         private void InitLanguage()
@@ -77,6 +78,11 @@ namespace SchoolManagement.UI
             exportToExelButton.Image = ViewUtilities.GetImage("Excel");
             printButton.Image = ViewUtilities.GetImage("Printer");
         }
+       
+        private void InitEvents()
+        {
+            ThemeResolutionService.ApplicationThemeChanged += ThemeResolutionService_ApplicationThemeChanged;
+        }
         public bool IsValidData()
         {
             if (this.noteCoefTextBox.Text == "" || double.Parse(this.noteCoefTextBox.Text) < 0)
@@ -93,5 +99,17 @@ namespace SchoolManagement.UI
             }
             return true;
         }
+        private void ThemeResolutionService_ApplicationThemeChanged(object sender, ThemeChangedEventArgs args)
+        {
+            if (ThemeResolutionService.ApplicationThemeName == "Windows11Dark")
+            {
+                informationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+            }
+            else
+            {
+                informationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+            }
+        }
+
     }
 }

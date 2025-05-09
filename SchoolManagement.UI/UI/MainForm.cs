@@ -171,7 +171,7 @@ namespace SchoolManagement.UI
             homeExportToExcelButton.ButtonElement.ToolTipText = Language.messageClickToExport;
 
             homeSearchTextBox.NullText = "Rechercher par Matricule, par Nom, par classe,par groupe";
-            homeIconViewToggleButton.ButtonElement.ToolTipText = "Vue grille";
+            homeIconViewToggleButton.ButtonElement.ToolTipText = Language.LabelIconView;
             homeIconViewToggleButton.RootElement.EnableElementShadow = false;
             homeIconViewToggleButton.ButtonElement.Padding = new Padding(0);
             homeIconViewToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
@@ -180,7 +180,7 @@ namespace SchoolManagement.UI
             homeIconViewToggleButton.Text = "\ue023";
             homeIconViewToggleButton.RootElement.CustomFontSize = 20;
 
-            homeListViewToggleButton.ButtonElement.ToolTipText = "Affichage Liste";
+            homeListViewToggleButton.ButtonElement.ToolTipText = Language.LabelViewList;
             homeListViewToggleButton.RootElement.EnableElementShadow = false;
             homeListViewToggleButton.ButtonElement.Padding = new Padding(0);
             homeListViewToggleButton.ImageAlignment = ContentAlignment.MiddleCenter;
@@ -260,9 +260,9 @@ namespace SchoolManagement.UI
                     break;
 
                 default:
-                    aboutButton.Image = ViewUtilities.GetImage( Resources.about_white);
+                    aboutButton.Image = ViewUtilities.GetImage(Resources.about_white);
                     userSplitButtonElement.Image = ViewUtilities.GetImage(Resources.user_white);
-                    this.Icon = Resources.icon_pink;
+                    this.Icon = ViewUtilities.GetIcon(Resources.icon_white);
                     break;
             }
         }

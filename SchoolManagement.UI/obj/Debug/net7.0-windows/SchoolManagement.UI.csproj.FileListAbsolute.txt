@@ -348,3 +348,4 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.genruntimeconfig.cache
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\ref\SchoolManagement.UI.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.GeneralReportForm.resources

@@ -665,7 +665,10 @@ namespace Primary.SchoolApp.Utilities
         {
             return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
         }
-
+        public static Icon GetIcon(Byte[] byteImage)
+        {
+            return (Icon)((new IconConverter()).ConvertFrom(byteImage));
+        }
         // return truncate or rounding value
         public static double GetTruncateOrRoundingValue(double value, SchoolGroup group)
         {
@@ -736,5 +739,123 @@ namespace Primary.SchoolApp.Utilities
             return string.Empty;
         }
 
+        public static string MonthToLongName(int index)
+        {
+            string name = "";
+            switch (index)
+            {
+                case 1:
+                    name = Language.LanguageName == "EN" ? "January" : "Janvier";
+                    break;
+                case 2:
+                    name = Language.LanguageName == "EN" ? "February" : "Février";
+                    break;
+                case 3:
+                    name = Language.LanguageName == "EN" ? "March" : "Mars";
+                    break;
+                case 4:
+                    name = Language.LanguageName == "EN" ? "April" : "Avril";
+                    break;
+                case 5:
+                    name = Language.LanguageName == "EN" ? "May" : "Mai";
+                    break;
+                case 6:
+                    name = Language.LanguageName == "EN" ? "June" : "Juin";
+                    break;
+                case 7:
+                    name = Language.LanguageName == "EN" ? "July" : "Juillet";
+                    break;
+                case 8:
+                    name = Language.LanguageName == "EN" ? "August" : "Août";
+                    break;
+                case 9:
+                    name = Language.LanguageName == "EN" ? "September" : "Septembre";
+                    break;
+                case 10:
+                    name = Language.LanguageName == "EN" ? "October" : "Octobre";
+                    break;
+                case 11:
+                    name = Language.LanguageName == "EN" ? "November" : "Novembre";
+                    break;
+                case 12:
+                    name = Language.LanguageName == "EN" ? "December":"Decembre";
+                    break;
+            }
+            return name;
+        }
+        public static string MonthToShortName(int index)
+        {
+            string name = "";
+            switch (index)
+            {
+                case 1:
+                    name = Language.LanguageName=="EN"? "Jan": "Jan";
+                    break;
+                case 2:
+                    name = Language.LanguageName == "EN" ? "Feb": "Fév";
+                    break;
+                case 3:
+                    name = Language.LanguageName == "EN" ?"March": "Mars";
+                    break;
+                case 4:
+                    name = Language.LanguageName == "EN" ?"April": "Avril";
+                    break;
+                case 5:
+                    name = Language.LanguageName == "EN" ? "May" : "Mai";
+                    break;
+                case 6:
+                    name = Language.LanguageName == "EN" ? "June" : "Juin";
+                    break;
+                case 7:
+                    name = Language.LanguageName == "EN" ? "July" : "Juil";
+                    break;
+                case 8:
+                    name = Language.LanguageName == "EN" ? "Aug" : "Août";
+                    break;
+                case 9:
+                    name = Language.LanguageName == "EN" ? "Sept" : "Sept";
+                    break;
+                case 10:
+                    name = Language.LanguageName == "EN" ? "Oct" : "Oct";
+                    break;
+                case 11:
+                    name = Language.LanguageName == "EN" ? "Nov" : "Nov";
+                    break;
+                case 12:
+                    name = Language.LanguageName == "EN" ? "Dec" : "Déc";
+                    break;
+            }
+            return name;
+        }
+
+
+        #region Report Card Method
+        public static Dictionary<string, string> GetHeadTerm(string termCode, string language)
+        {
+            Dictionary<string, string> terms = new();
+            switch (termCode)
+            {
+                case "TERM01":
+                    terms.Add("Title", language == "FR" ? "BULLETIN DU PREMIER TRIMESTRE" : "FIRST TERM SUMMARY MARK");
+                    terms.Add("FirstMonth", language == "FR" ? "1ʳᵉ EVAL" : "1ˢᵗ EVAL");
+                    terms.Add("SecondMonth", language == "FR" ? "2ᵉ EVAL" : "2ⁿᵈ EVAL");
+                    terms.Add("ThirdMonth", language == "FR" ? "3ᵉ  EVAL" : "3ʳᵈ EVAL");
+                    break;
+                case "TERM02":
+                    terms.Add("Title", language == "FR" ? "BULLETIN DU DEUXIEME TRIMESTRE" : "SECOND TERM SUMMARY MARK");
+                    terms.Add("FirstMonth", language == "FR" ? "4ᵉ  EVAL" : "4ᵗʰ EVAL");
+                    terms.Add("SecondMonth", language == "FR" ? "5ᵉ EVAL" : "5ᵗʰ EVAL");
+                    terms.Add("ThirdMonth", language == "FR" ? "6ᵉ  EVAL" : "6ᵗʰ EVAL");
+                    break;
+                case "TERM03":
+                    terms.Add("Title", language == "FR" ? "BULLETIN DU TROISIEME TRIMESTRE" : "THIRD TERM SUMMARY MARK");
+                    terms.Add("FirstMonth", language == "FR" ? "7ᵉ  EVAL" : "7ᵗʰ EVAL");
+                    terms.Add("SecondMonth", language == "FR" ? "8ᵉ EVAL" : "8ᵗʰ EVAL");
+                    terms.Add("ThirdMonth", language == "FR" ? "9ᵉ  EVAL" : "9ᵗʰ EVAL");
+                    break;
+            }
+            return terms;
+        }
+        #endregion
     }
 }

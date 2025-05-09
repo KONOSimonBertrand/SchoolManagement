@@ -87,7 +87,7 @@ namespace Primary.SchoolApp
                 };
                 StudentNoteLeftListView.Items.Add(dataItem);
             }
-            StudentNoteLeftListView.SelectedIndex = -1;
+            StudentNoteLeftListView.SelectedIndex = 0;
             if (StudentNoteLeftListView.SelectedItem != null)
             {
                 var sessionId = int.Parse(StudentNoteLeftListView.SelectedItem.Key.ToString());
@@ -1071,7 +1071,7 @@ namespace Primary.SchoolApp
                     if (StudentNoteIconViewToggleButton.ToggleState == ToggleState.On)
                     {
                         InitStudentNoteGridViewForAverages();
-                        List<DTOItem.AverageRecord> dataSource;
+                        List<AverageRecord> dataSource;
                         if (selectedEvaluation != null)
                         {
                             dataSource = await localStudentNoteService.GetEvaluationAverageListByRoom(selectedRoom.Id, selectedEvaluation.Id, Program.CurrentSchoolYear.Id, selectedBookId);

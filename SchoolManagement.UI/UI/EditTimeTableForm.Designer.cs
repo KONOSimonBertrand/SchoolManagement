@@ -116,7 +116,7 @@
             // 
             // 
             cmbBackground.RootElement.StretchVertically = true;
-            cmbBackground.Size = new Size(213, 30);
+            cmbBackground.Size = new Size(213, 20);
             cmbBackground.TabIndex = 3;
             ((Telerik.WinControls.UI.RadTextBoxItem)cmbBackground.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
             // 
@@ -240,23 +240,23 @@
             // 
             // addTeacherButton
             // 
-            addTeacherButton.Location = new Point(469, 106);
+            addTeacherButton.Location = new Point(469, 103);
             addTeacherButton.Name = "addTeacherButton";
-            addTeacherButton.Size = new Size(20, 27);
+            addTeacherButton.Size = new Size(20, 36);
             addTeacherButton.TabIndex = 31;
             // 
             // addSubjectButton
             // 
-            addSubjectButton.Location = new Point(469, 38);
+            addSubjectButton.Location = new Point(469, 35);
             addSubjectButton.Name = "addSubjectButton";
-            addSubjectButton.Size = new Size(20, 27);
+            addSubjectButton.Size = new Size(20, 36);
             addSubjectButton.TabIndex = 30;
             // 
             // labelTeacherTimeIn
             // 
             labelTeacherTimeIn.Location = new Point(124, 209);
             labelTeacherTimeIn.Name = "labelTeacherTimeIn";
-            labelTeacherTimeIn.Size = new Size(98, 18);
+            labelTeacherTimeIn.Size = new Size(128, 21);
             labelTeacherTimeIn.TabIndex = 33;
             labelTeacherTimeIn.Text = "Entrée enseignant:";
             // 
@@ -264,7 +264,7 @@
             // 
             labelTeacherTimeOut.Location = new Point(124, 277);
             labelTeacherTimeOut.Name = "labelTeacherTimeOut";
-            labelTeacherTimeOut.Size = new Size(96, 18);
+            labelTeacherTimeOut.Size = new Size(124, 21);
             labelTeacherTimeOut.TabIndex = 33;
             labelTeacherTimeOut.Text = "Sortie enseignant:";
             // 
@@ -278,7 +278,7 @@
             teacherTimeIn.MinDate = new DateTime(1900, 4, 30, 0, 0, 0, 0);
             teacherTimeIn.Name = "teacherTimeIn";
             teacherTimeIn.ShowUpDown = true;
-            teacherTimeIn.Size = new Size(102, 20);
+            teacherTimeIn.Size = new Size(102, 36);
             teacherTimeIn.TabIndex = 7;
             teacherTimeIn.TabStop = false;
             teacherTimeIn.Text = "12:02:51";
@@ -294,7 +294,7 @@
             teacherTimeOut.MinDate = new DateTime(1900, 4, 30, 0, 0, 0, 0);
             teacherTimeOut.Name = "teacherTimeOut";
             teacherTimeOut.ShowUpDown = true;
-            teacherTimeOut.Size = new Size(102, 20);
+            teacherTimeOut.Size = new Size(102, 36);
             teacherTimeOut.TabIndex = 8;
             teacherTimeOut.TabStop = false;
             teacherTimeOut.Text = "11:41:34";
@@ -304,43 +304,26 @@
             // 
             daysDropDownList.Location = new Point(228, 171);
             daysDropDownList.Name = "daysDropDownList";
-            // 
-            // 
-            // 
-            daysDropDownList.RootElement.StretchVertically = true;
-            daysDropDownList.Size = new Size(233, 30);
+            daysDropDownList.Size = new Size(233, 20);
             daysDropDownList.TabIndex = 4;
             daysDropDownList.Text = "Jours";
-            ((Telerik.WinControls.UI.RadDropDownTextBoxElement)daysDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0)).Text = "Jours";
-            ((Telerik.WinControls.UI.RadTextBoxItem)daysDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
+            daysDropDownList.ThemeName = "ControlDefault";
             // 
             // teacherDropDownList
             // 
             teacherDropDownList.Location = new Point(10, 103);
             teacherDropDownList.Name = "teacherDropDownList";
-            // 
-            // 
-            // 
-            teacherDropDownList.RootElement.StretchVertically = true;
-            teacherDropDownList.Size = new Size(453, 30);
+            teacherDropDownList.Size = new Size(453, 36);
             teacherDropDownList.TabIndex = 1;
             teacherDropDownList.Text = "Enseignants";
-            ((Telerik.WinControls.UI.RadDropDownTextBoxElement)teacherDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0)).Text = "Enseignants";
-            ((Telerik.WinControls.UI.RadTextBoxItem)teacherDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
             // 
             // subjectDropDownList
             // 
             subjectDropDownList.Location = new Point(10, 35);
             subjectDropDownList.Name = "subjectDropDownList";
-            // 
-            // 
-            // 
-            subjectDropDownList.RootElement.StretchVertically = true;
-            subjectDropDownList.Size = new Size(453, 30);
+            subjectDropDownList.Size = new Size(453, 36);
             subjectDropDownList.TabIndex = 0;
             subjectDropDownList.Text = "Cours";
-            ((Telerik.WinControls.UI.RadDropDownTextBoxElement)subjectDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0)).Text = "Cours";
-            ((Telerik.WinControls.UI.RadTextBoxItem)subjectDropDownList.GetChildAt(0).GetChildAt(2).GetChildAt(0).GetChildAt(0).GetChildAt(0)).StretchVertically = true;
             // 
             // errorLabel
             // 
@@ -356,7 +339,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(509, 501);
+            ClientSize = new Size(501, 515);
             Controls.Add(errorLabel);
             Controls.Add(teacherTimeOut);
             Controls.Add(teacherTimeIn);

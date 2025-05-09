@@ -14,6 +14,18 @@
     <Compile Update="Reporting\CashFlow\PaymentSummaryReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Reporting\NoteReport\FoundationAnnualReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\FoundationEvaluationReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\FoundationOneNoteSubReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Reporting\NoteReport\FoundationTermReportCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\NoteReport\GardenAnnualReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -52,6 +64,12 @@
     </Compile>
     <Compile Update="Reporting\NoteReport\PrimaryTermReportCardReport.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="UI\MainForm.ReportTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\GeneralReportForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\ReportViewerForm.cs">
       <SubType>Form</SubType>
@@ -92,7 +110,7 @@
     <Compile Update="UI\MainForm.Employee.Tab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.Settings.Tab.cs">
+    <Compile Update="UI\MainForm.SettingsTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Reporting\NoteReport\ClassNoteReportEmpty.cs">
@@ -218,7 +236,7 @@
     <Compile Update="UI\MainForm.StudentNoteTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\MainForm.TimeTable.Tab.cs">
+    <Compile Update="UI\MainForm.TimeTableTab.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\PaymentMeans\AddPaymentMeanForm.cs">

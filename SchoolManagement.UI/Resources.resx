@@ -577,4 +577,34 @@
   <data name="show_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Images\show_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="icon_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_black.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_black.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_green.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_orange.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_pink.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_teal.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_white.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="schoolapp_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Images\icon_white.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

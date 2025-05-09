@@ -1,6 +1,4 @@
-﻿
-
-using static Primary.SchoolApp.DTO.DTOItem;
+﻿using static Primary.SchoolApp.DTO.DTOItem;
 using Telerik.Reporting;
 using System.Linq;
 
@@ -52,7 +50,7 @@ namespace Primary.SchoolApp.Reporting
                 DirectorSignatureLabel.Value = "Visa Directeur";
                 var decisionMessagePassed = reportCard.HeadSection.Student.Sex == "M" ? "ADMIS" : "ADMISE";
                 var decisionMessageFailed = reportCard.HeadSection.Student.Sex == "M" ? "REFUSE" : "REFUSEE";
-                TeacherCommentLabel.Value = "OBSERVATIONS DE L'ENSEIGNANTE";
+                TeacherCommentLabel.Value = "OBSERVATIONS DE L'ENSEIGNANT(E)";
             }
             else
             {
@@ -71,7 +69,7 @@ namespace Primary.SchoolApp.Reporting
                 ExpertCompetenceLabel.Value = "A+   :  Expert [18 - 20 ]";
                 AcquiredCompetenceLabel.Value = "A     :  Skills Acquired [15 – 18 [";
                 EcaCompetenceLabel.Value = "IPA :Skills In The Process Of Acquiring  [10 – 15 [";
-                NaCompetenceLabel.Value = "NA  : Skills Non Acquired [ 00 – 09 ]";
+                NaCompetenceLabel.Value = "NA  : Skills Not Acquired [ 00 – 09 ]";
                 ParentSignatureLabel.Value = "Parent's Visa";
                 TeacherSignatureLabel.Value = "Teacher's Visa";
                 DeanSignatureLabel.Value = "Head of Nursery visa";

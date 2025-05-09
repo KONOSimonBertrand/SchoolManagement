@@ -1,4 +1,5 @@
-﻿using Telerik.WinControls;
+﻿using SchoolManagement.UI.CustomControls;
+using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace SchoolManagement.UI
@@ -6,7 +7,13 @@ namespace SchoolManagement.UI
     public partial class MainForm
     {
         public RadDropDownList ReportSchoolYearDropDownList { get => reportSchoolYearDropDownList; }
-
+        public SearchTextBox ReportSearchTextBox
+        {
+            get => reportSearchTextBox;
+        }
+        public RadListView ReportMainListView { get => reportMainListView; }
+        public RadListView ReportLeftListView { get => reportLeftListView; }
+        public RadPanel ReportMainPanel { get => reportMainPanel; }
         private void InitReportsPage()
         {
             reportMainPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;

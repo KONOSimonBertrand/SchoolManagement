@@ -1,5 +1,6 @@
 ﻿
 
+using Primary.SchoolApp.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using Telerik.Reporting;
@@ -12,7 +13,7 @@ namespace Primary.SchoolApp.Reporting
         public GardenTermReportCardReport(TermReportCard reportCard)
         {
             string img = reportCard.HeadSection.Language == "FR" ? "head_paper_fr.png" : "head_paper_en.png";
-            var headTerms = GetHeadTerm(reportCard.HeadSection.EvaluationCode, reportCard.HeadSection.Language);
+            var headTerms = AppUtilities.GetHeadTerm(reportCard.HeadSection.EvaluationCode, reportCard.HeadSection.Language);
             HeaderPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl(img);
             ReportTitleTextBox.Value = headTerms.GetValueOrDefault("Title");
             string schoolYearLabel = reportCard.HeadSection.Language == "FR" ? "Année scolaire" : "School year";
@@ -60,7 +61,7 @@ namespace Primary.SchoolApp.Reporting
                 DirectorSignatureLabel.Value = "Visa Directeur";
                 var decisionMessagePassed = reportCard.HeadSection.Student.Sex == "M" ? "ADMIS" : "ADMISE";
                 var decisionMessageFailed = reportCard.HeadSection.Student.Sex == "M" ? "REFUSE" : "REFUSEE";
-                TeacherCommentLabel.Value = "OBSERVATIONS DE L'ENSEIGNANTE";
+                TeacherCommentLabel.Value = "OBSERVATIONS DE L'ENSEIGNANT(E)";
                 DecisionTextBox.Value = double.TryParse(footerTermAverageItem.Value, out termAverage) && termAverage >= 10 ? decisionMessagePassed : decisionMessageFailed;
             }
             else
@@ -79,7 +80,7 @@ namespace Primary.SchoolApp.Reporting
                 ExpertCompetenceLabel.Value = "A+   :  Expert [18 - 20 ]";
                 AcquiredCompetenceLabel.Value = "A     :  Skills Acquired [15 – 18 [";
                 EcaCompetenceLabel.Value = "IPA :Skills In The Process Of Acquiring  [10 – 15 [";
-                NaCompetenceLabel.Value = "NA  : Skills Non Acquired [ 00 – 09 ]";
+                NaCompetenceLabel.Value = "NA  : Skills Not Acquired [ 00 – 09 ]";
                 ParentSignatureLabel.Value = "Parent's Visa";
                 TeacherSignatureLabel.Value = "Teacher's Visa";
                 DeanSignatureLabel.Value = "Head of Nursery visa";
@@ -148,36 +149,10 @@ namespace Primary.SchoolApp.Reporting
             WebSiteTextBox.Value = Program.CurrentSchool.WebSite;
             FaceBookPictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
             WebSitePictureBox.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Center;
-            WebSitePictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("website.png");
-            FaceBookPictureBox.Value = Utilities.AppUtilities.GetImageFromUrl("facebook.png");
+            WebSitePictureBox.Value = AppUtilities.GetImageFromUrl("website.png");
+            FaceBookPictureBox.Value = AppUtilities.GetImageFromUrl("facebook.png");
         }
 
-        // recupere les entetes selon langue
-        private Dictionary<string, string> GetHeadTerm(string termCode, string language)
-        {
-            Dictionary<string, string> terms = new();
-            switch (termCode)
-            {
-                case "TERM01":
-                    terms.Add("Title", language == "FR" ? "BULLETIN DU PREMIER TRIMESTRE" : "FIRST TERM SUMMARY MARK");
-                    terms.Add("FirstMonth", language == "FR" ? "1ʳᵉ EVAL" : "1ˢᵗ EVAL");
-                    terms.Add("SecondMonth", language == "FR" ? "2ᵉ EVAL" : "2ⁿᵈ EVAL");
-                    terms.Add("ThirdMonth", language == "FR" ? "3ᵉ  EVAL" : "3ʳᵈ EVAL");
-                    break;
-                case "TERM02":
-                    terms.Add("Title", language == "FR" ? "BULLETIN DU DEUXIEME TRIMESTRE" : "SECOND TERM SUMMARY MARK");
-                    terms.Add("FirstMonth", language == "FR" ? "4ᵉ  EVAL" : "4ᵗʰ EVAL");
-                    terms.Add("SecondMonth", language == "FR" ? "5ᵉ EVAL" : "5ᵗʰ EVAL");
-                    terms.Add("ThirdMonth", language == "FR" ? "6ᵉ  EVAL" : "6ᵗʰ EVAL");
-                    break;
-                case "TERM03":
-                    terms.Add("Title", language == "FR" ? "BULLETIN DU TROISIEME TRIMESTRE" : "THIRD TERM SUMMARY MARK");
-                    terms.Add("FirstMonth", language == "FR" ? "7ᵉ  EVAL" : "7ᵗʰ EVAL");
-                    terms.Add("SecondMonth", language == "FR" ? "8ᵉ EVAL" : "8ᵗʰ EVAL");
-                    terms.Add("ThirdMonth", language == "FR" ? "9ᵉ  EVAL" : "9ᵗʰ EVAL");
-                    break;
-            }
-            return terms;
-        }
+        
     }
 }

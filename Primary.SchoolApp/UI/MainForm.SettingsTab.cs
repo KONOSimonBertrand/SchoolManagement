@@ -488,6 +488,7 @@ namespace Primary.SchoolApp
                 schoolInfo.SerialKeyTypeLabel.Text = $"{Language.LabelLisenceType}: ";
                 schoolInfo.SerialKeyDurationLabel.Text = $"{Language.LabelExpiryDate}: ";
             }
+            schoolInfo.SerialKeyButton.Image = AppUtilities.GetImage("Edit");
             schoolInfo.SerialKeyButton.Click += (ob, ev) => {
                 var form = Program.ServiceProvider.GetService<EditSerialKeyForm>();
                 form.InitStartup();

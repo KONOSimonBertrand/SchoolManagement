@@ -55,7 +55,6 @@ namespace Primary.SchoolApp.UI
             SubjectDropDownList.ValueMember = "Id";
             SubjectDropDownList.SelectedIndex = -1;
 
-
             TeacherDropDownList.DataSource = Program.EmployeeList;
             TeacherDropDownList.DisplayMember = "FullName";
             TeacherDropDownList.ValueMember = "Id";

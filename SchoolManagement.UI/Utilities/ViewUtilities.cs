@@ -368,6 +368,10 @@ namespace SchoolManagement.UI.Utilities
         {
             return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
         }
+        public static Icon GetIcon(Byte[] byteImage)
+        {
+            return (Icon)((new IconConverter()).ConvertFrom(byteImage));
+        }
 
     }
 }

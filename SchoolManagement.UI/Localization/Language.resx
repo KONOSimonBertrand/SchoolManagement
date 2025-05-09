@@ -1532,4 +1532,19 @@
   <data name="MessageClickToAddEnrolling" xml:space="preserve">
     <value>Click here to add new enrolling</value>
   </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="LabelViewList" xml:space="preserve">
+    <value>List  view</value>
+  </data>
+  <data name="LabelDetailView" xml:space="preserve">
+    <value>Detailed View</value>
+  </data>
+  <data name="LabelGroupView" xml:space="preserve">
+    <value>Group view</value>
+  </data>
+  <data name="LabelIconView" xml:space="preserve">
+    <value>Icon view</value>
+  </data>
 </root>
