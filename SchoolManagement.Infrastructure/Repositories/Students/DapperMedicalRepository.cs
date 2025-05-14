@@ -73,6 +73,23 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
+        public async Task<IList<MedicalRecord>> GetMedicalRecordListBySchoolYearAsync(int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" SELECT * FROM MedicalRecords A      
+                              INNER JOIN Students B ON A.StudentId=B.Id  
+                              WHERE A.StudentId IN(SELECT StudentId FROM StudentsEnrollings WHERE SchoolYearId=@schoolYearId) ;";
+            var result = connection.Query<MedicalRecord, Student, MedicalRecord>(query
+               ,
+               (medicalRecord, student) =>
+               {
+                   medicalRecord.Student = student;
+                   return medicalRecord;
+               }
+               , new { schoolYearId}).ToList();
+            await Task.Delay(0);
+            return result;
+        }
 
         public async Task<bool> UpdateMedicalRecordAsync(MedicalRecord medicalRecord)
         {

@@ -11,6 +11,7 @@ namespace SchoolManagement.Application
         Task<bool> DeleteMedicalRecord(int medicalRecordId);
         Task<bool> UpdateMedicalRecord(MedicalRecord medicalRecord);
         Task<IList<MedicalRecord>> GetMedicalRecordList(int studentId);
-        Task<MedicalRecord> GetMedicalRecord(int studentId, string description);
+        Task<IList<MedicalRecord>> GetMedicalRecordListBySchoolYearAsync(int schoolYearId);
+        Task<MedicalRecord?> GetMedicalRecord(int studentId, string description);
     }
 }

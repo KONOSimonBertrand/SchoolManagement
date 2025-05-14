@@ -58,23 +58,23 @@ namespace SchoolManagement.Core.Model
             {
                 if (Category == "AB")
                 {
-                    return "ABONNEMENT";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SUBSCRIPTION" : "ABONNEMENT";
                 }
                 if (Category == "FS")
                 {
-                    return "FRAIS DE SCOLAIRE";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SCHOOL FEES" : "FRAIS DE SCOLAIRE";
                 }
                 if (Category == "SA")
                 {
-                    return "SALAIRE";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SALARY" : "SALAIRE";
                 }
                 if (Category == "DE")
                 {
-                    return "DEPENSE";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "EXPENSE" : "DEPENSE";
                 }
                 if (Category == "AP")
                 {
-                    return "APPROVISIONNEMENT";
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SUPPLY" : "APPROVISIONNEMENT";
                 }
                 return "RAS";
             }

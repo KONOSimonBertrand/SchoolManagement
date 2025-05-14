@@ -21,7 +21,7 @@ namespace Primary.SchoolApp
     public partial class MainForm
     {
         private string reportForToolTipText = string.Empty;
-        private readonly Dictionary<int?, Dictionary<int,DataTable>> generalReportTaskResult = new();
+        private readonly Dictionary<int?, Dictionary<int, DataTable>> generalReportTaskResult = new();
         private readonly ListingService listingService;
         private ListingItem selectedReport;
         private void InitReportPage()
@@ -38,7 +38,7 @@ namespace Primary.SchoolApp
             ReportMainListView.ToolTipTextNeeded += ReportMainListView_ToolTipTextNeeded;
             ReportMainListView.ItemMouseHover += ReportMainListView_ItemMouseHover;
             ReportMainListView.ItemMouseClick += ReportMainListView_ItemMouseClick;
-            ReportMainListView.ItemMouseDoubleClick += async (sender, e) => await ReportMainListView_ItemMouseDoubleClick(sender,e);
+            ReportMainListView.ItemMouseDoubleClick += async (sender, e) => await ReportMainListView_ItemMouseDoubleClick(sender, e);
             ReportMainListView.SelectedIndexChanged += ReportMainListView_SelectedIndexChanged;
             ReportSearchTextBox.TextChanged += ReportSearchTextBox_TextChanged;
         }
@@ -56,17 +56,17 @@ namespace Primary.SchoolApp
                 runningTaskCount++;
                 this.TaskWaitingBar.Text = runningTaskCount.ToString();
                 await task;
-                int[] reports_with_detail = {9};
+                int[] reports_with_detail = { 9, 10, 11, 12, 21 };
                 if (generalReportTaskResult.TryGetValue(task.Id, out var result))
                 {
                     var form = Program.ServiceProvider.GetService<GeneralReportForm>();
                     form.Icon = this.Icon;
-                    form.TitleLabel.Text = Language.LanguageName=="EN"? item.EnglishName: item.FrenchName;
+                    form.TitleLabel.Text = Language.LanguageName == "EN" ? item.EnglishName : item.FrenchName;
                     form.TitleLabel.Text = $"{form.TitleLabel.Text} :{Program.CurrentSchoolYear.Name}";
                     form.Text = form.TitleLabel.Text;
                     if (!reports_with_detail.Contains(item.Id))
                     {
-                        form.IconViewToggleButton.Enabled=false;
+                        form.IconViewToggleButton.Enabled = false;
                         form.ListViewToggleButton.Enabled = false;
                     }
                     else
@@ -75,26 +75,29 @@ namespace Primary.SchoolApp
                     }
                     if (result.TryGetValue(1, out var dataTable))
                     {
-                        LoadDataForIconView(form,item, dataTable);
+                        LoadDataForIconView(form, item, dataTable);
                     }
-                    
-                        bool updatingReportToggleState = false;
-                  
-                    form.IconViewToggleButton.ToggleStateChanging += (s, e) => {
+
+                    bool updatingReportToggleState = false;
+
+                    form.IconViewToggleButton.ToggleStateChanging += (s, e) =>
+                    {
                         if (!updatingReportToggleState && e.OldValue == ToggleState.On)
                         {
                             e.Cancel = true;
                         }
                     };
 
-                    form.ListViewToggleButton.ToggleStateChanging += (s, e) => {
+                    form.ListViewToggleButton.ToggleStateChanging += (s, e) =>
+                    {
                         if (!updatingReportToggleState && e.OldValue == ToggleState.On)
                         {
                             e.Cancel = true;
                         }
                     };
 
-                    form.IconViewToggleButton.ToggleStateChanged += (s, e) => {
+                    form.IconViewToggleButton.ToggleStateChanged += (s, e) =>
+                    {
 
                         if (updatingReportToggleState)
                         {
@@ -107,10 +110,11 @@ namespace Primary.SchoolApp
                         updatingReportToggleState = true;
                         form.ListViewToggleButton.ToggleState = ToggleState.Off;
                         updatingReportToggleState = false;
-                        
+
                     };
 
-                    form.ListViewToggleButton.ToggleStateChanged += (s, e) => {
+                    form.ListViewToggleButton.ToggleStateChanged += (s, e) =>
+                    {
 
                         if (updatingReportToggleState)
                         {
@@ -123,14 +127,16 @@ namespace Primary.SchoolApp
                         updatingReportToggleState = true;
                         form.IconViewToggleButton.ToggleState = ToggleState.Off;
                         updatingReportToggleState = false;
-                        
+
                     };
 
 
-                    form.PrintButton.Click += (sender, e) => {
+                    form.PrintButton.Click += (sender, e) =>
+                    {
                         AppUtilities.PrintGridView(form.ReportGrid, form.TitleLabel.Text);
                     };
-                    form.ExportButton.Click += (sender, e) => {
+                    form.ExportButton.Click += (sender, e) =>
+                    {
                         AppUtilities.ExportGridViewToExcel(form.ReportGrid, form.TitleLabel.Text);
                     };
                     form.WindowState = FormWindowState.Maximized;
@@ -140,7 +146,7 @@ namespace Primary.SchoolApp
 
             }
         }
-        private void LoadDataForDetailView(GeneralReportForm form,ListingItem item,DataTable dataTable)
+        private void LoadDataForDetailView(GeneralReportForm form, ListingItem item, DataTable dataTable)
         {
             if (form == null) return;
             if (item == null) return;
@@ -156,10 +162,22 @@ namespace Primary.SchoolApp
             switch (item.Id)
             {
                 case 9:
+                case 10:
+                case 12:
+                case 21:
                     form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
                     summaryRow = new GridViewSummaryRowItem {
                                           new (amountColumn, "{0}", GridAggregateFunction.Sum),
                                           new(refColumn,"{0}", GridAggregateFunction.Count)
+                                        };
+                    form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
+                    break;
+                case 11:
+                    form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
+                    form.ReportGrid.Columns[5].FormatString = "{0:dd-MM-yyyy}";
+                    summaryRow = new GridViewSummaryRowItem {
+                                          new (form.ReportGrid.Columns[2].Name, "{0}", GridAggregateFunction.Sum),
+                                          new(form.ReportGrid.Columns[1].Name,"{0}", GridAggregateFunction.Count)
                                         };
                     form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
                     break;
@@ -182,6 +200,7 @@ namespace Primary.SchoolApp
             switch (item.Id)
             {
                 case 6:
+                case 14:
                     form.ReportGrid.Columns[4].FormatString = "{0:dd-MM-yyyy}";
                     break;
                 case 7:
@@ -202,23 +221,43 @@ namespace Primary.SchoolApp
                     {
                         new(form.ReportGrid.Columns[1].Name, " {0}", GridAggregateFunction.Count) // Nbre total des élèves
                     };
-                    for (int i=3;i< form.ReportGrid.ColumnCount;i++)
+                    for (int i = 3; i < form.ReportGrid.ColumnCount; i++)
                     {
-                        summaryRow.Add(new(form.ReportGrid.Columns[i].Name," {0}", GridAggregateFunction.Sum));
+                        summaryRow.Add(new(form.ReportGrid.Columns[i].Name, " {0}", GridAggregateFunction.Sum));
                     }
                     form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
+                    break;
+                case 10:
+                case 12:
+                case 21:
+                    summaryRow = new();
+                    for (int i = 1; i < form.ReportGrid.ColumnCount; i++)
+                    {
+                        summaryRow.Add(new(form.ReportGrid.Columns[i].Name, " {0}", GridAggregateFunction.Sum));
+                    }
+                    form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
+                    break;
+                case 11:
+                    summaryRow = new GridViewSummaryRowItem
+                    {
+                        new(form.ReportGrid.Columns[4].Name, " {0}", GridAggregateFunction.Sum) // Somme
+                    };
+                    form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
+                    break;
+                case 15:
+                    form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
                     break;
             }
         }
         private void GetReport()
         {
-            if(selectedReport == null) return;
+            if (selectedReport == null) return;
             Task<Dictionary<int, DataTable>> task;
             switch (selectedReport.Id)
             {
                 case 1:
                     task = listingService.GetClassList();
-                    generalReportTaskResult.Add(Task.CurrentId, task.Result );
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
                     break;
                 case 2:
                     task = listingService.GetRoomList();
@@ -248,11 +287,38 @@ namespace Primary.SchoolApp
                     task = listingService.GetInscriptioList();
                     generalReportTaskResult.Add(Task.CurrentId, task.Result);
                     break;
-                    case 9:
+                case 9:
                     task = listingService.GetInscriptionPaymentList();
                     generalReportTaskResult.Add(Task.CurrentId, task.Result);
                     break;
-
+                case 10:
+                    task = listingService.GetCashFlowList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 11:
+                    task = listingService.GetSubscriptionList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 12:
+                    task = listingService.GetExpenseList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 13:
+                    task = listingService.GetContactList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 14:
+                    task = listingService.GetMedicalRecordList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 15:
+                    task = listingService.GetDisciplineRecordList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 21:
+                    task = listingService.GetSupplyList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
             }
 
             runningTaskCount--;
@@ -383,8 +449,8 @@ namespace Primary.SchoolApp
         private void LoadClassInfo()
         {
 
-             ReportLeftListView.Groups.Clear();
-             ReportLeftListView.Items.Clear();
+            ReportLeftListView.Groups.Clear();
+            ReportLeftListView.Items.Clear();
             ListViewDataItemGroup reportRoomGroup = new();
             reportRoomGroup.Text = "SALLES DE CLASSE";
             reportRoomGroup.Key = 1;
@@ -395,7 +461,7 @@ namespace Primary.SchoolApp
             reportTeacherGroup.Text = "ENSEIGNANTS PAR CLASSE";
             reportTeacherGroup.Key = 3;
 
-             ReportLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { reportRoomGroup, reportStudentGroup, reportTeacherGroup });
+            ReportLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { reportRoomGroup, reportStudentGroup, reportTeacherGroup });
             foreach (var item in Program.SchoolClassList)
             {
                 ListViewDataItem dataItem = new();
@@ -411,7 +477,7 @@ namespace Primary.SchoolApp
                     dataItem.Text = item.Name.ToUpper();
                 }
                 dataItem.Group = reportRoomGroup;
-                 ReportLeftListView.Items.Add(dataItem);
+                ReportLeftListView.Items.Add(dataItem);
             }
             foreach (var item in Program.SchoolClassList)
             {
@@ -428,7 +494,7 @@ namespace Primary.SchoolApp
                     dataItem.Text = item.Name.ToUpper();
                 }
                 dataItem.Group = reportStudentGroup;
-                 ReportLeftListView.Items.Add(dataItem);
+                ReportLeftListView.Items.Add(dataItem);
             }
             foreach (var item in Program.SchoolClassList)
             {
@@ -445,22 +511,22 @@ namespace Primary.SchoolApp
                     dataItem.Text = item.Name.ToUpper();
                 }
                 dataItem.Group = reportTeacherGroup;
-                 ReportLeftListView.Items.Add(dataItem);
+                ReportLeftListView.Items.Add(dataItem);
             }
             ReportLeftListView.ListViewElement.SynchronizeVisualItems();
         }
 
         private void LoadRoomInfo()
         {
-             ReportLeftListView.Groups.Clear();
-             ReportLeftListView.Items.Clear();
+            ReportLeftListView.Groups.Clear();
+            ReportLeftListView.Items.Clear();
             ListViewDataItemGroup reportStudentGroup = new();
             reportStudentGroup.Text = "ELEVES PAR SALLE";
             reportStudentGroup.Key = 1;
             ListViewDataItemGroup reportTeacherGroup = new();
             reportTeacherGroup.Text = "ENSEIGNANTS PAR SALLE";
             reportTeacherGroup.Key = 2;
-             ReportLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { reportStudentGroup, reportTeacherGroup });
+            ReportLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { reportStudentGroup, reportTeacherGroup });
 
             foreach (var item in Program.SchoolRoomList)
             {
@@ -477,7 +543,7 @@ namespace Primary.SchoolApp
                     dataItem.Text = item.Name.ToUpper();
                 }
                 dataItem.Group = reportStudentGroup;
-                 ReportLeftListView.Items.Add(dataItem);
+                ReportLeftListView.Items.Add(dataItem);
             }
             foreach (var item in Program.SchoolRoomList)
             {
@@ -494,10 +560,10 @@ namespace Primary.SchoolApp
                     dataItem.Text = item.Name.ToUpper();
                 }
                 dataItem.Group = reportTeacherGroup;
-                 ReportLeftListView.Items.Add(dataItem);
+                ReportLeftListView.Items.Add(dataItem);
             }
 
-             ReportLeftListView.ListViewElement.SynchronizeVisualItems();
+            ReportLeftListView.ListViewElement.SynchronizeVisualItems();
 
         }
         private void LoadReportInfo()

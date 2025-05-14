@@ -6,5 +6,7 @@ namespace SchoolManagement.Core.Repositories
     {
         Task<MedicalRecord?> GetMedicalRecordAsync(int studentId, string description);
         Task<IList<MedicalRecord>> GetMedicalRecordListAsync(int studentId);
+        Task<IList<MedicalRecord>> GetMedicalRecordListBySchoolYearAsync(int schoolYearId);
+
     }
 }

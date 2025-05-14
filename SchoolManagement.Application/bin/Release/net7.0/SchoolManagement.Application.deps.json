@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Localization.Abstractions": "7.0.20",
           "SchoolManagement.Core": "1.0.0"
         },
         "runtime": {
@@ -35,6 +36,14 @@
           }
         }
       },
+      "Microsoft.Extensions.Localization.Abstractions/7.0.20": {
+        "runtime": {
+          "lib/net7.0/Microsoft.Extensions.Localization.Abstractions.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.2024.26907"
+          }
+        }
+      },
       "Microsoft.Extensions.Primitives/8.0.0": {
         "runtime": {
           "lib/net7.0/Microsoft.Extensions.Primitives.dll": {
@@ -45,7 +54,10 @@
       },
       "SchoolManagement.Core/1.0.0": {
         "runtime": {
-          "SchoolManagement.Core.dll": {}
+          "SchoolManagement.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -69,6 +81,13 @@
       "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
       "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Localization.Abstractions/7.0.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kXxF0jflcQJnwmWIjB48PEkerG2QH1WrXEgEUdxtSLgL7IqI+VhbKrE7sUg0iRU5fbm8UyEuPQzvBn45zBQ8rQ==",
+      "path": "microsoft.extensions.localization.abstractions/7.0.20",
+      "hashPath": "microsoft.extensions.localization.abstractions.7.0.20.nupkg.sha512"
     },
     "Microsoft.Extensions.Primitives/8.0.0": {
       "type": "package",

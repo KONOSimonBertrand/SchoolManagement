@@ -24,7 +24,7 @@ namespace SchoolManagement.Application
             return await medicalWriteRepository.DeleteMedicalRecordAsync(medicalRecordId);
         }
 
-        public  async Task<MedicalRecord> GetMedicalRecord(int studentId, string description)
+        public  async Task<MedicalRecord?> GetMedicalRecord(int studentId, string description)
         {
             return await medicalReadRepository.GetMedicalRecordAsync(studentId,description);
         }
@@ -32,6 +32,10 @@ namespace SchoolManagement.Application
         public async Task<IList<MedicalRecord>> GetMedicalRecordList(int studentId)
         {
             return await medicalReadRepository.GetMedicalRecordListAsync(studentId);
+        }
+        public async Task<IList<MedicalRecord>> GetMedicalRecordListBySchoolYearAsync(int schoolYearId)
+        {
+            return await medicalReadRepository.GetMedicalRecordListBySchoolYearAsync(schoolYearId);
         }
 
         public async Task<bool> UpdateMedicalRecord(MedicalRecord medicalRecord)
