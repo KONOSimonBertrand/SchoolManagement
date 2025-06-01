@@ -145,7 +145,22 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             appDbContext.ChangeTracker.Clear();
             var user = await appDbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
-            user.Password = password;
+            if (user != null)
+            {
+                user.Password = password;
+            }
+            var result = appDbContext.SaveChanges();
+            await Task.Delay(0);
+            return result > 0;
+        }
+
+        public async Task<bool> UpdateDefaultThemeAsync(int userId, string theme)
+        {
+            appDbContext.ChangeTracker.Clear();
+            var user = await appDbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            if (user != null) {
+                user.DefaultTheme = theme;
+            }
             var result = appDbContext.SaveChanges();
             await Task.Delay(0);
             return result > 0;

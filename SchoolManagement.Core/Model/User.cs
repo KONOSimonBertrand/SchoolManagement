@@ -14,6 +14,7 @@ namespace SchoolManagement.Core.Model
         public string? Name { get; set; }
         public string? Email { get; set; }
         public int? EmployeeId { get; set; }
+        public string ? DefaultTheme {  get; set; }
         public virtual Employee? Employee { get; set; }
         public virtual ICollection<UserModule> Modules { get; set; }=new List<UserModule>(); 
         public virtual ICollection<UserRoom> Rooms { get; set; } =new List<UserRoom>();

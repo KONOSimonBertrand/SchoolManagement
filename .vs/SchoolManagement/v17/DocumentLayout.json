@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\services\\listingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\services\\listingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.ui\\ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|solutionrelative:schoolmanagement.ui\\ui\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\mainform.reporttab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\mainform.reporttab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\students\\dappermedicalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\students\\dappermedicalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\students\\medicalrecordsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\students\\medicalrecordsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\utilities\\apputilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\utilities\\apputilities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,64 +34,38 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DapperMedicalRepository.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\Students\\DapperMedicalRepository.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\Students\\DapperMedicalRepository.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\Students\\DapperMedicalRepository.cs",
-              "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\Students\\DapperMedicalRepository.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAADwv1AAAABDAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "MainForm.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\MainForm.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.UI\\UI\\MainForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\MainForm.cs [Conception]",
+              "RelativeToolTip": "SchoolManagement.UI\\UI\\MainForm.cs [Conception]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T04:22:11.48Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MedicalRecordsForm.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Students\\MedicalRecordsForm.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\Students\\MedicalRecordsForm.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Students\\MedicalRecordsForm.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\UI\\Students\\MedicalRecordsForm.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T03:10:54.161Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AppUtilities.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Utilities\\AppUtilities.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Utilities\\AppUtilities.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Utilities\\AppUtilities.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\Utilities\\AppUtilities.cs",
-              "ViewState": "AgIAAAgDAAAAAAAAAAAQwBEDAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T22:46:00.622Z"
+              "WhenOpened": "2025-06-01T08:18:27.844Z",
+              "EditorCaption": " [Conception]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ListingService.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\ListingService.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Services\\ListingService.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\ListingService.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\Services\\ListingService.cs",
-              "ViewState": "AgIAAAMEAAAAAAAAAADwvw4EAAAVAAAAAAAAAA==",
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\MainForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\MainForm.cs",
+              "ViewState": "AgIAANoHAAAAAAAAAAAnwOMHAADHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T16:21:14.415Z",
+              "WhenOpened": "2025-05-31T08:04:38.717Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainForm.ReportTab.cs",
               "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.ReportTab.cs",
               "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\MainForm.ReportTab.cs",
               "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.ReportTab.cs",
               "RelativeToolTip": "Primary.SchoolApp\\UI\\MainForm.ReportTab.cs",
-              "ViewState": "AgIAAC8BAAAAAAAAAAAgwDoBAABBAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAwwCEAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T10:37:22.345Z",
               "EditorCaption": ""

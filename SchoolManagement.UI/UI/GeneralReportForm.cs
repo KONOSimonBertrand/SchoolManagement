@@ -21,6 +21,8 @@ namespace SchoolManagement.UI
         }
         private void InitComponent()
         {
+            exportButton.DrawText = false;
+            printButton.DrawText = false;
             exportButton.Image = ViewUtilities.GetImage("Excel");
             printButton.Image = ViewUtilities.GetImage("Printer");
             iconViewToggleButton.CustomFont = "TelerikWebUI";

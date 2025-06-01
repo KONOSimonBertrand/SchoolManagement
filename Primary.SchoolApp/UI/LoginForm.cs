@@ -99,7 +99,7 @@ namespace Primary.SchoolApp
                 }
                 if (user != null)
                 {
-                    clientApp.UserConnected = user;                                   
+                    clientApp.UserConnected = user;
                     var mainForm = Program.ServiceProvider.GetService<MainForm>();
                     this.Hide();
                     mainForm.Show();

@@ -94,15 +94,15 @@ namespace SchoolManagement.UI
         private void InitLanguage()
         {
             
-            HomePage.Text=Language.labelHome.ToUpper();
-            CashFlowPage.Text = Language.labelCashFlow.ToUpper();
-            DisciplinePage.Text = Language.labelDiscipline.ToUpper();
-            StudentNotePage.Text=Language.labelStudentNotes.ToUpper();
-            DisciplinePage.Text=Language.labelDiscipline.ToUpper();
-            EmployeePage.Text=Language.labelAdministration.ToUpper();
-            ReportsPage.Text=Language.labelReports.ToUpper();
-            SettingPage.Text=Language.labelSettings.ToUpper();
-            TimeTablePage.Text=Language.labelTimeTable.ToUpper();
+            homePage.Text=Language.labelHome.ToUpper();
+            cashFlowPage.Text = Language.labelCashFlow.ToUpper();
+            disciplinePage.Text = Language.labelDiscipline.ToUpper();
+            studentNotePage.Text=Language.labelStudentNotes.ToUpper();
+            disciplinePage.Text=Language.labelDiscipline.ToUpper();
+            employeePage.Text=Language.labelAdministration.ToUpper();
+            reportsPage.Text=Language.labelReports.ToUpper();
+            settingPage.Text=Language.labelSettings.ToUpper();
+            timeTablePage.Text=Language.labelTimeTable.ToUpper();
             homeAddButton.Text = Language.labelEnroll;
             homeSchoolYearLabel.Text = Language.labelSchoolYear + ":";
             homeExportToExcelButton.ButtonElement.ToolTipText = Language.labelExport;

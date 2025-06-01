@@ -60,5 +60,9 @@ namespace SchoolManagement.Application
         {
             return await userRepository.UpdateAsync(user);
         }
+        public async Task<bool> UpdateDefaultTheme(int userId, string theme)
+        {
+            return await userRepository.UpdateDefaultThemeAsync(userId, theme);
+        }
     }
 }

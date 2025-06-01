@@ -19,6 +19,7 @@ using Telerik.Windows.Diagrams.Core;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Services;
 using System.ComponentModel;
+using Microsoft.VisualBasic.ApplicationServices;
 namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
@@ -73,7 +74,7 @@ namespace Primary.SchoolApp
             ListingService listingService
             )
         {
-            
+
             this.schoolYearService = schoolYearService;
             this.schoolGroupService = schoolGroupService;
             this.schoolClassService = schoolClassService;
@@ -127,6 +128,7 @@ namespace Primary.SchoolApp
             InitEmployeePage();
             InitStudentNotePage();
             InitReportPage();
+            CheckSecurity();
 
         }
 
@@ -330,7 +332,7 @@ namespace Primary.SchoolApp
         {
             TimeTableDateNavigator.Location = new System.Drawing.Point(350, 10);
             TimeTableDateNavigator.Size = new System.Drawing.Size(350, 60);
-
+            this.ThemesDropDownList.SelectedValue = Program.UserConnected?.DefaultTheme;
             if (!Program.SerialKeyIsOK)
             {
                 var customer = Program.CurrentSchool != null ? Program.CurrentSchool.Name : "SCHOOL APP";
@@ -472,6 +474,17 @@ namespace Primary.SchoolApp
             AjustColorDiciplinePage();
             HomeMainListView.ListViewElement.SynchronizeVisualItems();
             EmployeeMainListView.ListViewElement.SynchronizeVisualItems();
+            var done = userService.UpdateDefaultTheme(Program.UserConnected.Id, ThemesDropDownList.Text).Result;
+            if (done)
+            {
+                Log updateLog = new()
+                {
+                    UserId = Program.UserConnected.Id,
+                    UserAction = $"L'utilisateur {Program.UserConnected.Name} a changé son thème par défaut sur le poste {clientApp.IpAddress} le {DateTime.Now}"
+                };
+
+                logService.CreateLog(updateLog);
+            }
         }
         private void HomeLeftListView_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
         {
@@ -1990,6 +2003,55 @@ namespace Primary.SchoolApp
 
         }
 
+
+        // Apply right of user connected
+        private void CheckSecurity()
+        {
+            if (Program.UserConnected.UserName.Trim().ToLower() == "root") return;
+            if (Program.UserConnected.Modules.Count > 0)
+            {
+                // Home page
+                var homeAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 1);
+                CheckPageAccess(this.HomePage, homeAccess);
+                this.HomeAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 1 && m?.AllowCreate==true);
+                // CashFLow Page=> 3: frais de scolarité; 4: Abonnement; 15: Approvisionnement de la caisse 16: Dépenses;
+                var cashflowAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 || m.ModuleId == 4 || m.ModuleId == 15 || m.ModuleId == 16);
+                CheckPageAccess(this.CashFlowPage, cashflowAccess);
+                this.CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(m => (m.ModuleId == 3 && m?.AllowCreate == true)|| (m.ModuleId == 15 && m?.AllowCreate == true) || (m.ModuleId == 16 && m?.AllowCreate == true));
+                // Timetable page 
+                var timetableAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 8);
+                CheckPageAccess(this.TimeTablePage, timetableAccess);
+                // Discipline page 
+                var disciplineAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 7);
+                CheckPageAccess(this.DisciplinePage, disciplineAccess);
+                this.DisciplineAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
+                // student note page 
+                var noteAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 6);
+                CheckPageAccess(this.StudentNotePage, noteAccess);
+                this.StudentNoteAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 6 && m?.AllowCreate == true);
+                // employee page 
+                var employeeAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 11);
+                CheckPageAccess(this.EmployeePage, employeeAccess);
+                this.EmployeeEnrollingAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 11 && m?.AllowCreate == true);
+                // report page 
+                var reportAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 9 || m.ModuleId == 10);
+                CheckPageAccess(this.ReportsPage, reportAccess);
+                // setting page 
+                var settingAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 12);
+                CheckPageAccess(this.SettingPage, settingAccess);
+                this.SettingAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 12 && m?.AllowCreate == true);
+            }
+            else
+            {
+                this.MainPageView.Pages.Clear();
+            }
+
+        }
+        // Remove page if the user dont have access
+        private void CheckPageAccess(RadPageViewPage page,bool access)
+        {
+            if(!access) this.MainPageView.Pages.Remove(page);
+        }
         #endregion
 
     }

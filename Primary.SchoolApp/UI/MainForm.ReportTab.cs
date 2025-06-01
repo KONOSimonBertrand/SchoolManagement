@@ -39,7 +39,6 @@ namespace Primary.SchoolApp
             ReportMainListView.ItemMouseHover += ReportMainListView_ItemMouseHover;
             ReportMainListView.ItemMouseClick += ReportMainListView_ItemMouseClick;
             ReportMainListView.ItemMouseDoubleClick += async (sender, e) => await ReportMainListView_ItemMouseDoubleClick(sender, e);
-            ReportMainListView.SelectedIndexChanged += ReportMainListView_SelectedIndexChanged;
             ReportSearchTextBox.TextChanged += ReportSearchTextBox_TextChanged;
         }
         private async Task ReportMainListView_ItemMouseDoubleClick(object sender, ListViewItemEventArgs e)
@@ -56,7 +55,7 @@ namespace Primary.SchoolApp
                 runningTaskCount++;
                 this.TaskWaitingBar.Text = runningTaskCount.ToString();
                 await task;
-                int[] reports_with_detail = { 9, 10, 11, 12, 21 };
+                int[] reports_with_detail = { 9, 10, 11, 12, 17,18,19,20, 21 };
                 if (generalReportTaskResult.TryGetValue(task.Id, out var result))
                 {
                     var form = Program.ServiceProvider.GetService<GeneralReportForm>();
@@ -181,6 +180,28 @@ namespace Primary.SchoolApp
                                         };
                     form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
                     break;
+                case 17:
+                case 18:
+                case 19:
+                    form.ReportGrid.Columns[2].FormatString = "{0:dd-MM-yyyy}";
+                    form.ReportGrid.Columns[6].FormatString = "{0:dd-MM-yyyy}";
+                    summaryRow = new GridViewSummaryRowItem {
+                                          new (form.ReportGrid.Columns[4].Name, "{0}", GridAggregateFunction.Sum),
+                                          new(form.ReportGrid.Columns[5].Name,"{0}", GridAggregateFunction.Sum)
+                                        };
+                    form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
+                    break;
+                case 20:
+                    form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
+                    form.ReportGrid.Columns[2].FormatString = "{0:H:mm}";
+                    form.ReportGrid.Columns[3].FormatString = "{0:H:mm}";
+                    form.ReportGrid.Columns[4].FormatString = "H:mm";
+                    form.ReportGrid.Columns[7].FormatString = "{0:H:mm}";
+                    form.ReportGrid.Columns[8].FormatString = "{0:H:mm}";
+                    form.ReportGrid.Columns[9].FormatString = "H:mm";
+                    form.ReportGrid.Columns[10].FormatString = "H:mm";
+                    break;
+
             }
         }
         private void LoadDataForIconView(GeneralReportForm form, ListingItem item, DataTable dataTable)
@@ -247,6 +268,26 @@ namespace Primary.SchoolApp
                 case 15:
                     form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
                     break;
+                case 16:
+                    form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
+                    form.ReportGrid.Columns[1].FormatString = "{0:H:mm}";
+                    form.ReportGrid.Columns[2].FormatString = "{0:H:mm}";
+                    form.ReportGrid.Columns[3].FormatString = "0:H:mm";
+                    break;
+                case 17:
+                case 18:
+                case 19:
+                    summaryRow = new GridViewSummaryRowItem {
+                                          new(form.ReportGrid.Columns[0].Name,"{0}", GridAggregateFunction.Count),
+                                          new (form.ReportGrid.Columns[4].Name, "{0}", GridAggregateFunction.Sum),
+                                          new(form.ReportGrid.Columns[5].Name,"{0}", GridAggregateFunction.Sum),
+                                          new(form.ReportGrid.Columns[6].Name,"{0}", GridAggregateFunction.Sum),
+                                          new(form.ReportGrid.Columns[7].Name,"{0}", GridAggregateFunction.Sum),
+                                        };
+                    form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
+                    break;
+               
+
             }
         }
         private void GetReport()
@@ -315,6 +356,26 @@ namespace Primary.SchoolApp
                     task = listingService.GetDisciplineRecordList();
                     generalReportTaskResult.Add(Task.CurrentId, task.Result);
                     break;
+                case 16:
+                    task = listingService.GetEmployeeAttendanceList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 17:
+                    task = listingService.GetTransportSubscriptionList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 18:
+                    task = listingService.GetTapsSubscriptionList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 19:
+                    task = listingService.GetCantineSubscriptionList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 20:
+                    task = listingService.GetTeacherTimeTableList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
                 case 21:
                     task = listingService.GetSupplyList();
                     generalReportTaskResult.Add(Task.CurrentId, task.Result);
@@ -334,11 +395,6 @@ namespace Primary.SchoolApp
         private void ReportMainListView_ItemMouseClick(object sender, ListViewItemEventArgs e)
         {
             e.ListViewElement.SelectedItem = e.Item;
-        }
-
-        private void ReportMainListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadReportInfo();
         }
 
         private void ReportSearchTextBox_TextChanged(object sender, EventArgs e)
@@ -441,144 +497,6 @@ namespace Primary.SchoolApp
             if (e.VisualItem is SimpleListViewVisualItem)
             {
                 e.VisualItem = new ReportSimpleListViewVisualItem();
-            }
-        }
-
-
-
-        private void LoadClassInfo()
-        {
-
-            ReportLeftListView.Groups.Clear();
-            ReportLeftListView.Items.Clear();
-            ListViewDataItemGroup reportRoomGroup = new();
-            reportRoomGroup.Text = "SALLES DE CLASSE";
-            reportRoomGroup.Key = 1;
-            ListViewDataItemGroup reportStudentGroup = new();
-            reportStudentGroup.Text = "ELEVES PAR CLASSE";
-            reportStudentGroup.Key = 2;
-            ListViewDataItemGroup reportTeacherGroup = new();
-            reportTeacherGroup.Text = "ENSEIGNANTS PAR CLASSE";
-            reportTeacherGroup.Key = 3;
-
-            ReportLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { reportRoomGroup, reportStudentGroup, reportTeacherGroup });
-            foreach (var item in Program.SchoolClassList)
-            {
-                ListViewDataItem dataItem = new();
-                dataItem.Value = item.Name;
-                dataItem.Key = item.Id;
-                dataItem.Tag = item.Name;
-                if (item.Name.Length > 14)
-                {
-                    dataItem.Text = item.Name.ToUpper().Substring(0, 14) + "...";
-                }
-                else
-                {
-                    dataItem.Text = item.Name.ToUpper();
-                }
-                dataItem.Group = reportRoomGroup;
-                ReportLeftListView.Items.Add(dataItem);
-            }
-            foreach (var item in Program.SchoolClassList)
-            {
-                ListViewDataItem dataItem = new();
-                dataItem.Value = item.Name;
-                dataItem.Key = item.Id;
-                dataItem.Tag = item.Name;
-                if (item.Name.Length > 14)
-                {
-                    dataItem.Text = item.Name.ToUpper().Substring(0, 14) + "...";
-                }
-                else
-                {
-                    dataItem.Text = item.Name.ToUpper();
-                }
-                dataItem.Group = reportStudentGroup;
-                ReportLeftListView.Items.Add(dataItem);
-            }
-            foreach (var item in Program.SchoolClassList)
-            {
-                ListViewDataItem dataItem = new();
-                dataItem.Value = item.Name;
-                dataItem.Key = item.Id;
-                dataItem.Tag = item.Name;
-                if (item.Name.Length > 14)
-                {
-                    dataItem.Text = item.Name.ToUpper().Substring(0, 14) + "...";
-                }
-                else
-                {
-                    dataItem.Text = item.Name.ToUpper();
-                }
-                dataItem.Group = reportTeacherGroup;
-                ReportLeftListView.Items.Add(dataItem);
-            }
-            ReportLeftListView.ListViewElement.SynchronizeVisualItems();
-        }
-
-        private void LoadRoomInfo()
-        {
-            ReportLeftListView.Groups.Clear();
-            ReportLeftListView.Items.Clear();
-            ListViewDataItemGroup reportStudentGroup = new();
-            reportStudentGroup.Text = "ELEVES PAR SALLE";
-            reportStudentGroup.Key = 1;
-            ListViewDataItemGroup reportTeacherGroup = new();
-            reportTeacherGroup.Text = "ENSEIGNANTS PAR SALLE";
-            reportTeacherGroup.Key = 2;
-            ReportLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { reportStudentGroup, reportTeacherGroup });
-
-            foreach (var item in Program.SchoolRoomList)
-            {
-                ListViewDataItem dataItem = new ListViewDataItem();
-                dataItem.Value = item.Name;
-                dataItem.Key = item.Id;
-                dataItem.Tag = item.Name;
-                if (item.Name.Length > 14)
-                {
-                    dataItem.Text = item.Name.ToUpper().Substring(0, 14) + "...";
-                }
-                else
-                {
-                    dataItem.Text = item.Name.ToUpper();
-                }
-                dataItem.Group = reportStudentGroup;
-                ReportLeftListView.Items.Add(dataItem);
-            }
-            foreach (var item in Program.SchoolRoomList)
-            {
-                ListViewDataItem dataItem = new();
-                dataItem.Value = item.Name;
-                dataItem.Key = item.Id;
-                dataItem.Tag = item.Name;
-                if (item.Name.Length > 14)
-                {
-                    dataItem.Text = item.Name.ToUpper().Substring(0, 14) + "...";
-                }
-                else
-                {
-                    dataItem.Text = item.Name.ToUpper();
-                }
-                dataItem.Group = reportTeacherGroup;
-                ReportLeftListView.Items.Add(dataItem);
-            }
-
-            ReportLeftListView.ListViewElement.SynchronizeVisualItems();
-
-        }
-        private void LoadReportInfo()
-        {
-            if (ReportMainListView?.SelectedItem?.DataBoundItem is ListingItem report)
-            {
-                switch (report.Id)
-                {
-                    case 1:
-                        LoadClassInfo();
-                        break;
-                    case 2:
-                        LoadRoomInfo();
-                        break;
-                }
             }
         }
 

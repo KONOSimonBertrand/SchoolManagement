@@ -1282,8 +1282,8 @@ namespace Primary.SchoolApp.Services
                     row[columnId] = evaluationLine != null ? evaluationLine.FinalNoteAsString : string.Empty;
                     columnId++;
                 }
-                // colonne Total
-                row[columnId++] = averages.FirstOrDefault(x => x.Student.Id == student.Id).TotalMark;
+                // colonne Total 
+                row[columnId++] = AppUtilities.GetTruncateOrRoundingValue(notes.Where(x => x.Student.Id == student.Id).Sum(x => x.FinalNote), classGroup);
                 // colonne Moyenne
                 row[columnId++] = averages.FirstOrDefault(x => x.Student.Id == student.Id).Average;
                 // colonne Rang

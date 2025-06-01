@@ -33,6 +33,15 @@ namespace SchoolManagement.UI
         public RadSplitButtonElement UserSplitButtonElement { get => userSplitButtonElement; }
         public RadToggleButton HomeIconViewToggleButton { get=>homeIconViewToggleButton; }
         public RadToggleButton HomeListViewToggleButton {  get => homeListViewToggleButton; }
+
+        public RadPageViewPage HomePage { get => homePage; }
+        public RadPageViewPage CashFlowPage { get => cashFlowPage; }
+        public RadPageViewPage TimeTablePage { get => timeTablePage; }
+        public RadPageViewPage DisciplinePage { get => disciplinePage; }
+        public RadPageViewPage StudentNotePage {  get => studentNotePage; }
+        public RadPageViewPage ReportsPage { get => reportsPage; }
+        public RadPageViewPage EmployeePage {  get => employeePage; }
+        public RadPageViewPage SettingPage { get => settingPage; }
         #endregion
 
         public MainForm()

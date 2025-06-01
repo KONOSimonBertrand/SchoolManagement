@@ -18,15 +18,16 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAsync(User user)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO Users(UserName,Password,Name,Email,EmployeeId) 
-                           VALUES(@userName,@password,@name,@email,@employeeId) ;";
+            string query = @"INSERT INTO Users(UserName,Password,Name,Email,EmployeeId,DefaultTheme) 
+                           VALUES(@userName,@password,@name,@email,@employeeId,@defaultTheme) ;";
             var result = connection.Execute(query, new
             {
                 userName = user.UserName,
                 password = user.Password,
                 name = user.Name,
                 email = user.Email,
-                employeeId = user.EmployeeId
+                employeeId = user.EmployeeId,
+                defaultTheme= "Material",
             });
             await Task.Delay(0);
             return result > 0;
@@ -217,5 +218,20 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
+        public async Task<bool> UpdateDefaultThemeAsync(int userId,string theme)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"UPDATE Users SET DefaultTheme=@theme 
+                              WHERE Id=@userId ;";
+            var result = connection.Execute(query, new
+            {
+                theme,
+                userId
+            });
+            await Task.Delay(0);
+            return result > 0;
+        }
+
+
     }
 }

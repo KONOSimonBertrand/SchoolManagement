@@ -9,6 +9,7 @@ namespace SchoolManagement.Application
         public Task<bool> CreateUser(User user);
         public Task<bool> UpdateUser(User user);
         public Task<bool> ChangePassword(int userId,string password);
+        public Task<bool> UpdateDefaultTheme(int userId, string theme);
         public Task<bool> AddModuleList(int userId,IList<UserModule> modules);
         public Task<IList<UserModule>> GetUserModuleList(int userId);
         public Task<bool> AddRoomList(int userId, IList<UserRoom> rooms);

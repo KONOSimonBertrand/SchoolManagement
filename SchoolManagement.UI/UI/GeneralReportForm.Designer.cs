@@ -54,9 +54,9 @@
             // 
             reportPanel.Controls.Add(reportGrid);
             reportPanel.Dock = DockStyle.Fill;
-            reportPanel.Location = new Point(0, 73);
+            reportPanel.Location = new Point(0, 55);
             reportPanel.Name = "reportPanel";
-            reportPanel.Size = new Size(1308, 466);
+            reportPanel.Size = new Size(1344, 388);
             reportPanel.TabIndex = 13;
             // 
             // reportGrid
@@ -71,7 +71,7 @@
             reportGrid.MasterTemplate.AllowEditRow = false;
             reportGrid.MasterTemplate.ViewDefinition = tableViewDefinition1;
             reportGrid.Name = "reportGrid";
-            reportGrid.Size = new Size(1308, 466);
+            reportGrid.Size = new Size(1344, 388);
             reportGrid.TabIndex = 64;
             // 
             // commandBarRowElement1
@@ -138,10 +138,12 @@
             // 
             printButton.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             printButton.DisplayName = "commandBarButton1";
+            printButton.DrawText = true;
             printButton.Image = (Image)resources.GetObject("printButton.Image");
             printButton.Name = "printButton";
-            printButton.Text = "Imprimer";
+            printButton.Text = "";
             printButton.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            printButton.TextWrap = true;
             printButton.ToolTipText = "Cliquer ici pour imprimer";
             printButton.UseCompatibleTextRendering = false;
             // 
@@ -162,7 +164,7 @@
             reportCommandBar.Location = new Point(0, 0);
             reportCommandBar.Name = "reportCommandBar";
             reportCommandBar.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] { commandBarRowElement1 });
-            reportCommandBar.Size = new Size(1308, 73);
+            reportCommandBar.Size = new Size(1344, 55);
             reportCommandBar.TabIndex = 11;
             // 
             // GeneralReportForm
@@ -170,7 +172,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1308, 539);
+            ClientSize = new Size(1344, 443);
             Controls.Add(reportPanel);
             Controls.Add(reportCommandBar);
             Name = "GeneralReportForm";

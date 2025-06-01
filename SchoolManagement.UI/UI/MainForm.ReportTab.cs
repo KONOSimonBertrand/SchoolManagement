@@ -12,7 +12,6 @@ namespace SchoolManagement.UI
             get => reportSearchTextBox;
         }
         public RadListView ReportMainListView { get => reportMainListView; }
-        public RadListView ReportLeftListView { get => reportLeftListView; }
         public RadPanel ReportMainPanel { get => reportMainPanel; }
         private void InitReportsPage()
         {
@@ -57,14 +56,6 @@ namespace SchoolManagement.UI
             reportMainListView.ListViewElement.ViewElement.BackColor = Color.Transparent;
             reportMainListView.ListViewElement.Padding = new Padding(-9, 0, 0, 0);
             reportMainListView.RootElement.EnableElementShadow = false;
-
-            reportLeftListView.ShowGroups = true;
-            reportLeftListView.EnableGrouping = true;
-            reportLeftListView.EnableCustomGrouping = true;
-            reportLeftListView.AllowEdit = false;
-            reportLeftListView.RootElement.EnableElementShadow = false;
-            reportLeftListView.HotTracking = false;
-            reportLeftListView.ListViewElement.Padding = new System.Windows.Forms.Padding(0, 16, 0, 0);
 
             reportSchoolYearDropDownList.RootElement.EnableElementShadow = false;
             reportSchoolYearDropDownList.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;

@@ -21,9 +21,11 @@ namespace Primary.SchoolApp.Services
         private readonly IContactService contactService;
         private readonly IMedicalService medicalService;
         private readonly IDisciplineService disciplineService;
+        private readonly ISubscriptionService subscriptionService;
+        private readonly ITimeTableService timeTableService;
         public ListingService(IEmployeeService employeeService, ISchoolClassService schoolClassService,
             IStudentEnrollingService studentEnrollingService, IContactService contactService, IMedicalService medicalService,
-            IDisciplineService disciplineService)
+            IDisciplineService disciplineService, ISubscriptionService subscriptionService, ITimeTableService timeTableService)
         {
             this.employeeService = employeeService;
             this.schoolClassService = schoolClassService;
@@ -31,6 +33,8 @@ namespace Primary.SchoolApp.Services
             this.contactService = contactService;
             this.medicalService = medicalService;
             this.disciplineService = disciplineService;
+            this.subscriptionService = subscriptionService;
+            this.timeTableService = timeTableService;
         }
 
         public static List<ListingItem> GetListingItems()
@@ -643,7 +647,7 @@ namespace Primary.SchoolApp.Services
         {
             var cashFlowList = Program.CashFlowList;
             var monthList = cashFlowList.DistinctBy(x => x.Date.Month).Select(x => x.Date.Month).Order();
-            var typeList = cashFlowList.Select(x=>x.CashFlowType).DistinctBy(x=>x.Id).OrderByDescending(x => x.Category);
+            var typeList = cashFlowList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.Category);
             DataTable globalDataTable = new();
             DataTable detailDataTable = new();
 
@@ -661,9 +665,9 @@ namespace Primary.SchoolApp.Services
                 object[] row = new object[globalDataTable.Columns.Count];
                 row[0] = type.Name;
                 int position = 0;
-                foreach(var m in monthList)
+                foreach (var m in monthList)
                 {
-                    row[++position] = cashFlowList.Where(x=>x.Date.Month==m && x.CashFlowTypeId==type.Id).Sum(x=>x.Amount);
+                    row[++position] = cashFlowList.Where(x => x.Date.Month == m && x.CashFlowTypeId == type.Id).Sum(x => x.Amount);
                 }
                 row[++position] = cashFlowList.Where(x => x.CashFlowTypeId == type.Id).Sum(x => x.Amount);
                 globalDataTable.Rows.Add(row);
@@ -711,7 +715,7 @@ namespace Primary.SchoolApp.Services
         //retourne la liste des paiements relatifs aux abonnements
         public async Task<Dictionary<int, DataTable>> GetSubscriptionList()
         {
-            var inscriptionList=Program.StudentEnrollingList;
+            var inscriptionList = Program.StudentEnrollingList;
             var subscriptionList = Program.SubscriptionList;
             var typeList = subscriptionList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.Category);
             DataTable globalDataTable = new();
@@ -778,7 +782,7 @@ namespace Primary.SchoolApp.Services
                 row[5] = c.EndDate;
                 row[6] = c.State;
                 row[7] = c.Student.FullName;
-                row[8] = inscriptionList.FirstOrDefault(x=>x.StudentId==c.StudentId)?.ClassName;
+                row[8] = inscriptionList.FirstOrDefault(x => x.StudentId == c.StudentId)?.ClassName;
                 row[9] = c.Student.Address;
                 row[10] = c.Student.Phone;
                 detailDataTable.Rows.Add(row);
@@ -926,7 +930,7 @@ namespace Primary.SchoolApp.Services
         //retourne la liste des salles de classe
         public async Task<Dictionary<int, DataTable>> GetContactList()
         {
-            var getContactListTask=contactService.GetContactList();
+            var getContactListTask = contactService.GetContactList();
             var studentsId = Program.StudentEnrollingList.Select(x => x.Student.Id);
             DataTable dataTable = new();
             string idColumn = Language.LanguageName == "EN" ? "ID" : "MATRICULE";
@@ -950,14 +954,14 @@ namespace Primary.SchoolApp.Services
             dataTable.Columns.Add(jobColumn, typeof(string));
             var mother = Language.LanguageName == "EN" ? "Mother" : "Mère";
             var father = Language.LanguageName == "EN" ? "Father" : "Père";
-            var contactList = (await getContactListTask).Where(x=> studentsId.Contains(x.StudentId));
+            var contactList = (await getContactListTask).Where(x => studentsId.Contains(x.StudentId));
             foreach (var contact in contactList)
             {
                 object[] row = new object[dataTable.Columns.Count];
                 row[0] = contact.Student.IdNumber;
                 row[1] = contact.Student.FullName;
                 row[2] = contact.Name;
-                row[3] = contact.Relationship==0?father:mother;
+                row[3] = contact.Relationship == 0 ? father : mother;
                 row[4] = contact.Sex;
                 row[5] = contact.Phone;
                 row[6] = contact.Email;
@@ -985,7 +989,7 @@ namespace Primary.SchoolApp.Services
             dataTable.Columns.Add(objectColumn, typeof(string));
             dataTable.Columns.Add(descriptionColumn, typeof(string));
             dataTable.Columns.Add(dateColumn, typeof(DateTime));
-            var recordList = (await getMedicalRecordListTask).OrderBy(x=>x.Student.FullName);
+            var recordList = (await getMedicalRecordListTask).OrderBy(x => x.Student.FullName);
             foreach (var item in recordList)
             {
                 object[] row = new object[dataTable.Columns.Count];
@@ -1033,14 +1037,432 @@ namespace Primary.SchoolApp.Services
                 row[1] = Language.LanguageName == "EN" ? item.Subject.EnglishName : item.Subject.FrenchName;
                 row[2] = item.Reason;
                 row[3] = item.Duration;
-                row[4] = Language.LanguageName == "EN" ? item.Evaluation.EnglishName: item.Evaluation.FrenchName;
+                row[4] = Language.LanguageName == "EN" ? item.Evaluation.EnglishName : item.Evaluation.FrenchName;
                 row[5] = item.Student.FullName;
                 row[6] = item.Student.IdNumber;
-                row[7] = studentRoomList.FirstOrDefault(x=>x.StudentId==item.StudentId)?.Room.Name;
+                row[7] = studentRoomList.FirstOrDefault(x => x.StudentId == item.StudentId)?.Room.Name;
                 dataTable.Rows.Add(row);
             }
             return new Dictionary<int, DataTable>{
                 {1, dataTable}
+            };
+        }
+
+        //retourne la liste des éléments de discipline des elèves
+        public async Task<Dictionary<int, DataTable>> GetEmployeeAttendanceList()
+        {
+            var getAttendanceListTask = employeeService.GetAttendanceListBySchoolYear(Program.CurrentSchoolYear.Id);
+            DataTable dataTable = new();
+            string dateColumn = Language.LanguageName == "EN" ? "DATE" : "DATE";
+            string inColumn = Language.LanguageName == "EN" ? "ENTRY" : "ENTREE";
+            string outColumn = Language.LanguageName == "EN" ? "EXIT" : "SORTIE";
+            string durationColumn = Language.LanguageName == "EN" ? "DURATION" : "DUREE";
+            string classColumn = Language.LanguageName == "EN" ? "CLASS" : "CLASSE";
+            string subjectColumn = Language.LanguageName == "EN" ? "SUBJECT" : "MATIERRE";
+            string teacherColumn = Language.LanguageName == "EN" ? "TEACHER" : "ENSEIGNANT";
+            string idColumn = Language.LanguageName == "EN" ? "ID" : "MATRICULE";
+
+            dataTable.Columns.Add(dateColumn, typeof(DateTime));
+            dataTable.Columns.Add(inColumn, typeof(DateTime));
+            dataTable.Columns.Add(outColumn, typeof(DateTime));
+            dataTable.Columns.Add(durationColumn, typeof(TimeSpan));
+            dataTable.Columns.Add(subjectColumn, typeof(string));
+            dataTable.Columns.Add(classColumn, typeof(string));
+            dataTable.Columns.Add(teacherColumn, typeof(string));
+            dataTable.Columns.Add(idColumn, typeof(string));
+
+            var attendanceList = (await getAttendanceListTask).OrderByDescending(x => x.StartHour);
+            foreach (var item in attendanceList)
+            {
+                object[] row = new object[dataTable.Columns.Count];
+                row[0] = item.StartHour;
+                row[1] = item.StartHour.ToLocalTime();
+                row[2] = item.EndHour.ToLocalTime();
+                row[3] = item.Duration;
+                row[4] = Language.LanguageName == "EN" ? item.Subject.EnglishName : item.Subject.FrenchName;
+                row[5] = item.Room.Name;
+                row[6] = item.Employee.FullName;
+                row[7] = item.Employee.IdNumber;
+                dataTable.Rows.Add(row);
+            }
+            return new Dictionary<int, DataTable>{
+                {1, dataTable}
+            };
+        }
+
+        //retourne la liste des abonnements de type transport
+        public async Task<Dictionary<int, DataTable>> GetTransportSubscriptionList()
+        {
+            var getSubscriptionListTask = subscriptionService.GetSubscriptionLisAsync(Program.CurrentSchoolYear.Id);
+            var getStudentClassroomTask = studentEnrollingService.GetStudentRoomListAsync(Program.CurrentSchoolYear.Id);
+            DataTable globalDataTable = new();
+            DataTable detailDataTable = new();
+
+            string idColumn = Language.LanguageName == "EN" ? "ID" : "MATRICULE";
+            string studentColumn = Language.LanguageName == "EN" ? "STUDENT" : "ELEVE";
+            string classColumn = Language.LanguageName == "EN" ? "CLASS" : "CLASSE";
+            string addressColumn = Language.LanguageName == "EN" ? "ADDRESS" : "ADRESSE";
+            string phoneColumn = Language.LanguageName == "EN" ? "PHONE" : "TELEPHONE";
+            string subscriptionColumn = Language.LanguageName == "EN" ? "SUBSCRIPTIONS" : "ABONNEMENTS";
+            string firstTermColumn = Language.LanguageName == "EN" ? "1ˢᵗ TERM" : "1ᵉʳ TRIMESTRE";
+            string secondTermColumn = Language.LanguageName == "EN" ? "2ⁿᵈ TERM" : "2ᵉ TRIMESTRE";
+            string thirdTermColumn = Language.LanguageName == "EN" ? "3ʳᵈ TERM" : "3ᵉ TRIMESTRE";
+            string totalColumn = Language.LanguageName == "EN" ? "TOTAL" : "TOTAL";
+
+            string stateColumn = Language.LanguageName == "EN" ? "STATE" : "ETAT";
+            string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAIEMENT";
+            string refColumn = Language.LanguageName == "EN" ? "REF" : "REF";
+            string amountColumn = Language.LanguageName == "EN" ? "AMOUNT" : "MONTANT";
+            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
+            string endColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
+
+            // build global datatable
+            globalDataTable.Columns.Add(idColumn, typeof(string));
+            globalDataTable.Columns.Add(studentColumn, typeof(string));
+            globalDataTable.Columns.Add(classColumn, typeof(string));
+            globalDataTable.Columns.Add(subscriptionColumn, typeof(string));
+            globalDataTable.Columns.Add(firstTermColumn, typeof(double));
+            globalDataTable.Columns.Add(secondTermColumn, typeof(double));
+            globalDataTable.Columns.Add(thirdTermColumn, typeof(double));
+            globalDataTable.Columns.Add(totalColumn, typeof(double));
+
+            var subscriptionList = (await getSubscriptionListTask)
+                .Where(x => x.CashFlowType?.Domain == "Transport")
+                .OrderByDescending(x => x.StartDate);
+            var subsctiptionTypeList = subscriptionList.Select(x => x.CashFlowType);
+            var studentClassList = await getStudentClassroomTask;
+            var studentList = subscriptionList.Select(x => x.Student).DistinctBy(x => x.Id);
+            foreach (var student in studentList)
+            {
+                object[] row = new object[globalDataTable.Columns.Count];
+                row[0] = student.IdNumber;
+                row[1] = student.FullName;
+                row[2] = studentClassList.FirstOrDefault(x => x.StudentId == student.Id)?.Room.Name;
+                var subscriptionValues = subscriptionList.Where(x => x.StudentId == student.Id)
+                                         .DistinctBy(x => x.CashFlowTypeId).Select(x => x.CashFlowType.Name);
+                row[3] = string.Join("-", subscriptionValues);
+                row[4] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndFirstQuarter.Value.Date).Sum(x => x.Amount);
+                row[5] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndSecondQuarter.Value.Date && x.EndDate.Date > Program.CurrentSchoolYear?.EndFirstQuarter.Value.Date).Sum(x => x.Amount);
+                row[6] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndThirdQuarter.Value.Date && x.EndDate.Date > Program.CurrentSchoolYear?.EndSecondQuarter.Value.Date).Sum(x => x.Amount);
+                row[7] = subscriptionList.Where(x => x.StudentId == student.Id).Sum(x => x.Amount);
+                globalDataTable.Rows.Add(row);
+            }
+
+            // build detail datatable
+            detailDataTable.Columns.Add(subscriptionColumn, typeof(string));
+            detailDataTable.Columns.Add(stateColumn, typeof(string));
+            detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
+            detailDataTable.Columns.Add(refColumn, typeof(string));
+            detailDataTable.Columns.Add(amountColumn, typeof(double));
+            detailDataTable.Columns.Add(discountColumn, typeof(double));
+            detailDataTable.Columns.Add(endColumn, typeof(DateTime));
+            detailDataTable.Columns.Add(studentColumn, typeof(string));
+            detailDataTable.Columns.Add(idColumn, typeof(string));
+            detailDataTable.Columns.Add(classColumn, typeof(string));
+            detailDataTable.Columns.Add(addressColumn, typeof(string));
+            detailDataTable.Columns.Add(phoneColumn, typeof(string));
+            foreach (var subscription in subscriptionList)
+            {
+                object[] row = new object[detailDataTable.Columns.Count];
+                row[0] = subscription.CashFlowType.Name;
+                row[1] = subscription.State;
+                row[2] = subscription.TransactionDate;
+                row[3] = subscription.IdNumber;
+                row[4] = subscription.Amount;
+                row[5] = subscription.Discount;
+                row[6] = subscription.EndDate;
+                row[7] = subscription.Student.FullName;
+                row[8] = subscription.Student.IdNumber;
+                row[9] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
+                row[10] = subscription.Student.Address;
+                row[11] = subscription.Student.Phone;
+                detailDataTable.Rows.Add(row);
+            }
+            return new Dictionary<int, DataTable>{
+                {1, globalDataTable},
+                {2, detailDataTable}
+            };
+        }
+
+        //retourne la liste des abonnements de type tap
+        public async Task<Dictionary<int, DataTable>> GetTapsSubscriptionList()
+        {
+            var getSubscriptionListTask = subscriptionService.GetSubscriptionLisAsync(Program.CurrentSchoolYear.Id);
+            var getStudentClassroomTask = studentEnrollingService.GetStudentRoomListAsync(Program.CurrentSchoolYear.Id);
+            DataTable globalDataTable = new();
+            DataTable detailDataTable = new();
+
+            string idColumn = Language.LanguageName == "EN" ? "ID" : "MATRICULE";
+            string studentColumn = Language.LanguageName == "EN" ? "STUDENT" : "ELEVE";
+            string classColumn = Language.LanguageName == "EN" ? "CLASS" : "CLASSE";
+            string addressColumn = Language.LanguageName == "EN" ? "ADDRESS" : "ADRESSE";
+            string phoneColumn = Language.LanguageName == "EN" ? "PHONE" : "TELEPHONE";
+            string subscriptionColumn = Language.LanguageName == "EN" ? "SUBSCRIPTIONS" : "ABONNEMENTS";
+            string firstTermColumn = Language.LanguageName == "EN" ? "1ˢᵗ TERM" : "1ᵉʳ TRIMESTRE";
+            string secondTermColumn = Language.LanguageName == "EN" ? "2ⁿᵈ TERM" : "2ᵉ TRIMESTRE";
+            string thirdTermColumn = Language.LanguageName == "EN" ? "3ʳᵈ TERM" : "3ᵉ TRIMESTRE";
+            string totalColumn = Language.LanguageName == "EN" ? "TOTAL" : "TOTAL";
+
+            string stateColumn = Language.LanguageName == "EN" ? "STATE" : "ETAT";
+            string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAIEMENT";
+            string refColumn = Language.LanguageName == "EN" ? "REF" : "REF";
+            string amountColumn = Language.LanguageName == "EN" ? "AMOUNT" : "MONTANT";
+            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
+            string endColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
+
+            // build global datatable
+            globalDataTable.Columns.Add(idColumn, typeof(string));
+            globalDataTable.Columns.Add(studentColumn, typeof(string));
+            globalDataTable.Columns.Add(classColumn, typeof(string));
+            globalDataTable.Columns.Add(subscriptionColumn, typeof(string));
+            globalDataTable.Columns.Add(firstTermColumn, typeof(double));
+            globalDataTable.Columns.Add(secondTermColumn, typeof(double));
+            globalDataTable.Columns.Add(thirdTermColumn, typeof(double));
+            globalDataTable.Columns.Add(totalColumn, typeof(double));
+
+            var subscriptionList = (await getSubscriptionListTask)
+                .Where(x => x.CashFlowType?.Domain == "Activité Périscolaire")
+                .OrderByDescending(x => x.StartDate);
+            var subsctiptionTypeList = subscriptionList.Select(x => x.CashFlowType);
+            var studentClassList = await getStudentClassroomTask;
+            var studentList = subscriptionList.Select(x => x.Student).DistinctBy(x => x.Id);
+            foreach (var student in studentList)
+            {
+                object[] row = new object[globalDataTable.Columns.Count];
+                row[0] = student.IdNumber;
+                row[1] = student.FullName;
+                row[2] = studentClassList.FirstOrDefault(x => x.StudentId == student.Id)?.Room.Name;
+                var subscriptionValues = subscriptionList.Where(x => x.StudentId == student.Id)
+                                         .DistinctBy(x => x.CashFlowTypeId).Select(x => x.CashFlowType.Name);
+                row[3] = string.Join("-", subscriptionValues);
+                row[4] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndFirstQuarter.Value.Date).Sum(x => x.Amount);
+                row[5] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndSecondQuarter.Value.Date && x.EndDate.Date > Program.CurrentSchoolYear?.EndFirstQuarter.Value.Date).Sum(x => x.Amount);
+                row[6] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndThirdQuarter.Value.Date && x.EndDate.Date > Program.CurrentSchoolYear?.EndSecondQuarter.Value.Date).Sum(x => x.Amount);
+                row[7] = subscriptionList.Where(x => x.StudentId == student.Id).Sum(x => x.Amount);
+                globalDataTable.Rows.Add(row);
+            }
+
+            // build detail datatable
+            detailDataTable.Columns.Add(subscriptionColumn, typeof(string));
+            detailDataTable.Columns.Add(stateColumn, typeof(string));
+            detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
+            detailDataTable.Columns.Add(refColumn, typeof(string));
+            detailDataTable.Columns.Add(amountColumn, typeof(double));
+            detailDataTable.Columns.Add(discountColumn, typeof(double));
+            detailDataTable.Columns.Add(endColumn, typeof(DateTime));
+            detailDataTable.Columns.Add(studentColumn, typeof(string));
+            detailDataTable.Columns.Add(idColumn, typeof(string));
+            detailDataTable.Columns.Add(classColumn, typeof(string));
+            detailDataTable.Columns.Add(addressColumn, typeof(string));
+            detailDataTable.Columns.Add(phoneColumn, typeof(string));
+            foreach (var subscription in subscriptionList)
+            {
+                object[] row = new object[detailDataTable.Columns.Count];
+                row[0] = subscription.CashFlowType.Name;
+                row[1] = subscription.State;
+                row[2] = subscription.TransactionDate;
+                row[3] = subscription.IdNumber;
+                row[4] = subscription.Amount;
+                row[5] = subscription.Discount;
+                row[6] = subscription.EndDate;
+                row[7] = subscription.Student.FullName;
+                row[8] = subscription.Student.IdNumber;
+                row[9] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
+                row[10] = subscription.Student.Address;
+                row[11] = subscription.Student.Phone;
+                detailDataTable.Rows.Add(row);
+            }
+            return new Dictionary<int, DataTable>{
+                {1, globalDataTable},
+                {2, detailDataTable}
+            };
+        }
+
+        //retourne la liste des abonnements de type cantine
+        public async Task<Dictionary<int, DataTable>> GetCantineSubscriptionList()
+        {
+            var getSubscriptionListTask = subscriptionService.GetSubscriptionLisAsync(Program.CurrentSchoolYear.Id);
+            var getStudentClassroomTask = studentEnrollingService.GetStudentRoomListAsync(Program.CurrentSchoolYear.Id);
+            DataTable globalDataTable = new();
+            DataTable detailDataTable = new();
+
+            string idColumn = Language.LanguageName == "EN" ? "ID" : "MATRICULE";
+            string studentColumn = Language.LanguageName == "EN" ? "STUDENT" : "ELEVE";
+            string classColumn = Language.LanguageName == "EN" ? "CLASS" : "CLASSE";
+            string addressColumn = Language.LanguageName == "EN" ? "ADDRESS" : "ADRESSE";
+            string phoneColumn = Language.LanguageName == "EN" ? "PHONE" : "TELEPHONE";
+            string subscriptionColumn = Language.LanguageName == "EN" ? "SUBSCRIPTIONS" : "ABONNEMENTS";
+            string firstTermColumn = Language.LanguageName == "EN" ? "1ˢᵗ TERM" : "1ᵉʳ TRIMESTRE";
+            string secondTermColumn = Language.LanguageName == "EN" ? "2ⁿᵈ TERM" : "2ᵉ TRIMESTRE";
+            string thirdTermColumn = Language.LanguageName == "EN" ? "3ʳᵈ TERM" : "3ᵉ TRIMESTRE";
+            string totalColumn = Language.LanguageName == "EN" ? "TOTAL" : "TOTAL";
+
+            string stateColumn = Language.LanguageName == "EN" ? "STATE" : "ETAT";
+            string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAIEMENT";
+            string refColumn = Language.LanguageName == "EN" ? "REF" : "REF";
+            string amountColumn = Language.LanguageName == "EN" ? "AMOUNT" : "MONTANT";
+            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
+            string endColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
+
+            // build global datatable
+            globalDataTable.Columns.Add(idColumn, typeof(string));
+            globalDataTable.Columns.Add(studentColumn, typeof(string));
+            globalDataTable.Columns.Add(classColumn, typeof(string));
+            globalDataTable.Columns.Add(subscriptionColumn, typeof(string));
+            globalDataTable.Columns.Add(firstTermColumn, typeof(double));
+            globalDataTable.Columns.Add(secondTermColumn, typeof(double));
+            globalDataTable.Columns.Add(thirdTermColumn, typeof(double));
+            globalDataTable.Columns.Add(totalColumn, typeof(double));
+
+            var subscriptionList = (await getSubscriptionListTask)
+                .Where(x => x.CashFlowType?.Domain == "Cantine")
+                .OrderByDescending(x => x.StartDate);
+            var subsctiptionTypeList = subscriptionList.Select(x => x.CashFlowType);
+            var studentClassList = await getStudentClassroomTask;
+            var studentList = subscriptionList.Select(x => x.Student).DistinctBy(x => x.Id);
+            foreach (var student in studentList)
+            {
+                object[] row = new object[globalDataTable.Columns.Count];
+                row[0] = student.IdNumber;
+                row[1] = student.FullName;
+                row[2] = studentClassList.FirstOrDefault(x => x.StudentId == student.Id)?.Room.Name;
+                var subscriptionValues = subscriptionList.Where(x => x.StudentId == student.Id)
+                                         .DistinctBy(x => x.CashFlowTypeId).Select(x => x.CashFlowType.Name);
+                row[3] = string.Join("-", subscriptionValues);
+                row[4] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndFirstQuarter.Value.Date).Sum(x => x.Amount);
+                row[5] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndSecondQuarter.Value.Date && x.EndDate.Date > Program.CurrentSchoolYear?.EndFirstQuarter.Value.Date).Sum(x => x.Amount);
+                row[6] = subscriptionList.Where(x => x.StudentId == student.Id && x.EndDate.Date <= Program.CurrentSchoolYear?.EndThirdQuarter.Value.Date && x.EndDate.Date > Program.CurrentSchoolYear?.EndSecondQuarter.Value.Date).Sum(x => x.Amount);
+                row[7] = subscriptionList.Where(x => x.StudentId == student.Id).Sum(x => x.Amount);
+                globalDataTable.Rows.Add(row);
+            }
+
+            // build detail datatable
+            detailDataTable.Columns.Add(subscriptionColumn, typeof(string));
+            detailDataTable.Columns.Add(stateColumn, typeof(string));
+            detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
+            detailDataTable.Columns.Add(refColumn, typeof(string));
+            detailDataTable.Columns.Add(amountColumn, typeof(double));
+            detailDataTable.Columns.Add(discountColumn, typeof(double));
+            detailDataTable.Columns.Add(endColumn, typeof(DateTime));
+            detailDataTable.Columns.Add(studentColumn, typeof(string));
+            detailDataTable.Columns.Add(idColumn, typeof(string));
+            detailDataTable.Columns.Add(classColumn, typeof(string));
+            detailDataTable.Columns.Add(addressColumn, typeof(string));
+            detailDataTable.Columns.Add(phoneColumn, typeof(string));
+            foreach (var subscription in subscriptionList)
+            {
+                object[] row = new object[detailDataTable.Columns.Count];
+                row[0] = subscription.CashFlowType.Name;
+                row[1] = subscription.State;
+                row[2] = subscription.TransactionDate;
+                row[3] = subscription.IdNumber;
+                row[4] = subscription.Amount;
+                row[5] = subscription.Discount;
+                row[6] = subscription.EndDate;
+                row[7] = subscription.Student.FullName;
+                row[8] = subscription.Student.IdNumber;
+                row[9] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
+                row[10] = subscription.Student.Address;
+                row[11] = subscription.Student.Phone;
+                detailDataTable.Rows.Add(row);
+            }
+            return new Dictionary<int, DataTable>{
+                {1, globalDataTable},
+                {2, detailDataTable}
+            };
+        }
+
+        //retourne la liste des pointage
+        public async Task<Dictionary<int, DataTable>> GetTeacherTimeTableList()
+        {
+            var getTimeTableTask = timeTableService.GetTimeTableListAsync(Program.CurrentSchoolYear.Id);
+            DataTable globalTable = new();
+            DataTable detailTable = new();
+
+            string idColumn = Language.LanguageName == "EN" ? "ID" : "MATRICULE";
+            string teacherColumn = Language.LanguageName == "EN" ? "TEACHER" : "ENSEIGNANT";
+            string toDoColumn = Language.LanguageName == "EN" ? "TO DO" : "A FAIRE";
+            string doneColumn = Language.LanguageName == "EN" ? "WORKED TIME" : "TEMPS EFFECTUE";
+            string noDoneColumn = Language.LanguageName == "EN" ? "NO DONE" : "NON EFFECTUE";
+            string cancelColumn = Language.LanguageName == "EN" ? "CANCELED" : "ANNULE";
+            string remainingColumn = Language.LanguageName == "EN" ? "REMAINING TIME" : "TEMPS RESTANT";
+
+
+            string dateColumn = Language.LanguageName == "EN" ? "DATE" : "DATE";
+            string subjectColumn = Language.LanguageName == "EN" ? "SUBJECT" : "MATIERE";
+            string startColumn = Language.LanguageName == "EN" ? "START" : "DEBUT";
+            string endColumn = Language.LanguageName == "EN" ? "END" : "FIN";
+            string expectedDurationColumn = Language.LanguageName == "EN" ? "EXPECTED DURATION" : "DUREE PREVUE";
+            string stateColumn = Language.LanguageName == "EN" ? "STATE" : "STATUT";
+            string inColumn = Language.LanguageName == "EN" ? "ENTRY" : "ENTREE";
+            string outColumn = Language.LanguageName == "EN" ? "EXIT" : "SORTIE";
+            string realDurationColumn = Language.LanguageName == "EN" ? "REAL DURATION" : "DUREE EFFECTIVE";
+            // build global table
+            globalTable.Columns.Add(idColumn, typeof(string));
+            globalTable.Columns.Add(teacherColumn, typeof(string));
+            globalTable.Columns.Add(toDoColumn, typeof(int));
+            globalTable.Columns.Add(doneColumn, typeof(int));
+            globalTable.Columns.Add(noDoneColumn, typeof(int));
+            globalTable.Columns.Add(cancelColumn, typeof(int));
+            globalTable.Columns.Add(remainingColumn, typeof(int));
+
+            // build detail table
+            detailTable.Columns.Add(dateColumn, typeof(DateTime));
+            detailTable.Columns.Add(subjectColumn, typeof(string));
+            detailTable.Columns.Add(startColumn, typeof(DateTime));
+            detailTable.Columns.Add(endColumn, typeof(DateTime));
+            detailTable.Columns.Add(expectedDurationColumn, typeof(TimeSpan));
+            detailTable.Columns.Add(stateColumn, typeof(string));
+            detailTable.Columns.Add(teacherColumn, typeof(string));
+            detailTable.Columns.Add(inColumn, typeof(DateTime));
+            detailTable.Columns.Add(outColumn, typeof(DateTime));
+            detailTable.Columns.Add(realDurationColumn, typeof(TimeSpan));
+            detailTable.Columns.Add(remainingColumn, typeof(TimeSpan));
+
+            var timeTableList = (await getTimeTableTask).OrderByDescending(x => x.StartHour);
+            var teacherList = timeTableList.Select(x => x.Teacher).DistinctBy(x => x.Id);
+
+            // build global table rows
+            foreach (var teacher in teacherList)
+            {
+                object[] row = new object[globalTable.Columns.Count];
+                row[0] = teacher.IdNumber;
+                row[1] = teacher.FullName;
+                var toDo= timeTableList.Where(x => x.TeacherId == teacher.Id && x.State == TimeTable.TimeTableState.ToDo)
+                                    .Select(x => (x.EndHour - x.StartHour)).Sum(x => x.TotalMinutes);
+                row[2] = toDo;
+                var done= timeTableList.Where(x => x.TeacherId == teacher.Id && x.State == TimeTable.TimeTableState.Done)
+                                    .Select(x => (x.TeacherOut - x.TeacherIn)).Sum(x => x.TotalMinutes);
+                row[3] = done;
+                var noDone= timeTableList.Where(x => x.TeacherId == teacher.Id && x.State == TimeTable.TimeTableState.NoDone)
+                                    .Select(x => (x.EndHour - x.StartHour)).Sum(x => x.TotalMinutes);
+                row[4] = noDone;
+                var canceled= timeTableList.Where(x => x.TeacherId == teacher.Id && x.State == TimeTable.TimeTableState.Canceled)
+                                    .Select(x => (x.EndHour - x.StartHour)).Sum(x => x.TotalMinutes);
+                row[5] = canceled;
+                var remaining= toDo-done+noDone;
+                globalTable.Rows.Add(row);
+            }
+
+            foreach (var item in timeTableList)
+            {
+                object[] row = new object[detailTable.Columns.Count];
+                row[0] = item.StartHour;
+                row[1] = Program.SubjectList.FirstOrDefault(x => x.Id == item.SubjectId);
+                row[2] = item.StartHour;
+                row[3] = item.EndHour;
+                row[4] = item.EndHour - item.StartHour;
+                row[5] = item.State;
+                row[6] = item.Teacher.FullName;
+                row[7] = item.TeacherIn;
+                row[8] = item.TeacherOut;
+                row[9] = item.TeacherOut - item.TeacherIn;
+                row[10] = (item.EndHour - item.StartHour) - (item.TeacherOut - item.TeacherIn);
+                detailTable.Rows.Add(row);
+            }
+            return new Dictionary<int, DataTable>{
+                {1, globalTable},
+                {2, detailTable},
             };
         }
     }
