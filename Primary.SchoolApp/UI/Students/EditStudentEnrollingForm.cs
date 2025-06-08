@@ -186,7 +186,7 @@ namespace Primary.SchoolApp.UI
            var payments=await cashFlowService.GetTuitionPaymentByEnrollingList(enrollingId);
             if (payments != null) { 
                 AmountTextBox.Text= payments.Where(x => x.IsDuringEnrolling && x.Amount>0).Sum(x => x.Amount).ToString();
-                DoneByTextBox.Text = payments.Where(x => x.IsDuringEnrolling && x.Amount > 0).FirstOrDefault().DoneBy;
+                DoneByTextBox.Text = payments.Where(x => x.IsDuringEnrolling && x.Amount > 0).FirstOrDefault()?.DoneBy;
                 PaymentsGridView.DataSource = payments.Where(x=>x.IsDuringEnrolling && x.Amount > 0);
             }
         } 

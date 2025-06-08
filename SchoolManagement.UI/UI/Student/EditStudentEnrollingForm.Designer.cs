@@ -142,7 +142,7 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(1052, 395);
+            editPanel.Size = new Size(1080, 395);
             editPanel.TabIndex = 20;
             // 
             // paymentsGridView
@@ -161,7 +161,7 @@
             paymentsGridView.MasterTemplate.ShowFilteringRow = false;
             paymentsGridView.MasterTemplate.ViewDefinition = tableViewDefinition1;
             paymentsGridView.Name = "paymentsGridView";
-            paymentsGridView.Size = new Size(1052, 160);
+            paymentsGridView.Size = new Size(1080, 160);
             paymentsGridView.TabIndex = 12;
             // 
             // divisionLabel
@@ -171,7 +171,7 @@
             divisionLabel.Location = new Point(0, 204);
             divisionLabel.Margin = new Padding(4, 5, 4, 5);
             divisionLabel.Name = "divisionLabel";
-            divisionLabel.Size = new Size(1052, 30);
+            divisionLabel.Size = new Size(1080, 30);
             divisionLabel.TabIndex = 101;
             divisionLabel.Text = "Répartition:";
             // 
@@ -181,7 +181,7 @@
             amountSplitContainer.Dock = DockStyle.Top;
             amountSplitContainer.Location = new Point(0, 136);
             amountSplitContainer.Name = "amountSplitContainer";
-            amountSplitContainer.Size = new Size(1052, 68);
+            amountSplitContainer.Size = new Size(1080, 68);
             amountSplitContainer.SplitterWidth = 0;
             amountSplitContainer.TabIndex = 100;
             amountSplitContainer.TabStop = false;
@@ -198,7 +198,7 @@
             amountSplitPanel.Controls.Add(amountLabel);
             amountSplitPanel.Location = new Point(0, 0);
             amountSplitPanel.Name = "amountSplitPanel";
-            amountSplitPanel.Size = new Size(1052, 68);
+            amountSplitPanel.Size = new Size(1080, 68);
             amountSplitPanel.TabIndex = 0;
             amountSplitPanel.TabStop = false;
             // 
@@ -285,7 +285,7 @@
             studentSplitContainer.Dock = DockStyle.Top;
             studentSplitContainer.Location = new Point(0, 68);
             studentSplitContainer.Name = "studentSplitContainer";
-            studentSplitContainer.Size = new Size(1052, 68);
+            studentSplitContainer.Size = new Size(1080, 68);
             studentSplitContainer.SplitterWidth = 0;
             studentSplitContainer.TabIndex = 99;
             studentSplitContainer.TabStop = false;
@@ -308,7 +308,7 @@
             studentSplitPanel.Controls.Add(classLabel);
             studentSplitPanel.Location = new Point(0, 0);
             studentSplitPanel.Name = "studentSplitPanel";
-            studentSplitPanel.Size = new Size(1052, 68);
+            studentSplitPanel.Size = new Size(1080, 68);
             studentSplitPanel.TabIndex = 0;
             studentSplitPanel.TabStop = false;
             // 
@@ -317,7 +317,7 @@
             addRoomButton.Location = new Point(433, 33);
             addRoomButton.Margin = new Padding(4, 5, 4, 5);
             addRoomButton.Name = "addRoomButton";
-            addRoomButton.Size = new Size(20, 30);
+            addRoomButton.Size = new Size(20, 36);
             addRoomButton.TabIndex = 7;
             // 
             // roomLabel
@@ -347,7 +347,7 @@
             roomDropDownList.Margin = new Padding(4, 5, 4, 5);
             roomDropDownList.MinimumSize = new Size(0, 30);
             roomDropDownList.Name = "roomDropDownList";
-            roomDropDownList.Size = new Size(138, 30);
+            roomDropDownList.Size = new Size(138, 35);
             roomDropDownList.TabIndex = 6;
             ((Telerik.WinControls.UI.RadDropDownListElement)roomDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)roomDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -392,7 +392,7 @@
             repeaterDropDownList.Margin = new Padding(4, 5, 4, 5);
             repeaterDropDownList.MinimumSize = new Size(0, 30);
             repeaterDropDownList.Name = "repeaterDropDownList";
-            repeaterDropDownList.Size = new Size(138, 30);
+            repeaterDropDownList.Size = new Size(138, 35);
             repeaterDropDownList.TabIndex = 9;
             ((Telerik.WinControls.UI.RadDropDownListElement)repeaterDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)repeaterDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -425,7 +425,7 @@
             addClassButton.Location = new Point(240, 30);
             addClassButton.Margin = new Padding(4, 5, 4, 5);
             addClassButton.Name = "addClassButton";
-            addClassButton.Size = new Size(20, 30);
+            addClassButton.Size = new Size(20, 36);
             addClassButton.TabIndex = 5;
             // 
             // classSeparator
@@ -445,7 +445,7 @@
             classDropDownList.Margin = new Padding(4, 5, 4, 5);
             classDropDownList.MinimumSize = new Size(0, 30);
             classDropDownList.Name = "classDropDownList";
-            classDropDownList.Size = new Size(238, 30);
+            classDropDownList.Size = new Size(238, 35);
             classDropDownList.TabIndex = 4;
             ((Telerik.WinControls.UI.RadDropDownListElement)classDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)classDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -470,7 +470,7 @@
             schoolYearSplitContainer.Dock = DockStyle.Top;
             schoolYearSplitContainer.Location = new Point(0, 0);
             schoolYearSplitContainer.Name = "schoolYearSplitContainer";
-            schoolYearSplitContainer.Size = new Size(1052, 68);
+            schoolYearSplitContainer.Size = new Size(1080, 68);
             schoolYearSplitContainer.SplitterWidth = 0;
             schoolYearSplitContainer.TabIndex = 98;
             schoolYearSplitContainer.TabStop = false;
@@ -489,7 +489,7 @@
             schoolYearSplitPanel.Controls.Add(schoolYearLabel);
             schoolYearSplitPanel.Location = new Point(0, 0);
             schoolYearSplitPanel.Name = "schoolYearSplitPanel";
-            schoolYearSplitPanel.Size = new Size(1052, 68);
+            schoolYearSplitPanel.Size = new Size(1080, 68);
             schoolYearSplitPanel.TabIndex = 0;
             schoolYearSplitPanel.TabStop = false;
             // 
@@ -507,7 +507,7 @@
             addStudentButton.Location = new Point(723, 30);
             addStudentButton.Margin = new Padding(4, 5, 4, 5);
             addStudentButton.Name = "addStudentButton";
-            addStudentButton.Size = new Size(20, 30);
+            addStudentButton.Size = new Size(20, 36);
             addStudentButton.TabIndex = 3;
             // 
             // studentSeparator
@@ -527,7 +527,7 @@
             studentDropDownList.Margin = new Padding(4, 5, 4, 5);
             studentDropDownList.MinimumSize = new Size(0, 30);
             studentDropDownList.Name = "studentDropDownList";
-            studentDropDownList.Size = new Size(440, 30);
+            studentDropDownList.Size = new Size(440, 35);
             studentDropDownList.TabIndex = 2;
             ((Telerik.WinControls.UI.RadDropDownListElement)studentDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)studentDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -562,7 +562,7 @@
             dateTimePicker.Margin = new Padding(4, 5, 4, 5);
             dateTimePicker.MinimumSize = new Size(0, 30);
             dateTimePicker.Name = "dateTimePicker";
-            dateTimePicker.Size = new Size(141, 30);
+            dateTimePicker.Size = new Size(141, 36);
             dateTimePicker.TabIndex = 1;
             dateTimePicker.TabStop = false;
             dateTimePicker.Text = "lundi 29 janvier 2018";
@@ -637,7 +637,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(1052, 456);
+            ClientSize = new Size(1080, 474);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

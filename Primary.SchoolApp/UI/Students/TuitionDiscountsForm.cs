@@ -95,6 +95,10 @@ namespace Primary.SchoolApp.UI
 
             //load discount
             LoadDiscounts(enrolling.Id);
+            //check authorizations
+            this.SaveButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 5 && x.AllowCreate == true);
+            this.PrintButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 5 && x.AllowPrint == true);
+            this.ExportButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 5 && x.AllowPrint == true);
         }
         private void InitEvents()
         {

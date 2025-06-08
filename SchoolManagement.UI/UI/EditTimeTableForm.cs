@@ -58,7 +58,6 @@ namespace SchoolManagement.UI
             this.cmbBackground.RootElement.CustomFont = Utilities.ViewUtilities.MainFont;
             this.cmbBackground.RootElement.CustomFontSize = 10.5f;
             this.cmbBackground.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
-            //this.cmbBackground.RootElement.EnableElementShadow = false;
 
             this.FormElement.TitleBar.CustomFont = ViewUtilities.MainFont;
 
@@ -67,72 +66,64 @@ namespace SchoolManagement.UI
             addTeacherButton.RootElement.ToolTipText = Language.messageClickToAddRoom;
             this.textBoxDescription.NullText = Language.labelMoreInfo;
             #region Subject Row
-            labelSubject.Location = new Point(10, 5);
-            labelSubject.MinimumSize = new Size(0, 30);
-            labelSubject.RootElement.MinSize = new Size(0, 30);
-            labelSubject.Size = new Size(37, 30);
-
+           labelSubject.Location = new Point(10, 5);
             subjectDropDownList.DropDownAnimationEnabled = true;
-            subjectDropDownList.Location = new Point(10, 38);
+            subjectDropDownList.Location = new Point(10, 48);
             subjectDropDownList.TabIndex = 0;
 
-            addSubjectButton.Location = new Point(580, 38);
+            addSubjectButton.Location = new Point(580, 48);
             addSubjectButton.TabIndex = 1;
-            addSubjectButton.Height = subjectDropDownList.Height;
             #endregion Subject Row
             #region Teacher Row
-            labelLocation.MinimumSize = new Size(0, 30);
-            labelLocation.RootElement.MinSize = new Size(0, 30);
-            labelLocation.Size = new Size(37, 30);
-            labelLocation.Location = new Point(10, 73);
+
+            labelLocation.Location = new Point(10, 93);
 
             teacherDropDownList.DropDownAnimationEnabled = true;
-            teacherDropDownList.Location = new Point(10, 106);
+            teacherDropDownList.Location = new Point(10, 130);
             teacherDropDownList.TabIndex = 2;
 
-            addTeacherButton.Location = new Point(580, 106);
+            addTeacherButton.Location = new Point(580, 130);
             addTeacherButton.TabIndex = 3;
-            addTeacherButton.Height = teacherDropDownList.Height;
             #endregion Teacher Row
 
             #region Status Row
 
-            labelBackground.Location = new Point(10, 141);
-            cmbBackground.Location = new Point(10, 181);
+            labelBackground.Location = new Point(10, 190);
+            cmbBackground.Location = new Point(10, 230);
             cmbBackground.DropDownAnimationEnabled = true;
             cmbBackground.Width = 213;
 
-            labelStatus.Location = new Point(228, 141);
-            daysDropDownList.Location = new Point(228, 181);
+            labelStatus.Location = new Point(228, 190);
+            daysDropDownList.Location = new Point(228, 230);
             #endregion Status Row
             #region Start Row
-            labelStartTime.Location = new Point(10, 240);
+            labelStartTime.Location = new Point(10, 290);
             labelStartTime.Size = new Size(71, 30);
-            timeStart.Location = new Point(10, 270);
+            timeStart.Location = new Point(10, 330);
 
-            labelTeacherTimeIn.Location = new Point(160, 240);
-            teacherTimeIn.Location = new Point(160, 270);
+            labelTeacherTimeIn.Location = new Point(160, 290);
+            teacherTimeIn.Location = new Point(160, 330);
             teacherTimeIn.Size = timeStart.Size;
             #endregion Start Row
             #region End Row
-            labelEndTime.Location = new Point(10, 318);
+            labelEndTime.Location = new Point(10, 378);
             labelEndTime.Size = new Size(71, 30);
-            timeEnd.Location = new Point(10, 348);
+            timeEnd.Location = new Point(10, 418);
 
-            labelTeacherTimeOut.Location = new Point(160, 318);
-            teacherTimeOut.Location = new Point(160, 348);
+            labelTeacherTimeOut.Location = new Point(160, 378);
+            teacherTimeOut.Location = new Point(160, 418);
             teacherTimeOut.Size = timeEnd.Size;
             #endregion End Row
 
-            radSeparator1.Location = new Point(7, 420);
+            radSeparator1.Location = new Point(7, 500);
             radSeparator1.Width = 580;
-            textBoxDescription.Location=new Point(5, 440);
+            textBoxDescription.Location = new Point(5, 520);
             textBoxDescription.Height = 110;
             textBoxDescription.Width = 570;
             buttonOK.Width = 150;
             buttonCancel.Width = buttonOK.Width;
-            buttonOK.Location = new Point(280, 580);
-            buttonCancel.Location = new Point(440, 580);
+            buttonOK.Location = new Point(280, 650);
+            buttonCancel.Location = new Point(440, 650);
             errorLabel.Top = buttonCancel.Top;
             //visibility
 
@@ -156,7 +147,11 @@ namespace SchoolManagement.UI
             this.buttonRecurrence.Visible = false;
             this.buttonDelete.Visible = false;
             this.errorLabel.ForeColor = Color.Red;
+
+
+            cmbBackground.Height=daysDropDownList.Height;
         }
+
 
         protected override void OnLoad(EventArgs e)
         {

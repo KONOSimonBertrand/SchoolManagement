@@ -99,6 +99,9 @@ namespace Primary.SchoolApp.UI
 
             //load disciplines
             LoadDisciplines(selectedEnrolling.StudentId);
+            this.SaveButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
+            this.PrintButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowPrint == true);
+            this.ExportButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 7 && x.AllowPrint == true);
         }
         private void InitEvents()
         {

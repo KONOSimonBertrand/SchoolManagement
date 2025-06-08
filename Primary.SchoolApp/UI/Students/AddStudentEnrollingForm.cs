@@ -69,6 +69,8 @@ namespace Primary.SchoolApp.UI
             selectedSchoolYear = schoolYear;
             SchoolYearTexBox.Text = schoolYear.Name;
             AmountTextBox.Text = "0";
+            AmountTextBox.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowCreate==true);
+            AddStudentButton.Enabled= Program.UserConnected.Modules.Any(m => m.ModuleId ==2);
         }
         private void InitEvents()
         {

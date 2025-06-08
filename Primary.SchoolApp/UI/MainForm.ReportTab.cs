@@ -286,8 +286,10 @@ namespace Primary.SchoolApp
                                         };
                     form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
                     break;
-               
 
+                case 22:
+                    form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
+                    break ;
             }
         }
         private void GetReport()
@@ -378,6 +380,12 @@ namespace Primary.SchoolApp
                     break;
                 case 21:
                     task = listingService.GetSupplyList();
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 22:
+                    var startDate = Program.CurrentSchoolYear.StartFirstQuarter;
+                    var endDate = Program.CurrentSchoolYear.EndThirdQuarter;
+                    task = listingService.GetUserLogList(startDate.Value,endDate.Value);
                     generalReportTaskResult.Add(Task.CurrentId, task.Result);
                     break;
             }
@@ -479,7 +487,7 @@ namespace Primary.SchoolApp
             ReportMainListView.EnableFiltering = true;
             ReportMainListView.HotTracking = false;
             var reportStore = ListingService.GetListingItems();
-            if (Program.UserConnected.Name != "root")
+            if (Program.UserConnected.Name == "root")
             {
                 ReportMainListView.DataSource = reportStore;
             }

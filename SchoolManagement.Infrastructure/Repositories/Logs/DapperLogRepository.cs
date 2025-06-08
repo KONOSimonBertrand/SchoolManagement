@@ -51,8 +51,15 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<IEnumerable<Log>> GetListAsync(DateTime start, DateTime end)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"SELECT * FROM Logs WHERE DATE(CreateDate)>=@startDate AND DATE(CreateDate)<=@endDate  ;";
-            var result = connection.Query<Log>(query, new { startDate = start.Date, endDate = end.Date }).ToList();
+            string query = @"SELECT A.UserAction,A.UserId,A.CreateDate, B.Id,B.UserName,B.Name FROM Logs AS A
+                            INNER JOIN USERS AS B ON A.UserId=B.Id
+                             WHERE DATE(CreateDate)>=@startDate AND DATE(CreateDate)<=@endDate  ;";
+            var result = connection.Query<Log, User, Log>(query,
+                (log, user) => {
+                    log.User = user;
+                    return log;
+                },
+                new { startDate = start.Date, endDate = end.Date }).ToList();
             await Task.Delay(0);
             return result;
         }

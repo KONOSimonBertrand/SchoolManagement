@@ -101,12 +101,12 @@ namespace Primary.SchoolApp.UI
 
             }
             //check authorizations
-            Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
             this.SaveButton.Enabled= Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
             this.PrintButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true);
             this.ExportButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true);
             //load payments
             LoadPayments(enrolling.Id);
+
         }
         private void InitEvents()
         {

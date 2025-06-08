@@ -814,44 +814,60 @@ namespace Primary.SchoolApp
             cashFlowListViewGroup.Text = Language.labelCashFlowTypes.ToUpper();
             CashFlowLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { cashFlowListViewGroup });
             CashFlowLeftListView.ShowCheckBoxes = false;
-            ListViewDataItem fsItem = new()
+            if (Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowCreate == true))
             {
-                Key = 0,
-                Value = Language.labelSchoolingFee.ToUpper(),
-                Tag = Language.labelSchoolingFee.ToUpper(),
-                Text = Language.labelSchoolingFee.ToUpper(),
-                Group = cashFlowListViewGroup
-            };
-            ListViewDataItem abItem = new()
+                CashFlowLeftListView.Items.Add(
+                     new ListViewDataItem()
+                     {
+                         Key = 0,
+                         Value = Language.labelSchoolingFee.ToUpper(),
+                         Tag = Language.labelSchoolingFee.ToUpper(),
+                         Text = Language.labelSchoolingFee.ToUpper(),
+                         Group = cashFlowListViewGroup
+                     }
+                    );
+            }
+            if (Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowCreate == true))
             {
-                Key = 1,
-                Value = Language.labelSubscription.ToUpper(),
-                Tag = Language.labelSubscription.ToUpper(),
-                Text = Language.labelSubscription.ToUpper(),
-                Group = cashFlowListViewGroup
-            };
+                CashFlowLeftListView.Items.Add(
+                     new ListViewDataItem()
+                     {
+                         Key = 1,
+                         Value = Language.labelSubscription.ToUpper(),
+                         Tag = Language.labelSubscription.ToUpper(),
+                         Text = Language.labelSubscription.ToUpper(),
+                         Group = cashFlowListViewGroup
+                     }
+                    );
+            }
+            if (Program.UserConnected.Modules.Any(m => m.ModuleId == 15 && m?.AllowCreate == true))
+            {
+                CashFlowLeftListView.Items.Add(
+                     new ListViewDataItem()
+                     {
+                         Key = 2,
+                         Value = Language.LabelSupply.ToUpper(),
+                         Tag = Language.LabelSupply.ToUpper(),
+                         Text = Language.LabelSupply.ToUpper(),
+                         Group = cashFlowListViewGroup
+                     }
+                    );
+            }
 
-           
-            ListViewDataItem apItem = new()
+            if (Program.UserConnected.Modules.Any(m => m.ModuleId == 15 && m?.AllowCreate == true))
             {
-                Key = 2,
-                Value = Language.LabelSupply.ToUpper(),
-                Tag = Language.LabelSupply.ToUpper(),
-                Text = Language.LabelSupply.ToUpper(),
-                Group = cashFlowListViewGroup
-            };
-            ListViewDataItem deItem = new()
-            {
-                Key = 3,
-                Value = Language.LabelExpense.ToUpper(),
-                Tag = Language.LabelExpense.ToUpper(),
-                Text = Language.LabelExpense.ToUpper(),
-                Group = cashFlowListViewGroup
-            };
-            CashFlowLeftListView.Items.Add(fsItem);
-            CashFlowLeftListView.Items.Add(abItem);        
-            CashFlowLeftListView.Items.Add(apItem);
-            CashFlowLeftListView.Items.Add(deItem);
+                CashFlowLeftListView.Items.Add(
+                     new ListViewDataItem()
+                     {
+                         Key = 3,
+                         Value = Language.LabelExpense.ToUpper(),
+                         Tag = Language.LabelExpense.ToUpper(),
+                         Text = Language.LabelExpense.ToUpper(),
+                         Group = cashFlowListViewGroup
+                     }
+                    );
+            }
+            
             CashFlowLeftListView.ShowGroups = false;
             CashFlowLeftListView.SelectedIndex = 0;
         }

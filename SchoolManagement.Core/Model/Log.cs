@@ -15,7 +15,7 @@ namespace SchoolManagement.Core.Model
         public DateTime? CreateDate { get; set; }
         public int UserId {  get; set; }
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
         public override string ToString()
         {
             return Id+"-"+UserAction;

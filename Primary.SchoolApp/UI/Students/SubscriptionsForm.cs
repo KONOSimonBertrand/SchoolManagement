@@ -98,10 +98,8 @@ namespace Primary.SchoolApp.UI
                         PictureLabel.Image = Image.FromStream(ms);
                     }
                 }
-
             }
             //check authorizations
-            Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
             this.SaveButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
             this.PrintButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true);
             this.ExportButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true);

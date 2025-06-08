@@ -765,6 +765,16 @@ namespace Primary.SchoolApp
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                 e.ContextMenu.Items.Add(menuGenerateSchoolBadge);
 
+                menuEdit.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 1 && m?.AllowUpdate == true);
+                menuAddPayment.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowCreate == true);
+                menuShowPayments.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
+                menuPrintPaymentSummary.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
+                menuAddDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
+                menuShowDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
+                menuAddSubscription.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowCreate == true);
+                menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
+                menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
+                menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
             }
 
 
@@ -1100,7 +1110,16 @@ namespace Primary.SchoolApp
             homeMainListViewContextMenu.Items.Add(menuChangeStudentRoom);
             homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
             homeMainListViewContextMenu.Items.Add(menuGenerateSchoolBadge);
-
+            menuEdit.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 1 && m?.AllowUpdate == true);
+            menuAddPayment.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowCreate == true);
+            menuShowPayments.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
+            menuPrintPaymentSummary.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
+            menuAddDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
+            menuShowDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
+            menuAddSubscription.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowCreate == true);
+            menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
+            menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
+            menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
         }
 
         private void MenuShowDisciplines_Click(object sender, EventArgs e)

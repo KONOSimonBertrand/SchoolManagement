@@ -23,9 +23,10 @@ namespace Primary.SchoolApp.Services
         private readonly IDisciplineService disciplineService;
         private readonly ISubscriptionService subscriptionService;
         private readonly ITimeTableService timeTableService;
+        private readonly ILogService logService;
         public ListingService(IEmployeeService employeeService, ISchoolClassService schoolClassService,
             IStudentEnrollingService studentEnrollingService, IContactService contactService, IMedicalService medicalService,
-            IDisciplineService disciplineService, ISubscriptionService subscriptionService, ITimeTableService timeTableService)
+            IDisciplineService disciplineService, ISubscriptionService subscriptionService, ITimeTableService timeTableService, ILogService logService)
         {
             this.employeeService = employeeService;
             this.schoolClassService = schoolClassService;
@@ -35,6 +36,7 @@ namespace Primary.SchoolApp.Services
             this.disciplineService = disciplineService;
             this.subscriptionService = subscriptionService;
             this.timeTableService = timeTableService;
+            this.logService = logService;
         }
 
         public static List<ListingItem> GetListingItems()
@@ -192,7 +194,7 @@ namespace Primary.SchoolApp.Services
                     EnglishName = "TRANSPORT SUBSCRIPTION REPORT",
                     FrenchDescription = "Double-cliquer ici pour consulter abonnements relatifs au transport ",
                     EnglishDescription = "Double-click here to view transport subscriptions ",
-                    ModuleId = 9,
+                    ModuleId = 10,
                 },
                  new()
                 {
@@ -201,7 +203,7 @@ namespace Primary.SchoolApp.Services
                     EnglishName = "TAPS SUBSCRIPTION REPORT",
                     FrenchDescription = "Double-cliquer ici pour consulter abonnements relatifs aux activités périscolaires ",
                     EnglishDescription = "Double-click here to view subscriptions for extracurricular activities ",
-                    ModuleId = 9,
+                    ModuleId = 10,
                 },
                  new()
                 {
@@ -210,7 +212,7 @@ namespace Primary.SchoolApp.Services
                     EnglishName = "CANTEEN SUBSCRIPTION REPORT",
                     FrenchDescription = "Double-cliquer ici pour consulter abonnements relatifs à la cantine ",
                     EnglishDescription = "Double-click here to view canteen subscriptions ",
-                    ModuleId = 9,
+                    ModuleId = 10,
                 },
                  new()
                 {
@@ -229,6 +231,15 @@ namespace Primary.SchoolApp.Services
                     FrenchDescription = "Double-cliquer ici pour consulter les approvisionnements ",
                     EnglishDescription = "Double-click here to view supplies ",
                     ModuleId = 10,
+                },
+                 new()
+                {
+                    Id = 22,
+                    FrenchName = "HISTORIQUE DES ACTIONS DES UTILISATEURS SUR LE SYSTEME",
+                    EnglishName = "HISTORY OF USER ACTIONS IN THE SYSTEM",
+                    FrenchDescription = "Double-cliquer ici pour consulter l'historique des actions des  utilisateurs sur le système ",
+                    EnglishDescription = "Double-click here to view the history of user actions on the system ",
+                    ModuleId = 17,
                 }
             };
 
@@ -1463,6 +1474,31 @@ namespace Primary.SchoolApp.Services
             return new Dictionary<int, DataTable>{
                 {1, globalTable},
                 {2, detailTable},
+            };
+        }
+
+        //retourne l'historique des actions des utilisateurs
+        public async Task<Dictionary<int, DataTable>> GetUserLogList(DateTime start,DateTime end)
+        {
+            var getLogListTask=logService.GetLogListAsync(start, end);
+            DataTable dataTable = new();
+            string dateColumn = Language.LanguageName == "EN" ? "DATE" : "DATE";
+            string actionColumn = Language.LanguageName == "EN" ? "ACTION" : "ACTION";
+            string userColumn = Language.LanguageName == "EN" ? "USER" : "UTILISATEUR";
+            dataTable.Columns.Add(dateColumn, typeof(DateTime));
+            dataTable.Columns.Add(actionColumn, typeof(string));
+            dataTable.Columns.Add(userColumn, typeof(string));
+            var logList = await getLogListTask;
+            foreach (var item in logList.OrderBy(x => x.CreateDate))
+            {
+                object[] row = new object[dataTable.Columns.Count];
+                row[0] = item.CreateDate;
+                row[1] = item.UserAction;
+                row[2] =  $"{item?.User?.UserName}-{item?.User?.Name}";
+                dataTable.Rows.Add(row);
+            }
+            return new Dictionary<int, DataTable>{
+                {1, dataTable}
             };
         }
     }
