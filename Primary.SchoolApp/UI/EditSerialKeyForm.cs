@@ -35,7 +35,7 @@ namespace Primary.SchoolApp.UI
 
         private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void SerialKeyTextBox_TextChanged(object sender, EventArgs e)
