@@ -42,7 +42,7 @@ namespace Primary.SchoolApp
         }
         private void OnShown(object sender, EventArgs e)
         {
-            Program.SerialKeyIsOK = AppUtilities.SerialKeyIsOk(Program.CurrentSchool.Name, Program.CurrentSchool.SerialKey);
+            Program.SerialKeyIsOK = AppUtilities.SerialKeyIsOk(Program.CurrentSchool?.Name, Program.CurrentSchool?.SerialKey);
             this.UserNameTextBox.Focus();
         }
         private void UserNameTextBox_TextChanged(object sender, EventArgs e)

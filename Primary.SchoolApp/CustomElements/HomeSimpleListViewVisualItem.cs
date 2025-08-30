@@ -122,7 +122,7 @@ namespace Primary.SchoolApp.CustomElements
         private string GetStudentBySchoolGroup(int id)
         {
             int count = 0;
-            count = Program.StudentEnrollingList != null ? Program.StudentEnrollingList.Where(i => i.IsActive && i.SchoolClass.Group.Id == id).Count() : 0;
+            count = Program.StudentEnrollingList != null ? Program.StudentEnrollingList.Where(i => i.IsActive && i.SchoolClass?.Group?.Id == id).Count() : 0;
             return count.ToString();
         }
         private string GetStudentByClass(int id)

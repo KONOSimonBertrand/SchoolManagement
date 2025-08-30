@@ -299,6 +299,7 @@ namespace Primary.SchoolApp.UI
         private void ShowSubjectAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubjectForm>();
+            form.Icon = this.Icon;
             form.Text = Language.labelAdd + ":.. " + Language.labelSubject;
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {

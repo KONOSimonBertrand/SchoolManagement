@@ -299,6 +299,7 @@ namespace Primary.SchoolApp
                 HomeInfoRightPanel.Visible = false;
                 HomeGridView.DataSource = null;
                 HomeMainListView.DataSource = null;
+                LoadCashFlowTypeListToHomeLeftView();
                 HomeLeftListView.ListViewElement.SynchronizeVisualItems();
                 HomeMainListView.ListViewElement.SynchronizeVisualItems();
                 CashFlowGridView.DataSource = null;
@@ -335,8 +336,14 @@ namespace Primary.SchoolApp
             this.ThemesDropDownList.SelectedValue = Program.UserConnected?.DefaultTheme;
             if (!Program.SerialKeyIsOK)
             {
+                this.CashFlowAddButton.Enabled = false;
+                this.DisciplineAddButton.Enabled = false;
+                this.SettingAddButton.Enabled = false;
+                this.HomeAddButton.Enabled = false;
+                this.EmployeeEnrollingAddButton.Enabled = false;
+                this.StudentNoteAddButton.Enabled = false;
                 var customer = Program.CurrentSchool != null ? Program.CurrentSchool.Name : "SCHOOL APP";
-                RadMessageBox.Show($"{customer}, Votre licence a expiré. Merci de bien vouloir contacter SuiTtech au +237 679 72 83 44 ou +33 06 01 24 89 20  pour obtenir une licence ");
+                RadMessageBox.Show($"{customer}, Votre licence a expiré. Merci de bien vouloir contacter l'un des numéros de téléphone pour obtenir une licence: \n - +237 691 45 11 89\n - +237 695 10 05 47\n -  +33 06 01 24 89 20   ");
 
                 var form = Program.ServiceProvider.GetService<EditSerialKeyForm>();
                 form.ShowDialog(this);

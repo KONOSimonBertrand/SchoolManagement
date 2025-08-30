@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8hZg2IeXedw=",
+  "dgSpecHash": "2R7O6YiEhzs=",
   "success": true,
   "projectFilePath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\SchoolManagement.UI.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\documentformat.openxml\\3.0.1\\documentformat.openxml.3.0.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\documentformat.openxml.framework\\3.0.1\\documentformat.openxml.framework.3.0.1.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\microsoft.analysisservices.adomdclient.netcore.retail.amd64\\19.84.1\\microsoft.analysisservices.adomdclient.netcore.retail.amd64.19.84.1.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.analysisservices.adomdclient.netcore.retail.amd64\\19.16.3.4\\microsoft.analysisservices.adomdclient.netcore.retail.amd64.19.16.3.4.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\9.0.2\\microsoft.bcl.asyncinterfaces.9.0.2.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
@@ -23,7 +23,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\9.0.2\\microsoft.extensions.fileproviders.physical.9.0.2.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\9.0.2\\microsoft.extensions.filesystemglobbing.9.0.2.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.2\\microsoft.extensions.primitives.9.0.2.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\microsoft.identity.client\\4.66.1\\microsoft.identity.client.4.66.1.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\microsoft.identity.client\\4.61.3\\microsoft.identity.client.4.61.3.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.identity.client.extensions.msal\\4.61.3\\microsoft.identity.client.extensions.msal.4.61.3.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.identitymodel.abstractions\\6.35.0\\microsoft.identitymodel.abstractions.6.35.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.35.0\\microsoft.identitymodel.jsonwebtokens.6.35.0.nupkg.sha512",
@@ -136,7 +136,6 @@
     "C:\\Users\\HP\\.nuget\\packages\\telerik.reporting.openxmlrendering\\19.0.25.313\\telerik.reporting.openxmlrendering.19.0.25.313.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\telerik.reporting.openxmlrendering3\\19.0.25.313\\telerik.reporting.openxmlrendering3.19.0.25.313.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\telerik.reportviewer.winforms\\19.0.25.313\\telerik.reportviewer.winforms.19.0.25.313.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\ui.for.winforms.allcontrols.net60\\2025.1.211\\ui.for.winforms.allcontrols.net60.2025.1.211.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\ui.for.winforms.allcontrols.net70\\2024.3.924\\ui.for.winforms.allcontrols.net70.2024.3.924.nupkg.sha512"
   ],
   "logs": []

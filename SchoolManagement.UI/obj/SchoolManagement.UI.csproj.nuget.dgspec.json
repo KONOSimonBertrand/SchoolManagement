@@ -75,10 +75,6 @@
               "target": "Package",
               "version": "[19.0.25.313, )"
             },
-            "UI.for.WinForms.AllControls.Net60": {
-              "target": "Package",
-              "version": "[2025.1.211, )"
-            },
             "UI.for.WinForms.AllControls.Net70": {
               "target": "Package",
               "version": "[2024.3.924, )"

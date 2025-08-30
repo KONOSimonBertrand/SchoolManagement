@@ -208,19 +208,19 @@
           }
         }
       },
-      "Microsoft.AnalysisServices.AdomdClient.NetCore.retail.amd64/19.84.1": {
+      "Microsoft.AnalysisServices.AdomdClient.NetCore.retail.amd64/19.16.3.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Identity.Client": "4.56.0"
+          "Microsoft.Identity.Client": "4.6.0"
         },
         "compile": {
           "lib/netcoreapp3.0/Microsoft.AnalysisServices.AdomdClient.dll": {
             "related": ".deps.json;.xml"
           },
-          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Core.dll": {
+          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Core.dll": {
             "related": ".deps.json;.xml"
           },
-          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Windows.dll": {
+          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Windows.dll": {
             "related": ".deps.json;.xml"
           }
         },
@@ -228,10 +228,10 @@
           "lib/netcoreapp3.0/Microsoft.AnalysisServices.AdomdClient.dll": {
             "related": ".deps.json;.xml"
           },
-          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Core.dll": {
+          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Core.dll": {
             "related": ".deps.json;.xml"
           },
-          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Windows.dll": {
+          "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Windows.dll": {
             "related": ".deps.json;.xml"
           }
         },
@@ -239,266 +239,131 @@
           "lib/netcoreapp3.0/ar/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "ar"
           },
-          "lib/netcoreapp3.0/ar/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "ar"
-          },
           "lib/netcoreapp3.0/bg/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "bg"
-          },
-          "lib/netcoreapp3.0/bg/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "bg"
           },
           "lib/netcoreapp3.0/ca/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "ca"
           },
-          "lib/netcoreapp3.0/ca/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "ca"
-          },
           "lib/netcoreapp3.0/cs/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "cs"
-          },
-          "lib/netcoreapp3.0/cs/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "cs"
           },
           "lib/netcoreapp3.0/da/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "da"
           },
-          "lib/netcoreapp3.0/da/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "da"
-          },
           "lib/netcoreapp3.0/de/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "de"
-          },
-          "lib/netcoreapp3.0/de/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "de"
           },
           "lib/netcoreapp3.0/el/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "el"
           },
-          "lib/netcoreapp3.0/el/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "el"
-          },
           "lib/netcoreapp3.0/es/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "es"
-          },
-          "lib/netcoreapp3.0/es/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "es"
           },
           "lib/netcoreapp3.0/et/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "et"
           },
-          "lib/netcoreapp3.0/et/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "et"
-          },
           "lib/netcoreapp3.0/eu/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "eu"
-          },
-          "lib/netcoreapp3.0/eu/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "eu"
           },
           "lib/netcoreapp3.0/fi/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "fi"
           },
-          "lib/netcoreapp3.0/fi/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "fi"
-          },
           "lib/netcoreapp3.0/fr/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "fr"
-          },
-          "lib/netcoreapp3.0/fr/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "fr"
           },
           "lib/netcoreapp3.0/gl/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "gl"
           },
-          "lib/netcoreapp3.0/gl/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "gl"
-          },
           "lib/netcoreapp3.0/he/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "he"
-          },
-          "lib/netcoreapp3.0/he/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "he"
           },
           "lib/netcoreapp3.0/hi/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "hi"
           },
-          "lib/netcoreapp3.0/hi/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "hi"
-          },
           "lib/netcoreapp3.0/hr/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "hr"
-          },
-          "lib/netcoreapp3.0/hr/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "hr"
           },
           "lib/netcoreapp3.0/hu/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "hu"
           },
-          "lib/netcoreapp3.0/hu/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "hu"
-          },
           "lib/netcoreapp3.0/id/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "id"
-          },
-          "lib/netcoreapp3.0/id/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "id"
           },
           "lib/netcoreapp3.0/it/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "it"
           },
-          "lib/netcoreapp3.0/it/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "it"
-          },
           "lib/netcoreapp3.0/ja/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "ja"
-          },
-          "lib/netcoreapp3.0/ja/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "ja"
           },
           "lib/netcoreapp3.0/kk/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "kk"
           },
-          "lib/netcoreapp3.0/kk/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "kk"
-          },
           "lib/netcoreapp3.0/ko/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "ko"
-          },
-          "lib/netcoreapp3.0/ko/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "ko"
           },
           "lib/netcoreapp3.0/lt/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "lt"
           },
-          "lib/netcoreapp3.0/lt/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "lt"
-          },
           "lib/netcoreapp3.0/lv/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "lv"
-          },
-          "lib/netcoreapp3.0/lv/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "lv"
           },
           "lib/netcoreapp3.0/ms/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "ms"
           },
-          "lib/netcoreapp3.0/ms/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "ms"
-          },
           "lib/netcoreapp3.0/nl/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "nl"
-          },
-          "lib/netcoreapp3.0/nl/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "nl"
           },
           "lib/netcoreapp3.0/no/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "no"
           },
-          "lib/netcoreapp3.0/no/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "no"
-          },
           "lib/netcoreapp3.0/pl/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "pl"
-          },
-          "lib/netcoreapp3.0/pl/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "pl"
           },
           "lib/netcoreapp3.0/pt-PT/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "pt-PT"
           },
-          "lib/netcoreapp3.0/pt-PT/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "pt-PT"
-          },
           "lib/netcoreapp3.0/pt/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "pt"
-          },
-          "lib/netcoreapp3.0/pt/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "pt"
           },
           "lib/netcoreapp3.0/ro/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "ro"
           },
-          "lib/netcoreapp3.0/ro/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "ro"
-          },
           "lib/netcoreapp3.0/ru/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "ru"
-          },
-          "lib/netcoreapp3.0/ru/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "ru"
           },
           "lib/netcoreapp3.0/sk/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "sk"
           },
-          "lib/netcoreapp3.0/sk/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "sk"
-          },
           "lib/netcoreapp3.0/sl/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "sl"
-          },
-          "lib/netcoreapp3.0/sl/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "sl"
           },
           "lib/netcoreapp3.0/sr-Cyrl/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "sr-Cyrl"
           },
-          "lib/netcoreapp3.0/sr-Cyrl/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "sr-Cyrl"
-          },
           "lib/netcoreapp3.0/sr-Latn/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "sr-Latn"
-          },
-          "lib/netcoreapp3.0/sr-Latn/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "sr-Latn"
           },
           "lib/netcoreapp3.0/sv/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "sv"
           },
-          "lib/netcoreapp3.0/sv/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "sv"
-          },
           "lib/netcoreapp3.0/th/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "th"
-          },
-          "lib/netcoreapp3.0/th/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "th"
           },
           "lib/netcoreapp3.0/tr/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "tr"
           },
-          "lib/netcoreapp3.0/tr/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "tr"
-          },
           "lib/netcoreapp3.0/uk/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "uk"
-          },
-          "lib/netcoreapp3.0/uk/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
             "locale": "uk"
           },
           "lib/netcoreapp3.0/vi/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
             "locale": "vi"
           },
-          "lib/netcoreapp3.0/vi/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "vi"
+          "lib/netcoreapp3.0/zh-HANS/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
+            "locale": "zh-HANS"
           },
-          "lib/netcoreapp3.0/zh-Hans/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "zh-Hans"
-          },
-          "lib/netcoreapp3.0/zh-Hans/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "zh-Hans"
-          },
-          "lib/netcoreapp3.0/zh-Hant/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
-            "locale": "zh-Hant"
-          },
-          "lib/netcoreapp3.0/zh-Hant/Microsoft.AnalysisServices.Runtime.Core.resources.dll": {
-            "locale": "zh-Hant"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win-x64/native/msasxpress.dll": {
-            "assetType": "native",
-            "rid": "win-x64"
+          "lib/netcoreapp3.0/zh-HANT/Microsoft.AnalysisServices.AdomdClient.resources.dll": {
+            "locale": "zh-HANT"
           }
         }
       },
@@ -1336,7 +1201,7 @@
           "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Primitives.targets": {}
         }
       },
-      "Microsoft.Identity.Client/4.66.1": {
+      "Microsoft.Identity.Client/4.61.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.IdentityModel.Abstractions": "6.35.0",
@@ -3434,292 +3299,6 @@
           "lib/net6.0-windows/Telerik.ReportViewer.WinForms.dll": {}
         }
       },
-      "UI.for.WinForms.AllControls.Net60/2025.1.211": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AnalysisServices.AdomdClient.NetCore.retail.amd64": "19.84.1",
-          "Microsoft.Identity.Client": "4.66.1",
-          "System.ComponentModel.Composition": "4.7.0",
-          "System.Data.OleDb": "7.0.0",
-          "System.Management": "4.7.0",
-          "System.Reflection.Emit": "4.7.0",
-          "Telerik.Licensing": "[1.4.6, 2.0.0)"
-        },
-        "compile": {
-          "lib/net6.0-windows/MediaFoundation.dll": {},
-          "lib/net6.0-windows/RadControlSpy.dll": {},
-          "lib/net6.0-windows/Telerik.Documents.SpreadsheetStreaming.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.ChartView.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.GridView.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.PdfViewer.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.PivotGrid.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadChart.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadDiagram.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadDock.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadMap.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadMarkupEditor.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadSpreadsheet.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadWebCam.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RichTextEditor.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.Scheduler.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.SpellChecker.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.SyntaxEditor.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Aqua.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Breeze.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Crystal.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.CrystalDark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Desert.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Fluent.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.FluentDark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.HighContrastBlack.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Material.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialBlueGrey.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialPink.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialTeal.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2007Black.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2007Silver.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Black.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Blue.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Silver.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2013Dark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2013Light.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2019.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetro.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetroBlue.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetroTouch.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Dark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Light.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2022.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows11.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows7.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows8.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.UI.dll": {
-            "related": ".XML"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.dll": {
-            "related": ".ChartView.xml;.GridView.xml;.PdfViewer.xml;.PivotGrid.xml;.RadChart.xml;.RadDiagram.xml;.RadDock.xml;.RadMap.xml;.RadMarkupEditor.xml;.RadSpreadsheet.xml;.RadWebCam.xml;.RichTextEditor.xml;.Scheduler.xml;.SpellChecker.xml;.SyntaxEditor.xml;.UI.XML;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.CMapUtils.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Core.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.DrawingML.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.FormatProviders.Ocr.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.dll": {
-            "related": ".FormatProviders.Ocr.xml;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Doc.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Flow.dll": {
-            "related": ".FormatProviders.Doc.xml;.FormatProviders.Pdf.xml;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Xls.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.dll": {
-            "related": ".FormatProviders.OpenXml.xml;.FormatProviders.Pdf.xml;.FormatProviders.Xls.xml;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.TesseractOcr.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.MediaFoundation.dll": {},
-          "lib/net6.0-windows/Telerik.Windows.Zip.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/TelerikCommon.dll": {},
-          "lib/net6.0-windows/TelerikData.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/TelerikExport.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0-windows/MediaFoundation.dll": {},
-          "lib/net6.0-windows/RadControlSpy.dll": {},
-          "lib/net6.0-windows/Telerik.Documents.SpreadsheetStreaming.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.ChartView.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.GridView.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.PdfViewer.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.PivotGrid.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadChart.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadDiagram.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadDock.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadMap.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadMarkupEditor.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadSpreadsheet.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RadWebCam.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.RichTextEditor.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.Scheduler.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.SpellChecker.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.SyntaxEditor.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Aqua.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Breeze.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Crystal.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.CrystalDark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Desert.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Fluent.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.FluentDark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.HighContrastBlack.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Material.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialBlueGrey.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialPink.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialTeal.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2007Black.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2007Silver.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Black.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Blue.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Silver.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2013Dark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2013Light.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Office2019.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetro.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetroBlue.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetroTouch.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Dark.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Light.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2022.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows11.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows7.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.Themes.Windows8.dll": {},
-          "lib/net6.0-windows/Telerik.WinControls.UI.dll": {
-            "related": ".XML"
-          },
-          "lib/net6.0-windows/Telerik.WinControls.dll": {
-            "related": ".ChartView.xml;.GridView.xml;.PdfViewer.xml;.PivotGrid.xml;.RadChart.xml;.RadDiagram.xml;.RadDock.xml;.RadMap.xml;.RadMarkupEditor.xml;.RadSpreadsheet.xml;.RadWebCam.xml;.RichTextEditor.xml;.Scheduler.xml;.SpellChecker.xml;.SyntaxEditor.xml;.UI.XML;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.CMapUtils.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Core.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.DrawingML.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.FormatProviders.Ocr.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.dll": {
-            "related": ".FormatProviders.Ocr.xml;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Doc.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Flow.dll": {
-            "related": ".FormatProviders.Doc.xml;.FormatProviders.Pdf.xml;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Xls.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.dll": {
-            "related": ".FormatProviders.OpenXml.xml;.FormatProviders.Pdf.xml;.FormatProviders.Xls.xml;.xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.Documents.TesseractOcr.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/Telerik.Windows.MediaFoundation.dll": {},
-          "lib/net6.0-windows/Telerik.Windows.Zip.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/TelerikCommon.dll": {},
-          "lib/net6.0-windows/TelerikData.dll": {
-            "related": ".xml"
-          },
-          "lib/net6.0-windows/TelerikExport.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "UI.for.WinForms.AllControls.Net70/2024.3.924": {
         "type": "package",
         "dependencies": {
@@ -4055,7 +3634,6 @@
           "Telerik.Reporting": "19.0.25.313",
           "Telerik.Reporting.OpenXmlRendering": "19.0.25.313",
           "Telerik.Reporting.OpenXmlRendering3": "19.0.25.313",
-          "UI.for.WinForms.AllControls.Net60": "2025.1.211",
           "UI.for.WinForms.AllControls.Net70": "2024.3.924"
         },
         "compile": {
@@ -4336,111 +3914,67 @@
         "lib/netstandard2.1/K4os.Hash.xxHash.xml"
       ]
     },
-    "Microsoft.AnalysisServices.AdomdClient.NetCore.retail.amd64/19.84.1": {
-      "sha512": "9CqmY8BbjY0wdLM7Fq40H63+SHVLuPpnncvcLTkJoab5bK+546mxAxFHaYZaNs9WdPp8ToWnBoV9Zumsrx0Owg==",
+    "Microsoft.AnalysisServices.AdomdClient.NetCore.retail.amd64/19.16.3.4": {
+      "sha512": "5CEyrdorKiYRrC37sCnuavcDqQETAtAbDf1LpI5v2wquQQ5j4b86i0kzaWjPZnwb88kHT6Ct/7KbUb+np3v2Bw==",
       "type": "package",
-      "path": "microsoft.analysisservices.adomdclient.netcore.retail.amd64/19.84.1",
+      "path": "microsoft.analysisservices.adomdclient.netcore.retail.amd64/19.16.3.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netcoreapp3.0/Microsoft.AnalysisServices.AdomdClient.deps.json",
         "lib/netcoreapp3.0/Microsoft.AnalysisServices.AdomdClient.dll",
         "lib/netcoreapp3.0/Microsoft.AnalysisServices.AdomdClient.xml",
-        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Core.deps.json",
-        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Core.dll",
-        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Core.xml",
-        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Windows.deps.json",
-        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Windows.dll",
-        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Runtime.Windows.xml",
+        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Core.deps.json",
+        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Core.dll",
+        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Core.xml",
+        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Windows.deps.json",
+        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Windows.dll",
+        "lib/netcoreapp3.0/Microsoft.AnalysisServices.Platform.Windows.xml",
         "lib/netcoreapp3.0/ar/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ar/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/bg/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/bg/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/ca/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ca/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/cs/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/cs/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/da/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/da/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/de/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/de/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/el/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/el/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/es/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/es/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/et/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/et/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/eu/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/eu/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/fi/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/fi/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/fr/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/fr/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/gl/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/gl/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/he/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/he/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/hi/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/hi/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/hr/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/hr/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/hu/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/hu/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/id/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/id/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/it/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/it/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/ja/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ja/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/kk/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/kk/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/ko/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ko/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/lt/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/lt/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/lv/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/lv/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/ms/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ms/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/nl/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/nl/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/no/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/no/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/pl/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/pl/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/pt-PT/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/pt-PT/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/pt/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/pt/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/ro/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ro/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/ru/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/ru/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/sk/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/sk/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/sl/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/sl/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/sr-Cyrl/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/sr-Cyrl/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/sr-Latn/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/sr-Latn/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/sv/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/sv/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/th/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/th/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/tr/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/tr/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/uk/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/uk/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
         "lib/netcoreapp3.0/vi/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/vi/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
-        "lib/netcoreapp3.0/zh-Hans/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/zh-Hans/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
-        "lib/netcoreapp3.0/zh-Hant/Microsoft.AnalysisServices.AdomdClient.resources.dll",
-        "lib/netcoreapp3.0/zh-Hant/Microsoft.AnalysisServices.Runtime.Core.resources.dll",
-        "microsoft.analysisservices.adomdclient.netcore.retail.amd64.19.84.1.nupkg.sha512",
-        "microsoft.analysisservices.adomdclient.netcore.retail.amd64.nuspec",
-        "runtimes/win-x64/native/msasxpress.dll"
+        "lib/netcoreapp3.0/zh-HANS/Microsoft.AnalysisServices.AdomdClient.resources.dll",
+        "lib/netcoreapp3.0/zh-HANT/Microsoft.AnalysisServices.AdomdClient.resources.dll",
+        "microsoft.analysisservices.adomdclient.netcore.retail.amd64.19.16.3.4.nupkg.sha512",
+        "microsoft.analysisservices.adomdclient.netcore.retail.amd64.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/9.0.4": {
@@ -5641,18 +5175,16 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Identity.Client/4.66.1": {
-      "sha512": "mE+m3pZ7zSKocSubKXxwZcUrCzLflC86IdLxrVjS8tialy0b1L+aECBqRBC/ykcPlB4y7skg49TaTiA+O2UfDw==",
+    "Microsoft.Identity.Client/4.61.3": {
+      "sha512": "naJo/Qm35Caaoxp5utcw+R8eU8ZtLz2ALh8S+gkekOYQ1oazfCQMWVT4NJ/FnHzdIJlm8dMz0oMpMGCabx5odA==",
       "type": "package",
-      "path": "microsoft.identity.client/4.66.1",
+      "path": "microsoft.identity.client/4.61.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
         "lib/net462/Microsoft.Identity.Client.dll",
         "lib/net462/Microsoft.Identity.Client.xml",
-        "lib/net472/Microsoft.Identity.Client.dll",
-        "lib/net472/Microsoft.Identity.Client.xml",
         "lib/net6.0-android31.0/Microsoft.Identity.Client.dll",
         "lib/net6.0-android31.0/Microsoft.Identity.Client.xml",
         "lib/net6.0-ios15.4/Microsoft.Identity.Client.dll",
@@ -5661,7 +5193,7 @@
         "lib/net6.0/Microsoft.Identity.Client.xml",
         "lib/netstandard2.0/Microsoft.Identity.Client.dll",
         "lib/netstandard2.0/Microsoft.Identity.Client.xml",
-        "microsoft.identity.client.4.66.1.nupkg.sha512",
+        "microsoft.identity.client.4.61.3.nupkg.sha512",
         "microsoft.identity.client.nuspec"
       ]
     },
@@ -9852,156 +9384,6 @@
         "lib/net8.0-windows/Telerik.ReportViewer.WinForms.dll",
         "telerik.reportviewer.winforms.19.0.25.313.nupkg.sha512",
         "telerik.reportviewer.winforms.nuspec"
-      ]
-    },
-    "UI.for.WinForms.AllControls.Net60/2025.1.211": {
-      "sha512": "nBLYmt6eghc/OK5fnqDrG7fJE4QHMHBE9k87dDfodnLOoU8shcJw7HwSIjyyl11vcJ7vs/HR+yYBGMpcL/AtAw==",
-      "type": "package",
-      "path": "ui.for.winforms.allcontrols.net60/2025.1.211",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LicenseAgreements/EULA.rtf",
-        "LicenseAgreements/EULA.txt",
-        "LicenseAgreements/ThirdParty/NOTICE.txt",
-        "images/wf.png",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Protocol.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.ChartView.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.Common.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.GridView.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.PdfViewer.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.PivotGrid.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.RadDiagram.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.RadDock.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.RadMap.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.RadSpreadsheet.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.RadWebCam.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.RichTextEditor.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.Scheduler.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Server/Telerik.WinForms.Surface.SpellChecker.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Telerik.WinForms.Protocol.dll",
-        "lib/net6.0-windows/Design/WinForms/17.0/Telerik.WinForms.RemoteClient.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Protocol.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.ChartView.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.Common.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.GridView.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.PdfViewer.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.PivotGrid.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.RadDiagram.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.RadDock.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.RadMap.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.RadSpreadsheet.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.RadWebCam.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.RichTextEditor.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.Scheduler.dll",
-        "lib/net6.0-windows/Design/WinForms/Server/Telerik.WinForms.Surface.SpellChecker.dll",
-        "lib/net6.0-windows/Design/WinForms/Telerik.WinForms.Protocol.dll",
-        "lib/net6.0-windows/Design/WinForms/Telerik.WinForms.RemoteClient.dll",
-        "lib/net6.0-windows/MediaFoundation.dll",
-        "lib/net6.0-windows/RadControlSpy.dll",
-        "lib/net6.0-windows/Telerik.Documents.SpreadsheetStreaming.dll",
-        "lib/net6.0-windows/Telerik.Documents.SpreadsheetStreaming.xml",
-        "lib/net6.0-windows/Telerik.WinControls.ChartView.dll",
-        "lib/net6.0-windows/Telerik.WinControls.ChartView.xml",
-        "lib/net6.0-windows/Telerik.WinControls.GridView.dll",
-        "lib/net6.0-windows/Telerik.WinControls.GridView.xml",
-        "lib/net6.0-windows/Telerik.WinControls.PdfViewer.dll",
-        "lib/net6.0-windows/Telerik.WinControls.PdfViewer.xml",
-        "lib/net6.0-windows/Telerik.WinControls.PivotGrid.dll",
-        "lib/net6.0-windows/Telerik.WinControls.PivotGrid.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadChart.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadChart.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadDiagram.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadDiagram.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadDock.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadDock.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadMap.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadMap.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadMarkupEditor.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadMarkupEditor.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadSpreadsheet.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadSpreadsheet.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RadWebCam.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RadWebCam.xml",
-        "lib/net6.0-windows/Telerik.WinControls.RichTextEditor.dll",
-        "lib/net6.0-windows/Telerik.WinControls.RichTextEditor.xml",
-        "lib/net6.0-windows/Telerik.WinControls.Scheduler.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Scheduler.xml",
-        "lib/net6.0-windows/Telerik.WinControls.SpellChecker.dll",
-        "lib/net6.0-windows/Telerik.WinControls.SpellChecker.xml",
-        "lib/net6.0-windows/Telerik.WinControls.SyntaxEditor.dll",
-        "lib/net6.0-windows/Telerik.WinControls.SyntaxEditor.xml",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Aqua.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Breeze.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Crystal.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.CrystalDark.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Desert.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Fluent.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.FluentDark.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.HighContrastBlack.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Material.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialBlueGrey.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialPink.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.MaterialTeal.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2007Black.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2007Silver.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Black.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Blue.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2010Silver.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2013Dark.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2013Light.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Office2019.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetro.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetroBlue.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.TelerikMetroTouch.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Dark.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2012Light.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.VisualStudio2022.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Windows11.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Windows7.dll",
-        "lib/net6.0-windows/Telerik.WinControls.Themes.Windows8.dll",
-        "lib/net6.0-windows/Telerik.WinControls.UI.XML",
-        "lib/net6.0-windows/Telerik.WinControls.UI.dll",
-        "lib/net6.0-windows/Telerik.WinControls.dll",
-        "lib/net6.0-windows/Telerik.WinControls.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.CMapUtils.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.CMapUtils.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Core.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Core.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.DrawingML.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.DrawingML.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.FormatProviders.Ocr.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.FormatProviders.Ocr.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Fixed.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Doc.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Doc.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Flow.FormatProviders.Pdf.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Flow.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Flow.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Xls.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.FormatProviders.Xls.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.Spreadsheet.xml",
-        "lib/net6.0-windows/Telerik.Windows.Documents.TesseractOcr.dll",
-        "lib/net6.0-windows/Telerik.Windows.Documents.TesseractOcr.xml",
-        "lib/net6.0-windows/Telerik.Windows.MediaFoundation.dll",
-        "lib/net6.0-windows/Telerik.Windows.Zip.dll",
-        "lib/net6.0-windows/Telerik.Windows.Zip.xml",
-        "lib/net6.0-windows/TelerikCommon.dll",
-        "lib/net6.0-windows/TelerikData.dll",
-        "lib/net6.0-windows/TelerikData.xml",
-        "lib/net6.0-windows/TelerikExport.dll",
-        "lib/net6.0-windows/TelerikExport.xml",
-        "tools/VisualStudioToolsManifest.xml",
-        "ui.for.winforms.allcontrols.net60.2025.1.211.nupkg.sha512",
-        "ui.for.winforms.allcontrols.net60.nuspec"
       ]
     },
     "UI.for.WinForms.AllControls.Net70/2024.3.924": {

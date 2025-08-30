@@ -9,7 +9,13 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
 		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+		<ApplicationIcon>icon_blue.ico</ApplicationIcon>
   </PropertyGroup>
+
+
+    <ItemGroup>
+      <Content Include="icon_blue.ico" />
+    </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.104.2" />

@@ -156,7 +156,6 @@
             // typeDropDownList
             // 
             typeDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            typeDropDownList.DropDownAnimationEnabled = true;
             typeDropDownList.DropDownHeight = 199;
             typeDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             typeDropDownList.ItemHeight = 30;
@@ -245,7 +244,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(888, 247);
+            ClientSize = new Size(888, 222);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

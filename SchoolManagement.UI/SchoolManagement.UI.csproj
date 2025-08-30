@@ -54,7 +54,6 @@
     <PackageReference Include="Telerik.Reporting.OpenXmlRendering" Version="19.0.25.313" />
     <PackageReference Include="Telerik.Reporting.OpenXmlRendering3" Version="19.0.25.313" />
     <PackageReference Include="Telerik.ReportViewer.WinForms" Version="19.0.25.313" />
-    <PackageReference Include="UI.for.WinForms.AllControls.Net60" Version="2025.1.211" />
     <PackageReference Include="UI.for.WinForms.AllControls.Net70" Version="2024.3.924" />
   </ItemGroup>
 

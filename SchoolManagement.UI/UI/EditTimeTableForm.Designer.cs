@@ -334,7 +334,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(497, 638);
+            ClientSize = new Size(497, 575);
             Controls.Add(errorLabel);
             Controls.Add(teacherTimeOut);
             Controls.Add(teacherTimeIn);

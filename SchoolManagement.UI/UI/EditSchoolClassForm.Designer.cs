@@ -102,6 +102,10 @@
             sequenceSpinEditor.Location = new Point(356, 100);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
+            // 
+            // 
+            // 
+            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(109, 30);
             sequenceSpinEditor.TabIndex = 3;
             // 
@@ -262,7 +266,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(752, 197);
+            ClientSize = new Size(752, 205);
             Controls.Add(reportCardSeparator);
             Controls.Add(reportCardDropDownList);
             Controls.Add(reportCardLabel);

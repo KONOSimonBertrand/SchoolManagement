@@ -105,6 +105,10 @@
             sequenceSpinEditor.Location = new Point(2, 97);
             sequenceSpinEditor.MinimumSize = new Size(0, 30);
             sequenceSpinEditor.Name = "sequenceSpinEditor";
+            // 
+            // 
+            // 
+            sequenceSpinEditor.RootElement.MinSize = new Size(0, 30);
             sequenceSpinEditor.Size = new Size(345, 30);
             sequenceSpinEditor.TabIndex = 114;
             // 
@@ -219,7 +223,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(751, 195);
+            ClientSize = new Size(751, 201);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

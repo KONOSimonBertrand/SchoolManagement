@@ -104,6 +104,7 @@ namespace Primary.SchoolApp.Utilities
 
         public static string ConvertHexToString(string hexInput)
         {
+            if (string.IsNullOrWhiteSpace(hexInput)) return string.Empty;
             return Encoding.UTF8.GetString(Enumerable.Range(0, hexInput.Length / 2).Select(_ => Convert.ToByte(hexInput.Substring(_ * 2, 2), 16)).ToArray());
         }
 

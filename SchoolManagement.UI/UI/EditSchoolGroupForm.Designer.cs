@@ -118,7 +118,6 @@
             // averageFormulaDropDownList
             // 
             averageFormulaDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            averageFormulaDropDownList.DropDownAnimationEnabled = true;
             averageFormulaDropDownList.DropDownHeight = 159;
             averageFormulaDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             averageFormulaDropDownList.Location = new Point(8, 99);
@@ -137,7 +136,6 @@
             // isTruncateDropDownList
             // 
             isTruncateDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            isTruncateDropDownList.DropDownAnimationEnabled = true;
             isTruncateDropDownList.DropDownHeight = 159;
             isTruncateDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             isTruncateDropDownList.Location = new Point(245, 99);
@@ -165,7 +163,6 @@
             // documentTemplateDropDownList
             // 
             documentTemplateDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            documentTemplateDropDownList.DropDownAnimationEnabled = true;
             documentTemplateDropDownList.DropDownHeight = 159;
             documentTemplateDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             documentTemplateDropDownList.Location = new Point(428, 30);
@@ -257,7 +254,7 @@
             nameTextBox.Location = new Point(8, 30);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new Size(412, 30);
+            nameTextBox.Size = new Size(412, 36);
             nameTextBox.TabIndex = 0;
             // 
             // nameLabel
@@ -284,7 +281,7 @@
             closeButton.Location = new Point(540, 155);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(117, 30);
+            closeButton.Size = new Size(117, 36);
             closeButton.TabIndex = 6;
             closeButton.Text = "Annuler";
             // 
@@ -293,7 +290,7 @@
             saveButton.Location = new Point(415, 155);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(117, 30);
+            saveButton.Size = new Size(117, 36);
             saveButton.TabIndex = 5;
             saveButton.Text = "Enregistrer";
             // 
@@ -307,7 +304,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(672, 190);
+            ClientSize = new Size(672, 212);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);

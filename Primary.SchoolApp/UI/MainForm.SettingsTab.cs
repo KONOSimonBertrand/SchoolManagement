@@ -2651,6 +2651,7 @@ namespace Primary.SchoolApp
             if (e.CurrentRow != null)
             {
                 SettingInfoRightPanel.Visible = true;
+                this.SettingAddButton.Visible = SettingLeftListView.SelectedItem.Key.ToString() == "0" ? false : true;
                 switch (SettingLeftListView.SelectedItem.Key)
                 {
                     case 0:
