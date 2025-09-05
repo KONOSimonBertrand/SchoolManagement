@@ -38,6 +38,15 @@ namespace SchoolManagement.Application
         {
             return await schoolingCostReadRepository.GetListAsync();
         }
+        public async Task<IList<SchoolingCost>> GetSchoolingCostList(List<int> classIdList, int cashFlowTypeId, int schoolYearId)
+        {
+            return await schoolingCostReadRepository.GetListAsync(classIdList, cashFlowTypeId, schoolYearId);
+        }
+
+        public async Task<IList<SchoolingCost>> GetSchoolingCostList(int cashFlowTypeId, int schoolYearId)
+        {
+            return await schoolingCostReadRepository.GetListAsync(cashFlowTypeId, schoolYearId);
+        }
 
         public async Task<bool> UpdateSchoolingCost(SchoolingCost cost)
         {

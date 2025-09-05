@@ -69,7 +69,6 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result;
         }
-
         public async Task<IList<SchoolingCostItem>> GetItemsAsync(int schoolingCostId)
         {
             var connection = dbConnectionFactory.CreateConnection();
@@ -111,6 +110,58 @@ namespace SchoolManagement.Infrastructure.Repositories
                     schoolingCost.CashFlowType = cashFlowType;
                     schoolingCost.SchoolYear = schoolYear;
                     return schoolingCost;
+                }
+                ).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+        public async Task<IList<SchoolingCost>> GetListAsync(List<int> classIdList, int cashFlowTypeId, int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM SchoolingCosts AS A 
+                             INNER JOIN SchoolClasses AS  B ON A.SchoolClassId=B.Id 
+                             INNER JOIN CashFlowTypes AS D ON A.CashFlowTypeId=D.Id 
+                             INNER JOIN SchoolYears   AS C ON A.SchoolYearId= C.Id  
+                             WHERE A.SchoolClassId IN @classIdList AND A.CashFlowTypeId=@cashFlowTypeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<SchoolingCost, SchoolClass, CashFlowType, SchoolYear, SchoolingCost>(query,
+                (schoolingCost, schoolClass, cashFlowType, schoolYear) =>
+                {
+                    schoolingCost.SchoolClass = schoolClass;
+                    schoolingCost.CashFlowType = cashFlowType;
+                    schoolingCost.SchoolYear = schoolYear;
+                    return schoolingCost;
+                },
+                new
+                {
+                    classIdList,
+                    cashFlowTypeId,
+                    schoolYearId
+                }
+                ).ToList();
+            await Task.Delay(0);
+            return result;
+        }
+
+        public async Task<IList<SchoolingCost>> GetListAsync(int cashFlowTypeId, int schoolYearId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"SELECT * FROM SchoolingCosts AS A 
+                             INNER JOIN SchoolClasses AS  B ON A.SchoolClassId=B.Id 
+                             INNER JOIN CashFlowTypes AS D ON A.CashFlowTypeId=D.Id 
+                             INNER JOIN SchoolYears   AS C ON A.SchoolYearId= C.Id  
+                             WHERE A.CashFlowTypeId=@cashFlowTypeId AND A.SchoolYearId=@schoolYearId  ;";
+            var result = connection.Query<SchoolingCost, SchoolClass, CashFlowType, SchoolYear, SchoolingCost>(query,
+                (schoolingCost, schoolClass, cashFlowType, schoolYear) =>
+                {
+                    schoolingCost.SchoolClass = schoolClass;
+                    schoolingCost.CashFlowType = cashFlowType;
+                    schoolingCost.SchoolYear = schoolYear;
+                    return schoolingCost;
+                },
+                new
+                {
+                    cashFlowTypeId,
+                    schoolYearId
                 }
                 ).ToList();
             await Task.Delay(0);

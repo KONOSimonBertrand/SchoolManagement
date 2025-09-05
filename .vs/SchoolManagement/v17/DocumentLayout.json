@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\startform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\startform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\schoolsupplies\\dapperschoolsuppliesfeesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\schoolsupplies\\dapperschoolsuppliesfeesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\mainform.cashflow.tab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\mainform.cashflow.tab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.ui\\ui\\editschoolingcostform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|solutionrelative:schoolmanagement.ui\\ui\\editschoolingcostform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\mainform.settingstab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\mainform.settingstab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\schoolingcosts\\addschoolingcostform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\schoolingcosts\\addschoolingcostform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\schoolingcosts\\editschoolingcostform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\schoolingcosts\\editschoolingcostform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.ui\\localization\\language.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|solutionrelative:schoolmanagement.ui\\localization\\language.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +34,21 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DapperSchoolSuppliesFeesRepository.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSuppliesFeesRepository.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSuppliesFeesRepository.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSuppliesFeesRepository.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSuppliesFeesRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T06:02:56.339Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -30,28 +59,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StartForm.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\StartForm.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\StartForm.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\StartForm.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\UI\\StartForm.cs",
-              "ViewState": "AgIAAJoAAAAAAAAAAAAvwKIAAAAQAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "EditSchoolingCostForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\EditSchoolingCostForm.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.UI\\UI\\EditSchoolingCostForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\EditSchoolingCostForm.cs",
+              "RelativeToolTip": "SchoolManagement.UI\\UI\\EditSchoolingCostForm.cs",
+              "ViewState": "AgIAANoAAAAAAAAAAAAkwOsAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-30T19:30:16.933Z",
+              "WhenOpened": "2025-09-05T03:51:53.314Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainForm.CashFlow.Tab.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
-              "ViewState": "AgIAAKoDAAAAAAAAAAAAwK8DAAAQAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Language.resx",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\Localization\\Language.resx",
+              "RelativeDocumentMoniker": "SchoolManagement.UI\\Localization\\Language.resx",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\Localization\\Language.resx",
+              "RelativeToolTip": "SchoolManagement.UI\\Localization\\Language.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-09-04T18:42:01.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EditSchoolingCostForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\SchoolingCosts\\EditSchoolingCostForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\SchoolingCosts\\EditSchoolingCostForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\SchoolingCosts\\EditSchoolingCostForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\SchoolingCosts\\EditSchoolingCostForm.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAAwBoBAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-30T19:25:27.565Z",
+              "WhenOpened": "2025-09-01T21:19:32.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainForm.SettingsTab.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.SettingsTab.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\MainForm.SettingsTab.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.SettingsTab.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\MainForm.SettingsTab.cs",
+              "ViewState": "AgIAAGgFAAAAAAAAAADgv4oFAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T19:15:09.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AddSchoolingCostForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\SchoolingCosts\\AddSchoolingCostForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\SchoolingCosts\\AddSchoolingCostForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\SchoolingCosts\\AddSchoolingCostForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\SchoolingCosts\\AddSchoolingCostForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T10:05:04.916Z",
               "EditorCaption": ""
             }
           ]

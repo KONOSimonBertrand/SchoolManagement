@@ -13,7 +13,7 @@ namespace SchoolManagement.UI
         public RadButton CloseButton { get => closeButton; }
         public RadDropDownList SchoolYearDropDownList {  get => schoolYearDropDownList; }
         public RadButton AddSchoolYearButton { get => addSchoolYearButton ; }
-        public RadDropDownList ClassDropDownList { get => classDropDownList; }
+        public RadAutoCompleteBox ClassAutoCompleteBox {  get => classAutoCompleteBox; }
         public RadButton AddClassButton {  get => addClassButton; }
         public RadDropDownList CostTypeDropDownList {  get => costTypeDropDownList; }
         public RadButton AddCostTypeButton { get => addCostTypeButton; }
@@ -22,6 +22,7 @@ namespace SchoolManagement.UI
         public RadTextBox TrancheNumberTextBox { get => trancheNumberTextBox; }
         public RadGridView  TranchesGridView { get => tranchesGridView; }
         public RadLabel ErrorLabel { get => errorLabel; }
+        public ErrorProvider ErrorProvider { get => errorProvider; }
         public EditSchoolingCostForm()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace SchoolManagement.UI
         private void InitLanguage()
         {
             this.schoolYearLabel.Text = Language.labelSchoolYear;
-            this.classLabel.Text = Language.labelClass;
+            this.classLabel.Text = Language.labelClass+"s";
             this.costTypeLabel.Text = Language.labelFeeType;
             this.costPayableLabel.Text = Language.labelExigible;
             this.amountLabel.Text = Language.labelAmount;
@@ -44,14 +45,28 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.closeButton.Click += CloseButton_Click;
-            classDropDownList.SelectedIndexChanged += ClassDropDownList_SelectedIndexChanged;
+            classAutoCompleteBox.SelectionChanged += ClassAutoCompleteBox_SelectionChanged; ;
             costTypeDropDownList.SelectedIndexChanged += CostTypeDropDownList_SelectedIndexChanged;
             schoolYearDropDownList.SelectedIndexChanged += SchoolYearDropDownList_SelectedIndexChanged;
             this.amountTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
             this.trancheNumberTextBox.TextChanging += new TextChangingEventHandler(TxtChanging);
         }
 
-      
+        private void ClassAutoCompleteBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (classAutoCompleteBox.SelectionLength > 0)
+            {
+                addClassButton.Image = Utilities.ViewUtilities.GetImage("Edit");
+                addClassButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de la classe";
+               
+            }
+            else
+            {
+                addClassButton.Image = Utilities.ViewUtilities.GetImage("Add");
+                addClassButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer ue nouvelle classe";
+            }
+        }
+
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -60,7 +75,7 @@ namespace SchoolManagement.UI
         private void InitComponent()
         {
             this.schoolYearDropDownList.RootElement.EnableElementShadow = false;
-            this.classDropDownList.RootElement.EnableElementShadow = false;
+            this.classAutoCompleteBox.RootElement.EnableElementShadow = false;
             this.costTypeDropDownList.RootElement.EnableElementShadow = false;
             this.costPayableDropDownList.RootElement.EnableElementShadow = false;
 
@@ -102,9 +117,8 @@ namespace SchoolManagement.UI
             this.schoolYearDropDownList.RootElement.CustomFontSize = 10.5f;
             this.schoolYearDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
-            this.classDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
-            this.classDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.classDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+            this.classAutoCompleteBox.RootElement.CustomFont = ViewUtilities.MainFont;
+            this.classAutoCompleteBox.RootElement.CustomFontSize = 10.5f;
 
             this.costTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.costTypeDropDownList.RootElement.CustomFontSize = 10.5f;
@@ -115,7 +129,6 @@ namespace SchoolManagement.UI
             this.costPayableDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.costTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
-            this.classDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
             this.schoolYearDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.editPanel.RootElement.EnableElementShadow = false;
@@ -169,9 +182,8 @@ namespace SchoolManagement.UI
             this.schoolYearDropDownList.ValueMember = "Id";
             this.schoolYearDropDownList.SelectedIndex = -1;
 
-            this.classDropDownList.DisplayMember = "Name";
-            this.classDropDownList.ValueMember = "Id";
-            this.classDropDownList.SelectedIndex = -1;
+            classAutoCompleteBox.AutoCompleteDisplayMember = "Name";
+            classAutoCompleteBox.AutoCompleteValueMember = "Id";
 
             this.costTypeDropDownList.DisplayMember = "Name";
             this.costTypeDropDownList.ValueMember = "Id";
@@ -183,28 +195,27 @@ namespace SchoolManagement.UI
             this.costPayableDropDownList.Items.Add(yesItem);
             this.costPayableDropDownList.Items.Add(noItem);
             errorLabel.ForeColor = Color.Red;
+            trancheNumberTextBox.NullText="<=6";
+            addClassButton.Image = Utilities.ViewUtilities.GetImage("Add");
         }
         public bool IsValidData()
         {
             this.errorLabel.Text = "";
+            this.errorProvider.Clear();
 
             if (this.schoolYearDropDownList.SelectedIndex < 0)
             {
                 this.errorLabel.Text = "La sélection de l'année scolaire est requise!";
+                this.errorProvider.SetError(schoolYearDropDownList, this.errorLabel.Text);
                 this.schoolYearDropDownList.Focus();
                 return false;
             }
 
-            if (this.classDropDownList.SelectedIndex < 0)
-            {
-                this.errorLabel.Text = "La sélection d'une classe est requise!";
-                this.classDropDownList.Focus();
-                return false;
-            }
 
             if (this.costTypeDropDownList.SelectedIndex < 0)
             {
                 this.errorLabel.Text = "La sélection d'un type de frais est requise!";
+                this.errorProvider.SetError(costTypeDropDownList, this.errorLabel.Text);
                 this.costTypeDropDownList.Focus();
                 return false;
             }
@@ -212,14 +223,24 @@ namespace SchoolManagement.UI
             if (this.amountTextBox.Text == "")
             {
                 this.errorLabel.Text = "La saisie du montant est requise!";
+                this.errorProvider.SetError(amountTextBox, this.errorLabel.Text);
                 this.amountTextBox.Focus();
                 return false;
             }
             
-            if (this.trancheNumberTextBox.Text == "")
+            if (this.trancheNumberTextBox.Text == ""|| this.trancheNumberTextBox.Text == "0")
             {
                 this.errorLabel.Text = "La saisie du nombre de tranches est requise!";
+                this.errorProvider.SetError(trancheNumberTextBox, this.errorLabel.Text);
                 this.trancheNumberTextBox.Focus();
+                return false;
+            }
+
+            if (!this.classAutoCompleteBox.Items.Any())
+            {
+                this.errorLabel.Text = "La sélection d'une classe est requise!";
+                this.errorProvider.SetError(classAutoCompleteBox, this.errorLabel.Text);
+                this.classAutoCompleteBox.Focus();
                 return false;
             }
             return true;
@@ -244,20 +265,7 @@ namespace SchoolManagement.UI
                 addSchoolYearButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de l'année scolaire";
             }
         }
-        private void ClassDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            
-            if (classDropDownList.SelectedIndex < 0)
-            {
-                addClassButton.Image = Utilities.ViewUtilities.GetImage("Add");
-                addClassButton.RootElement.ToolTipText = "Cliquer ici pour enregistrer ue nouvelle classe";
-            }
-            else
-            {
-                addClassButton.Image = Utilities.ViewUtilities.GetImage("Edit");
-                addClassButton.RootElement.ToolTipText = "Cliquer ici pour modifier les informations de la classe";
-            }
-        }
+      
         private void CostTypeDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
            

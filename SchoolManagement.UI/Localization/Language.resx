@@ -1547,4 +1547,7 @@
   <data name="LabelIconView" xml:space="preserve">
     <value>Icon view</value>
   </data>
+  <data name="LabelAllClass" xml:space="preserve">
+    <value>All Classes</value>
+  </data>
 </root>

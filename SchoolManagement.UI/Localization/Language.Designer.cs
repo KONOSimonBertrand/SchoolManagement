@@ -250,6 +250,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à All Classes.
+        /// </summary>
+        public static string LabelAllClass {
+            get {
+                return ResourceManager.GetString("LabelAllClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Amount.
         /// </summary>
         public static string labelAmount {

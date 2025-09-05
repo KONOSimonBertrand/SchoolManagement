@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
+
 namespace Primary.SchoolApp
 {
     public partial class MainForm
@@ -515,8 +516,8 @@ namespace Primary.SchoolApp
         private void LoadSelectedSchoolClassDetail(SchoolClass schoolClass)
         {
             schoolClassInfo.TitleInfoLabel.Text = "INFO ...";
-            schoolClassInfo.NameTextBox.Text = schoolClass.Name;
-            schoolClassInfo.GroupTextBox.Text = schoolClass.Group.Name;
+            schoolClassInfo.NameTextBox.Text = schoolClass?.Name;
+            schoolClassInfo.GroupTextBox.Text = schoolClass?.Group.Name;
             schoolClassInfo.SubjectsCountLabel.Text =  Language.labelSubjectTaught+": "+ schoolClassService.GetClassSubjectList(schoolClass.Id).Result.Count;
         }
         // affiche les info d'une salle classe
@@ -1409,13 +1410,19 @@ namespace Primary.SchoolApp
             form.Icon = this.Icon;
             if (form.ShowDialog(this) == DialogResult.OK)
             {
-                int classId = int.Parse(form.ClassDropDownList.SelectedValue.ToString());
-                int yearId = int.Parse(form.SchoolYearDropDownList.SelectedValue.ToString());
-                int costTypeId = int.Parse(form.CostTypeDropDownList.SelectedValue.ToString());
-                var data = schoolingCostService.GetSchoolingCost(classId, costTypeId, yearId).Result;
-                Program.SchoolingCostList.Add(data);
-                SettingGridView.DataSource = new List<SchoolingCost>();
-                SettingGridView.DataSource = Program.SchoolingCostList;
+                var selectedItemClass = form.ClassAutoCompleteBox.Items.FirstOrDefault();
+                var idList = form.ClassAutoCompleteBox.Items.Select(x => int.Parse(x.Value.ToString()));
+                if (int.TryParse(selectedItemClass.Value.ToString(), out var classId))
+                {
+                    int yearId = int.Parse(form.SchoolYearDropDownList.SelectedValue.ToString());
+                    int costTypeId = int.Parse(form.CostTypeDropDownList.SelectedValue.ToString());
+                    var data = schoolingCostService.GetSchoolingCostList(idList.ToList(), costTypeId, yearId).Result;
+                    var costList= Program.SchoolingCostList.ToList();
+                    costList.AddRange(data);
+                    SettingGridView.DataSource = new List<SchoolingCost>();
+                    Program.SchoolingCostList= costList;
+                    SettingGridView.DataSource = Program.SchoolingCostList;
+                } 
             }
         }
         // show schoolingCost UI for edit

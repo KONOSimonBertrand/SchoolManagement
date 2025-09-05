@@ -62,6 +62,16 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
+        public Task<IList<SchoolingCost>> GetListAsync(List<int> classIdList, int cashFlowTypeId, int schoolYearId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<SchoolingCost>> GetListAsync(int cashFlowTypeId, int schoolYearId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UpdateAsync(SchoolingCost cost)
         {
             appDbContext.ChangeTracker.Clear();

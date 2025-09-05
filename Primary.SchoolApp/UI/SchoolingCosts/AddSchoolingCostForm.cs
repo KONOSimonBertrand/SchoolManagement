@@ -21,6 +21,7 @@ namespace Primary.SchoolApp.UI
         private readonly ISchoolYearService schoolYearService;
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ISchoolClassService schoolClassService;
+        private List<SchoolClass> schoolClasses;
         public AddSchoolingCostForm(ISchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ISchoolClassService schoolClassService
             )
@@ -31,12 +32,22 @@ namespace Primary.SchoolApp.UI
             this.schoolClassService = schoolClassService;
             this.logService = logService;
             this.clientApp = clientApp;
-            ClassDropDownList.DataSource = Program.SchoolClassList;
+            schoolClasses=new List<SchoolClass>();
             CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+            schoolClasses.AddRange(Program.SchoolClassList);
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
+            schoolClasses.Add(
+                new() { 
+                    Id=0,
+                    Name=Language.LabelAllClass
+                }
+                );
+            ClassAutoCompleteBox.AutoCompleteDataSource = schoolClasses;
+            ClassAutoCompleteBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             InitTranchesGridView();
             InitEvents();
             TrancheNumberTextBox.Text = "0";
+
         }
 
         private void InitEvents()
@@ -48,6 +59,18 @@ namespace Primary.SchoolApp.UI
             AddClassButton.Click += AddClassButton_Click;
             AddSchoolYearButton.Click += AddSchoolYearButton_Click;
             AddCostTypeButton.Click += AddCostTypeButton_Click;
+            ClassAutoCompleteBox.TextChanged += ClassAutoCompleteBox_TextChanged;
+        }
+
+        private void ClassAutoCompleteBox_TextChanged(object sender, EventArgs e)
+        {
+            if(ClassAutoCompleteBox.Text== Language.LabelAllClass)
+            {
+                string items = string.Empty;
+                var nameList = Program.SchoolClassList.Select(x => x.Name);
+                items = string.Join(';', nameList) + ";";
+                ClassAutoCompleteBox.Text = items;
+            }
         }
 
         private void AddCostTypeButton_Click(object sender, EventArgs e)
@@ -92,16 +115,17 @@ namespace Primary.SchoolApp.UI
 
         private void AddClassButton_Click(object sender, EventArgs e)
         {
-            if (ClassDropDownList.SelectedItem == null)
+            if (ClassAutoCompleteBox.SelectionLength == 0)
             {
                 ShowSchoolClassAddForm();
             }
             else
             {
-                var item = ClassDropDownList.SelectedItem.DataBoundItem as SchoolClass;
-                if (item != null)
+                var selectedText = ClassAutoCompleteBox.SelectedText.Replace(';', ' ').Trim();
+                var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Name == selectedText);
+                if (selectedClass != null)
                 {
-                    ShowSchoolClassEditForm(item);
+                    ShowSchoolClassEditForm(selectedClass);
                 }
                 else
                 {
@@ -153,10 +177,10 @@ namespace Primary.SchoolApp.UI
             if (TrancheNumberTextBox.Text != "")
             {
                 int trancheNumber = int.Parse(TrancheNumberTextBox.Text);
-                if (trancheNumber > 3)
+                if (trancheNumber > 6)
                 {
                     ErrorLabel.Text = Language.messageBadTrancheNumber;
-                    TrancheNumberTextBox.Text = "3";
+                    TrancheNumberTextBox.Text = "6";
                     TrancheNumberTextBox.Focus();
                     return;
                 }
@@ -221,59 +245,83 @@ namespace Primary.SchoolApp.UI
             {
                 if (IsValidTrancheValue(int.Parse(TrancheNumberTextBox.Text)))
                 {
-                    SchoolingCost cost = new();
-                    cost.SchoolYear = SchoolYearDropDownList.SelectedItem.DataBoundItem as SchoolYear;
-                    cost.SchoolYearId = cost.SchoolYear.Id;
-                    cost.SchoolClass = ClassDropDownList.SelectedItem.DataBoundItem as SchoolClass;
-                    cost.SchoolClassId = cost.SchoolClass.Id;
-                    cost.CashFlowType = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
-                    cost.CashFlowTypeId = cost.CashFlowType.Id;
-                    cost.IsPayable = bool.Parse(CostPayableDropDownList.SelectedValue.ToString());
-                    cost.TrancheNumber = int.Parse(TrancheNumberTextBox.Text);
-                    cost.Amount = double.Parse(AmountTextBox.Text);
-                    cost.SchoolingCostItems = new List<SchoolingCostItem>();
-                    for (int i = 0; i < cost.TrancheNumber; i++)
+                    int rowsAdded = 0;// nombre d'enregistrements enregistrés en base
+                    string infoMessage = string.Empty;
+                    foreach (var classItem in ClassAutoCompleteBox.Items)
                     {
-                        var item = TranchesGridView.Rows[i].DataBoundItem as SchoolingCostItem;
-                        cost.SchoolingCostItems.Add(
-                            new SchoolingCostItem()
+                        var selectedItemClass = ClassAutoCompleteBox.Items.FirstOrDefault(x => x.Value == classItem.Value);
+                        if (int.TryParse(selectedItemClass?.Value.ToString(), out var selectedId))
+                        {
+                            var selectedClass = Program.SchoolClassList.FirstOrDefault(x => x.Id == selectedId);
+                            if (selectedClass != null)
                             {
-                                Amount = item.Amount,
-                                DeadLine = item.DeadLine,
+                                SchoolingCost cost = new();
+                                cost.SchoolYear = SchoolYearDropDownList.SelectedItem.DataBoundItem as SchoolYear;
+                                cost.SchoolYearId = cost.SchoolYear.Id;
+                                cost.SchoolClass = selectedClass;
+                                cost.SchoolClassId = selectedClass.Id;
+                                cost.CashFlowType = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                                cost.CashFlowTypeId = cost.CashFlowType.Id;
+                                cost.IsPayable = bool.Parse(CostPayableDropDownList.SelectedValue.ToString());
+                                cost.TrancheNumber = int.Parse(TrancheNumberTextBox.Text);
+                                cost.Amount = double.Parse(AmountTextBox.Text);
+                                cost.SchoolingCostItems = new List<SchoolingCostItem>();
+                                for (int i = 0; i < cost.TrancheNumber; i++)
+                                {
+                                    var item = TranchesGridView.Rows[i].DataBoundItem as SchoolingCostItem;
+                                    cost.SchoolingCostItems.Add(
+                                        new SchoolingCostItem()
+                                        {
+                                            Amount = item.Amount,
+                                            DeadLine = item.DeadLine,
+                                            Rank = item.Rank,
+                                        }
+                                        );
+                                }
+                                if (!SchoolingCostExist(cost.SchoolClassId, cost.CashFlowTypeId, cost.SchoolYearId))
+                                {
+                                    bool isDone = schoolingCostService.CreateSchoolingCost(cost).Result;
+                                    if (isDone == true)
+                                    {
+                                        Log log = new()
+                                        {
+                                            UserAction = $"Ajout  des frais scolaires {cost.CashFlowType.Name} pour la classe {cost.SchoolClass.Name} pour l'année scolaire {cost.SchoolYear.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                                            UserId = clientApp.UserConnected.Id
+                                        };
+                                        logService.CreateLog(log);
+                                        rowsAdded++;
+                                    }
+                                    else
+                                    {
+                                        infoMessage+= selectedClass +":"+ Language.messageAddError+"\n";
+                                    }
+                                }
+                                else
+                                {
+                                    infoMessage += selectedClass + ":" + Language.messageFeesExist + "\n";
+                                }
                             }
-                            );
+                        }
                     }
-                    if (!SchoolingCostExist(cost.SchoolClassId, cost.CashFlowTypeId, cost.SchoolYearId))
+                    if (ClassAutoCompleteBox.Items.Count == rowsAdded)
                     {
-                        bool isDone = schoolingCostService.CreateSchoolingCost(cost).Result;
-                        if (isDone == true)
-                        {
-                            Log log = new()
-                            {
-                                UserAction = $"Ajout  des frais scolaires {cost.CashFlowType.Name} pour la classe {cost.SchoolClass.Name} pour l'année scolaire {cost.SchoolYear.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
-                                UserId = clientApp.UserConnected.Id
-                            };
-                            logService.CreateLog(log);
-                            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                            this.Close();
-                        }
-                        else
-                        {
-                            this.ErrorLabel.Text = Language.messageAddError;
-                        }
+                        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        this.Close();
                     }
-
                     else
                     {
-                        this.ErrorLabel.Text = Language.messageFeesExist;
+                        ErrorProvider.Clear();
+                        ErrorLabel.Text = infoMessage;
+                        ErrorProvider.SetError(ClassAutoCompleteBox, infoMessage);
                     }
                 }
                 else
                 {
+                    ErrorProvider.Clear();
                     ErrorLabel.Text = Language.messageBadInstalment;
+                    ErrorProvider.SetError(TranchesGridView, Language.messageBadInstalment);
                     TranchesGridView.Focus();
                 }
-
             }
         }
 
@@ -325,9 +373,9 @@ namespace Primary.SchoolApp.UI
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;
-                    ClassDropDownList.DataSource = null;
-                    ClassDropDownList.DataSource = Program.SchoolClassList;
-                    ClassDropDownList.SelectedValue = data;
+                    ClassAutoCompleteBox.AutoCompleteDataSource=null;
+                    ClassAutoCompleteBox.AutoCompleteDataSource = Program.SchoolClassList;
+                    ClassAutoCompleteBox.AutoCompleteItems.Add(new RadListDataItem(data.Name,data.Id));
                 }
             }
             else
@@ -345,9 +393,9 @@ namespace Primary.SchoolApp.UI
             {
                 var data = schoolClassService.GetSchoolClass(form.NameTextBox.Text).Result;
                 Program.SchoolClassList.Add(data);
-                ClassDropDownList.DataSource = null;
-                SchoolYearDropDownList.DataSource = Program.SchoolClassList;
-                ClassDropDownList.SelectedValue = data;
+                ClassAutoCompleteBox.AutoCompleteDataSource = null;
+                ClassAutoCompleteBox.AutoCompleteDataSource = Program.SchoolClassList;
+                ClassAutoCompleteBox.AutoCompleteItems.Add(new RadListDataItem(data.Name, data.Id));
             }
         }
         // show CashFlowType UI for edit

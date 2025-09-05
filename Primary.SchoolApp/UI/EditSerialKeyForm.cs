@@ -29,15 +29,10 @@ namespace Primary.SchoolApp.UI
         {
             SaveButton.Click += SaveButton_Click;
             this.Shown += OnShown;
-            this.FormClosed += OnFormClosed;
             this.SerialKeyTextBox.TextChanged += SerialKeyTextBox_TextChanged;
         }
 
-        private void OnFormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Close();
-        }
-
+       
         private void SerialKeyTextBox_TextChanged(object sender, EventArgs e)
         {
             var serialKeytring = AppUtilities.ConvertHexToString(SerialKeyTextBox.Text);

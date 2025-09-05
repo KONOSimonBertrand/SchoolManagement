@@ -466,7 +466,7 @@
     <value>Nombre de Tranches</value>
   </data>
   <data name="labelInstallments" xml:space="preserve">
-    <value>Versements</value>
+    <value>Tranches</value>
   </data>
   <data name="labelJob" xml:space="preserve">
     <value>Fonction</value>
@@ -1544,5 +1544,8 @@
   </data>
   <data name="LabelIconView" xml:space="preserve">
     <value>Vue icône</value>
+  </data>
+  <data name="LabelAllClass" xml:space="preserve">
+    <value>Toutes les classes</value>
   </data>
 </root>

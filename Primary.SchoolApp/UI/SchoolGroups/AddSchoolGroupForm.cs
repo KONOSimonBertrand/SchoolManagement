@@ -40,7 +40,7 @@ namespace Primary.SchoolApp.UI
                         Name = NameTextBox.Text,
                         Sequence = int.Parse(SequenceSpinEditor.Value.ToString()),
                         DocumentLanguageId = (int)DocumentTemplateDropDownList.SelectedValue,
-                        NoteIsTruncate = bool.Parse(IsTruncateDropDownList.SelectedValue.ToString()),
+                        NoteIsTruncate = IsTruncateDropDownList.SelectedValue.ToString()== "1" ? true : false,
                         AverageFormula = int.Parse(AverageFormulaDropDownList.SelectedValue.ToString())
                     };
 
