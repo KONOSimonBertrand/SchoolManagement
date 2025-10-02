@@ -113,7 +113,7 @@ namespace Primary.SchoolApp.UI
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            AppUtilities.ExportGridViewToExcel(DataGridView, Language.titlePaymentList);
+            AppUtilities.ExportGridViewToExcel(DataGridView, Language.TitleDiscountList);
         }
 
         private void PrintButton_Click(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace Primary.SchoolApp.UI
             {
 
                 e.Visible &= e.Row.Cells["CashFlowType.Name"].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower()) ||
-                    e.Row.Cells["OrdoredBy"].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower());
+                    e.Row.Cells["OrderedBy"].Value.ToString().ToLower().Contains(FilterTextBox.Text.ToLower());
             }
         }
         private void FilterTextBox_TextChanged(object sender, EventArgs e)

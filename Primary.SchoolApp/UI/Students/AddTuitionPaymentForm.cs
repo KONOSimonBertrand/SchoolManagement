@@ -5,6 +5,7 @@ using SchoolManagement.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
@@ -35,7 +36,9 @@ namespace Primary.SchoolApp.UI
             this.Shown += OnShown;
             this.StudentDropDownList.SelectedValueChanged += StudentDropDownList_SelectedValueChanged;
             this.ReasonDropDownList.SelectedValueChanged += ReasonDropDownList_SelectedValueChanged;
-        }       
+        }  
+        
+        
         private void StudentDropDownList_SelectedValueChanged(object sender, EventArgs e)
         {
             if (this.StudentDropDownList.SelectedItem != null) { 

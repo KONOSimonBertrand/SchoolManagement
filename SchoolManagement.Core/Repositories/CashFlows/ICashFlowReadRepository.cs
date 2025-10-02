@@ -22,5 +22,7 @@ namespace SchoolManagement.Core.Repositories
         Task<CashBoxIn?> GetCashBoxInAsync(string idNumber);
         Task<List<CashBoxIn>> GetCashBoxInListAsync(int schoolYearId);
         Task<CashBoxIn?> GetLastCashBoxInAsync();
+
+        
     }
 }

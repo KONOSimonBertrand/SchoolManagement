@@ -1550,4 +1550,58 @@
   <data name="LabelAllClass" xml:space="preserve">
     <value>All Classes</value>
   </data>
+  <data name="LabelRequiredQuantity" xml:space="preserve">
+    <value>Required Quantity</value>
+  </data>
+  <data name="LabelSchoolSupplieRequired" xml:space="preserve">
+    <value>Required school supplies</value>
+  </data>
+  <data name="LabelSchoolSupplie" xml:space="preserve">
+    <value>School supplies</value>
+  </data>
+  <data name="LabelSchoolSupplieFees" xml:space="preserve">
+    <value>School Supplie fees</value>
+  </data>
+  <data name="messageClickToAddSchoolSupplieFee" xml:space="preserve">
+    <value>Click here to add school supplie fees</value>
+  </data>
+  <data name="LabelAddSchoolSupplie" xml:space="preserve">
+    <value>Add school supplies</value>
+  </data>
+  <data name="LabelShowSchoolSupplie" xml:space="preserve">
+    <value>Show school supplies</value>
+  </data>
+  <data name="LabelDiscountOnQuantity" xml:space="preserve">
+    <value>Discount on  the quantity</value>
+  </data>
+  <data name="LabelDiscountType" xml:space="preserve">
+    <value>Type  of discount</value>
+  </data>
+  <data name="LabelUnitPrice" xml:space="preserve">
+    <value>Unit price</value>
+  </data>
+  <data name="LabelDiscountOnAmount" xml:space="preserve">
+    <value>Discount on the  amount</value>
+  </data>
+  <data name="TitleDiscountList" xml:space="preserve">
+    <value>Discount list</value>
+  </data>
+  <data name="LabelDiscounts" xml:space="preserve">
+    <value>Discounts</value>
+  </data>
+  <data name="LabelCheckAllForThisModule" xml:space="preserve">
+    <value>Check all for this module</value>
+  </data>
+  <data name="LabelUnCheckAllForThisModule" xml:space="preserve">
+    <value>Uncheck all for this  module</value>
+  </data>
+  <data name="LabelQuantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="LabelActivateDiscount" xml:space="preserve">
+    <value>Enable discount</value>
+  </data>
+  <data name="LabelDesactivateDiscount" xml:space="preserve">
+    <value>Desable discount</value>
+  </data>
 </root>

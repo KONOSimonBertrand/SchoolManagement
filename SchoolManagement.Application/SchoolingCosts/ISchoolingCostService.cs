@@ -4,7 +4,7 @@ using SchoolManagement.Core.Model;
 
 namespace SchoolManagement.Application
 {
-    public  interface ISchoolingCostService
+    public  interface ISchoolSchoolingCostService
     {
         public Task<bool> CreateSchoolingCost(SchoolingCost cost);
         public Task<bool> UpdateSchoolingCost(SchoolingCost cost);

@@ -21,17 +21,17 @@ namespace SchoolManagement.Application
 
         public async Task<bool> CreateCashFlow (CashFlow cashFlow)
         {
-            cashFlow.IdNumber = GenerateCashFlowIdNumber().Result;
+            cashFlow.IdNumber = await GenerateCashFlowIdNumber();
             return await cashFlowWriteRepository.AddCashFlowAsync(cashFlow);
         }
         public async Task<bool> CreateCashBoxOut(CashBoxOut cashBox)
         {
-            cashBox.IdNumber = GenerateCashBoxOutIdNumber().Result;
+            cashBox.IdNumber = await GenerateCashBoxOutIdNumber();
             return await cashFlowWriteRepository.AddCashBoxOutAsync(cashBox);
         }
         public async Task<bool> CreateCashBoxIn(CashBoxIn cashBox)
         {
-            cashBox.IdNumber = GenerateCashBoxInIdNumber().Result;
+            cashBox.IdNumber = await GenerateCashBoxInIdNumber();
             return await cashFlowWriteRepository.AddCashBoxInAsync(cashBox);
         }
 
@@ -43,7 +43,7 @@ namespace SchoolManagement.Application
         public async Task<bool> CreateTuitionPayment(TuitionPayment payment)
         {
             payment.IdNumber = GenerateTuitionPaymentIdNumber().Result;
-            payment.TransactionId = payment.TransactionId.Trim() == string.Empty ? payment.IdNumber : payment.TransactionId;
+            payment.TransactionId = payment?.TransactionId?.Trim() == string.Empty ? payment.IdNumber : payment.TransactionId;
             return await cashFlowWriteRepository.AddTuitionPaymentAsync(payment);
         }
 
@@ -64,11 +64,11 @@ namespace SchoolManagement.Application
         {
             return await cashFlowReadRepository.GetCashFlowAsync(IdNumber);
         }
-        public async Task<CashBoxOut> GetCashBoxOut(string IdNumber)
+        public async Task<CashBoxOut?> GetCashBoxOut(string IdNumber)
         {
             return await cashFlowReadRepository.GetCashBoxOutAsync(IdNumber);
         }
-        public async Task<CashBoxIn> GetCashBoxIn(string IdNumber)
+        public async Task<CashBoxIn?> GetCashBoxIn(string IdNumber)
         {
             return await cashFlowReadRepository.GetCashBoxInAsync(IdNumber);
         }
@@ -87,7 +87,7 @@ namespace SchoolManagement.Application
             return await cashFlowReadRepository.GetTuitionDiscountBySchoolYearListAsync(schoolYearId);
         }
 
-        public async Task<TuitionPayment> GetTuitionPayment(string idNumber)
+        public async Task<TuitionPayment?> GetTuitionPayment(string idNumber)
         {
             return await cashFlowReadRepository.GetTuitionPaymentAsync(idNumber);
         }

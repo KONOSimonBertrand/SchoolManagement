@@ -17,7 +17,7 @@ namespace Primary.SchoolApp.UI
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
-        private readonly ISchoolingCostService schoolingCostService;
+        private readonly ISchoolSchoolingCostService schoolingCostService;
         private readonly ISchoolYearService schoolYearService;
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ISchoolClassService schoolClassService;
@@ -29,7 +29,7 @@ namespace Primary.SchoolApp.UI
             public int SchoolYearId { get; set; }
         }
         private SchoolingCostTracker schoolingCostTracker;
-        public EditSchoolingCostForm(ISchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
+        public EditSchoolingCostForm(ISchoolSchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ISchoolClassService schoolClassService)
         {
             this.logService = logService;

@@ -1548,4 +1548,58 @@
   <data name="LabelAllClass" xml:space="preserve">
     <value>Toutes les classes</value>
   </data>
+  <data name="LabelRequiredQuantity" xml:space="preserve">
+    <value>Quantité requise</value>
+  </data>
+  <data name="LabelSchoolSupplieRequired" xml:space="preserve">
+    <value>Fourniture exigible</value>
+  </data>
+  <data name="LabelSchoolSupplie" xml:space="preserve">
+    <value>Fourniture scolaire</value>
+  </data>
+  <data name="LabelSchoolSupplieFees" xml:space="preserve">
+    <value>Frais des fournitures scolaires</value>
+  </data>
+  <data name="messageClickToAddSchoolSupplieFee" xml:space="preserve">
+    <value>Cliquez ici pour ajouter les frais de fournitures scolaires</value>
+  </data>
+  <data name="LabelAddSchoolSupplie" xml:space="preserve">
+    <value>Ajouter fourniture scolaire</value>
+  </data>
+  <data name="LabelShowSchoolSupplie" xml:space="preserve">
+    <value>Afficher les fournitures scolaires</value>
+  </data>
+  <data name="LabelDiscountOnQuantity" xml:space="preserve">
+    <value>Réduction sur la quantité</value>
+  </data>
+  <data name="LabelDiscountType" xml:space="preserve">
+    <value>Type de réduction</value>
+  </data>
+  <data name="LabelUnitPrice" xml:space="preserve">
+    <value>Prix unitaire</value>
+  </data>
+  <data name="LabelDiscountOnAmount" xml:space="preserve">
+    <value>Réduction sur le montant</value>
+  </data>
+  <data name="TitleDiscountList" xml:space="preserve">
+    <value>Liste des réductions</value>
+  </data>
+  <data name="LabelDiscounts" xml:space="preserve">
+    <value>Réductions</value>
+  </data>
+  <data name="LabelCheckAllForThisModule" xml:space="preserve">
+    <value>Cocher tout pour ce module</value>
+  </data>
+  <data name="LabelUnCheckAllForThisModule" xml:space="preserve">
+    <value>Décocher tout pour ce module</value>
+  </data>
+  <data name="LabelQuantity" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="LabelActivateDiscount" xml:space="preserve">
+    <value>Activer la réduction</value>
+  </data>
+  <data name="LabelDesactivateDiscount" xml:space="preserve">
+    <value>Désactiver la réduction</value>
+  </data>
 </root>

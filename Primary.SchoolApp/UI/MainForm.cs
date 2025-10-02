@@ -19,7 +19,6 @@ using Telerik.Windows.Diagrams.Core;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Services;
 using System.ComponentModel;
-using Microsoft.VisualBasic.ApplicationServices;
 namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
@@ -39,8 +38,9 @@ namespace Primary.SchoolApp
         private readonly ISchoolRoomService schoolRoomService;
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly IPaymentMeanService paymentMeanService;
-        private readonly ISchoolingCostService schoolingCostService;
+        private readonly ISchoolSchoolingCostService schoolingCostService;
         private readonly ISubscriptionFeeService subscriptionFeeService;
+        private readonly ISchoolSupplieFeeService schoolSupplieFeeService;
         private readonly ISubjectGroupService subjectGroupService;
         private readonly ISubjectService subjectService;
         private readonly IEvaluationSessionService evaluationSessionService;
@@ -63,15 +63,16 @@ namespace Primary.SchoolApp
         private readonly IMedicalService medicalService;
         private readonly IStudentNoteService studentNoteService;
         private readonly ReportCardService reportCardService;
+        private readonly ISchoolSupplieService schoolSupplieService;
         public MainForm(ISchoolYearService schoolYearService, ISchoolGroupService schoolGroupService,
             ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
-            , IPaymentMeanService paymentMeanService, ISchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
+            , IPaymentMeanService paymentMeanService, ISchoolSchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
             , ISubjectGroupService subjectGroupService, ISubjectService subjectService, IEvaluationSessionService evaluationSessionService,
             ClientApp clientApp, ILogService logService, IRatingSystemService ratingSystemService, IJobService jobService, IEmployeeGroupService employeeGroupService,
             IUserService userService, IEmployeeService employeeService, IModuleService moduleService, ICountryService countryService, ITimeTableService timeTableService,
             IStudentEnrollingService studentEnrollingService, IPrintService printService, ICashFlowService cashFlowService, ISubscriptionService subscriptionService,
             IDisciplineService disciplineService, IContactService contactService, IMedicalService medicalService, IStudentNoteService studentNoteService, ReportCardService reportCardService,
-            ListingService listingService
+            ListingService listingService, ISchoolSupplieFeeService schoolSupplieFeeService, ISchoolSupplieService schoolSupplieService
             )
         {
 
@@ -106,6 +107,8 @@ namespace Primary.SchoolApp
             localStudentNoteService = Program.ServiceProvider.GetService<LocalStudentNoteService>();
             this.reportCardService = reportCardService;
             this.listingService = listingService;
+            this.schoolSupplieFeeService = schoolSupplieFeeService;
+            this.schoolSupplieService = schoolSupplieService;
             mainBackgroundWorker = new()
             {
                 WorkerReportsProgress = true,
@@ -690,6 +693,11 @@ namespace Primary.SchoolApp
                 RadMenuItem menuPrintCertificate = new(Language.LabelPrintSchoolCertificate);
                 RadMenuItem menuChangeStudentRoom = new(Language.LabelChangeRoom);
                 RadMenuItem menuGenerateSchoolBadge = new(Language.LabelGenerateBadge);
+                RadMenuItem menuSchoolSupplie = new(Language.LabelSchoolSupplie);
+                RadMenuItem menuAddSchoolSupplie = new(Language.LabelAddSchoolSupplie);
+                RadMenuItem menuShowSchoolSupplies = new(Language.LabelShowSchoolSupplie);
+                RadMenuItem menuAddSchoolSupplieDiscount = new(Language.labelAddDiscount);
+                RadMenuItem menuShowSchoolSupplieDiscounts = new(Language.labelShowDiscounts);
                 menuEdit.Image = AppUtilities.GetImage("Edit");
                 menuPrint.Image = AppUtilities.GetImage("Printer");
                 menuAddPicture.Image = AppUtilities.GetImage("Image");
@@ -709,6 +717,10 @@ namespace Primary.SchoolApp
                 menuPrintCertificate.Image = AppUtilities.GetImage("Printer");
                 menuChangeStudentRoom.Image = AppUtilities.GetImage("Edit");
                 menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
+                menuShowSchoolSupplies.Image = AppUtilities.GetImage("Folder");
+                menuAddSchoolSupplie.Image = AppUtilities.GetImage("Add");
+                menuShowSchoolSupplieDiscounts.Image = AppUtilities.GetImage("Folder");
+                menuAddSchoolSupplieDiscount.Image = AppUtilities.GetImage("Add");
                 menuSchoolFee.Items.Add(menuAddPayment);
                 menuSchoolFee.Items.Add(menuShowPayments);
                 menuSchoolFee.Items.Add(menuPrintPaymentSummary);
@@ -723,6 +735,11 @@ namespace Primary.SchoolApp
                 menuContact.Items.Add(menuShowContacts);
                 menuMedicalFile.Items.Add(menuAddHealthInfo);
                 menuMedicalFile.Items.Add(menuShowMedicalFile);
+                menuSchoolSupplie.Items.Add(menuAddSchoolSupplie);
+                menuSchoolSupplie.Items.Add(menuShowSchoolSupplies);
+                menuSchoolSupplie.Items.Add(new RadMenuSeparatorItem());
+                menuSchoolSupplie.Items.Add(menuAddSchoolSupplieDiscount);
+                menuSchoolSupplie.Items.Add(menuShowSchoolSupplieDiscounts);
                 menuEdit.Click += StudentEnrollingEditButton_Click;
                 menuAddPicture.Click += MenuAddStudentPicture_Click;
                 menuPrint.Click += MenuPrintStudentEnrollingReceipt;
@@ -731,6 +748,10 @@ namespace Primary.SchoolApp
                 menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
                 menuShowDiscounts.Click += MenuShowDiscounts_Click;
                 menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
+                menuShowSchoolSupplieDiscounts.Click += MenuShowSchoolSupplieDiscounts_Click;
+                menuAddSchoolSupplieDiscount.Click += MenuAddSchoolSupplieDiscount_Click;
+                menuAddSchoolSupplie.Click += MenuAddSchoolSupplie_Click;
+                menuShowSchoolSupplies.Click += MenuShowSchoolSupplies_Click;
                 menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
                 menuAddSubscription.Click += MenuAddSubscription_Click;
                 menuAddDiscipline.Click += MenuAddDiscipline_Click;
@@ -749,6 +770,8 @@ namespace Primary.SchoolApp
                 e.ContextMenu.Items.Add(menuAddPicture);
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                 e.ContextMenu.Items.Add(menuSchoolFee);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuSchoolSupplie);
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                 e.ContextMenu.Items.Add(menuSubscription);
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
@@ -782,6 +805,8 @@ namespace Primary.SchoolApp
                 menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
                 menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
                 menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
+                menuShowSchoolSupplieDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
+                menuAddSchoolSupplieDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
             }
 
 
@@ -814,6 +839,20 @@ namespace Primary.SchoolApp
                 ShowTuitionDiscountsForm(enrollingDTO);
             }
         }
+        private void MenuShowSchoolSupplies_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowSchoolSuppliesForm(enrollingDTO);
+            }
+        }
+        private void MenuShowSchoolSupplieDiscounts_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowSchoolSupplieDiscountsForm(enrollingDTO);
+            }
+        }
         private void MenuAddSubscription_Click(object sender, EventArgs e)
         {
             if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
@@ -822,6 +861,20 @@ namespace Primary.SchoolApp
             }
         }
 
+        private void MenuAddSchoolSupplieDiscount_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowAddSchoolSupplieDiscountForm(enrollingDTO.AsStudentEnrolling());
+            }
+        }
+        private void MenuAddSchoolSupplie_Click(object sender, EventArgs e)
+        {
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            {
+                ShowAddSchoolSupplieForm(enrollingDTO.AsStudentEnrolling());
+            }
+        }
         //impression du reçu d'inscription
         private void MenuPrintStudentEnrollingReceipt(object sender, EventArgs e)
         {
@@ -928,7 +981,45 @@ namespace Primary.SchoolApp
                 RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
             }
         }
-
+        private void ShowAddSchoolSupplieDiscountForm(StudentEnrolling enrolling)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddSchoolSupplieDiscountForm>();
+                form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
+                form.Icon = this.Icon;
+                form.Init(enrolling);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    var cashFlowType = form.CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                    var dataList = schoolSupplieService.GetSchoolSupplieDiscountByEnrollingList(enrolling.Id).Result;
+                    var data = dataList.OrderByDescending(x=>x.Id).FirstOrDefault();
+                    Program.SchoolSupplieDiscountList.Add(data);
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+        // show UI to add school supplie 
+        private void ShowAddSchoolSupplieForm(StudentEnrolling enrolling)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddSchoolSupplieForm>();
+                form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
+                form.Icon = this.Icon;
+                form.Init(enrolling);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
         // show ui tuition payment form
         private void ShowAddTuitionPaymentForm(StudentEnrolling enrolling)
         {
@@ -962,7 +1053,25 @@ namespace Primary.SchoolApp
         private void ShowTuitionDiscountsForm(StudentEnrollingDTO enrolling)
         {
             var form = Program.ServiceProvider.GetService<TuitionDiscountsForm>();
-            form.Text = Language.labelPayments;
+            form.Text = Language.labelSchoolingFee + "-" + Language.LabelDiscounts;
+            form.Icon = this.Icon;
+            form.Init(enrolling.AsStudentEnrolling());
+            form.Show();
+        }
+        private void ShowSchoolSupplieDiscountsForm(StudentEnrollingDTO enrolling)
+        {
+            var form = Program.ServiceProvider.GetService<SchoolSupplieDiscountsForm>();
+            form.Text = Language.LabelSchoolSupplie+"-"+ Language.LabelDiscounts;
+            form.Icon = this.Icon;
+            form.Init(enrolling.AsStudentEnrolling());
+            form.Show();
+        }
+
+        // show school supplies
+        private void ShowSchoolSuppliesForm(StudentEnrollingDTO enrolling)
+        {
+            var form = Program.ServiceProvider.GetService<SchoolSuppliesForm>();
+            form.Text = Language.LabelDiscounts;
             form.Icon = this.Icon;
             form.Init(enrolling.AsStudentEnrolling());
             form.Show();
@@ -1020,7 +1129,7 @@ namespace Primary.SchoolApp
 
             RadMenuItem menuEdit = new(Language.labelEdit);
             RadMenuItem menuPrint = new(Language.labelPrintRegistrationReceipt);
-            RadMenuItem menuAddPicture = new RadMenuItem(Language.labelAddPicture);
+            RadMenuItem menuAddPicture = new (Language.labelAddPicture);
             RadMenuItem menuSchoolFee = new(Language.labelSchoolingFee);
             RadMenuItem menuAddPayment = new(Language.labelAddPayment);
             RadMenuItem menuShowPayments = new(Language.labelShowPayments);
@@ -1042,6 +1151,11 @@ namespace Primary.SchoolApp
             RadMenuItem menuPrintCertificate = new(Language.LabelPrintSchoolCertificate);
             RadMenuItem menuChangeStudentRoom = new(Language.LabelChangeRoom);
             RadMenuItem menuGenerateSchoolBadge = new(Language.LabelGenerateBadge);
+            RadMenuItem menuSchoolSupplie = new(Language.LabelSchoolSupplie);
+            RadMenuItem menuAddSchoolSupplie=new(Language.LabelAddSchoolSupplie);
+            RadMenuItem menuShowSchoolSupplies=new(Language.LabelShowSchoolSupplie);
+            RadMenuItem menuAddSchoolSupplieDiscount = new(Language.labelAddDiscount);
+            RadMenuItem menuShowSchoolSupplieDiscounts = new(Language.labelShowDiscounts);
             menuEdit.Image = AppUtilities.GetImage("Edit");
             menuPrint.Image = AppUtilities.GetImage("Printer");
             menuAddPicture.Image = AppUtilities.GetImage("Image");
@@ -1061,12 +1175,21 @@ namespace Primary.SchoolApp
             menuPrintCertificate.Image = AppUtilities.GetImage("Printer");
             menuChangeStudentRoom.Image = AppUtilities.GetImage("Edit");
             menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
+            menuShowSchoolSupplies.Image = AppUtilities.GetImage("Folder");
+            menuAddSchoolSupplie.Image = AppUtilities.GetImage("Add");
+            menuShowSchoolSupplieDiscounts.Image = AppUtilities.GetImage("Folder");
+            menuAddSchoolSupplieDiscount.Image = AppUtilities.GetImage("Add");
             menuSchoolFee.Items.Add(menuAddPayment);
             menuSchoolFee.Items.Add(menuShowPayments);
             menuSchoolFee.Items.Add(menuPrintPaymentSummary);
             menuSchoolFee.Items.Add(new RadMenuSeparatorItem());
             menuSchoolFee.Items.Add(menuAddDiscount);
             menuSchoolFee.Items.Add(menuShowDiscounts);
+            menuSchoolSupplie.Items.Add(menuAddSchoolSupplie);
+            menuSchoolSupplie.Items.Add(menuShowSchoolSupplies);
+            menuSchoolSupplie.Items.Add(new RadMenuSeparatorItem());
+            menuSchoolSupplie.Items.Add(menuAddSchoolSupplieDiscount);
+            menuSchoolSupplie.Items.Add(menuShowSchoolSupplieDiscounts);
             menuSubscription.Items.Add(menuAddSubscription);
             menuSubscription.Items.Add(menuShowSubscriptions);
             menuDiscipline.Items.Add(menuAddDiscipline);
@@ -1082,7 +1205,11 @@ namespace Primary.SchoolApp
             menuAddPayment.Click += MenuAddTuitionPayment_Click;
             menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
             menuShowDiscounts.Click += MenuShowDiscounts_Click;
+            menuShowSchoolSupplieDiscounts.Click += MenuShowSchoolSupplieDiscounts_Click;
             menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
+            menuAddSchoolSupplieDiscount.Click += MenuAddSchoolSupplieDiscount_Click;
+            menuAddSchoolSupplie.Click += MenuAddSchoolSupplie_Click;
+            menuShowSchoolSupplies.Click += MenuShowSchoolSupplies_Click;
             menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
             menuAddSubscription.Click += MenuAddSubscription_Click;
             menuAddDiscipline.Click += MenuAddDiscipline_Click;
@@ -1101,6 +1228,8 @@ namespace Primary.SchoolApp
             homeMainListViewContextMenu.Items.Add(menuAddPicture);
             homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
             homeMainListViewContextMenu.Items.Add(menuSchoolFee);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuSchoolSupplie);
             homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
             homeMainListViewContextMenu.Items.Add(menuSubscription);
             homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
@@ -1127,6 +1256,8 @@ namespace Primary.SchoolApp
             menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
             menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
             menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
+            menuShowSchoolSupplieDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
+            menuAddSchoolSupplieDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
         }
 
         private void MenuShowDisciplines_Click(object sender, EventArgs e)

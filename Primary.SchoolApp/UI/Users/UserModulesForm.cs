@@ -61,11 +61,18 @@ namespace Primary.SchoolApp.UI
             {
                 RadMenuItem checkAllMenu = new(Language.labelCheckAll);
                 RadMenuItem unCheckAllMenu = new(Language.labelUnCheckAll);
+                RadMenuItem checkAllSelectedModuleMenu = new(Language.LabelCheckAllForThisModule);
+                RadMenuItem unCheckAllSelectedModuleMenu = new(Language.LabelUnCheckAllForThisModule);
                 e.ContextMenu.Items.Clear();
+                e.ContextMenu.Items.Add(checkAllSelectedModuleMenu);
                 e.ContextMenu.Items.Add(checkAllMenu);
+                e.ContextMenu.Items.Add(unCheckAllSelectedModuleMenu);
                 e.ContextMenu.Items.Add(unCheckAllMenu);
                 checkAllMenu.Click += CheckAllMenu_Click;
                 unCheckAllMenu.Click += UnCheckAllMenu_Click;
+
+                checkAllSelectedModuleMenu.Click += CheckAllSelectedModuleMenu_Click;
+                unCheckAllSelectedModuleMenu.Click += UnCheckAllSelectedModuleMenu_Click;
             }
         }
 
@@ -73,13 +80,22 @@ namespace Primary.SchoolApp.UI
         {
             foreach (var row in DataGridView.Rows)
             {
-
-                if (row.DataBoundItem is UserModule module)
+                if (row.DataBoundItem is UserModule)
                 {
                     for (int i = 1; i < row.Cells.Count; i++)
                     {
                         row.Cells[i].Value = false;
                     }
+                }
+            }
+        }
+        private void UnCheckAllSelectedModuleMenu_Click(object sender, EventArgs e)
+        {
+            if (DataGridView?.CurrentRow.DataBoundItem is UserModule )
+            {
+                for (int i = 1; i < DataGridView?.CurrentRow.Cells.Count; i++)
+                {
+                    DataGridView.CurrentRow.Cells[i].Value = false;
                 }
             }
         }
@@ -89,12 +105,22 @@ namespace Primary.SchoolApp.UI
             foreach (var row in DataGridView.Rows)
             {
 
-                if (row.DataBoundItem is UserModule module)
+                if (row.DataBoundItem is UserModule)
                 {
                     for (int i = 1; i < row.Cells.Count; i++)
                     {
                         row.Cells[i].Value = true;
                     }
+                }
+            }
+        }
+        private void CheckAllSelectedModuleMenu_Click(object sender, EventArgs e)
+        {
+            if (DataGridView?.CurrentRow.DataBoundItem is UserModule)
+            {
+                for (int i = 1; i < DataGridView?.CurrentRow.Cells.Count; i++)
+                {
+                    DataGridView.CurrentRow.Cells[i].Value = true;
                 }
             }
         }

@@ -6,10 +6,13 @@ namespace SchoolManagement.Core.Model
         public int Id { get; set; }
         public double Amount { get; set; }
         public double RequiredQuantity { get; set; }
+        public bool? IsPayable { get; set; }
         public int CashFlowTypeId { get; set; }
+        public int SchoolClassId { get; set; }
         public int SchoolYearId { get; set; }
         public virtual CashFlowType? CashFlowType { get; set; }
         public virtual SchoolYear? SchoolYear { get; set; }
+        public virtual SchoolClass? SchoolClass { get; set; }
 
         public override bool Equals(object? obj)
         {

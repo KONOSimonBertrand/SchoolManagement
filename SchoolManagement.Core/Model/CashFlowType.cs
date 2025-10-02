@@ -32,20 +32,12 @@ namespace SchoolManagement.Core.Model
         {
             get
             {
-                if (Category == "FS")
-                {
-                    return "in";
-                }
-                if (Category == "AB")
+                if (Category == "FS"|| Category == "FF"|| Category == "AB" || Category == "AP")
                 {
                     return "in";
                 }
                 
-                if (Category == "DE")
-                {
-                    return "out";
-                }
-                if (Category == "AP")
+                if (Category == "DE" || Category == "SA")
                 {
                     return "out";
                 }
@@ -63,6 +55,10 @@ namespace SchoolManagement.Core.Model
                 if (Category == "FS")
                 {
                     return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SCHOOL FEES" : "FRAIS DE SCOLAIRE";
+                }
+                if (Category == "FF")
+                {
+                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SCHOOL SUPPLIES" : "FOURNITURES SCOLAIRE";
                 }
                 if (Category == "SA")
                 {

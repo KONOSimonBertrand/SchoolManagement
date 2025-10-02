@@ -2,9 +2,9 @@
 
 namespace SchoolManagement.Core.Repositories
 {
-    public interface ISchoolSupplieFeesWriteRepository
+    public interface ISchoolSupplieFeeWriteRepository
     {
         public Task<bool> AddAsync(SchoolSupplieFee schoolSupplieFee);
-        public Task<bool> Updatesync(SchoolSupplieFee schoolSupplieFee);
+        public Task<bool> UpdateAsync(SchoolSupplieFee schoolSupplieFee);
     }
 }

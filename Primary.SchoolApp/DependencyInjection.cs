@@ -103,6 +103,13 @@ namespace Primary.SchoolApp
             services.AddTransient<EditEvaluationCommentsForm>();
             services.AddTransient<ImportNotesForm>();
             services.AddTransient<GeneralReportForm>();
+            services.AddTransient<AddSchoolSupplieFeeForm>();
+            services.AddTransient<EditSchoolSupplieFeeForm>();
+            services.AddTransient<AddSchoolSupplieDiscountForm>();
+            services.AddTransient<AddSchoolSupplieForm>();
+            services.AddTransient<EditSchoolSupplieDiscountForm>();
+            services.AddTransient<SchoolSupplieDiscountsForm>();
+            services.AddTransient<SchoolSuppliesForm>();
             services.AddTransient<ListingService>();
             return services;
         }

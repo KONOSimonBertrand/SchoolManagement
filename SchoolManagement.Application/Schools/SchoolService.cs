@@ -2,18 +2,20 @@
 
 using SchoolManagement.Core.Model;
 using SchoolManagement.Core.Repositories;
-
+using Microsoft.Extensions.Logging;
 namespace SchoolManagement.Application
 {
     public class SchoolService : ISchoolService
     {
         private readonly ISchoolWriteRepository writeRepository;
         private readonly ISchoolReadRepository readRepository;
-
-        public SchoolService(ISchoolRepository repository)
+        private readonly ILogger<SchoolService> logger;
+        public SchoolService(ISchoolRepository repository, ILogger<SchoolService> logger)
         {
             this.writeRepository = repository;
             this.readRepository = repository;
+            this.logger = logger;
+            logger.LogInformation("Bonjour service ecole");
         }
 
         public async Task<bool> CreateSchoolAsync(School school)

@@ -29,6 +29,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UI\CustomControls\SchoolSupplieFeesInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolSupplieFeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolSupplieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\EditSchoolSupplieDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

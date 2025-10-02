@@ -16,6 +16,7 @@ namespace Primary.SchoolApp
 {
     public partial class MainForm
     {
+        private string cashFlowLeftViewForToolTipText;
         private void InitCashFlowPage()
         {
             InitCashFlowLeftView();
@@ -26,14 +27,35 @@ namespace Primary.SchoolApp
         private void InitCashFlowPageEvents()
         {
             CashFlowLeftListView.SelectedItemChanged += CashFlowLeftListView_SelectedItemChanged;
+            CashFlowLeftListView.ItemMouseHover += CashFlowLeftListView_ItemMouseHover;
+            CashFlowLeftListView.ToolTipTextNeeded += CashFlowLeftListView_ToolTipTextNeeded;
             CashFlowAddButton.Click += CashFlowAddButton_Click;
             CashFlowGridView.ContextMenuOpening += CashFlowGridView_ContextMenuOpening;
             CashFlowSearchTextBox.TextChanged += CashFlowSearchTextBox_TextChanged;
             CashFlowGridView.CustomFiltering += CashFlowGridView_CustomFiltering;
-            CashFlowExportToExcelButton.Click += (o, ev) => {
+            CashFlowExportToExcelButton.Click += (o, ev) =>
+            {
                 AppUtilities.ExportGridViewToExcel(CashFlowGridView, Language.TitleCashFlowList);
             };
         }
+
+        private void CashFlowLeftListView_ToolTipTextNeeded(object sender, ToolTipTextNeededEventArgs e)
+        {
+            try
+            {
+                e.Offset = new System.Drawing.Size(e.Offset.Width + 20, e.Offset.Height + 20);
+                e.ToolTipText = cashFlowLeftViewForToolTipText;
+            }
+            catch
+            {
+            }
+        }
+
+        private void CashFlowLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
+        {
+            cashFlowLeftViewForToolTipText = "" + e.Item.Tag;
+        }
+
         private void CashFlowGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
         {
             CashFlowGridViewCustomFiltering(e);
@@ -45,7 +67,7 @@ namespace Primary.SchoolApp
                 //get authorization modules
                 Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
                 // create  and show the good context menu
-                switch (CashFlowLeftListView.SelectedIndex)
+                switch (CashFlowLeftListView.SelectedItem.Key)
                 {
                     case 0:// Frais de scolarité
                         if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
@@ -186,7 +208,7 @@ namespace Primary.SchoolApp
                             // impression du reçu
                             printMenu.Click += (o, ev) =>
                             {
-                                
+
                             };
                         }
 
@@ -236,6 +258,9 @@ namespace Primary.SchoolApp
 
                             };
                         }
+
+                        break;
+                    case 4:
 
                         break;
                 }
@@ -361,7 +386,7 @@ namespace Primary.SchoolApp
         // retour d'un approvisionnement
         private void ReturnCashBoxIn(CashBoxIn selectedCashBoxIn)
         {
-            if (selectedCashBoxIn!= null)
+            if (selectedCashBoxIn != null)
             {
                 DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
                 if (dialogResult == DialogResult.Yes)
@@ -387,12 +412,13 @@ namespace Primary.SchoolApp
                         if (isDone)
                         {
                             var recordAdded = cashFlowService.GetCashBoxIn(selectedCashBoxIn.IdNumber + "-return").Result;
-                            if (recordAdded != null) {
+                            if (recordAdded != null)
+                            {
                                 cashbox.Id = recordAdded.Id;
                                 Program.CashBoxInList.Add(cashbox);
                             }
                             InitCashFlowGridViewForData();
-      
+
                             Log log = new()
                             {
                                 UserAction = $"Retour de l'approvisionnement {selectedCashBoxIn.CashFlowType.Name} {selectedCashBoxIn.IdNumber}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
@@ -571,7 +597,7 @@ namespace Primary.SchoolApp
                             var isDone = cashFlowService.CreateCashFlow(cashFlow).Result;
                             if (isDone)
                             {
-                              //refresh list
+                                //refresh list
                                 InitCashFlowGridViewForData();
                                 //enregistrement du log cash flow
                                 Log logCash = new()
@@ -632,8 +658,8 @@ namespace Primary.SchoolApp
                         var isDone = subscriptionService.ReturnSubscriptionAsync(subscription).Result;
                         if (isDone)
                         {
-                            var recordAdded= subscriptionService.GetSubscriptionAsync(selectedSubscription.IdNumber+"-return").Result;
-                            if(recordAdded != null)
+                            var recordAdded = subscriptionService.GetSubscriptionAsync(selectedSubscription.IdNumber + "-return").Result;
+                            if (recordAdded != null)
                             {
                                 subscription.Id = recordAdded.Id;
                                 Program.SubscriptionList.Add(subscription);
@@ -668,8 +694,8 @@ namespace Primary.SchoolApp
             {
                 selectedPayment.Enrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.Id == selectedPayment.EnrollingId).AsStudentEnrolling();
                 selectedPayment.Enrolling.SchoolYear = Program.CurrentSchoolYear;
-              
-                var paymentExsit = cashFlowService.GetTuitionPayment(selectedPayment.IdNumber+"-return").Result!=null;
+
+                var paymentExsit = cashFlowService.GetTuitionPayment(selectedPayment.IdNumber + "-return").Result != null;
                 if (!paymentExsit)
                 {
                     var payment = new TuitionPayment()
@@ -689,7 +715,7 @@ namespace Primary.SchoolApp
                         Note = selectedPayment.Note,
                         DoneBy = selectedPayment.DoneBy,
                         IsDuringEnrolling = selectedPayment.IsDuringEnrolling,
-                        
+
                     };
                     var isDone = cashFlowService.ReturnTuitionPayment(payment).Result;
                     if (isDone)
@@ -724,13 +750,13 @@ namespace Primary.SchoolApp
 
         private void CashFlowAddButton_Click(object sender, EventArgs e)
         {
-            switch (CashFlowLeftListView.SelectedIndex)
+            switch (CashFlowLeftListView.SelectedItem.Key)
             {
                 case 0:
                     var pForm = Program.ServiceProvider.GetService<AddTuitionPaymentForm>();
                     pForm.Text = Language.labelAdd + ":.." + Language.labelPayment;
                     pForm.Icon = this.Icon;
-                    pForm.Init(Program.StudentEnrollingList.Select(x=>x.Student).ToList());
+                    pForm.Init(Program.StudentEnrollingList.Select(x => x.Student).ToList());
                     if (pForm.ShowDialog(this) == DialogResult.OK)
                     {
                         InitCashFlowGridViewForData();
@@ -774,17 +800,42 @@ namespace Primary.SchoolApp
             if (CashFlowLeftListView.SelectedItem != null)
             {
                 InitCashFlowGridViewForData();
-                if (CashFlowLeftListView.SelectedIndex < 2)
+                switch (CashFlowLeftListView.SelectedItem.Key)
                 {
-                    CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelIdTransaction}, {Language.labelPaymentMean}, {Language.LabelValidation}, {Language.labelCashFlowType}";
-                    if(CashFlowLeftListView.SelectedIndex==0) CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
-                    else CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
-                }
-                else
-                {
-                    if (CashFlowLeftListView.SelectedIndex == 2) CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 15 && x.AllowCreate == true);
-                    else CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 16 && x.AllowCreate == true);
-                    CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelNote}, {Language.LabelValidation}, {Language.labelCashFlowType}";
+                    case 0:
+                    case 1:
+                    case 4:
+                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelIdTransaction}, {Language.labelPaymentMean}, {Language.LabelValidation}, {Language.labelCashFlowType}";
+                        if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 0)
+                        {
+                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
+                        }
+                        else
+                        {
+                            if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 1)
+                            {
+                                CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
+                            }
+                            else
+                            {
+                                CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 18 && x.AllowCreate == true);
+
+                            }
+                        }
+
+                        break;
+                    case 2:
+                    case 3:
+                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelNote}, {Language.LabelValidation}, {Language.labelCashFlowType}";
+                        if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2)
+                        {
+                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 15 && x.AllowCreate == true);
+                        }
+                        else
+                        {
+                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
+                        }
+                        break;
                 }
             }
         }
@@ -794,7 +845,7 @@ namespace Primary.SchoolApp
             CashFlowGridView.Templates.Clear();
             CashFlowGridView.MasterTemplate.Reset();
 
-            switch (CashFlowLeftListView.SelectedIndex)
+            switch (CashFlowLeftListView.SelectedItem.Key)
             {
                 case 0:
                     InitCashFlowGridViewForTuitionPayments();
@@ -802,15 +853,19 @@ namespace Primary.SchoolApp
                 case 1:
                     InitCashFlowGridViewForSubscriptions();
                     break;
-                default:
+                case 2:
+                case 3:
                     InitCashFlowGridViewForCashBox();
+                    break;
+                case 4:
+                    InitCashFlowGridViewForSchoolSupplies();
                     break;
             }
         }
-
+        //init left view
         private void InitCashFlowLeftView()
         {
-            ListViewDataItemGroup cashFlowListViewGroup = new ListViewDataItemGroup();
+            ListViewDataItemGroup cashFlowListViewGroup = new();
             cashFlowListViewGroup.Text = Language.labelCashFlowTypes.ToUpper();
             CashFlowLeftListView.Groups.AddRange(new ListViewDataItemGroup[] { cashFlowListViewGroup });
             CashFlowLeftListView.ShowCheckBoxes = false;
@@ -823,6 +878,19 @@ namespace Primary.SchoolApp
                          Value = Language.labelSchoolingFee.ToUpper(),
                          Tag = Language.labelSchoolingFee.ToUpper(),
                          Text = Language.labelSchoolingFee.ToUpper(),
+                         Group = cashFlowListViewGroup
+                     }
+                    );
+            }
+            if (Program.UserConnected.Modules.Any(m => m.ModuleId == 18 && m?.AllowCreate == true))
+            {
+                CashFlowLeftListView.Items.Add(
+                     new ListViewDataItem()
+                     {
+                         Key = 4,
+                         Value = Language.LabelSchoolSupplieFees.ToUpper(),
+                         Tag = Language.LabelSchoolSupplieFees.ToUpper(),
+                         Text = Language.LabelSchoolSupplieFees.Trim().Length > 20 ? string.Concat(Language.LabelSchoolSupplieFees.AsSpan(0, 20), "...").ToUpper() : Language.LabelSchoolSupplieFees.ToUpper(),
                          Group = cashFlowListViewGroup
                      }
                     );
@@ -867,7 +935,7 @@ namespace Primary.SchoolApp
                      }
                     );
             }
-            
+
             CashFlowLeftListView.ShowGroups = false;
             CashFlowLeftListView.SelectedIndex = 0;
         }
@@ -894,7 +962,7 @@ namespace Primary.SchoolApp
                 GridViewTextBoxColumn cashFlowColumn = new("CashFlowType");
                 GridViewTextBoxColumn isValidatedColumn = new("IsValidated");
                 GridViewTextBoxColumn validationStateColumn = new("ValidattionState");
-               
+
 
                 foreach (GridViewDataColumn col in CashFlowGridView.Columns)
                 {
@@ -981,7 +1049,7 @@ namespace Primary.SchoolApp
                 transactionIdColumn.HeaderText = Language.labelIdTransaction;
                 endDateColumn.HeaderText = Language.labelDateTransaction;
                 cashFlowTypeColumn.HeaderText = Language.labelSubscription;
-                validationStateColumn.HeaderText = Language.LabelValidation; 
+                validationStateColumn.HeaderText = Language.LabelValidation;
 
                 startDateColumn.Format = DateTimePickerFormat.Custom;
                 startDateColumn.CustomFormat = "dd-MM-yyyy";
@@ -1015,7 +1083,7 @@ namespace Primary.SchoolApp
                 CashFlowGridView.Columns.Add(validationStateColumn);
                 //load subscriptions
                 CashFlowGridView.DataSource = Program.SubscriptionList.OrderByDescending(x => x.Id);
-            
+
             }
         }
         private void InitCashFlowGridViewForCashBox()
@@ -1029,7 +1097,7 @@ namespace Primary.SchoolApp
                 GridViewTextBoxColumn cashFlowTypeColumn = new("CashFlowType");
                 GridViewTextBoxColumn isValidatedColumn = new("IsValidated");
                 GridViewTextBoxColumn validationStateColumn = new("ValidattionState");
-                isValidatedColumn.IsVisible=false;
+                isValidatedColumn.IsVisible = false;
                 dateColumn.Width = 80;
                 amountColumn.Width = 80;
                 idNumberColumn.Width = 100;
@@ -1039,7 +1107,7 @@ namespace Primary.SchoolApp
                 idNumberColumn.HeaderText = Language.LabelReference;
                 validationStateColumn.HeaderText = Language.LabelValidation;
                 amountColumn.HeaderText = Language.labelAmount;
-                cashFlowTypeColumn.HeaderText= Language.labelReason;
+                cashFlowTypeColumn.HeaderText = Language.labelReason;
                 dateColumn.Format = DateTimePickerFormat.Custom;
                 dateColumn.CustomFormat = "dd-MM-yyyy";
                 dateColumn.FormatString = "{0:dd-MM-yyyy}";
@@ -1070,14 +1138,80 @@ namespace Primary.SchoolApp
                 {
                     col.HeaderTextAlignment = ContentAlignment.MiddleLeft;
                 }
-                CashFlowGridView.DataSource=CashFlowLeftListView.SelectedIndex==2? Program.CashBoxInList.OrderByDescending(x => x.Id):Program.CashBoxOutList.OrderByDescending(x => x.Id);
+                CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
             }
         }
+        private void InitCashFlowGridViewForSchoolSupplies()
+        {
+            using (CashFlowGridView.DeferRefresh())
+            {
+                GridViewTextBoxColumn idNumberColumn = new("IdNumber");
+                GridViewDateTimeColumn dateColumn = new("Date");
+                GridViewDecimalColumn amountColumn = new("Amount");
+                GridViewDecimalColumn quantityColumn = new("Quantity");
+                GridViewTextBoxColumn paymentMeanColumn = new("PaymentMean");
+                GridViewTextBoxColumn transactionIdColumn = new("TransactionId");
+                GridViewDateTimeColumn transactionDateColumn = new("TransactionDate");
+                GridViewTextBoxColumn cashFlowColumn = new("CashFlowType");
+                GridViewTextBoxColumn isValidatedColumn = new("IsValidated");
+                GridViewTextBoxColumn validationStateColumn = new("ValidattionState");
 
+
+                foreach (GridViewDataColumn col in CashFlowGridView.Columns)
+                {
+                    col.HeaderTextAlignment = ContentAlignment.MiddleLeft;
+                }
+                isValidatedColumn.IsVisible = false;
+                dateColumn.Width = 80;
+                amountColumn.Width = 100;
+                quantityColumn.Width = 100;
+                idNumberColumn.Width = 100;
+                paymentMeanColumn.Width = 300;
+                transactionIdColumn.Width = 150;
+                transactionDateColumn.Width = 100;
+                validationStateColumn.Width = 100;
+                cashFlowColumn.Width = 150;
+                dateColumn.HeaderText = "Date";
+                amountColumn.HeaderText = Language.labelAmount;
+                quantityColumn.HeaderText = Language.LabelQuantity;
+                idNumberColumn.HeaderText = Language.LabelReference;
+                paymentMeanColumn.HeaderText = Language.labelPaymentMean;
+                transactionIdColumn.HeaderText = Language.labelIdTransaction;
+                transactionDateColumn.HeaderText = Language.labelDateTransaction;
+                validationStateColumn.HeaderText = Language.LabelValidation;
+                cashFlowColumn.HeaderText = Language.labelSchoolingFee;
+                dateColumn.Format = DateTimePickerFormat.Custom;
+                dateColumn.CustomFormat = "dd-MM-yyyy";
+                dateColumn.FormatString = "{0:dd-MM-yyyy}";
+                dateColumn.TextAlignment = ContentAlignment.MiddleLeft;
+                transactionDateColumn.Format = DateTimePickerFormat.Custom;
+                transactionDateColumn.CustomFormat = "dd-MM-yyyy";
+                transactionDateColumn.FormatString = "{0:dd-MM-yyyy}";
+                transactionDateColumn.TextAlignment = ContentAlignment.MiddleLeft;
+                ConditionalFormattingObject c1 = new("Orange, applied to entire row", ConditionTypes.Equal, "False", "", true);
+                c1.RowBackColor = Color.FromArgb(255, 209, 140);
+                c1.CellBackColor = Color.FromArgb(255, 209, 140);
+                c1.RowForeColor = Color.Black;
+                c1.CellForeColor = Color.Black;
+                isValidatedColumn.ConditionalFormattingObjectList.Add(c1);
+
+                CashFlowGridView.Columns.Add(idNumberColumn);
+                CashFlowGridView.Columns.Add(dateColumn);
+                CashFlowGridView.Columns.Add(amountColumn);
+                CashFlowGridView.Columns.Add(quantityColumn);
+                CashFlowGridView.Columns.Add(paymentMeanColumn);
+                CashFlowGridView.Columns.Add(cashFlowColumn);
+                CashFlowGridView.Columns.Add(transactionDateColumn);
+                CashFlowGridView.Columns.Add(transactionIdColumn);
+                CashFlowGridView.Columns.Add(validationStateColumn);
+                CashFlowGridView.Columns.Add(isValidatedColumn);
+                CashFlowGridView.DataSource = Program.SchoolSupplieList.OrderByDescending(x => x.Id);
+            }
+        }
         //recherche des données correspondantes pour lancer des filtres
         private void CashFlowSearchTextBox_TextChanged(object sender, System.EventArgs e)
         {
-            CashFlowGridView.MasterTemplate.Refresh();    
+            CashFlowGridView.MasterTemplate.Refresh();
         }
         // cash flow filtering
         private async void CashFlowGridViewCustomFiltering(GridViewCustomFilteringEventArgs e)
@@ -1085,21 +1219,26 @@ namespace Primary.SchoolApp
             e.Handled = true;
             if (this.CashFlowSearchTextBox.Text != null)
             {
-                if (CashFlowLeftListView.SelectedIndex<2)
+                switch (CashFlowLeftListView.SelectedItem.Key)
                 {
-                    e.Visible &= e.Row.Cells["IdNumber"].Value.ToString().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
+                    case 0:
+                    case 1:
+                    case 4:
+                        e.Visible &= e.Row.Cells["IdNumber"].Value.ToString().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
                       e.Row.Cells["TransactionId"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
                       e.Row.Cells["ValidattionState"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
                       e.Row.Cells["CashFlowType"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
                       e.Row.Cells["PaymentMean"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower());
+                        break;
+                    case 2:
+                    case 3:
+                        e.Visible &= e.Row.Cells["IdNumber"].Value.ToString().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
+                    e.Row.Cells["Note"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
+                    e.Row.Cells["ValidattionState"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
+                     e.Row.Cells["CashFlowType"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower());
+                        break;
                 }
-                else
-                {
-                    e.Visible &= e.Row.Cells["IdNumber"].Value.ToString().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["Note"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
-                     e.Row.Cells["ValidattionState"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower()) ||
-                      e.Row.Cells["CashFlowType"].Value.ToString().ToLower().Contains(CashFlowSearchTextBox.Text.ToLower());
-                }
+
             }
             await System.Threading.Tasks.Task.Delay(0);
         }

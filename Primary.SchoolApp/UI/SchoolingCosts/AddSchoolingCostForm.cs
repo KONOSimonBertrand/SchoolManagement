@@ -17,12 +17,12 @@ namespace Primary.SchoolApp.UI
     {
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
-        private readonly ISchoolingCostService schoolingCostService;
+        private readonly ISchoolSchoolingCostService schoolingCostService;
         private readonly ISchoolYearService schoolYearService;
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ISchoolClassService schoolClassService;
         private List<SchoolClass> schoolClasses;
-        public AddSchoolingCostForm(ISchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
+        public AddSchoolingCostForm(ISchoolSchoolingCostService schoolingCostService, ILogService logService, ClientApp clientApp,
             ISchoolYearService schoolYearService, ICashFlowTypeService cashFlowTypeService, ISchoolClassService schoolClassService
             )
         {

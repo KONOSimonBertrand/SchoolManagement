@@ -129,7 +129,7 @@
             addClassButton.Margin = new Padding(4, 5, 4, 5);
             addClassButton.Name = "addClassButton";
             addClassButton.Size = new Size(20, 36);
-            addClassButton.TabIndex = 5;
+            addClassButton.TabIndex = 8;
             // 
             // classAutoCompleteBox
             // 
@@ -137,7 +137,7 @@
             classAutoCompleteBox.Multiline = true;
             classAutoCompleteBox.Name = "classAutoCompleteBox";
             classAutoCompleteBox.Size = new Size(552, 117);
-            classAutoCompleteBox.TabIndex = 4;
+            classAutoCompleteBox.TabIndex = 7;
             // 
             // tranchesGroupBox
             // 
@@ -214,7 +214,7 @@
             trancheNumberTextBox.MaxLength = 1;
             trancheNumberTextBox.Name = "trancheNumberTextBox";
             trancheNumberTextBox.Size = new Size(154, 36);
-            trancheNumberTextBox.TabIndex = 7;
+            trancheNumberTextBox.TabIndex = 5;
             // 
             // amountTextBox
             // 
@@ -223,7 +223,7 @@
             amountTextBox.Margin = new Padding(4, 5, 4, 5);
             amountTextBox.Name = "amountTextBox";
             amountTextBox.Size = new Size(166, 36);
-            amountTextBox.TabIndex = 6;
+            amountTextBox.TabIndex = 4;
             // 
             // trancheNumberLabel
             // 
@@ -281,7 +281,7 @@
             costPayableDropDownList.MinimumSize = new Size(0, 30);
             costPayableDropDownList.Name = "costPayableDropDownList";
             costPayableDropDownList.Size = new Size(212, 30);
-            costPayableDropDownList.TabIndex = 8;
+            costPayableDropDownList.TabIndex = 6;
             ((Telerik.WinControls.UI.RadDropDownListElement)costPayableDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)costPayableDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             ((Telerik.WinControls.Primitives.BorderPrimitive)costPayableDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;

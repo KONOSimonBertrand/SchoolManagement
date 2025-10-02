@@ -280,7 +280,6 @@ namespace SchoolManagement.UI
             homeMainListView.VisualItemFormatting += HomeMainListView_VisualItemFormatting;
             ThemeResolutionService.ApplicationThemeChanged += ThemeResolutionService_ApplicationThemeChanged;
         }
-
         private void ThemeResolutionService_ApplicationThemeChanged(object sender, ThemeChangedEventArgs args)
         {
             if (ThemeResolutionService.ApplicationThemeName == "Windows11Dark")
@@ -306,7 +305,6 @@ namespace SchoolManagement.UI
                 this.settingNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
             }
         }
-
         private void HomeMainListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)
         {
             IconListViewGroupVisualItem groupItem = e.VisualItem as IconListViewGroupVisualItem;

@@ -118,14 +118,17 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
             var scItemText = Language.labelSchoolingFee;
+            var sfItemText = Language.LabelSchoolSupplie;
             var stItemText = Language.labelSubscription;
             var deItemText = Language.LabelExpense;
             var apItemText = Language.LabelSupply;
             RadListDataItem scItem = new (scItemText, "FS");
+            RadListDataItem sfItem = new(sfItemText, "FF");
             RadListDataItem stItem = new (stItemText, "AB");
             RadListDataItem deItem = new (deItemText, "DE");
             RadListDataItem apItem = new (apItemText, "AP");
             categoryDropDownList.Items.Add(scItem);
+            categoryDropDownList.Items.Add(sfItem);
             categoryDropDownList.Items.Add(stItem);
             categoryDropDownList.Items.Add(deItem);
             categoryDropDownList.Items.Add(apItem);

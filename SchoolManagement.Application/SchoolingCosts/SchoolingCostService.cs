@@ -5,7 +5,7 @@ using SchoolManagement.Core.Repositories;
 
 namespace SchoolManagement.Application
 {
-    public class SchoolingCostService : ISchoolingCostService
+    public class SchoolingCostService : ISchoolSchoolingCostService
     {
         private readonly ISchoolingCostWriteRepository schoolingCostWriteRepository;
         private readonly ISchoolingCostReadRepository schoolingCostReadRepository;

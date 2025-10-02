@@ -65,6 +65,9 @@
     <Compile Update="Reporting\NoteReport\PrimaryTermReportCardReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="UI\CustomControls\SchoolSupplieFeesInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\MainForm.ReportTab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +290,18 @@
     <Compile Update="UI\SchoolRooms\EditSchoolRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\SchoolSupplies\AddSchoolSupplieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolSupplies\SchoolSuppliesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Students\AddSchoolSupplieDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolSupplies\EditSchoolSupplieDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\SchoolYears\AddSchoolYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,6 +390,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\RecapNotesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SchoolSupplies\SchoolSupplieDiscountsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\SubscriptionsForm.cs">

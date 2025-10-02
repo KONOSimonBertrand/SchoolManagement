@@ -70,6 +70,10 @@
             "Microsoft.Extensions.Localization.Abstractions": {
               "target": "Package",
               "version": "[7.0.20, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [

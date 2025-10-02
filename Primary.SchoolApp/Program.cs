@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.UI;
-using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Infrastructure;
@@ -27,6 +28,8 @@ namespace Primary.SchoolApp
         public static IList<PaymentMean> PaymentMeanList;
         public static IList<SchoolingCost> SchoolingCostList;
         public static IList<SchoolingCostItem> SchoolingCostItemList;
+        public static IList<SchoolSupplieFee> SchoolSupplieFeeList;
+        public static IList<SchoolSupplie> SchoolSupplieList;
         public static IList<SubscriptionFee> SubscriptionFeeList;
         public static IList<Subscription> SubscriptionList;
         public static IList<SubjectGroup> SubjectGroupList;
@@ -48,6 +51,7 @@ namespace Primary.SchoolApp
         public static IList<Student> StudentList;
         public static IList<TuitionPayment> TuitionPaymentList;
         public static IList<TuitionDiscount> TuitionDiscountList;
+        public static IList<SchoolSupplieDiscount> SchoolSupplieDiscountList;
         public static IList<DisciplineSubject> DisciplineSubjectList;
         public static IList<CashBoxIn> CashBoxInList;
         public static IList<CashBoxOut> CashBoxOutList;
@@ -77,9 +81,14 @@ namespace Primary.SchoolApp
                    services.AddApplicationDependency();
                    services.AddClientDependency();
                    services.AddInfrastructureDependency();
+                   services.AddLogging(loggingBuilder =>
+                   {
+                       loggingBuilder.ClearProviders();
+                       loggingBuilder.AddNLog();
+                   }).BuildServiceProvider();
+
                })
                ;
-            
             var host = hostBuilder.Build();
             ServiceProvider = host.Services;
             #endregion

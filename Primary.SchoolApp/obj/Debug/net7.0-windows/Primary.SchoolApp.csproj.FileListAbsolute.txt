@@ -297,3 +297,7 @@ C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-win
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-windows\Primary.SchoolApp.UI.EditStudentEnrollingForm.resources
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Microsoft.AnalysisServices.Platform.Core.dll
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Microsoft.AnalysisServices.Platform.Windows.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-windows\Primary.SchoolApp.UI.AddTuitionPaymentForm.resources
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\NLog.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\NLog.Extensions.Logging.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\NLog.config

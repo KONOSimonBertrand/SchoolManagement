@@ -38,6 +38,7 @@ namespace Primary.SchoolApp
         private EmployeeGroupInfo employeeGroupInfo;
         private UserInfo userInfo;
         private DisciplineSubjectInfo disciplineSubjectInfo;
+        private SchoolSupplieFeesInfo schoolSupplieFeeInfo;
         private bool isFirstLoadingBasicData = false;//  détermine si c'est le premier chargement des données de base
         private readonly List<UserControl> settingPageUserControlList = new();
        
@@ -155,12 +156,17 @@ namespace Primary.SchoolApp
                 Value = Language.labelDisciplineSubjects
             };
 
-
+            ListViewDataItem itemSchoolSupplieFee = new()
+            {
+                Key = 17,
+                Value = Language.LabelSchoolSupplieFees
+            };
             itemSchool.Group = settingGroup;
             itemSchoolYear.Group = settingGroup;
             itemGroup.Group = settingGroup;
             itemClass.Group = settingGroup;
             itemSchoolingCost.Group = settingGroup;
+            itemSchoolSupplieFee.Group = settingGroup;
             itemPaymentMean.Group = settingGroup;
             itemCashFlowSetting.Group = settingGroup;
             itemSubjectGroup.Group = settingGroup;
@@ -180,6 +186,7 @@ namespace Primary.SchoolApp
             SettingLeftListView.Items.Add(itemCashFlowSetting);
             SettingLeftListView.Items.Add(itemPaymentMean);
             SettingLeftListView.Items.Add(itemSchoolingCost);
+            SettingLeftListView.Items.Add(itemSchoolSupplieFee);
             SettingLeftListView.Items.Add(itemSubscriptionFees);
             SettingLeftListView.Items.Add(itemSubjectGroup);
             SettingLeftListView.Items.Add(itemSubject);
@@ -196,6 +203,7 @@ namespace Primary.SchoolApp
             SettingSearchModuleDropDownList.Items.Add(itemRoom.Text);
             SettingSearchModuleDropDownList.Items.Add(itemSchoolYear.Text);
             SettingSearchModuleDropDownList.Items.Add(itemSchoolingCost.Text);
+            SettingSearchModuleDropDownList.Items.Add(itemSchoolSupplieFee.Text);
             SettingSearchModuleDropDownList.Items.Add(itemSubscriptionFees.Text);
             SettingSearchModuleDropDownList.Items.Add(itemCashFlowSetting.Text);
             SettingSearchModuleDropDownList.Items.Add(itemSubject.Text);
@@ -324,7 +332,21 @@ namespace Primary.SchoolApp
             schoolingCostInfo.EditButton.Click += SettingEditButton_Click;
             SettingInfoRightPanel.Controls.Add(schoolingCostInfo);
             settingPageUserControlList.Add(schoolingCostInfo);
-
+            // info frais de founitures scolaire
+            schoolSupplieFeeInfo = new()
+            {
+                Dock = DockStyle.Fill,
+                Location = new Point(0, 0),
+                Margin = new Padding(2, 2, 2, 2)
+            };
+            schoolSupplieFeeInfo.CloseButton.Click += delegate (object sender, EventArgs e)
+            {
+                SettingInfoRightPanel.Visible = false;
+            };
+            schoolSupplieFeeInfo.EditButton.Click += SettingEditButton_Click;
+            SettingInfoRightPanel.Controls.Add(schoolSupplieFeeInfo);
+            settingPageUserControlList.Add(schoolSupplieFeeInfo);
+            // Info Frais d'abonnement
             subscriptionFeeInfo = new()
             {
                 Dock = DockStyle.Fill,
@@ -576,6 +598,19 @@ namespace Primary.SchoolApp
                     schoolingCostInfo.TranchesLabel.Text += i + "- " + line.Amount + " "+Language.labelDelay + ": " + line.DeadLine.ToString("dd - MM - yyyy") + "\n";
                     i++;
                 }
+            }
+        }
+        // affiche les info d'un frais de  fourniture scolaire
+        private void LoadSelectedSchoolSupplieFeeDetail(SchoolSupplieFee schoolSupplieFee)
+        {
+            schoolSupplieFeeInfo.TitleInfoLabel.Text = "INFO...";
+            if (schoolSupplieFee != null)
+            {
+                schoolSupplieFeeInfo.SchoolYearTextBox.Text = schoolSupplieFee.SchoolYear?.Name;
+                schoolSupplieFeeInfo.CostTypeTextBox.Text = schoolSupplieFee.CashFlowType?.Name;
+                schoolSupplieFeeInfo.ClassTextBox.Text = schoolSupplieFee.SchoolClass?.Name;
+                schoolSupplieFeeInfo.AmountTextBox.Text = schoolSupplieFee.Amount.ToString();
+                schoolSupplieFeeInfo.QuantityTextBox.Text = schoolSupplieFee.RequiredQuantity.ToString();
             }
         }
         // affiche les info d'un frais d'abonnement
@@ -944,6 +979,38 @@ namespace Primary.SchoolApp
             SettingGridView.Columns.Add(costTypeColumn);
             SettingGridView.Columns.Add(amountColumn);
             SettingGridView.Columns.Add(trancheNumberColumn);
+            SettingGridView.Columns.Add(payableColumn);
+            SettingGridView.Columns.Add(yearColumn);
+        }
+
+        //chargement des frais fournitures scolaire dans le datagridview de la page setting
+        private async void LoadSchoolSupplieFeeListToSettingGridView()
+        {
+            var getData = schoolSupplieFeeService.GetSchoolSupplieFeeList();
+            CreateSchoolSupplieFeeColumnsForSettingGridView();
+            Program.SchoolSupplieFeeList = await getData;
+            SettingGridView.DataSource = Program.SchoolSupplieFeeList;
+
+        }
+        private void CreateSchoolSupplieFeeColumnsForSettingGridView()
+        {
+            SettingGridView.Columns.Clear();
+            GridViewTextBoxColumn supplieColumn = new("CashFlowType.Name");
+            GridViewDecimalColumn amountColumn = new("Amount");
+            GridViewDecimalColumn quantitylumn = new("RequiredQuantity");
+            GridViewTextBoxColumn classColumn = new("SchoolClass.Name");
+            GridViewTextBoxColumn yearColumn = new("SchoolYear.Name");
+            GridViewCheckBoxColumn payableColumn = new("IsPayable");
+            supplieColumn.HeaderText = Language.LabelSchoolSupplie;
+            amountColumn.HeaderText = Language.labelAmount;
+            quantitylumn.HeaderText = Language.LabelRequiredQuantity;
+            classColumn.HeaderText = Language.labelClass;
+            yearColumn.HeaderText = Language.labelSchoolYear;
+            payableColumn.HeaderText = Language.labelExigible;
+            SettingGridView.Columns.Add(classColumn);
+            SettingGridView.Columns.Add(supplieColumn);
+            SettingGridView.Columns.Add(amountColumn);
+            SettingGridView.Columns.Add(quantitylumn);
             SettingGridView.Columns.Add(payableColumn);
             SettingGridView.Columns.Add(yearColumn);
         }
@@ -1425,7 +1492,56 @@ namespace Primary.SchoolApp
                 } 
             }
         }
-        // show schoolingCost UI for edit
+        // show School supplie fee UI for edit
+        private void ShowSchoolSupplieFeeEditForm(SchoolSupplieFee item)
+        {
+            if (item != null)
+            {
+                var form = Program.ServiceProvider.GetService<EditSchoolSupplieFeeForm>();
+                form.Text = Language.labelUpdate + ":.. " + Language.labelSubscriptionFee;
+                form.Init(item);
+                form.Icon = this.Icon;
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    SettingGridView.DataSource = new List<SchoolSupplieFee>();
+                    SettingGridView.DataSource = Program.SchoolSupplieFeeList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(Language.messageUnknowType);
+            }
+        }
+        // show School supplie  fee UI to add new 
+        private void ShowSchoolSupplieFeeAddForm()
+        {
+            var form = Program.ServiceProvider.GetService<AddSchoolSupplieFeeForm>();
+            form.Text = Language.labelAdd + ":.. " + Language.LabelSchoolSupplieFees;
+            form.Icon = this.Icon;
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                
+                var selectedItemClass = form.ClassAutoCompleteBox.Items.FirstOrDefault();
+                var idList = form.ClassAutoCompleteBox.Items.Select(x => int.Parse(x.Value.ToString()));
+                if (int.TryParse(selectedItemClass.Value.ToString(), out var classId))
+                {
+                    int yearId = int.Parse(form.SchoolYearDropDownList.SelectedValue.ToString());
+                    if(form.CostTypeDropDownList.SelectedValue is CashFlowType costType)
+                    {
+                        var items = schoolSupplieFeeService.GetSchoolSupplieFeeList(idList.ToList(), costType.Id, yearId).Result;
+                        foreach (var item in items)
+                        {
+                            Program.SchoolSupplieFeeList.Add(item);
+                        }
+
+                        SettingGridView.DataSource = new List<SchoolSupplieFee>();
+                        SettingGridView.DataSource = Program.SchoolSupplieFeeList;
+                    }
+                    
+                }
+            }
+        }
+        // show Subscription fee UI for edit
         private void ShowSubscriptionFeeEditForm(SubscriptionFee item)
         {
             if (item != null)
@@ -1445,7 +1561,7 @@ namespace Primary.SchoolApp
                 RadMessageBox.Show(Language.messageUnknowType);
             }
         }
-        // show SchoolingCost UI to add new 
+        // show Subscription fee UI to add new 
         private void ShowSubscriptionFeeAddForm()
         {
             var form = Program.ServiceProvider.GetService<AddSubscriptionFeeForm>();
@@ -2280,6 +2396,7 @@ namespace Primary.SchoolApp
                 SettingGridView.Templates.Clear();
                 SettingGridView.Columns.Clear();
                 SettingGridView.DataSource = null;
+                this.SettingAddButton.Visible = SettingLeftListView?.SelectedItem.Key.ToString() == "0" ? false : true;
                 switch (SettingLeftListView.SelectedItem.Key)
                 {
                     case 0:
@@ -2549,6 +2666,22 @@ namespace Primary.SchoolApp
                         disciplineSubjectInfo.CloseButton.Image = AppUtilities.GetImage("Close");
                         disciplineSubjectInfo.EditButton.Image = AppUtilities.GetImage("Edit");
                         break;
+                    case 17:
+                        this.SettingAddButton.ButtonElement.ToolTipText = Language.messageClickToAddSchoolSupplieFee;
+                        if (!isFirstLoadingBasicData)
+                        {
+                            LoadSchoolSupplieFeeListToSettingGridView();
+                        }
+                        else
+                        {
+                            CreateSchoolSupplieFeeColumnsForSettingGridView();
+                            SettingGridView.DataSource = Program.SchoolSupplieFeeList;
+                            isFirstLoadingBasicData = false;
+                        }
+                        SetVisibleSelectedSettingPageUserControl(schoolSupplieFeeInfo);
+                        schoolSupplieFeeInfo.CloseButton.Image = AppUtilities.GetImage("Close");
+                        schoolSupplieFeeInfo.EditButton.Image = AppUtilities.GetImage("Edit");
+                        break;
                     default:
                         SetVisibleSelectedSettingPageUserControl(null);
                         break;
@@ -2577,10 +2710,10 @@ namespace Primary.SchoolApp
                     switch (SettingLeftListView.SelectedItem.Key)
                     {
                         case 1:
-                             e.Visible &= e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
-                            break;
                         case 2:
-                             e.Visible &= e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                        case 13:
+                        case 14:
+                            e.Visible &= e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                         case 3:
                              e.Visible &= e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
@@ -2601,7 +2734,8 @@ namespace Primary.SchoolApp
                                 e.Row.Cells[Language.labelType].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                         case 7:
-                             e.Visible &= e.Row.Cells["SchoolClass.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
+                        case 17:
+                            e.Visible &= e.Row.Cells["SchoolClass.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
                                 e.Row.Cells["CashFlowType.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
                                 e.Row.Cells["SchoolYear.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
@@ -2610,24 +2744,14 @@ namespace Primary.SchoolApp
                                 e.Row.Cells["SchoolYear.Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                         case 9:
-                             e.Visible &= e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ;
-                            break;
                         case 10:
-                             e.Visible &= e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ;
-                            break;
                         case 11:
-                             e.Visible &= e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
+                            e.Visible &= e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ;
                             break;
                         case 12:
                             e.Visible &= e.Row.Cells[Language.fieldName].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
                                 e.Row.Cells[Language.fieldDescription].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
                                 e.Row.Cells["Domain"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
-                            break;
-                        case 13:
-                             e.Visible &= e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
-                            break;
-                        case 14:
-                             e.Visible &= e.Row.Cells["Name"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower());
                             break;
                         case 15:
                              e.Visible &= e.Row.Cells["UserName"].Value.ToString().ToLower().Contains(this.SettingSearchTextBox.Text.ToLower()) ||
@@ -2658,8 +2782,7 @@ namespace Primary.SchoolApp
             if (e.CurrentRow != null)
             {
                 SettingInfoRightPanel.Visible = true;
-                this.SettingAddButton.Visible = SettingLeftListView.SelectedItem.Key.ToString() == "0" ? false : true;
-                switch (SettingLeftListView.SelectedItem.Key)
+                switch (SettingLeftListView?.SelectedItem?.Key)
                 {
                     case 0:
                         LoadSchoolDetail(Program.CurrentSchool);
@@ -2780,6 +2903,13 @@ namespace Primary.SchoolApp
                             if (!userInfo.Visible) userInfo.Visible = true;
                         }
                         break;
+                    case 17:
+                        LoadSelectedSchoolSupplieFeeDetail(SettingGridView.CurrentRow.DataBoundItem as SchoolSupplieFee);
+                        if (SettingGridView.RowCount > 0)
+                        {
+                            if (!userInfo.Visible) userInfo.Visible = true;
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -2843,6 +2973,9 @@ namespace Primary.SchoolApp
                     case 16:
                     GenerateDisciplineSubjects();
                     break;
+                case 17:
+                    ShowSchoolSupplieFeeAddForm();
+                    break;
                 default:
                     RadMessageBox.Show("Not Implemented");
                     break;
@@ -2857,52 +2990,55 @@ namespace Primary.SchoolApp
                     ShowSchoolEditForm();
                     break;
                 case 1:
-                    ShowSchoolYearEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolYear);
+                    ShowSchoolYearEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolYear);
                     break;
                 case 2:
-                    ShowSchoolGroupEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolGroup);
+                    ShowSchoolGroupEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolGroup);
                     break;
                 case 3:
-                    ShowSchoolClassEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolClass);
+                    ShowSchoolClassEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolClass);
                     break;
                 case 4:
-                    ShowSchoolRoomEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolRoom);
+                    ShowSchoolRoomEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolRoom);
                     break;
                 case 5:
-                    ShowCashFlowTypeEditForm(SettingGridView.CurrentRow.DataBoundItem as CashFlowType);
+                    ShowCashFlowTypeEditForm(SettingGridView?.CurrentRow.DataBoundItem as CashFlowType);
                     break;
                 case 6:
-                    ShowPaymentMeanEditForm(SettingGridView.CurrentRow.DataBoundItem as PaymentMean);
+                    ShowPaymentMeanEditForm(SettingGridView?.CurrentRow.DataBoundItem as PaymentMean);
                     break;
                 case 7:
-                    ShowSchoolingCostEditForm(SettingGridView.CurrentRow.DataBoundItem as SchoolingCost);
+                    ShowSchoolingCostEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolingCost);
                     break;
                 case 8:
-                    ShowSubscriptionFeeEditForm(SettingGridView.CurrentRow.DataBoundItem as SubscriptionFee);
+                    ShowSubscriptionFeeEditForm(SettingGridView?.CurrentRow.DataBoundItem as SubscriptionFee);
                     break;
                 case 9:
-                    ShowSubjectGroupEditForm(SettingGridView.CurrentRow.DataBoundItem as SubjectGroup);
+                    ShowSubjectGroupEditForm(SettingGridView?.CurrentRow.DataBoundItem as SubjectGroup);
                     break;
                 case 10:
-                    ShowSubjectEditForm(SettingGridView.CurrentRow.DataBoundItem as Subject);
+                    ShowSubjectEditForm(SettingGridView?.CurrentRow.DataBoundItem as Subject);
                     break;
                 case 11:
-                    ShowEvaluationSessionEditForm(SettingGridView.CurrentRow.DataBoundItem as EvaluationSession);
+                    ShowEvaluationSessionEditForm(SettingGridView?.CurrentRow.DataBoundItem as EvaluationSession);
                     break;
                 case 12:
-                    ShowRatingSystemEditForm(SettingGridView.CurrentRow.DataBoundItem as RatingSystem);
+                    ShowRatingSystemEditForm(SettingGridView?.CurrentRow.DataBoundItem as RatingSystem);
                     break;
                 case 13:
-                    ShowJobEditForm(SettingGridView.CurrentRow.DataBoundItem as Job);
+                    ShowJobEditForm(SettingGridView?.CurrentRow.DataBoundItem as Job);
                     break;
                 case 14:
-                    ShowEmployeeGroupEditForm(SettingGridView.CurrentRow.DataBoundItem as EmployeeGroup);
+                    ShowEmployeeGroupEditForm(SettingGridView?.CurrentRow.DataBoundItem as EmployeeGroup);
                     break;
                 case 15:
-                    ShowUserEditForm(SettingGridView.CurrentRow.DataBoundItem as User);
+                    ShowUserEditForm(SettingGridView.CurrentRow?.DataBoundItem as User);
                     break;
                 case 16:
-                    ShowDisciplineSubjectEditForm(SettingGridView.CurrentRow.DataBoundItem as DisciplineSubject);
+                    ShowDisciplineSubjectEditForm(SettingGridView?.CurrentRow.DataBoundItem as DisciplineSubject);
+                    break;
+                case 17:
+                    ShowSchoolSupplieFeeEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolSupplieFee);
                     break;
                 default:
                     RadMessageBox.Show("En cours d'implementation");
@@ -3000,7 +3136,12 @@ namespace Primary.SchoolApp
                         e.ContextMenu.Items.Add(menuShowUserModule);
                         e.ContextMenu.Items.Add(menuShowUserRoom);
                         break;
-
+                    case 17:
+                        RadMenuItem menuDuplicateSchoolSupplieFee = new(Language.labelDuplicateForCurrentYear);
+                        menuDuplicateSchoolSupplieFee.Image = AppUtilities.GetImage("Duplicate");
+                        menuDuplicateSchoolSupplieFee.Click += MenuDuplicateSchoolSupplieFee_Click;
+                        e.ContextMenu.Items.Add(menuDuplicateSchoolSupplieFee);
+                        break;
                 }
             }
                 
@@ -3122,6 +3263,65 @@ namespace Primary.SchoolApp
             }
         }
 
+        // duplique les frais de fourniture scolaire pour l'année en cours
+        private void MenuDuplicateSchoolSupplieFee_Click(object sender, EventArgs e)
+        {
+            var currentYear = Program.SchoolYearList.Where(y => y.IsClosed == false).FirstOrDefault();
+            if (currentYear != null)
+            {
+                if (SettingGridView.CurrentRow.DataBoundItem is SchoolSupplieFee selectedRecord)
+                {
+                    var result = RadMessageBox.Show(this, $"{Language.messageConfirmeFeeDuplicate} ({currentYear.Name}) ", Language.LabelSchoolSupplieFees, MessageBoxButtons.YesNo, RadMessageIcon.Question, MessageBoxDefaultButton.Button1, RightToLeft);
+                    if (result == DialogResult.Yes)
+                    {
+                        var newRecord = new SchoolSupplieFee
+                        {
+                            SchoolYear = currentYear,
+                            SchoolYearId = currentYear.Id,
+                            SchoolClass = selectedRecord.SchoolClass,
+                            SchoolClassId = selectedRecord.SchoolClassId,
+                            CashFlowType = selectedRecord.CashFlowType,
+                            CashFlowTypeId = selectedRecord.CashFlowTypeId,
+                            IsPayable = selectedRecord.IsPayable,
+                            RequiredQuantity= selectedRecord.RequiredQuantity,
+                            Amount = selectedRecord.Amount,
+              
+                        };
+                        //vérification de l'existance si trouvé pas d'enregistrement
+                        if (schoolSupplieFeeService.GetSchoolSupplieFee(newRecord.SchoolClassId, newRecord.CashFlowTypeId, newRecord.SchoolYearId).Result == null)
+                        {
+                            bool isDone = schoolSupplieFeeService.CreateSchoolSupplieFee(newRecord).Result;
+                            if (isDone == true)
+                            {
+                                Log log = new()
+                                {
+                                    UserAction = $"Ajout  des frais scolaires {newRecord.CashFlowType.Name} pour la classe {newRecord.SchoolClass.Name} pour l'année scolaire {newRecord.SchoolYear.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                logService.CreateLog(log);
+
+                                // récupération de nouvel enregistrement pour editer
+                                newRecord.Id = schoolSupplieFeeService.GetSchoolSupplieFee(newRecord.SchoolClassId, newRecord.CashFlowTypeId, newRecord.SchoolYearId).Result.Id;
+                                Program.SchoolSupplieFeeList.Add(newRecord);
+                                ShowSchoolSupplieFeeEditForm(newRecord);
+                            }
+                            else
+                            {
+                                RadMessageBox.Show(Language.messageAddError);
+                            }
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(this, Language.messageFeeDuplicateAlreadyExist, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageRequireOpenYear, Language.labelSchoolingFee, MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
         private void MenuShowUserRoom_Click(object sender, EventArgs e)
         {
             if (SettingGridView.CurrentRow.DataBoundItem is User user)

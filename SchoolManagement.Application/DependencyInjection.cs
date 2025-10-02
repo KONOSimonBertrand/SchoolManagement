@@ -16,7 +16,7 @@ namespace SchoolManagement.Application
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICashFlowTypeService, CashFlowTypeService>();
             services.AddTransient<IPaymentMeanService, PaymentMeanService>();
-            services.AddTransient<ISchoolingCostService, SchoolingCostService>();
+            services.AddTransient<ISchoolSchoolingCostService, SchoolingCostService>();
             services.AddTransient<ISubscriptionFeeService, SubscriptionFeeService>();
             services.AddTransient<ISubjectGroupService, SubjectGroupService>();
             services.AddTransient<ISubjectService, SubjectService>();
@@ -40,6 +40,8 @@ namespace SchoolManagement.Application
             services.AddTransient<IMedicalService, MedicalService>();
             services.AddTransient<IStudentNoteService,StudentNoteService>();
             services.AddTransient<ISchoolService, SchoolService>();
+            services.AddTransient<ISchoolSupplieFeeService, SchoolSupplieFeeService>();
+            services.AddTransient<ISchoolSupplieService, SchoolSupplieService>();
             return services;
         }
     }
