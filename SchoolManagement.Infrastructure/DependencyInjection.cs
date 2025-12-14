@@ -44,6 +44,7 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<ISchoolSupplieFeeRepository, DapperSchoolSupplieFeesRepository>();
             services.AddTransient<ISchoolSupplieRepository, DapperSchoolSupplieRepository>();
             services.AddTransient<ISchoolSupplieDiscountRepository, DapperSchoolSupplieDiscountRepository>();
+            services.AddTransient<ITuitionOrderRepository, DapperTuitionOrderRepository>();
             services.AddDbContext<AppDbContext>();
             services.AddLogging(builder => builder.AddConsole());
             return services;

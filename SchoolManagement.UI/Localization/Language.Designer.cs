@@ -196,6 +196,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add Item.
+        /// </summary>
+        public static string LabelAddInvoiceItem {
+            get {
+                return ResourceManager.GetString("LabelAddInvoiceItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add new note.
         /// </summary>
         public static string LabelAddNewNote {
@@ -336,6 +345,15 @@ namespace SchoolManagement.UI.Localization {
         public static string LabelAnnualSummaryNotes {
             get {
                 return ResourceManager.GetString("LabelAnnualSummaryNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Annual tuition fees.
+        /// </summary>
+        public static string LabelAnnualTuitionFee {
+            get {
+                return ResourceManager.GetString("LabelAnnualTuitionFee", resourceCulture);
             }
         }
         
@@ -1267,6 +1285,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Fees to pay.
+        /// </summary>
+        public static string LabelFeesToPay {
+            get {
+                return ResourceManager.GetString("LabelFeesToPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Fee type.
         /// </summary>
         public static string labelFeeType {
@@ -1704,6 +1731,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelInstallments {
             get {
                 return ResourceManager.GetString("labelInstallments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invoice.
+        /// </summary>
+        public static string LabelInvoice {
+            get {
+                return ResourceManager.GetString("LabelInvoice", resourceCulture);
             }
         }
         
@@ -2370,6 +2406,15 @@ namespace SchoolManagement.UI.Localization {
         public static string LabelReminder {
             get {
                 return ResourceManager.GetString("LabelReminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove Item.
+        /// </summary>
+        public static string LabelRemoveInvoiceItem {
+            get {
+                return ResourceManager.GetString("LabelRemoveInvoiceItem", resourceCulture);
             }
         }
         
@@ -3670,6 +3715,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click here to add to invoice.
+        /// </summary>
+        public static string messageClickToAddToInvoice {
+            get {
+                return ResourceManager.GetString("messageClickToAddToInvoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click here to add a user.
         /// </summary>
         public static string messageClickToAddUser {
@@ -3720,6 +3774,15 @@ namespace SchoolManagement.UI.Localization {
         public static string messageClickToPrint {
             get {
                 return ResourceManager.GetString("messageClickToPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click here to remove from invoice.
+        /// </summary>
+        public static string messageClickToRemoveFromInvoice {
+            get {
+                return ResourceManager.GetString("messageClickToRemoveFromInvoice", resourceCulture);
             }
         }
         

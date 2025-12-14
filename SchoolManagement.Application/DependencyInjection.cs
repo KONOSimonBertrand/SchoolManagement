@@ -42,6 +42,7 @@ namespace SchoolManagement.Application
             services.AddTransient<ISchoolService, SchoolService>();
             services.AddTransient<ISchoolSupplieFeeService, SchoolSupplieFeeService>();
             services.AddTransient<ISchoolSupplieService, SchoolSupplieService>();
+            services.AddTransient<ITuitionOrderService, TuitionOrderService>();
             return services;
         }
     }

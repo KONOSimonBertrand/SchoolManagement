@@ -1602,4 +1602,25 @@
   <data name="LabelDesactivateDiscount" xml:space="preserve">
     <value>Desable discount</value>
   </data>
+  <data name="LabelFeesToPay" xml:space="preserve">
+    <value>Fees to pay</value>
+  </data>
+  <data name="LabelAnnualTuitionFee" xml:space="preserve">
+    <value>Annual tuition fees</value>
+  </data>
+  <data name="LabelInvoice" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="LabelAddInvoiceItem" xml:space="preserve">
+    <value>Add item</value>
+  </data>
+  <data name="LabelRemoveInvoiceItem" xml:space="preserve">
+    <value>Remove Item</value>
+  </data>
+  <data name="messageClickToAddToInvoice" xml:space="preserve">
+    <value>Click here to add to invoice</value>
+  </data>
+  <data name="messageClickToRemoveFromInvoice" xml:space="preserve">
+    <value>Click here to remove from invoice</value>
+  </data>
 </root>

@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
 using SchoolManagement.Application;
 using SchoolManagement.Application.Extensions;
 using SchoolManagement.Core.Model;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
@@ -24,10 +26,11 @@ namespace Primary.SchoolApp.UI
         private readonly ISchoolRoomService roomService;
         private readonly IPaymentMeanService paymentMeanService;
         private readonly IStudentEnrollingService studentEnrollingService;
+        private readonly ITuitionOrderService tuitionOrderService;
         private readonly ClientApp clientApp;
         private StudentEnrolling selectedEnrolling;
         public EditStudentEnrollingForm(ILogService logService, IStudentService studentService, ICashFlowService cashFlowService, ISchoolClassService classService,
-             ISchoolRoomService roomService, IPaymentMeanService paymentMeanService, ClientApp clientApp, IStudentEnrollingService studentEnrollingService)
+             ISchoolRoomService roomService, IPaymentMeanService paymentMeanService, ClientApp clientApp, IStudentEnrollingService studentEnrollingService, ITuitionOrderService tuitionOrderService)
         {
             this.logService = logService;
             this.studentService = studentService;
@@ -37,12 +40,70 @@ namespace Primary.SchoolApp.UI
             this.paymentMeanService = paymentMeanService;
             this.studentEnrollingService = studentEnrollingService;
             this.clientApp = clientApp;
-            InitPaymentsGridView();
             LoadStudentList();
             ClassDropDownList.DataSource = Program.SchoolClassList;
             ClassDropDownList.SelectedIndex = -1;
+            PaymentMeanDropDownList.DataSource = Program.PaymentMeanList;
+            PaymentMeanDropDownList.SelectedIndex = -1;
             InitEvents();
+            this.tuitionOrderService = tuitionOrderService;
         }
+
+        private void LoadFeesList(int classId)
+        {
+
+            var InfoItemList = new List<ReceiptItem>();
+            int i = 0;
+            var fsList = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+            var abList = Program.CashFlowTypeList.Where(x => x.Category == "AB");
+            var ffList = Program.CashFlowTypeList.Where(x => x.Category == "FF");
+
+            foreach (var fs in Program.SchoolingCostList.Where(x => x.SchoolClassId == classId && x.SchoolYearId == selectedEnrolling.SchoolYearId))
+            {
+                InfoItemList.Add(new()
+                {
+                    Id = i++,
+                    UnitPrice = fs.Amount,
+                    Quantity = 1,
+                    CashFlowTypeName = fs.CashFlowType.Name,
+                    Description = $"{fs.CashFlowType.Name}: {fs.Amount} FCFA, {Language.labelTrancheNumber}: {fs.TrancheNumber}"
+                }
+                    );
+            }
+
+            foreach (var ab in Program.SubscriptionFeeList.Where(x => x.SchoolYearId == selectedEnrolling.SchoolYearId))
+            {
+                InfoItemList.Add(new()
+                {
+                    Id = i++,
+                    UnitPrice = ab.Amount,
+                    Quantity = 1,
+                    CashFlowTypeName = ab.CashFlowType.Name,
+                    Description = $"{Language.labelSubscription}   {ab.CashFlowType.Name}: {ab.Amount} FCFA, {Language.labelDuration}: {ab.Duration}"
+                }
+                    );
+            }
+
+            foreach (var ff in Program.SchoolSupplieFeeList.Where(x => x.SchoolClassId == classId && x.SchoolYearId == selectedEnrolling.SchoolYearId))
+            {
+                InfoItemList.Add(new()
+                {
+                    Id = i++,
+                    UnitPrice = ff.Amount,
+                    Quantity = ff.RequiredQuantity,
+                    CashFlowTypeName = ff.CashFlowType.Name,
+                    Description = $"{ff.CashFlowType.Name}  {Language.LabelUnitPrice}: {ff.Amount} FCFA, {Language.LabelRequiredQuantity}: {ff.RequiredQuantity}"
+                }
+                    );
+            }
+
+            FeesDropDownList.DataSource = null;
+            FeesDropDownList.ValueMember = "Id";
+            FeesDropDownList.DisplayMember = "Description";
+            FeesDropDownList.DataSource = InfoItemList;
+
+        }
+
         private async void LoadStudentList()
         {
             if (Program.StudentList != null)
@@ -67,67 +128,8 @@ namespace Primary.SchoolApp.UI
             AddClassButton.Click += AddClassButton_Click;
             AddRoomButton.Click += AddRoomButton_Click;
             ClassDropDownList.SelectedValueChanged += ClassDropDownList_SelectedValueChanged;
-          
         }
-        //init gridview
-        private void InitPaymentsGridView()
-        {
-            PaymentsGridView.MasterTemplate.EnableFiltering = true;
-            PaymentsGridView.EnableFiltering = true;
-            PaymentsGridView.ShowFilteringRow = false;
-            PaymentsGridView.AllowAddNewRow = false;
-            PaymentsGridView.AutoGenerateColumns = false;
-            PaymentsGridView.AutoSizeColumnsMode = GridViewAutoSizeColumnsMode.Fill;
-            GridViewTextBoxColumn reasonColumn = new("CashFlowType.Name");
-            GridViewTextBoxColumn idTransactionColumn = new("TransactionId");
-            GridViewDecimalColumn amountColumn = new("Amount");
-            GridViewDecimalColumn balanceColumn = new("Balance");
-            GridViewDateTimeColumn dateColumn = new("TransactionDate");
-            GridViewComboBoxColumn paymentMeanColumn = new("PaymentMeanId");
-            reasonColumn.ReadOnly = true;
-            balanceColumn.ReadOnly = true;
-            idTransactionColumn.ReadOnly = true;
-            amountColumn.ReadOnly = true;
-            dateColumn.ReadOnly = true;
-            paymentMeanColumn.ReadOnly = true;
-            reasonColumn.HeaderText = Language.labelReason;
-            amountColumn.HeaderText = Language.labelAmount;
-            dateColumn.HeaderText = Language.labelDateTransaction;
-            balanceColumn.HeaderText = Language.labelUnPaid;
-            idTransactionColumn.HeaderText = Language.labelIdTransaction;
-            paymentMeanColumn.HeaderText = Language.labelPaymentMean;
-            reasonColumn.Width = 150;
-            amountColumn.Width = 80;
-            dateColumn.Width = 120;
-            idTransactionColumn.Width = 150;
-            paymentMeanColumn.Width = 150;
-            balanceColumn.Width = 80;
-            paymentMeanColumn.DataSource = Program.PaymentMeanList;
-            paymentMeanColumn.ValueMember = "Id";
-            paymentMeanColumn.DisplayMember = "FullName";
 
-            dateColumn.CustomFormat = "dd/MM/yyyy";
-            dateColumn.FormatString = "{0:dd/MM/yyyy}";
-
-            PaymentsGridView.Columns.Add(reasonColumn);
-            PaymentsGridView.Columns.Add(amountColumn);
-            PaymentsGridView.Columns.Add(dateColumn);
-            PaymentsGridView.Columns.Add(idTransactionColumn);
-            PaymentsGridView.Columns.Add(paymentMeanColumn);
-            PaymentsGridView.Columns.Add(balanceColumn);
-
-            GridViewSummaryRowItem total = new()
-            {
-                new GridViewSummaryItem("Amount", " {0}", GridAggregateFunction.Sum),
-                new GridViewSummaryItem("Balance", " {0}", GridAggregateFunction.Sum)
-            };
-            PaymentsGridView.MasterTemplate.SummaryRowsBottom.Add(total);
-            foreach (GridViewDataColumn col in PaymentsGridView.Columns)
-            {
-                col.HeaderTextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            }
-            // Chargement des frais           
-        }
         internal void Init(StudentEnrolling enrolling)
         {
             
@@ -136,15 +138,15 @@ namespace Primary.SchoolApp.UI
                 LoadStudentRoom(enrolling.StudentId, enrolling.SchoolYearId);
                 LoadPayments(enrolling.Id);
                 selectedEnrolling = enrolling;
-                SchoolYearTexBox.Text=enrolling.SchoolYear.Name;
                 EnrollingDateTimePicker.Value=enrolling.Date;
                 StudentDropDownList.SelectedValue=enrolling.StudentId;               
                 OldSchoolTextBox.Text=enrolling.OldSchool;
                 RepeaterDropDownList.SelectedValue = enrolling.IsRepeater==true?1:0;
             }
-            PaymentsGridView.Enabled=false;
-            AmountTextBox.Enabled=false;
+            TransactionDateTimePicker.Enabled=false;
+            TransactionIdTextBox.Enabled=false;
             DoneByTextBox.Enabled=false;
+            PaymentMeanDropDownList.Enabled=false;
         }
         // Génère une liste de payements pour l'initialisation du payments gridview
         private List<TuitionPayment> GetInitialPaymentList(int classId)
@@ -170,7 +172,7 @@ namespace Primary.SchoolApp.UI
             }
             return recordList;
         }
-        private async void  LoadStudentRoom(int studentId,int schoolYearId)
+        private async void LoadStudentRoom(int studentId,int schoolYearId)
         {
             var studentRoom=await studentEnrollingService.GetStudentRoomAsync(studentId,schoolYearId);
             if (studentRoom != null) {
@@ -183,11 +185,22 @@ namespace Primary.SchoolApp.UI
         }
         private async void LoadPayments(int enrollingId)
         {
-           var payments=await cashFlowService.GetTuitionPaymentByEnrollingList(enrollingId);
-            if (payments != null) { 
-                AmountTextBox.Text= payments.Where(x => x.IsDuringEnrolling && x.Amount>0).Sum(x => x.Amount).ToString();
-                DoneByTextBox.Text = payments.Where(x => x.IsDuringEnrolling && x.Amount > 0).FirstOrDefault()?.DoneBy;
-                PaymentsGridView.DataSource = payments.Where(x=>x.IsDuringEnrolling && x.Amount > 0);
+            var orders= await tuitionOrderService.GetTuitionOrdersByEnrollingAsync(enrollingId);
+            var selectedOrder=orders.FirstOrDefault(x=>x.IsDuringEnrolling);
+            if (selectedOrder != null) {
+                selectedOrder.TuitionOrderItems=await tuitionOrderService.GetTuitionOrderItemsAsync(selectedOrder.Id);
+                DoneByTextBox.Text=selectedOrder.DoneBy;
+                TransactionIdTextBox.Text=selectedOrder.TransactionId;
+                TransactionDateTimePicker.Value=selectedOrder.TransactionDate;
+                PaymentMeanDropDownList.SelectedValue = selectedOrder.PaymentMean;
+                if (selectedOrder.TuitionOrderItems.Count == 1) {
+                }
+                else
+                {
+                    foreach (var item in selectedOrder.TuitionOrderItems) { 
+
+                    }
+                }
             }
         } 
         private void OnShown(object sender, EventArgs e)
@@ -199,19 +212,24 @@ namespace Primary.SchoolApp.UI
         {
             if (ClassDropDownList.SelectedItem != null)
             {
-                if (ClassDropDownList.SelectedItem.DataBoundItem is SchoolClass record)
+                if (ClassDropDownList.SelectedItem.DataBoundItem is SchoolClass selectedRecord)
                 {
-                    RoomDropDownList.DataSource = Program.SchoolRoomList.Where(x => x.ClassId == record.Id);
-                    var payments = GetInitialPaymentList(record.Id);
+                    RoomDropDownList.DataSource = Program.SchoolRoomList.Where(x => x.ClassId == selectedRecord.Id);
+                    var payments = GetInitialPaymentList(selectedRecord.Id);
                     var amountToPaid = payments.Sum(x => x.Balance);
+                    // chargement de la liste des frais scolaire
+                    LoadFeesList(selectedRecord.Id);
+                    // ajout total des frais scolarité
+                    string totalText = Language.LabelAnnualTuitionFee;
                     if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                     {
-                        SchoolFeeValueLabel.Text = amountToPaid + " CFA  ( " + amountToPaid.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                        totalText = $" {totalText}: {amountToPaid} CFA ( {amountToPaid.ToLetter(CountryLanguage.French, Currency.CFA)}) ";
                     }
                     else
                     {
-                        SchoolFeeValueLabel.Text = amountToPaid + " CFA  ( " + amountToPaid.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                        totalText = $"{totalText}: {amountToPaid} CFA ( {amountToPaid.ToLetter(CountryLanguage.English, Currency.CFA)}) ";
                     }
+                    FeesTotalLabel.Text = totalText;
                 }
                
             }
@@ -258,7 +276,6 @@ namespace Primary.SchoolApp.UI
                 ShowStudentAddForm();
             }
         }
-
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData())

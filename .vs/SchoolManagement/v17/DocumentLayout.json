@@ -3,52 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\nlog.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\nlog.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.application\\schools\\schoolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|solutionrelative:schoolmanagement.application\\schools\\schoolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\startform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\startform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\primary.schoolapp.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\primary.schoolapp.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\primary.schoolapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\primary.schoolapp.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\database\\mysqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\database\\mysqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\database\\idbconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\database\\idbconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\tuitionorders\\dappertuitionorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\tuitionorders\\dappertuitionorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\cashflows\\dapperreceiptrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\cashflows\\dapperreceiptrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\cashflows\\dappercashflowrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\cashflows\\dappercashflowrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D36AA8D3-E7F0-430B-B4A0-542C54D28CFA}|SchoolManagement.Core\\SchoolManagement.Core.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.core\\model\\tuitionorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D36AA8D3-E7F0-430B-B4A0-542C54D28CFA}|SchoolManagement.Core\\SchoolManagement.Core.csproj|solutionrelative:schoolmanagement.core\\model\\tuitionorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D36AA8D3-E7F0-430B-B4A0-542C54D28CFA}|SchoolManagement.Core\\SchoolManagement.Core.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.core\\model\\receipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D36AA8D3-E7F0-430B-B4A0-542C54D28CFA}|SchoolManagement.Core\\SchoolManagement.Core.csproj|solutionrelative:schoolmanagement.core\\model\\receipt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D36AA8D3-E7F0-430B-B4A0-542C54D28CFA}|SchoolManagement.Core\\SchoolManagement.Core.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.core\\model\\tuitionorderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D36AA8D3-E7F0-430B-B4A0-542C54D28CFA}|SchoolManagement.Core\\SchoolManagement.Core.csproj|solutionrelative:schoolmanagement.core\\model\\tuitionorderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\students\\addstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\students\\addstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\subscriptionfees\\dappersubscriptionfeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\subscriptionfees\\dappersubscriptionfeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\students\\editstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\students\\editstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.infrastructure\\repositories\\schoolsupplies\\dapperschoolsupplierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA1A3B96-4576-4E6B-B053-E7463D7FF682}|SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj|solutionrelative:schoolmanagement.infrastructure\\repositories\\schoolsupplies\\dapperschoolsupplierepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.ui\\ui\\student\\editstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|solutionrelative:schoolmanagement.ui\\ui\\student\\editstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|C:\\Users\\HP\\source\\repos\\SchoolManagement\\schoolmanagement.ui\\ui\\student\\editstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|solutionrelative:schoolmanagement.ui\\ui\\student\\editstudentenrollingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -71,157 +59,111 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SchoolService.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\Schools\\SchoolService.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Application\\Schools\\SchoolService.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\Schools\\SchoolService.cs",
-              "RelativeToolTip": "SchoolManagement.Application\\Schools\\SchoolService.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBEAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T16:26:02.356Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StartForm.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\StartForm.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\StartForm.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\StartForm.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\UI\\StartForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T16:07:40.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Primary.SchoolApp",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "RelativeToolTip": "Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-02T16:06:53.256Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Program.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Program.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Program.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\Program.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAkwF8AAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T15:32:38.365Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NLog.config",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\NLog.config",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\NLog.config",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\NLog.config",
-              "RelativeToolTip": "Primary.SchoolApp\\NLog.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-10-02T15:28:29.681Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Primary.SchoolApp",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "RelativeToolTip": "Primary.SchoolApp\\Primary.SchoolApp.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-02T15:25:53.963Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MySqlConnectionFactory.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\MySqlConnectionFactory.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\DataBase\\MySqlConnectionFactory.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\MySqlConnectionFactory.cs",
-              "RelativeToolTip": "SchoolManagement.Infrastructure\\DataBase\\MySqlConnectionFactory.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAgAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T15:11:57.621Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IDbConnectionFactory.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\IDbConnectionFactory.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\DataBase\\IDbConnectionFactory.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\DataBase\\IDbConnectionFactory.cs",
-              "RelativeToolTip": "SchoolManagement.Infrastructure\\DataBase\\IDbConnectionFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T15:11:52.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "DapperCashFlowRepository.cs",
               "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperCashFlowRepository.cs",
               "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperCashFlowRepository.cs",
               "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperCashFlowRepository.cs",
               "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperCashFlowRepository.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAgwEsAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T13:24:25.547Z",
+              "WhenOpened": "2025-12-13T13:25:27.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DapperReceiptRepository.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperReceiptRepository.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperReceiptRepository.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperReceiptRepository.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\CashFlows\\DapperReceiptRepository.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwB8AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T12:56:44.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Receipt.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\Model\\Receipt.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Core\\Model\\Receipt.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\Model\\Receipt.cs",
+              "RelativeToolTip": "SchoolManagement.Core\\Model\\Receipt.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-13T12:45:47.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DapperSubscriptionFeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\SubscriptionFees\\DapperSubscriptionFeeRepository.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\SubscriptionFees\\DapperSubscriptionFeeRepository.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\SubscriptionFees\\DapperSubscriptionFeeRepository.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\SubscriptionFees\\DapperSubscriptionFeeRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T09:09:16.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EditStudentEnrollingForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs",
+              "RelativeToolTip": "SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs",
+              "ViewState": "AgIAAPQAAAAAAAAAAAAowAABAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T17:26:58.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "DapperTuitionOrderRepository.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\TuitionOrders\\DapperTuitionOrderRepository.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\TuitionOrders\\DapperTuitionOrderRepository.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\TuitionOrders\\DapperTuitionOrderRepository.cs",
-              "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\TuitionOrders\\DapperTuitionOrderRepository.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAswFEAAAAqAAAAAAAAAA==",
+              "Title": "EditStudentEnrollingForm.cs [Conception]",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs [Conception]",
+              "RelativeToolTip": "SchoolManagement.UI\\UI\\Student\\EditStudentEnrollingForm.cs [Conception]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T13:12:57.094Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T17:57:01.977Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TuitionOrderItem.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\Model\\TuitionOrderItem.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Core\\Model\\TuitionOrderItem.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\Model\\TuitionOrderItem.cs",
-              "RelativeToolTip": "SchoolManagement.Core\\Model\\TuitionOrderItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "AddStudentEnrollingForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Students\\AddStudentEnrollingForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\Students\\AddStudentEnrollingForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Students\\AddStudentEnrollingForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\Students\\AddStudentEnrollingForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAO8AAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T12:14:00.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T21:55:02.538Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TuitionOrder.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\Model\\TuitionOrder.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.Core\\Model\\TuitionOrder.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Core\\Model\\TuitionOrder.cs",
-              "RelativeToolTip": "SchoolManagement.Core\\Model\\TuitionOrder.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAIwCQAAAApAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "EditStudentEnrollingForm.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Students\\EditStudentEnrollingForm.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\Students\\EditStudentEnrollingForm.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\Students\\EditStudentEnrollingForm.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\Students\\EditStudentEnrollingForm.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAQwBkAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T21:54:49.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T17:01:08.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DapperSchoolSupplieRepository.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSupplieRepository.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSupplieRepository.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSupplieRepository.cs",
+              "RelativeToolTip": "SchoolManagement.Infrastructure\\Repositories\\SchoolSupplies\\DapperSchoolSupplieRepository.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T09:10:18.276Z"
             }
           ]
         },

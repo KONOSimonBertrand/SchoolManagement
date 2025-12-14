@@ -8,7 +8,7 @@ namespace SchoolManagement.Core.Model
     public class TuitionOrder
     {
         public int Id { get; set; }
-        public string? IdNumber { get; set; }
+        public required string IdNumber { get; set; }
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public double Discount { get; set; }
@@ -34,6 +34,7 @@ namespace SchoolManagement.Core.Model
                 }
             }
         }
+        public bool IsDuringEnrolling { get; set; }
         public virtual StudentEnrolling? Enrolling { get; set; }
         public virtual PaymentMean? PaymentMean { get; set; }
         public virtual required List<TuitionOrderItem> TuitionOrderItems { get; set; }

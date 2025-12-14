@@ -23,7 +23,7 @@ namespace SchoolManagement.Core.Model
         }
         public override string ToString()
         {
-            return Name;
+            return Name??"";
         }
     }
 }

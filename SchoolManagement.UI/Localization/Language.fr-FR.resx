@@ -1602,4 +1602,25 @@
   <data name="LabelDesactivateDiscount" xml:space="preserve">
     <value>Désactiver la réduction</value>
   </data>
+  <data name="LabelFeesToPay" xml:space="preserve">
+    <value>Frais à payer</value>
+  </data>
+  <data name="LabelAnnualTuitionFee" xml:space="preserve">
+    <value>Frais de scolarité annuels</value>
+  </data>
+  <data name="LabelInvoice" xml:space="preserve">
+    <value>Facture</value>
+  </data>
+  <data name="LabelAddInvoiceItem" xml:space="preserve">
+    <value>Ajouter  à la facture</value>
+  </data>
+  <data name="LabelRemoveInvoiceItem" xml:space="preserve">
+    <value>Retirer de la facture</value>
+  </data>
+  <data name="messageClickToAddToInvoice" xml:space="preserve">
+    <value>Cliquer ici pour ajouter à la facture</value>
+  </data>
+  <data name="messageClickToRemoveFromInvoice" xml:space="preserve">
+    <value>Cliquer ici pour retirer de la facture</value>
+  </data>
 </root>

@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Services;
 using Primary.SchoolApp.Utilities;
@@ -46,14 +45,15 @@ namespace Primary.SchoolApp.UI
         private readonly ISubscriptionService subscriptionService;
         private readonly ISchoolService schoolService;
         private readonly ISchoolSupplieService schoolSupplieService;
-        private readonly ILogger<StartForm> logger;
+        private readonly ITuitionOrderService tuitionOrderService;
         public StartForm(ClientApp clientApp, ISchoolYearService schoolYearService, IDisciplineService disciplineService, ICountryService countryService,
             IModuleService moduleService, IEmployeeService employeeService, IUserService userService, IEmployeeGroupService employeeGroupService,
             IRatingSystemService ratingSystemService, IEvaluationSessionService evaluationSessionService, ISubjectService subjectService,
             ISubjectGroupService subjectGroupService, ISubscriptionFeeService subscriptionFeeService, ISchoolSchoolingCostService schoolingCostService,
             IPaymentMeanService paymentMeanService, ICashFlowTypeService cashFlowTypeService, ISchoolRoomService schoolRoomService,
             ISchoolClassService schoolClassService, ISchoolGroupService schoolGroupService, IJobService jobService, ICashFlowService cashFlowService,
-            IStudentEnrollingService studentEnrollingService,ISubscriptionService subscriptionService,ISchoolService schoolService,ISchoolSupplieFeeService schoolSupplieFeeService, ISchoolSupplieService schoolSupplieService, ILogger<StartForm> logger
+            IStudentEnrollingService studentEnrollingService,ISubscriptionService subscriptionService,ISchoolService schoolService,ISchoolSupplieFeeService schoolSupplieFeeService, 
+            ISchoolSupplieService schoolSupplieService, ITuitionOrderService tuitionOrderService
             )
         {
             InitializeComponent();
@@ -85,13 +85,11 @@ namespace Primary.SchoolApp.UI
             localEnrollingService = new LocalEnrollingService();
             this.schoolSupplieFeeService = schoolSupplieFeeService;
             this.schoolSupplieService= schoolSupplieService;
-            this.logger = logger;
+            this.tuitionOrderService = tuitionOrderService;
             InitializeWaitingBar();
             StartWaiting();
             this.Icon = Resources.icon_pink;
             clientApp.ConnectionString = Program.ConnectionString;
-            Console.WriteLine("Salue");
-            logger.LogDebug(20, "Doing hard work! {Action}", Program.ConnectionString);
             //create thread for loading initial data
             this.Shown += (o, s) =>
             {
@@ -172,6 +170,7 @@ namespace Primary.SchoolApp.UI
             if (schoolYear != null)
             {
                 //lancement des tâches d'extraction des données
+                var getTuitionOrderListTask = tuitionOrderService.GetTuitionOrdersBySchoolYearAsync(schoolYear.Id);
                 var getPaymentListTask = cashFlowService.GetTuitionPaymentBySchoolYearList(schoolYear.Id);
                 var getEnrollingListTask = studentEnrollingService.GetStudentEnrollingListAsync(schoolYear.Id);
                 var getDiscountListTask = cashFlowService.GetTuitionDiscountBySchoolYearList(schoolYear.Id);
@@ -188,12 +187,13 @@ namespace Primary.SchoolApp.UI
                 var getEmployeeRoomListTask=employeeService.GetRoomListBySchoolYear(schoolYear.Id); 
 
                 //on s'assure que toutes soient terminées
-                await System.Threading.Tasks.Task.WhenAll(getPaymentListTask, getEnrollingListTask, getDiscountListTask);
+                await System.Threading.Tasks.Task.WhenAll(getTuitionOrderListTask,getPaymentListTask, getEnrollingListTask, getDiscountListTask);
                 //chargement des données dans les listes principales
                 Program.TuitionDiscountList = await getDiscountListTask;
                 Program.SchoolSupplieDiscountList = await getSchoolSupplieDiscountListTask;
                 Program.SchoolSupplieList=await getSchoolSupplieListTask;
                 Program.TuitionPaymentList = await getPaymentListTask;
+                Program.TuitionOrderList = await getTuitionOrderListTask;
                 Program.SchoolingCostItemList = await getSchoolingCostItemTask;
                 var enrollingList = await getEnrollingListTask;
                 Program.SubscriptionList=await getSubscriptionTask;

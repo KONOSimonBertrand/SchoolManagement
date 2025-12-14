@@ -301,3 +301,8 @@ C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\obj\Debug\net7.0-win
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\NLog.dll
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\NLog.Extensions.Logging.dll
 C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\NLog.config
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Serilog.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Serilog.Extensions.Hosting.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Serilog.Extensions.Logging.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Serilog.Sinks.Console.dll
+C:\Users\HP\source\repos\SchoolManagement\Primary.SchoolApp\bin\Debug\net7.0-windows\Serilog.Sinks.File.dll

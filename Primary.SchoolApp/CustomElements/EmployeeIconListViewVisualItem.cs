@@ -7,10 +7,8 @@ using SchoolManagement.Core.Model;
 using Primary.SchoolApp.Utilities;
 using Telerik.WinControls.Layouts;
 using System.Windows.Forms;
-using Primary.SchoolApp.DTO;
 using SchoolManagement.UI.Localization;
 using System.IO;
-using Telerik.WinControls.Primitives;
 
 namespace Primary.SchoolApp.CustomElements
 {
