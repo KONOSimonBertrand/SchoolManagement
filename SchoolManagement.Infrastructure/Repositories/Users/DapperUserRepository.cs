@@ -78,7 +78,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<User?> GetAsync(string userName, string password)
         {
-            var connection = dbConnectionFactory.CreateConnection();
+            using var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Users A 
                            WHERE UserName=@userName AND Password=@password ;";
             var result = connection.Query<User>(query, new { userName, password }).FirstOrDefault();
@@ -87,7 +87,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<User?> GetAsync(string userName)
         {
-            var connection = dbConnectionFactory.CreateConnection();
+           using var connection = dbConnectionFactory.CreateConnection();
             string query = @"SELECT * FROM Users A 
                            LEFT JOIN Employees B ON A.EmployeeId=B.Id
                            WHERE UserName=@userName  ;";
@@ -208,7 +208,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<bool> ChangePasswordAsync(int userId, string password)
         {
-            var connection = dbConnectionFactory.CreateConnection();
+            using var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE Users SET Password=@password WHERE Id=@userId ;";                             
             var result = connection.Execute(query, new
             {
@@ -220,7 +220,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         }
         public async Task<bool> UpdateDefaultThemeAsync(int userId,string theme)
         {
-            var connection = dbConnectionFactory.CreateConnection();
+            using var connection = dbConnectionFactory.CreateConnection();
             string query = @"UPDATE Users SET DefaultTheme=@theme 
                               WHERE Id=@userId ;";
             var result = connection.Execute(query, new
@@ -231,7 +231,5 @@ namespace SchoolManagement.Infrastructure.Repositories
             await Task.Delay(0);
             return result > 0;
         }
-
-
     }
 }

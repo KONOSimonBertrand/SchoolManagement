@@ -50,7 +50,6 @@ namespace Primary.SchoolApp
         public static IList<StudentEnrollingDTO> StudentEnrollingList;
         public static IList<Student> StudentList;
         public static IList<TuitionPayment> TuitionPaymentList;
-        public static IList<TuitionOrder> TuitionOrderList;
         public static IList<TuitionDiscount> TuitionDiscountList;
         public static IList<SchoolSupplieDiscount> SchoolSupplieDiscountList;
         public static IList<DisciplineSubject> DisciplineSubjectList;

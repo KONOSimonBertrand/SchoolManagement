@@ -2,7 +2,6 @@
 
 using Telerik.WinControls;
 
-
 namespace SchoolManagement.UI.Utilities
 {
     internal static class ViewUtilities
@@ -11,48 +10,9 @@ namespace SchoolManagement.UI.Utilities
         public static string MainFont = "Roboto";
         public static string MainFontMedium = "Roboto Medium";
        
-        public static bool IsNumber(string text)
-        {
-            bool res = true;
-            try
-            {
-                if (!string.IsNullOrEmpty(text) && ((text.Length != 1) || (text != "-")))
-                {
-                    Decimal d = decimal.Parse(text, System.Globalization.CultureInfo.CurrentCulture);
-                }
-            }
-            catch
-            {
-                res = false;
-            }
-            return res;
-        }
+       
 
-        public static List<string> Religions()
-        {
-            List<string> religions = new()
-            {
-                "Inonnue",
-                "Christianisme",
-                "Christianisme-Catholicisme",
-                "Christianisme-Protestantisme",
-                "Christianisme-Orthodoxe",
-                "Judaïsme",
-                "Islam",
-                "Islam-Sunnisme",
-                "Islam-Chiisme",
-                "Islam-Ahmadisme",
-                "Bahaïsme",
-                "Hindouisme",
-                "Bouddhisme",
-                "Taoïsme",
-                "Jaïnisme",
-                "Sikhisme"
-            };
-
-            return religions;
-
-        }
+   
         //get image from resource file
         public static Image GetImage(string category)
         {
@@ -90,7 +50,7 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.printer_blue;
                             break;
                         case "Folder":
-                            image= GetImage(Resources.folder_blue);
+                            image= Helper.Helper.GetImage(Resources.folder_blue);
                             break;
                         case "Hide":
                             image = Resources.hide_blue;
@@ -99,19 +59,19 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.floppy_disk_blue;
                             break;
                         case "Import":
-                            image = GetImage(Resources.import_blue);
+                            image = Helper.Helper.GetImage(Resources.import_blue);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_blue);
+                            image = Helper.Helper.GetImage(Resources.add_payment_blue);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_blue);
+                            image = Helper.Helper.GetImage(Resources.add_contact_blue);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_blue);
+                            image = Helper.Helper.GetImage(Resources.id_card_blue);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_blue);
+                            image = Helper.Helper.GetImage(Resources.show_blue);
                             break;
                     }
                     break;
@@ -146,7 +106,7 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.printer_blue_grey;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_blue_grey);
+                            image = Helper.Helper.GetImage(Resources.folder_blue_grey);
                             break;
                         case "Hide":
                             image = Resources.hide_blue_grey;
@@ -155,19 +115,19 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.floppy_disk_blue_grey;
                             break;
                         case "Import":
-                            image = GetImage(Resources.import_blue_grey);
+                            image = Helper.Helper.GetImage(Resources.import_blue_grey);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_blue_grey);
+                            image = Helper.Helper.GetImage(Resources.add_payment_blue_grey);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_blue_grey);
+                            image = Helper.Helper.GetImage(Resources.add_contact_blue_grey);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_blue_grey);
+                            image = Helper.Helper.GetImage(Resources.id_card_blue_grey);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_blue_grey);
+                            image = Helper.Helper.GetImage(Resources.show_blue_grey);
                             break;
                     }
                     break;
@@ -202,7 +162,7 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.printer_pink;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_pink);
+                            image = Helper.Helper.GetImage(Resources.folder_pink);
                             break;
                         case "Hide":
                             image = Resources.hide_pink;
@@ -211,19 +171,19 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.floppy_disk_pink;
                             break;
                         case "Import":
-                            image = GetImage(Resources.import_pink);
+                            image = Helper.Helper.GetImage(Resources.import_pink);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_pink);
+                            image = Helper.Helper.GetImage(Resources.add_payment_pink);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_pink);
+                            image = Helper.Helper.GetImage(Resources.add_contact_pink);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_pink);
+                            image = Helper.Helper.GetImage(Resources.id_card_pink);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_pink);
+                            image = Helper.Helper.GetImage(Resources.show_pink);
                             break;
                     }
                     break;
@@ -258,7 +218,7 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.printer_teal;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_teal);
+                            image = Helper.Helper.GetImage(Resources.folder_teal);
                             break;
                         case "Hide":
                             image = Resources.hide_teal;
@@ -267,19 +227,19 @@ namespace SchoolManagement.UI.Utilities
                             image = Resources.floppy_disk_teal;
                             break;
                         case "Import":
-                            image = GetImage(Resources.import_teal);
+                            image = Helper.Helper.GetImage(Resources.import_teal);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_teal);
+                            image = Helper.Helper.GetImage(Resources.add_payment_teal);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_teal);
+                            image = Helper.Helper.GetImage(Resources.add_contact_teal);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_teal);
+                            image = Helper.Helper.GetImage(Resources.id_card_teal);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_teal);
+                            image = Helper.Helper.GetImage(Resources.show_teal);
                             break;
                     }
                     break;
@@ -287,91 +247,81 @@ namespace SchoolManagement.UI.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = GetImage(Resources.pencil_white);
+                            image = Helper.Helper.GetImage(Resources.pencil_white);
                             break;
                         case "Watch":
-                            image = GetImage(Resources.watch_white);
+                            image = Helper.Helper.GetImage(Resources.watch_white);
                             break;
                         case "Image":
-                            image = GetImage(Resources.add_image_White);
+                            image = Helper.Helper.GetImage(Resources.add_image_White);
                             break;
                         case "File":
-                            image = GetImage(Resources.create_file_white);
+                            image = Helper.Helper.GetImage(Resources.create_file_white);
                             break;
                         case "Lock":
-                            image = GetImage(Resources.lock_white);
+                            image = Helper.Helper.GetImage(Resources.lock_white);
                             break;
                         case "Unlock":
-                            image = GetImage(Resources.unlock_white);
+                            image = Helper.Helper.GetImage(Resources.unlock_white);
                             break;
                         case "Close":
-                            image = GetImage(Resources.close_white);
+                            image = Helper.Helper.GetImage(Resources.close_white);
                             break;
                         case "Printer":
-                            image = GetImage(Resources.printer_white);
+                            image = Helper.Helper.GetImage(Resources.printer_white);
                             break;
                         case "Add":
-                            image = GetImage(Resources.add_white);
+                            image = Helper.Helper.GetImage(Resources.add_white);
                             break;
                         case "Delete":
-                            image = GetImage(Resources.delete_white);
+                            image = Helper.Helper.GetImage(Resources.delete_white);
                             break;
                         case "Excel":
-                            image = GetImage(Resources.excel_white);
+                            image = Helper.Helper.GetImage(Resources.excel_white);
                             break;
                         case "Duplicate":
-                            image = GetImage(Resources.duplicate_white);
+                            image = Helper.Helper.GetImage(Resources.duplicate_white);
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_white);
+                            image = Helper.Helper.GetImage(Resources.folder_white);
                             break;
                         case "Hide":
-                            image = GetImage(Resources.hide_white);
+                            image = Helper.Helper.GetImage(Resources.hide_white);
                             break;
                         case "Save":
-                            image = GetImage(Resources.floppy_disk_white);
+                            image = Helper.Helper.GetImage(Resources.floppy_disk_white);
                             break;
                         case "Undo":
-                            image = GetImage(Resources.undo_white);
+                            image = Helper.Helper.GetImage(Resources.undo_white);
                             break;
                         case "Cancel":
-                            image = GetImage(Resources.cancel_white);
+                            image = Helper.Helper.GetImage(Resources.cancel_white);
                             break;
                         case "Search":
-                            image = GetImage(Resources.search_white);
+                            image = Helper.Helper.GetImage(Resources.search_white);
                             break;
                         case "Import":
-                            image = GetImage(Resources.import_white);
+                            image = Helper.Helper.GetImage(Resources.import_white);
                             break;
                         case "Check":
-                            image = GetImage(Resources.check_white);
+                            image = Helper.Helper.GetImage(Resources.check_white);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_white);
+                            image = Helper.Helper.GetImage(Resources.add_payment_white);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_white);
+                            image = Helper.Helper.GetImage(Resources.add_contact_white);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_white);
+                            image = Helper.Helper.GetImage(Resources.id_card_white);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_white);
+                            image = Helper.Helper.GetImage(Resources.show_white);
                             break;
                     }
                     break;
             }
             return image;
         }
-
-        public static Image GetImage(Byte[] byteImage)
-        {
-            return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
-        }
-        public static Icon GetIcon(Byte[] byteImage)
-        {
-            return (Icon)((new IconConverter()).ConvertFrom(byteImage));
-        }
-
     }
 }

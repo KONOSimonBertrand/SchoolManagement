@@ -105,5 +105,16 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result > 0;
         }
 
+        public async Task<List<Student>> GetStudentListAsync(string searchTerm, CancellationToken token)
+        {
+            if (token.IsCancellationRequested) return new List<Student>();
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @" SELECT * FROM Students  WHERE FirstName LIKE @pattern OR LastName LIKE @pattern OR IdNumber LIKE @pattern ORDER BY FirstName ";
+            var result = await connection.QueryAsync<Student>(query,new {
+                pattern= $"%{searchTerm}%"
+            });
+           // await Task.Delay(0, token);
+            return result.ToList();
+        }
     }
 }

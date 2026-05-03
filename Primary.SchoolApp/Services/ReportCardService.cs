@@ -1,6 +1,7 @@
 ﻿using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Helper;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -245,7 +246,7 @@ namespace Primary.SchoolApp.Services
             double sumThirdNote = student_notes.Where(x => x.ThirdNoteAsString != string.Empty).Sum(x => x.ThirdNote);
             footerItems.Add(sumThirdNote != 0 ? new("SumThirdNote", sumThirdNote.ToString()) : new("SumThirdNote", string.Empty));
 
-            double sumFinalNote = AppUtilities.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
+            double sumFinalNote = Helper.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
             footerItems.Add(sumFinalNote != 0 ? new("SumFinalNote", sumFinalNote.ToString()) : new("SumFinalNote", string.Empty));
             var term_averages = await term_averages_task;
             var eval01_averages = await eval01_averages_task;
@@ -593,7 +594,7 @@ namespace Primary.SchoolApp.Services
                 double sumThirdNote = student_notes.Where(x => x.ThirdNoteAsString != string.Empty).Sum(x => x.ThirdNote);
                 footerItems.Add(sumThirdNote != 0 ? new("SumThirdNote", sumThirdNote.ToString()) : new("SumThirdNote", string.Empty));
 
-                double sumFinalNote = AppUtilities.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
+                double sumFinalNote = Helper.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
                 footerItems.Add(sumFinalNote != 0 ? new("SumFinalNote", sumFinalNote.ToString()) : new("SumFinalNote", string.Empty));
                 var term_averages = await term_averages_task;
                 var eval01_averages = await eval01_averages_task;
@@ -910,7 +911,7 @@ namespace Primary.SchoolApp.Services
                 double sumThirdNote = student_notes.Where(x => x.ThirdNoteAsString != string.Empty).Sum(x => x.ThirdNote);
                 sumThirdNote = AppUtilities.GetTruncateOrRoundingValue(sumThirdNote, selectedClassGroup);
                 footerItems.Add(sumThirdNote != 0 ? new("SumThirdNote", sumThirdNote.ToString()) : new("SumThirdNote", string.Empty));
-                double sumFinalNote = AppUtilities.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
+                double sumFinalNote = Helper.RoundingValue(student_notes.Where(x => x.FinalNoteAsString != string.Empty).Sum(x => x.FinalNote));
                 footerItems.Add(sumFinalNote != 0 ? new("SumFinalNote", sumFinalNote.ToString()) : new("SumFinalNote", string.Empty));
 
               
@@ -1339,9 +1340,9 @@ namespace Primary.SchoolApp.Services
                           new("AverageFemale",averageFemale.ToString()),
                           new("AverageMale", averageMale.ToString()),
                           new("AverageTotal",averageTotal.ToString()),
-                          new("PassedFemale",AppUtilities.RoundingValue(passedFemale).ToString()),
-                          new("PassedMale", AppUtilities.RoundingValue(passedMale).ToString()),
-                          new("PassedTotal",AppUtilities.RoundingValue(passedTotal).ToString()),
+                          new("PassedFemale",Helper.RoundingValue(passedFemale).ToString()),
+                          new("PassedMale", Helper.RoundingValue(passedMale).ToString()),
+                          new("PassedTotal",Helper.RoundingValue(passedTotal).ToString()),
                           new("ClassroomSizeDescription",classroomSizeDescription),
                           new("GeneralAverage", generalAverage),
                           new("LowestAverage",lowestAverage),
@@ -1436,8 +1437,8 @@ namespace Primary.SchoolApp.Services
                 row[5] = AppUtilities.GetTruncateOrRoundingValue(generalAverage, classGroup);
                 row[6] = admittedCount;
                 row[7] = failedCount;
-                row[8] = AppUtilities.RoundingValue(admittedCountP);
-                row[9] = AppUtilities.RoundingValue(failedCountP);
+                row[8] = Helper.RoundingValue(admittedCountP);
+                row[9] = Helper.RoundingValue(failedCountP);
                 dataTable.Rows.Add(row);
                 rowId++;
             }
@@ -1449,11 +1450,11 @@ namespace Primary.SchoolApp.Services
             rowT[2] = roomSizeSum;
             rowT[3] = composedCountSum;
             rowT[4] = abstentionCountSum;
-            rowT[5] = composedClassCount > 0 ? AppUtilities.RoundingValue(generalAverageSum / composedClassCount) : 0;
+            rowT[5] = composedClassCount > 0 ? Helper.RoundingValue(generalAverageSum / composedClassCount) : 0;
             rowT[6] = admittedCountSum;
             rowT[7] = failedCountSum;
-            rowT[8] = AppUtilities.RoundingValue(admittedCountFinalP);
-            rowT[9] = AppUtilities.RoundingValue(failedCountFinalP);
+            rowT[8] = Helper.RoundingValue(admittedCountFinalP);
+            rowT[9] = Helper.RoundingValue(failedCountFinalP);
             dataTable.Rows.Add(rowT);
             // create head report
             ClassGroupReportHeader headerSection = new(
@@ -1615,8 +1616,8 @@ namespace Primary.SchoolApp.Services
                             lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + admittedCount;
                             row[currentColum += 1] = failedCount;
                             lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + failedCount;
-                            row[currentColum += 1] = AppUtilities.RoundingValue(admittedCountP);
-                            row[currentColum += 1] = AppUtilities.RoundingValue(failedCountP);
+                            row[currentColum += 1] = Helper.RoundingValue(admittedCountP);
+                            row[currentColum += 1] = Helper.RoundingValue(failedCountP);
                         }
                     }
                     var termAverages = await termTask;
@@ -1630,7 +1631,7 @@ namespace Primary.SchoolApp.Services
                     row[currentColum += 1] = roomSize - studentCount;
                     lastRow[currentColum] = double.Parse(lastRow[currentColum].ToString()) + (roomSize - studentCount);
                     // moyenne général pour le trimestre 
-                    var termGeneralAverage = studentCount > 0 ? AppUtilities.RoundingValue(termAverages.Sum(x => x.Average) / studentCount) : 0;
+                    var termGeneralAverage = studentCount > 0 ? Helper.RoundingValue(termAverages.Sum(x => x.Average) / studentCount) : 0;
                     row[currentColum += 1] = termGeneralAverage;
                     lastRow[currentColum] = termGeneralAverage + double.Parse(lastRow[currentColum].ToString());
                     // Nombre d'admis pour le trimestre
@@ -1642,11 +1643,11 @@ namespace Primary.SchoolApp.Services
                     row[currentColum += 1] = termFailedCount;
                     lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + termFailedCount;
                     // Pourcentage des admis pour le trimestre
-                    var termAdmittedCountP = studentCount > 0 ? AppUtilities.RoundingValue(termAdmittedCount * 100 / studentCount) : 0;
+                    var termAdmittedCountP = studentCount > 0 ? Helper.RoundingValue(termAdmittedCount * 100 / studentCount) : 0;
                     row[currentColum += 1] = termAdmittedCountP;
 
                     // Pourcentage des recalés pour le trimestre
-                    var termFailedCountP = studentCount > 0 ? AppUtilities.RoundingValue(termFailedCount * 100 / studentCount) : 0;
+                    var termFailedCountP = studentCount > 0 ? Helper.RoundingValue(termFailedCount * 100 / studentCount) : 0;
                     row[currentColum += 1] = termFailedCountP;
                     dataTable.Rows.Add(row);
                     rowId++;
@@ -1681,32 +1682,31 @@ namespace Primary.SchoolApp.Services
                     averagesSum += average;
 
                 }
-                dataTable.Rows[classroomList.Count()][$"GeneralAverage{eval.Code}"] = AppUtilities.RoundingValue(averagesCount > 0 ? averagesSum / averagesCount : 0);
+                dataTable.Rows[classroomList.Count()][$"GeneralAverage{eval.Code}"] = Helper.RoundingValue(averagesCount > 0 ? averagesSum / averagesCount : 0);
                 averagesSum = 0;
                 averagesCount = 0;
 
-                dataTable.Rows[classroomList.Count()][$"AdmittedP{eval.Code}"] = AppUtilities.RoundingValue(admittedP);
-
-                dataTable.Rows[classroomList.Count()][$"FailedP{eval.Code}"] = AppUtilities.RoundingValue(failedP);
+                dataTable.Rows[classroomList.Count()][$"AdmittedP{eval.Code}"] = Helper.RoundingValue(admittedP);
+                dataTable.Rows[classroomList.Count()][$"FailedP{eval.Code}"] = Helper.RoundingValue(failedP);
             }
 
             // Mise à jour des totaux liés au trimestre
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["GeneralAverage"].ToString(), out double averageSum))
             {
                 double average = roomComposed > 0 ? averageSum / roomComposed : 0;
-                dataTable.Rows[classroomList.Count()]["GeneralAverage"] = AppUtilities.RoundingValue(average);
+                dataTable.Rows[classroomList.Count()]["GeneralAverage"] = Helper.RoundingValue(average);
             }
 
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["Admitted"].ToString(), out double admittedSum))
             {
                 double admittedP = termStudentComposed > 0 ? admittedSum * 100 / termStudentComposed : 0;
-                dataTable.Rows[classroomList.Count()]["AdmittedP"] = AppUtilities.RoundingValue(admittedP);
+                dataTable.Rows[classroomList.Count()]["AdmittedP"] = Helper.RoundingValue(admittedP);
             }
 
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["Failed"].ToString(), out double failedSum))
             {
                 double failedP = termStudentComposed > 0 ? failedSum * 100 / termStudentComposed : 0;
-                dataTable.Rows[classroomList.Count()]["FailedP"] = AppUtilities.RoundingValue(failedP);
+                dataTable.Rows[classroomList.Count()]["FailedP"] = Helper.RoundingValue(failedP);
             }
 
             // create head report
@@ -1866,8 +1866,8 @@ namespace Primary.SchoolApp.Services
                             lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + admittedCount;
                             row[currentColum += 1] = failedCount;
                             lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + failedCount;
-                            row[currentColum += 1] = AppUtilities.RoundingValue(admittedCountP);
-                            row[currentColum += 1] = AppUtilities.RoundingValue(failedCountP);
+                            row[currentColum += 1] = Helper.RoundingValue(admittedCountP);
+                            row[currentColum += 1] = Helper.RoundingValue(failedCountP);
                         }
                     }
                     var annualAverages = await annualTask;
@@ -1881,7 +1881,7 @@ namespace Primary.SchoolApp.Services
                     row[currentColum += 1] = roomSize - studentCount;
                     lastRow[currentColum] = double.Parse(lastRow[currentColum].ToString()) + (roomSize - studentCount);
                     // moyenne général pour le trimestre 
-                    var termGeneralAverage = studentCount > 0 ? AppUtilities.RoundingValue(annualAverages.Sum(x => x.Average) / studentCount) : 0;
+                    var termGeneralAverage = studentCount > 0 ? Helper.RoundingValue(annualAverages.Sum(x => x.Average) / studentCount) : 0;
                     row[currentColum += 1] = termGeneralAverage;
                     lastRow[currentColum] = termGeneralAverage + double.Parse(lastRow[currentColum].ToString());
                     // Nombre d'admis pour le trimestre
@@ -1893,11 +1893,11 @@ namespace Primary.SchoolApp.Services
                     row[currentColum += 1] = termFailedCount;
                     lastRow[currentColum] = int.Parse(lastRow[currentColum].ToString()) + termFailedCount;
                     // Pourcentage des admis pour le trimestre
-                    var termAdmittedCountP = studentCount > 0 ? AppUtilities.RoundingValue(termAdmittedCount * 100 / studentCount) : 0;
+                    var termAdmittedCountP = studentCount > 0 ? Helper.RoundingValue(termAdmittedCount * 100 / studentCount) : 0;
                     row[currentColum += 1] = termAdmittedCountP;
 
                     // Pourcentage des recalés pour le trimestre
-                    var termFailedCountP = studentCount > 0 ? AppUtilities.RoundingValue(termFailedCount * 100 / studentCount) : 0;
+                    var termFailedCountP = studentCount > 0 ? Helper.RoundingValue(termFailedCount * 100 / studentCount) : 0;
                     row[currentColum += 1] = termFailedCountP;
                     dataTable.Rows.Add(row);
                     rowId++;
@@ -1933,32 +1933,31 @@ namespace Primary.SchoolApp.Services
                     averagesSum += average;
 
                 }
-                dataTable.Rows[classroomList.Count()][$"GeneralAverage{term.Code}"] = AppUtilities.RoundingValue(averagesCount > 0 ? averagesSum / averagesCount : 0);
+                dataTable.Rows[classroomList.Count()][$"GeneralAverage{term.Code}"] = Helper.RoundingValue(averagesCount > 0 ? averagesSum / averagesCount : 0);
                 averagesSum = 0;
                 averagesCount = 0;
 
-                dataTable.Rows[classroomList.Count()][$"AdmittedP{term.Code}"] = AppUtilities.RoundingValue(admittedP);
-
-                dataTable.Rows[classroomList.Count()][$"FailedP{term.Code}"] = AppUtilities.RoundingValue(failedP);
+                dataTable.Rows[classroomList.Count()][$"AdmittedP{term.Code}"] = Helper.RoundingValue(admittedP);
+                dataTable.Rows[classroomList.Count()][$"FailedP{term.Code}"] = Helper.RoundingValue(failedP);
             }
 
             // Mise à jour des totaux liés au trimestre
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["GeneralAverage"].ToString(), out double averageSum))
             {
                 double average = roomComposed > 0 ? averageSum / roomComposed : 0;
-                dataTable.Rows[classroomList.Count()]["GeneralAverage"] = AppUtilities.RoundingValue(average);
+                dataTable.Rows[classroomList.Count()]["GeneralAverage"] = Helper.RoundingValue(average);
             }
 
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["Admitted"].ToString(), out double admittedSum))
             {
                 double admittedP = annualtudentComposed > 0 ? admittedSum * 100 / annualtudentComposed : 0;
-                dataTable.Rows[classroomList.Count()]["AdmittedP"] = AppUtilities.RoundingValue(admittedP);
+                dataTable.Rows[classroomList.Count()]["AdmittedP"] = Helper.RoundingValue(admittedP);
             }
 
             if (double.TryParse(dataTable.Rows[classroomList.Count()]["Failed"].ToString(), out double failedSum))
             {
                 double failedP = annualtudentComposed > 0 ? failedSum * 100 / annualtudentComposed : 0;
-                dataTable.Rows[classroomList.Count()]["FailedP"] = AppUtilities.RoundingValue(failedP);
+                dataTable.Rows[classroomList.Count()]["FailedP"] = Helper.RoundingValue(failedP);
             }
 
             // create head report

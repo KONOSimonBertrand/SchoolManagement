@@ -22,7 +22,7 @@ namespace SchoolManagement.Core.Model
         {
             get
             {
-                return FullName + " #" + IdNumber;
+                return FullName + " | " + IdNumber;
             }
         }
         public DateTime BirthDate { get; set; }

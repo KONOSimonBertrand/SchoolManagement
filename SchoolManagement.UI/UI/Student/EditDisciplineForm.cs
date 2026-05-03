@@ -263,7 +263,7 @@ namespace SchoolManagement.UI
         }
         private void TextChanging(object sender, TextChangingEventArgs e)
         {
-            e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
+            e.Cancel = !Helper.Helper.IsNumber(e.NewValue);
         }
     }
 }

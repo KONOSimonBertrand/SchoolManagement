@@ -55,7 +55,7 @@ namespace SchoolManagement.Core.Model
 
         public override bool Equals(object? obj)
         {
-            if (obj is not Student other) return false;
+            if (obj is not Subscription other) return false;
             return (this.Id == other.Id );
         }
         public override int GetHashCode()

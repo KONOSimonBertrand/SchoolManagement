@@ -13,6 +13,8 @@ using SchoolManagement.Core.Model;
 using System.Text;
 using SchoolManagement.UI.Localization;
 using System.Diagnostics;
+using SchoolManagement.Helper;
+//using Microsoft.Extensions.Logging;
 
 namespace Primary.SchoolApp.Utilities
 {
@@ -73,35 +75,14 @@ namespace Primary.SchoolApp.Utilities
                 new Relationship(17,"Doctor"),
                 new Relationship(18,"Other"),
             };
-        public static List<string> Religions()
-        {
-            List<string> religions = new List<string>();
-            religions.Add("Inonnue");
-            religions.Add("Christianisme");
-            religions.Add("Christianisme-Catholicisme");
-            religions.Add("Christianisme-Protestantisme");
-            religions.Add("Christianisme-Orthodoxe");
-            religions.Add("Judaïsme");
-            religions.Add("Islam");
-            religions.Add("Islam-Sunnisme");
-            religions.Add("Islam-Chiisme");
-            religions.Add("Islam-Ahmadisme");
-            religions.Add("Bahaïsme");
-            religions.Add("Hindouisme");
-            religions.Add("Bouddhisme");
-            religions.Add("Taoïsme");
-            religions.Add("Jaïnisme");
-            religions.Add("Sikhisme");
-
-            return religions;
-
-        }
+      
         public static String ConvertStringToHexString(string input)
         {
 
             return string.Join("", Encoding.UTF8.GetBytes(input).Select(b => $"{b:X2}"));
         }
-
+        
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         public static string ConvertHexToString(string hexInput)
         {
             if (string.IsNullOrWhiteSpace(hexInput)) return string.Empty;
@@ -169,7 +150,7 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = GetImage(Resources.pencil_blue);
+                            image = Helper.GetImage(Resources.pencil_blue);
                             break;
                         case "Watch":
                             image = Resources.watch_blue;
@@ -205,7 +186,7 @@ namespace Primary.SchoolApp.Utilities
                             image = Resources.duplicate_blue;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_blue);
+                            image = Helper.GetImage(Resources.folder_blue);
                             break;
                         case "Hide":
                             image = Resources.hide_blue;
@@ -223,16 +204,16 @@ namespace Primary.SchoolApp.Utilities
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_blue);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_blue);
+                            image = Helper.GetImage(Resources.add_payment_blue);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_blue);
+                            image = Helper.GetImage(Resources.add_contact_blue);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_blue);
+                            image = Helper.GetImage(Resources.id_card_blue);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_blue);
+                            image = Helper.GetImage(Resources.show_blue);
                             break;
                     }
                     break;
@@ -240,7 +221,7 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = GetImage(Resources.pencil_blue_grey);
+                            image = Helper.GetImage(Resources.pencil_blue_grey);
                             break;
                         case "Watch":
                             image = Resources.watch_blue_grey;
@@ -276,7 +257,7 @@ namespace Primary.SchoolApp.Utilities
                             image = Resources.duplicate_blue_grey;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_blue_grey);
+                            image = Helper.GetImage(Resources.folder_blue_grey);
                             break;
                         case "Hide":
                             image = Resources.hide_blue_grey;
@@ -294,16 +275,16 @@ namespace Primary.SchoolApp.Utilities
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_blue_grey);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_blue_grey);
+                            image = Helper.GetImage(Resources.add_payment_blue_grey);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_blue_grey);
+                            image = Helper.GetImage(Resources.add_contact_blue_grey);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_blue_grey);
+                            image = Helper.GetImage(Resources.id_card_blue_grey);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_blue_grey);
+                            image = Helper.GetImage(Resources.show_blue_grey);
                             break;
                     }
                     break;
@@ -311,7 +292,7 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = GetImage(Resources.pencil_pink);
+                            image = Helper.GetImage(Resources.pencil_pink);
                             break;
                         case "Watch":
                             image = Resources.watch_pink;
@@ -347,7 +328,7 @@ namespace Primary.SchoolApp.Utilities
                             image = Resources.duplicate_pink;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_pink);
+                            image = Helper.GetImage(Resources.folder_pink);
                             break;
                         case "Hide":
                             image = Resources.hide_pink;
@@ -365,16 +346,16 @@ namespace Primary.SchoolApp.Utilities
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_pink);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_pink);
+                            image = Helper.GetImage(Resources.add_payment_pink);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_pink);
+                            image = Helper.GetImage(Resources.add_contact_pink);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_pink);
+                            image = Helper.GetImage(Resources.id_card_pink);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_pink);
+                            image = Helper.GetImage(Resources.show_pink);
                             break;
                     }
                     break;
@@ -382,7 +363,7 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image = GetImage(Resources.pencil_teal);
+                            image = Helper.GetImage(Resources.pencil_teal);
                             break;
                         case "Watch":
                             image = Resources.watch_teal;
@@ -418,7 +399,7 @@ namespace Primary.SchoolApp.Utilities
                             image = Resources.duplicate_teal;
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_teal);
+                            image = Helper.GetImage(Resources.folder_teal);
                             break;
                         case "Hide":
                             image = Resources.hide_teal;
@@ -436,16 +417,16 @@ namespace Primary.SchoolApp.Utilities
                             image = (Bitmap)(new ImageConverter()).ConvertFrom(Resources.check_teal);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_teal);
+                            image = Helper.GetImage(Resources.add_payment_teal);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_teal);
+                            image = Helper.GetImage(Resources.add_contact_teal);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_teal);
+                            image = Helper.GetImage(Resources.id_card_teal);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_teal);
+                            image = Helper.GetImage(Resources.show_teal);
                             break;
                     }
                     break;
@@ -453,70 +434,70 @@ namespace Primary.SchoolApp.Utilities
                     switch (category)
                     {
                         case "Edit":
-                            image =GetImage(Resources.pencil_white);
+                            image = Helper.GetImage(Resources.pencil_white);
                             break;
                         case "Watch":
-                            image = GetImage(Resources.watch_white);
+                            image = Helper.GetImage(Resources.watch_white);
                             break;
                         case "Image":
-                            image = GetImage(Resources.add_image_White);
+                            image = Helper.GetImage(Resources.add_image_White);
                             break;
                         case "File":
-                            image = GetImage(Resources.create_file_white);
+                            image = Helper.GetImage(Resources.create_file_white);
                             break;
                         case "Lock":
-                            image = GetImage(Resources.lock_white);
+                            image = Helper.GetImage(Resources.lock_white);
                             break;
                         case "Unlock":
-                            image = GetImage(Resources.unlock_white);
+                            image = Helper.GetImage(Resources.unlock_white);
                             break;
                         case "Close":
-                            image = GetImage(Resources.close_white);
+                            image = Helper.GetImage(Resources.close_white);
                             break;
                         case "Printer":
-                            image = GetImage(Resources.printer_white);
+                            image = Helper.GetImage(Resources.printer_white);
                             break;
                         case "Add":
-                            image = GetImage(Resources.add_white);
+                            image = Helper.GetImage(Resources.add_white);
                             break;
                         case "Delete":
-                            image = GetImage(Resources.delete_white);
+                            image = Helper.GetImage(Resources.delete_white);
                             break;
                         case "Excel":
-                            image = GetImage(Resources.excel_white);
+                            image = Helper.GetImage(Resources.excel_white);
                             break;
                         case "Duplicate":
-                            image = GetImage(Resources.duplicate_white);
+                            image = Helper.GetImage(Resources.duplicate_white);
                             break;
                         case "Folder":
-                            image = GetImage(Resources.folder_white);
+                            image = Helper.GetImage(Resources.folder_white);
                             break;
                         case "Hide":
-                            image = GetImage(Resources.hide_white);
+                            image = Helper.GetImage(Resources.hide_white);
                             break;
                         case "Undo":
-                            image = GetImage(Resources.undo_white);
+                            image = Helper.GetImage(Resources.undo_white);
                             break;
                         case "Cancel":
-                            image = GetImage(Resources.cancel_white);
+                            image = Helper.GetImage(Resources.cancel_white);
                             break;
                         case "Search":
-                            image = GetImage(Resources.search_white);
+                            image = Helper.GetImage(Resources.search_white);
                             break;
                         case "Check":
-                            image = GetImage(Resources.check_white);
+                            image = Helper.GetImage(Resources.check_white);
                             break;
                         case "Payment":
-                            image = GetImage(Resources.add_payment_white);
+                            image = Helper.GetImage(Resources.add_payment_white);
                             break;
                         case "Contact":
-                            image = GetImage(Resources.add_contact_white);
+                            image = Helper.GetImage(Resources.add_contact_white);
                             break;
                         case "Card":
-                            image = GetImage(Resources.id_card_white);
+                            image = Helper.GetImage(Resources.id_card_white);
                             break;
                         case "Show":
-                            image = GetImage(Resources.show_white);
+                            image = Helper.GetImage(Resources.show_white);
                             break;
                     }
                     break;
@@ -604,40 +585,18 @@ namespace Primary.SchoolApp.Utilities
         }
         #endregion
         #region LogManager
-        public static void AddLog(string logMessage)
-        {
-            using (StreamWriter w = File.AppendText(System.Windows.Forms.Application.StartupPath + @"\Log\Log.txt"))
-            {
-                AddLogMessage(logMessage, w);
-            }
-        }
-        private static void AddLogMessage(string logMessage, TextWriter w)
-        {
-            w.Write("\r\nDate   : ");
-            w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
-                DateTime.Now.ToLongDateString());
-            // w.WriteLine("  :");
-            w.WriteLine("Message: {0}", logMessage);
-            w.WriteLine("-------------------------------");
-
-        }
+       
 
         public static string GetCurrentMethodName()
         {
-            StackTrace stackTrace = new StackTrace();
+            StackTrace stackTrace = new();
             StackFrame stackFrame = stackTrace.GetFrame(1);
             return stackFrame.GetMethod().DeclaringType + " :: " + stackFrame.GetMethod().Name;
         }
 
         #endregion
 
-        private static double TruncateDouble(double value, int precision)
-        {
-            var divisor = (decimal)Math.Pow(10, -1 * 2);
-            decimal decimalValue = (decimal)value;
-            var actual = (decimalValue - (decimalValue % divisor));
-            return (double)actual;
-        }
+       
         public static string GetRelationshipName(int relationshipId)
         {
             var relationship = Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? relationshipEnglishList.FirstOrDefault(x => x.Id == relationshipId) : relationshipFrenchList.FirstOrDefault(x => x.Id == relationshipId);
@@ -657,29 +616,20 @@ namespace Primary.SchoolApp.Utilities
             }
             catch (Exception ex)
             {
-                AddLog(ex.Message);
+                string message=Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? $"Error while loading image from url: {url}" : $"Erreur lors du chargement de l'image depuis l'URL: {url}";
+                logger.Error(ex, message);
             }
             return null;
         }
 
-        public static Image GetImage(Byte[] byteImage)
-        {
-            return (Bitmap)((new ImageConverter()).ConvertFrom(byteImage));
-        }
-        public static Icon GetIcon(Byte[] byteImage)
-        {
-            return (Icon)((new IconConverter()).ConvertFrom(byteImage));
-        }
+      
         // return truncate or rounding value
         public static double GetTruncateOrRoundingValue(double value, SchoolGroup group)
         {
-            double result = group.NoteIsTruncate ? TruncateDouble(value, 2) : RoundingValue(value);
+            double result = group.NoteIsTruncate ? Helper.TruncateDouble(value, 2) : Helper.RoundingValue(value);
             return result;
         }
-        public static double RoundingValue(double value)
-        {
-            return double.Parse(value.ToString("F", System.Globalization.CultureInfo.CurrentCulture));
-        }
+       
 
         public static string ToLisenceType(string key) => key switch
         {

@@ -10,7 +10,7 @@ using Telerik.WinControls;
 using System.Net;
 using System.Linq;
 using System.Net.Sockets;
-using Primary.SchoolApp.UI;
+using Microsoft.Extensions.Logging;
 namespace Primary.SchoolApp
 {
     public partial class LoginForm : SchoolManagement.UI.LoginForm
@@ -18,7 +18,8 @@ namespace Primary.SchoolApp
         private readonly ClientApp clientApp;
         private readonly IUserService userService;
         private readonly ILogService logService;
-        public LoginForm(ClientApp clientApp, IUserService userService, ILogService logService)
+        private readonly ILogger<LoginForm> logger;
+        public LoginForm(ClientApp clientApp, IUserService userService, ILogService logService, ILogger<LoginForm> logger)
         {
             ThemeResolutionService.ApplicationThemeName = "Material";
             PictureLogo.Image = Resources.logo;
@@ -26,6 +27,7 @@ namespace Primary.SchoolApp
             this.clientApp = clientApp;
             this.userService = userService;
             this.logService = logService;
+            this.logger = logger;
             InitEvents();
             this.Text = Language.labelSignIn;
             ConnectionButton.Text = Language.labelLogIn;
@@ -90,12 +92,12 @@ namespace Primary.SchoolApp
                         };
                         Program.UserConnected=user;
                         var logResult = logService.CreateLog(log).Result;
+                        logger.LogInformation($"Connexion de l'utisateur {Program.UserConnected.UserName}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    AppUtilities.AddLog(ex.Message);
-                    AppUtilities.AddLog(ex.StackTrace);
+                    logger.LogError(ex, $"Erreur lors de la connexion de l'utilisateur {UserNameTextBox.Text.Trim()}");
                 }
                 if (user != null)
                 {
@@ -114,6 +116,7 @@ namespace Primary.SchoolApp
         }
         private void OutButton_Click(object sender, EventArgs e)
         {
+            logger.LogInformation($"Arrêt de SchoolApp");
             Application.Exit();
         }
     

@@ -1,4 +1,5 @@
 ﻿
+using SchoolManagement.Helper;
 using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
@@ -40,7 +41,7 @@ namespace SchoolManagement.UI
 
         private void AmountTextBox_TextChanging(object sender, TextChangingEventArgs e)
         {
-            e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
+            e.Cancel = !Helper.Helper.IsNumber(e.NewValue);
         }
 
         private void InitComponent()

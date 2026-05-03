@@ -4,6 +4,7 @@ using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Services;
 using Primary.SchoolApp.UI;
 using Primary.SchoolApp.Utilities;
+using SchoolManagement.Helper;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
@@ -475,7 +476,7 @@ namespace Primary.SchoolApp
 
         private void ReportMainListView_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
-            e.Item.Image = AppUtilities.GetImage(Resources.report);
+            e.Item.Image = Helper.GetImage(Resources.report);
         }
 
         private void InitMainListView()

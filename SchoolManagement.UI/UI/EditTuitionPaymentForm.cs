@@ -64,7 +64,7 @@ namespace SchoolManagement.UI
 
         private void AmountTextBox_TextChanging(object sender, TextChangingEventArgs e)
         {
-            e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
+            e.Cancel = !Helper.Helper.IsNumber(e.NewValue);
         }
         private void CloseButton_Click(object sender, EventArgs e)
         {

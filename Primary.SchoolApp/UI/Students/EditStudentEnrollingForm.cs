@@ -26,11 +26,10 @@ namespace Primary.SchoolApp.UI
         private readonly ISchoolRoomService roomService;
         private readonly IPaymentMeanService paymentMeanService;
         private readonly IStudentEnrollingService studentEnrollingService;
-        private readonly ITuitionOrderService tuitionOrderService;
         private readonly ClientApp clientApp;
         private StudentEnrolling selectedEnrolling;
         public EditStudentEnrollingForm(ILogService logService, IStudentService studentService, ICashFlowService cashFlowService, ISchoolClassService classService,
-             ISchoolRoomService roomService, IPaymentMeanService paymentMeanService, ClientApp clientApp, IStudentEnrollingService studentEnrollingService, ITuitionOrderService tuitionOrderService)
+             ISchoolRoomService roomService, IPaymentMeanService paymentMeanService, ClientApp clientApp, IStudentEnrollingService studentEnrollingService)
         {
             this.logService = logService;
             this.studentService = studentService;
@@ -46,13 +45,12 @@ namespace Primary.SchoolApp.UI
             PaymentMeanDropDownList.DataSource = Program.PaymentMeanList;
             PaymentMeanDropDownList.SelectedIndex = -1;
             InitEvents();
-            this.tuitionOrderService = tuitionOrderService;
         }
 
         private void LoadFeesList(int classId)
         {
 
-            var InfoItemList = new List<ReceiptItem>();
+            var InfoItemList = new List<FeeItem>();
             int i = 0;
             var fsList = Program.CashFlowTypeList.Where(x => x.Category == "FS");
             var abList = Program.CashFlowTypeList.Where(x => x.Category == "AB");
@@ -65,7 +63,7 @@ namespace Primary.SchoolApp.UI
                     Id = i++,
                     UnitPrice = fs.Amount,
                     Quantity = 1,
-                    CashFlowTypeName = fs.CashFlowType.Name,
+                    Name = fs.CashFlowType.Name,
                     Description = $"{fs.CashFlowType.Name}: {fs.Amount} FCFA, {Language.labelTrancheNumber}: {fs.TrancheNumber}"
                 }
                     );
@@ -78,7 +76,7 @@ namespace Primary.SchoolApp.UI
                     Id = i++,
                     UnitPrice = ab.Amount,
                     Quantity = 1,
-                    CashFlowTypeName = ab.CashFlowType.Name,
+                    Name = ab.CashFlowType.Name,
                     Description = $"{Language.labelSubscription}   {ab.CashFlowType.Name}: {ab.Amount} FCFA, {Language.labelDuration}: {ab.Duration}"
                 }
                     );
@@ -91,7 +89,7 @@ namespace Primary.SchoolApp.UI
                     Id = i++,
                     UnitPrice = ff.Amount,
                     Quantity = ff.RequiredQuantity,
-                    CashFlowTypeName = ff.CashFlowType.Name,
+                    Name = ff.CashFlowType.Name,
                     Description = $"{ff.CashFlowType.Name}  {Language.LabelUnitPrice}: {ff.Amount} FCFA, {Language.LabelRequiredQuantity}: {ff.RequiredQuantity}"
                 }
                     );
@@ -185,23 +183,8 @@ namespace Primary.SchoolApp.UI
         }
         private async void LoadPayments(int enrollingId)
         {
-            var orders= await tuitionOrderService.GetTuitionOrdersByEnrollingAsync(enrollingId);
-            var selectedOrder=orders.FirstOrDefault(x=>x.IsDuringEnrolling);
-            if (selectedOrder != null) {
-                selectedOrder.TuitionOrderItems=await tuitionOrderService.GetTuitionOrderItemsAsync(selectedOrder.Id);
-                DoneByTextBox.Text=selectedOrder.DoneBy;
-                TransactionIdTextBox.Text=selectedOrder.TransactionId;
-                TransactionDateTimePicker.Value=selectedOrder.TransactionDate;
-                PaymentMeanDropDownList.SelectedValue = selectedOrder.PaymentMean;
-                if (selectedOrder.TuitionOrderItems.Count == 1) {
-                }
-                else
-                {
-                    foreach (var item in selectedOrder.TuitionOrderItems) { 
 
-                    }
-                }
-            }
+            await Task.Delay(0);
         } 
         private void OnShown(object sender, EventArgs e)
         {

@@ -141,7 +141,7 @@ namespace SchoolManagement.UI
 
         private void TextBox_Changing(object sender, TextChangingEventArgs e)
         {
-            e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
+            e.Cancel = !Helper.Helper.IsNumber(e.NewValue);
         }
         private void GroupDropDownList_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {

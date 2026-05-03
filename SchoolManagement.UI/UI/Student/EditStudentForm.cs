@@ -242,7 +242,7 @@ namespace SchoolManagement.UI
 
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            this.religionDropDownList.DataSource = ViewUtilities.Religions();
+            this.religionDropDownList.DataSource = Helper.Helper.Religions();
             this.religionDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.religionDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 

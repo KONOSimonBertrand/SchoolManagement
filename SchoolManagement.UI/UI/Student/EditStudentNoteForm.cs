@@ -50,7 +50,7 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             closeButton.Click += (s, e) => { this.Close(); };
-            noteTextBox.TextChanging += (s, e) => { e.Cancel=!ViewUtilities.IsNumber(e.NewValue); };
+            noteTextBox.TextChanging += (s, e) => { e.Cancel=!Helper.Helper.IsNumber(e.NewValue); };
         }
 
 

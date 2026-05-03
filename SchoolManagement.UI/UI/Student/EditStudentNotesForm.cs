@@ -103,11 +103,11 @@ namespace SchoolManagement.UI
         {
             if (ThemeResolutionService.ApplicationThemeName == "Windows11Dark")
             {
-                informationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                informationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
             }
             else
             {
-                informationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                informationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
             }
         }
 

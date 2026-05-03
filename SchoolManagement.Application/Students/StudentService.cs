@@ -63,6 +63,11 @@ namespace SchoolManagement.Application
             return await studentReadRepository.GetStudentListAsync();
         }
 
+        public async Task<List<Student>> GetStudentListsync(string searchTerm, CancellationToken token)
+        {
+            return await studentReadRepository.GetStudentListAsync(searchTerm,token);
+        }
+
         public async Task<bool> SaveStudentPictureAsync(int studentId, string urlPicture)
         {
             return await studentWriteRepository.AddStudentPictureAsync(studentId, urlPicture);

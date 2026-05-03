@@ -368,7 +368,6 @@ namespace Primary.SchoolApp.UI
                                 IdNumber = selectedPayment.IdNumber,
                                 Note = selectedPayment.Note,
                                 DoneBy = selectedPayment.DoneBy,
-                                IsDuringEnrolling = selectedPayment.IsDuringEnrolling,
                               
                             };
                             if (!selectedEnrolling.PaymentList.ToList().Select(x => x.IdNumber).Contains(payment.IdNumber+"-return"))

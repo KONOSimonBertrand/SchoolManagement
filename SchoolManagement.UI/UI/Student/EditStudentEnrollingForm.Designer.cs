@@ -67,19 +67,20 @@
             amountLabel = new Telerik.WinControls.UI.RadLabel();
             feesLabel = new Telerik.WinControls.UI.RadLabel();
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            feesTotalLabel = new Telerik.WinControls.UI.RadLabel();
+            feesTotalSeparator = new Telerik.WinControls.UI.RadSeparator();
+            invoicePanel = new Telerik.WinControls.UI.RadPanel();
+            endDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
+            endDateSeparator = new Telerik.WinControls.UI.RadSeparator();
+            startDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
+            startDateSeparator = new Telerik.WinControls.UI.RadSeparator();
             removeInvoiceItemButton = new Telerik.WinControls.UI.RadButton();
             addInvoiceItemButton = new Telerik.WinControls.UI.RadButton();
-            feesTotalSeparator = new Telerik.WinControls.UI.RadSeparator();
             feesSeparator = new Telerik.WinControls.UI.RadSeparator();
             invoiceTotalListView = new Telerik.WinControls.UI.RadListView();
             invoiceItemListView = new Telerik.WinControls.UI.RadListView();
-            quantityLabel = new Telerik.WinControls.UI.RadLabel();
-            quantitySeparator = new Telerik.WinControls.UI.RadSeparator();
-            totalAmountSeparator = new Telerik.WinControls.UI.RadSeparator();
-            quantityTextBox = new Telerik.WinControls.UI.RadTextBox();
-            totalAmountTextBox = new Telerik.WinControls.UI.RadTextBox();
-            totalAmountLabel = new Telerik.WinControls.UI.RadLabel();
-            feesTotalLabel = new Telerik.WinControls.UI.RadLabel();
+            startDateLabel = new Telerik.WinControls.UI.RadLabel();
+            endDateLabel = new Telerik.WinControls.UI.RadLabel();
             feesDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
@@ -124,19 +125,21 @@
             ((System.ComponentModel.ISupportInitialize)feesLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)feesTotalLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)feesTotalSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)invoicePanel).BeginInit();
+            invoicePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)endDateTimePicker).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)endDateSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)startDateTimePicker).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)startDateSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)removeInvoiceItemButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)addInvoiceItemButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)feesTotalSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)feesSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)invoiceTotalListView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)invoiceItemListView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)quantityLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)quantitySeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)totalAmountSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)quantityTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)totalAmountTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)totalAmountLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)feesTotalLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)startDateLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)endDateLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)feesDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
@@ -379,7 +382,7 @@
             // 
             // transactionDateSeparator
             // 
-            transactionDateSeparator.Location = new Point(15, 251);
+            transactionDateSeparator.Location = new Point(15, 82);
             transactionDateSeparator.Margin = new Padding(5, 6, 5, 6);
             transactionDateSeparator.Name = "transactionDateSeparator";
             transactionDateSeparator.Size = new Size(140, 5);
@@ -389,7 +392,7 @@
             // transactionDateLabel
             // 
             transactionDateLabel.AutoSize = false;
-            transactionDateLabel.Location = new Point(13, 181);
+            transactionDateLabel.Location = new Point(13, 12);
             transactionDateLabel.Margin = new Padding(5, 6, 5, 6);
             transactionDateLabel.Name = "transactionDateLabel";
             transactionDateLabel.Size = new Size(140, 30);
@@ -399,7 +402,7 @@
             // transactionDateTimePicker
             // 
             transactionDateTimePicker.CalendarSize = new Size(290, 320);
-            transactionDateTimePicker.Location = new Point(15, 221);
+            transactionDateTimePicker.Location = new Point(15, 52);
             transactionDateTimePicker.Margin = new Padding(5, 6, 5, 6);
             transactionDateTimePicker.MinimumSize = new Size(0, 30);
             transactionDateTimePicker.Name = "transactionDateTimePicker";
@@ -415,7 +418,7 @@
             // 
             // transactionIdSeparator
             // 
-            transactionIdSeparator.Location = new Point(165, 251);
+            transactionIdSeparator.Location = new Point(165, 82);
             transactionIdSeparator.Margin = new Padding(5, 6, 5, 6);
             transactionIdSeparator.Name = "transactionIdSeparator";
             transactionIdSeparator.Size = new Size(165, 5);
@@ -425,7 +428,7 @@
             // transactionIdTextBox
             // 
             transactionIdTextBox.AutoSize = false;
-            transactionIdTextBox.Location = new Point(165, 221);
+            transactionIdTextBox.Location = new Point(165, 52);
             transactionIdTextBox.Margin = new Padding(5, 6, 5, 6);
             transactionIdTextBox.Name = "transactionIdTextBox";
             transactionIdTextBox.Size = new Size(165, 36);
@@ -434,7 +437,7 @@
             // transactionIdLabel
             // 
             transactionIdLabel.AutoSize = false;
-            transactionIdLabel.Location = new Point(165, 181);
+            transactionIdLabel.Location = new Point(165, 12);
             transactionIdLabel.Margin = new Padding(5, 6, 5, 6);
             transactionIdLabel.Name = "transactionIdLabel";
             transactionIdLabel.Size = new Size(165, 30);
@@ -443,7 +446,7 @@
             // 
             // paymentMeanSeparator
             // 
-            paymentMeanSeparator.Location = new Point(340, 251);
+            paymentMeanSeparator.Location = new Point(340, 82);
             paymentMeanSeparator.Margin = new Padding(5, 6, 5, 6);
             paymentMeanSeparator.Name = "paymentMeanSeparator";
             paymentMeanSeparator.Size = new Size(325, 5);
@@ -455,7 +458,7 @@
             paymentMeanDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             paymentMeanDropDownList.DropDownHeight = 249;
             paymentMeanDropDownList.ItemHeight = 38;
-            paymentMeanDropDownList.Location = new Point(340, 221);
+            paymentMeanDropDownList.Location = new Point(340, 52);
             paymentMeanDropDownList.Margin = new Padding(5, 6, 5, 6);
             paymentMeanDropDownList.MinimumSize = new Size(0, 30);
             paymentMeanDropDownList.Name = "paymentMeanDropDownList";
@@ -471,7 +474,7 @@
             // paymentMeanLabel
             // 
             paymentMeanLabel.AutoSize = false;
-            paymentMeanLabel.Location = new Point(340, 181);
+            paymentMeanLabel.Location = new Point(340, 12);
             paymentMeanLabel.Margin = new Padding(5, 6, 5, 6);
             paymentMeanLabel.Name = "paymentMeanLabel";
             paymentMeanLabel.Size = new Size(325, 30);
@@ -480,7 +483,7 @@
             // 
             // doneBySeparator
             // 
-            doneBySeparator.Location = new Point(674, 251);
+            doneBySeparator.Location = new Point(674, 82);
             doneBySeparator.Margin = new Padding(4, 5, 4, 5);
             doneBySeparator.Name = "doneBySeparator";
             doneBySeparator.Size = new Size(372, 4);
@@ -490,7 +493,7 @@
             // doneByTextBox
             // 
             doneByTextBox.AutoSize = false;
-            doneByTextBox.Location = new Point(674, 221);
+            doneByTextBox.Location = new Point(674, 52);
             doneByTextBox.Margin = new Padding(4, 5, 4, 5);
             doneByTextBox.Name = "doneByTextBox";
             doneByTextBox.Size = new Size(372, 36);
@@ -499,7 +502,7 @@
             // doneByLabel
             // 
             doneByLabel.AutoSize = false;
-            doneByLabel.Location = new Point(674, 181);
+            doneByLabel.Location = new Point(674, 12);
             doneByLabel.Margin = new Padding(4, 5, 4, 5);
             doneByLabel.Name = "doneByLabel";
             doneByLabel.Size = new Size(372, 30);
@@ -508,7 +511,7 @@
             // 
             // amountSeparator
             // 
-            amountSeparator.Location = new Point(537, 338);
+            amountSeparator.Location = new Point(537, 167);
             amountSeparator.Margin = new Padding(4, 5, 4, 5);
             amountSeparator.Name = "amountSeparator";
             amountSeparator.Size = new Size(138, 4);
@@ -518,7 +521,7 @@
             // amountTextBox
             // 
             amountTextBox.AutoSize = false;
-            amountTextBox.Location = new Point(537, 308);
+            amountTextBox.Location = new Point(537, 137);
             amountTextBox.Margin = new Padding(4, 5, 4, 5);
             amountTextBox.Name = "amountTextBox";
             amountTextBox.Size = new Size(138, 36);
@@ -527,7 +530,7 @@
             // amountLabel
             // 
             amountLabel.AutoSize = false;
-            amountLabel.Location = new Point(537, 268);
+            amountLabel.Location = new Point(537, 97);
             amountLabel.Margin = new Padding(4, 5, 4, 5);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(138, 30);
@@ -537,7 +540,7 @@
             // feesLabel
             // 
             feesLabel.AutoSize = false;
-            feesLabel.Location = new Point(15, 268);
+            feesLabel.Location = new Point(15, 97);
             feesLabel.Margin = new Padding(4, 5, 4, 5);
             feesLabel.Name = "feesLabel";
             feesLabel.Size = new Size(514, 30);
@@ -546,45 +549,17 @@
             // 
             // editPanel
             // 
-            editPanel.Controls.Add(removeInvoiceItemButton);
-            editPanel.Controls.Add(addInvoiceItemButton);
-            editPanel.Controls.Add(feesTotalSeparator);
-            editPanel.Controls.Add(feesSeparator);
-            editPanel.Controls.Add(doneBySeparator);
-            editPanel.Controls.Add(transactionDateLabel);
-            editPanel.Controls.Add(invoiceTotalListView);
-            editPanel.Controls.Add(invoiceItemListView);
-            editPanel.Controls.Add(quantityLabel);
-            editPanel.Controls.Add(quantitySeparator);
-            editPanel.Controls.Add(totalAmountSeparator);
-            editPanel.Controls.Add(amountSeparator);
-            editPanel.Controls.Add(quantityTextBox);
-            editPanel.Controls.Add(totalAmountTextBox);
-            editPanel.Controls.Add(amountTextBox);
-            editPanel.Controls.Add(totalAmountLabel);
-            editPanel.Controls.Add(amountLabel);
-            editPanel.Controls.Add(feesLabel);
-            editPanel.Controls.Add(doneByTextBox);
-            editPanel.Controls.Add(doneByLabel);
-            editPanel.Controls.Add(paymentMeanSeparator);
-            editPanel.Controls.Add(paymentMeanDropDownList);
-            editPanel.Controls.Add(paymentMeanLabel);
-            editPanel.Controls.Add(transactionDateSeparator);
-            editPanel.Controls.Add(transactionDateTimePicker);
-            editPanel.Controls.Add(transactionIdSeparator);
-            editPanel.Controls.Add(transactionIdTextBox);
-            editPanel.Controls.Add(transactionIdLabel);
             editPanel.Controls.Add(dateLabel);
             editPanel.Controls.Add(dateSeparator);
             editPanel.Controls.Add(dateTimePicker);
             editPanel.Controls.Add(addRoomButton);
             editPanel.Controls.Add(feesTotalLabel);
+            editPanel.Controls.Add(feesTotalSeparator);
             editPanel.Controls.Add(roomLabel);
             editPanel.Controls.Add(roomSeparator);
             editPanel.Controls.Add(roomDropDownList);
             editPanel.Controls.Add(addClassButton);
             editPanel.Controls.Add(classSeparator);
-            editPanel.Controls.Add(feesDropDownList);
             editPanel.Controls.Add(classDropDownList);
             editPanel.Controls.Add(classLabel);
             editPanel.Controls.Add(repeaterLabel);
@@ -597,26 +572,21 @@
             editPanel.Controls.Add(studentSeparator);
             editPanel.Controls.Add(studentDropDownList);
             editPanel.Controls.Add(studentLabel);
+            editPanel.Controls.Add(invoicePanel);
             editPanel.Location = new Point(-1, 0);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(1052, 540);
+            editPanel.Size = new Size(1059, 556);
             editPanel.TabIndex = 174;
             // 
-            // removeInvoiceItemButton
+            // feesTotalLabel
             // 
-            removeInvoiceItemButton.Location = new Point(1003, 398);
-            removeInvoiceItemButton.Name = "removeInvoiceItemButton";
-            removeInvoiceItemButton.Size = new Size(35, 36);
-            removeInvoiceItemButton.TabIndex = 17;
-            removeInvoiceItemButton.Text = "-";
-            // 
-            // addInvoiceItemButton
-            // 
-            addInvoiceItemButton.Location = new Point(1003, 308);
-            addInvoiceItemButton.Name = "addInvoiceItemButton";
-            addInvoiceItemButton.Size = new Size(35, 36);
-            addInvoiceItemButton.TabIndex = 15;
-            addInvoiceItemButton.Text = "+";
+            feesTotalLabel.AutoSize = false;
+            feesTotalLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            feesTotalLabel.Location = new Point(640, 138);
+            feesTotalLabel.Margin = new Padding(4, 5, 4, 5);
+            feesTotalLabel.Name = "feesTotalLabel";
+            feesTotalLabel.Size = new Size(406, 30);
+            feesTotalLabel.TabIndex = 148;
             // 
             // feesTotalSeparator
             // 
@@ -627,9 +597,104 @@
             feesTotalSeparator.TabIndex = 179;
             feesTotalSeparator.TabStop = false;
             // 
+            // invoicePanel
+            // 
+            invoicePanel.Controls.Add(endDateTimePicker);
+            invoicePanel.Controls.Add(endDateSeparator);
+            invoicePanel.Controls.Add(startDateTimePicker);
+            invoicePanel.Controls.Add(startDateSeparator);
+            invoicePanel.Controls.Add(removeInvoiceItemButton);
+            invoicePanel.Controls.Add(addInvoiceItemButton);
+            invoicePanel.Controls.Add(feesSeparator);
+            invoicePanel.Controls.Add(doneBySeparator);
+            invoicePanel.Controls.Add(transactionDateLabel);
+            invoicePanel.Controls.Add(invoiceTotalListView);
+            invoicePanel.Controls.Add(invoiceItemListView);
+            invoicePanel.Controls.Add(startDateLabel);
+            invoicePanel.Controls.Add(amountSeparator);
+            invoicePanel.Controls.Add(amountTextBox);
+            invoicePanel.Controls.Add(endDateLabel);
+            invoicePanel.Controls.Add(amountLabel);
+            invoicePanel.Controls.Add(feesLabel);
+            invoicePanel.Controls.Add(doneByTextBox);
+            invoicePanel.Controls.Add(doneByLabel);
+            invoicePanel.Controls.Add(paymentMeanSeparator);
+            invoicePanel.Controls.Add(paymentMeanDropDownList);
+            invoicePanel.Controls.Add(paymentMeanLabel);
+            invoicePanel.Controls.Add(transactionDateSeparator);
+            invoicePanel.Controls.Add(transactionDateTimePicker);
+            invoicePanel.Controls.Add(transactionIdSeparator);
+            invoicePanel.Controls.Add(transactionIdTextBox);
+            invoicePanel.Controls.Add(transactionIdLabel);
+            invoicePanel.Controls.Add(feesDropDownList);
+            invoicePanel.Location = new Point(2, 187);
+            invoicePanel.Name = "invoicePanel";
+            invoicePanel.Size = new Size(1054, 359);
+            invoicePanel.TabIndex = 178;
+            // 
+            // endDateTimePicker
+            // 
+            endDateTimePicker.AutoSize = false;
+            endDateTimePicker.CalendarSize = new Size(290, 320);
+            endDateTimePicker.Location = new Point(844, 137);
+            endDateTimePicker.Margin = new Padding(4, 5, 4, 5);
+            endDateTimePicker.Name = "endDateTimePicker";
+            endDateTimePicker.Size = new Size(147, 36);
+            endDateTimePicker.TabIndex = 14;
+            endDateTimePicker.TabStop = false;
+            endDateTimePicker.Text = "lundi 29 janvier 2018";
+            endDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
+            // 
+            // endDateSeparator
+            // 
+            endDateSeparator.Location = new Point(844, 167);
+            endDateSeparator.Margin = new Padding(4, 5, 4, 5);
+            endDateSeparator.Name = "endDateSeparator";
+            endDateSeparator.Size = new Size(147, 4);
+            endDateSeparator.TabIndex = 171;
+            endDateSeparator.TabStop = false;
+            // 
+            // startDateTimePicker
+            // 
+            startDateTimePicker.AutoSize = false;
+            startDateTimePicker.CalendarSize = new Size(290, 320);
+            startDateTimePicker.Location = new Point(685, 137);
+            startDateTimePicker.Margin = new Padding(4, 5, 4, 5);
+            startDateTimePicker.Name = "startDateTimePicker";
+            startDateTimePicker.Size = new Size(151, 36);
+            startDateTimePicker.TabIndex = 13;
+            startDateTimePicker.TabStop = false;
+            startDateTimePicker.Text = "lundi 29 janvier 2018";
+            startDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
+            // 
+            // startDateSeparator
+            // 
+            startDateSeparator.Location = new Point(685, 167);
+            startDateSeparator.Margin = new Padding(4, 5, 4, 5);
+            startDateSeparator.Name = "startDateSeparator";
+            startDateSeparator.Size = new Size(151, 4);
+            startDateSeparator.TabIndex = 171;
+            startDateSeparator.TabStop = false;
+            // 
+            // removeInvoiceItemButton
+            // 
+            removeInvoiceItemButton.Location = new Point(1003, 243);
+            removeInvoiceItemButton.Name = "removeInvoiceItemButton";
+            removeInvoiceItemButton.Size = new Size(35, 36);
+            removeInvoiceItemButton.TabIndex = 17;
+            removeInvoiceItemButton.Text = "-";
+            // 
+            // addInvoiceItemButton
+            // 
+            addInvoiceItemButton.Location = new Point(1003, 137);
+            addInvoiceItemButton.Name = "addInvoiceItemButton";
+            addInvoiceItemButton.Size = new Size(35, 36);
+            addInvoiceItemButton.TabIndex = 15;
+            addInvoiceItemButton.Text = "+";
+            // 
             // feesSeparator
             // 
-            feesSeparator.Location = new Point(15, 338);
+            feesSeparator.Location = new Point(15, 167);
             feesSeparator.Margin = new Padding(4, 5, 4, 5);
             feesSeparator.Name = "feesSeparator";
             feesSeparator.Size = new Size(514, 4);
@@ -652,85 +717,39 @@
             // 
             invoiceItemListView.AllowEdit = false;
             invoiceItemListView.ItemSpacing = -1;
-            invoiceItemListView.Location = new Point(15, 343);
+            invoiceItemListView.Location = new Point(15, 186);
             invoiceItemListView.Name = "invoiceItemListView";
             invoiceItemListView.ShowColumnHeaders = false;
             invoiceItemListView.ShowGridLines = true;
-            invoiceItemListView.Size = new Size(976, 155);
+            invoiceItemListView.Size = new Size(976, 168);
             invoiceItemListView.TabIndex = 16;
             invoiceItemListView.ViewType = Telerik.WinControls.UI.ListViewType.DetailsView;
             // 
-            // quantityLabel
+            // startDateLabel
             // 
-            quantityLabel.AutoSize = false;
-            quantityLabel.Location = new Point(683, 268);
-            quantityLabel.Margin = new Padding(4, 5, 4, 5);
-            quantityLabel.Name = "quantityLabel";
-            quantityLabel.Size = new Size(93, 30);
-            quantityLabel.TabIndex = 176;
-            quantityLabel.Text = "Quantié:";
+            startDateLabel.AutoSize = false;
+            startDateLabel.Location = new Point(683, 97);
+            startDateLabel.Margin = new Padding(4, 5, 4, 5);
+            startDateLabel.Name = "startDateLabel";
+            startDateLabel.Size = new Size(151, 30);
+            startDateLabel.TabIndex = 176;
+            startDateLabel.Text = "Date de souscription:";
             // 
-            // quantitySeparator
+            // endDateLabel
             // 
-            quantitySeparator.Location = new Point(683, 338);
-            quantitySeparator.Margin = new Padding(4, 5, 4, 5);
-            quantitySeparator.Name = "quantitySeparator";
-            quantitySeparator.Size = new Size(93, 4);
-            quantitySeparator.TabIndex = 171;
-            quantitySeparator.TabStop = false;
-            // 
-            // totalAmountSeparator
-            // 
-            totalAmountSeparator.Location = new Point(783, 338);
-            totalAmountSeparator.Margin = new Padding(4, 5, 4, 5);
-            totalAmountSeparator.Name = "totalAmountSeparator";
-            totalAmountSeparator.Size = new Size(211, 4);
-            totalAmountSeparator.TabIndex = 171;
-            totalAmountSeparator.TabStop = false;
-            // 
-            // quantityTextBox
-            // 
-            quantityTextBox.AutoSize = false;
-            quantityTextBox.Location = new Point(683, 308);
-            quantityTextBox.Margin = new Padding(4, 5, 4, 5);
-            quantityTextBox.Name = "quantityTextBox";
-            quantityTextBox.Size = new Size(93, 36);
-            quantityTextBox.TabIndex = 13;
-            // 
-            // totalAmountTextBox
-            // 
-            totalAmountTextBox.AutoSize = false;
-            totalAmountTextBox.Location = new Point(783, 308);
-            totalAmountTextBox.Margin = new Padding(4, 5, 4, 5);
-            totalAmountTextBox.Name = "totalAmountTextBox";
-            totalAmountTextBox.Size = new Size(211, 36);
-            totalAmountTextBox.TabIndex = 14;
-            // 
-            // totalAmountLabel
-            // 
-            totalAmountLabel.AutoSize = false;
-            totalAmountLabel.Location = new Point(783, 268);
-            totalAmountLabel.Margin = new Padding(4, 5, 4, 5);
-            totalAmountLabel.Name = "totalAmountLabel";
-            totalAmountLabel.Size = new Size(211, 30);
-            totalAmountLabel.TabIndex = 169;
-            totalAmountLabel.Text = "Montant :";
-            // 
-            // feesTotalLabel
-            // 
-            feesTotalLabel.AutoSize = false;
-            feesTotalLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            feesTotalLabel.Location = new Point(640, 138);
-            feesTotalLabel.Margin = new Padding(4, 5, 4, 5);
-            feesTotalLabel.Name = "feesTotalLabel";
-            feesTotalLabel.Size = new Size(406, 30);
-            feesTotalLabel.TabIndex = 148;
+            endDateLabel.AutoSize = false;
+            endDateLabel.Location = new Point(844, 97);
+            endDateLabel.Margin = new Padding(4, 5, 4, 5);
+            endDateLabel.Name = "endDateLabel";
+            endDateLabel.Size = new Size(147, 30);
+            endDateLabel.TabIndex = 169;
+            endDateLabel.Text = "Date fin abonnement :";
             // 
             // feesDropDownList
             // 
             feesDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             feesDropDownList.DropDownHeight = 159;
-            feesDropDownList.Location = new Point(15, 308);
+            feesDropDownList.Location = new Point(15, 137);
             feesDropDownList.Margin = new Padding(4, 5, 4, 5);
             feesDropDownList.MinimumSize = new Size(0, 30);
             feesDropDownList.Name = "feesDropDownList";
@@ -746,7 +765,7 @@
             // closeButton
             // 
             closeButton.DialogResult = DialogResult.Cancel;
-            closeButton.Location = new Point(931, 548);
+            closeButton.Location = new Point(931, 564);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 36);
@@ -755,7 +774,7 @@
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(806, 548);
+            saveButton.Location = new Point(806, 564);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 36);
@@ -765,7 +784,7 @@
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(9, 548);
+            errorLabel.Location = new Point(9, 564);
             errorLabel.Margin = new Padding(4, 5, 4, 5);
             errorLabel.Name = "errorLabel";
             errorLabel.Size = new Size(771, 36);
@@ -780,7 +799,7 @@
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1063, 593);
+            ClientSize = new Size(1063, 612);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -829,19 +848,22 @@
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)feesTotalLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)feesTotalSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)invoicePanel).EndInit();
+            invoicePanel.ResumeLayout(false);
+            invoicePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)endDateTimePicker).EndInit();
+            ((System.ComponentModel.ISupportInitialize)endDateSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)startDateTimePicker).EndInit();
+            ((System.ComponentModel.ISupportInitialize)startDateSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)removeInvoiceItemButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)addInvoiceItemButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)feesTotalSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)feesSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)invoiceTotalListView).EndInit();
             ((System.ComponentModel.ISupportInitialize)invoiceItemListView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)quantityLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)quantitySeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)totalAmountSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)quantityTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)totalAmountTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)totalAmountLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)feesTotalLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)startDateLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)endDateLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)feesDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
@@ -894,9 +916,8 @@
         private Telerik.WinControls.UI.RadButton saveButton;
         private Telerik.WinControls.UI.RadLabel errorLabel;
         private ErrorProvider errorProvider;
-        private Telerik.WinControls.UI.RadLabel quantityLabel;
-        private Telerik.WinControls.UI.RadSeparator quantitySeparator;
-        private Telerik.WinControls.UI.RadTextBox quantityTextBox;
+        private Telerik.WinControls.UI.RadLabel startDateLabel;
+        private Telerik.WinControls.UI.RadSeparator startDateSeparator;
         private Telerik.WinControls.UI.RadListView invoiceItemListView;
         private Telerik.WinControls.UI.RadListView invoiceTotalListView;
         private Telerik.WinControls.UI.RadLabel feesTotalLabel;
@@ -905,8 +926,10 @@
         private Telerik.WinControls.UI.RadSeparator feesTotalSeparator;
         private Telerik.WinControls.UI.RadButton addInvoiceItemButton;
         private Telerik.WinControls.UI.RadButton removeInvoiceItemButton;
-        private Telerik.WinControls.UI.RadSeparator totalAmountSeparator;
-        private Telerik.WinControls.UI.RadTextBox totalAmountTextBox;
-        private Telerik.WinControls.UI.RadLabel totalAmountLabel;
+        private Telerik.WinControls.UI.RadSeparator endDateSeparator;
+        private Telerik.WinControls.UI.RadLabel endDateLabel;
+        private Telerik.WinControls.UI.RadDateTimePicker endDateTimePicker;
+        private Telerik.WinControls.UI.RadDateTimePicker startDateTimePicker;
+        private Telerik.WinControls.UI.RadPanel invoicePanel;
     }
 }

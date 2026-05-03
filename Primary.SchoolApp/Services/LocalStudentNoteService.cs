@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.Extensions.Logging;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
@@ -15,11 +16,12 @@ namespace Primary.SchoolApp.Services
     {
         private readonly IStudentNoteService studentNoteService;
         private readonly IDisciplineService disciplineService;
-
-        public LocalStudentNoteService(IStudentNoteService studentNoteService, IDisciplineService disciplineService)
+        private readonly ILogger<LocalStudentNoteService> logger;
+        public LocalStudentNoteService(IStudentNoteService studentNoteService, IDisciplineService disciplineService, ILogger<LocalStudentNoteService> logger)
         {
             this.studentNoteService = studentNoteService;
             this.disciplineService = disciplineService;
+            this.logger = logger;
         }
         // récupération des notes d'une évaluation,calcul des moyennes et classement
         public async Task<List<AverageRecord>> GetEvaluationAverageListByRoom(int roomId, int evaluationId, int schoolYearId, int bookId)
@@ -115,7 +117,7 @@ namespace Primary.SchoolApp.Services
                     var errorSubject=Program.SubjectList.FirstOrDefault(x => x.Id == item.SubjectId);
                     var errorSubjectName= errorSubject!=null? language=="FR"?errorSubject.FrenchName:errorSubject.EnglishName : string.Empty;
                     string errorMessage = $"La matière {errorSubjectName}  n 'est pas associée à la classe {classOfRoom.Name} : {AppUtilities.GetCurrentMethodName()}";
-                    AppUtilities.AddLog(errorMessage);
+                    logger.LogError(errorMessage);
                     throw new Exception(errorMessage);
                 }
                 var subject = classSubject.Subject;

@@ -1,5 +1,6 @@
 ﻿
 using Primary.SchoolApp.Utilities;
+using SchoolManagement.Helper;
 using SchoolManagement.UI.Localization;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -31,27 +32,27 @@ namespace Primary.SchoolApp.UI
                 case "Material":
 
                     this.Icon =Resources.icon_orange;
-                    logoPictureBox.Image = AppUtilities.GetImage(Resources.schoolapp_orange);
+                    logoPictureBox.Image = Helper.GetImage(Resources.schoolapp_orange);
                     break;
                 case "MaterialBlueGrey":
 
                     this.Icon =Resources.icon_green;
-                    logoPictureBox.Image = AppUtilities.GetImage(Resources.schoolapp_green);
+                    logoPictureBox.Image = Helper.GetImage(Resources.schoolapp_green);
                     break;
                 case "MaterialPink":
 
                     this.Icon =Resources.icon_blue;
-                    logoPictureBox.Image = AppUtilities.GetImage(Resources.schoolapp_blue);
+                    logoPictureBox.Image = Helper.GetImage(Resources.schoolapp_blue);
                     break;
                 case "MaterialTeal":
 
                     this.Icon =Resources.icon_red;
-                    logoPictureBox.Image =AppUtilities.GetImage(Resources.schoolapp_red);
+                    logoPictureBox.Image =Helper.GetImage(Resources.schoolapp_red);
                     break;
 
                 default:
-                    this.Icon =AppUtilities.GetIcon(Resources.icon_white);
-                    logoPictureBox.Image =AppUtilities.GetImage(Resources.schoolapp_white);
+                    this.Icon =Helper.GetIcon(Resources.icon_white);
+                    logoPictureBox.Image =Helper.GetImage(Resources.schoolapp_white);
                     break;
             }
         }

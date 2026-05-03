@@ -4,6 +4,6 @@ namespace SchoolManagement.Core.Repositories
 {
     public interface IReceiptWriteRepository
     {
-        public Task<Receipt> Add(Receipt receipt);
+        public Task<Receipt> AddAsync(Receipt receipt);
     }
 }

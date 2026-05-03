@@ -5,7 +5,7 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
 
-namespace SchoolManagement.Infrastructure.Repositories.CashFlows
+namespace SchoolManagement.Infrastructure.Repositories
 {
     public class DapperReceiptRepository : IReceiptRepository
     {
@@ -16,7 +16,7 @@ namespace SchoolManagement.Infrastructure.Repositories.CashFlows
             this.dbConnectionFactory = dbConnectionFactory;
             this.logger = logger;
         }
-        public async Task<Receipt> Add(Receipt receipt)
+        public async Task<Receipt> AddAsync(Receipt receipt)
         {
             using var connection = dbConnectionFactory.CreateConnection();
             var sql = @"INSERT INTO Receipts (IdNumber, Amount, Balance, OpFor, OpDoneBy, Date, SchoolYearId)
@@ -28,8 +28,9 @@ namespace SchoolManagement.Infrastructure.Repositories.CashFlows
                 receipt.Id = id;
 
             }
-            catch (Exception ex) { 
-                logger.LogError("Une erreur est survenue lors de l'enregistrement du réçu {errorMessgae}",ex.Message);
+            catch (Exception ex)
+            {
+                logger.LogError("Une erreur est survenue lors de l'enregistrement du réçu {errorMessgae}", ex.Message);
             }
             return receipt;
         }
@@ -43,8 +44,9 @@ namespace SchoolManagement.Infrastructure.Repositories.CashFlows
                 var sql = @"SELECT * FROM Receipts WHERE Id=@id";
                 receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, id);
             }
-            catch (Exception ex) {
-                logger.LogError("Une erreur est survenue lors de l'extraction du réçu {id}: {errorMessgae}", id,ex.Message);
+            catch (Exception ex)
+            {
+                logger.LogError("Une erreur est survenue lors de l'extraction du réçu {id}: {errorMessgae}", id, ex.Message);
             }
             return receipt;
         }
@@ -72,7 +74,7 @@ namespace SchoolManagement.Infrastructure.Repositories.CashFlows
             {
                 using var dbConnection = dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts WHERE SchoolYearId=@schoolYearId";
-               receiptList = (await dbConnection.QueryAsync<Receipt>(sql, schoolYearId)).ToList();
+                receiptList = (await dbConnection.QueryAsync<Receipt>(sql, schoolYearId)).ToList();
             }
             catch (Exception ex)
             {
@@ -81,13 +83,21 @@ namespace SchoolManagement.Infrastructure.Repositories.CashFlows
             return receiptList;
         }
 
-        public async Task<CashFlow> GetLastCashFlowAsync()
+        public async Task<List<Receipt>> GetListByDateAsync(DateTime date)
         {
-            var connection = dbConnectionFactory.CreateConnection();
-            string query = "SELECT * FROM CashFlows ORDER BY Id DESC LIMIT 1 ;";
-            var result = connection.Query<CashFlow>(query).FirstOrDefault();
+            List<Receipt> receiptList = new();
+            try
+            {
+                using var dbConnection =  dbConnectionFactory.CreateConnection();
+                var sql = @"SELECT * FROM Receipts  WHERE YEAR(Date) = @Year AND MONTH(Date) = @Month ;";
+                receiptList = ( dbConnection.Query<Receipt>(sql, date)).ToList();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Une erreur est survenu lors de l'extraction de la liste des réçus pour le mois de {month}-{year}: {errorMessgae}", date.Month, date.Year, ex.Message);
+            }
             await Task.Delay(0);
-            return result;
+            return receiptList;
         }
     }
 }

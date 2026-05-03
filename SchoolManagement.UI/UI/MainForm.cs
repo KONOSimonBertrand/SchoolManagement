@@ -92,7 +92,7 @@ namespace SchoolManagement.UI
                 new("MaterialPink") { Image = Resources.pink_blue_small },
                 new ("MaterialTeal") { Image = Resources.teal_red_small },
                 new("MaterialBlueGrey") { Image = Resources.blue_grey_green_small },
-                new("Windows11Dark"){Image=ViewUtilities.GetImage(Resources.theme_dark)},
+                new("Windows11Dark"){Image = Helper.Helper.GetImage(Resources.theme_dark)},
             });
             themesDropDown.SelectedValue = "Material";
             ThemeResolutionService.ApplicationThemeName = "Material";
@@ -157,7 +157,7 @@ namespace SchoolManagement.UI
             homeMainPanel.BackgroundImageLayout = ImageLayout.Stretch;
             homeMainPanel.PanelElement.PanelFill.Visibility = ElementVisibility.Hidden;
 
-            homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+            homeNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
             homeNavigationPanel.BackgroundImageLayout = ImageLayout.Stretch;
             homeNavigationPanel.PanelElement.PanelBorder.Visibility = ElementVisibility.Collapsed;
             homeNavigationPanel.PanelElement.PanelFill.BackColor = Color.Transparent;
@@ -269,9 +269,9 @@ namespace SchoolManagement.UI
                     break;
 
                 default:
-                    aboutButton.Image = ViewUtilities.GetImage(Resources.about_white);
-                    userSplitButtonElement.Image = ViewUtilities.GetImage(Resources.user_white);
-                    this.Icon = ViewUtilities.GetIcon(Resources.icon_white);
+                    aboutButton.Image = Helper.Helper.GetImage(Resources.about_white);
+                    userSplitButtonElement.Image = Helper.Helper.GetImage(Resources.user_white);
+                    this.Icon = Helper.Helper.GetIcon(Resources.icon_white);
                     break;
             }
         }
@@ -284,25 +284,25 @@ namespace SchoolManagement.UI
         {
             if (ThemeResolutionService.ApplicationThemeName == "Windows11Dark")
             {
-                homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.cashFlowNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.disciplineNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.employeeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.reportNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.studentNoteNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.timeTableNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
-                this.settingNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.black_no_borders);
+                homeNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.cashFlowNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.disciplineNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.employeeNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.reportNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.studentNoteNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.timeTableNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
+                this.settingNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.black_no_borders);
             }
             else
             {
-                homeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.cashFlowNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.disciplineNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.employeeNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.reportNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.studentNoteNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.timeTableNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
-                this.settingNavigationPanel.BackgroundImage = ViewUtilities.GetImage(Resources.grey_no_borders);
+                homeNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.cashFlowNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.disciplineNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.employeeNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.reportNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.studentNoteNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.timeTableNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
+                this.settingNavigationPanel.BackgroundImage = Helper.Helper.GetImage(Resources.grey_no_borders);
             }
         }
         private void HomeMainListView_VisualItemFormatting(object sender, ListViewVisualItemEventArgs e)

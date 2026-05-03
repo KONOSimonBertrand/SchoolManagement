@@ -714,7 +714,6 @@ namespace Primary.SchoolApp
                         IdNumber = selectedPayment.IdNumber,
                         Note = selectedPayment.Note,
                         DoneBy = selectedPayment.DoneBy,
-                        IsDuringEnrolling = selectedPayment.IsDuringEnrolling,
 
                     };
                     var isDone = cashFlowService.ReturnTuitionPayment(payment).Result;

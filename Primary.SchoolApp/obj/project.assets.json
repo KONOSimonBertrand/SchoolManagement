@@ -3719,6 +3719,19 @@
           "bin/placeholder/SchoolManagement.Core.dll": {}
         }
       },
+      "SchoolManagement.Helper/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SchoolManagement.Helper.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SchoolManagement.Helper.dll": {}
+        }
+      },
       "SchoolManagement.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -3742,6 +3755,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "SchoolManagement.Helper": "1.0.0",
           "System.Resources.Extensions": "9.0.4",
           "Telerik.ReportViewer.WinForms": "19.0.25.313",
           "Telerik.Reporting": "19.0.25.313",
@@ -9840,6 +9854,11 @@
       "path": "../SchoolManagement.Core/SchoolManagement.Core.csproj",
       "msbuildProject": "../SchoolManagement.Core/SchoolManagement.Core.csproj"
     },
+    "SchoolManagement.Helper/1.0.0": {
+      "type": "project",
+      "path": "../SchoolManagement.Helper/SchoolManagement.Helper.csproj",
+      "msbuildProject": "../SchoolManagement.Helper/SchoolManagement.Helper.csproj"
+    },
     "SchoolManagement.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../SchoolManagement.Infrastructure/SchoolManagement.Infrastructure.csproj",
@@ -9857,6 +9876,7 @@
       "Microsoft.Extensions.Hosting >= 9.0.4",
       "NLog.Extensions.Logging >= 6.0.4",
       "SchoolManagement.Application >= 1.0.0",
+      "SchoolManagement.Helper >= 1.0.0",
       "SchoolManagement.Infrastructure >= 1.0.0",
       "SchoolManagement.UI >= 1.0.0",
       "Serilog >= 4.3.0",
@@ -9909,6 +9929,9 @@
           "projectReferences": {
             "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\SchoolManagement.Application.csproj": {
               "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\SchoolManagement.Application.csproj"
+            },
+            "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Helper\\SchoolManagement.Helper.csproj": {
+              "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Helper\\SchoolManagement.Helper.csproj"
             },
             "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Infrastructure\\SchoolManagement.Infrastructure.csproj"
@@ -10003,7 +10026,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -109,7 +109,6 @@ namespace Primary.SchoolApp.UI
                     TransactionDate=this.TransactionDateTimePicker.Value,
                     TransactionId=this.TransactionIdTextBox.Text,
                     DoneBy=this.DoneByTextBox.Text,
-                    IsDuringEnrolling=false,
                     Enrolling=selectedEnrolling,
                     EnrollingId=selectedEnrolling.Id,                    
                 };

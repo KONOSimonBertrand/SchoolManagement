@@ -19,6 +19,8 @@ using Telerik.Windows.Diagrams.Core;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Services;
 using System.ComponentModel;
+using Microsoft.Extensions.Logging;
+using Primary.SchoolApp.Extensions;
 namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
@@ -64,6 +66,7 @@ namespace Primary.SchoolApp
         private readonly IStudentNoteService studentNoteService;
         private readonly ReportCardService reportCardService;
         private readonly ISchoolSupplieService schoolSupplieService;
+        private readonly ILogger<MainForm> logger;
         public MainForm(ISchoolYearService schoolYearService, ISchoolGroupService schoolGroupService,
             ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
             , IPaymentMeanService paymentMeanService, ISchoolSchoolingCostService schoolingCostService, ISubscriptionFeeService subscriptionFeeService
@@ -72,7 +75,7 @@ namespace Primary.SchoolApp
             IUserService userService, IEmployeeService employeeService, IModuleService moduleService, ICountryService countryService, ITimeTableService timeTableService,
             IStudentEnrollingService studentEnrollingService, IPrintService printService, ICashFlowService cashFlowService, ISubscriptionService subscriptionService,
             IDisciplineService disciplineService, IContactService contactService, IMedicalService medicalService, IStudentNoteService studentNoteService, ReportCardService reportCardService,
-            ListingService listingService, ISchoolSupplieFeeService schoolSupplieFeeService, ISchoolSupplieService schoolSupplieService
+            ListingService listingService, ISchoolSupplieFeeService schoolSupplieFeeService, ISchoolSupplieService schoolSupplieService, ILogger<MainForm> logger
             )
         {
 
@@ -109,6 +112,7 @@ namespace Primary.SchoolApp
             this.listingService = listingService;
             this.schoolSupplieFeeService = schoolSupplieFeeService;
             this.schoolSupplieService = schoolSupplieService;
+            this.logger = logger;
             mainBackgroundWorker = new()
             {
                 WorkerReportsProgress = true,
@@ -131,7 +135,8 @@ namespace Primary.SchoolApp
             InitEmployeePage();
             InitStudentNotePage();
             InitReportPage();
-            CheckSecurity();
+            CheckPermissions();
+            logger.LogInformation("Démarrage de SchoolApp.");   
 
         }
 
@@ -884,7 +889,7 @@ namespace Primary.SchoolApp
                 record.SchoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == record.SchoolYearId);
                 var enrolling = record.AsStudentEnrolling();
                 var payments = cashFlowService.GetTuitionPaymentByEnrollingList(enrolling.Id).Result;
-                enrolling.PaymentList = payments.Where(x => x.IsDuringEnrolling && x.Amount > 0).ToList();
+                enrolling.PaymentList = payments.Where(x =>  x.Amount > 0).ToList();
                 printService.PrintPaymentReceiptAsync(enrolling, true);
             }
             //impression du reçu
@@ -1308,6 +1313,7 @@ namespace Primary.SchoolApp
             if (dialogResult == DialogResult.Yes)
             {
                 isLogOut = true;
+                logger.LogInformation($"Déconnexion de l'utisateur {Program.UserConnected.UserName}");
                 this.Close();
                 Application.OpenForms["LoginForm"].Show();
 
@@ -2135,6 +2141,7 @@ namespace Primary.SchoolApp
             }
 
         }
+
         private void ShowEditStudentEnrollingForm(DTO.StudentEnrollingDTO enrollingDTO)
         {
             if (!Program.CurrentSchoolYear.IsClosed)
@@ -2162,41 +2169,57 @@ namespace Primary.SchoolApp
 
 
         // Apply right of user connected
-        private void CheckSecurity()
+        private void CheckPermissions()
         {
             if (Program.UserConnected.UserName.Trim().ToLower() == "root") return;
             if (Program.UserConnected.Modules.Count > 0)
             {
                 // Home page
-                var homeAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 1);
-                CheckPageAccess(this.HomePage, homeAccess);
-                this.HomeAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 1 && m?.AllowCreate==true);
-                // CashFLow Page=> 3: frais de scolarité; 4: Abonnement; 15: Approvisionnement de la caisse 16: Dépenses;
-                var cashflowAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 || m.ModuleId == 4 || m.ModuleId == 15 || m.ModuleId == 16);
-                CheckPageAccess(this.CashFlowPage, cashflowAccess);
-                this.CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(m => (m.ModuleId == 3 && m?.AllowCreate == true)|| (m.ModuleId == 15 && m?.AllowCreate == true) || (m.ModuleId == 16 && m?.AllowCreate == true));
+                if (!Program.UserConnected.HasHomePagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.HomePage);
+                }
+                this.HomeAddButton.Enabled = Program.UserConnected.CanCreateEnrolling();
+                // Cashflow page    
+                if (!Program.UserConnected.HasCashFlowPagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.CashFlowPage);
+                }
+                this.CashFlowAddButton.Enabled = Program.UserConnected.CanCreateCashFlow();
                 // Timetable page 
-                var timetableAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 8);
-                CheckPageAccess(this.TimeTablePage, timetableAccess);
+                if (!Program.UserConnected.HasTimeTablePagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.TimeTablePage);
+                }
                 // Discipline page 
-                var disciplineAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 7);
-                CheckPageAccess(this.DisciplinePage, disciplineAccess);
-                this.DisciplineAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
+                if (!Program.UserConnected.HasDiciplinePagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.DisciplinePage);
+                }
+                this.DisciplineAddButton.Enabled = Program.UserConnected.CanCreateDicipline();
                 // student note page 
-                var noteAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 6);
-                CheckPageAccess(this.StudentNotePage, noteAccess);
-                this.StudentNoteAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 6 && m?.AllowCreate == true);
+               if (!Program.UserConnected.HasStudentNotePagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.StudentNotePage);
+                }
+                this.StudentNoteAddButton.Enabled = Program.UserConnected.CanCreateStudentNote();
                 // employee page 
-                var employeeAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 11);
-                CheckPageAccess(this.EmployeePage, employeeAccess);
-                this.EmployeeEnrollingAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 11 && m?.AllowCreate == true);
+                if (!Program.UserConnected.HasEmployeePagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.EmployeePage);
+                }
+                this.EmployeeEnrollingAddButton.Enabled = Program.UserConnected.CanCreateEmployee();
                 // report page 
-                var reportAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 9 || m.ModuleId == 10);
-                CheckPageAccess(this.ReportsPage, reportAccess);
+               if (!Program.UserConnected.HasReportPagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.ReportsPage);
+                }
                 // setting page 
-                var settingAccess = Program.UserConnected.Modules.Any(m => m.ModuleId == 12);
-                CheckPageAccess(this.SettingPage, settingAccess);
-                this.SettingAddButton.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 12 && m?.AllowCreate == true);
+               if (!Program.UserConnected.HasSettingPagePermission())
+                {
+                    this.MainPageView.Pages.Remove(this.SettingPage);
+                }
+                this.SettingAddButton.Enabled = Program.UserConnected.CanCreateSetting();
             }
             else
             {
@@ -2204,11 +2227,7 @@ namespace Primary.SchoolApp
             }
 
         }
-        // Remove page if the user dont have access
-        private void CheckPageAccess(RadPageViewPage page,bool access)
-        {
-            if(!access) this.MainPageView.Pages.Remove(page);
-        }
+      
         #endregion
 
     }

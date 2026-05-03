@@ -55,8 +55,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddTuitionPaymentAsync(TuitionPayment payment)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO TuitionsPayments(IdNumber,Date,Amount,EnrollingId,CashFlowTypeId,PaymentMeanId,Balance,DoneBy,Note,TransactionDate,TransactionId,IsDuringEnrolling) 
-                              VALUES(@idNumber,@date,@amount,@enrollingId,@cashFlowTypeId,@paymentMeanId,@balance,@doneBy,@note,@transactionDate,@transactionId,@isDuringEnrolling);";
+            string query = @"INSERT INTO TuitionsPayments(IdNumber,Date,Amount,EnrollingId,CashFlowTypeId,PaymentMeanId,Balance,DoneBy,Note,TransactionDate,TransactionId) 
+                              VALUES(@idNumber,@date,@amount,@enrollingId,@cashFlowTypeId,@paymentMeanId,@balance,@doneBy,@note,@transactionDate,@transactionId);";
             var result = connection.Execute(query, new
             {
                 idNumber = payment.IdNumber,
@@ -70,7 +70,6 @@ namespace SchoolManagement.Infrastructure.Repositories
                 note = payment.Note,
                 transactionDate = payment.TransactionDate,
                 transactionId = payment.TransactionId,
-                isDuringEnrolling = payment.IsDuringEnrolling,
             });
             await Task.Delay(0);
             return result > 0;

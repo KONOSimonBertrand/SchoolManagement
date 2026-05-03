@@ -1,6 +1,4 @@
 ﻿
-
-
 using SchoolManagement.UI.Localization;
 using SchoolManagement.UI.Utilities;
 using Telerik.WinControls;
@@ -13,6 +11,8 @@ namespace SchoolManagement.UI
 
         public RadButton SaveButton { get => saveButton; }
         public RadButton CloseButton { get => closeButton; }
+        public RadPanel EditPanel { get => editPanel; }
+        public RadPanel InvoicePanel { get => invoicePanel; }
         public RadDateTimePicker EnrollingDateTimePicker { get => dateTimePicker; }
         public RadDropDownList StudentDropDownList { get => studentDropDownList; }
         public RadButton AddStudentButton { get => addStudentButton; }
@@ -29,11 +29,15 @@ namespace SchoolManagement.UI
         public RadLabel ErrorLabel { get => errorLabel; }
         public ErrorProvider DataErrorProvider { get => errorProvider; }
         public RadTextBox DoneByTextBox { get => doneByTextBox; }
-        public RadLabel QuantityLabel { get => quantityLabel; }
-        public RadTextBox QuantityTextBox { get => quantityTextBox; }
-        public RadSeparator QuantitySeparetor { get => quantitySeparator; }
+        public RadLabel QuantityLabel { get => startDateLabel; }
+        public RadSeparator QuantitySeparetor { get => startDateSeparator; }
         public RadTextBox AmountTextBox { get => amountTextBox; }
-        public RadTextBox TotalAmountTextBox { get => totalAmountTextBox; }
+        public RadDateTimePicker StartDateTimePicker { get => startDateTimePicker; }
+        public RadDateTimePicker EndDateTimePicker { get => endDateTimePicker; }
+        public RadLabel StartDateLabel { get => startDateLabel; }
+        public RadLabel EndDateLabel { get => endDateLabel; }
+        public RadSeparator StartDateSeparator { get => startDateSeparator; }
+        public RadSeparator EndDateSeparator { get => endDateSeparator; }
         public RadListView InvoiceItemListView { get => invoiceItemListView; }
         public RadListView InvoiceTotalListView { get => invoiceTotalListView; }
         public RadLabel AmountLabel { get => amountLabel; }
@@ -42,6 +46,7 @@ namespace SchoolManagement.UI
         public RadButton AddInvoiceItemButton { get => addInvoiceItemButton; }
         public RadButton RemoveInvoiceItemButton { get => removeInvoiceItemButton; }
         public ErrorProvider ErrorProvider { get => errorProvider; }
+        public RadSeparator AmountSeparator { get => amountSeparator; }
         public EditStudentEnrollingForm()
         {
             InitializeComponent();
@@ -87,17 +92,17 @@ namespace SchoolManagement.UI
             this.doneByLabel.LabelElement.CustomFontSize = 10.5f;
             this.doneByLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.quantityLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
-            this.quantityLabel.LabelElement.CustomFontSize = 10.5f;
-            this.quantityLabel.TextAlignment = ContentAlignment.BottomLeft;
+            this.startDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            this.startDateLabel.LabelElement.CustomFontSize = 10.5f;
+            this.startDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.amountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.amountLabel.LabelElement.CustomFontSize = 10.5f;
             this.amountLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.totalAmountLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
-            this.totalAmountLabel.LabelElement.CustomFontSize = 10.5f;
-            this.totalAmountLabel.TextAlignment = ContentAlignment.BottomLeft;
+            this.endDateLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            this.endDateLabel.LabelElement.CustomFontSize = 10.5f;
+            this.endDateLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.feesTotalLabel.LabelElement.CustomFontSize = 10.5f;
             this.feesTotalLabel.TextAlignment = ContentAlignment.BottomLeft;
@@ -109,15 +114,26 @@ namespace SchoolManagement.UI
             this.doneByTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.doneByTextBox.TextBoxElement.CustomFontSize = 10.5f;
 
-            this.quantityTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
-            this.quantityTextBox.TextBoxElement.CustomFontSize = 10.5f;
 
             this.amountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.amountTextBox.TextBoxElement.CustomFontSize = 10.5f;
+            this.startDateTimePicker.Format = DateTimePickerFormat.Custom;
+            this.startDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            this.startDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
+            this.startDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
+            this.startDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
 
-            this.totalAmountTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
-            this.totalAmountTextBox.TextBoxElement.CustomFontSize = 10.5f;
-            this.totalAmountTextBox.ReadOnly = true;
+            this.startDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
+            this.startDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
+
+            this.endDateTimePicker.Format = DateTimePickerFormat.Custom;
+            this.endDateTimePicker.CustomFormat = "dd/MM/yyyy";
+            this.endDateTimePicker.DateTimePickerElement.CalendarSize = new Size(350, 380);
+            this.endDateTimePicker.DateTimePickerElement.TextBoxElement.Padding = new Padding(10, 0, 0, 0);
+            this.endDateTimePicker.DateTimePickerElement.ArrowButton.Margin = new Padding(0, 0, 10, 0);
+
+            this.endDateTimePicker.DateTimePickerElement.CustomFont = ViewUtilities.MainFont;
+            this.endDateTimePicker.DateTimePickerElement.CustomFontSize = 10.5f;
 
             this.dateTimePicker.Format = DateTimePickerFormat.Custom;
             this.dateTimePicker.CustomFormat = "dd/MM/yyyy";
@@ -169,13 +185,14 @@ namespace SchoolManagement.UI
             {
                 c.RootElement.EnableElementShadow = false;
             }
-
+            foreach (RadControl c in this.invoicePanel.Controls)
+            {
+                c.RootElement.EnableElementShadow = false;
+            }
             this.oldSchoolTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.amountTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
-            this.totalAmountTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.doneByTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.transactionIdTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
-            this.quantityTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
 
             this.studentLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.classLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
@@ -183,8 +200,8 @@ namespace SchoolManagement.UI
             this.repeaterLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.roomLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.amountLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
-            this.totalAmountLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
-            this.quantityLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+            this.endDateLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+            this.startDateLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.doneByLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.transactionDateLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.paymentMeanDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
@@ -201,10 +218,10 @@ namespace SchoolManagement.UI
             this.paymentMeanSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.transactionIdSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.transactionDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-            this.quantitySeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            this.startDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.feesTotalSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.feesSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-            this.totalAmountSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            this.endDateSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
 
@@ -240,9 +257,17 @@ namespace SchoolManagement.UI
             this.repeaterDropDownList.DropDownStyle = RadDropDownStyle.DropDownList;
 
             amountTextBox.Text = "0";
-            quantityTextBox.Text = "1";
             transactionDateTimePicker.Value = DateTime.Now;
             removeInvoiceItemButton.Enabled = false;
+            amountLabel.Visible = false;
+            amountSeparator.Visible = false;
+            startDateLabel.Visible = false;
+            startDateSeparator.Visible = false;
+            endDateLabel.Visible = false;
+            endDateSeparator.Visible = false;
+            amountTextBox.Visible = false;
+            endDateTimePicker.Visible = false;
+            startDateTimePicker.Visible = false;
         }
 
         private void InitLanguage()
@@ -253,12 +278,12 @@ namespace SchoolManagement.UI
             studentLabel.Text = "<html>" + Language.labelStudent + ":" + "<color=Red>*";
             classLabel.Text = "<html>" + Language.labelClass + ":" + "<color=Red>*";
             roomLabel.Text = "<html>" + Language.labelRoom + ":" + "<color=Red>*";
-            quantityLabel.Text = "<html>" + Language.LabelQuantity + ":" + "<color=Red>*";
+            startDateLabel.Text = "<html>" + Language.LabelQuantity + ":" + "<color=Red>*";
             oldSchoolLabel.Text = Language.labelOldSchool;
             repeaterLabel.Text = Language.labelRepeater;
             amountLabel.Text = "<html>" + Language.labelAmount + ":" + "<color=Red>*";
-            quantityLabel.Text = "<html>" + Language.LabelQuantity + ":" + "<color=Red>*";
-            totalAmountLabel.Text = "Total";
+            startDateLabel.Text = "<html>" + Language.labelStart + ":" + "<color=Red>*";
+            endDateLabel.Text = "<html>" + Language.labelEnd + ":" + "<color=Red>*";
             doneByLabel.Text = Language.labelPaymentDoneBy;
             feesLabel.Text = "<html>" + Language.LabelFeesToPay + ":" + "<color=Red>*";
             paymentMeanLabel.Text = "<html>" + Language.labelPaymentMean + ":" + "<color=Red>*";
@@ -272,7 +297,6 @@ namespace SchoolManagement.UI
         private void InitEvent()
         {
             this.amountTextBox.TextChanging += new TextChangingEventHandler(TextBox_Changing);
-            this.quantityTextBox.TextChanging += new TextChangingEventHandler(TextBox_Changing);
             studentDropDownList.SelectedIndexChanged += StudentDropDownList_SelectedIndexChanged;
             classDropDownList.SelectedIndexChanged += ClassDropDownList_SelectedIndexChanged;
             roomDropDownList.SelectedIndexChanged += RoomDropDownList_SelectedIndexChanged;
@@ -282,7 +306,7 @@ namespace SchoolManagement.UI
 
         private void TextBox_Changing(object sender, TextChangingEventArgs e)
         {
-            e.Cancel = !ViewUtilities.IsNumber(e.NewValue);
+            e.Cancel = !Helper.Helper.IsNumber(e.NewValue);
         }
         private void CloseButton_Click(object sender, EventArgs e)
         {
@@ -368,13 +392,7 @@ namespace SchoolManagement.UI
                 this.roomDropDownList.Focus();
                 return false;
             }
-            if (this.paymentMeanDropDownList.SelectedIndex < 0)
-            {
-                errorProvider.SetError(roomDropDownList, Language.messageFillField);
-                this.errorLabel.Text = Language.messageFillField;
-                this.paymentMeanDropDownList.Focus();
-                return false;
-            }
+           
             return true;
         }
     }

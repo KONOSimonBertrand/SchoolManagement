@@ -100,5 +100,11 @@ namespace Primary.SchoolApp.DTO
             string Position
             );
     
+
+        public record ReceiptHeader(
+            string ReceiptNumber,
+            StudentEnrolling Enrolling,
+            SchoolGroup SchoolGroup
+            );
     }
 }
