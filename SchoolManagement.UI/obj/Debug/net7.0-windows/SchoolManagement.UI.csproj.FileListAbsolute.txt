@@ -209,8 +209,10 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\runtimes\win\lib\netcoreapp2.0\System.Management.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\runtimes\win\lib\net7.0\System.Threading.AccessControl.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\SchoolManagement.Core.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\SchoolManagement.Helper.dll
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\SchoolManagement.Helper.pdb
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\bin\Debug\net7.0-windows\SchoolManagement.Core.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.csproj.AssemblyReference.cache
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.Localization.Language.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.Resources.resources
@@ -243,6 +245,7 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditDisciplineSubjectForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditEmployeeGroupForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditEvaluationSessionForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditFeesPaymentForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditJobForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditMedicalRecordForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditOtherCashFlowForm.resources
@@ -253,9 +256,7 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolGroupForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolingCostForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolRoomForm.resources
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolSupplieDiscountForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolSupplieFeeForm.resources
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolSupplieForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSchoolYearForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSerialKeyForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSubjectForm.resources
@@ -263,7 +264,6 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSubscriptionFeeForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditTimeTableForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditTuitionDiscountForm.resources
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditTuitionPaymentForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditEmployeeAccountTransactionForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditEmployeeAttendanceForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditEmployeeEnrollingForm.resources
@@ -280,11 +280,9 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditEvaluationCommentsForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStatusForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentClassForm.resources
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentEnrollingForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentNoteForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentNotesForm.resources
-C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditSubscriptionForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.ImportNotesForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.StudentItemsForm.resources
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.UploadPictureForm.resources
@@ -309,3 +307,5 @@ C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-w
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.pdb
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.genruntimeconfig.cache
 C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\ref\SchoolManagement.UI.dll
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentEnrollingFullForm.resources
+C:\Users\HP\source\repos\SchoolManagement\SchoolManagement.UI\obj\Debug\net7.0-windows\SchoolManagement.UI.EditStudentEnrollingForm.resources

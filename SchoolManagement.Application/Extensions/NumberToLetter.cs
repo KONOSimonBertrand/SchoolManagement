@@ -1,7 +1,5 @@
-﻿
-
+﻿using System.Globalization;
 using System.Text;
-using static SchoolManagement.Application.Extensions.NumberToLetter;
 
 namespace SchoolManagement.Application.Extensions
 {
@@ -14,16 +12,16 @@ namespace SchoolManagement.Application.Extensions
         /// <param name="Language">La langue utilisé FR pour le français et EN pour l'anglais</param>
         /// <param name="TheCurrency">Devise à utliser</param>
         /// <returns></returns>
-        public static string ToLetter(this double Number, CountryLanguage Language, Currency TheCurrency)
+        public static string ToLetter(this double Number, CountryLanguage Language)
         {
             var numberToLetter = new NumberToLetter();
-            return numberToLetter.ToLetter((int)Number,Language, TheCurrency);
+            return numberToLetter.ToLetter((int)Number,Language);
         }
     }
     internal class NumberToLetter
     {
-        private Dictionary<int, string> textStrings = new Dictionary<int, string>();
-        private Dictionary<int, string> scales = new Dictionary<int, string>();
+        private Dictionary<int, string> textStrings = new();
+        private Dictionary<int, string> scales = new();
         private StringBuilder builder;
 
         public NumberToLetter()
@@ -31,14 +29,14 @@ namespace SchoolManagement.Application.Extensions
             Initialize();
         }
 
-        public string ToLetter(int number, CountryLanguage language,Currency currency)
+        public string ToLetter(int number, CountryLanguage language)
         {
             if(language==CountryLanguage.English)
-            return GetEnglishVersion(number,currency);
+            return GetEnglishVersion(number);
             else 
-                return GetFrenchVersion(number,currency);
+                return GetFrenchVersion(number);
         }
-        private string GetEnglishVersion(int number, Currency theCurrency)
+        private string GetEnglishVersion(int number)
         {
             builder = new StringBuilder();
 
@@ -50,17 +48,7 @@ namespace SchoolManagement.Application.Extensions
 
             number = scales.Aggregate(number, (current, scale) => Append(current, scale.Key));
             AppendLessThanOneThousand(number);
-            switch (theCurrency)
-            {
-                case Currency.CFA:
-                    return builder.ToString().Trim() + " CFA";
-                case Currency.Dollar:
-                    return builder.ToString().Trim() + " $";
-                case Currency.Euro:
-                    return builder.ToString().Trim() + " €";
-               default: return builder.ToString();
-            }
-            
+            return builder.ToString().Trim() + CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol;
         }
 
         private int Append(int num, int scale)
@@ -154,7 +142,7 @@ namespace SchoolManagement.Application.Extensions
         private  string[] tensNumbers = { "rien", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante", "quatre-vingt", "quatre-vingt" };
 
         private  List<string> result;
-        private string GetFrenchVersion(int number,Currency theCurrency)
+        private string GetFrenchVersion(int number)
         {
             result = new List<string>();
 
@@ -212,72 +200,43 @@ namespace SchoolManagement.Application.Extensions
             else
                 result.Add(firstSixteenNumbers[0]);
 
-            switch (theCurrency)
-            {
-                case Currency.CFA:
-                    result.Add("CFA");
-                    break;
-                case Currency.Dollar:
-                    result.Add("$");
-                    break;
+            result.Add(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol);
+            thousands = new[] { "millième", "millionième", "milliardième" };
 
-                case Currency.Euro:
-                    result.Add("€");
-                    break;              
-            }
+            //avec l'imprécision des nombres à virgules flotantes,  1234562.789 - 1234562 donne 0.78900000010617077 il faut donc compter le nombre de chiffres décimaux du nombre original et arrondir le resultat de la soustraction 
+            string[] morceaux = number.ToString("G25").Split(new[] { '.', ',' });//par défaut ToString arrondi à 10^-8, le format G25 oblige à écrire 25 caractères s'ils sont présents soit (au pire) 15 avant la virgule, la virgule et 9 après, split permet de découper le string obtenu
 
-            if (theCurrency != Currency.No)
+            if (morceaux.Length == 2)//il y a une partie décimale
             {
-                decimalPart = Math.Round(decimalPart, 2);
-                if (decimalPart != 0)
+                result.Add("et");
+
+                int lenghtPartieDecimale = morceaux[1].Length;
+                if (lenghtPartieDecimale > 9)
+                    lenghtPartieDecimale = 9;//on se limite à 10^-9
+
+                decimalPart = Math.Round(decimalPart, lenghtPartieDecimale);
+
+                int i = 0;
+                while (decimalPart > 0)
                 {
-                    result.Add("et");
-                    result.Add(WriteTwoDigits((int)(decimalPart * 100)));
-                    result.Add("centimes");
-                }
-            }
-            else
-            {
-                thousands = new[] { "millième", "millionième", "milliardième" };
+                    decimalPart = decimalPart * 1000;
+                    int valeur = (int)decimalPart;
+                    lenghtPartieDecimale -= 3;
+                    if (lenghtPartieDecimale < 0)
+                        lenghtPartieDecimale = 0;
+                    decimalPart = Math.Round(decimalPart - valeur, lenghtPartieDecimale);
 
-                //avec l'imprécision des nombres à virgules flotantes,  1234562.789 - 1234562 donne 0.78900000010617077 il faut donc compter le nombre de chiffres décimaux du nombre original et arrondir le resultat de la soustraction 
-                string[] morceaux = number.ToString("G25").Split(new[] { '.', ',' });//par défaut ToString arrondi à 10^-8, le format G25 oblige à écrire 25 caractères s'ils sont présents soit (au pire) 15 avant la virgule, la virgule et 9 après, split permet de découper le string obtenu
-
-                if (morceaux.Length == 2)//il y a une partie décimale
-                {
-                    result.Add("et");
-
-                    int lenghtPartieDecimale = morceaux[1].Length;
-                    if (lenghtPartieDecimale > 9)
-                        lenghtPartieDecimale = 9;//on se limite à 10^-9
-
-                    decimalPart = Math.Round(decimalPart, lenghtPartieDecimale);
-
-                    int i = 0;
-                    while (decimalPart > 0)
+                    if (valeur != 0)
                     {
-                        decimalPart = decimalPart * 1000;
-                        int valeur = (int)decimalPart;
-                        lenghtPartieDecimale -= 3;
-                        if (lenghtPartieDecimale < 0)
-                            lenghtPartieDecimale = 0;
-                        decimalPart = Math.Round(decimalPart - valeur, lenghtPartieDecimale);
+                        result.Add(WriteThreeDigits(valeur, false));
+                        if (valeur > 1)
+                            result.Add(thousands[i++] + "s");
+                        else
+                            result.Add(thousands[i++]);
 
-                        if (valeur != 0)
-                        {
-                            result.Add(WriteThreeDigits(valeur, false));
-                            if (valeur > 1)
-                                result.Add(thousands[i++] + "s");
-                            else
-                                result.Add(thousands[i++]);
-
-                        }
                     }
-
-
                 }
             }
-
             return string.Join(" ", result);
         }
         private string WriteThreeDigits(int number, bool ruleOfHundred)
@@ -359,7 +318,7 @@ namespace SchoolManagement.Application.Extensions
     public enum Currency
     {
         No,
-        CFA,
+        FCFA,
         Euro,
         FrancSuisse,
         Dollar

@@ -2,7 +2,6 @@
 using Telerik.WinControls.UI;
 using SchoolManagement.UI.Utilities;
 using SchoolManagement.UI.Localization;
-
 namespace SchoolManagement.UI
 {
     public partial class EditCashFlowTypeForm : RadForm
@@ -11,7 +10,9 @@ namespace SchoolManagement.UI
         public RadButton CloseButton { get => closeButton; }
         public RadTextBox NameTextBox { get => nameTextBox; }
         public RadDropDownList CategoryDropDownList { get => categoryDropDownList; }
-        public RadDropDownList DomainDropDownList { get => domainDropDownList; }
+        public RadDropDownList TransactionTypeDropDownList { get => transactionTypeDropDownList; }
+        public RadDropDownList FlowTypeDropDownList { get => flowTypeDropDownList; }
+        public RadDropDownList FlowDomainDropDownList { get => flowDomainDropDownList; }
         public RadSpinEditor SequenceSpinEditor { get => sequenceSpinEditor; }
         public RadTextBox DescriptionTextBox { get => descriptionTextBox; }
         public RadLabel ErrorLabel { get => errorLabel; }
@@ -27,7 +28,9 @@ namespace SchoolManagement.UI
         {
             this.descriptionLabel.Text = Language.labelDescription;
             this.categoryLabel.Text = Language.labelCategory;
-            this.domainLabel.Text=Language.LabelDomain;
+            this.transactionTypeLabel.Text=Language.LabelTransactionType;
+            this.flowTypeLabel.Text = Language.LabelFlowType;
+            this.flowDomainLabel.Text = Language.LabelDomain;
             this.nameLabel.Text = Language.labelDesignation;
             this.sequenceLabel.Text= Language.labelSequence;
             this.saveButton.Text= Language.labelSave;
@@ -38,8 +41,6 @@ namespace SchoolManagement.UI
         {
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
         }
-
-        
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
@@ -58,9 +59,17 @@ namespace SchoolManagement.UI
             this.categoryLabel.LabelElement.CustomFontSize = 10.5f;
             this.categoryLabel.TextAlignment = ContentAlignment.BottomLeft;
 
-            this.domainLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
-            this.domainLabel.LabelElement.CustomFontSize = 10.5f;
-            this.domainLabel.TextAlignment = ContentAlignment.BottomLeft;
+            this.transactionTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            this.transactionTypeLabel.LabelElement.CustomFontSize = 10.5f;
+            this.transactionTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
+
+            this.flowTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            this.flowTypeLabel.LabelElement.CustomFontSize = 10.5f;
+            this.flowTypeLabel.TextAlignment = ContentAlignment.BottomLeft;
+
+            this.flowDomainLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            this.flowDomainLabel.LabelElement.CustomFontSize = 10.5f;
+            this.flowDomainLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.descriptionLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionLabel.LabelElement.CustomFontSize = 10.5f;
@@ -69,7 +78,6 @@ namespace SchoolManagement.UI
             this.nameTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.nameTextBox.TextBoxElement.CustomFontSize = 10.5f;
           
-
             this.descriptionTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.descriptionTextBox.TextBoxElement.CustomFontSize = 10.5f;
 
@@ -78,16 +86,20 @@ namespace SchoolManagement.UI
             this.categoryDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
             this.categoryDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
-            this.domainDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
-            this.domainDropDownList.RootElement.CustomFontSize = 10.5f;
-            this.domainDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
-            this.domainDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+            this.transactionTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
+            this.transactionTypeDropDownList.RootElement.CustomFontSize = 10.5f;
+            this.transactionTypeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+            this.transactionTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
-            domainDropDownList.Items.Add(new RadListDataItem("Finance", "Finance"));
-            domainDropDownList.Items.Add(new RadListDataItem("Transport", "Transport"));
-            domainDropDownList.Items.Add(new RadListDataItem("Cantine", "Cantine"));
-            domainDropDownList.Items.Add(new RadListDataItem("Activité Périscolaire", "Activité Périscolaire"));
-            domainDropDownList.Items.Add(new RadListDataItem("Autre", "Autre"));
+            this.flowTypeDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
+            this.flowTypeDropDownList.RootElement.CustomFontSize = 10.5f;
+            this.flowTypeDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+            this.flowTypeDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
+
+            this.flowDomainDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
+            this.flowDomainDropDownList.RootElement.CustomFontSize = 10.5f;
+            this.flowDomainDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+            this.flowDomainDropDownList.DropDownListElement.AutoCompleteSuggest.SuggestMode = SuggestMode.Contains;
 
             this.sequenceSpinEditor.SpinElement.CustomFont = ViewUtilities.MainFont;
             this.sequenceSpinEditor.SpinElement.CustomFontSize = 10.5f;
@@ -105,33 +117,23 @@ namespace SchoolManagement.UI
 
             this.nameLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.categoryLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
-            this.domainLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+            this.transactionTypeLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.sequenceLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+            this.flowTypeLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
+            this.flowDomainLabel.LabelElement.LabelText.Margin = new Padding(5, 0, 0, 0);
             this.nameTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
             this.descriptionTextBox.TextBoxElement.Border.Visibility = ElementVisibility.Collapsed;
 
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.typeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
-            this.domainSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            this.transactionTypeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.descriptionSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.sequenceSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            this.flowTypeSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            this.flowDomainSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
-            var scItemText = Language.labelSchoolingFee;
-            var sfItemText = Language.LabelSchoolSupplie;
-            var stItemText = Language.labelSubscription;
-            var deItemText = Language.LabelExpense;
-            var apItemText = Language.LabelSupply;
-            RadListDataItem scItem = new (scItemText, "FS");
-            RadListDataItem sfItem = new(sfItemText, "FF");
-            RadListDataItem stItem = new (stItemText, "AB");
-            RadListDataItem deItem = new (deItemText, "DE");
-            RadListDataItem apItem = new (apItemText, "AP");
-            categoryDropDownList.Items.Add(scItem);
-            categoryDropDownList.Items.Add(sfItem);
-            categoryDropDownList.Items.Add(stItem);
-            categoryDropDownList.Items.Add(deItem);
-            categoryDropDownList.Items.Add(apItem);
+           
             this.errorLabel.ForeColor = Color.Red;
 
         }
@@ -153,7 +155,27 @@ namespace SchoolManagement.UI
                 this.categoryDropDownList.Focus();
                 return false;
             }
-
+            if (this.flowDomainDropDownList.SelectedIndex < 0)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.flowDomainDropDownList, Language.messageFillField);
+                this.flowDomainDropDownList.Focus();
+                return false;
+            }
+            if (this.transactionTypeDropDownList.SelectedIndex < 0)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.transactionTypeDropDownList, Language.messageFillField);
+                this.transactionTypeDropDownList.Focus();
+                return false;
+            }
+            if (this.flowTypeDropDownList.SelectedIndex < 0)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(this.flowTypeDropDownList, Language.messageFillField);
+                this.flowTypeDropDownList.Focus();
+                return false;
+            }
             return true;
         }
 

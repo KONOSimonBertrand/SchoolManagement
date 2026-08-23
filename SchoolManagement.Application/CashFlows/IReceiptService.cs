@@ -9,5 +9,7 @@ namespace SchoolManagement.Application
         public Task<Receipt?> GetReceiptByIdNumberAsync(string idNumber);
         public Task<Receipt> CreateReceiptAsync(Receipt receipt);
         public Task<List<Receipt>> GetReceiptListAsync(int schoolYearId);
+        public Task<bool> ValidateReceiptAsync(int receiptId);
+        Task<Receipt> ReturnReceiptAsync(Receipt receipt);
     }
 }

@@ -2782,10 +2782,21 @@
           }
         }
       },
+      "SchoolManagement.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/SchoolManagement.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SchoolManagement.Core.dll": {}
+        }
+      },
       "SchoolManagement.Helper/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "SchoolManagement.Core": "1.0.0",
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
@@ -7640,6 +7651,11 @@
         "ui.for.winforms.allcontrols.net70.nuspec"
       ]
     },
+    "SchoolManagement.Core/1.0.0": {
+      "type": "project",
+      "path": "../SchoolManagement.Core/SchoolManagement.Core.csproj",
+      "msbuildProject": "../SchoolManagement.Core/SchoolManagement.Core.csproj"
+    },
     "SchoolManagement.Helper/1.0.0": {
       "type": "project",
       "path": "../SchoolManagement.Helper/SchoolManagement.Helper.csproj",
@@ -7760,7 +7776,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.315\\RuntimeIdentifierGraph.json"
       }
     }
   }

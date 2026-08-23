@@ -346,6 +346,18 @@ namespace Primary.SchoolApp
             ReportViewer.RefreshReport();
         }
 
+
+
+        internal void LoadPaymentReceipt(PaymentReceipt paymentReceip,bool isCopy)
+        {
+            InstanceReportSource reportSource = new()
+            {
+                ReportDocument = new PaymentDoubleReceiptA4SecondModelReport(paymentReceip,isCopy)
+            };
+            ReportViewer.AutoSize = true;
+            ReportViewer.ReportSource = reportSource;
+            ReportViewer.RefreshReport();
+        }
         #endregion
     }
 }

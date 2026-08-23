@@ -1,123 +1,54 @@
-﻿
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Extensions;
 using SchoolManagement.Application;
 using SchoolManagement.Application.Extensions;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Helper;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
-    internal class EditStudentEnrollingForm:SchoolManagement.UI.EditStudentEnrollingForm
+    internal class EditStudentEnrollingForm : SchoolManagement.UI.EditStudentEnrollingForm
     {
 
         private readonly ILogService logService;
         private readonly IStudentService studentService;
-        private readonly ICashFlowService cashFlowService;
         private readonly ISchoolClassService classService;
         private readonly ISchoolRoomService roomService;
-        private readonly IPaymentMeanService paymentMeanService;
         private readonly IStudentEnrollingService studentEnrollingService;
+        private readonly ILogger<EditStudentEnrollingForm> logger;
         private readonly ClientApp clientApp;
         private StudentEnrolling selectedEnrolling;
-        public EditStudentEnrollingForm(ILogService logService, IStudentService studentService, ICashFlowService cashFlowService, ISchoolClassService classService,
-             ISchoolRoomService roomService, IPaymentMeanService paymentMeanService, ClientApp clientApp, IStudentEnrollingService studentEnrollingService)
+        private StudentRoom oldStudentRoom;
+        public EditStudentEnrollingForm(ILogService logService, IStudentService studentService, ISchoolClassService classService,
+             ISchoolRoomService roomService, ClientApp clientApp, IStudentEnrollingService studentEnrollingService, ILogger<EditStudentEnrollingForm> logger)
         {
             this.logService = logService;
             this.studentService = studentService;
-            this.cashFlowService = cashFlowService;
             this.classService = classService;
             this.roomService = roomService;
-            this.paymentMeanService = paymentMeanService;
             this.studentEnrollingService = studentEnrollingService;
             this.clientApp = clientApp;
-            LoadStudentList();
+            this.logger = logger;
             ClassDropDownList.DataSource = Program.SchoolClassList;
             ClassDropDownList.SelectedIndex = -1;
-            PaymentMeanDropDownList.DataSource = Program.PaymentMeanList;
-            PaymentMeanDropDownList.SelectedIndex = -1;
             InitEvents();
         }
 
-        private void LoadFeesList(int classId)
-        {
 
-            var InfoItemList = new List<FeeItem>();
-            int i = 0;
-            var fsList = Program.CashFlowTypeList.Where(x => x.Category == "FS");
-            var abList = Program.CashFlowTypeList.Where(x => x.Category == "AB");
-            var ffList = Program.CashFlowTypeList.Where(x => x.Category == "FF");
-
-            foreach (var fs in Program.SchoolingCostList.Where(x => x.SchoolClassId == classId && x.SchoolYearId == selectedEnrolling.SchoolYearId))
-            {
-                InfoItemList.Add(new()
-                {
-                    Id = i++,
-                    UnitPrice = fs.Amount,
-                    Quantity = 1,
-                    Name = fs.CashFlowType.Name,
-                    Description = $"{fs.CashFlowType.Name}: {fs.Amount} FCFA, {Language.labelTrancheNumber}: {fs.TrancheNumber}"
-                }
-                    );
-            }
-
-            foreach (var ab in Program.SubscriptionFeeList.Where(x => x.SchoolYearId == selectedEnrolling.SchoolYearId))
-            {
-                InfoItemList.Add(new()
-                {
-                    Id = i++,
-                    UnitPrice = ab.Amount,
-                    Quantity = 1,
-                    Name = ab.CashFlowType.Name,
-                    Description = $"{Language.labelSubscription}   {ab.CashFlowType.Name}: {ab.Amount} FCFA, {Language.labelDuration}: {ab.Duration}"
-                }
-                    );
-            }
-
-            foreach (var ff in Program.SchoolSupplieFeeList.Where(x => x.SchoolClassId == classId && x.SchoolYearId == selectedEnrolling.SchoolYearId))
-            {
-                InfoItemList.Add(new()
-                {
-                    Id = i++,
-                    UnitPrice = ff.Amount,
-                    Quantity = ff.RequiredQuantity,
-                    Name = ff.CashFlowType.Name,
-                    Description = $"{ff.CashFlowType.Name}  {Language.LabelUnitPrice}: {ff.Amount} FCFA, {Language.LabelRequiredQuantity}: {ff.RequiredQuantity}"
-                }
-                    );
-            }
-
-            FeesDropDownList.DataSource = null;
-            FeesDropDownList.ValueMember = "Id";
-            FeesDropDownList.DisplayMember = "Description";
-            FeesDropDownList.DataSource = InfoItemList;
-
-        }
-
-        private async void LoadStudentList()
-        {
-            if (Program.StudentList != null)
-            {
-                if (Program.StudentList.Count == 0)
-                {
-                    Program.StudentList = await studentService.GetStudentListsync();
-                }
-            }
-            else
-            {
-                Program.StudentList = await studentService.GetStudentListsync();
-            }
-            StudentDropDownList.DataSource = Program.StudentList;
-            StudentDropDownList.SelectedIndex = -1;
-        }
         private void InitEvents()
         {
             SaveButton.Click += SaveButton_Click;
@@ -130,62 +61,45 @@ namespace Primary.SchoolApp.UI
 
         internal void Init(StudentEnrolling enrolling)
         {
-            
-            if (enrolling != null) {
+
+            if (enrolling != null)
+            {
+                selectedEnrolling = enrolling;
+                var item = new RadListDataItem
+                {
+                    Text = $"{enrolling.Student.LastName} {enrolling.Student.FirstName} | {enrolling.Student.IdNumber}",
+                    Value = enrolling.Student.Id,
+                    Image = File.Exists(enrolling.Student.PictureUrl) ? new Bitmap(Image.FromFile(enrolling.Student.PictureUrl), new Size(32, 32)) : new Bitmap(Helper.GetImage(Resources.no_image), new Size(32, 32)),
+                    Tag = enrolling.Student
+                };
+
+                StudentDropDownList.Items.Add(item);
+                StudentDropDownList.ShowDropDown();
+                StudentDropDownList.SelectedValue = enrolling.StudentId;
+                StudentDropDownList.ReadOnly = true;
+                OldSchoolTextBox.Text = enrolling.OldSchool;
+                RepeaterDropDownList.SelectedValue = enrolling.IsRepeater == true ? 1 : 0;
                 ClassDropDownList.SelectedValue = enrolling.ClassId;
                 LoadStudentRoom(enrolling.StudentId, enrolling.SchoolYearId);
-                LoadPayments(enrolling.Id);
-                selectedEnrolling = enrolling;
-                EnrollingDateTimePicker.Value=enrolling.Date;
-                StudentDropDownList.SelectedValue=enrolling.StudentId;               
-                OldSchoolTextBox.Text=enrolling.OldSchool;
-                RepeaterDropDownList.SelectedValue = enrolling.IsRepeater==true?1:0;
+                EnrollingDateTimePicker.Value = enrolling.Date;
             }
-            TransactionDateTimePicker.Enabled=false;
-            TransactionIdTextBox.Enabled=false;
-            DoneByTextBox.Enabled=false;
-            PaymentMeanDropDownList.Enabled=false;
+            CheckPermissions();
         }
-        // Génère une liste de payements pour l'initialisation du payments gridview
-        private List<TuitionPayment> GetInitialPaymentList(int classId)
+
+        private async void LoadStudentRoom(int studentId, int schoolYearId)
         {
-            var recordList = new List<TuitionPayment>();
-            //Récupération des frais  scolaires exigibles de l'année en cours.
-            var feeList = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == classId).OrderBy(x => x.CashFlowType.Sequence).ToList();
-            foreach (var fee in feeList)
+            var studentRoom = await studentEnrollingService.GetStudentRoomAsync(studentId, schoolYearId);
+            if (studentRoom != null)
             {
-                recordList.Add(
-                    new TuitionPayment()
-                    {
-                        CashFlowType = fee.CashFlowType,
-                        CashFlowTypeId = fee.CashFlowType.Id,
-                        Amount = 0,
-                        Date = DateTime.Now,
-                        TransactionDate = DateTime.Now,
-                        PaymentMean = Program.PaymentMeanList.FirstOrDefault(),
-                        PaymentMeanId = Program.PaymentMeanList.FirstOrDefault().Id,
-                        Balance = feeList.Where(x => x.CashFlowTypeId == fee.CashFlowTypeId).Sum(x => x.Amount)
-                    }
-                    );
-            }
-            return recordList;
-        }
-        private async void LoadStudentRoom(int studentId,int schoolYearId)
-        {
-            var studentRoom=await studentEnrollingService.GetStudentRoomAsync(studentId,schoolYearId);
-            if (studentRoom != null) {
                 RoomDropDownList.SelectedValue = studentRoom.RoomId;
+                oldStudentRoom = studentRoom;
             }
             else
             {
                 StudentDropDownList.SelectedValue = null;
             }
         }
-        private async void LoadPayments(int enrollingId)
-        {
 
-            await Task.Delay(0);
-        } 
         private void OnShown(object sender, EventArgs e)
         {
             EnrollingDateTimePicker.Focus();
@@ -193,28 +107,23 @@ namespace Primary.SchoolApp.UI
         }
         private void ClassDropDownList_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (ClassDropDownList.SelectedItem != null)
+            if (ClassDropDownList.SelectedItem?.DataBoundItem is SchoolClass selectedRecord)
             {
-                if (ClassDropDownList.SelectedItem.DataBoundItem is SchoolClass selectedRecord)
+                ClassDropDownList.RootElement.ToolTipText = selectedRecord.Name;
+                RoomDropDownList.DataSource = Program.SchoolRoomList.Where(x => x.ClassId == selectedRecord.Id);
+                var payments = GetInitialPaymentList(selectedRecord.Id);
+                var amountToPaid = payments.Sum(x => x.Balance);
+                // ajout total des frais scolarité
+                string totalText = Language.labelTuitionFees;
+                if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                 {
-                    RoomDropDownList.DataSource = Program.SchoolRoomList.Where(x => x.ClassId == selectedRecord.Id);
-                    var payments = GetInitialPaymentList(selectedRecord.Id);
-                    var amountToPaid = payments.Sum(x => x.Balance);
-                    // chargement de la liste des frais scolaire
-                    LoadFeesList(selectedRecord.Id);
-                    // ajout total des frais scolarité
-                    string totalText = Language.LabelAnnualTuitionFee;
-                    if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
-                    {
-                        totalText = $" {totalText}: {amountToPaid} CFA ( {amountToPaid.ToLetter(CountryLanguage.French, Currency.CFA)}) ";
-                    }
-                    else
-                    {
-                        totalText = $"{totalText}: {amountToPaid} CFA ( {amountToPaid.ToLetter(CountryLanguage.English, Currency.CFA)}) ";
-                    }
-                    FeesTotalLabel.Text = totalText;
+                    totalText = $"{totalText}: {amountToPaid} {CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol} ( {amountToPaid.ToLetter(CountryLanguage.French)}) ";
                 }
-               
+                else
+                {
+                    totalText = $"{totalText}: {amountToPaid} {CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol} ( {amountToPaid.ToLetter(CountryLanguage.English)}) ";
+                }
+                FeesTotalLabel.Text = totalText;
             }
         }
         private void AddRoomButton_Click(object sender, EventArgs e)
@@ -249,9 +158,9 @@ namespace Primary.SchoolApp.UI
         {
             if (StudentDropDownList.SelectedItem != null)
             {
-                if (StudentDropDownList.SelectedItem.DataBoundItem is Student record)
+                if (StudentDropDownList.SelectedItem.Tag is Student student)
                 {
-                    ShowStudentEditForm(record);
+                    ShowStudentEditForm(student);
                 }
             }
             else
@@ -259,24 +168,44 @@ namespace Primary.SchoolApp.UI
                 ShowStudentAddForm();
             }
         }
-        private void SaveButton_Click(object sender, EventArgs e)
+        private async void SaveButton_Click(object sender, EventArgs e)
         {
+           
             if (IsValidData())
             {
-                var selectedStudent = StudentDropDownList.SelectedItem.DataBoundItem as Student;
+                this.SaveButton.Enabled = false;
                 var selectedClass = ClassDropDownList.SelectedItem.DataBoundItem as SchoolClass;
+                if (selectedClass.Id != selectedEnrolling.ClassId)
+                {
+                    var oldTuitionAmount = GetInitialPaymentList(selectedEnrolling.ClassId).Sum(x => x.Balance);
+                    var currentTuitionAmount = GetInitialPaymentList(selectedClass.Id).Sum(x => x.Balance);
+                    if (oldTuitionAmount != currentTuitionAmount)
+                    {
+                    }
+                    string message = $"Les frais de scolarité pour la classe sélectionnée ({selectedClass.Name}: {oldTuitionAmount}) ne correspondent pas à ceux de la classe précédente ({selectedEnrolling?.SchoolClass?.Name}: {currentTuitionAmount}).\r\n Voulez-vous continuer ?";
+                    if (Thread.CurrentThread.CurrentUICulture.Name == "en-GB")
+                    {
+                        message = $"The tuition fees for the selected class ({selectedClass.Name}: {oldTuitionAmount}) do not match those of the previous class ({selectedEnrolling?.SchoolClass?.Name}: {currentTuitionAmount}).\r\n Do you want to continue?";
+                    }
+                    DialogResult dialogResult = RadMessageBox.Show(message, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        this.SaveButton.Enabled = true;
+                        return;
+                    }
+                }
                 var selectedRoom = RoomDropDownList.SelectedItem.DataBoundItem as SchoolRoom;
+                var selectedStudent = selectedEnrolling.Student;
+               
                 selectedEnrolling.Date = EnrollingDateTimePicker.Value;
                 selectedEnrolling.StudentId = selectedStudent.Id;
-                selectedEnrolling.Student = selectedStudent;
                 selectedEnrolling.ClassId = selectedClass.Id;
                 selectedEnrolling.SchoolClass = selectedClass;
-                selectedEnrolling.IsRepeater = (int)RepeaterDropDownList.SelectedValue == 0 ? false : true;
+                selectedEnrolling.IsRepeater = (int)RepeaterDropDownList.SelectedValue != 0;
                 selectedEnrolling.OldSchool = OldSchoolTextBox.Text;
-                selectedEnrolling.DoneBy = DoneByTextBox.Text;
                 //Mise à jour de l'inscription
-                var isDone = studentEnrollingService.UpdateStudentEnrollingAsync(selectedEnrolling).Result;
-                if (isDone)
+                var updateEnrollingIsDone = await studentEnrollingService.UpdateStudentEnrollingAsync(selectedEnrolling);
+                if (updateEnrollingIsDone)
                 {
                     //enregistrement du log
                     Log logEnrol = new()
@@ -284,33 +213,64 @@ namespace Primary.SchoolApp.UI
                         UserAction = $"Mise à jour de l'inscription de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                         UserId = clientApp.UserConnected.Id
                     };
-                    logService.CreateLog(logEnrol);
-                    //affectation d'une salle de classe
-                    var studentRoom = new StudentRoom()
+                     await logService.CreateLog(logEnrol);
+                    logger.LogInformation("Mise à jour de l'inscription de l'élève {StudentFullName} par l'utilisateur {UserName} sur le poste {IpAddress}",
+                                          selectedEnrolling.Student.FullName,
+                                          clientApp.UserConnected.UserName,
+                                          clientApp.IpAddress
+                    );
+                    if(oldStudentRoom != null && oldStudentRoom.RoomId != selectedRoom.Id)
                     {
-                        Room = selectedRoom,
-                        RoomId = selectedRoom.Id,
-                        StudentId = selectedStudent.Id,
-                        Student = selectedStudent,
-                        SchoolYearId = selectedEnrolling.SchoolYearId,
-                        Note = Language.labelRegistration
-                    };
-                    //suppression de l'ancienne salle
-                    studentEnrollingService.DeleteStudentRoomAsync(selectedEnrolling.StudentId,selectedEnrolling.SchoolYearId).Wait();
-                    
-                    if (studentEnrollingService.CreateStudentRoomAsync(studentRoom).Result)
-                    {
-                        Log logRoom = new()
+                        //suppression de l'ancienne salle
+                        var deleteOldRoomIsDone = await studentEnrollingService.DeleteStudentRoomAsync(selectedEnrolling.StudentId, selectedEnrolling.SchoolYearId);
+                        if (deleteOldRoomIsDone)
                         {
-                            UserAction = $"Affectation de la salle {studentRoom.Room.Name} à l'élève {studentRoom.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                            UserId = clientApp.UserConnected.Id
+                            Log logOldRoom = new()
+                            {
+                                UserAction = $"Suppression de l'affectation de la salle {oldStudentRoom.Room.Name} à l'élève {oldStudentRoom.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserId = clientApp.UserConnected.Id
+                            };
+                            await logService.CreateLog(logOldRoom);
+                            logger.LogInformation("Suppression de l'affectation de la salle {RoomName} à l'élève {StudentFullName} par l'utilisateur {UserName} sur le poste {IpAddress}",
+                                                  oldStudentRoom.Room.Name,
+                                                  oldStudentRoom.Student.FullName,
+                                                  clientApp.UserConnected.UserName,
+                                                  clientApp.IpAddress
+                            );
+                        }
+                        //affectation d'une salle de classe
+                        var studentRoom = new StudentRoom()
+                        {
+                            Room = selectedRoom,
+                            RoomId = selectedRoom.Id,
+                            StudentId = selectedStudent.Id,
+                            Student = selectedStudent,
+                            SchoolYearId = selectedEnrolling.SchoolYearId,
+                            Note = Language.labelRegistration
                         };
-                        logService.CreateLog(logRoom);
-                    }
-                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        var createStudentRoomIsDone = await studentEnrollingService.CreateStudentRoomAsync(studentRoom);
+                        if (createStudentRoomIsDone)
+                        {
+                            Log logRoom = new()
+                            {
+                                UserAction = $"Affectation de la salle {studentRoom.Room.Name} à l'élève {studentRoom.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserId = clientApp.UserConnected.Id
+                            };
+                            await   logService.CreateLog(logRoom);
+                            logger.LogInformation("Affectation de la salle {RoomName} à l'élève {StudentFullName} par l'utilisateur {UserName} sur le poste {IpAddress}",
+                                                  studentRoom.Room.Name,
+                                                  studentRoom.Student.FullName,
+                                                  clientApp.UserConnected.UserName,
+                                                  clientApp.IpAddress
+                            );
+                        }
+                    }      
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
+                this.SaveButton.Enabled = true;
             }
+            
         }
         // show student UI for edit
         private void ShowStudentEditForm(Student student)
@@ -323,10 +283,17 @@ namespace Primary.SchoolApp.UI
                 form.Init(student);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    var data = studentService.GetStudentAsync(form.IdNumberTextBox.Text).Result;
+                    var item = new RadListDataItem
+                    {
+                        Text = $"{student.LastName} {student.FirstName} | {student.IdNumber}",
+                        Value = student.Id,
+                        Image = File.Exists(student.PictureUrl) ? new Bitmap(Image.FromFile(student.PictureUrl), new Size(32, 32)) : new Bitmap(Helper.GetImage(Resources.no_image), new Size(32, 32)),
+                        Tag = student
+                    };
+                    StudentDropDownList.Items.Clear();
                     StudentDropDownList.DataSource = null;
-                    StudentDropDownList.DataSource = Program.StudentList;
-                    StudentDropDownList.SelectedValue = data;
+                    StudentDropDownList.Items.Add(item);
+                    StudentDropDownList.SelectedValue = student.Id;
                 }
             }
             else
@@ -426,6 +393,37 @@ namespace Primary.SchoolApp.UI
                 RoomDropDownList.SelectedValue = data;
             }
         }
-       
+
+        private List<TuitionPayment> GetInitialPaymentList(int classId)
+        {
+            var recordList = new List<TuitionPayment>();
+            //Récupération des frais  scolaires exigibles de l'année en cours.
+            var feeList = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == classId).OrderBy(x => x.CashFlowType.Sequence).ToList();
+            foreach (var fee in feeList)
+            {
+                recordList.Add(
+                    new TuitionPayment()
+                    {
+                        CashFlowType = fee.CashFlowType,
+                        CashFlowTypeId = fee.CashFlowType.Id,
+                        Amount = 0,
+                        Date = DateTime.Now,
+                        TransactionDate = DateTime.Now,
+                        PaymentMean = Program.PaymentMeanList.FirstOrDefault(),
+                        PaymentMeanId = Program.PaymentMeanList.FirstOrDefault().Id,
+                        Balance = feeList.Where(x => x.CashFlowTypeId == fee.CashFlowTypeId).Sum(x => x.Amount)
+                    }
+                    );
+            }
+            return recordList;
+        }
+
+        private void CheckPermissions()
+        {
+            this.AddStudentButton.Visible = Program.UserConnected.CanCreateStudent();
+            this.AddClassButton.Visible = Program.UserConnected.HasSettingPagePermission();
+            this.AddRoomButton.Visible = Program.UserConnected.HasSettingPagePermission();
+        }
+
     }
 }

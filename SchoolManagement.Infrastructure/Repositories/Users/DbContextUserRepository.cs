@@ -20,12 +20,6 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<User?> GetAsync(string userName, string userPassword)
-        {
-            var user = appDbContext.Users.SingleOrDefault(user => user.UserName == userName && user.Password == userPassword);
-            await Task.Delay(0);
-            return user;
-        }
         public async Task<User?> GetAsync(string userName)
         {
             var user = appDbContext.Users.SingleOrDefault(user => user.UserName == userName);

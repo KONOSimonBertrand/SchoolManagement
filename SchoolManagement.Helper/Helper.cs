@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using SchoolManagement.Core.Enum;
+using System.Drawing;
 using System.Runtime.Versioning;
 
 namespace SchoolManagement.Helper
@@ -84,6 +85,29 @@ namespace SchoolManagement.Helper
             decimal decimalValue = (decimal)value;
             var actual = (decimalValue - (decimalValue % divisor));
             return (double)actual;
+        }
+
+
+       public static string GetFlowCategoryName(FlowCategory category)
+        {
+            return category switch
+            {
+                FlowCategory.Subscription => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SUBSCRIPTION" : "ABONNEMENT",
+                FlowCategory.Expense => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "EXPENSE" : "DEPENSE",
+                FlowCategory.CashSupply => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "CASH SUPPLY" : "APPROVISIONNEMENT",
+                FlowCategory.SchoolSupplie => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SCHOOL SUPPLIES" : "FOURNITURES SCOLAIRE",
+                FlowCategory.TuitionFee => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "TUITION FEE" : "FRAIS SCOLAIRE",
+                _ => string.Empty,
+            };
+        }
+        public static string GetFlowTypeName(FlowType flowType)
+        {
+            return flowType switch
+            {
+                FlowType.Inflow => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "INFLOW" : "ENTREE",
+                FlowType.Outflow => Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "OUTFLOW" : "SORTIE",
+                _ => string.Empty,
+            };
         }
     }
 }

@@ -242,7 +242,7 @@ namespace Primary.SchoolApp.UI
                             {
                                 Date=record.Date,
                                 Amount=(-1)*record.Amount,
-                                TransactionId=record.TransactionId+ "-Return",
+                                TransactionId=record.TransactionId+ "-R",
                                 Employee=record.Employee,
                                 EmployeeId = record.EmployeeId,
                                 SchoolYear=record.SchoolYear,

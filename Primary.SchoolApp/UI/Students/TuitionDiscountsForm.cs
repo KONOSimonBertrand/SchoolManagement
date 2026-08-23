@@ -173,12 +173,12 @@ namespace Primary.SchoolApp.UI
             DataGridView.EnableCustomFiltering = true;
             DataGridView.EnableFiltering = true;
             GridViewDateTimeColumn dateColumn = new("Date");
-            GridViewDecimalColumn amountColumn = new("Amount");
+            GridViewDecimalColumn amountColumn = new("Discount");
             GridViewTextBoxColumn cashFlowTypeColumn = new("CashFlowType.Name");
             GridViewTextBoxColumn reasonColumn = new("Reason");
             GridViewTextBoxColumn ordoredByColumn = new("OrderedBy");
             dateColumn.HeaderText = "Date";
-            amountColumn.HeaderText = Language.labelAmount;
+            amountColumn.HeaderText = Language.labelDiscount;
             reasonColumn.HeaderText = Language.labelReason;
             cashFlowTypeColumn.HeaderText = Language.labelSchoolingFee;
             ordoredByColumn.HeaderText = Language.labelOrdoredBy;

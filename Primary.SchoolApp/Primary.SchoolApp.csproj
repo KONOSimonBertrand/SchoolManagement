@@ -88,6 +88,9 @@
     <None Update="Images\head_paper_fr.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\Signature.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

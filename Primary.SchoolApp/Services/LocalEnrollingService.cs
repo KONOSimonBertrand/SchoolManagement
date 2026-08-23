@@ -26,7 +26,7 @@ namespace Primary.SchoolApp.Services
                             {
                                 var amountToPay = fee.SchoolingCostItems.Where(x => x.Rank <= i).Sum(x => x.Amount);
                                 var amountPaid = enrolling.PaymentPayableList.Where(x=>x.CashFlowTypeId== cashFlowTypeId).Sum(x => x.Amount);
-                                var discount = enrolling.DiscountList.Where(x => x.CashFlowTypeId == cashFlowTypeId).Sum(x => x.Amount);
+                                var discount = enrolling.DiscountList.Where(x => x.CashFlowTypeId == cashFlowTypeId).Sum(x => x.Discount);
                                 var balance = amountToPay - (amountPaid + discount);
                                 if (balance > 0)
                                 {

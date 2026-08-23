@@ -21,7 +21,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             using var connection = dbConnectionFactory.CreateConnection();
             var sql = @"INSERT INTO Receipts (IdNumber, Amount, Balance, OpFor, OpDoneBy, Date, SchoolYearId)
                         VALUES (@IdNumber, @Amount, @Balance, @OpFor, @OpDoneBy, @Date, @SchoolYearId);
-                        SELECT CAST(SCOPE_IDENTITY() as int);";
+                       SELECT CAST(LAST_INSERT_ID() AS UNSIGNED) AS Id;";
             try
             {
                 var id = await connection.QuerySingleAsync<int>(sql, receipt);
@@ -42,7 +42,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 using var dbConnection = dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts WHERE Id=@id";
-                receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, id);
+                receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, new { id });
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 using var dbConnection = dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts WHERE IdNumber=@idNumber";
-                receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, idNumber);
+                receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, new { idNumber });
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 using var dbConnection = dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts WHERE SchoolYearId=@schoolYearId";
-                receiptList = (await dbConnection.QueryAsync<Receipt>(sql, schoolYearId)).ToList();
+                receiptList = (await dbConnection.QueryAsync<Receipt>(sql, new { schoolYearId })).ToList();
             }
             catch (Exception ex)
             {
@@ -90,14 +90,22 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 using var dbConnection =  dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts  WHERE YEAR(Date) = @Year AND MONTH(Date) = @Month ;";
-                receiptList = ( dbConnection.Query<Receipt>(sql, date)).ToList();
+                receiptList = ( await dbConnection.QueryAsync<Receipt>(sql, new { date })).ToList();
             }
             catch (Exception ex)
             {
                 logger.LogError("Une erreur est survenu lors de l'extraction de la liste des réçus pour le mois de {month}-{year}: {errorMessgae}", date.Month, date.Year, ex.Message);
             }
-            await Task.Delay(0);
             return receiptList;
+        }
+
+        public async Task<bool> ValidateReceiptAsync(int receipId)
+        {
+            var connection = dbConnectionFactory.CreateConnection();
+            string query = @"UPDATE Receipts SET IsValidated=1 WHERE Id=@receipId AND IsValidated=0;";
+            var result = await connection.ExecuteAsync(query, new { receipId });
+            await Task.Delay(0);
+            return result > 0;
         }
     }
 }

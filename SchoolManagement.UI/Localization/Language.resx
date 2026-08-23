@@ -1625,4 +1625,46 @@
   <data name="messageClickToRemoveFromInvoice" xml:space="preserve">
     <value>Click here to remove from invoice</value>
   </data>
+  <data name="LabelReceiptModel" xml:space="preserve">
+    <value>Receipt model</value>
+  </data>
+  <data name="messageClickToShow" xml:space="preserve">
+    <value>Click here to show</value>
+  </data>
+  <data name="LabelModel" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="labelAddPayments" xml:space="preserve">
+    <value>Add payments</value>
+  </data>
+  <data name="LabelCashTransaction" xml:space="preserve">
+    <value>Cash Transaction</value>
+  </data>
+  <data name="LabelTransactionInKind" xml:space="preserve">
+    <value>Transaction in kind</value>
+  </data>
+  <data name="LabelTransactionType" xml:space="preserve">
+    <value>Transaction type</value>
+  </data>
+  <data name="LabelFlowType" xml:space="preserve">
+    <value>Flow type</value>
+  </data>
+  <data name="LabelFinance" xml:space="preserve">
+    <value>Finance</value>
+  </data>
+  <data name="LabelTransport" xml:space="preserve">
+    <value>Transport</value>
+  </data>
+  <data name="LabelCanteen" xml:space="preserve">
+    <value>Cafeteria</value>
+  </data>
+  <data name="LabelSchoolActivity" xml:space="preserve">
+    <value>After-school activity</value>
+  </data>
+  <data name="LabelReceipt" xml:space="preserve">
+    <value>Receipt</value>
+  </data>
+  <data name="LabelReceipts" xml:space="preserve">
+    <value>Receipts</value>
+  </data>
 </root>

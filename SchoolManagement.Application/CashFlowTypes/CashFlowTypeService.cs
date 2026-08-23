@@ -20,12 +20,12 @@ namespace SchoolManagement.Application
 
         public async Task<CashFlowType> GetCashFlowType(string name)
         {
-           return await cashFlowTypeReadRepository.GetAsyn(name);
+           return await cashFlowTypeReadRepository.GetAsync(name);
         }
 
         public async Task<IList<CashFlowType>> GetCashFlowTypeList()
         {
-            return await cashFlowTypeReadRepository.GetAsynList();
+            return await cashFlowTypeReadRepository.GetAsyncList();
         }
 
         public async Task<bool> UpdateCashFlowType(CashFlowType cashFlowType)

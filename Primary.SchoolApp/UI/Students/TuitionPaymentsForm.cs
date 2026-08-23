@@ -1,19 +1,21 @@
 ﻿
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Primary.SchoolApp.Services;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
-using System.Windows.Forms;
-using Telerik.WinControls.UI;
-using Telerik.WinControls;
-using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
-using System.IO;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using Primary.SchoolApp.Services;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Telerik.WinControls;
+using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
@@ -25,12 +27,14 @@ namespace Primary.SchoolApp.UI
         private readonly IUserService userService;
         private readonly ClientApp clientApp;
         private StudentEnrolling selectedEnrolling;
-        public TuitionPaymentsForm(IPrintService printService, ICashFlowService cashFlowService, ClientApp clientApp, ILogService logService, IUserService userService)
+        private readonly ILogger<TuitionPaymentsForm> logger;
+        public TuitionPaymentsForm(IPrintService printService, ICashFlowService cashFlowService, ClientApp clientApp, ILogService logService, IUserService userService, ILogger<TuitionPaymentsForm> logger)
         {
             this.printService = printService;
             this.cashFlowService = cashFlowService;
             this.clientApp = clientApp;
             this.logService = logService;
+            this.logger = logger;
             this.SaveButton.ButtonElement.ToolTipText = Language.messageClickToAddPayment;
             CreateGridViewColumn();
             InitEvents();
@@ -163,10 +167,9 @@ namespace Primary.SchoolApp.UI
         // chargement de la liste des paiements dans le datagridview
         private async void LoadPayments(int enrollingId)
         {
-            selectedEnrolling.PaymentList = cashFlowService.GetTuitionPaymentByEnrollingList(enrollingId).Result;
+            selectedEnrolling.PaymentList = await cashFlowService.GetTuitionPaymentByEnrollingList(enrollingId);
             DataGridView.DataSource = selectedEnrolling.PaymentList;
             DataGridView.BestFitColumns();
-           await Task.Delay(0);
         }
         //Création des colonnes du datagridview
         private void CreateGridViewColumn()
@@ -332,16 +335,16 @@ namespace Primary.SchoolApp.UI
             }
         }
 
-        private void PrintMenu_Click(object sender, EventArgs e)
+        private async void PrintMenu_Click(object sender, EventArgs e)
         {
            if(DataGridView.CurrentRow.DataBoundItem is TuitionPayment payment){
                 payment.Enrolling=selectedEnrolling;
-                printService.PrintPaymentReceiptAsync(payment,true);
+                await printService.PrintPaymentReceiptAsync(payment,true);
             }
         }
 
         // retour versement
-        private void ReturnMenu_Click(object sender, EventArgs e)
+        private  async void ReturnMenu_Click(object sender, EventArgs e)
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
@@ -368,11 +371,13 @@ namespace Primary.SchoolApp.UI
                                 IdNumber = selectedPayment.IdNumber,
                                 Note = selectedPayment.Note,
                                 DoneBy = selectedPayment.DoneBy,
-                              
+                                Receipt= selectedPayment.Receipt,
+                                ReceiptId= selectedPayment.ReceiptId,
+
                             };
-                            if (!selectedEnrolling.PaymentList.ToList().Select(x => x.IdNumber).Contains(payment.IdNumber+"-return"))
+                            if (!selectedEnrolling.PaymentList.ToList().Select(x => x.IdNumber).Contains(payment.IdNumber+"-R"))
                             {
-                                var isDone = cashFlowService.ReturnTuitionPayment(payment).Result;
+                                var isDone = await cashFlowService.ReturnTuitionPayment(payment);
                                 if (isDone)
                                 {
                                     LoadPayments(selectedEnrolling.Id);
@@ -380,12 +385,14 @@ namespace Primary.SchoolApp.UI
                                     {
                                         UserAction = $"Retour du versement {payment.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                                         UserId = clientApp.UserConnected.Id
-                                    };
-                                    logService.CreateLog(log);
+                                    }; 
+                                    logger.LogInformation($"Retour du versement {payment.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
+                                    await logService.CreateLog(log);
                                    
                                 }
                                 else
                                 {
+                                    logger.LogError($"Erreur lors du retour du versement {payment.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
                                     RadMessageBox.Show(Language.messageAddError);
                                 }
                             }
@@ -408,10 +415,10 @@ namespace Primary.SchoolApp.UI
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                var form = Program.ServiceProvider.GetService<AddTuitionPaymentForm>();
+                var form = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
                 form.Text = Language.labelAdd + ":.." + Language.labelPayment;
                 form.Icon = this.Icon;
-                form.Init(selectedEnrolling);
+                form.Init(selectedEnrolling, TypeFee.TuitionFee);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     LoadPayments(selectedEnrolling.Id);

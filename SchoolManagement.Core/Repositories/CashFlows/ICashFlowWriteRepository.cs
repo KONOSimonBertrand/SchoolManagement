@@ -6,6 +6,11 @@ namespace SchoolManagement.Core.Repositories
     public interface ICashFlowWriteRepository
     {
         Task<bool> AddCashFlowAsync(CashFlow cashFlow);
+        /// <summary>
+        /// Ajoute un nouveau rabais de scolarité à la base de données.
+        /// </summary>
+        /// <param name="discount"></param>
+        /// <returns></returns>
         Task<bool> AddTuitionDiscountAsync(TuitionDiscount discount);
         Task<bool> AddTuitionPaymentAsync(TuitionPayment payment);
         Task<bool> UpdateTuitionDiscountAsync(TuitionDiscount discount);

@@ -36,12 +36,12 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddTuitionDiscountAsync(TuitionDiscount discount)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO TuitionsDiscounts(Date,Amount,EnrollingId,CashFlowTypeId,OrderedBy,Reason) 
-                              VALUES(@date,@amount,@enrollingId,@cashFlowTypeId,@orderedBy,@reason);";
+            string query = @"INSERT INTO TuitionsDiscounts(Date,Discount,EnrollingId,CashFlowTypeId,OrderedBy,Reason) 
+                              VALUES(@date,@discount,@enrollingId,@cashFlowTypeId,@orderedBy,@reason);";
             var result = connection.Execute(query, new
             {
                 date = discount.Date,
-                amount = discount.Amount,
+                discount = discount.Discount,
                 enrollingId = discount.EnrollingId,
                 cashFlowTypeId = discount.CashFlowTypeId,
                 orderedBy = discount.OrderedBy,
@@ -55,8 +55,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddTuitionPaymentAsync(TuitionPayment payment)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO TuitionsPayments(IdNumber,Date,Amount,EnrollingId,CashFlowTypeId,PaymentMeanId,Balance,DoneBy,Note,TransactionDate,TransactionId) 
-                              VALUES(@idNumber,@date,@amount,@enrollingId,@cashFlowTypeId,@paymentMeanId,@balance,@doneBy,@note,@transactionDate,@transactionId);";
+            string query = @"INSERT INTO TuitionsPayments(IdNumber,Date,Amount,EnrollingId,CashFlowTypeId,PaymentMeanId,Balance,DoneBy,Note,TransactionDate,TransactionId,ReceiptId) 
+                              VALUES(@idNumber,@date,@amount,@enrollingId,@cashFlowTypeId,@paymentMeanId,@balance,@doneBy,@note,@transactionDate,@transactionId,@receiptId);";
             var result = connection.Execute(query, new
             {
                 idNumber = payment.IdNumber,
@@ -70,6 +70,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 note = payment.Note,
                 transactionDate = payment.TransactionDate,
                 transactionId = payment.TransactionId,
+                receiptId = payment.ReceiptId
             });
             await Task.Delay(0);
             return result > 0;
@@ -157,12 +158,14 @@ namespace SchoolManagement.Infrastructure.Repositories
             string query = @"SELECT * FROM TuitionsPayments  AS A
                                INNER JOIN CashFlowTypes AS C ON A.CashFlowTypeId=C.Id
                                INNER JOIN PaymentMeans AS B ON A.PaymentMeanId=B.Id
+                               INNER JOIN Receipts AS D ON A.ReceiptId=D.Id
                                WHERE IdNumber=@idNumber ;";
-            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, TuitionPayment>(query,
-                (payment, cashFlowType, paymentMean) =>
+            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, Receipt, TuitionPayment>(query,
+                (payment, cashFlowType, paymentMean, receipt) =>
                 {
                     payment.CashFlowType = cashFlowType;
                     payment.PaymentMean = paymentMean;
+                    payment.Receipt = receipt;
                     return payment;
                 },
                 new { idNumber }).FirstOrDefault();
@@ -183,12 +186,14 @@ namespace SchoolManagement.Infrastructure.Repositories
             string query = @"SELECT * FROM TuitionsPayments  AS A  
                             INNER JOIN  CashFlowTypes AS B ON A.CashFlowTypeId=B.Id
                             INNER JOIN PaymentMeans AS C ON A.PaymentMeanId=C.Id
+                            INNER JOIN Receipts AS D ON A.ReceiptId=D.Id
                             WHERE EnrollingId=@enrollingId   ORDER BY A.Id DESC ;";
-            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, TuitionPayment>(query,
-                (payment, cashFlowType, paymentMean) =>
+            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, Receipt, TuitionPayment>(query,
+                (payment, cashFlowType, paymentMean, receipt) =>
                 {
                     payment.CashFlowType = cashFlowType;
                     payment.PaymentMean = paymentMean;
+                    payment.Receipt = receipt;
                     return payment;
                 },
                 new { enrollingId }).ToList();
@@ -202,13 +207,15 @@ namespace SchoolManagement.Infrastructure.Repositories
             string query = @"SELECT * FROM TuitionsPayments AS A  
                             INNER JOIN  CashFlowTypes AS B ON A.CashFlowTypeId=B.Id
                             INNER JOIN PaymentMeans AS C ON A.PaymentMeanId=C.Id
+                            INNER JOIN Receipts AS D ON A.ReceiptId=D.Id
                             WHERE A.EnrollingId IN (SELECT Id FROM StudentsEnrollings WHERE SchoolYearId=@schoolYearId) 
                              ORDER BY A.Id DESC ;";
-            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, TuitionPayment>(query,
-                (payment, cashFlowType, paymentMean) =>
+            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, Receipt, TuitionPayment>(query,
+                (payment, cashFlowType, paymentMean, receipt) =>
                 {
                     payment.CashFlowType = cashFlowType;
                     payment.PaymentMean = paymentMean;
+                    payment.Receipt = receipt;
                     return payment;
                 },
                 new { schoolYearId }).ToList();
@@ -233,7 +240,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             var result = connection.Execute(query, new
             {
                 date = discount.Date,
-                amount = discount.Amount,
+                amount = discount.Discount,
                 OrderedBy = discount.OrderedBy,
                 reason = discount.Reason,
                 enrollingId = discount.EnrollingId,

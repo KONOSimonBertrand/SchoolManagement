@@ -16,7 +16,7 @@ namespace SchoolManagement.Core.Model
         public DateTime Date { get; set; }
         public int SchoolYearId { get; set; }
         public SchoolYear? SchoolYear { get; set; }
-
+        public bool IsValidated { get; set; }
         public override bool Equals(object? obj)
         {
             if (obj is not Receipt other) return false;

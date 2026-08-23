@@ -8,6 +8,9 @@
     <Compile Update="Reporting\Administration\SchoolCertificateReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Reporting\CashFlow\PaymentDoubleReceiptA4SecondModelReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Reporting\CashFlow\PaymentReceiptA4Report.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -290,16 +293,10 @@
     <Compile Update="UI\SchoolRooms\EditSchoolRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\SchoolSupplies\AddSchoolSupplieForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="UI\SchoolSupplies\SchoolSuppliesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\Students\AddSchoolSupplieDiscountForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI\SchoolSupplies\EditSchoolSupplieDiscountForm.cs">
+    <Compile Update="UI\Students\AddFeesPaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\SchoolYears\AddSchoolYearForm.cs">
@@ -323,6 +320,9 @@
     <Compile Update="UI\Students\AddStudentEnrollingForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Students\AddStudentEnrollingFullForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Students\AddStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,13 +332,7 @@
     <Compile Update="UI\Students\AddStudentNotesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\Students\AddSubscriptionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="UI\Students\AddTuitionDiscountForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI\Students\AddTuitionPaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\ContactsForm.cs">
@@ -377,9 +371,6 @@
     <Compile Update="UI\Students\EditStudentNoteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI\Students\EditSubscriptionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="UI\Students\EditTuitionDiscountForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,9 +381,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\RecapNotesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI\SchoolSupplies\SchoolSupplieDiscountsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Students\SubscriptionsForm.cs">

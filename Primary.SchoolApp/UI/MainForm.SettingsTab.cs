@@ -1,9 +1,13 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using Primary.SchoolApp.UI;
 using Primary.SchoolApp.UI.CustomControls;
 using Primary.SchoolApp.Utilities;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Helper;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
@@ -553,16 +557,17 @@ namespace Primary.SchoolApp
             }
         }
         // affiche les info d'un type de trésorerie
-        private void LoadSelectedCashFlowTypeDetail(CashFlowType cashFlowType)
+        private void LoadSelectedCashFlowTypeDetail(CashFlowTypeDTO type)
         {
             cashFlowTypeInfo.TitleInfoLabel.Text = "INFO";
-            if (cashFlowType != null)
+            if (type != null)
             {
-                cashFlowTypeInfo.NameTextBox.Text = cashFlowType.Name;
-                cashFlowTypeInfo.CategoryTextBox.Text = cashFlowType.CategoryName;
-                cashFlowTypeInfo.TypeTextBox.Text = cashFlowType.TypeName;
+                cashFlowTypeInfo.NameTextBox.Text = type.Name;
+                cashFlowTypeInfo.CategoryTextBox.Text = Helper.GetFlowCategoryName(type.FlowCategory);
+                cashFlowTypeInfo.TypeTextBox.Text = Helper.GetFlowTypeName(type.FlowType);
             }
         }
+
         // affiche les info d'un moyen de paiement
         private void LoadSelectedPaymentMeanDetail(PaymentMean paymentMean)
         {
@@ -692,9 +697,9 @@ namespace Primary.SchoolApp
                 var rooms = userService.GetUserRoomList(user.Id).Result;
                 var defautModule = modules.FirstOrDefault(m => m.IsDefault == true);
                 userInfo.DefaultModuleTextBox.Text = defautModule != null ? defautModule.Module.Name : string.Empty;
-                userInfo.ModuleCount.Text = $"{Language.labelModules}: {modules.Count.ToString()}/ {Program.ModuleList.Count}";
+                userInfo.ModuleCount.Text = $"{Language.labelModules}: {modules.Count}/ {Program.ModuleList.Count}";
                 userInfo.ModuleCount.Image = Utilities.AppUtilities.GetImage("Folder");
-                userInfo.RoomCount.Text = $"{Language.labelRooms}: {rooms.Count.ToString()}/{Program.SchoolRoomList.Count}";
+                userInfo.RoomCount.Text = $"{Language.labelRooms}: {rooms.Count}/{Program.SchoolRoomList.Count}";
                 userInfo.RoomCount.Image = Utilities.AppUtilities.GetImage("Folder");
             }
         }
@@ -724,6 +729,9 @@ namespace Primary.SchoolApp
             object[] rowMotto = new object[2];
             rowMotto[0] = language == "FR" ? "DEVISE" : "MOTTO";
             rowMotto[1] = Program.CurrentSchool.Motto;
+            object[] rowReceiptModel = new object[2];
+            rowReceiptModel[0] = language == "FR" ? "MODELE DE RECU" : "RECEIPT MODEL";
+            rowReceiptModel[1] = Program.CurrentSchool.ReceiptModel;
             object[] rowPhone = new object[2];
             rowPhone[0] = language == "FR" ? "TELEPHONE" : "PHONE";
             rowPhone[1] = Program.CurrentSchool.Phone;
@@ -751,6 +759,7 @@ namespace Primary.SchoolApp
 
             dataTable.Rows.Add(rowName);
             dataTable.Rows.Add(rowMotto);
+            dataTable.Rows.Add(rowReceiptModel);
             dataTable.Rows.Add(rowPhone);
             dataTable.Rows.Add(rowCity);
             dataTable.Rows.Add(rowPostBox);
@@ -906,7 +915,8 @@ namespace Primary.SchoolApp
         {
             var getData = cashFlowTypeService.GetCashFlowTypeList();
             CreateCashFlowTypeColumnsForSettingGridView();
-            Program.CashFlowTypeList = await getData;
+            var result = await getData;
+            Program.CashFlowTypeList = result.Select(x => x.AsCashFlowTypeDTO()).ToList();
             SettingGridView.DataSource = Program.CashFlowTypeList;
 
         }
@@ -1124,8 +1134,10 @@ namespace Primary.SchoolApp
                 template.Columns.Add(sequenceTColumn);
                 SettingGridView.Templates.Add(template);
 
-                GridViewRelation relation = new (SettingGridView.MasterTemplate, template);
-                relation.RelationName = "ParentChild";
+                GridViewRelation relation = new(SettingGridView.MasterTemplate, template)
+                {
+                    RelationName = "ParentChild"
+                };
                 relation.ParentColumnNames.Add("Id");
                 relation.ChildColumnNames.Add("Mother");
                 this.SettingGridView.Relations.Add(relation);
@@ -1174,8 +1186,10 @@ namespace Primary.SchoolApp
         }
         private void CreateJobColumnsForSettingGridView()
         {
-            GridViewTextBoxColumn nameColumn = new("Name");
-            nameColumn.HeaderText = Language.labelDesignation;
+            GridViewTextBoxColumn nameColumn = new("Name")
+            {
+                HeaderText = Language.labelDesignation
+            };
             SettingGridView.Columns.Add(nameColumn);
         }
         //chargement la liste des groupes employé dans le datagridview de la page setting
@@ -1189,8 +1203,10 @@ namespace Primary.SchoolApp
         }
         private void CreateEmployeeGroupColumnsForSettingGridView()
         {
-            GridViewTextBoxColumn nameColumn = new("Name");
-            nameColumn.HeaderText = Language.labelDesignation;
+            GridViewTextBoxColumn nameColumn = new("Name")
+            {
+                HeaderText = Language.labelDesignation
+            };
             SettingGridView.Columns.Add(nameColumn);
         }
         //chargement la liste des utilisateurs dans le datagridview de la page setting
@@ -1381,7 +1397,7 @@ namespace Primary.SchoolApp
             }
         }
         // show CashFlowType UI for edit
-        private void ShowCashFlowTypeEditForm(CashFlowType type)
+        private void ShowCashFlowTypeEditForm(CashFlowTypeDTO type)
         {
             if (type != null)
             {
@@ -1391,7 +1407,7 @@ namespace Primary.SchoolApp
                 form.Icon = this.Icon;
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
-                    SettingGridView.DataSource = new List<CashFlowType>();
+                    SettingGridView.DataSource = new List<CashFlowTypeDTO>();
                     SettingGridView.DataSource = Program.CashFlowTypeList;
                 }
             }
@@ -1409,7 +1425,7 @@ namespace Primary.SchoolApp
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data);
+                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
                 SettingGridView.DataSource = new List<CashFlowType>();
                 SettingGridView.DataSource = Program.CashFlowTypeList;
             }
@@ -2820,7 +2836,7 @@ namespace Primary.SchoolApp
                         }
                         break;
                     case 5:
-                        LoadSelectedCashFlowTypeDetail(SettingGridView.CurrentRow.DataBoundItem as CashFlowType);
+                        LoadSelectedCashFlowTypeDetail(SettingGridView.CurrentRow.DataBoundItem as CashFlowTypeDTO);
                         if (SettingGridView.RowCount > 0)
                         {
                             if (!cashFlowTypeInfo.Visible) cashFlowTypeInfo.Visible = true;
@@ -3002,7 +3018,7 @@ namespace Primary.SchoolApp
                     ShowSchoolRoomEditForm(SettingGridView?.CurrentRow.DataBoundItem as SchoolRoom);
                     break;
                 case 5:
-                    ShowCashFlowTypeEditForm(SettingGridView?.CurrentRow.DataBoundItem as CashFlowType);
+                    ShowCashFlowTypeEditForm(SettingGridView?.CurrentRow.DataBoundItem as CashFlowTypeDTO);
                     break;
                 case 6:
                     ShowPaymentMeanEditForm(SettingGridView?.CurrentRow.DataBoundItem as PaymentMean);
@@ -3068,8 +3084,10 @@ namespace Primary.SchoolApp
                     case 1:
                         var currentYear = SettingGridView.CurrentRow.DataBoundItem as SchoolYear;
                         var message = currentYear.IsClosed == false ? Language.messageCloseSchoolYear : Language.messageActivateSchoolYear;
-                        RadMenuItem menuChangeSchoolYearStatus = new(message);
-                        menuChangeSchoolYearStatus.Image = currentYear.IsClosed == false ? AppUtilities.GetImage("Lock") : AppUtilities.GetImage("Unlock");
+                        RadMenuItem menuChangeSchoolYearStatus = new(message)
+                        {
+                            Image = currentYear.IsClosed == false ? AppUtilities.GetImage("Lock") : AppUtilities.GetImage("Unlock")
+                        };
                         e.ContextMenu.Items.Add(menuChangeSchoolYearStatus);
                         menuChangeSchoolYearStatus.Click += MenuChangeSchoolYearStatus_Click;
                         break;
@@ -3078,32 +3096,42 @@ namespace Primary.SchoolApp
                         menuShowSubjectOfClass.Image = AppUtilities.GetImage("Folder");
                         menuShowSubjectOfClass.ToolTipText = Language.messageClickToSee;
                         menuShowSubjectOfClass.Click += MenuShowSubjectOfClass_Click;
-                        RadMenuItem menuGenerateEmptyClassReport = new(Language.labelGenerateEmptyClassReport);
-                        menuGenerateEmptyClassReport.Image = AppUtilities.GetImage("File");
+                        RadMenuItem menuGenerateEmptyClassReport = new(Language.labelGenerateEmptyClassReport)
+                        {
+                            Image = AppUtilities.GetImage("File")
+                        };
                         menuGenerateEmptyClassReport.Click += MenuGenerateEmptyClassReport_Click;
                         e.ContextMenu.Items.Add(menuShowSubjectOfClass);
                         e.ContextMenu.Items.Add(menuGenerateEmptyClassReport);
                         break;
                     case 4:
-                        RadMenuItem menuShowStudentOfClass = new(Language.titleStudentList);
-                        menuShowStudentOfClass.Image = AppUtilities.GetImage("Folder");
-                        menuShowStudentOfClass.ToolTipText = Language.messageClickToSee;
+                        RadMenuItem menuShowStudentOfClass = new(Language.titleStudentList)
+                        {
+                            Image = AppUtilities.GetImage("Folder"),
+                            ToolTipText = Language.messageClickToSee
+                        };
                         menuShowStudentOfClass.Click += MenuShowStudentOfClass_Click; ;
-                        RadMenuItem menuGenerateEmptyRoomReport = new(Language.labelGenerateEmptyClassReport);
-                        menuGenerateEmptyRoomReport.Image = AppUtilities.GetImage("File");
+                        RadMenuItem menuGenerateEmptyRoomReport = new(Language.labelGenerateEmptyClassReport)
+                        {
+                            Image = AppUtilities.GetImage("File")
+                        };
                         menuGenerateEmptyRoomReport.Click += MenuGenerateEmptyClassReport_Click;
                         e.ContextMenu.Items.Add(menuShowStudentOfClass);
                         e.ContextMenu.Items.Add(menuGenerateEmptyRoomReport);
                         break;
                     case 7:
-                        RadMenuItem menuDuplicateSchoolingFee = new(Language.labelDuplicateForCurrentYear);
-                        menuDuplicateSchoolingFee.Image = AppUtilities.GetImage("Duplicate");
+                        RadMenuItem menuDuplicateSchoolingFee = new(Language.labelDuplicateForCurrentYear)
+                        {
+                            Image = AppUtilities.GetImage("Duplicate")
+                        };
                         menuDuplicateSchoolingFee.Click += MenuDuplicateSchoolingFee_Click;
                         e.ContextMenu.Items.Add(menuDuplicateSchoolingFee);
                         break;
                     case 8:
-                        RadMenuItem menuDuplicateSubscriptionFee = new(Language.labelDuplicateForCurrentYear);
-                        menuDuplicateSubscriptionFee.Image = AppUtilities.GetImage("Duplicate");
+                        RadMenuItem menuDuplicateSubscriptionFee = new(Language.labelDuplicateForCurrentYear)
+                        {
+                            Image = AppUtilities.GetImage("Duplicate")
+                        };
                         menuDuplicateSubscriptionFee.Click += MenuDuplicateSubscriptionFee_Click;
                         e.ContextMenu.Items.Add(menuDuplicateSubscriptionFee);
                         break;
@@ -3112,8 +3140,10 @@ namespace Primary.SchoolApp
                         {
                             if (!session.Code.Contains("TERM"))
                             {
-                                RadMenuItem changeStateMenu = new(Language.LabelCloseOrActivateEvaluation);
-                                changeStateMenu.Image = AppUtilities.GetImage("Lock");
+                                RadMenuItem changeStateMenu = new(Language.LabelCloseOrActivateEvaluation)
+                                {
+                                    Image = AppUtilities.GetImage("Lock")
+                                };
                                 e.ContextMenu.Items.Add(changeStateMenu);
                                 changeStateMenu.Click += (o, ev) => {
                                     var form = Program.ServiceProvider.GetService<EvaluationSessionStateForm>();

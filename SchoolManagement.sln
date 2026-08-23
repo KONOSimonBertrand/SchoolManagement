@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Primary.SchoolApp", "Primar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.Helper", "SchoolManagement.Helper\SchoolManagement.Helper.csproj", "{5B501A13-DBE0-44CA-BCAC-9C1BC14CA7C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolAppUpdate", "SchoolAppUpdate\SchoolAppUpdate.csproj", "{4BACB725-5995-4DBB-B7D8-7D2054C12907}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{5B501A13-DBE0-44CA-BCAC-9C1BC14CA7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B501A13-DBE0-44CA-BCAC-9C1BC14CA7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B501A13-DBE0-44CA-BCAC-9C1BC14CA7C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BACB725-5995-4DBB-B7D8-7D2054C12907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BACB725-5995-4DBB-B7D8-7D2054C12907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BACB725-5995-4DBB-B7D8-7D2054C12907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BACB725-5995-4DBB-B7D8-7D2054C12907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{4AD75164-9635-49FB-86BD-1B97B78F099D} = {247FCFE2-12D3-4171-A8F6-CD2690B2AE69}
 		{945B1933-9CA0-4947-8B58-68FC09C2AB56} = {9F30CBDA-0363-45D9-A673-98B141CCF94E}
 		{5B501A13-DBE0-44CA-BCAC-9C1BC14CA7C4} = {247FCFE2-12D3-4171-A8F6-CD2690B2AE69}
+		{4BACB725-5995-4DBB-B7D8-7D2054C12907} = {9F30CBDA-0363-45D9-A673-98B141CCF94E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DD720E55-A1AA-4312-8ADD-112553D54EBD}

@@ -19,7 +19,7 @@ namespace SchoolManagement.Application
 
         public async Task<bool> ReturnSubscriptionAsync(Subscription subscription)
         {
-            subscription.IdNumber = subscription.IdNumber + "-return";
+            subscription.IdNumber = subscription.IdNumber + "-R";
             subscription.Amount = (-1) * subscription.Amount;
             return await subscriptionWriteRepository.AddSubscriptionAsync(subscription);
         }
@@ -68,11 +68,6 @@ namespace SchoolManagement.Application
         public  async Task<List<Subscription>> GetSubscriptionLisAsync(int schoolyearId)
         {
             return await subscriptionReadRepository.GetSubscriptionListAsync(schoolyearId);
-        }
-
-        public async Task<bool> UpdateSubscriptiongAsync(Subscription subscription)
-        {
-            return await subscriptionWriteRepository.UpdateSubscriptionAsync(subscription);
         }
 
         public async Task<bool> ValidateSubscriptionAsync(int subscriptionId)

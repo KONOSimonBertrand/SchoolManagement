@@ -4,7 +4,6 @@ using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace Primary.SchoolApp.UI
 {
@@ -82,6 +81,7 @@ namespace Primary.SchoolApp.UI
             this.NameTextBox.Text = Program.CurrentSchool.Name;
             this.MottoTextBox.Text = Program.CurrentSchool.Motto;
             this.EvaluationModelDropDownList.SelectedValue = Program.CurrentSchool.EvaluationModel;
+            this.ReceiptModelDropDownList.SelectedValue = Program.CurrentSchool.ReceiptModel;
             this.CityTextBox.Text = Program.CurrentSchool.City;
             this.PostBoxTextBox.Text = Program.CurrentSchool.PostBox;
             this.AddressTextBox.Text = Program.CurrentSchool.Address;
@@ -114,6 +114,7 @@ namespace Primary.SchoolApp.UI
                 Program.CurrentSchool.HeadMasterSex= this.HeadMasterSexDropDownList.SelectedValue.ToString();
                 Program.CurrentSchool.StudentPictureDirectory = this.StudentPictureDirectoryTextBox.Text;
                 Program.CurrentSchool.EmployeePictureDirectory = this.EmployeePictureDirectoryTextBox.Text;
+                Program.CurrentSchool.ReceiptModel = Convert.ToInt32(this.ReceiptModelDropDownList.SelectedValue.ToString());
                 bool isDone = schoolService.UpdateSchoolAsync(Program.CurrentSchool).Result;
                 if (isDone)
                 {

@@ -1,6 +1,5 @@
 ﻿
 
-using MediaFoundation;
 using SchoolManagement.Core.Model;
 using System.Threading;
 using System;

@@ -65,18 +65,15 @@ namespace Primary.SchoolApp
             services.AddTransient<AddEmployeeAccountTransactionForm>();
             services.AddTransient<EditTimeTableForm>();
             services.AddTransient<EditStudentEnrollingForm>();
-            services.AddTransient<AddStudentEnrollingForm>();
+            services.AddTransient<AddStudentEnrollingFullForm>();
             services.AddTransient<EditStudentForm>();
             services.AddTransient<AddStudentForm>();
             services.AddTransient<UploadStudentPictureForm>();
             services.AddTransient<IPrintService,PrintService>();
             services.AddTransient<TuitionPaymentsForm>();
-            services.AddTransient<AddTuitionPaymentForm>();
             services.AddTransient<TuitionDiscountsForm>();
             services.AddTransient<AddTuitionDiscountForm>();
             services.AddTransient<EditTuitionDiscountForm>();
-            services.AddTransient<AddSubscriptionForm>();
-            services.AddTransient<EditSubscriptionForm>();
             services.AddTransient<SubscriptionsForm>();
             services.AddTransient<EditDisciplineSubjectForm>();
             services.AddTransient<EditDisciplineForm>();
@@ -105,12 +102,9 @@ namespace Primary.SchoolApp
             services.AddTransient<GeneralReportForm>();
             services.AddTransient<AddSchoolSupplieFeeForm>();
             services.AddTransient<EditSchoolSupplieFeeForm>();
-            services.AddTransient<AddSchoolSupplieDiscountForm>();
-            services.AddTransient<AddSchoolSupplieForm>();
-            services.AddTransient<EditSchoolSupplieDiscountForm>();
-            services.AddTransient<SchoolSupplieDiscountsForm>();
             services.AddTransient<SchoolSuppliesForm>();
             services.AddTransient<ListingService>();
+            services.AddTransient<AddFeesPaymentForm>();
             return services;
         }
     }

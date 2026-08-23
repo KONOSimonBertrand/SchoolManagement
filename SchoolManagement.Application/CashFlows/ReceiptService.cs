@@ -21,12 +21,18 @@ namespace SchoolManagement.Application
             receipt.IdNumber = await GenerateReceiptIdNumberAsync();
             return await receiptWriteRepository.AddAsync(receipt);
         }
-
+        public async Task<Receipt> ReturnReceiptAsync(Receipt receipt)
+        {
+            receipt.IdNumber = receipt.IdNumber+"-R";
+            receipt.Amount = receipt.Amount * (-1);
+            return await receiptWriteRepository.AddAsync(receipt);
+        }
         public async Task<string> GenerateReceiptIdNumberAsync()
         {
             var selectedDate = DateTime.Now;    
             var receipts = await receiptReadRepository.GetListByDateAsync(selectedDate);
-            var prefix=string.Concat(selectedDate.Year.ToString(),"-",selectedDate.Month.ToString());
+            var month = selectedDate.Month.ToString().Length == 1 ? string.Concat("0", selectedDate.Month.ToString()) : selectedDate.Month.ToString();
+            var prefix=string.Concat(selectedDate.Year.ToString(),"-",month);
             var idNumber =generateIdNumberService.GenerateNextIdNumberWithFourDigit(prefix, receipts.Count+1);
             return idNumber;
         }
@@ -43,7 +49,11 @@ namespace SchoolManagement.Application
 
         public Task<List<Receipt>> GetReceiptListAsync(int schoolYearId)
         {
-            throw new NotImplementedException();
+            return receiptReadRepository.GetListBySchoolYearIdAsync(schoolYearId);
+        }
+        public async Task<bool> ValidateReceiptAsync(int receiptId)
+        {
+            return await receiptWriteRepository.ValidateReceiptAsync(receiptId);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace SchoolManagement.UI
         public RadTextBox NameTextBox { get=>nameTextBox;}
         public RadTextBox MottoTextBox { get=>mottoTextBox;}
         public RadDropDownList EvaluationModelDropDownList {  get=>evaluationModelDropDownList;}
+        public RadDropDownList ReceiptModelDropDownList { get => receiptModelDropDownList; }
+        public RadButton ShowModelButton { get => showModelButton; }
         public RadTextBox CityTextBox { get=>cityTextBox;}
         public RadTextBox PostBoxTextBox { get=>postBoxTextBox;}
         public RadTextBox AddressTextBox { get=>addressTextBox;}
@@ -39,6 +41,7 @@ namespace SchoolManagement.UI
             this.nameLabel.Text = "<html>" + Language.labelDesignation + ":" + "<color=Red>*";
             this.mottoLabel.Text = Language.LabelMotto;
             this.evaluationModelLabel.Text="<html>" + Language.LabelEvaluationModel + ":" + "<color=Red>*";
+            this.receiptModelLabel.Text="<html>" + Language.LabelReceiptModel + ":" + "<color=Red>*";
             this.cityLabel.Text = Language.LabelCity;
             this.postBoxLabel.Text=Language.LabelPostBox;
             this.addressLabel.Text=Language.LabelLocalization;
@@ -67,6 +70,10 @@ namespace SchoolManagement.UI
             this.evaluationModelLabel.LabelElement.CustomFontSize = 10.5f;
             this.evaluationModelLabel.TextAlignment = ContentAlignment.BottomLeft;
 
+            this.receiptModelLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
+            this.receiptModelLabel.LabelElement.CustomFontSize = 10.5f;
+            this.receiptModelLabel.TextAlignment = ContentAlignment.BottomLeft;
+
             this.cityLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.cityLabel.LabelElement.CustomFontSize = 10.5f;
             this.cityLabel.TextAlignment = ContentAlignment.BottomLeft;
@@ -93,7 +100,6 @@ namespace SchoolManagement.UI
 
             this.facebookLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
             this.facebookLabel.LabelElement.CustomFontSize = 10.5f;
-            this.facebookLabel.ForeColor = Color.FromArgb(89, 89, 89);
             this.facebookLabel.TextAlignment = ContentAlignment.BottomLeft;
 
             this.headMasterTypeLabel.LabelElement.CustomFont = ViewUtilities.MainFont;
@@ -125,6 +131,10 @@ namespace SchoolManagement.UI
             this.evaluationModelDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
             this.evaluationModelDropDownList.RootElement.CustomFontSize = 10.5f;
             this.evaluationModelDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
+
+            this.receiptModelDropDownList.RootElement.CustomFont = ViewUtilities.MainFont;
+            this.receiptModelDropDownList.RootElement.CustomFontSize = 10.5f;
+            this.receiptModelDropDownList.DropDownListElement.Padding = new Padding(3, 0, 0, 0);
 
             this.cityTextBox.TextBoxElement.CustomFont = ViewUtilities.MainFont;
             this.cityTextBox.TextBoxElement.CustomFontSize = 10.5f;
@@ -186,6 +196,7 @@ namespace SchoolManagement.UI
             this.nameSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.mottoSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.evaluationModelSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
+            this.receiptModelSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.citySeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.postBoxSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
             this.phoneSeparator.SeparatorElement.Line1.BackColor = Color.FromArgb(209, 209, 209);
@@ -202,6 +213,11 @@ namespace SchoolManagement.UI
             this.saveButton.ButtonElement.CustomFont = ViewUtilities.MainFontMedium;
             this.saveButton.ButtonElement.CustomFontSize = 10.5f;
 
+            showModelButton.RootElement.ToolTipText = Language.messageClickToShow;
+            showModelButton.Image = ViewUtilities.GetImage("Show");
+            showModelButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            showModelButton.ButtonElement.Padding = new Padding(0);
+
             this.errorLabel.ForeColor = Color.Red;
             this.evaluationModelDropDownList.Items.Add(new RadListDataItem(Language.LabelFirstModel, 0));
             this.evaluationModelDropDownList.Items.Add(new RadListDataItem(Language.LabelSecondModel, 1));
@@ -211,6 +227,12 @@ namespace SchoolManagement.UI
             this.headMasterTypeDropDownList.Items.Add(new RadListDataItem(Language.LabelThePrincipal, 2));
             this.headMasterSexDropDownList.Items.Add(new RadListDataItem(Language.LabelMale, "M"));
             this.headMasterSexDropDownList.Items.Add(new RadListDataItem(Language.LabelFemale, "F"));
+
+            this.receiptModelDropDownList.Items.Add(new RadListDataItem(Language.LabelFirstModel, 0));
+            this.receiptModelDropDownList.Items.Add(new RadListDataItem(Language.LabelSecondModel, 1));
+            this.receiptModelDropDownList.SelectedIndex = 0;
+
+
         }
 
         private void InitEvent()
@@ -238,28 +260,35 @@ namespace SchoolManagement.UI
             {
                 this.errorLabel.Text = Language.messageFillField;
                 this.errorProvider.SetError(evaluationModelDropDownList, Language.messageFillField);
-                this.mottoTextBox.Focus();
+                this.evaluationModelDropDownList.Focus();
+                return false;
+            }
+            if (this.receiptModelDropDownList.SelectedIndex < 0)
+            {
+                this.errorLabel.Text = Language.messageFillField;
+                this.errorProvider.SetError(receiptModelDropDownList, Language.messageFillField);
+                this.receiptModelDropDownList.Focus();
                 return false;
             }
             if (this.headMasterNameTextBox.Text == string.Empty)
             {
                 this.errorProvider.SetError(this.headMasterNameTextBox, Language.messageFillField);
                 this.errorLabel.Text = Language.messageFillField;
-                this.nameTextBox.Focus();
+                this.headMasterNameTextBox.Focus();
                 return false;
             }
             if (this.headMasterTypeDropDownList.SelectedIndex < 0)
             {
                 this.errorLabel.Text = Language.messageFillField;
                 this.errorProvider.SetError(headMasterTypeDropDownList, Language.messageFillField);
-                this.mottoTextBox.Focus();
+                this.headMasterTypeDropDownList.Focus();
                 return false;
             }
             if (this.headMasterSexDropDownList.SelectedIndex < 0)
             {
                 this.errorLabel.Text = Language.messageFillField;
                 this.errorProvider.SetError(headMasterSexDropDownList, Language.messageFillField);
-                this.mottoTextBox.Focus();
+                this.headMasterSexDropDownList.Focus();
                 return false;
             }
             return true;

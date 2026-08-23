@@ -1,7 +1,9 @@
 ﻿using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
+using SchoolManagement.Helper;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Collections.Generic;
@@ -408,7 +410,7 @@ namespace Primary.SchoolApp.Services
                 row[0] = item.CashFlowType.Name;
                 row[1] = item.Amount;
                 row[2] = item.Duration;
-                row[3] = item.CashFlowType.Domain;
+                row[3] = item.CashFlowType.FlowDomain;
                 row[4] = item.CashFlowType.Description;
                 dataTable.Rows.Add(row);
             }
@@ -658,7 +660,7 @@ namespace Primary.SchoolApp.Services
         {
             var cashFlowList = Program.CashFlowList;
             var monthList = cashFlowList.DistinctBy(x => x.Date.Month).Select(x => x.Date.Month).Order();
-            var typeList = cashFlowList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.Category);
+            var typeList = cashFlowList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.FlowCategory);
             DataTable globalDataTable = new();
             DataTable detailDataTable = new();
 
@@ -710,8 +712,8 @@ namespace Primary.SchoolApp.Services
                 row[2] = c.Amount;
                 row[3] = c.CashFlowType.Name;
                 row[4] = c.DoneBy;
-                row[5] = c.CashFlowType.CategoryName;
-                row[6] = c.CashFlowType.TypeName;
+                row[5] = Helper.GetFlowCategoryName(c.CashFlowType.FlowCategory);
+                row[6] = Helper.GetFlowTypeName(c.CashFlowType.FlowType);
                 detailDataTable.Rows.Add(row);
 
             }
@@ -728,7 +730,7 @@ namespace Primary.SchoolApp.Services
         {
             var inscriptionList = Program.StudentEnrollingList;
             var subscriptionList = Program.SubscriptionList;
-            var typeList = subscriptionList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.Category);
+            var typeList = subscriptionList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.FlowCategory);
             DataTable globalDataTable = new();
             DataTable detailDataTable = new();
 
@@ -750,7 +752,7 @@ namespace Primary.SchoolApp.Services
             {
                 object[] row = new object[globalDataTable.Columns.Count];
                 row[0] = type.Name;
-                row[1] = type.Domain;
+                row[1] = type.FlowDomain;
                 row[2] = type.Description;
                 row[3] = subscriptionList.Count(x => x.CashFlowTypeId == type.Id);
                 row[4] = subscriptionList.Where(x => x.CashFlowTypeId == type.Id).Sum(x => x.Amount);
@@ -760,7 +762,6 @@ namespace Primary.SchoolApp.Services
             // Build detail datatable column
             string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAYEMENT";
             string paymentRefColumn = Language.LanguageName == "EN" ? "REF" : "REF";
-            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
             string endDateColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
             string stateColumn = Language.LanguageName == "EN" ? "STATE" : "ETAT";
 
@@ -772,7 +773,6 @@ namespace Primary.SchoolApp.Services
             detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
             detailDataTable.Columns.Add(paymentRefColumn, typeof(string));
             detailDataTable.Columns.Add(amountColumn, typeof(double));
-            detailDataTable.Columns.Add(discountColumn, typeof(double));
             detailDataTable.Columns.Add(subscriptionColumn, typeof(string));
             detailDataTable.Columns.Add(endDateColumn, typeof(DateTime));
             detailDataTable.Columns.Add(stateColumn, typeof(string));
@@ -788,14 +788,13 @@ namespace Primary.SchoolApp.Services
                 row[0] = c.TransactionDate;
                 row[1] = c.IdNumber;
                 row[2] = c.Amount;
-                row[3] = c.Discount;
-                row[4] = c.CashFlowType.Name;
-                row[5] = c.EndDate;
-                row[6] = c.State;
-                row[7] = c.Student.FullName;
-                row[8] = inscriptionList.FirstOrDefault(x => x.StudentId == c.StudentId)?.ClassName;
-                row[9] = c.Student.Address;
-                row[10] = c.Student.Phone;
+                row[3] = c.CashFlowType.Name;
+                row[4] = c.EndDate;
+                row[5] = c.State;
+                row[6] = c.Student.FullName;
+                row[7] = inscriptionList.FirstOrDefault(x => x.StudentId == c.StudentId)?.ClassName;
+                row[8] = c.Student.Address;
+                row[9] = c.Student.Phone;
                 detailDataTable.Rows.Add(row);
 
             }
@@ -811,7 +810,7 @@ namespace Primary.SchoolApp.Services
         {
             var expenseList = Program.CashBoxOutList;
             var monthList = expenseList.DistinctBy(x => x.Date.Month).Select(x => x.Date.Month).Order();
-            var typeList = expenseList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.Category);
+            var typeList = expenseList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.FlowCategory);
             DataTable globalDataTable = new();
             DataTable detailDataTable = new();
 
@@ -877,7 +876,7 @@ namespace Primary.SchoolApp.Services
         {
             var expenseList = Program.CashBoxInList;
             var monthList = expenseList.DistinctBy(x => x.Date.Month).Select(x => x.Date.Month).Order();
-            var typeList = expenseList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.Category);
+            var typeList = expenseList.Select(x => x.CashFlowType).DistinctBy(x => x.Id).OrderByDescending(x => x.FlowCategory);
             DataTable globalDataTable = new();
             DataTable detailDataTable = new();
 
@@ -1124,7 +1123,6 @@ namespace Primary.SchoolApp.Services
             string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAIEMENT";
             string refColumn = Language.LanguageName == "EN" ? "REF" : "REF";
             string amountColumn = Language.LanguageName == "EN" ? "AMOUNT" : "MONTANT";
-            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
             string endColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
 
             // build global datatable
@@ -1138,7 +1136,7 @@ namespace Primary.SchoolApp.Services
             globalDataTable.Columns.Add(totalColumn, typeof(double));
 
             var subscriptionList = (await getSubscriptionListTask)
-                .Where(x => x.CashFlowType?.Domain == "Transport")
+                .Where(x => x.CashFlowType?.FlowDomain == FlowDomain.Transport)
                 .OrderByDescending(x => x.StartDate);
             var subsctiptionTypeList = subscriptionList.Select(x => x.CashFlowType);
             var studentClassList = await getStudentClassroomTask;
@@ -1165,7 +1163,6 @@ namespace Primary.SchoolApp.Services
             detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
             detailDataTable.Columns.Add(refColumn, typeof(string));
             detailDataTable.Columns.Add(amountColumn, typeof(double));
-            detailDataTable.Columns.Add(discountColumn, typeof(double));
             detailDataTable.Columns.Add(endColumn, typeof(DateTime));
             detailDataTable.Columns.Add(studentColumn, typeof(string));
             detailDataTable.Columns.Add(idColumn, typeof(string));
@@ -1180,13 +1177,12 @@ namespace Primary.SchoolApp.Services
                 row[2] = subscription.TransactionDate;
                 row[3] = subscription.IdNumber;
                 row[4] = subscription.Amount;
-                row[5] = subscription.Discount;
-                row[6] = subscription.EndDate;
-                row[7] = subscription.Student.FullName;
-                row[8] = subscription.Student.IdNumber;
-                row[9] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
-                row[10] = subscription.Student.Address;
-                row[11] = subscription.Student.Phone;
+                row[5] = subscription.EndDate;
+                row[6] = subscription.Student.FullName;
+                row[7] = subscription.Student.IdNumber;
+                row[8] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
+                row[9] = subscription.Student.Address;
+                row[10] = subscription.Student.Phone;
                 detailDataTable.Rows.Add(row);
             }
             return new Dictionary<int, DataTable>{
@@ -1218,7 +1214,6 @@ namespace Primary.SchoolApp.Services
             string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAIEMENT";
             string refColumn = Language.LanguageName == "EN" ? "REF" : "REF";
             string amountColumn = Language.LanguageName == "EN" ? "AMOUNT" : "MONTANT";
-            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
             string endColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
 
             // build global datatable
@@ -1232,7 +1227,7 @@ namespace Primary.SchoolApp.Services
             globalDataTable.Columns.Add(totalColumn, typeof(double));
 
             var subscriptionList = (await getSubscriptionListTask)
-                .Where(x => x.CashFlowType?.Domain == "Activité Périscolaire")
+                .Where(x => x.CashFlowType?.FlowDomain == FlowDomain.SchoolActivity)
                 .OrderByDescending(x => x.StartDate);
             var subsctiptionTypeList = subscriptionList.Select(x => x.CashFlowType);
             var studentClassList = await getStudentClassroomTask;
@@ -1259,7 +1254,6 @@ namespace Primary.SchoolApp.Services
             detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
             detailDataTable.Columns.Add(refColumn, typeof(string));
             detailDataTable.Columns.Add(amountColumn, typeof(double));
-            detailDataTable.Columns.Add(discountColumn, typeof(double));
             detailDataTable.Columns.Add(endColumn, typeof(DateTime));
             detailDataTable.Columns.Add(studentColumn, typeof(string));
             detailDataTable.Columns.Add(idColumn, typeof(string));
@@ -1274,13 +1268,12 @@ namespace Primary.SchoolApp.Services
                 row[2] = subscription.TransactionDate;
                 row[3] = subscription.IdNumber;
                 row[4] = subscription.Amount;
-                row[5] = subscription.Discount;
-                row[6] = subscription.EndDate;
-                row[7] = subscription.Student.FullName;
-                row[8] = subscription.Student.IdNumber;
-                row[9] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
-                row[10] = subscription.Student.Address;
-                row[11] = subscription.Student.Phone;
+                row[5] = subscription.EndDate;
+                row[6] = subscription.Student.FullName;
+                row[7] = subscription.Student.IdNumber;
+                row[8] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
+                row[9] = subscription.Student.Address;
+                row[10] = subscription.Student.Phone;
                 detailDataTable.Rows.Add(row);
             }
             return new Dictionary<int, DataTable>{
@@ -1312,7 +1305,6 @@ namespace Primary.SchoolApp.Services
             string paymentDateColumn = Language.LanguageName == "EN" ? "PAYMENT DATE" : "DATE PAIEMENT";
             string refColumn = Language.LanguageName == "EN" ? "REF" : "REF";
             string amountColumn = Language.LanguageName == "EN" ? "AMOUNT" : "MONTANT";
-            string discountColumn = Language.LanguageName == "EN" ? "DISCOUNT" : "REMISE";
             string endColumn = Language.LanguageName == "EN" ? "END DATE" : "DATE FIN";
 
             // build global datatable
@@ -1326,7 +1318,7 @@ namespace Primary.SchoolApp.Services
             globalDataTable.Columns.Add(totalColumn, typeof(double));
 
             var subscriptionList = (await getSubscriptionListTask)
-                .Where(x => x.CashFlowType?.Domain == "Cantine")
+                .Where(x => x.CashFlowType?.FlowDomain == FlowDomain.Canteen)
                 .OrderByDescending(x => x.StartDate);
             var subsctiptionTypeList = subscriptionList.Select(x => x.CashFlowType);
             var studentClassList = await getStudentClassroomTask;
@@ -1353,7 +1345,6 @@ namespace Primary.SchoolApp.Services
             detailDataTable.Columns.Add(paymentDateColumn, typeof(DateTime));
             detailDataTable.Columns.Add(refColumn, typeof(string));
             detailDataTable.Columns.Add(amountColumn, typeof(double));
-            detailDataTable.Columns.Add(discountColumn, typeof(double));
             detailDataTable.Columns.Add(endColumn, typeof(DateTime));
             detailDataTable.Columns.Add(studentColumn, typeof(string));
             detailDataTable.Columns.Add(idColumn, typeof(string));
@@ -1368,13 +1359,12 @@ namespace Primary.SchoolApp.Services
                 row[2] = subscription.TransactionDate;
                 row[3] = subscription.IdNumber;
                 row[4] = subscription.Amount;
-                row[5] = subscription.Discount;
-                row[6] = subscription.EndDate;
-                row[7] = subscription.Student.FullName;
-                row[8] = subscription.Student.IdNumber;
-                row[9] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
-                row[10] = subscription.Student.Address;
-                row[11] = subscription.Student.Phone;
+                row[5] = subscription.EndDate;
+                row[6] = subscription.Student.FullName;
+                row[7] = subscription.Student.IdNumber;
+                row[8] = studentClassList.FirstOrDefault(x => x.StudentId == subscription.StudentId)?.Room.Name;
+                row[9] = subscription.Student.Address;
+                row[10] = subscription.Student.Phone;
                 detailDataTable.Rows.Add(row);
             }
             return new Dictionary<int, DataTable>{

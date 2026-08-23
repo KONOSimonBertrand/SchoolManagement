@@ -76,15 +76,6 @@ namespace SchoolManagement.Infrastructure.Repositories
             }
             return recordCount== modules.Count;
         }
-        public async Task<User?> GetAsync(string userName, string password)
-        {
-            using var connection = dbConnectionFactory.CreateConnection();
-            string query = @"SELECT * FROM Users A 
-                           WHERE UserName=@userName AND Password=@password ;";
-            var result = connection.Query<User>(query, new { userName, password }).FirstOrDefault();
-            await Task.Delay(0);
-            return result;
-        }
         public async Task<User?> GetAsync(string userName)
         {
            using var connection = dbConnectionFactory.CreateConnection();

@@ -5,11 +5,8 @@ using SchoolManagement.Helper;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
-using Telerik.WinControls.Svg.ExCSS;
 using static Primary.SchoolApp.DTO.DTOItem;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 
 namespace Primary.SchoolApp.Services

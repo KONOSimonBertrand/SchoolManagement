@@ -11,6 +11,7 @@ using System.Net;
 using System.Linq;
 using System.Net.Sockets;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 namespace Primary.SchoolApp
 {
     public partial class LoginForm : SchoolManagement.UI.LoginForm
@@ -61,7 +62,7 @@ namespace Primary.SchoolApp
                 ErrorLabel.Text = string.Empty;
             }
         }
-        private void ConnectionButton_Click(object sender, EventArgs e)
+        private async void  ConnectionButton_Click(object sender, EventArgs e)
         {
             if (this.IsValidData())
             {
@@ -69,31 +70,41 @@ namespace Primary.SchoolApp
                 User user = null;
                 try
                 {
-                    user = userService.GetUser(UserNameTextBox.Text.Trim(), PasswordTextBox.Text.Trim()).Result;
-                    if (user != null)
+
+                    if(await userService.AuthenticateUser(UserNameTextBox.Text.Trim(), PasswordTextBox.Text.Trim()))
                     {
-                        //get ip address
-                        var hostName = Dns.GetHostName();
-                        var ipAddresses = Dns.GetHostAddresses(hostName).Where(x => x.AddressFamily.ToString() == ProtocolFamily.InterNetwork.ToString());
-                        if (ipAddresses.Any())
+                        logger.LogInformation($"Authentification de l'utilisateur {UserNameTextBox.Text.Trim()} réussie");
+                        user = await userService.GetUser(UserNameTextBox.Text.Trim());
+                        if (user != null)
                         {
-                            clientApp.IpAddress = ipAddresses.First().ToString();
+                            //get ip address
+                            var hostName = Dns.GetHostName();
+                            var ipAddresses = Dns.GetHostAddresses(hostName).Where(x => x.AddressFamily.ToString() == ProtocolFamily.InterNetwork.ToString());
+                            if (ipAddresses.Any())
+                            {
+                                clientApp.IpAddress = ipAddresses.First().ToString();
+                            }
+                            else
+                            {
+                                clientApp.IpAddress = hostName;
+                            }
+                            user.Rooms = await userService.GetUserRoomList(user.Id);
+                            user.Modules = await userService.GetUserModuleList(user.Id);
+                            Log log = new()
+                            {
+                                UserAction = $" Connexion de l'utilisateur {user.UserName}  sur le poste {clientApp.IpAddress} le {DateTime.Now} ",
+                                UserId = user.Id
+                            };
+                            Program.UserConnected = user;
+                            var logResult = logService.CreateLog(log).Result;
+                            logger.LogInformation($"Connexion de l'utisateur {Program.UserConnected.UserName}");
                         }
-                        else
-                        {
-                            clientApp.IpAddress = hostName;
-                        }
-                        user.Rooms = userService.GetUserRoomList(user.Id).Result;
-                        user.Modules = userService.GetUserModuleList(user.Id).Result;
-                        Log log = new()
-                        {
-                            UserAction = $" Connexion de l'utilisateur {user.UserName}  sur le poste {clientApp.IpAddress} le {DateTime.Now} ",
-                            UserId = user.Id
-                        };
-                        Program.UserConnected=user;
-                        var logResult = logService.CreateLog(log).Result;
-                        logger.LogInformation($"Connexion de l'utisateur {Program.UserConnected.UserName}");
                     }
+                    else
+                    {
+                        logger.LogWarning($"Authentification de l'utilisateur {UserNameTextBox.Text.Trim()} échouée");
+                    }
+                   
                 }
                 catch (Exception ex)
                 {

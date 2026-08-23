@@ -14,6 +14,7 @@ using System.Text;
 using SchoolManagement.UI.Localization;
 using System.Diagnostics;
 using SchoolManagement.Helper;
+using Primary.SchoolApp.DTO;
 //using Microsoft.Extensions.Logging;
 
 namespace Primary.SchoolApp.Utilities
@@ -806,6 +807,62 @@ namespace Primary.SchoolApp.Utilities
                     break;
             }
             return terms;
+        }
+        #endregion
+
+        #region Receipt Helper
+        public static void GenerateReceiptItems(ReceiptDTO receipt)
+        {
+           // receipt.ReceiptItems.Clear();
+            foreach (var p in Program.TuitionPaymentList.Where(x => x.ReceiptId == receipt.Id))
+            {
+                receipt.ReceiptItems.Add(
+                    new()
+                    {
+                        ReceiptId = receipt.Id,
+                        Id = p.Id,
+                        Reference = p.IdNumber,
+                        ItemName = p.CashFlowType.Name,
+                        UnitPrice = p.Amount,
+                        Quantity = 1,
+                        Balance = p.Balance,
+                        LinkedItem = p
+                    }
+                    );
+            }
+            var test = Program.SubscriptionList.Where(x => x.ReceiptId == receipt.Id);
+            foreach (var s in Program.SubscriptionList.Where(x => x.ReceiptId == receipt.Id))
+            {
+                receipt.ReceiptItems.Add(
+                    new()
+                    {
+                        ReceiptId = receipt.Id,
+                        Id = s.Id,
+                        Reference = s.IdNumber,
+                        ItemName = s.CashFlowType.Name,
+                        UnitPrice = s.Amount,
+                        Quantity = 1,
+                        Balance = 0,
+                        LinkedItem = s
+                    }
+                    );
+            }
+            foreach (var s in Program.SchoolSupplieList.Where(x => x.ReceiptId == receipt.Id))
+            {
+                receipt.ReceiptItems.Add(
+                    new()
+                    {
+                        ReceiptId = receipt.Id,
+                        Id = s.Id,
+                        Reference = s.IdNumber,
+                        ItemName = s.CashFlowType.Name,
+                        UnitPrice = s.Amount,
+                        Quantity = s.Quantity,
+                        Balance = 0,
+                        LinkedItem = s
+                    }
+                    );
+            }
         }
         #endregion
     }

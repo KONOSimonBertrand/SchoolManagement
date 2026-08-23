@@ -41,11 +41,11 @@ namespace Primary.SchoolApp.Reporting.CashFlow
             this.TotalTextBox.Value = enrolling.PaymentList.Sum(c => c.Amount).ToString() + " CFA";
             if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
             {
-                this.TotalInLetterTextBox.Value = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                this.TotalInLetterTextBox.Value = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.French) + ")";
             }
             else
             {
-                this.TotalInLetterTextBox.Value = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                this.TotalInLetterTextBox.Value = "(" + enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English) + ")";
             }
             this.ContactTextBox.Value =$"{Program.CurrentSchool.Phone}";
             this.WebSiteTextBox.Value = Program.CurrentSchool.WebSite;

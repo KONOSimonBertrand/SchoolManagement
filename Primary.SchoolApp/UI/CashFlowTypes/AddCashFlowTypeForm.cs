@@ -1,9 +1,11 @@
 ﻿
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
+using Telerik.WinControls.UI;
 namespace Primary.SchoolApp.UI
 {
     public class AddCashFlowTypeForm : SchoolManagement.UI.EditCashFlowTypeForm
@@ -17,6 +19,29 @@ namespace Primary.SchoolApp.UI
             this.cashFlowTypeService = cashFlowTypeService;
             this.logService = logService;
             this.clientApp = clientApp;
+
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.labelSchoolingFee, FlowCategory.TuitionFee));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.LabelSchoolSupplie, FlowCategory.SchoolSupplie));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.labelSubscription, FlowCategory.Subscription));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.LabelExpense, FlowCategory.Expense));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.LabelSupply, FlowCategory.CashSupply));
+
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelFinance, FlowDomain.Finance));
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelTransport, FlowDomain.Transport));
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelCanteen, FlowDomain.Canteen));
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelSchoolActivity, FlowDomain.SchoolActivity));
+
+            TransactionTypeDropDownList.Items.Add(new RadListDataItem(Language.LabelCashTransaction, TransactionType.CashTransaction));
+            TransactionTypeDropDownList.Items.Add(new RadListDataItem(Language.LabelTransactionInKind, TransactionType.TransactionInKind));
+
+            FlowTypeDropDownList.Items.Add(new RadListDataItem( Language.labelInput,FlowType.Inflow));
+            FlowTypeDropDownList.Items.Add(new RadListDataItem( Language.labelOutput,FlowType.Outflow));
+
+
+            TransactionTypeDropDownList.SelectedIndex = 0;
+            CategoryDropDownList.SelectedIndex = 0;
+            FlowDomainDropDownList.SelectedIndex = 0;
+            FlowTypeDropDownList.SelectedIndex = 0;
             InitEvents();
         }
 
@@ -39,12 +64,16 @@ namespace Primary.SchoolApp.UI
             {
                 if (!CashFlowTypeExist(NameTextBox.Text))
                 {
-                    cashFlowType = new CashFlowType();
-                    cashFlowType.Name = NameTextBox.Text;
-                    cashFlowType.Category = CategoryDropDownList.SelectedValue.ToString();
-                    cashFlowType.Domain = DomainDropDownList.SelectedValue.ToString();
-                    cashFlowType.Description = DescriptionTextBox.Text;
-                    cashFlowType.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
+                    cashFlowType = new CashFlowType
+                    {
+                        Name = NameTextBox.Text,
+                        FlowCategory = (FlowCategory)CategoryDropDownList.SelectedValue,
+                        TransactionType = (TransactionType)TransactionTypeDropDownList.SelectedValue,
+                        FlowDomain = (FlowDomain)FlowDomainDropDownList.SelectedValue,
+                        FlowType = (FlowType)FlowTypeDropDownList.SelectedValue,
+                        Description = DescriptionTextBox.Text,
+                        Sequence = int.Parse(SequenceSpinEditor.Value.ToString())
+                    };
                     bool isDone = cashFlowTypeService.CreateCashFlowType(cashFlowType).Result;
                     if (isDone == true)
                     {

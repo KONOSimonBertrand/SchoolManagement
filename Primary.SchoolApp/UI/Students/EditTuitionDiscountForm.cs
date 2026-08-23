@@ -45,7 +45,7 @@ namespace Primary.SchoolApp
             StudentTextBox.Text = discount.Enrolling.Student.FullName;
             ClassTextBox.Text = discount.Enrolling.SchoolClass.Name;
             SchoolYearTextBox.Text = discount.Enrolling.SchoolYear.Name;
-            this.DiscountTextBox.Text = discount.Amount.ToString();          
+            this.DiscountTextBox.Text = discount.Discount.ToString();          
             this.ReasonTextBox.Text = discount.Reason;
             this.OrdoredByTextBox.Text = discount.OrderedBy;
             this.CashFlowTypeDropDownList.ReadOnly = true;
@@ -74,7 +74,7 @@ namespace Primary.SchoolApp
             {
 
                 selectedDiscount.Date = DateTime.Now;
-                selectedDiscount.Amount = double.Parse(DiscountTextBox.Text);
+                selectedDiscount.Discount = double.Parse(DiscountTextBox.Text);
                 selectedDiscount.Reason = ReasonTextBox.Text;
                 selectedDiscount.OrderedBy = OrdoredByTextBox.Text;
 

@@ -15,6 +15,7 @@ namespace SchoolManagement.Core.Model
         public string? DoneBy {  get; set; }
         public DateTime TransactionDate {  get; set; }
         public string? TransactionId {  get; set; }
+        public int ReceiptId {  get; set; }
         public bool IsValidated { get; set; }
         public string ValidattionState { 
             get {
@@ -30,6 +31,8 @@ namespace SchoolManagement.Core.Model
         public virtual StudentEnrolling? Enrolling { get; set; }
         public virtual CashFlowType? CashFlowType { get; set; }
         public virtual PaymentMean? PaymentMean { get; set; }
+        public virtual Receipt? Receipt { get; set; }
+
         public override bool Equals(object? obj)
         {
             if (obj is not SchoolSupplie other) return false;

@@ -21,14 +21,14 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         }
 
-        public async Task<CashFlowType?> GetAsyn(string name)
+        public async Task<CashFlowType?> GetAsync(string name)
         {
             var result = appDbContext.CashFlowTypes.FirstOrDefault(x => x.Name == name);
             await Task.Delay(0);
             return result;
         }
 
-        public async Task<IList<CashFlowType>> GetAsynList()
+        public async Task<IList<CashFlowType>> GetAsyncList()
         {
             var result = appDbContext.CashFlowTypes.ToList();
             await Task.Delay(0);
@@ -46,7 +46,10 @@ namespace SchoolManagement.Infrastructure.Repositories
                 item.Name = cashFlowType.Name;
                 item.Sequence = cashFlowType.Sequence;
                 item.Description = cashFlowType.Description;
-                item.Domain = cashFlowType.Domain;
+                item.TransactionType = cashFlowType.TransactionType;
+                item.FlowDomain = cashFlowType.FlowDomain;
+                item.FlowType = cashFlowType.FlowType;
+                item.FlowCategory = cashFlowType.FlowCategory;
                 if (appDbContext.SaveChanges() > 0) isDone = true;
             }
             await Task.Delay(0);

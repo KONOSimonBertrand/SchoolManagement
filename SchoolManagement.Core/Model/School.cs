@@ -22,5 +22,6 @@ namespace SchoolManagement.Core.Model
         public string? EmployeePictureDirectory { get; set; }
         public string? Code { get; set; }
         public string? SerialKey { get; set; } //licence
+        public int ReceiptModel { get; set; }
     }
 }

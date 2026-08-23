@@ -1770,8 +1770,17 @@
           }
         }
       },
+      "SchoolManagement.Core/1.0.0": {
+        "runtime": {
+          "SchoolManagement.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "SchoolManagement.Helper/1.0.0": {
         "dependencies": {
+          "SchoolManagement.Core": "1.0.0",
           "System.Drawing.Common": "6.0.0"
         },
         "runtime": {
@@ -2719,6 +2728,11 @@
       "sha512": "sha512-BMGnyWzoRMOnb6+J0UEpCfmPGWDj1Xi9bgKG53Q67ApMqU1OW2Fibdy+D7FL5lmIzld7PeuU7k3gQFFe7JpYIw==",
       "path": "ui.for.winforms.allcontrols.net70/2024.3.924",
       "hashPath": "ui.for.winforms.allcontrols.net70.2024.3.924.nupkg.sha512"
+    },
+    "SchoolManagement.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "SchoolManagement.Helper/1.0.0": {
       "type": "project",

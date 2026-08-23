@@ -1,6 +1,9 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
@@ -32,7 +35,7 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             schoolClasses=new List<SchoolClass>();
-            CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FF");
+            CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.SchoolSupplie);
             schoolClasses.AddRange(Program.SchoolClassList);
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
             schoolClasses.Add(
@@ -78,7 +81,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                var item = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                var item = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO;
                 if (item != null)
                 {
                     ShowCashFlowTypeEditForm(item);
@@ -178,7 +181,8 @@ namespace Primary.SchoolApp.UI
                             supplieFee.SchoolYearId = supplieFee.SchoolYear.Id;
                             supplieFee.SchoolClass = selectedClass;
                             supplieFee.SchoolClassId = selectedClass.Id;
-                            supplieFee.CashFlowType = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                            var cashFlowType = (CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).AsCashFlowType();
+                            supplieFee.CashFlowType = cashFlowType;
                             supplieFee.CashFlowTypeId = supplieFee.CashFlowType.Id;
                             supplieFee.IsPayable = bool.Parse(CostPayableDropDownList.SelectedValue.ToString());
                             supplieFee.Amount = double.Parse(AmountTextBox.Text);
@@ -296,18 +300,18 @@ namespace Primary.SchoolApp.UI
             }
         }
         // show CashFlowType UI for edit
-        private void ShowCashFlowTypeEditForm(CashFlowType cashFlowType)
+        private void ShowCashFlowTypeEditForm(CashFlowTypeDTO type)
         {
-            if (cashFlowType != null)
+            if (type != null)
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelCashFlowType;
-                form.Init(cashFlowType);
+                form.Init(type);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
                     CostTypeDropDownList.DataSource = null;
-                    CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FF");
+                    CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.SchoolSupplie);
                     CostTypeDropDownList.SelectedValue = data;
                 }
             }
@@ -325,9 +329,9 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data);
+                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
                 CostTypeDropDownList.DataSource = null;
-                CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FF");
+                CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.SchoolSupplie);
                 CostTypeDropDownList.SelectedValue = data;
             }
         }

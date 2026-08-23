@@ -75,7 +75,7 @@ namespace Primary.SchoolApp.UI
                     {
                         Enrolling = selectedEnrolling,
                         EnrollingId = selectedEnrolling.Id,
-                        Amount = double.Parse(DiscountTextBox.Text),
+                        Discount = double.Parse(DiscountTextBox.Text),
                         Date = DateTime.Now,
                         Reason = ReasonTextBox.Text,
                         OrderedBy = this.OrdoredByTextBox.Text,
@@ -89,7 +89,7 @@ namespace Primary.SchoolApp.UI
                         //enregistrement du log
                         Log logPayment = new()
                         {
-                            UserAction = $"Ajout d'une réduction de  {discount.Amount} pour {discount.CashFlowType.Name} de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                            UserAction = $"Ajout d'une réduction de  {discount.Discount} pour {discount.CashFlowType.Name} de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(logPayment);

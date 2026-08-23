@@ -39,8 +39,8 @@ namespace Primary.SchoolApp.Reporting
                 SchoolYear2TextBox.Value = SchoolYearTextBox.Value;
                 PaymentAmountTextBox.Value = receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToString() + " CFA";
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;
-                var lFR = "(" + receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.French, Currency.CFA) + ")";
-                var lEN = "(" + receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                var lFR = "(" + receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.French) + ")";
+                var lEN = "(" + receiptData.Enrolling.PaymentList.Sum(a => a.Amount).ToLetter(CountryLanguage.English) + ")";
                 if (receiptData.SchoolGroup.DocumentLanguageId==0)
                 {
                     PaymentAmountLeterTextBox.Value = lFR;
@@ -179,11 +179,11 @@ namespace Primary.SchoolApp.Reporting
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;
                 if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + receiptData.TuitionPayment.Amount.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.TuitionPayment.Amount.ToLetter(CountryLanguage.French) + ")";
                 }
                 else
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + receiptData.TuitionPayment.Amount.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.TuitionPayment.Amount.ToLetter(CountryLanguage.English) + ")";
                 }
                 PaymentAmountLeter2TextBox.Value = PaymentAmountLeterTextBox.Value;
                 PaymentBalanceTextBox.Value = receiptData.TuitionPayment.Balance.ToString() + " F CFA";
@@ -248,11 +248,11 @@ namespace Primary.SchoolApp.Reporting
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;
                 if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + receiptData.Subscription.Amount.ToLetter(CountryLanguage.French, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.Subscription.Amount.ToLetter(CountryLanguage.French) + ")";
                 }
                 else
                 {
-                    PaymentAmountLeterTextBox.Value = "(" + receiptData.Subscription.Amount.ToLetter(CountryLanguage.English, Currency.CFA) + ")";
+                    PaymentAmountLeterTextBox.Value = "(" + receiptData.Subscription.Amount.ToLetter(CountryLanguage.English) + ")";
                 }
                 PaymentAmountLeter2TextBox.Value = PaymentAmountLeterTextBox.Value;
                 PaymentBalanceTextBox.Value = "0 F CFA";

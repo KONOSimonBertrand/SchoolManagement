@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Reporting;
 using Primary.SchoolApp.Reporting.CashFlow;
-using Primary.SchoolApp.UI;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System;
@@ -182,6 +181,13 @@ namespace Primary.SchoolApp.Services
             reportViewer.Show();
             await Task.Delay(0);
         }
-        
+
+        public async Task PrintPaymentReceiptAsync(PaymentReceipt paymentReceipt, bool isCopy)
+        {
+            var reportViewer = Program.ServiceProvider.GetService<ReportViewerForm>();
+            reportViewer.LoadPaymentReceipt(paymentReceipt,isCopy);
+            reportViewer.Show();
+            await Task.Delay(0);
+        }
     }
 }

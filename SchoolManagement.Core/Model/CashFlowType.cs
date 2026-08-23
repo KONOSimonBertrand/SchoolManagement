@@ -1,6 +1,6 @@
 ﻿
 
-using System.Diagnostics.SymbolStore;
+using SchoolManagement.Core.Enum;
 
 namespace SchoolManagement.Core.Model
 {
@@ -12,72 +12,12 @@ namespace SchoolManagement.Core.Model
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        virtual public string TypeName
-        {
-            get
-            {
-                if (Type == "in")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB"?"Input":"Flux d'entrée";
-                }
-                if (Type == "out")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "Out":"Flux de sortie";
-                }
-                return string.Empty;
-            }
-        }
-        public string? Category { get; set; }
-        public string Type
-        {
-            get
-            {
-                if (Category == "FS"|| Category == "FF"|| Category == "AB" || Category == "AP")
-                {
-                    return "in";
-                }
-                
-                if (Category == "DE" || Category == "SA")
-                {
-                    return "out";
-                }
-                return "RAS";
-            }
-        }
-        public string CategoryName
-        {
-            get
-            {
-                if (Category == "AB")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SUBSCRIPTION" : "ABONNEMENT";
-                }
-                if (Category == "FS")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SCHOOL FEES" : "FRAIS DE SCOLAIRE";
-                }
-                if (Category == "FF")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SCHOOL SUPPLIES" : "FOURNITURES SCOLAIRE";
-                }
-                if (Category == "SA")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SALARY" : "SALAIRE";
-                }
-                if (Category == "DE")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "EXPENSE" : "DEPENSE";
-                }
-                if (Category == "AP")
-                {
-                    return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "SUPPLY" : "APPROVISIONNEMENT";
-                }
-                return "RAS";
-            }
-        }
-        public string? Domain { get; set; }
+        public FlowCategory FlowCategory { get; set; }
+        public FlowDomain FlowDomain { get; set; }
+       public FlowType FlowType { get; set; }
         public string? Description { get; set; }
         public int Sequence { get; set; }
+        public TransactionType TransactionType { get; set; }
         public virtual ICollection<SchoolingCost> SchoolingCosts { get; set; } 
         public virtual ICollection<SubscriptionFee> SubscriptionFees { get; set; }
         public override bool Equals(object? obj)
@@ -91,7 +31,7 @@ namespace SchoolManagement.Core.Model
         }
         public override string ToString()
         {
-            return Name;
+            return Name ?? string.Empty;
         }
     }
 }

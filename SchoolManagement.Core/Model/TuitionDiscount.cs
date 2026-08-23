@@ -4,8 +4,9 @@ namespace SchoolManagement.Core.Model
 {
     public  class TuitionDiscount
     {
+        public int Id { get; set; } 
         public DateTime Date { get; set; }
-        public double Amount {  get; set; }
+        public double Discount {  get; set; }
         public int EnrollingId {  get; set; }
         public int CashFlowTypeId {  get; set; }
         public string OrderedBy {  get; set; }

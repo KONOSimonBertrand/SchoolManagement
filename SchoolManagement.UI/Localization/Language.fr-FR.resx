@@ -157,7 +157,7 @@
     <value>Ajouter un nouvel enregistrement</value>
   </data>
   <data name="labelAddPayment" xml:space="preserve">
-    <value>Ajouter un versement</value>
+    <value>Ajouter un paiement</value>
   </data>
   <data name="labelAddPicture" xml:space="preserve">
     <value>Ajouter une photo</value>
@@ -1622,5 +1622,47 @@
   </data>
   <data name="messageClickToRemoveFromInvoice" xml:space="preserve">
     <value>Cliquer ici pour retirer de la facture</value>
+  </data>
+  <data name="LabelReceiptModel" xml:space="preserve">
+    <value>Model de reçu</value>
+  </data>
+  <data name="messageClickToShow" xml:space="preserve">
+    <value>Cliquez ici pour voir</value>
+  </data>
+  <data name="LabelModel" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="labelAddPayments" xml:space="preserve">
+    <value>Ajouter des paiements</value>
+  </data>
+  <data name="LabelCashTransaction" xml:space="preserve">
+    <value>Transaction en numéraire</value>
+  </data>
+  <data name="LabelTransactionInKind" xml:space="preserve">
+    <value>Transaction en nature</value>
+  </data>
+  <data name="LabelTransactionType" xml:space="preserve">
+    <value>Type de transaction</value>
+  </data>
+  <data name="LabelFlowType" xml:space="preserve">
+    <value>Type de flux</value>
+  </data>
+  <data name="LabelFinance" xml:space="preserve">
+    <value>Finance</value>
+  </data>
+  <data name="LabelTransport" xml:space="preserve">
+    <value>Transport</value>
+  </data>
+  <data name="LabelCanteen" xml:space="preserve">
+    <value>Cantine</value>
+  </data>
+  <data name="LabelSchoolActivity" xml:space="preserve">
+    <value>Activité périscolaire</value>
+  </data>
+  <data name="LabelReceipt" xml:space="preserve">
+    <value>Reçu</value>
+  </data>
+  <data name="LabelReceipts" xml:space="preserve">
+    <value>Reçus</value>
   </data>
 </root>

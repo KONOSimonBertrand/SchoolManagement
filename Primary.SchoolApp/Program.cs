@@ -23,7 +23,7 @@ namespace Primary.SchoolApp
         public static IList<SchoolGroup> SchoolGroupList;
         public static IList<SchoolClass> SchoolClassList;
         public static IList<SchoolRoom> SchoolRoomList;
-        public static IList<CashFlowType> CashFlowTypeList;
+        public static IList<CashFlowTypeDTO> CashFlowTypeList;
         public static IList<CashFlow> CashFlowList;
         public static IList<PaymentMean> PaymentMeanList;
         public static IList<SchoolingCost> SchoolingCostList;
@@ -51,12 +51,12 @@ namespace Primary.SchoolApp
         public static IList<Student> StudentList;
         public static IList<TuitionPayment> TuitionPaymentList;
         public static IList<TuitionDiscount> TuitionDiscountList;
-        public static IList<SchoolSupplieDiscount> SchoolSupplieDiscountList;
         public static IList<DisciplineSubject> DisciplineSubjectList;
         public static IList<CashBoxIn> CashBoxInList;
         public static IList<CashBoxOut> CashBoxOutList;
         public static IList<StudentRoom> StudentRoomList;
         public static IList<EmployeeRoom> EmployeeRoomList;
+        public static IList<ReceiptDTO> ReceiptList;
         public static School CurrentSchool;
         //public static IList<StudentNoteDTO> StudentNoteList;
         public static User UserConnected;

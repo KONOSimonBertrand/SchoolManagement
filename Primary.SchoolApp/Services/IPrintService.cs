@@ -1,6 +1,5 @@
 ﻿using Primary.SchoolApp.DTO;
 using SchoolManagement.Core.Model;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,13 +7,14 @@ namespace Primary.SchoolApp.Services
 {
     public interface IPrintService
     {
-        public Task PrintPaymentReceiptAsync(StudentEnrolling enrolling, bool isCopy);
-        public Task PrintPaymentReceiptAsync(TuitionPayment payment, bool isCopy);
-        public Task PrintPaymentSummaryAsync(StudentEnrolling enrolling);
-        public Task PrintPaymentReceiptAsync(Subscription subscription, bool isCopy);
-        internal Task PrintSchoolCertificateAsync(StudentEnrollingDTO enrolling);
-        internal Task PrintStudentBadgeAsync(StudentEnrollingDTO enrolling,string expirationDate);
-        internal Task PrintClassBadgeAsync(IEnumerable<StudentEnrollingDTO> enrollingList, string expirationDate);
+        Task PrintPaymentReceiptAsync(StudentEnrolling enrolling, bool isCopy);
+        Task PrintPaymentReceiptAsync(TuitionPayment payment, bool isCopy);
+        Task PrintPaymentSummaryAsync(StudentEnrolling enrolling);
+        Task PrintPaymentReceiptAsync(Subscription subscription, bool isCopy);
+        Task PrintSchoolCertificateAsync(StudentEnrollingDTO enrolling);
+        Task PrintStudentBadgeAsync(StudentEnrollingDTO enrolling, string expirationDate);
+        Task PrintClassBadgeAsync(IEnumerable<StudentEnrollingDTO> enrollingList, string expirationDate);
+        Task PrintPaymentReceiptAsync(DTOItem.PaymentReceipt paymentReceipt, bool isCopy);
 
     }
 }

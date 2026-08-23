@@ -99,12 +99,36 @@ namespace Primary.SchoolApp.DTO
             string Appreciation,
             string Position
             );
-    
 
-        public record ReceiptHeader(
+        /// <summary>
+        /// Entête du reçu à imprimer
+        /// </summary>
+        /// <param name="ReceiptNumber">Numéro de reçu</param>
+        /// <param name="ReceiptDate">Date du reçu</param>
+        /// <param name="ReceiptTitle">Titre du reçu</param>
+        /// <param name="StudentName">Nom de l'élève</param>
+        /// <param name="StudentId">Matricule de l'élève</param>
+        /// <param name="StudentRoom">Salle de l'élève</param>
+        /// <param name="TransactionId">Identifiant de la transaction</param>
+        /// <param name="PaymentMode">Mode de paiement</param>
+        /// <param name="SchoolYear">Année scolaire</param>
+        public record ReceiptHeaderSection(
             string ReceiptNumber,
-            StudentEnrolling Enrolling,
-            SchoolGroup SchoolGroup
+            DateTime ReceiptDate,
+            string ReceiptTitle,
+            string StudentName,
+            string StudentId,
+            string StudentRoom,
+            string TransactionId,
+            string PaymentMode,
+            string SchoolYear
             );
+        /// <summary>
+        /// Détail des informations à imprimer
+        /// </summary>
+        /// <param name="Items"></param>
+        public record ReceiptDetailSection(List<ReceiptItem> Items);
+        public record ReceiptFooterSection(string FooterNote);
+        public record PaymentReceipt(ReceiptHeaderSection HeaderSection, ReceiptDetailSection DetailSection, ReceiptFooterSection FooterSection);
     }
 }

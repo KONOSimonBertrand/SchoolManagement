@@ -17,22 +17,23 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> AddAsync(CashFlowType cashFlowType)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"INSERT INTO CashFlowTypes(Name,Category,Domain,Description,Sequence) 
-                              VALUES(@name,@category,@domain,@description,@sequence);";
+            string query = @"INSERT INTO CashFlowTypes(Name,FlowCategory,TransactionType,FlowType,FlowDomain,Description,Sequence) 
+                              VALUES(@name,@flowCategory,@transactionType,@flowType,@flowDomain,@description,@sequence);";
             var result = connection.Execute(query, new
             {
                 name = cashFlowType.Name,
-                category = cashFlowType.Category,
-                domain = cashFlowType.Domain,
+                flowCategory = cashFlowType.FlowCategory,
+                transactionType = cashFlowType.TransactionType,
+                flowType = cashFlowType.FlowType,
+                flowDomain = cashFlowType.FlowDomain,
                 description = cashFlowType.Description,
                 sequence = cashFlowType.Sequence
-
             });
             await Task.Delay(0);
             return result > 0;
         }
 
-        public async Task<CashFlowType> GetAsyn(string name)
+        public async Task<CashFlowType?> GetAsync(string name)
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM CashFlowTypes WHERE Name=@name ;";
@@ -41,7 +42,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<IList<CashFlowType>> GetAsynList()
+        public async Task<IList<CashFlowType>> GetAsyncList()
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = "SELECT * FROM CashFlowTypes ORDER BY Sequence ;";
@@ -53,13 +54,15 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> UpdateAsync(CashFlowType cashFlowType)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @"UPDATE CashFlowTypes SET Name=@name,Category=@category,Domain=@domain,
-                             Description=@description,Sequence=@sequence WHERE Id=@id";
+            string query = @"UPDATE CashFlowTypes SET Name=@name,FlowCategory=@flowCategory,TransactionType=@transactionType,
+                             FlowType=@flowType,FlowDomain=@flowDomain,Description=@description,Sequence=@sequence WHERE Id=@id";
             var result = connection.Execute(query, new
             {
                 name = cashFlowType.Name,
-                category = cashFlowType.Category,
-                domain = cashFlowType.Domain,
+                flowCategory = cashFlowType.FlowCategory,
+                transactionType = cashFlowType.TransactionType,
+                flowType = cashFlowType.FlowType,
+                flowDomain = cashFlowType.FlowDomain,
                 description = cashFlowType.Description,
                 sequence = cashFlowType.Sequence,
                 id = cashFlowType.Id

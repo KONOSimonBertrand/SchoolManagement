@@ -30,11 +30,15 @@
         {
             components = new System.ComponentModel.Container();
             editPanel = new Telerik.WinControls.UI.RadPanel();
+            showModelButton = new Telerik.WinControls.UI.RadButton();
             websiteSeparator = new Telerik.WinControls.UI.RadSeparator();
             websiteTextBox = new Telerik.WinControls.UI.RadTextBox();
             websiteLabel = new Telerik.WinControls.UI.RadLabel();
+            receiptModelSeparator = new Telerik.WinControls.UI.RadSeparator();
             evaluationModelSeparator = new Telerik.WinControls.UI.RadSeparator();
+            receiptModelLabel = new Telerik.WinControls.UI.RadLabel();
             evaluationModelLabel = new Telerik.WinControls.UI.RadLabel();
+            receiptModelDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             evaluationModelDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             employeePictureDirectorySeparator = new Telerik.WinControls.UI.RadSeparator();
             employeePictureDirectoryTextBox = new Telerik.WinControls.UI.RadTextBox();
@@ -81,11 +85,15 @@
             errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)showModelButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)websiteSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)websiteTextBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)websiteLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)receiptModelSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelSeparator).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)receiptModelLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelLabel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)receiptModelDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)employeePictureDirectorySeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)employeePictureDirectoryTextBox).BeginInit();
@@ -135,11 +143,15 @@
             // 
             // editPanel
             // 
+            editPanel.Controls.Add(showModelButton);
             editPanel.Controls.Add(websiteSeparator);
             editPanel.Controls.Add(websiteTextBox);
             editPanel.Controls.Add(websiteLabel);
+            editPanel.Controls.Add(receiptModelSeparator);
             editPanel.Controls.Add(evaluationModelSeparator);
+            editPanel.Controls.Add(receiptModelLabel);
             editPanel.Controls.Add(evaluationModelLabel);
+            editPanel.Controls.Add(receiptModelDropDownList);
             editPanel.Controls.Add(evaluationModelDropDownList);
             editPanel.Controls.Add(employeePictureDirectorySeparator);
             editPanel.Controls.Add(employeePictureDirectoryTextBox);
@@ -184,8 +196,17 @@
             editPanel.Location = new Point(0, 0);
             editPanel.Margin = new Padding(4, 5, 4, 5);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(1138, 369);
+            editPanel.Size = new Size(1211, 369);
             editPanel.TabIndex = 117;
+            // 
+            // showModelButton
+            // 
+            showModelButton.ImageAlignment = ContentAlignment.MiddleCenter;
+            showModelButton.Location = new Point(1180, 39);
+            showModelButton.Margin = new Padding(4, 5, 4, 5);
+            showModelButton.Name = "showModelButton";
+            showModelButton.Size = new Size(20, 30);
+            showModelButton.TabIndex = 4;
             // 
             // websiteSeparator
             // 
@@ -203,7 +224,7 @@
             websiteTextBox.Margin = new Padding(4, 5, 4, 5);
             websiteTextBox.Name = "websiteTextBox";
             websiteTextBox.Size = new Size(340, 30);
-            websiteTextBox.TabIndex = 7;
+            websiteTextBox.TabIndex = 9;
             // 
             // websiteLabel
             // 
@@ -215,35 +236,72 @@
             websiteLabel.TabIndex = 137;
             websiteLabel.Text = "Site web:";
             // 
+            // receiptModelSeparator
+            // 
+            receiptModelSeparator.Location = new Point(1039, 70);
+            receiptModelSeparator.Margin = new Padding(4, 5, 4, 5);
+            receiptModelSeparator.Name = "receiptModelSeparator";
+            receiptModelSeparator.Size = new Size(139, 4);
+            receiptModelSeparator.TabIndex = 135;
+            receiptModelSeparator.TabStop = false;
+            // 
             // evaluationModelSeparator
             // 
-            evaluationModelSeparator.Location = new Point(903, 70);
+            evaluationModelSeparator.Location = new Point(857, 70);
             evaluationModelSeparator.Margin = new Padding(4, 5, 4, 5);
             evaluationModelSeparator.Name = "evaluationModelSeparator";
-            evaluationModelSeparator.Size = new Size(205, 4);
+            evaluationModelSeparator.Size = new Size(180, 4);
             evaluationModelSeparator.TabIndex = 135;
             evaluationModelSeparator.TabStop = false;
+            // 
+            // receiptModelLabel
+            // 
+            receiptModelLabel.AutoSize = false;
+            receiptModelLabel.Location = new Point(1039, 5);
+            receiptModelLabel.Margin = new Padding(4, 5, 4, 5);
+            receiptModelLabel.Name = "receiptModelLabel";
+            receiptModelLabel.Size = new Size(139, 30);
+            receiptModelLabel.TabIndex = 134;
+            receiptModelLabel.Text = "Modèle de reçu:";
             // 
             // evaluationModelLabel
             // 
             evaluationModelLabel.AutoSize = false;
-            evaluationModelLabel.Location = new Point(903, 5);
+            evaluationModelLabel.Location = new Point(857, 5);
             evaluationModelLabel.Margin = new Padding(4, 5, 4, 5);
             evaluationModelLabel.Name = "evaluationModelLabel";
-            evaluationModelLabel.Size = new Size(205, 30);
+            evaluationModelLabel.Size = new Size(180, 30);
             evaluationModelLabel.TabIndex = 134;
             evaluationModelLabel.Text = "Modèle d'évaluation:";
+            // 
+            // receiptModelDropDownList
+            // 
+            receiptModelDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            receiptModelDropDownList.DropDownHeight = 159;
+            receiptModelDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+            receiptModelDropDownList.Location = new Point(1039, 39);
+            receiptModelDropDownList.Margin = new Padding(4, 5, 4, 5);
+            receiptModelDropDownList.MinimumSize = new Size(0, 30);
+            receiptModelDropDownList.Name = "receiptModelDropDownList";
+            receiptModelDropDownList.Size = new Size(139, 30);
+            receiptModelDropDownList.TabIndex = 3;
+            ((Telerik.WinControls.UI.RadDropDownListElement)receiptModelDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)receiptModelDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+            ((Telerik.WinControls.Primitives.BorderPrimitive)receiptModelDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)receiptModelDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
+            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)receiptModelDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
+            ((Telerik.WinControls.Primitives.BorderPrimitive)receiptModelDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // evaluationModelDropDownList
             // 
             evaluationModelDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             evaluationModelDropDownList.DropDownHeight = 159;
             evaluationModelDropDownList.DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
-            evaluationModelDropDownList.Location = new Point(903, 39);
+            evaluationModelDropDownList.Location = new Point(857, 39);
             evaluationModelDropDownList.Margin = new Padding(4, 5, 4, 5);
             evaluationModelDropDownList.MinimumSize = new Size(0, 30);
             evaluationModelDropDownList.Name = "evaluationModelDropDownList";
-            evaluationModelDropDownList.Size = new Size(205, 30);
+            evaluationModelDropDownList.Size = new Size(180, 30);
             evaluationModelDropDownList.TabIndex = 2;
             ((Telerik.WinControls.UI.RadDropDownListElement)evaluationModelDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)evaluationModelDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -268,7 +326,7 @@
             employeePictureDirectoryTextBox.Margin = new Padding(4, 5, 4, 5);
             employeePictureDirectoryTextBox.Name = "employeePictureDirectoryTextBox";
             employeePictureDirectoryTextBox.Size = new Size(518, 30);
-            employeePictureDirectoryTextBox.TabIndex = 14;
+            employeePictureDirectoryTextBox.TabIndex = 16;
             // 
             // employeePictureDirectoryLabel
             // 
@@ -296,7 +354,7 @@
             studentPictureDirectoryTextBox.Margin = new Padding(4, 5, 4, 5);
             studentPictureDirectoryTextBox.Name = "studentPictureDirectoryTextBox";
             studentPictureDirectoryTextBox.Size = new Size(510, 30);
-            studentPictureDirectoryTextBox.TabIndex = 13;
+            studentPictureDirectoryTextBox.TabIndex = 15;
             // 
             // studentPictureDirectoryLabel
             // 
@@ -337,7 +395,7 @@
             headMasterSexDropDownList.MinimumSize = new Size(0, 30);
             headMasterSexDropDownList.Name = "headMasterSexDropDownList";
             headMasterSexDropDownList.Size = new Size(203, 30);
-            headMasterSexDropDownList.TabIndex = 12;
+            headMasterSexDropDownList.TabIndex = 14;
             ((Telerik.WinControls.UI.RadDropDownListElement)headMasterSexDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)headMasterSexDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             ((Telerik.WinControls.Primitives.BorderPrimitive)headMasterSexDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -361,7 +419,7 @@
             headMasterNameTextBox.Margin = new Padding(4, 5, 4, 5);
             headMasterNameTextBox.Name = "headMasterNameTextBox";
             headMasterNameTextBox.Size = new Size(539, 30);
-            headMasterNameTextBox.TabIndex = 11;
+            headMasterNameTextBox.TabIndex = 13;
             // 
             // headMasterNameLabel
             // 
@@ -402,7 +460,7 @@
             headMasterTypeDropDownList.MinimumSize = new Size(0, 30);
             headMasterTypeDropDownList.Name = "headMasterTypeDropDownList";
             headMasterTypeDropDownList.Size = new Size(277, 30);
-            headMasterTypeDropDownList.TabIndex = 10;
+            headMasterTypeDropDownList.TabIndex = 12;
             ((Telerik.WinControls.UI.RadDropDownListElement)headMasterTypeDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDownList;
             ((Telerik.WinControls.Primitives.BorderPrimitive)headMasterTypeDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             ((Telerik.WinControls.Primitives.BorderPrimitive)headMasterTypeDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -426,7 +484,7 @@
             postBoxTextBox.Margin = new Padding(4, 5, 4, 5);
             postBoxTextBox.Name = "postBoxTextBox";
             postBoxTextBox.Size = new Size(159, 30);
-            postBoxTextBox.TabIndex = 4;
+            postBoxTextBox.TabIndex = 6;
             // 
             // postBoxLabel
             // 
@@ -454,7 +512,7 @@
             facebookTextBox.Margin = new Padding(4, 5, 4, 5);
             facebookTextBox.Name = "facebookTextBox";
             facebookTextBox.Size = new Size(375, 30);
-            facebookTextBox.TabIndex = 9;
+            facebookTextBox.TabIndex = 11;
             // 
             // facebookLabel
             // 
@@ -482,7 +540,7 @@
             emailTextBox.Margin = new Padding(4, 5, 4, 5);
             emailTextBox.Name = "emailTextBox";
             emailTextBox.Size = new Size(375, 30);
-            emailTextBox.TabIndex = 8;
+            emailTextBox.TabIndex = 10;
             // 
             // emailLabel
             // 
@@ -510,7 +568,7 @@
             cityTextBox.Margin = new Padding(4, 5, 4, 5);
             cityTextBox.Name = "cityTextBox";
             cityTextBox.Size = new Size(232, 30);
-            cityTextBox.TabIndex = 3;
+            cityTextBox.TabIndex = 5;
             // 
             // cityLabel
             // 
@@ -538,7 +596,7 @@
             addressTextBox.Margin = new Padding(4, 5, 4, 5);
             addressTextBox.Name = "addressTextBox";
             addressTextBox.Size = new Size(451, 30);
-            addressTextBox.TabIndex = 5;
+            addressTextBox.TabIndex = 7;
             // 
             // addressLabel
             // 
@@ -566,7 +624,7 @@
             phoneTextBox.Margin = new Padding(4, 5, 4, 5);
             phoneTextBox.Name = "phoneTextBox";
             phoneTextBox.Size = new Size(252, 30);
-            phoneTextBox.TabIndex = 6;
+            phoneTextBox.TabIndex = 8;
             // 
             // phoneLabel
             // 
@@ -581,29 +639,29 @@
             // mottoLabel
             // 
             mottoLabel.AutoSize = false;
-            mottoLabel.Location = new Point(474, 5);
+            mottoLabel.Location = new Point(461, 5);
             mottoLabel.Margin = new Padding(4, 5, 4, 5);
             mottoLabel.Name = "mottoLabel";
-            mottoLabel.Size = new Size(421, 30);
+            mottoLabel.Size = new Size(392, 30);
             mottoLabel.TabIndex = 8;
             mottoLabel.Text = "Devise:";
             // 
             // mottoSeparator
             // 
-            mottoSeparator.Location = new Point(474, 70);
+            mottoSeparator.Location = new Point(461, 70);
             mottoSeparator.Margin = new Padding(4, 5, 4, 5);
             mottoSeparator.Name = "mottoSeparator";
-            mottoSeparator.Size = new Size(421, 4);
+            mottoSeparator.Size = new Size(392, 4);
             mottoSeparator.TabIndex = 71;
             mottoSeparator.TabStop = false;
             // 
             // mottoTextBox
             // 
             mottoTextBox.AutoSize = false;
-            mottoTextBox.Location = new Point(474, 39);
+            mottoTextBox.Location = new Point(461, 39);
             mottoTextBox.Margin = new Padding(4, 5, 4, 5);
             mottoTextBox.Name = "mottoTextBox";
-            mottoTextBox.Size = new Size(421, 30);
+            mottoTextBox.Size = new Size(392, 30);
             mottoTextBox.TabIndex = 1;
             // 
             // nameSeparator
@@ -611,7 +669,7 @@
             nameSeparator.Location = new Point(5, 70);
             nameSeparator.Margin = new Padding(4, 5, 4, 5);
             nameSeparator.Name = "nameSeparator";
-            nameSeparator.Size = new Size(465, 4);
+            nameSeparator.Size = new Size(451, 4);
             nameSeparator.TabIndex = 70;
             nameSeparator.TabStop = false;
             // 
@@ -621,7 +679,7 @@
             nameTextBox.Location = new Point(5, 39);
             nameTextBox.Margin = new Padding(4, 5, 4, 5);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new Size(465, 30);
+            nameTextBox.Size = new Size(451, 30);
             nameTextBox.TabIndex = 0;
             // 
             // nameLabel
@@ -630,7 +688,7 @@
             nameLabel.Location = new Point(5, 5);
             nameLabel.Margin = new Padding(4, 5, 4, 5);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(465, 30);
+            nameLabel.Size = new Size(451, 30);
             nameLabel.TabIndex = 5;
             nameLabel.Text = "Désignation:";
             // 
@@ -646,20 +704,20 @@
             // closeButton
             // 
             closeButton.DialogResult = DialogResult.Cancel;
-            closeButton.Location = new Point(992, 379);
+            closeButton.Location = new Point(1077, 379);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 30);
-            closeButton.TabIndex = 16;
+            closeButton.TabIndex = 18;
             closeButton.Text = "Annuler";
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(867, 379);
+            saveButton.Location = new Point(952, 379);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 30);
-            saveButton.TabIndex = 15;
+            saveButton.TabIndex = 17;
             saveButton.Text = "Enregistrer";
             // 
             // errorProvider
@@ -673,7 +731,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = closeButton;
-            ClientSize = new Size(1138, 420);
+            ClientSize = new Size(1211, 420);
             Controls.Add(editPanel);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
@@ -685,11 +743,15 @@
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)showModelButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)websiteSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)websiteTextBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)websiteLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)receiptModelSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelSeparator).EndInit();
+            ((System.ComponentModel.ISupportInitialize)receiptModelLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelLabel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)receiptModelDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)evaluationModelDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)employeePictureDirectorySeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)employeePictureDirectoryTextBox).EndInit();
@@ -790,5 +852,9 @@
         private Telerik.WinControls.UI.RadSeparator websiteSeparator;
         private Telerik.WinControls.UI.RadTextBox websiteTextBox;
         private Telerik.WinControls.UI.RadLabel websiteLabel;
+        private Telerik.WinControls.UI.RadSeparator receiptModelSeparator;
+        private Telerik.WinControls.UI.RadLabel receiptModelLabel;
+        private Telerik.WinControls.UI.RadDropDownList receiptModelDropDownList;
+        private Telerik.WinControls.UI.RadButton showModelButton;
     }
 }

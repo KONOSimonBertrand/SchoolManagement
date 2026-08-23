@@ -5,7 +5,7 @@ using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
-
+using SchoolManagement.Core.Enum;
 namespace Primary.SchoolApp.UI
 {
     internal class AddOtherCashFlowForm:SchoolManagement.UI.EditOtherCashFlowForm
@@ -42,7 +42,7 @@ namespace Primary.SchoolApp.UI
         internal void Init(int selectedType)
         {
             this.selectedCategory = selectedType;
-            this.CashFlowTypeDropDownList.DataSource = selectedType == 2 ? Program.CashFlowTypeList.Where(x => x.Category == "AP") : Program.CashFlowTypeList.Where(x => x.Category == "DE");
+            this.CashFlowTypeDropDownList.DataSource = selectedType == 2 ? Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.CashSupply) : Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Expense);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

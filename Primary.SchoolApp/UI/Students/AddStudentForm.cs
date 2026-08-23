@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.Extensions.Logging;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
@@ -14,12 +14,14 @@ namespace Primary.SchoolApp.UI
         private readonly ILogService logService;
         private readonly IStudentService studentService;
         private readonly ClientApp clientApp;
+        private readonly ILogger<AddStudentForm> logger;
         private int healthState = 0;
-        public AddStudentForm(ILogService logService, IStudentService studentService, ClientApp clientApp)
+        public AddStudentForm(ILogService logService, IStudentService studentService, ClientApp clientApp, ILogger<AddStudentForm> logger)
         {
             this.logService = logService;
             this.studentService = studentService;
             this.clientApp = clientApp;
+            this.logger = logger;
             if (Thread.CurrentThread.CurrentUICulture.Name != "en-GB")
             {
                 NationalityDropDownList.DataSource = Program.CountryList.Select(x => x.FrenchName);
@@ -94,16 +96,26 @@ namespace Primary.SchoolApp.UI
                     {
                         Log log = new()
                         {
-                            UserAction = $"Ajout de  l'élève {record.FullName}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                            UserAction = $"Ajout de  l'élève {record.FullName}  par l'utisateur  {clientApp.UserConnected.Name} sur le poste {clientApp.IpAddress} ",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
+                        logger.LogInformation(
+                            "Ajout de  l'élève {FullName}  par l'utilisateur  {UserName} ",
+                            record.FullName,
+                            clientApp.UserConnected.Name
+                        );
                         this.DialogResult = System.Windows.Forms.DialogResult.OK;
                         this.Close();
                     }
                     else
                     {
                         ErrorLabel.Text = Language.messageUpdateError;
+                        logger.LogError(
+                            "Erreur lors de l'ajout de  l'élève {FullName}  par l'utilisateur  {UserName} ",
+                            record.FullName,
+                            clientApp.UserConnected.Name
+                        );
                     }
                 }
                 else
@@ -116,10 +128,6 @@ namespace Primary.SchoolApp.UI
         }
         private bool RecordExist(string idNumber)
         {
-            if (Program.StudentList.Where(x => x.IdNumber == idNumber).Count() > 0)
-            {
-                return true;
-            }
             return studentService.GetStudentAsync(idNumber).Result != null;
         }
     }

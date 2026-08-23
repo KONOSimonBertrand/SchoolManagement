@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
 using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using Primary.SchoolApp.Services;
 using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
@@ -45,6 +46,7 @@ namespace Primary.SchoolApp.UI
         private readonly ISubscriptionService subscriptionService;
         private readonly ISchoolService schoolService;
         private readonly ISchoolSupplieService schoolSupplieService;
+        private readonly IReceiptService receiptService;
         public StartForm(ClientApp clientApp, ISchoolYearService schoolYearService, IDisciplineService disciplineService, ICountryService countryService,
             IModuleService moduleService, IEmployeeService employeeService, IUserService userService, IEmployeeGroupService employeeGroupService,
             IRatingSystemService ratingSystemService, IEvaluationSessionService evaluationSessionService, ISubjectService subjectService,
@@ -52,7 +54,7 @@ namespace Primary.SchoolApp.UI
             IPaymentMeanService paymentMeanService, ICashFlowTypeService cashFlowTypeService, ISchoolRoomService schoolRoomService,
             ISchoolClassService schoolClassService, ISchoolGroupService schoolGroupService, IJobService jobService, ICashFlowService cashFlowService,
             IStudentEnrollingService studentEnrollingService, ISubscriptionService subscriptionService, ISchoolService schoolService, ISchoolSupplieFeeService schoolSupplieFeeService,
-            ISchoolSupplieService schoolSupplieService
+            ISchoolSupplieService schoolSupplieService, IReceiptService receiptService
             )
         {
             InitializeComponent();
@@ -84,6 +86,7 @@ namespace Primary.SchoolApp.UI
             localEnrollingService = new LocalEnrollingService();
             this.schoolSupplieFeeService = schoolSupplieFeeService;
             this.schoolSupplieService= schoolSupplieService;
+            this.receiptService = receiptService;
             InitializeWaitingBar();
             StartWaiting();
             this.Icon = Resources.icon_pink;
@@ -141,7 +144,8 @@ namespace Primary.SchoolApp.UI
             Program.SchoolClassList = await getClassListTask;
             Program.ClassSubjectList= await getClassSubjectListTask;
             Program.SchoolRoomList = await getRoomListTask;
-            Program.CashFlowTypeList = await getCashflowTypeListTask;
+            var cashflowTypeList= await getCashflowTypeListTask;
+            Program.CashFlowTypeList = cashflowTypeList.Select(x=>x.AsCashFlowTypeDTO()).ToList();
             Program.PaymentMeanList = await getPaymenMeantListTask;
             Program.SchoolingCostList = await getSchoolingCostListTask;
             Program.SubscriptionFeeList = await getSubscripFeetionListTask;
@@ -169,10 +173,10 @@ namespace Primary.SchoolApp.UI
             {
                 //lancement des tâches d'extraction des données
                 var getPaymentListTask = cashFlowService.GetTuitionPaymentBySchoolYearList(schoolYear.Id);
+                var getReceiptListTask=receiptService.GetReceiptListAsync(schoolYear.Id);
                 var getEnrollingListTask = studentEnrollingService.GetStudentEnrollingListAsync(schoolYear.Id);
                 var getDiscountListTask = cashFlowService.GetTuitionDiscountBySchoolYearList(schoolYear.Id);
                 var getSchoolSupplieListTask = schoolSupplieService.GetSchoolSupplieBySchoolYearList(schoolYear.Id);
-                var getSchoolSupplieDiscountListTask = schoolSupplieService.GetSchoolSupplieDiscountBySchoolYearList(schoolYear.Id);
                 var getSchoolingCostItemTask = schoolingCostService.GetSchoolingCostItemsBySchoolYear(schoolYear.Id);
                 var getSubscriptionTask = subscriptionService.GetSubscriptionLisAsync(schoolYear.Id);
                 var getCashFlowTask = cashFlowService.GetCashFlowList(schoolYear.Id);
@@ -187,7 +191,6 @@ namespace Primary.SchoolApp.UI
                 await Task.WhenAll(getPaymentListTask, getEnrollingListTask, getDiscountListTask);
                 //chargement des données dans les listes principales
                 Program.TuitionDiscountList = await getDiscountListTask;
-                Program.SchoolSupplieDiscountList = await getSchoolSupplieDiscountListTask;
                 Program.SchoolSupplieList=await getSchoolSupplieListTask;
                 Program.TuitionPaymentList = await getPaymentListTask;
                 Program.SchoolingCostItemList = await getSchoolingCostItemTask;
@@ -213,7 +216,7 @@ namespace Primary.SchoolApp.UI
                     //extraction de la somme des frais exigibles
                     var amountFee = Program.SchoolingCostList.Where(x => x.SchoolYearId == schoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Sum(x => x.Amount);
                     //calcul des impayés de l'élève
-                    enrollingDTO.Balance = amountFee - (enrollingDTO.DiscountList.Sum(x => x.Amount) + enrollingDTO.PaymentPayableList.Sum(x => x.Amount));
+                    enrollingDTO.Balance = amountFee - (enrollingDTO.DiscountList.Sum(x => x.Discount) + enrollingDTO.PaymentPayableList.Sum(x => x.Amount));
                     //récupération de l'état des insolvabilités
                     foreach (int feeId in feeIdList)
                     {
@@ -232,8 +235,10 @@ namespace Primary.SchoolApp.UI
                 Program.CashBoxInList = await getCashBoxInTask;
                 Program.CashBoxOutList = await getCashBoxOutTask;
                 Program.EvaluationSessionStateList = await getEvaluationStateTask;
-
-
+                Program.ReceiptList = (await getReceiptListTask).Select(x=>x.AsReceiptDTO()).ToList();
+                foreach (var receipt in Program.ReceiptList) {
+                   AppUtilities.GenerateReceiptItems(receipt);
+                }
             }
         }
         protected override void OnLoad(EventArgs e)

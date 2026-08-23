@@ -50,38 +50,9 @@
             classSeparator = new Telerik.WinControls.UI.RadSeparator();
             classDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             classLabel = new Telerik.WinControls.UI.RadLabel();
-            transactionDateSeparator = new Telerik.WinControls.UI.RadSeparator();
-            transactionDateLabel = new Telerik.WinControls.UI.RadLabel();
-            transactionDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
-            transactionIdSeparator = new Telerik.WinControls.UI.RadSeparator();
-            transactionIdTextBox = new Telerik.WinControls.UI.RadTextBox();
-            transactionIdLabel = new Telerik.WinControls.UI.RadLabel();
-            paymentMeanSeparator = new Telerik.WinControls.UI.RadSeparator();
-            paymentMeanDropDownList = new Telerik.WinControls.UI.RadDropDownList();
-            paymentMeanLabel = new Telerik.WinControls.UI.RadLabel();
-            doneBySeparator = new Telerik.WinControls.UI.RadSeparator();
-            doneByTextBox = new Telerik.WinControls.UI.RadTextBox();
-            doneByLabel = new Telerik.WinControls.UI.RadLabel();
-            amountSeparator = new Telerik.WinControls.UI.RadSeparator();
-            amountTextBox = new Telerik.WinControls.UI.RadTextBox();
-            amountLabel = new Telerik.WinControls.UI.RadLabel();
-            feesLabel = new Telerik.WinControls.UI.RadLabel();
             editPanel = new Telerik.WinControls.UI.RadPanel();
             feesTotalLabel = new Telerik.WinControls.UI.RadLabel();
             feesTotalSeparator = new Telerik.WinControls.UI.RadSeparator();
-            invoicePanel = new Telerik.WinControls.UI.RadPanel();
-            endDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
-            endDateSeparator = new Telerik.WinControls.UI.RadSeparator();
-            startDateTimePicker = new Telerik.WinControls.UI.RadDateTimePicker();
-            startDateSeparator = new Telerik.WinControls.UI.RadSeparator();
-            removeInvoiceItemButton = new Telerik.WinControls.UI.RadButton();
-            addInvoiceItemButton = new Telerik.WinControls.UI.RadButton();
-            feesSeparator = new Telerik.WinControls.UI.RadSeparator();
-            invoiceTotalListView = new Telerik.WinControls.UI.RadListView();
-            invoiceItemListView = new Telerik.WinControls.UI.RadListView();
-            startDateLabel = new Telerik.WinControls.UI.RadLabel();
-            endDateLabel = new Telerik.WinControls.UI.RadLabel();
-            feesDropDownList = new Telerik.WinControls.UI.RadDropDownList();
             closeButton = new Telerik.WinControls.UI.RadButton();
             saveButton = new Telerik.WinControls.UI.RadButton();
             errorLabel = new Telerik.WinControls.UI.RadLabel();
@@ -107,40 +78,10 @@
             ((System.ComponentModel.ISupportInitialize)classSeparator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)classDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)classLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)transactionDateSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)transactionDateLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)transactionDateTimePicker).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)transactionIdSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)transactionIdTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)transactionIdLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)paymentMeanSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)paymentMeanDropDownList).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)paymentMeanLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)doneBySeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)doneByTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)doneByLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)amountSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)amountTextBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)amountLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)feesLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).BeginInit();
             editPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)feesTotalLabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)feesTotalSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)invoicePanel).BeginInit();
-            invoicePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)endDateTimePicker).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)endDateSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)startDateTimePicker).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)startDateSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)removeInvoiceItemButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)addInvoiceItemButton).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)feesSeparator).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)invoiceTotalListView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)invoiceItemListView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)startDateLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)endDateLabel).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)feesDropDownList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorLabel).BeginInit();
@@ -175,7 +116,7 @@
             repeaterDropDownList.Margin = new Padding(4, 5, 4, 5);
             repeaterDropDownList.MinimumSize = new Size(0, 30);
             repeaterDropDownList.Name = "repeaterDropDownList";
-            repeaterDropDownList.Size = new Size(162, 30);
+            repeaterDropDownList.Size = new Size(162, 35);
             repeaterDropDownList.TabIndex = 3;
             ((Telerik.WinControls.UI.RadDropDownListElement)repeaterDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)repeaterDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -217,7 +158,7 @@
             addStudentButton.Location = new Point(477, 53);
             addStudentButton.Margin = new Padding(4, 5, 4, 5);
             addStudentButton.Name = "addStudentButton";
-            addStudentButton.Size = new Size(20, 30);
+            addStudentButton.Size = new Size(20, 36);
             addStudentButton.TabIndex = 1;
             // 
             // studentSeparator
@@ -237,7 +178,7 @@
             studentDropDownList.Margin = new Padding(4, 5, 4, 5);
             studentDropDownList.MinimumSize = new Size(0, 30);
             studentDropDownList.Name = "studentDropDownList";
-            studentDropDownList.Size = new Size(461, 30);
+            studentDropDownList.Size = new Size(461, 35);
             studentDropDownList.TabIndex = 0;
             ((Telerik.WinControls.UI.RadDropDownListElement)studentDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)studentDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -276,7 +217,7 @@
             // 
             // 
             dateTimePicker.RootElement.MinSize = new Size(0, 30);
-            dateTimePicker.Size = new Size(142, 30);
+            dateTimePicker.Size = new Size(142, 36);
             dateTimePicker.TabIndex = 4;
             dateTimePicker.TabStop = false;
             dateTimePicker.Text = "lundi 29 janvier 2018";
@@ -297,8 +238,8 @@
             addRoomButton.Location = new Point(619, 138);
             addRoomButton.Margin = new Padding(4, 5, 4, 5);
             addRoomButton.Name = "addRoomButton";
-            addRoomButton.Size = new Size(20, 30);
-            addRoomButton.TabIndex = 7;
+            addRoomButton.Size = new Size(20, 36);
+            addRoomButton.TabIndex = 8;
             // 
             // roomLabel
             // 
@@ -327,8 +268,8 @@
             roomDropDownList.Margin = new Padding(4, 5, 4, 5);
             roomDropDownList.MinimumSize = new Size(0, 30);
             roomDropDownList.Name = "roomDropDownList";
-            roomDropDownList.Size = new Size(160, 30);
-            roomDropDownList.TabIndex = 6;
+            roomDropDownList.Size = new Size(160, 35);
+            roomDropDownList.TabIndex = 7;
             ((Telerik.WinControls.UI.RadDropDownListElement)roomDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)roomDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
             ((Telerik.WinControls.Primitives.BorderPrimitive)roomDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
@@ -341,8 +282,8 @@
             addClassButton.Location = new Point(428, 139);
             addClassButton.Margin = new Padding(4, 5, 4, 5);
             addClassButton.Name = "addClassButton";
-            addClassButton.Size = new Size(20, 30);
-            addClassButton.TabIndex = 143;
+            addClassButton.Size = new Size(20, 36);
+            addClassButton.TabIndex = 6;
             // 
             // classSeparator
             // 
@@ -361,7 +302,7 @@
             classDropDownList.Margin = new Padding(4, 5, 4, 5);
             classDropDownList.MinimumSize = new Size(0, 30);
             classDropDownList.Name = "classDropDownList";
-            classDropDownList.Size = new Size(262, 30);
+            classDropDownList.Size = new Size(262, 35);
             classDropDownList.TabIndex = 5;
             ((Telerik.WinControls.UI.RadDropDownListElement)classDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
             ((Telerik.WinControls.Primitives.BorderPrimitive)classDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
@@ -379,173 +320,6 @@
             classLabel.Size = new Size(262, 30);
             classLabel.TabIndex = 146;
             classLabel.Text = "Classe:";
-            // 
-            // transactionDateSeparator
-            // 
-            transactionDateSeparator.Location = new Point(15, 82);
-            transactionDateSeparator.Margin = new Padding(5, 6, 5, 6);
-            transactionDateSeparator.Name = "transactionDateSeparator";
-            transactionDateSeparator.Size = new Size(140, 5);
-            transactionDateSeparator.TabIndex = 159;
-            transactionDateSeparator.TabStop = false;
-            // 
-            // transactionDateLabel
-            // 
-            transactionDateLabel.AutoSize = false;
-            transactionDateLabel.Location = new Point(13, 12);
-            transactionDateLabel.Margin = new Padding(5, 6, 5, 6);
-            transactionDateLabel.Name = "transactionDateLabel";
-            transactionDateLabel.Size = new Size(140, 30);
-            transactionDateLabel.TabIndex = 158;
-            transactionDateLabel.Text = "Date transaction:";
-            // 
-            // transactionDateTimePicker
-            // 
-            transactionDateTimePicker.CalendarSize = new Size(290, 320);
-            transactionDateTimePicker.Location = new Point(15, 52);
-            transactionDateTimePicker.Margin = new Padding(5, 6, 5, 6);
-            transactionDateTimePicker.MinimumSize = new Size(0, 30);
-            transactionDateTimePicker.Name = "transactionDateTimePicker";
-            // 
-            // 
-            // 
-            transactionDateTimePicker.RootElement.MinSize = new Size(0, 30);
-            transactionDateTimePicker.Size = new Size(140, 30);
-            transactionDateTimePicker.TabIndex = 7;
-            transactionDateTimePicker.TabStop = false;
-            transactionDateTimePicker.Text = "lundi 29 janvier 2018";
-            transactionDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
-            // 
-            // transactionIdSeparator
-            // 
-            transactionIdSeparator.Location = new Point(165, 82);
-            transactionIdSeparator.Margin = new Padding(5, 6, 5, 6);
-            transactionIdSeparator.Name = "transactionIdSeparator";
-            transactionIdSeparator.Size = new Size(165, 5);
-            transactionIdSeparator.TabIndex = 157;
-            transactionIdSeparator.TabStop = false;
-            // 
-            // transactionIdTextBox
-            // 
-            transactionIdTextBox.AutoSize = false;
-            transactionIdTextBox.Location = new Point(165, 52);
-            transactionIdTextBox.Margin = new Padding(5, 6, 5, 6);
-            transactionIdTextBox.Name = "transactionIdTextBox";
-            transactionIdTextBox.Size = new Size(165, 36);
-            transactionIdTextBox.TabIndex = 8;
-            // 
-            // transactionIdLabel
-            // 
-            transactionIdLabel.AutoSize = false;
-            transactionIdLabel.Location = new Point(165, 12);
-            transactionIdLabel.Margin = new Padding(5, 6, 5, 6);
-            transactionIdLabel.Name = "transactionIdLabel";
-            transactionIdLabel.Size = new Size(165, 30);
-            transactionIdLabel.TabIndex = 156;
-            transactionIdLabel.Text = "Reférence transaction:";
-            // 
-            // paymentMeanSeparator
-            // 
-            paymentMeanSeparator.Location = new Point(340, 82);
-            paymentMeanSeparator.Margin = new Padding(5, 6, 5, 6);
-            paymentMeanSeparator.Name = "paymentMeanSeparator";
-            paymentMeanSeparator.Size = new Size(325, 5);
-            paymentMeanSeparator.TabIndex = 162;
-            paymentMeanSeparator.TabStop = false;
-            // 
-            // paymentMeanDropDownList
-            // 
-            paymentMeanDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            paymentMeanDropDownList.DropDownHeight = 249;
-            paymentMeanDropDownList.ItemHeight = 38;
-            paymentMeanDropDownList.Location = new Point(340, 52);
-            paymentMeanDropDownList.Margin = new Padding(5, 6, 5, 6);
-            paymentMeanDropDownList.MinimumSize = new Size(0, 30);
-            paymentMeanDropDownList.Name = "paymentMeanDropDownList";
-            paymentMeanDropDownList.Size = new Size(325, 30);
-            paymentMeanDropDownList.TabIndex = 9;
-            ((Telerik.WinControls.UI.RadDropDownListElement)paymentMeanDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)paymentMeanDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)paymentMeanDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)paymentMeanDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)paymentMeanDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
-            ((Telerik.WinControls.Primitives.BorderPrimitive)paymentMeanDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            // 
-            // paymentMeanLabel
-            // 
-            paymentMeanLabel.AutoSize = false;
-            paymentMeanLabel.Location = new Point(340, 12);
-            paymentMeanLabel.Margin = new Padding(5, 6, 5, 6);
-            paymentMeanLabel.Name = "paymentMeanLabel";
-            paymentMeanLabel.Size = new Size(325, 30);
-            paymentMeanLabel.TabIndex = 161;
-            paymentMeanLabel.Text = "Moyen de paiement:";
-            // 
-            // doneBySeparator
-            // 
-            doneBySeparator.Location = new Point(674, 82);
-            doneBySeparator.Margin = new Padding(4, 5, 4, 5);
-            doneBySeparator.Name = "doneBySeparator";
-            doneBySeparator.Size = new Size(372, 4);
-            doneBySeparator.TabIndex = 165;
-            doneBySeparator.TabStop = false;
-            // 
-            // doneByTextBox
-            // 
-            doneByTextBox.AutoSize = false;
-            doneByTextBox.Location = new Point(674, 52);
-            doneByTextBox.Margin = new Padding(4, 5, 4, 5);
-            doneByTextBox.Name = "doneByTextBox";
-            doneByTextBox.Size = new Size(372, 36);
-            doneByTextBox.TabIndex = 10;
-            // 
-            // doneByLabel
-            // 
-            doneByLabel.AutoSize = false;
-            doneByLabel.Location = new Point(674, 12);
-            doneByLabel.Margin = new Padding(4, 5, 4, 5);
-            doneByLabel.Name = "doneByLabel";
-            doneByLabel.Size = new Size(372, 30);
-            doneByLabel.TabIndex = 164;
-            doneByLabel.Text = "Versement effectué par:";
-            // 
-            // amountSeparator
-            // 
-            amountSeparator.Location = new Point(537, 167);
-            amountSeparator.Margin = new Padding(4, 5, 4, 5);
-            amountSeparator.Name = "amountSeparator";
-            amountSeparator.Size = new Size(138, 4);
-            amountSeparator.TabIndex = 171;
-            amountSeparator.TabStop = false;
-            // 
-            // amountTextBox
-            // 
-            amountTextBox.AutoSize = false;
-            amountTextBox.Location = new Point(537, 137);
-            amountTextBox.Margin = new Padding(4, 5, 4, 5);
-            amountTextBox.Name = "amountTextBox";
-            amountTextBox.Size = new Size(138, 36);
-            amountTextBox.TabIndex = 12;
-            // 
-            // amountLabel
-            // 
-            amountLabel.AutoSize = false;
-            amountLabel.Location = new Point(537, 97);
-            amountLabel.Margin = new Padding(4, 5, 4, 5);
-            amountLabel.Name = "amountLabel";
-            amountLabel.Size = new Size(138, 30);
-            amountLabel.TabIndex = 169;
-            amountLabel.Text = "Montant :";
-            // 
-            // feesLabel
-            // 
-            feesLabel.AutoSize = false;
-            feesLabel.Location = new Point(15, 97);
-            feesLabel.Margin = new Padding(4, 5, 4, 5);
-            feesLabel.Name = "feesLabel";
-            feesLabel.Size = new Size(514, 30);
-            feesLabel.TabIndex = 168;
-            feesLabel.Text = "Frais à payer:";
             // 
             // editPanel
             // 
@@ -572,10 +346,9 @@
             editPanel.Controls.Add(studentSeparator);
             editPanel.Controls.Add(studentDropDownList);
             editPanel.Controls.Add(studentLabel);
-            editPanel.Controls.Add(invoicePanel);
             editPanel.Location = new Point(-1, 0);
             editPanel.Name = "editPanel";
-            editPanel.Size = new Size(1059, 556);
+            editPanel.Size = new Size(1059, 188);
             editPanel.TabIndex = 174;
             // 
             // feesTotalLabel
@@ -597,194 +370,29 @@
             feesTotalSeparator.TabIndex = 179;
             feesTotalSeparator.TabStop = false;
             // 
-            // invoicePanel
-            // 
-            invoicePanel.Controls.Add(endDateTimePicker);
-            invoicePanel.Controls.Add(endDateSeparator);
-            invoicePanel.Controls.Add(startDateTimePicker);
-            invoicePanel.Controls.Add(startDateSeparator);
-            invoicePanel.Controls.Add(removeInvoiceItemButton);
-            invoicePanel.Controls.Add(addInvoiceItemButton);
-            invoicePanel.Controls.Add(feesSeparator);
-            invoicePanel.Controls.Add(doneBySeparator);
-            invoicePanel.Controls.Add(transactionDateLabel);
-            invoicePanel.Controls.Add(invoiceTotalListView);
-            invoicePanel.Controls.Add(invoiceItemListView);
-            invoicePanel.Controls.Add(startDateLabel);
-            invoicePanel.Controls.Add(amountSeparator);
-            invoicePanel.Controls.Add(amountTextBox);
-            invoicePanel.Controls.Add(endDateLabel);
-            invoicePanel.Controls.Add(amountLabel);
-            invoicePanel.Controls.Add(feesLabel);
-            invoicePanel.Controls.Add(doneByTextBox);
-            invoicePanel.Controls.Add(doneByLabel);
-            invoicePanel.Controls.Add(paymentMeanSeparator);
-            invoicePanel.Controls.Add(paymentMeanDropDownList);
-            invoicePanel.Controls.Add(paymentMeanLabel);
-            invoicePanel.Controls.Add(transactionDateSeparator);
-            invoicePanel.Controls.Add(transactionDateTimePicker);
-            invoicePanel.Controls.Add(transactionIdSeparator);
-            invoicePanel.Controls.Add(transactionIdTextBox);
-            invoicePanel.Controls.Add(transactionIdLabel);
-            invoicePanel.Controls.Add(feesDropDownList);
-            invoicePanel.Location = new Point(2, 187);
-            invoicePanel.Name = "invoicePanel";
-            invoicePanel.Size = new Size(1054, 359);
-            invoicePanel.TabIndex = 178;
-            // 
-            // endDateTimePicker
-            // 
-            endDateTimePicker.AutoSize = false;
-            endDateTimePicker.CalendarSize = new Size(290, 320);
-            endDateTimePicker.Location = new Point(844, 137);
-            endDateTimePicker.Margin = new Padding(4, 5, 4, 5);
-            endDateTimePicker.Name = "endDateTimePicker";
-            endDateTimePicker.Size = new Size(147, 36);
-            endDateTimePicker.TabIndex = 14;
-            endDateTimePicker.TabStop = false;
-            endDateTimePicker.Text = "lundi 29 janvier 2018";
-            endDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
-            // 
-            // endDateSeparator
-            // 
-            endDateSeparator.Location = new Point(844, 167);
-            endDateSeparator.Margin = new Padding(4, 5, 4, 5);
-            endDateSeparator.Name = "endDateSeparator";
-            endDateSeparator.Size = new Size(147, 4);
-            endDateSeparator.TabIndex = 171;
-            endDateSeparator.TabStop = false;
-            // 
-            // startDateTimePicker
-            // 
-            startDateTimePicker.AutoSize = false;
-            startDateTimePicker.CalendarSize = new Size(290, 320);
-            startDateTimePicker.Location = new Point(685, 137);
-            startDateTimePicker.Margin = new Padding(4, 5, 4, 5);
-            startDateTimePicker.Name = "startDateTimePicker";
-            startDateTimePicker.Size = new Size(151, 36);
-            startDateTimePicker.TabIndex = 13;
-            startDateTimePicker.TabStop = false;
-            startDateTimePicker.Text = "lundi 29 janvier 2018";
-            startDateTimePicker.Value = new DateTime(2018, 1, 29, 16, 2, 10, 371);
-            // 
-            // startDateSeparator
-            // 
-            startDateSeparator.Location = new Point(685, 167);
-            startDateSeparator.Margin = new Padding(4, 5, 4, 5);
-            startDateSeparator.Name = "startDateSeparator";
-            startDateSeparator.Size = new Size(151, 4);
-            startDateSeparator.TabIndex = 171;
-            startDateSeparator.TabStop = false;
-            // 
-            // removeInvoiceItemButton
-            // 
-            removeInvoiceItemButton.Location = new Point(1003, 243);
-            removeInvoiceItemButton.Name = "removeInvoiceItemButton";
-            removeInvoiceItemButton.Size = new Size(35, 36);
-            removeInvoiceItemButton.TabIndex = 17;
-            removeInvoiceItemButton.Text = "-";
-            // 
-            // addInvoiceItemButton
-            // 
-            addInvoiceItemButton.Location = new Point(1003, 137);
-            addInvoiceItemButton.Name = "addInvoiceItemButton";
-            addInvoiceItemButton.Size = new Size(35, 36);
-            addInvoiceItemButton.TabIndex = 15;
-            addInvoiceItemButton.Text = "+";
-            // 
-            // feesSeparator
-            // 
-            feesSeparator.Location = new Point(15, 167);
-            feesSeparator.Margin = new Padding(4, 5, 4, 5);
-            feesSeparator.Name = "feesSeparator";
-            feesSeparator.Size = new Size(514, 4);
-            feesSeparator.TabIndex = 147;
-            feesSeparator.TabStop = false;
-            // 
-            // invoiceTotalListView
-            // 
-            invoiceTotalListView.AllowEdit = false;
-            invoiceTotalListView.ItemSpacing = -1;
-            invoiceTotalListView.Location = new Point(15, 497);
-            invoiceTotalListView.Name = "invoiceTotalListView";
-            invoiceTotalListView.ShowColumnHeaders = false;
-            invoiceTotalListView.ShowGridLines = true;
-            invoiceTotalListView.Size = new Size(976, 36);
-            invoiceTotalListView.TabIndex = 178;
-            invoiceTotalListView.ViewType = Telerik.WinControls.UI.ListViewType.DetailsView;
-            // 
-            // invoiceItemListView
-            // 
-            invoiceItemListView.AllowEdit = false;
-            invoiceItemListView.ItemSpacing = -1;
-            invoiceItemListView.Location = new Point(15, 186);
-            invoiceItemListView.Name = "invoiceItemListView";
-            invoiceItemListView.ShowColumnHeaders = false;
-            invoiceItemListView.ShowGridLines = true;
-            invoiceItemListView.Size = new Size(976, 168);
-            invoiceItemListView.TabIndex = 16;
-            invoiceItemListView.ViewType = Telerik.WinControls.UI.ListViewType.DetailsView;
-            // 
-            // startDateLabel
-            // 
-            startDateLabel.AutoSize = false;
-            startDateLabel.Location = new Point(683, 97);
-            startDateLabel.Margin = new Padding(4, 5, 4, 5);
-            startDateLabel.Name = "startDateLabel";
-            startDateLabel.Size = new Size(151, 30);
-            startDateLabel.TabIndex = 176;
-            startDateLabel.Text = "Date de souscription:";
-            // 
-            // endDateLabel
-            // 
-            endDateLabel.AutoSize = false;
-            endDateLabel.Location = new Point(844, 97);
-            endDateLabel.Margin = new Padding(4, 5, 4, 5);
-            endDateLabel.Name = "endDateLabel";
-            endDateLabel.Size = new Size(147, 30);
-            endDateLabel.TabIndex = 169;
-            endDateLabel.Text = "Date fin abonnement :";
-            // 
-            // feesDropDownList
-            // 
-            feesDropDownList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            feesDropDownList.DropDownHeight = 159;
-            feesDropDownList.Location = new Point(15, 137);
-            feesDropDownList.Margin = new Padding(4, 5, 4, 5);
-            feesDropDownList.MinimumSize = new Size(0, 30);
-            feesDropDownList.Name = "feesDropDownList";
-            feesDropDownList.Size = new Size(514, 30);
-            feesDropDownList.TabIndex = 11;
-            ((Telerik.WinControls.UI.RadDropDownListElement)feesDropDownList.GetChildAt(0)).DropDownStyle = Telerik.WinControls.RadDropDownStyle.DropDown;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)feesDropDownList.GetChildAt(0).GetChildAt(0)).SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-            ((Telerik.WinControls.Primitives.BorderPrimitive)feesDropDownList.GetChildAt(0).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)feesDropDownList.GetChildAt(0).GetChildAt(3)).Visibility = Telerik.WinControls.ElementVisibility.Hidden;
-            ((Telerik.WinControls.UI.AutoCompleteSuggestDropDownListElement)feesDropDownList.GetChildAt(0).GetChildAt(3)).MaxSize = new Size(0, 1);
-            ((Telerik.WinControls.Primitives.BorderPrimitive)feesDropDownList.GetChildAt(0).GetChildAt(3).GetChildAt(0)).Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            // 
             // closeButton
             // 
             closeButton.DialogResult = DialogResult.Cancel;
-            closeButton.Location = new Point(931, 564);
+            closeButton.Location = new Point(939, 196);
             closeButton.Margin = new Padding(4, 5, 4, 5);
             closeButton.Name = "closeButton";
             closeButton.Size = new Size(117, 36);
-            closeButton.TabIndex = 19;
+            closeButton.TabIndex = 10;
             closeButton.Text = "Annuler";
             // 
             // saveButton
             // 
-            saveButton.Location = new Point(806, 564);
+            saveButton.Location = new Point(814, 196);
             saveButton.Margin = new Padding(4, 5, 4, 5);
             saveButton.Name = "saveButton";
             saveButton.Size = new Size(117, 36);
-            saveButton.TabIndex = 18;
+            saveButton.TabIndex = 9;
             saveButton.Text = "Enregistrer";
             // 
             // errorLabel
             // 
             errorLabel.AutoSize = false;
-            errorLabel.Location = new Point(9, 564);
+            errorLabel.Location = new Point(17, 196);
             errorLabel.Margin = new Padding(4, 5, 4, 5);
             errorLabel.Name = "errorLabel";
             errorLabel.Size = new Size(771, 36);
@@ -796,10 +404,12 @@
             // 
             // EditStudentEnrollingForm
             // 
+            AcceptButton = saveButton;
             AutoScaleBaseSize = new Size(7, 15);
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1063, 612);
+            CancelButton = closeButton;
+            ClientSize = new Size(1067, 245);
             Controls.Add(errorLabel);
             Controls.Add(closeButton);
             Controls.Add(saveButton);
@@ -829,42 +439,11 @@
             ((System.ComponentModel.ISupportInitialize)classSeparator).EndInit();
             ((System.ComponentModel.ISupportInitialize)classDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)classLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)transactionDateSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)transactionDateLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)transactionDateTimePicker).EndInit();
-            ((System.ComponentModel.ISupportInitialize)transactionIdSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)transactionIdTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)transactionIdLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)paymentMeanSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)paymentMeanDropDownList).EndInit();
-            ((System.ComponentModel.ISupportInitialize)paymentMeanLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)doneBySeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)doneByTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)doneByLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)amountSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)amountTextBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)amountLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)feesLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)editPanel).EndInit();
             editPanel.ResumeLayout(false);
             editPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)feesTotalLabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)feesTotalSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)invoicePanel).EndInit();
-            invoicePanel.ResumeLayout(false);
-            invoicePanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)endDateTimePicker).EndInit();
-            ((System.ComponentModel.ISupportInitialize)endDateSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)startDateTimePicker).EndInit();
-            ((System.ComponentModel.ISupportInitialize)startDateSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)removeInvoiceItemButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)addInvoiceItemButton).EndInit();
-            ((System.ComponentModel.ISupportInitialize)feesSeparator).EndInit();
-            ((System.ComponentModel.ISupportInitialize)invoiceTotalListView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)invoiceItemListView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)startDateLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)endDateLabel).EndInit();
-            ((System.ComponentModel.ISupportInitialize)feesDropDownList).EndInit();
             ((System.ComponentModel.ISupportInitialize)closeButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)saveButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorLabel).EndInit();
@@ -895,41 +474,12 @@
         private Telerik.WinControls.UI.RadSeparator classSeparator;
         private Telerik.WinControls.UI.RadDropDownList classDropDownList;
         private Telerik.WinControls.UI.RadLabel classLabel;
-        private Telerik.WinControls.UI.RadSeparator transactionDateSeparator;
-        private Telerik.WinControls.UI.RadLabel transactionDateLabel;
-        private Telerik.WinControls.UI.RadDateTimePicker transactionDateTimePicker;
-        private Telerik.WinControls.UI.RadSeparator transactionIdSeparator;
-        private Telerik.WinControls.UI.RadTextBox transactionIdTextBox;
-        private Telerik.WinControls.UI.RadLabel transactionIdLabel;
-        private Telerik.WinControls.UI.RadSeparator paymentMeanSeparator;
-        private Telerik.WinControls.UI.RadDropDownList paymentMeanDropDownList;
-        private Telerik.WinControls.UI.RadLabel paymentMeanLabel;
-        private Telerik.WinControls.UI.RadSeparator doneBySeparator;
-        private Telerik.WinControls.UI.RadTextBox doneByTextBox;
-        private Telerik.WinControls.UI.RadLabel doneByLabel;
-        private Telerik.WinControls.UI.RadSeparator amountSeparator;
-        private Telerik.WinControls.UI.RadTextBox amountTextBox;
-        private Telerik.WinControls.UI.RadLabel amountLabel;
-        private Telerik.WinControls.UI.RadLabel feesLabel;
         private Telerik.WinControls.UI.RadPanel editPanel;
         private Telerik.WinControls.UI.RadButton closeButton;
         private Telerik.WinControls.UI.RadButton saveButton;
         private Telerik.WinControls.UI.RadLabel errorLabel;
         private ErrorProvider errorProvider;
-        private Telerik.WinControls.UI.RadLabel startDateLabel;
-        private Telerik.WinControls.UI.RadSeparator startDateSeparator;
-        private Telerik.WinControls.UI.RadListView invoiceItemListView;
-        private Telerik.WinControls.UI.RadListView invoiceTotalListView;
         private Telerik.WinControls.UI.RadLabel feesTotalLabel;
-        private Telerik.WinControls.UI.RadSeparator feesSeparator;
-        private Telerik.WinControls.UI.RadDropDownList feesDropDownList;
         private Telerik.WinControls.UI.RadSeparator feesTotalSeparator;
-        private Telerik.WinControls.UI.RadButton addInvoiceItemButton;
-        private Telerik.WinControls.UI.RadButton removeInvoiceItemButton;
-        private Telerik.WinControls.UI.RadSeparator endDateSeparator;
-        private Telerik.WinControls.UI.RadLabel endDateLabel;
-        private Telerik.WinControls.UI.RadDateTimePicker endDateTimePicker;
-        private Telerik.WinControls.UI.RadDateTimePicker startDateTimePicker;
-        private Telerik.WinControls.UI.RadPanel invoicePanel;
     }
 }

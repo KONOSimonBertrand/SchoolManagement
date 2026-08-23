@@ -23,18 +23,26 @@ namespace SchoolManagement.Application
 
         public async Task<bool> ChangePassword(int userId, string password)
         {
-            return await userRepository.ChangePasswordAsync(userId,password);
+            var hashPassword = BCrypt.Net.BCrypt.HashPassword(password);
+            return await userRepository.ChangePasswordAsync(userId, hashPassword);
         }
 
         public async Task<bool> CreateUser(User user)
         {
+            user.Password= BCrypt.Net.BCrypt.HashPassword(user.Password);
             return await userRepository.AddAsync(user);
         }
 
-        public async Task<User?> GetUser(string userName, string userPassword)
-        {           
-            return await userRepository.GetAsync(userName, userPassword);
+        public async Task<bool> AuthenticateUser(string userName, string userPassword)
+        {
+            var user = await userRepository.GetAsync(userName);
+            if (user == null)
+            {
+                return false;
+            }
+            return BCrypt.Net.BCrypt.Verify(userPassword, user.Password);
         }
+
         public async Task<User?> GetUser(string userName)
         {
             return await userRepository.GetAsync(userName);

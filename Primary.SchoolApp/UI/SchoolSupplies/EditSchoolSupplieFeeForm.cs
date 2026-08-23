@@ -1,6 +1,8 @@
 ﻿
 
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
@@ -59,10 +61,10 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                var item = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
-                if (item != null)
+                var type = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO;
+                if (type != null)
                 {
-                    ShowCashFlowTypeEditForm(item);
+                    ShowCashFlowTypeEditForm(type);
                 }
                 else
                 {
@@ -188,7 +190,8 @@ namespace Primary.SchoolApp.UI
                     schoolSupplieFee.SchoolClassId = schoolSupplieFee.SchoolYear.Id;
                     schoolSupplieFee.SchoolClass = selectedClass;
                     schoolSupplieFee.SchoolClassId = schoolSupplieFee.SchoolClass.Id;
-                    schoolSupplieFee.CashFlowType = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                    var cashFlowType = (CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).AsCashFlowType();
+                    schoolSupplieFee.CashFlowType = cashFlowType;
                     schoolSupplieFee.CashFlowTypeId = schoolSupplieFee.CashFlowType.Id;
                     schoolSupplieFee.IsPayable = bool.Parse(CostPayableDropDownList.SelectedValue.ToString());
                     schoolSupplieFee.RequiredQuantity = int.Parse(RequiredQuantityTextBox.Text);
@@ -294,18 +297,18 @@ namespace Primary.SchoolApp.UI
             }
         }
         // show CashFlowType UI for edit
-        private void ShowCashFlowTypeEditForm(CashFlowType cashFlowType)
+        private void ShowCashFlowTypeEditForm(CashFlowTypeDTO type)
         {
-            if (cashFlowType != null)
+            if (type != null)
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelCashFlowType;
-                form.Init(cashFlowType);
+                form.Init(type);
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
                     CostTypeDropDownList.DataSource = null;
-                    CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+                    CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == SchoolManagement.Core.Enum.FlowCategory.SchoolSupplie);
                     CostTypeDropDownList.SelectedValue = data;
                 }
             }
@@ -323,9 +326,9 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data);
+                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
                 CostTypeDropDownList.DataSource = null;
-                CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+                CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == SchoolManagement.Core.Enum.FlowCategory.SchoolSupplie);
                 CostTypeDropDownList.SelectedValue = data;
             }
         }

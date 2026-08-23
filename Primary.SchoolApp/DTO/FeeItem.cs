@@ -1,5 +1,7 @@
 ﻿
 
+using SchoolManagement.Core.Enum;
+
 namespace Primary.SchoolApp.DTO
 {
     /// <summary>
@@ -11,9 +13,10 @@ namespace Primary.SchoolApp.DTO
         public string Name{ get; set; }
         public double Quantity {  get; set; }
         public double UnitPrice {  get; set; }
+        public double Discount {  get; set; }   
         public double Total{get=> Quantity * UnitPrice; }
         public string Description { get; set; }
-        public string Category { get; internal set; }
+        public TypeFee Category { get; internal set; }
         public object Tag { get; internal set; }
         public override bool Equals(object obj)
         {

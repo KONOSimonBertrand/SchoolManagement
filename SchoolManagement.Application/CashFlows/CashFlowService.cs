@@ -43,7 +43,7 @@ namespace SchoolManagement.Application
         public async Task<bool> CreateTuitionPayment(TuitionPayment payment)
         {
             payment.IdNumber = GenerateTuitionPaymentIdNumber().Result;
-            payment.TransactionId = payment?.TransactionId?.Trim() == string.Empty ? payment.IdNumber : payment.TransactionId;
+            payment.TransactionId = payment?.TransactionId?.Trim() == string.Empty ? payment.IdNumber : payment?.TransactionId;
             return await cashFlowWriteRepository.AddTuitionPaymentAsync(payment);
         }
 
@@ -104,20 +104,20 @@ namespace SchoolManagement.Application
 
         public async Task<bool> ReturnTuitionPayment(TuitionPayment payment)
         {
-            payment.IdNumber = payment.IdNumber + "-return";
+            payment.IdNumber = payment.IdNumber + "-R";
             payment.Amount = (-1) * payment.Amount;
             return await cashFlowWriteRepository.AddTuitionPaymentAsync(payment);
         }
 
         public async Task<bool> ReturnCashBoxOut(CashBoxOut cashBox)
         {
-            cashBox.IdNumber = cashBox.IdNumber + "-return";
+            cashBox.IdNumber = cashBox.IdNumber + "-R";
             cashBox.Amount = (-1) * cashBox.Amount;
             return await cashFlowWriteRepository.AddCashBoxOutAsync(cashBox);
         }
         public async Task<bool> ReturnCashBoxIn(CashBoxIn cashBox)
         {
-            cashBox.IdNumber = cashBox.IdNumber + "-return";
+            cashBox.IdNumber = cashBox.IdNumber + "-R";
             cashBox.Amount = (-1) * cashBox.Amount;
             return await cashFlowWriteRepository.AddCashBoxInAsync(cashBox);
         }

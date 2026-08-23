@@ -4,7 +4,7 @@ namespace SchoolManagement.Core.Repositories
 {
     public interface ICashFlowTypeReadRepository
     {
-        public Task<CashFlowType?> GetAsyn(string name);
-        public Task<IList<CashFlowType>> GetAsynList();
+        public Task<CashFlowType?> GetAsync(string name);
+        public Task<IList<CashFlowType>> GetAsyncList();
     }
 }

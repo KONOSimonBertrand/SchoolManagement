@@ -18,8 +18,8 @@ namespace SchoolManagement.Infrastructure.Repositories
         public  async Task<bool> AddEnrollingAsync(StudentEnrolling enrolling)
         {
             var connection = dbConnectionFactory.CreateConnection();
-            string query = @" INSERT INTO StudentsEnrollings(Date,StudentId,ClassId,SchoolYearId,OldSchool,IsRepeater,DoneBy)  
-                              VALUES(@date,@studentId,@classId,@schoolYearId,@oldSchool,@isRepeater,@doneBy);";
+            string query = @" INSERT INTO StudentsEnrollings(Date,StudentId,ClassId,SchoolYearId,OldSchool,IsRepeater)  
+                              VALUES(@date,@studentId,@classId,@schoolYearId,@oldSchool,@isRepeater);";
             var result = connection.Execute(query, new
             {
                 date = enrolling.Date,
@@ -28,7 +28,6 @@ namespace SchoolManagement.Infrastructure.Repositories
                 schoolYearId=enrolling.SchoolYearId,
                 oldSchool =enrolling.OldSchool,
                 isRepeater=enrolling.IsRepeater,
-                doneBy = enrolling.DoneBy,
             });
             await Task.Delay(0);
             return result > 0;
@@ -88,7 +87,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             string query = @"SELECT * FROM StudentsEnrollings  AS A  
                             INNER JOIN Students AS B ON A.StudentId=B.Id 
                             INNER JOIN  SchoolClasses AS C ON A.ClassId=C.Id
-                                WHERE A.SchoolYearId=@schoolYearId;";
+                            WHERE A.SchoolYearId=@schoolYearId;";
             var result = connection.Query<StudentEnrolling,Student, SchoolClass, StudentEnrolling>(query,
                 (enrolling,student, schoolclass) =>
                 {
@@ -186,7 +185,7 @@ namespace SchoolManagement.Infrastructure.Repositories
         {
             var connection = dbConnectionFactory.CreateConnection();
             string query = @" UPDATE StudentsEnrollings SET Date=@date,StudentId=@studentId,ClassId=@classId,
-                                     OldSchool=@oldSchool,IsRepeater=@isRepeater,DoneBy=@doneBy WHERE Id=@enrollingId ;";
+                                     OldSchool=@oldSchool,IsRepeater=@isRepeater  WHERE Id=@enrollingId ;";
             var result = connection.Execute(query, new
             {
                 date = enrolling.Date,
@@ -195,7 +194,6 @@ namespace SchoolManagement.Infrastructure.Repositories
                 oldSchool = enrolling.OldSchool,
                 isRepeater = enrolling.IsRepeater,
                 enrollingId=enrolling.Id,
-                doneBy=enrolling.DoneBy,
             });
             await Task.Delay(0);
             return result > 0;

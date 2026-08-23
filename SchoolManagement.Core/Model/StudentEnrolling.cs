@@ -14,7 +14,6 @@ namespace SchoolManagement.Core.Model
         public int ClassId { get; set; }
         public string OldSchool { get; set; }
         public bool IsRepeater {  get; set; }
-        public string DoneBy {  get; set; }
         public bool IsActive {  get; set; }
         public string ReasonLeft { get; set; }
         public string? PictureUrl { get; set; }
@@ -24,7 +23,8 @@ namespace SchoolManagement.Core.Model
         public virtual Student Student { get; set; }
         public virtual IList<TuitionPayment> PaymentList { get; set; }=new List<TuitionPayment>();
         public virtual IList<TuitionDiscount> DiscountList { get; set; } =new List<TuitionDiscount>();
-            
+        public virtual IList<SchoolSupplie> SchoolSuppliesList { get; set; } = new List<SchoolSupplie>();
+
         public override bool Equals(object? obj)
         {
             if (obj is not StudentEnrolling other) return false;

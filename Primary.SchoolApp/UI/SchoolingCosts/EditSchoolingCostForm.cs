@@ -1,6 +1,8 @@
 ﻿
 
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
@@ -61,7 +63,7 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                var item = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                var item = CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO;
                 if (item != null)
                 {
                     ShowCashFlowTypeEditForm(item);
@@ -423,18 +425,18 @@ namespace Primary.SchoolApp.UI
             }
         }
         // show CashFlowType UI for edit
-        private void ShowCashFlowTypeEditForm(CashFlowType cashFlowType)
+        private void ShowCashFlowTypeEditForm(CashFlowTypeDTO type)
         {
-            if (cashFlowType != null)
+            if (type != null)
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelCashFlowType;
-                form.Init(cashFlowType);
+                form.Init(type);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
                     CostTypeDropDownList.DataSource = null;
-                    CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+                    CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == SchoolManagement.Core.Enum.FlowCategory.TuitionFee);
                     CostTypeDropDownList.SelectedValue = data;
                 }
             }
@@ -452,9 +454,9 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data);
+                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
                 CostTypeDropDownList.DataSource = null;
-                CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "FS");
+                CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == SchoolManagement.Core.Enum.FlowCategory.TuitionFee);
                 CostTypeDropDownList.SelectedValue = data;
             }
         }

@@ -1,9 +1,13 @@
 ﻿
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
+using Telerik.WinControls.UI;
 
 namespace Primary.SchoolApp.UI
 {
@@ -12,7 +16,7 @@ namespace Primary.SchoolApp.UI
         private readonly ICashFlowTypeService cashFlowTypeService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
-        CashFlowType cashFlowType;
+        CashFlowTypeDTO cashFlowTypeDTO;
         private string cashFlowTypeNameTracker;
 
         public EditCashFlowTypeForm(ICashFlowTypeService cashFlowTypeService, ILogService logService, ClientApp clientApp)
@@ -21,6 +25,29 @@ namespace Primary.SchoolApp.UI
             this.logService = logService;
             this.clientApp = clientApp;
             cashFlowTypeNameTracker = string.Empty;
+
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.labelSchoolingFee, FlowCategory.TuitionFee));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.LabelSchoolSupplie, FlowCategory.SchoolSupplie));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.labelSubscription, FlowCategory.Subscription));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.LabelExpense, FlowCategory.Expense));
+            CategoryDropDownList.Items.Add(new RadListDataItem(Language.LabelSupply, FlowCategory.CashSupply));
+
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelFinance, FlowDomain.Finance));
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelTransport, FlowDomain.Transport));
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelCanteen, FlowDomain.Canteen));
+            FlowDomainDropDownList.Items.Add(new RadListDataItem(Language.LabelSchoolActivity, FlowDomain.SchoolActivity));
+
+            TransactionTypeDropDownList.Items.Add(new RadListDataItem(Language.LabelCashTransaction, TransactionType.CashTransaction));
+            TransactionTypeDropDownList.Items.Add(new RadListDataItem(Language.LabelTransactionInKind, TransactionType.TransactionInKind));
+
+            FlowTypeDropDownList.Items.Add(new RadListDataItem(Language.labelInput, FlowType.Inflow));
+            FlowTypeDropDownList.Items.Add(new RadListDataItem(Language.labelOutput, FlowType.Outflow));
+
+
+            TransactionTypeDropDownList.SelectedIndex = 0;
+            CategoryDropDownList.SelectedIndex = 0;
+            FlowDomainDropDownList.SelectedIndex = 0;
+            FlowTypeDropDownList.SelectedIndex = 0;
             InitEvents();
         }
 
@@ -43,23 +70,24 @@ namespace Primary.SchoolApp.UI
             {
                 if (!CashFlowTypeExist(NameTextBox.Text))
                 {
-                    cashFlowType.Name = NameTextBox.Text;
-                    cashFlowType.Category = CategoryDropDownList.SelectedValue.ToString();
-                    cashFlowType.Domain = DomainDropDownList.SelectedValue.ToString();
-                    cashFlowType.Description = DescriptionTextBox.Text;
-                    cashFlowType.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
-                    bool isDone = cashFlowTypeService.UpdateCashFlowType(cashFlowType).Result;
+                    cashFlowTypeDTO.Name = NameTextBox.Text;
+                    cashFlowTypeDTO.FlowCategory = (FlowCategory)CategoryDropDownList.SelectedValue;
+                    cashFlowTypeDTO.TransactionType = (TransactionType)TransactionTypeDropDownList.SelectedValue;
+                    cashFlowTypeDTO.FlowDomain = (FlowDomain)FlowDomainDropDownList.SelectedValue;
+                    cashFlowTypeDTO.FlowType = (FlowType)FlowTypeDropDownList.SelectedValue;
+                    cashFlowTypeDTO.Description = DescriptionTextBox.Text;
+                    cashFlowTypeDTO.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
+                    bool isDone = cashFlowTypeService.UpdateCashFlowType(cashFlowTypeDTO.AsCashFlowType()).Result;
                     if (isDone == true)
                     {
                         Log log = new()
                         {
-                            UserAction = $"Modification des informations du Type de flux de trésorerie {cashFlowType.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
+                            UserAction = $"Modification des informations du Type de flux de trésorerie {cashFlowTypeDTO.Name}  par l'utisateur  {clientApp.UserConnected.Name} ",
                             UserId = clientApp.UserConnected.Id
                         };
                         logService.CreateLog(log);
                         this.DialogResult = System.Windows.Forms.DialogResult.OK;
                         this.Close();
-
                     }
                     else
                     {
@@ -71,24 +99,22 @@ namespace Primary.SchoolApp.UI
                     ErrorLabel.Text = Language.messageCashFlowExist;
 
                 }
-
             }
-
         }
-        internal void Init(CashFlowType cashFlowType)
+        internal void Init(CashFlowTypeDTO type)
         {
-
-            if (cashFlowType != null)
+            if (type != null)
             {
-                this.cashFlowType = cashFlowType;
-                cashFlowTypeNameTracker = cashFlowType.Name;
-                NameTextBox.Text = cashFlowType.Name;
-                CategoryDropDownList.SelectedValue = cashFlowType.Category;
-                DomainDropDownList.SelectedValue = cashFlowType.Domain;
-                DescriptionTextBox.Text = cashFlowType.Description;
-                SequenceSpinEditor.Value = cashFlowType.Sequence;
+                this.cashFlowTypeDTO = type;
+                cashFlowTypeNameTracker = type.Name;
+                NameTextBox.Text = type.Name;
+                CategoryDropDownList.SelectedValue = type.FlowCategory;
+                FlowDomainDropDownList.SelectedValue = type.FlowDomain;
+                FlowTypeDropDownList.SelectedValue = type.FlowType;
+                TransactionTypeDropDownList.SelectedValue = type.TransactionType;
+                DescriptionTextBox.Text = type.Description;
+                SequenceSpinEditor.Value = type.Sequence;
             }
-
         }
         private bool CashFlowTypeExist(string name)
         {

@@ -4,3 +4,7 @@ published
 **/bin
 **/obj
 *.DotSettings.user
+[Dd]ebug/
+[Rr]elease/
+bin/
+obj/

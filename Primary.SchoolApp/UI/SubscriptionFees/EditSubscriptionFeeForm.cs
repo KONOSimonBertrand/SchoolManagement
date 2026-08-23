@@ -1,10 +1,14 @@
 ﻿
 
 using Microsoft.Extensions.DependencyInjection;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
 using SchoolManagement.UI.Localization;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Telerik.WinControls;
 
@@ -32,7 +36,7 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             this.schoolYearService = schoolYearService;
             this.cashFlowTypeService = cashFlowTypeService;
-            SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "AB");
+            SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Subscription);
             SchoolYearDropDownList.DataSource = Program.SchoolYearList;
             InitEvents();
         }
@@ -66,10 +70,10 @@ namespace Primary.SchoolApp.UI
             }
             else
             {
-                var item = SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
-                if (item != null)
+                var type = SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO;
+                if (type != null)
                 {
-                    ShowCashFlowTypeEditForm(item);
+                    ShowCashFlowTypeEditForm(type);
                 }
                 else
                 {
@@ -139,7 +143,8 @@ namespace Primary.SchoolApp.UI
                 {
                     subscriptionFee.SchoolYear = SchoolYearDropDownList.SelectedItem.DataBoundItem as SchoolYear;
                     subscriptionFee.SchoolYearId = subscriptionFee.SchoolYear.Id;
-                    subscriptionFee.CashFlowType = SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                    var type = (SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).AsCashFlowType();
+                    subscriptionFee.CashFlowType =type ;
                     subscriptionFee.CashFlowTypeId = subscriptionFee.CashFlowType.Id;
                     subscriptionFee.Duration = int.Parse(DurationSpinEditor.Value.ToString());
                     subscriptionFee.Amount = double.Parse(AmountTextBox.Text);
@@ -205,19 +210,20 @@ namespace Primary.SchoolApp.UI
 
 
         // show CashFlowType UI for edit
-        private void ShowCashFlowTypeEditForm(CashFlowType cashFlowType)
+        private void ShowCashFlowTypeEditForm(CashFlowTypeDTO type)
         {
-            if (cashFlowType != null)
+            if (type != null)
             {
                 var form = Program.ServiceProvider.GetService<EditCashFlowTypeForm>();
                 form.Text = Language.labelUpdate + ":.. " + Language.labelCashFlowType;
-                form.Init(cashFlowType);
+                form.Init(type);
                 if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
                     var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                    SubscriptionTypeDropDownList.DataSource = null;
-                    SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "AB");
-                    SubscriptionTypeDropDownList.SelectedValue = data;
+                    SubscriptionTypeDropDownList.DataSource = new List<CashFlowTypeDTO>();
+                    var typeList = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Subscription);
+                    SubscriptionTypeDropDownList.DataSource = typeList;
+                    SubscriptionTypeDropDownList.SelectedValue = data.Id;
                 }
             }
             else
@@ -234,9 +240,9 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data);
+                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
                 SubscriptionTypeDropDownList.DataSource = null;
-                SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.Category == "AB");
+                SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Subscription);
                 SubscriptionTypeDropDownList.SelectedValue = data;
             }
         }

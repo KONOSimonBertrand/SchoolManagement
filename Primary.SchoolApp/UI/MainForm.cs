@@ -1,26 +1,28 @@
-﻿using Primary.SchoolApp.UI;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Primary.SchoolApp.CustomElements;
+using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Extensions;
+using Primary.SchoolApp.Mapping;
+using Primary.SchoolApp.Services;
+using Primary.SchoolApp.UI;
+using Primary.SchoolApp.UI.CustomControls;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
+using SchoolManagement.Core.Enum;
 using SchoolManagement.Core.Model;
+using SchoolManagement.UI.Localization;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Telerik.WinControls;
-using System.Linq;
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using Primary.SchoolApp.Utilities;
-using SchoolManagement.UI.Localization;
-using System.Collections.Generic;
-using Telerik.WinControls.UI;
 using Telerik.WinControls.Enumerations;
-using Primary.SchoolApp.CustomElements;
-using Primary.SchoolApp.UI.CustomControls;
-using System.IO;
-using System.Drawing;
+using Telerik.WinControls.UI;
 using Telerik.Windows.Diagrams.Core;
-using Primary.SchoolApp.DTO;
-using Primary.SchoolApp.Services;
-using System.ComponentModel;
-using Microsoft.Extensions.Logging;
-using Primary.SchoolApp.Extensions;
 namespace Primary.SchoolApp
 {
     public partial class MainForm : SchoolManagement.UI.MainForm
@@ -66,6 +68,7 @@ namespace Primary.SchoolApp
         private readonly IStudentNoteService studentNoteService;
         private readonly ReportCardService reportCardService;
         private readonly ISchoolSupplieService schoolSupplieService;
+        private readonly IReceiptService receiptService;
         private readonly ILogger<MainForm> logger;
         public MainForm(ISchoolYearService schoolYearService, ISchoolGroupService schoolGroupService,
             ISchoolClassService schoolClassService, ISchoolRoomService schoolRoomService, ICashFlowTypeService cashFlowTypeService
@@ -75,7 +78,7 @@ namespace Primary.SchoolApp
             IUserService userService, IEmployeeService employeeService, IModuleService moduleService, ICountryService countryService, ITimeTableService timeTableService,
             IStudentEnrollingService studentEnrollingService, IPrintService printService, ICashFlowService cashFlowService, ISubscriptionService subscriptionService,
             IDisciplineService disciplineService, IContactService contactService, IMedicalService medicalService, IStudentNoteService studentNoteService, ReportCardService reportCardService,
-            ListingService listingService, ISchoolSupplieFeeService schoolSupplieFeeService, ISchoolSupplieService schoolSupplieService, ILogger<MainForm> logger
+            ListingService listingService, ISchoolSupplieFeeService schoolSupplieFeeService, ISchoolSupplieService schoolSupplieService, ILogger<MainForm> logger, IReceiptService receiptService
             )
         {
 
@@ -113,6 +116,7 @@ namespace Primary.SchoolApp
             this.schoolSupplieFeeService = schoolSupplieFeeService;
             this.schoolSupplieService = schoolSupplieService;
             this.logger = logger;
+            this.receiptService = receiptService;
             mainBackgroundWorker = new()
             {
                 WorkerReportsProgress = true,
@@ -200,6 +204,131 @@ namespace Primary.SchoolApp
             };
         }
 
+        //create Home context menu for home main list view
+        private void InitContextHomePage()
+        {
+            RadMenuItem menuEdit = new(Language.labelEdit);
+            RadMenuItem menuAddPayements = new(Language.labelAddPayments);
+            RadMenuItem menuAddPicture = new(Language.labelAddPicture);
+            RadMenuItem menuSchoolFee = new(Language.labelSchoolingFee);
+            RadMenuItem menuAddPayment = new(Language.labelAddPayment);
+            RadMenuItem menuShowPayments = new(Language.labelShowPayments);
+            RadMenuItem menuPrintPaymentSummary = new RadMenuItem(Language.labelPrintSummaryPayment);
+            RadMenuItem menuShowDiscounts = new(Language.labelShowDiscounts);
+            RadMenuItem menuAddDiscount = new(Language.labelAddDiscount);
+            RadMenuItem menuSubscription = new(Language.labelSubscription);
+            RadMenuItem menuAddSubscription = new(Language.labelAddSubscription);
+            RadMenuItem menuShowSubscriptions = new(Language.labelShowSubscriptions);
+            RadMenuItem menuDiscipline = new(Language.labelDiscipline);
+            RadMenuItem menuAddDiscipline = new(Language.labelAddDiscipline);
+            RadMenuItem menuShowDisciplines = new(Language.labelShowDiscipline);
+            RadMenuItem menuContact = new(Language.labelContact);
+            RadMenuItem menuAddContact = new(Language.labelAddContact);
+            RadMenuItem menuShowContacts = new(Language.labelShowContact);
+            RadMenuItem menuMedicalFile = new(Language.labelMedicalFile);
+            RadMenuItem menuAddHealthInfo = new(Language.labelAddHealthInformation);
+            RadMenuItem menuShowMedicalFile = new(Language.labelShowMedicalFile);
+            RadMenuItem menuPrintCertificate = new(Language.LabelPrintSchoolCertificate);
+            RadMenuItem menuChangeStudentRoom = new(Language.LabelChangeRoom);
+            RadMenuItem menuGenerateSchoolBadge = new(Language.LabelGenerateBadge);
+            RadMenuItem menuSchoolSupplie = new(Language.LabelSchoolSupplie);
+            RadMenuItem menuAddSchoolSupplie = new(Language.LabelAddSchoolSupplie);
+            RadMenuItem menuShowSchoolSupplies = new(Language.LabelShowSchoolSupplie);
+            menuEdit.Image = AppUtilities.GetImage("Edit");
+            menuAddPayements.Image = AppUtilities.GetImage("Payment");
+            menuAddPicture.Image = AppUtilities.GetImage("Image");
+            menuAddPayment.Image = AppUtilities.GetImage("Payment");
+            menuShowPayments.Image = AppUtilities.GetImage("Folder");
+            menuAddDiscount.Image = AppUtilities.GetImage("Add");
+            menuShowDiscounts.Image = AppUtilities.GetImage("Folder");
+            menuPrintPaymentSummary.Image = AppUtilities.GetImage("Printer");
+            menuShowSubscriptions.Image = AppUtilities.GetImage("Folder");
+            menuAddSubscription.Image = AppUtilities.GetImage("Add");
+            menuAddDiscipline.Image = AppUtilities.GetImage("Add");
+            menuShowDisciplines.Image = AppUtilities.GetImage("Folder");
+            menuAddContact.Image = AppUtilities.GetImage("Contact");
+            menuShowContacts.Image = AppUtilities.GetImage("Folder");
+            menuAddHealthInfo.Image = AppUtilities.GetImage("Add");
+            menuShowMedicalFile.Image = AppUtilities.GetImage("Folder");
+            menuPrintCertificate.Image = AppUtilities.GetImage("Printer");
+            menuChangeStudentRoom.Image = AppUtilities.GetImage("Edit");
+            menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
+            menuShowSchoolSupplies.Image = AppUtilities.GetImage("Folder");
+            menuAddSchoolSupplie.Image = AppUtilities.GetImage("Add");
+            menuSchoolFee.Items.Add(menuAddPayment);
+            menuSchoolFee.Items.Add(menuShowPayments);
+            menuSchoolFee.Items.Add(menuPrintPaymentSummary);
+            menuSchoolFee.Items.Add(new RadMenuSeparatorItem());
+            menuSchoolFee.Items.Add(menuAddDiscount);
+            menuSchoolFee.Items.Add(menuShowDiscounts);
+            menuSchoolSupplie.Items.Add(menuAddSchoolSupplie);
+            menuSchoolSupplie.Items.Add(menuShowSchoolSupplies);
+            menuSubscription.Items.Add(menuAddSubscription);
+            menuSubscription.Items.Add(menuShowSubscriptions);
+            menuDiscipline.Items.Add(menuAddDiscipline);
+            menuDiscipline.Items.Add(menuShowDisciplines);
+            menuContact.Items.Add(menuAddContact);
+            menuContact.Items.Add(menuShowContacts);
+            menuMedicalFile.Items.Add(menuAddHealthInfo);
+            menuMedicalFile.Items.Add(menuShowMedicalFile);
+            menuEdit.Click += StudentEnrollingEditButton_Click;
+            menuAddPicture.Click += MenuAddStudentPicture_Click;
+            menuAddPayements.Click += MenuAddPayments_Click;
+            menuShowPayments.Click += MenuShowPayments_Click;
+            menuAddPayment.Click += MenuAddTuitionPayment_Click;
+            menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
+            menuShowDiscounts.Click += MenuShowDiscounts_Click;
+            menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
+            menuAddSchoolSupplie.Click += MenuAddSchoolSupplie_Click;
+            menuShowSchoolSupplies.Click += MenuShowSchoolSupplies_Click;
+            menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
+            menuAddSubscription.Click += MenuAddSubscription_Click;
+            menuAddDiscipline.Click += MenuAddDiscipline_Click;
+            menuShowDisciplines.Click += MenuShowDisciplines_Click;
+            menuAddContact.Click += MenuAddContact_Click;
+            menuShowContacts.Click += MenuShowContacts_Click;
+            menuAddHealthInfo.Click += MenuAddHealthInfo_Click;
+            menuShowMedicalFile.Click += MenuShowMedicalFile_Click;
+            menuChangeEnrollingStatus.Click += MenuChangeStatus_Click;
+            menuPrintCertificate.Click += MenuPrintCertificate_Click;
+            menuChangeStudentRoom.Click += MenuChangeStudentRoom_Click;
+            menuGenerateSchoolBadge.Click += MenuGenerateBadge_Click;
+            homeMainListViewContextMenu.Items.Add(menuEdit);
+            homeMainListViewContextMenu.Items.Add(menuAddPicture);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuAddPayements);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuSchoolFee);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuSchoolSupplie);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuSubscription);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuDiscipline);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuContact);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuMedicalFile);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuChangeEnrollingStatus);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuPrintCertificate);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuChangeStudentRoom);
+            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
+            homeMainListViewContextMenu.Items.Add(menuGenerateSchoolBadge);
+            menuEdit.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 1 && m?.AllowUpdate == true);
+            menuAddPayment.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowCreate == true);
+            menuShowPayments.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
+            menuPrintPaymentSummary.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
+            menuAddDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
+            menuShowDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
+            menuAddSubscription.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowCreate == true);
+            menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
+            menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
+            menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
+        }
+
         private void MainBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             StudentNoteSearchTextBox.Text = string.Empty;
@@ -229,7 +358,7 @@ namespace Primary.SchoolApp
 
         }
 
-        private void MainBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private async void MainBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (HomeSchoolYearDropDownList.SelectedItem != null)
             {
@@ -239,8 +368,10 @@ namespace Primary.SchoolApp
                     Program.CurrentSchoolYear = schoolYear;
                     //lancement des tâches d'extraction des données
                     var getPaymentListTask = cashFlowService.GetTuitionPaymentBySchoolYearList(schoolYear.Id);
+                    var getReceiptListTask = receiptService.GetReceiptListAsync(schoolYear.Id);
                     var getEnrollingListTask = studentEnrollingService.GetStudentEnrollingListAsync(schoolYear.Id);
                     var getDiscountListTask = cashFlowService.GetTuitionDiscountBySchoolYearList(schoolYear.Id);
+                    var getSchoolSupplieListTask = schoolSupplieService.GetSchoolSupplieBySchoolYearList(schoolYear.Id);
                     var getSchoolingCostItemTask = schoolingCostService.GetSchoolingCostItemsBySchoolYear(schoolYear.Id);
                     var getSubscriptionTask = subscriptionService.GetSubscriptionLisAsync(schoolYear.Id);
                     var getCashFlowTask = cashFlowService.GetCashFlowList(schoolYear.Id);
@@ -250,15 +381,16 @@ namespace Primary.SchoolApp
                     var getStudentRoomTask = studentEnrollingService.GetStudentRoomListAsync(schoolYear.Id);
                     var getEmployeeListTask = employeeService.GetEmployeeEnrollingList(schoolYear.Id);
                     var getEmployeeRoomListTask = employeeService.GetRoomListBySchoolYear(schoolYear.Id);
-                    Program.TuitionDiscountList = getDiscountListTask.Result;
-                    Program.TuitionPaymentList = getPaymentListTask.Result;
-                    Program.SchoolingCostItemList = getSchoolingCostItemTask.Result;
-                    Program.SubscriptionList = getSubscriptionTask.Result;
-                    Program.CashFlowList = getCashFlowTask.Result;
-                    Program.StudentRoomList = getStudentRoomTask.Result;
-                    Program.EvaluationSessionStateList = getEvaluationStateTask.Result;
-                    Program.EmployeeEnrollingList = getEmployeeListTask.Result;
-                    Program.EmployeeRoomList = getEmployeeRoomListTask.Result;
+                    Program.TuitionDiscountList = await getDiscountListTask;
+                    Program.SchoolSupplieList = await getSchoolSupplieListTask;
+                    Program.TuitionPaymentList = await getPaymentListTask;
+                    Program.SchoolingCostItemList = await getSchoolingCostItemTask;
+                    Program.SubscriptionList = await getSubscriptionTask;
+                    Program.CashFlowList = await getCashFlowTask;
+                    Program.StudentRoomList = await getStudentRoomTask;
+                    Program.EvaluationSessionStateList = await getEvaluationStateTask;
+                    Program.EmployeeEnrollingList = await getEmployeeListTask;
+                    Program.EmployeeRoomList = await getEmployeeRoomListTask;
                     var enrollingList = getEnrollingListTask.Result;
                     //Création de la liste des inscriptions à afficher
                     Program.StudentEnrollingList = new List<StudentEnrollingDTO>();
@@ -276,7 +408,7 @@ namespace Primary.SchoolApp
                         //extraction de la somme des frais exigibles
                         var amountFee = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Sum(x => x.Amount);
                         //calcul des impayés de l'élève
-                        enrollingDTO.Balance = amountFee - (enrollingDTO.DiscountList.Sum(x => x.Amount) + enrollingDTO.PaymentPayableList.Sum(x => x.Amount));
+                        enrollingDTO.Balance = amountFee - (enrollingDTO.DiscountList.Sum(x => x.Discount) + enrollingDTO.PaymentPayableList.Sum(x => x.Amount));
                         //récupération de l'état des insolvabilités
                         foreach (int feeId in feeIdList)
                         {
@@ -292,11 +424,14 @@ namespace Primary.SchoolApp
                         // Ajout de l'inscription dans la liste à afficher
                         Program.StudentEnrollingList.Add(enrollingDTO);
                     }
-                    Program.CashBoxInList = getCashBoxInTask.Result;
-                    Program.CashBoxOutList = getCashBoxOutTask.Result;
-
+                    Program.CashBoxInList = await getCashBoxInTask;
+                    Program.CashBoxOutList = await getCashBoxOutTask;
+                    Program.ReceiptList = (await getReceiptListTask).Select(x => x.AsReceiptDTO()).ToList();
+                    foreach (var receipt in Program.ReceiptList)
+                    {
+                        AppUtilities.GenerateReceiptItems(receipt);
+                    }
                 }
-
             }
         }
         //Selectionne une année scolaire
@@ -323,7 +458,27 @@ namespace Primary.SchoolApp
         //inscription d'un élève
         private void HomeAddButton_Click(object sender, EventArgs e)
         {
-            ShowAddStudentEnrollingForm();
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                var form = Program.ServiceProvider.GetService<AddStudentEnrollingFullForm>();
+                form.Text = Language.labelAdd + ":.. " + Language.labelRegistration;
+                form.Icon = this.Icon;
+                form.Init(Program.CurrentSchoolYear);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    var data = studentEnrollingService.GetStudentEnrollingAsync((form.StudentDropDownList.SelectedItem.Tag as Student).Id, Program.CurrentSchoolYear.Id).Result;
+                    Program.StudentEnrollingList.Add(data.AsStudentEnrollingDTO());
+                    HomeGridView.DataSource = new List<DTO.StudentEnrollingDTO>();
+                    HomeMainListView.DataSource = new List<DTO.StudentEnrollingDTO>();
+                    HomeGridView.DataSource = Program.StudentEnrollingList;
+                    HomeMainListView.DataSource = Program.StudentEnrollingList;
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -586,9 +741,13 @@ namespace Primary.SchoolApp
         }
         private void MenuShowSubscriptions_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowSubscriptionsForm(enrollingDTO);
+                var form = Program.ServiceProvider.GetService<SubscriptionsForm>();
+                form.Text = enrolling.Student.FullName + ": " + Language.labelSubscriptions;
+                form.Icon = this.Icon;
+                form.InitStartup(enrolling.AsStudentEnrolling());
+                form.Show();
             }
         }
         private void MenuShowMedicalFile_Click(object sender, EventArgs e)
@@ -664,9 +823,23 @@ namespace Primary.SchoolApp
         {
             if (HomeGridView.CurrentRow != null)
             {
-                if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO record)
+                if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
                 {
-                    ShowUploadStudentPictureForm(record);
+                    if (!Program.CurrentSchoolYear.IsClosed)
+                    {
+                        var form = Program.ServiceProvider.GetService<UploadStudentPictureForm>();
+                        form.Icon = this.Icon;
+                        form.Init(enrolling.AsStudentEnrolling());
+                        if (form.ShowDialog(this) == DialogResult.OK)
+                        {
+                            enrolling.PictureUrl = form.UrlPicture;
+                            studentEnrollingInfo.StudentLabel.Image = new Bitmap(Image.FromFile(enrolling.PictureUrl), new System.Drawing.Size(114, 114));
+                        }
+                    }
+                    else
+                    {
+                        RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                    }
                 }
             }
         }
@@ -675,7 +848,7 @@ namespace Primary.SchoolApp
             if (!e.ContextMenuProvider.ToString().Contains("Header"))
             {
                 RadMenuItem menuEdit = new(Language.labelEdit);
-                RadMenuItem menuPrint = new(Language.labelPrintRegistrationReceipt);
+                RadMenuItem menuAddPayments = new(Language.labelAddPayments);
                 RadMenuItem menuAddPicture = new(Language.labelAddPicture);
                 RadMenuItem menuSchoolFee = new(Language.labelSchoolingFee);
                 RadMenuItem menuAddPayment = new(Language.labelAddPayment);
@@ -701,10 +874,8 @@ namespace Primary.SchoolApp
                 RadMenuItem menuSchoolSupplie = new(Language.LabelSchoolSupplie);
                 RadMenuItem menuAddSchoolSupplie = new(Language.LabelAddSchoolSupplie);
                 RadMenuItem menuShowSchoolSupplies = new(Language.LabelShowSchoolSupplie);
-                RadMenuItem menuAddSchoolSupplieDiscount = new(Language.labelAddDiscount);
-                RadMenuItem menuShowSchoolSupplieDiscounts = new(Language.labelShowDiscounts);
                 menuEdit.Image = AppUtilities.GetImage("Edit");
-                menuPrint.Image = AppUtilities.GetImage("Printer");
+                menuAddPayments.Image = AppUtilities.GetImage("Payment");
                 menuAddPicture.Image = AppUtilities.GetImage("Image");
                 menuAddPayment.Image = AppUtilities.GetImage("Payment");
                 menuShowPayments.Image = AppUtilities.GetImage("Folder");
@@ -724,8 +895,6 @@ namespace Primary.SchoolApp
                 menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
                 menuShowSchoolSupplies.Image = AppUtilities.GetImage("Folder");
                 menuAddSchoolSupplie.Image = AppUtilities.GetImage("Add");
-                menuShowSchoolSupplieDiscounts.Image = AppUtilities.GetImage("Folder");
-                menuAddSchoolSupplieDiscount.Image = AppUtilities.GetImage("Add");
                 menuSchoolFee.Items.Add(menuAddPayment);
                 menuSchoolFee.Items.Add(menuShowPayments);
                 menuSchoolFee.Items.Add(menuPrintPaymentSummary);
@@ -742,19 +911,15 @@ namespace Primary.SchoolApp
                 menuMedicalFile.Items.Add(menuShowMedicalFile);
                 menuSchoolSupplie.Items.Add(menuAddSchoolSupplie);
                 menuSchoolSupplie.Items.Add(menuShowSchoolSupplies);
-                menuSchoolSupplie.Items.Add(new RadMenuSeparatorItem());
-                menuSchoolSupplie.Items.Add(menuAddSchoolSupplieDiscount);
-                menuSchoolSupplie.Items.Add(menuShowSchoolSupplieDiscounts);
+               
                 menuEdit.Click += StudentEnrollingEditButton_Click;
                 menuAddPicture.Click += MenuAddStudentPicture_Click;
-                menuPrint.Click += MenuPrintStudentEnrollingReceipt;
+                menuAddPayments.Click += MenuAddPayments_Click;
                 menuShowPayments.Click += MenuShowPayments_Click;
                 menuAddPayment.Click += MenuAddTuitionPayment_Click;
                 menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
                 menuShowDiscounts.Click += MenuShowDiscounts_Click;
                 menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
-                menuShowSchoolSupplieDiscounts.Click += MenuShowSchoolSupplieDiscounts_Click;
-                menuAddSchoolSupplieDiscount.Click += MenuAddSchoolSupplieDiscount_Click;
                 menuAddSchoolSupplie.Click += MenuAddSchoolSupplie_Click;
                 menuShowSchoolSupplies.Click += MenuShowSchoolSupplies_Click;
                 menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
@@ -770,9 +935,9 @@ namespace Primary.SchoolApp
                 menuGenerateSchoolBadge.Click += MenuGenerateBadge_Click;
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                 e.ContextMenu.Items.Add(menuEdit);
-                e.ContextMenu.Items.Add(menuPrint);
-                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                 e.ContextMenu.Items.Add(menuAddPicture);
+                e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
+                e.ContextMenu.Items.Add(menuAddPayments);
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
                 e.ContextMenu.Items.Add(menuSchoolFee);
                 e.ContextMenu.Items.Add(new RadMenuSeparatorItem());
@@ -810,8 +975,6 @@ namespace Primary.SchoolApp
                 menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
                 menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
                 menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
-                menuShowSchoolSupplieDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
-                menuAddSchoolSupplieDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
             }
 
 
@@ -820,80 +983,143 @@ namespace Primary.SchoolApp
         {
             if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
             {
-                ShowAddTuitionPaymentForm(enrollingDTO.AsStudentEnrolling());
+                if (!Program.CurrentSchoolYear.IsClosed)
+                {
+                    var form = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form.Text = Language.labelAdd + ":.." + Language.labelPayment;
+                    form.Icon = this.Icon;
+                    form.Init(enrollingDTO.AsStudentEnrolling(), TypeFee.TuitionFee);
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
+
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                }
             }
         }
         private void MenuAddTuitionDiscount_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowAddTuitionDiscountForm(enrollingDTO.AsStudentEnrolling());
+                if (!Program.CurrentSchoolYear.IsClosed)
+                {
+                    var form = Program.ServiceProvider.GetService<AddTuitionDiscountForm>();
+                    form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
+                    form.Icon = this.Icon;
+                    form.Init(enrolling.AsStudentEnrolling());
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
+                        var cashFlowType = form.CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
+                        var data = cashFlowService.GetTuitionDiscount(enrolling.Id, cashFlowType.Id).Result;
+                        Program.TuitionDiscountList.Add(data);
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                }
             }
         }
         private void MenuShowPayments_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowTuitionPaymentsForm(enrollingDTO);
+                var form = Program.ServiceProvider.GetService<TuitionPaymentsForm>();
+                form.Text = Language.labelPayments;
+                form.Icon = this.Icon;
+                form.Init(enrolling.AsStudentEnrolling());
+                form.Show();
             }
         }
         private void MenuShowDiscounts_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowTuitionDiscountsForm(enrollingDTO);
+                var form = Program.ServiceProvider.GetService<TuitionDiscountsForm>();
+                form.Text = Language.labelSchoolingFee + "-" + Language.LabelDiscounts;
+                form.Icon = this.Icon;
+                form.Init(enrolling.AsStudentEnrolling());
+                form.Show();
             }
         }
         private void MenuShowSchoolSupplies_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowSchoolSuppliesForm(enrollingDTO);
+                var form = Program.ServiceProvider.GetService<SchoolSuppliesForm>();
+                form.Text = Language.LabelDiscounts;
+                form.Icon = this.Icon;
+                form.Init(enrolling.AsStudentEnrolling());
+                form.Show();
             }
         }
-        private void MenuShowSchoolSupplieDiscounts_Click(object sender, EventArgs e)
-        {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
-            {
-                ShowSchoolSupplieDiscountsForm(enrollingDTO);
-            }
-        }
+       
         private void MenuAddSubscription_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowAddSubscriptionForm(enrollingDTO.AsStudentEnrolling());
+                if (!Program.CurrentSchoolYear.IsClosed)
+                {
+                    var form = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form.Text = Language.labelAdd + ":.." + Language.labelSubscription;
+                    form.Icon = this.Icon;
+                    form.Init(enrolling.AsStudentEnrolling(), TypeFee.Subscription);
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
+
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                }
             }
         }
 
-        private void MenuAddSchoolSupplieDiscount_Click(object sender, EventArgs e)
-        {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
-            {
-                ShowAddSchoolSupplieDiscountForm(enrollingDTO.AsStudentEnrolling());
-            }
-        }
         private void MenuAddSchoolSupplie_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrolling)
             {
-                ShowAddSchoolSupplieForm(enrollingDTO.AsStudentEnrolling());
+                if (!Program.CurrentSchoolYear.IsClosed)
+                {
+                    var form = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
+                    form.Icon = this.Icon;
+                    form.Init(enrolling.AsStudentEnrolling(), TypeFee.SchoolSupply);
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                }
             }
         }
-        //impression du reçu d'inscription
-        private void MenuPrintStudentEnrollingReceipt(object sender, EventArgs e)
+        // Ajout d'un paiement pour un élève
+        private void MenuAddPayments_Click(object sender, EventArgs e)
         {
-            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO record)
+            if (HomeGridView.CurrentRow.DataBoundItem is StudentEnrollingDTO enrollingDTO)
             {
+                if (!Program.CurrentSchoolYear.IsClosed)
+                {
+                    var form = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form.Text = Language.labelAdd + ":.." + Language.labelPayment;
+                    form.Icon = this.Icon;
+                    form.Init(enrollingDTO.AsStudentEnrolling(), TypeFee.Unknown);
+                    if (form.ShowDialog(this) == DialogResult.OK)
+                    {
 
-                record.SchoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == record.SchoolYearId);
-                var enrolling = record.AsStudentEnrolling();
-                var payments = cashFlowService.GetTuitionPaymentByEnrollingList(enrolling.Id).Result;
-                enrolling.PaymentList = payments.Where(x =>  x.Amount > 0).ToList();
-                printService.PrintPaymentReceiptAsync(enrolling, true);
+                    }
+                }
+                else
+                {
+                    RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                }
             }
-            //impression du reçu
-
         }
         //print summary of payments
         private void MenuPrintPaymentSummary_Click(object sender, EventArgs e)
@@ -962,308 +1188,6 @@ namespace Primary.SchoolApp
             }
 
         }
-        #endregion
-
-        #region Methodes  
-        //affichage de UI pour l'ajout d'une réduction
-        private void ShowAddTuitionDiscountForm(StudentEnrolling enrolling)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<AddTuitionDiscountForm>();
-                form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
-                form.Icon = this.Icon;
-                form.Init(enrolling);
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-                    var cashFlowType = form.CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
-                    var data = cashFlowService.GetTuitionDiscount(enrolling.Id, cashFlowType.Id).Result;
-                    Program.TuitionDiscountList.Add(data);
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        private void ShowAddSchoolSupplieDiscountForm(StudentEnrolling enrolling)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<AddSchoolSupplieDiscountForm>();
-                form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
-                form.Icon = this.Icon;
-                form.Init(enrolling);
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-                    var cashFlowType = form.CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
-                    var dataList = schoolSupplieService.GetSchoolSupplieDiscountByEnrollingList(enrolling.Id).Result;
-                    var data = dataList.OrderByDescending(x=>x.Id).FirstOrDefault();
-                    Program.SchoolSupplieDiscountList.Add(data);
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        // show UI to add school supplie 
-        private void ShowAddSchoolSupplieForm(StudentEnrolling enrolling)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<AddSchoolSupplieForm>();
-                form.Text = Language.labelAdd + ":.." + Language.labelDiscount;
-                form.Icon = this.Icon;
-                form.Init(enrolling);
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        // show ui tuition payment form
-        private void ShowAddTuitionPaymentForm(StudentEnrolling enrolling)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<AddTuitionPaymentForm>();
-                form.Text = Language.labelAdd + ":.." + Language.labelPayment;
-                form.Icon = this.Icon;
-                form.Init(enrolling);
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-
-        }
-        //affiche les versements d'un élève
-        private void ShowTuitionPaymentsForm(StudentEnrollingDTO enrolling)
-        {
-            var form = Program.ServiceProvider.GetService<TuitionPaymentsForm>();
-            form.Text = Language.labelPayments;
-            form.Icon = this.Icon;
-            form.Init(enrolling.AsStudentEnrolling());
-            form.Show();
-        }
-        //affiche les Réductions accordées à un élève
-        private void ShowTuitionDiscountsForm(StudentEnrollingDTO enrolling)
-        {
-            var form = Program.ServiceProvider.GetService<TuitionDiscountsForm>();
-            form.Text = Language.labelSchoolingFee + "-" + Language.LabelDiscounts;
-            form.Icon = this.Icon;
-            form.Init(enrolling.AsStudentEnrolling());
-            form.Show();
-        }
-        private void ShowSchoolSupplieDiscountsForm(StudentEnrollingDTO enrolling)
-        {
-            var form = Program.ServiceProvider.GetService<SchoolSupplieDiscountsForm>();
-            form.Text = Language.LabelSchoolSupplie+"-"+ Language.LabelDiscounts;
-            form.Icon = this.Icon;
-            form.Init(enrolling.AsStudentEnrolling());
-            form.Show();
-        }
-
-        // show school supplies
-        private void ShowSchoolSuppliesForm(StudentEnrollingDTO enrolling)
-        {
-            var form = Program.ServiceProvider.GetService<SchoolSuppliesForm>();
-            form.Text = Language.LabelDiscounts;
-            form.Icon = this.Icon;
-            form.Init(enrolling.AsStudentEnrolling());
-            form.Show();
-        }
-        private void ShowUploadStudentPictureForm(StudentEnrollingDTO enrolling)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<UploadStudentPictureForm>();
-                form.Icon = this.Icon;
-                form.Init(enrolling.AsStudentEnrolling());
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-                    enrolling.PictureUrl = form.UrlPicture;
-                    studentEnrollingInfo.StudentLabel.Image = new Bitmap(Image.FromFile(enrolling.PictureUrl), new System.Drawing.Size(114, 114));
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        // show add ui subscription form
-        private void ShowAddSubscriptionForm(StudentEnrolling enrolling)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<AddSubscriptionForm>();
-                form.Text = Language.labelAdd + ":.." + Language.labelSubscription;
-                form.Icon = this.Icon;
-                form.InitStartup(enrolling.Student);
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-
-        }
-        // affiche les abonnements d'un élève
-        private void ShowSubscriptionsForm(StudentEnrollingDTO enrolling)
-        {
-            var form = Program.ServiceProvider.GetService<SubscriptionsForm>();
-            form.Text = enrolling.Student.FullName + ": " + Language.labelSubscriptions;
-            form.Icon = this.Icon;
-            form.InitStartup(enrolling.AsStudentEnrolling());
-            form.Show();
-        }
-        //create Home context menu for home main list view
-        private void InitContextHomePage()
-        {
-
-            RadMenuItem menuEdit = new(Language.labelEdit);
-            RadMenuItem menuPrint = new(Language.labelPrintRegistrationReceipt);
-            RadMenuItem menuAddPicture = new (Language.labelAddPicture);
-            RadMenuItem menuSchoolFee = new(Language.labelSchoolingFee);
-            RadMenuItem menuAddPayment = new(Language.labelAddPayment);
-            RadMenuItem menuShowPayments = new(Language.labelShowPayments);
-            RadMenuItem menuPrintPaymentSummary = new RadMenuItem(Language.labelPrintSummaryPayment);
-            RadMenuItem menuShowDiscounts = new(Language.labelShowDiscounts);
-            RadMenuItem menuAddDiscount = new(Language.labelAddDiscount);
-            RadMenuItem menuSubscription = new(Language.labelSubscription);
-            RadMenuItem menuAddSubscription = new(Language.labelAddSubscription);
-            RadMenuItem menuShowSubscriptions = new(Language.labelShowSubscriptions);
-            RadMenuItem menuDiscipline = new(Language.labelDiscipline);
-            RadMenuItem menuAddDiscipline = new(Language.labelAddDiscipline);
-            RadMenuItem menuShowDisciplines = new(Language.labelShowDiscipline);
-            RadMenuItem menuContact = new(Language.labelContact);
-            RadMenuItem menuAddContact = new(Language.labelAddContact);
-            RadMenuItem menuShowContacts = new(Language.labelShowContact);
-            RadMenuItem menuMedicalFile = new(Language.labelMedicalFile);
-            RadMenuItem menuAddHealthInfo = new(Language.labelAddHealthInformation);
-            RadMenuItem menuShowMedicalFile = new(Language.labelShowMedicalFile);
-            RadMenuItem menuPrintCertificate = new(Language.LabelPrintSchoolCertificate);
-            RadMenuItem menuChangeStudentRoom = new(Language.LabelChangeRoom);
-            RadMenuItem menuGenerateSchoolBadge = new(Language.LabelGenerateBadge);
-            RadMenuItem menuSchoolSupplie = new(Language.LabelSchoolSupplie);
-            RadMenuItem menuAddSchoolSupplie=new(Language.LabelAddSchoolSupplie);
-            RadMenuItem menuShowSchoolSupplies=new(Language.LabelShowSchoolSupplie);
-            RadMenuItem menuAddSchoolSupplieDiscount = new(Language.labelAddDiscount);
-            RadMenuItem menuShowSchoolSupplieDiscounts = new(Language.labelShowDiscounts);
-            menuEdit.Image = AppUtilities.GetImage("Edit");
-            menuPrint.Image = AppUtilities.GetImage("Printer");
-            menuAddPicture.Image = AppUtilities.GetImage("Image");
-            menuAddPayment.Image = AppUtilities.GetImage("Payment");
-            menuShowPayments.Image = AppUtilities.GetImage("Folder");
-            menuAddDiscount.Image = AppUtilities.GetImage("Add");
-            menuShowDiscounts.Image = AppUtilities.GetImage("Folder");
-            menuPrintPaymentSummary.Image = AppUtilities.GetImage("Printer");
-            menuShowSubscriptions.Image = AppUtilities.GetImage("Folder");
-            menuAddSubscription.Image = AppUtilities.GetImage("Add");
-            menuAddDiscipline.Image = AppUtilities.GetImage("Add");
-            menuShowDisciplines.Image = AppUtilities.GetImage("Folder");
-            menuAddContact.Image = AppUtilities.GetImage("Contact");
-            menuShowContacts.Image = AppUtilities.GetImage("Folder");
-            menuAddHealthInfo.Image = AppUtilities.GetImage("Add");
-            menuShowMedicalFile.Image = AppUtilities.GetImage("Folder");
-            menuPrintCertificate.Image = AppUtilities.GetImage("Printer");
-            menuChangeStudentRoom.Image = AppUtilities.GetImage("Edit");
-            menuGenerateSchoolBadge.Image = AppUtilities.GetImage("Card");
-            menuShowSchoolSupplies.Image = AppUtilities.GetImage("Folder");
-            menuAddSchoolSupplie.Image = AppUtilities.GetImage("Add");
-            menuShowSchoolSupplieDiscounts.Image = AppUtilities.GetImage("Folder");
-            menuAddSchoolSupplieDiscount.Image = AppUtilities.GetImage("Add");
-            menuSchoolFee.Items.Add(menuAddPayment);
-            menuSchoolFee.Items.Add(menuShowPayments);
-            menuSchoolFee.Items.Add(menuPrintPaymentSummary);
-            menuSchoolFee.Items.Add(new RadMenuSeparatorItem());
-            menuSchoolFee.Items.Add(menuAddDiscount);
-            menuSchoolFee.Items.Add(menuShowDiscounts);
-            menuSchoolSupplie.Items.Add(menuAddSchoolSupplie);
-            menuSchoolSupplie.Items.Add(menuShowSchoolSupplies);
-            menuSchoolSupplie.Items.Add(new RadMenuSeparatorItem());
-            menuSchoolSupplie.Items.Add(menuAddSchoolSupplieDiscount);
-            menuSchoolSupplie.Items.Add(menuShowSchoolSupplieDiscounts);
-            menuSubscription.Items.Add(menuAddSubscription);
-            menuSubscription.Items.Add(menuShowSubscriptions);
-            menuDiscipline.Items.Add(menuAddDiscipline);
-            menuDiscipline.Items.Add(menuShowDisciplines);
-            menuContact.Items.Add(menuAddContact);
-            menuContact.Items.Add(menuShowContacts);
-            menuMedicalFile.Items.Add(menuAddHealthInfo);
-            menuMedicalFile.Items.Add(menuShowMedicalFile);
-            menuEdit.Click += StudentEnrollingEditButton_Click;
-            menuAddPicture.Click += MenuAddStudentPicture_Click;
-            menuPrint.Click += MenuPrintStudentEnrollingReceipt;
-            menuShowPayments.Click += MenuShowPayments_Click;
-            menuAddPayment.Click += MenuAddTuitionPayment_Click;
-            menuPrintPaymentSummary.Click += MenuPrintPaymentSummary_Click;
-            menuShowDiscounts.Click += MenuShowDiscounts_Click;
-            menuShowSchoolSupplieDiscounts.Click += MenuShowSchoolSupplieDiscounts_Click;
-            menuAddDiscount.Click += MenuAddTuitionDiscount_Click;
-            menuAddSchoolSupplieDiscount.Click += MenuAddSchoolSupplieDiscount_Click;
-            menuAddSchoolSupplie.Click += MenuAddSchoolSupplie_Click;
-            menuShowSchoolSupplies.Click += MenuShowSchoolSupplies_Click;
-            menuShowSubscriptions.Click += MenuShowSubscriptions_Click;
-            menuAddSubscription.Click += MenuAddSubscription_Click;
-            menuAddDiscipline.Click += MenuAddDiscipline_Click;
-            menuShowDisciplines.Click += MenuShowDisciplines_Click;
-            menuAddContact.Click += MenuAddContact_Click;
-            menuShowContacts.Click += MenuShowContacts_Click;
-            menuAddHealthInfo.Click += MenuAddHealthInfo_Click;
-            menuShowMedicalFile.Click += MenuShowMedicalFile_Click;
-            menuChangeEnrollingStatus.Click += MenuChangeStatus_Click;
-            menuPrintCertificate.Click += MenuPrintCertificate_Click;
-            menuChangeStudentRoom.Click += MenuChangeStudentRoom_Click;
-            menuGenerateSchoolBadge.Click += MenuGenerateBadge_Click;
-            homeMainListViewContextMenu.Items.Add(menuEdit);
-            homeMainListViewContextMenu.Items.Add(menuPrint);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuAddPicture);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuSchoolFee);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuSchoolSupplie);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuSubscription);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuDiscipline);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuContact);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuMedicalFile);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuChangeEnrollingStatus);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuPrintCertificate);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuChangeStudentRoom);
-            homeMainListViewContextMenu.Items.Add(new RadMenuSeparatorItem());
-            homeMainListViewContextMenu.Items.Add(menuGenerateSchoolBadge);
-            menuEdit.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 1 && m?.AllowUpdate == true);
-            menuAddPayment.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowCreate == true);
-            menuShowPayments.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
-            menuPrintPaymentSummary.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 3 && m?.AllowRead == true);
-            menuAddDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
-            menuShowDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
-            menuAddSubscription.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowCreate == true);
-            menuShowSubscriptions.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 4 && m?.AllowRead == true);
-            menuAddDiscipline.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowCreate == true);
-            menuShowDisciplines.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 7 && m?.AllowRead == true);
-            menuShowSchoolSupplieDiscounts.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowRead == true);
-            menuAddSchoolSupplieDiscount.Enabled = Program.UserConnected.Modules.Any(m => m.ModuleId == 5 && m?.AllowCreate == true);
-        }
 
         private void MenuShowDisciplines_Click(object sender, EventArgs e)
         {
@@ -1297,6 +1221,12 @@ namespace Primary.SchoolApp
                 }
             }
         }
+
+        #endregion
+
+        #region Methodes  
+
+
 
         private void InitBasicData()
         {
@@ -2114,34 +2044,6 @@ namespace Primary.SchoolApp
             }
             return status;
         }
-
-        // show ui to add student enrolling
-        private void ShowAddStudentEnrollingForm()
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                var form = Program.ServiceProvider.GetService<AddStudentEnrollingForm>();
-                form.Text = Language.labelAdd + ":.. " + Language.labelRegistration;
-                form.Icon = this.Icon;
-                form.Init(Program.CurrentSchoolYear);
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-                    var data = studentEnrollingService.GetStudentEnrollingAsync((form.StudentDropDownList.SelectedItem.DataBoundItem as Student).Id, Program.CurrentSchoolYear.Id).Result;
-                    Program.StudentEnrollingList.Add(data.AsStudentEnrollingDTO());
-                    HomeGridView.DataSource = new List<DTO.StudentEnrollingDTO>();
-                    HomeMainListView.DataSource = new List<DTO.StudentEnrollingDTO>();
-                    HomeGridView.DataSource = Program.StudentEnrollingList;
-                    HomeMainListView.DataSource = Program.StudentEnrollingList;
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-
-            }
-
-        }
-
         private void ShowEditStudentEnrollingForm(DTO.StudentEnrollingDTO enrollingDTO)
         {
             if (!Program.CurrentSchoolYear.IsClosed)
@@ -2153,7 +2055,7 @@ namespace Primary.SchoolApp
                 form.Init(enrollingDTO.AsStudentEnrolling());
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
-                    var data = studentEnrollingService.GetStudentEnrollingAsync((form.StudentDropDownList.SelectedItem.DataBoundItem as Student).Id, Program.CurrentSchoolYear.Id).Result;
+                    var data = studentEnrollingService.GetStudentEnrollingAsync((form.StudentDropDownList.SelectedItem.Tag as Student).Id, Program.CurrentSchoolYear.Id).Result;
                     enrollingDTO = data.AsStudentEnrollingDTO();
                     HomeGridView.DataSource = new List<StudentEnrollingDTO>();
                     HomeGridView.DataSource = Program.StudentEnrollingList;
