@@ -12,7 +12,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Telerik.WinControls;
 using Telerik.WinControls.UI;
@@ -255,22 +254,6 @@ namespace Primary.SchoolApp.UI
                         validateMenu.Click += ValidateMenu_Click;
                         e.ContextMenu.Items.Add(validateMenu);
                     }
-
-                    if (!selectedPayment.IdNumber.ToLower().Contains("return") && selectedPayment.IsValidated)
-                    {
-                        RadMenuItem returnMenu = new(Language.labelReturn);
-                        returnMenu.Image = AppUtilities.GetImage("Undo");
-                        returnMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true);
-                        e.ContextMenu.Items.Add(returnMenu);
-                        returnMenu.Click += ReturnMenu_Click;
-                        
-                    }
-                    RadMenuItem printMenu = new(Language.labelPrintReceipt);
-                    printMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true);
-                    e.ContextMenu.Items.Add(printMenu);
-                    printMenu.Image = AppUtilities.GetImage("Printer");
-                    printMenu.Click += PrintMenu_Click;
-
                 }
             }
         }
@@ -325,81 +308,6 @@ namespace Primary.SchoolApp.UI
                         else
                         {
                             RadMessageBox.Show(Language.MessageValidateError);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-
-        private async void PrintMenu_Click(object sender, EventArgs e)
-        {
-           if(DataGridView.CurrentRow.DataBoundItem is TuitionPayment payment){
-                payment.Enrolling=selectedEnrolling;
-                await printService.PrintPaymentReceiptAsync(payment,true);
-            }
-        }
-
-        // retour versement
-        private  async void ReturnMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (DataGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
-                {
-                    if (selectedPayment != null)
-                    {
-                        DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            var payment = new TuitionPayment()
-                            {
-                                Date = DateTime.Now,
-                                Amount = selectedPayment.Amount,
-                                TransactionDate = selectedPayment.TransactionDate,
-                                TransactionId = selectedPayment.TransactionId,
-                                Enrolling = selectedPayment.Enrolling,
-                                EnrollingId = selectedPayment.EnrollingId,
-                                CashFlowType=selectedPayment.CashFlowType,
-                                CashFlowTypeId = selectedPayment.CashFlowTypeId,
-                                PaymentMean =selectedPayment.PaymentMean,
-                                PaymentMeanId=selectedPayment.PaymentMeanId,
-                                Balance=selectedPayment.Balance,
-                                IdNumber = selectedPayment.IdNumber,
-                                Note = selectedPayment.Note,
-                                DoneBy = selectedPayment.DoneBy,
-                                Receipt= selectedPayment.Receipt,
-                                ReceiptId= selectedPayment.ReceiptId,
-
-                            };
-                            if (!selectedEnrolling.PaymentList.ToList().Select(x => x.IdNumber).Contains(payment.IdNumber+"-R"))
-                            {
-                                var isDone = await cashFlowService.ReturnTuitionPayment(payment);
-                                if (isDone)
-                                {
-                                    LoadPayments(selectedEnrolling.Id);
-                                    Log log = new()
-                                    {
-                                        UserAction = $"Retour du versement {payment.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                        UserId = clientApp.UserConnected.Id
-                                    }; 
-                                    logger.LogInformation($"Retour du versement {payment.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
-                                    await logService.CreateLog(log);
-                                   
-                                }
-                                else
-                                {
-                                    logger.LogError($"Erreur lors du retour du versement {payment.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
-                                    RadMessageBox.Show(Language.messageAddError);
-                                }
-                            }
-                            else
-                            {
-                                RadMessageBox.Show(Language.messageReturnAllreadyDone);
-                            }
                         }
                     }
                 }

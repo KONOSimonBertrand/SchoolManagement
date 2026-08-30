@@ -373,7 +373,7 @@ namespace Primary.SchoolApp
                     var getDiscountListTask = cashFlowService.GetTuitionDiscountBySchoolYearList(schoolYear.Id);
                     var getSchoolSupplieListTask = schoolSupplieService.GetSchoolSupplieBySchoolYearList(schoolYear.Id);
                     var getSchoolingCostItemTask = schoolingCostService.GetSchoolingCostItemsBySchoolYear(schoolYear.Id);
-                    var getSubscriptionTask = subscriptionService.GetSubscriptionLisAsync(schoolYear.Id);
+                    var getSubscriptionTask = subscriptionService.GetSubscriptionListBySchoolYearAsync(schoolYear.Id);
                     var getCashFlowTask = cashFlowService.GetCashFlowList(schoolYear.Id);
                     var getCashBoxInTask = cashFlowService.GetCashBoxInList(schoolYear.Id);
                     var getCashBoxOutTask = cashFlowService.GetCashBoxOutList(schoolYear.Id);
@@ -429,7 +429,7 @@ namespace Primary.SchoolApp
                     Program.ReceiptList = (await getReceiptListTask).Select(x => x.AsReceiptDTO()).ToList();
                     foreach (var receipt in Program.ReceiptList)
                     {
-                        AppUtilities.GenerateReceiptItems(receipt);
+                        AppUtilities.GenerateReceiptItems(receipt, Program.TuitionPaymentList, Program.SubscriptionList, Program.SchoolSupplieList);
                     }
                 }
             }
@@ -1633,7 +1633,7 @@ namespace Primary.SchoolApp
         private void LoadSelectedStudentEnrollingDetail(DTO.StudentEnrollingDTO enrolling)
         {
             var getRoom = studentEnrollingService.GetStudentRoomAsync(enrolling.StudentId, enrolling.SchoolYearId);
-            var getSubscriptions = subscriptionService.GetSubscriptionListAsync(enrolling.StudentId, enrolling.SchoolYearId);
+            var getSubscriptions = subscriptionService.GetSubscriptionListByEnrollingAsync(enrolling.Id);
             var getDisciplines = disciplineService.GetDisciplineListByStudent(enrolling.StudentId, Program.CurrentSchoolYear.Id);
             var getContacts = contactService.GetContactList(enrolling.StudentId);
             var getMedicalRecords = medicalService.GetMedicalRecordList(enrolling.StudentId);

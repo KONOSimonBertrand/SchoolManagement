@@ -1,7 +1,9 @@
 ﻿
 using Microsoft.Extensions.Logging;
 using Primary.SchoolApp.DTO;
+using Primary.SchoolApp.Mapping;
 using Primary.SchoolApp.Services;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Application.Extensions;
 using SchoolManagement.Core.Enum;
@@ -137,13 +139,21 @@ namespace Primary.SchoolApp.UI
                     {
                         opFor += Language.labelTuitionFees;
                     }
-                    if (subscriptionsToAdd.Any())
+                    if (subscriptionsToAdd.Any() && tuitionPaymentsToAdd.Any())
                     {
                         opFor += " & " + Language.labelSubscriptions;
                     }
-                    if (schoolSuppliesToAdd.Any())
+                    else
+                    {
+                        if (subscriptionsToAdd.Any()) opFor = Language.labelSubscriptions;
+                    }
+                    if (schoolSuppliesToAdd.Any() && subscriptionsToAdd.Any()|| schoolSuppliesToAdd.Any() && tuitionPaymentsToAdd.Any())
                     {
                         opFor += " & " + Language.LabelSchoolSupplie;
+                    }
+                    else
+                    {
+                        if (schoolSuppliesToAdd.Any()) opFor = Language.LabelSchoolSupplie;
                     }
                     var receipt = await receiptService.CreateReceiptAsync(new Receipt()
                     {
@@ -164,7 +174,6 @@ namespace Primary.SchoolApp.UI
                         };
                         await logService.CreateLog(logReceipt);
                         logger.LogInformation("Enregistrement du reçu de paiement N° {ReceiptId} pour l'élève {StudentName}  par l'utilisateur {UserName}", receipt.IdNumber, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
-
                         // Enregistrement des frais
                         if (tuitionPaymentsToAdd.Count > 0)
                         {
@@ -172,8 +181,8 @@ namespace Primary.SchoolApp.UI
                             {
                                 t.EnrollingId = selectedEnrolling.Id;
                                 t.Enrolling = selectedEnrolling;
-                                t.Receipt = receipt;
                                 t.ReceiptId = receipt.Id;
+                                t.Receipt = receipt;
                                 if (await cashFlowService.CreateTuitionPayment(t) == true)
                                 {
                                     Log logTuitionPayment = new()
@@ -183,6 +192,9 @@ namespace Primary.SchoolApp.UI
                                     };
                                     await logService.CreateLog(logTuitionPayment);
                                     logger.LogInformation("Enregistrement du paiement de frais scolarité  {TuitionPaymentName} pour l'élève {StudentName}  par l'utilisateur {UserName}", t?.CashFlowType?.Name, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
+                                    var payment = await cashFlowService.GetTuitionPayment(t.IdNumber);
+                                    t.Id= payment.Id;
+                                    Program.TuitionPaymentList.Add(payment);
                                 }
                                 else
                                 {
@@ -194,11 +206,10 @@ namespace Primary.SchoolApp.UI
                         {
                             foreach (var s in subscriptionsToAdd)
                             {
-                                s.Student = selectedEnrolling?.Student;
-                                s.StudentId = selectedEnrolling.StudentId;
-                                s.Receipt = receipt;
+                                s.EnrollingId = selectedEnrolling.Id;
+                                s.Enrolling = selectedEnrolling;
                                 s.ReceiptId = receipt.Id;
-
+                                s.Receipt = receipt;
                                 if (await subscriptionService.CreateSubscriptionAsync(s) == true)
                                 {
                                     Log logSubscription = new()
@@ -208,6 +219,9 @@ namespace Primary.SchoolApp.UI
                                     };
                                     await logService.CreateLog(logSubscription);
                                     logger.LogInformation("Enregistrement de l'abonnement {SubscriptionName} pour l'élève {StudentName}  par l'utilisateur {UserName}", s?.CashFlowType?.Name, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
+                                    var subscription = await subscriptionService.GetSubscriptionAsync(s.IdNumber);
+                                    s.Id = subscription.Id;
+                                    Program.SubscriptionList.Add(subscription);
                                 }
                                 else
                                 {
@@ -219,10 +233,10 @@ namespace Primary.SchoolApp.UI
                         {
                             foreach (var s in schoolSuppliesToAdd)
                             {
-                                s.Receipt = receipt;
-                                s.ReceiptId = receipt.Id;
-                                s.Enrolling = selectedEnrolling;
                                 s.EnrollingId = selectedEnrolling.Id;
+                                s.Enrolling = selectedEnrolling;
+                                s.ReceiptId = receipt.Id;
+                                s.Receipt = receipt;
                                 if (await supplieService.CreateSchoolSupplie(s) == true)
                                 {
                                     Log logSupplie = new()
@@ -232,6 +246,9 @@ namespace Primary.SchoolApp.UI
                                     };
                                     await logService.CreateLog(logSupplie);
                                     logger.LogInformation("Enregistrement fourniture scolaire  {SupplieName} pour l'élève {StudentName}  par l'utilisateur {UserName}", s?.CashFlowType?.Name, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
+                                    var supplie = await supplieService.GetSchoolSupplie(s.IdNumber);
+                                    s.Id = supplie.Id;
+                                    Program.SchoolSupplieList.Add(supplie);
                                 }
                                 else
                                 {
@@ -240,8 +257,10 @@ namespace Primary.SchoolApp.UI
                             }
                         }
                         //impression du reçu
-                        var paymentReceipt = GetPaymentReceipt(receipt);
-                        await printService.PrintPaymentReceiptAsync(paymentReceipt, false);
+                        var receiptToPrint = receipt.AsReceiptDTO();
+                        AppUtilities.GenerateReceiptItems(receiptToPrint, tuitionPaymentsToAdd, subscriptionsToAdd, schoolSuppliesToAdd);
+                        Program.ReceiptList.Add(receiptToPrint);
+                        await printService.PrintReceiptAsync(receiptToPrint, false);
                     }
                     else
                     {
@@ -633,7 +652,7 @@ namespace Primary.SchoolApp.UI
                 {
                     case TypeFee.TuitionFee:
                         balance = feeItem.Total - amount;
-                        tuitionPaymentsToAdd.Add(new TuitionPayment()
+                        var newTuition = new TuitionPayment()
                         {
                             Amount = amount,
                             CashFlowTypeId = (feeItem.Tag as SchoolingCost)?.CashFlowTypeId ?? 0,
@@ -648,33 +667,33 @@ namespace Primary.SchoolApp.UI
                             Note = string.Empty,
                             Id = tuitionPaymentsToAdd.Count + 1,
                             Balance = balance
-                        });
+                        };
+                        tuitionPaymentsToAdd.Add(newTuition);
+
                         break;
                     case TypeFee.Subscription:
-                        subscriptionsToAdd.Add(new Subscription()
+                        var newSubscription = new Subscription()
                         {
                             Amount = amount,
                             CashFlowTypeId = (feeItem.Tag as SubscriptionFee)?.CashFlowTypeId ?? 0,
                             CashFlowType = (feeItem.Tag as SubscriptionFee).CashFlowType,
                             StartDate = StartDateTimePicker.Value,
                             EndDate = EndDateTimePicker.Value,
-                            StudentId = (StudentDropDownList.SelectedItem?.DataBoundItem as Student)?.Id ?? 0,
-                            Student = (StudentDropDownList.SelectedItem?.DataBoundItem as Student),
                             DoneBy = DoneByTextBox.Text,
-                            SchoolYearId = Program.CurrentSchoolYear.Id,
-                            SchoolYear = Program.CurrentSchoolYear,
                             TransactionDate = TransactionDateTimePicker.Value,
                             PaymentMean = PaymentMeanDropDownList.SelectedItem?.DataBoundItem as PaymentMean,
                             PaymentMeanId = (PaymentMeanDropDownList.SelectedItem?.DataBoundItem as PaymentMean)?.Id ?? 0,
                             TransactionId = TransactionIdTextBox.Text,
                             IsValidated = false,
                             Id = subscriptionsToAdd.Count + 1,
-                        });
+                        };
+                        subscriptionsToAdd.Add(newSubscription);
 
                         break;
                     case TypeFee.SchoolSupply:
-                        balance = (double)((feeItem.Tag as SchoolSupplieFee)?.RequiredQuantity - amount);
-                        schoolSuppliesToAdd.Add(new SchoolSupplie()
+                        var requiredQuantity = (double)(feeItem.Tag as SchoolSupplieFee)?.RequiredQuantity;
+                        balance = amount<= requiredQuantity? requiredQuantity - amount:0;
+                        var newSupplie = new SchoolSupplie()
                         {
                             Amount = (feeItem.Tag as SchoolSupplieFee)?.Amount * amount ?? 0,
                             Date = DateTime.Now,
@@ -689,8 +708,8 @@ namespace Primary.SchoolApp.UI
                             IsValidated = false,
                             Id = schoolSuppliesToAdd.Count + 1,
                             Balance = balance
-                        }
-                            );
+                        };
+                        schoolSuppliesToAdd.Add(newSupplie);
                         break;
                 }
                 double unitPrice = amount;
@@ -737,49 +756,5 @@ namespace Primary.SchoolApp.UI
         }
 
         //Permet de créer reçu de paiement à partir d'une instance de receipt
-        private PaymentReceipt GetPaymentReceipt(Receipt receipt)
-        {
-            var selectedClass = selectedEnrolling.SchoolClass;
-            var selectedStudent = selectedEnrolling.Student;
-            var studentIdNumber = selectedStudent != null ? selectedStudent.IdNumber : string.Empty;
-            var studentName = selectedStudent != null ? selectedStudent.FullName : string.Empty;
-            var receiptTitle = string.Empty;
-            var transactionId = string.Empty;
-            var transactionItems = new List<string>();
-            var PaymentModes = new List<string>();
-            if (tuitionPaymentsToAdd.Any())
-            {
-                transactionItems.AddRange(tuitionPaymentsToAdd.Select(x => x.TransactionId).Distinct().ToList());
-                PaymentModes.AddRange(tuitionPaymentsToAdd.Select(x => x.PaymentMean?.Name).Distinct().ToList());
-                receiptTitle += Language.labelTuitionFees;
-            }
-            if (subscriptionsToAdd.Any())
-            {
-                receiptTitle += " & " + Language.labelSubscriptions;
-                transactionItems.AddRange(subscriptionsToAdd.Select(x => x.TransactionId).Distinct().ToList());
-                PaymentModes.AddRange(subscriptionsToAdd.Select(x => x.PaymentMean?.Name).Distinct().ToList());
-            }
-            if (schoolSuppliesToAdd.Any())
-            {
-                receiptTitle += " & " + Language.LabelSchoolSupplie;
-                transactionItems.AddRange(schoolSuppliesToAdd.Select(x => x.TransactionId).Distinct().ToList());
-                PaymentModes.AddRange(schoolSuppliesToAdd.Select(x => x.PaymentMean?.Name).Distinct().ToList());
-            }
-            var receiptHeaderSection = new ReceiptHeaderSection(
-                ReceiptNumber: receipt.IdNumber,
-                ReceiptDate: DateTime.Now,
-                ReceiptTitle: receiptTitle,
-                StudentName: studentName,
-                StudentId: studentIdNumber,
-                StudentRoom: selectedClass?.Name,
-                TransactionId: string.Join(", ", transactionItems.Distinct()),
-                PaymentMode: string.Join(", ", PaymentModes.Distinct()),
-                SchoolYear: Program.CurrentSchoolYear.Name
-            );
-            var receiptDetailSection = new ReceiptDetailSection(paymentList);
-            var receiptFooterSection = new ReceiptFooterSection(string.Empty);
-            return new PaymentReceipt(receiptHeaderSection, receiptDetailSection, receiptFooterSection);
-        }
-
     }
 }

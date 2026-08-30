@@ -219,9 +219,9 @@ namespace Primary.SchoolApp.Reporting
             InitComponents();
             if (receiptData.Subscription != null)
             {
-                var studentRoom=Program.StudentRoomList.FirstOrDefault(x => x.StudentId==receiptData.Subscription.StudentId && x.SchoolYearId== receiptData.Subscription.SchoolYearId);
-                var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == studentRoom.RoomId);
-                var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
+                //var studentRoom=Program.StudentRoomList.FirstOrDefault(x => x.StudentId==receiptData.Subscription.StudentId && x.SchoolYearId== receiptData.Subscription.SchoolYearId);
+                //var room = Program.SchoolRoomList.FirstOrDefault(x => x.Id == studentRoom.RoomId);
+                //var classOfRoom = Program.SchoolClassList.FirstOrDefault(x => x.Id == room.ClassId);
                 CopyLabel.Visible = receiptData.IsCopy;
                 Copy2Label.Visible = receiptData.IsCopy;
                 PaymentsTableAmountLabel.Value = Language.labelAmount.ToUpper();
@@ -236,13 +236,13 @@ namespace Primary.SchoolApp.Reporting
                 PaymentIdNumber2TextBox.Value = PaymentIdNumberTextBox.Value;
                 PaymentDateTextBox.Value = receiptData.Subscription.StartDate.ToShortDateString();
                 PaymentDate2TextBox.Value = PaymentDateTextBox.Value;
-                StudentTextBox.Value = receiptData.Subscription.Student.FullName;
+                StudentTextBox.Value = receiptData.Subscription.Enrolling.Student.FullName;
                 Student2TextBox.Value = StudentTextBox.Value;
-                StudentIdNumberTextBox.Value = receiptData.Subscription.Student.IdNumber;
+                StudentIdNumberTextBox.Value = receiptData.Subscription.Enrolling.Student.IdNumber;
                 StudentIdNumber2TextBox.Value = StudentIdNumberTextBox.Value;
-                StudentClassTextBox.Value = classOfRoom.Name;
+                StudentClassTextBox.Value = receiptData.Subscription.Enrolling.SchoolClass.Name;
                 StudentClass2TextBox.Value = StudentClassTextBox.Value;
-                SchoolYearTextBox.Value = receiptData.Subscription.SchoolYear.Name;
+                SchoolYearTextBox.Value = receiptData.Subscription.Enrolling.SchoolYear.Name;
                 SchoolYear2TextBox.Value = SchoolYearTextBox.Value;
                 PaymentAmountTextBox.Value = receiptData.Subscription.Amount.ToString() + " F CFA";
                 PaymentAmount2TextBox.Value = PaymentAmountTextBox.Value;

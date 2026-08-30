@@ -811,10 +811,16 @@ namespace Primary.SchoolApp.Utilities
         #endregion
 
         #region Receipt Helper
-        public static void GenerateReceiptItems(ReceiptDTO receipt)
+        /// <summary>
+        /// Permet de générer les items du reçu à partir des paiements, abonnements et fournitures scolaires associés au reçu.
+        /// </summary>
+        /// <param name="receipt"></param>
+        /// <param name="payments"></param>
+        /// <param name="subscriptions"></param>
+        /// <param name="supplies"></param>
+        public static void GenerateReceiptItems(ReceiptDTO receipt,IEnumerable<TuitionPayment> payments,IEnumerable<Subscription> subscriptions, IEnumerable<SchoolSupplie> supplies)
         {
-           // receipt.ReceiptItems.Clear();
-            foreach (var p in Program.TuitionPaymentList.Where(x => x.ReceiptId == receipt.Id))
+            foreach (var p in payments.Where(x => x.ReceiptId == receipt.Id))
             {
                 receipt.ReceiptItems.Add(
                     new()
@@ -830,8 +836,7 @@ namespace Primary.SchoolApp.Utilities
                     }
                     );
             }
-            var test = Program.SubscriptionList.Where(x => x.ReceiptId == receipt.Id);
-            foreach (var s in Program.SubscriptionList.Where(x => x.ReceiptId == receipt.Id))
+            foreach (var s in subscriptions.Where(x => x.ReceiptId == receipt.Id))
             {
                 receipt.ReceiptItems.Add(
                     new()
@@ -847,7 +852,7 @@ namespace Primary.SchoolApp.Utilities
                     }
                     );
             }
-            foreach (var s in Program.SchoolSupplieList.Where(x => x.ReceiptId == receipt.Id))
+            foreach (var s in supplies.Where(x => x.ReceiptId == receipt.Id))
             {
                 receipt.ReceiptItems.Add(
                     new()
@@ -855,7 +860,7 @@ namespace Primary.SchoolApp.Utilities
                         ReceiptId = receipt.Id,
                         Id = s.Id,
                         Reference = s.IdNumber,
-                        ItemName = s.CashFlowType.Name,
+                        ItemName = s.Quantity>1?s.CashFlowType.Name+"  x"+ s.Quantity: s.CashFlowType.Name,
                         UnitPrice = s.Amount,
                         Quantity = s.Quantity,
                         Balance = 0,

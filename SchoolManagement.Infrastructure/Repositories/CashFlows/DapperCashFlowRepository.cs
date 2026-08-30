@@ -1,6 +1,7 @@
 ﻿
 
 using Dapper;
+using Microsoft.Extensions.Logging;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
@@ -10,9 +11,11 @@ namespace SchoolManagement.Infrastructure.Repositories
     public class DapperCashFlowRepository : ICashFlowRepository
     {
         private readonly IDbConnectionFactory dbConnectionFactory;
-        public DapperCashFlowRepository(IDbConnectionFactory dbConnectionFactory)
+        private readonly ILogger<DapperCashFlowRepository> logger;
+        public DapperCashFlowRepository(IDbConnectionFactory dbConnectionFactory, ILogger<DapperCashFlowRepository> logger)
         {
             this.dbConnectionFactory = dbConnectionFactory;
+            this.logger = logger;
         }
         public async Task<bool> AddCashFlowAsync(CashFlow cashFlow)
         {
@@ -159,17 +162,25 @@ namespace SchoolManagement.Infrastructure.Repositories
                                INNER JOIN CashFlowTypes AS C ON A.CashFlowTypeId=C.Id
                                INNER JOIN PaymentMeans AS B ON A.PaymentMeanId=B.Id
                                INNER JOIN Receipts AS D ON A.ReceiptId=D.Id
-                               WHERE IdNumber=@idNumber ;";
-            var result = connection.Query<TuitionPayment, CashFlowType, PaymentMean, Receipt, TuitionPayment>(query,
-                (payment, cashFlowType, paymentMean, receipt) =>
-                {
-                    payment.CashFlowType = cashFlowType;
-                    payment.PaymentMean = paymentMean;
-                    payment.Receipt = receipt;
-                    return payment;
-                },
-                new { idNumber }).FirstOrDefault();
-            await Task.Delay(0);
+                               WHERE A.IdNumber=@idNumber ;";
+            TuitionPayment? result = null ;
+            try
+            {
+                result = (await connection.QueryAsync<TuitionPayment, CashFlowType, PaymentMean, Receipt, TuitionPayment>(query,
+                    (payment, cashFlowType, paymentMean, receipt) =>
+                    {
+                        payment.CashFlowType = cashFlowType;
+                        payment.PaymentMean = paymentMean;
+                        payment.Receipt = receipt;
+                        return payment;
+                    },
+                    new { idNumber })).FirstOrDefault();
+                logger.LogInformation("Récupération des frais de scolarité avec le numéro d'identification: {IdNumber} de la base de donnée", idNumber);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Une erreur est survenue lors de la récupération des frais de scolarité avec le numéro d'identification: {IdNumber} de la base de donnée", idNumber);
+            }
             return result;
         }
         public async Task<TuitionPayment?> GetLastTuitionPaymentAsync()

@@ -25,7 +25,6 @@ namespace Primary.SchoolApp.UI
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
         private SchoolYear selectedSchoolYear;
-        private Student selectedStudent;
         private StudentEnrolling selectedEnrolling;
         private readonly ILogger<SubscriptionsForm> logger;
         public SubscriptionsForm(IPrintService printService, ICashFlowService cashFlowService, ILogService logService, ClientApp clientApp, ISubscriptionService subscriptionService, IUserService userService, ILogger<SubscriptionsForm> logger)
@@ -45,7 +44,6 @@ namespace Primary.SchoolApp.UI
         internal void InitStartup(StudentEnrolling enrolling)
         {
             selectedSchoolYear = Program.SchoolYearList.FirstOrDefault(x => x.Id == enrolling.SchoolYearId);
-            selectedStudent=enrolling.Student;
             selectedEnrolling = enrolling;
             if (enrolling.Student.FullName.Length >= 17)
             {
@@ -166,7 +164,7 @@ namespace Primary.SchoolApp.UI
         // chargement de la liste des abonnements dans le datagridview
         private async void LoadSubscriptions()
         {
-            DataGridView.DataSource = await subscriptionService.GetSubscriptionListAsync(selectedStudent.Id,selectedSchoolYear.Id);
+            DataGridView.DataSource = await subscriptionService.GetSubscriptionListByEnrollingAsync(selectedEnrolling.Id);
             DataGridView.BestFitColumns();
         }
         //Création des colonnes du datagridview
@@ -265,37 +263,10 @@ namespace Primary.SchoolApp.UI
                         validateMenu.Click += ValidateMenu_Click;
                         e.ContextMenu.Items.Add(validateMenu);
                     }
-
-                    
-                    if (!selectedSubscription.IdNumber.ToLower().Contains("return") && selectedSubscription.IsValidated)
-                    {
-
-                        RadMenuItem returnMenu = new(Language.labelReturn);
-                        returnMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true);
-                        returnMenu.Image = AppUtilities.GetImage("Undo");
-                        e.ContextMenu.Items.Add(returnMenu);
-                        returnMenu.Click += ReturnMenu_Click;
-
-                    }
-                    RadMenuItem printMenu = new(Language.labelPrintReceipt);
-                    printMenu.Image = AppUtilities.GetImage("Printer");
-                    printMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true);
-                    e.ContextMenu.Items.Add(printMenu);
-                    printMenu.Click += PrintMenu_Click;
-
                 }
             }
         }
-        // lance l'impression
-        private void PrintMenu_Click(object sender, EventArgs e)
-        {
-            if (DataGridView.CurrentRow.DataBoundItem is Subscription subscription)
-            {
-                subscription.Student=selectedStudent;
-                subscription.SchoolYear= selectedSchoolYear;
-                printService.PrintPaymentReceiptAsync(subscription, true);
-            }
-        }
+       
 
         // validate subscription
         private async void ValidateMenu_Click(object sender, EventArgs e)
@@ -328,7 +299,7 @@ namespace Primary.SchoolApp.UI
                                 DoneBy = selectedSubscription.DoneBy,
                                 SchoolYear = selectedSchoolYear,
                                 SchoolYearId = selectedSchoolYear.Id,
-                                Note = $"{Language.labelSubscription} {selectedSubscription.IdNumber}: {selectedSubscription.CashFlowType.Name}  {selectedStudent.FullName}",
+                                Note = $"{Language.labelSubscription} {selectedSubscription.IdNumber}: {selectedSubscription.CashFlowType.Name}  {selectedEnrolling.Student.FullName}",
                             };
                             var isDone = await cashFlowService.CreateCashFlow(cashFlow);
                             if (isDone)
@@ -363,74 +334,6 @@ namespace Primary.SchoolApp.UI
             }
         }
 
-        // retour d'abonnement
-        private async void ReturnMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    if (DataGridView.CurrentRow.DataBoundItem is Subscription selectedSubscription)
-                    {
-                        if (selectedSubscription != null)
-                        {
-                            if (! RecordExist(selectedSubscription.IdNumber + "-R"))
-                            {
-                                var subscription = new Subscription()
-                                {
-                                    Amount = selectedSubscription.Amount,
-                                    CashFlowType = selectedSubscription.CashFlowType,
-                                    CashFlowTypeId = selectedSubscription.CashFlowTypeId,
-                                    DoneBy = selectedSubscription.DoneBy,
-                                    EndDate = selectedSubscription.EndDate,
-                                    Student = selectedStudent,
-                                    StudentId = selectedSubscription.StudentId,
-                                    SchoolYear = selectedSchoolYear,
-                                    SchoolYearId = selectedSubscription.SchoolYearId,
-                                    IsValidated = selectedSubscription.IsValidated,
-                                    PaymentMean = selectedSubscription.PaymentMean,
-                                    PaymentMeanId = selectedSubscription.PaymentMeanId,
-                                    StartDate = selectedSubscription.StartDate,
-                                    TransactionDate = selectedSubscription.TransactionDate,
-                                    TransactionId = selectedSubscription.TransactionId,
-                                    IdNumber = selectedSubscription.IdNumber,
-                                    Receipt = selectedSubscription.Receipt,
-                                    ReceiptId = selectedSubscription.ReceiptId
-                                };
-                                var isDone = await subscriptionService.ReturnSubscriptionAsync(subscription);
-                                if (isDone)
-                                {
-                                    LoadSubscriptions();
-                                    Log log = new()
-                                    {
-                                        UserAction = $"Retour de l'abonnement {selectedSubscription.CashFlowType.Name}  de l'élève {selectedStudent.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                        UserId = clientApp.UserConnected.Id
-                                    };
-                                    logger.LogInformation(log.UserAction);
-                                    await logService.CreateLog(log);
-
-                                }
-                                else
-                                {
-                                    logger.LogError($"Erreur lors du retour de l'abonnement {selectedSubscription.CashFlowType.Name}  de l'élève {selectedStudent.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
-                                    RadMessageBox.Show(Language.messageAddError);
-                                }
-                            }
-                            else
-                            {
-                                RadMessageBox.Show(Language.messageReturnAllreadyDone);
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-
         //affichage de UI pour l'ajout d'un abonnement
         private void ShowAddSubscriptionForm()
         {
@@ -449,11 +352,6 @@ namespace Primary.SchoolApp.UI
             {
                 RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
             }
-        }
-
-        private bool RecordExist(string idNumber)
-        {
-            return subscriptionService.GetSubscriptionAsync(idNumber).Result != null;
         }
 
     }

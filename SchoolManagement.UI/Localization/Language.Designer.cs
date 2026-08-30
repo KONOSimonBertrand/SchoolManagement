@@ -1744,6 +1744,15 @@ namespace SchoolManagement.UI.Localization {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à In progress.
+        /// </summary>
+        public static string LabelInprogress {
+            get {
+                return ResourceManager.GetString("LabelInprogress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Input.
         /// </summary>
         public static string labelInput {
@@ -2244,6 +2253,15 @@ namespace SchoolManagement.UI.Localization {
         public static string labelPayments {
             get {
                 return ResourceManager.GetString("labelPayments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pending.
+        /// </summary>
+        public static string LabelPending {
+            get {
+                return ResourceManager.GetString("LabelPending", resourceCulture);
             }
         }
         

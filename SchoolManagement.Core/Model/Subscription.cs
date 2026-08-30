@@ -12,8 +12,7 @@ namespace SchoolManagement.Core.Model
         public string? DoneBy { get; set; }
         public string? TransactionId { get; set; }
         public DateTime TransactionDate { get; set; }
-        public int StudentId { get; set; }
-        public int SchoolYearId { get; set; }
+        public int EnrollingId { get; set; }
         public int CashFlowTypeId { get; set; }  
         public int PaymentMeanId { get; set; }
         public int ReceiptId { get; set; }
@@ -48,8 +47,7 @@ namespace SchoolManagement.Core.Model
                return string.Empty;
             }
         }
-        public virtual Student? Student{ get; set; }
-        public virtual SchoolYear? SchoolYear{ get; set; }
+        public virtual StudentEnrolling? Enrolling{ get; set; }
         public virtual CashFlowType? CashFlowType { get; set; }
         public virtual PaymentMean? PaymentMean { get; set; }
         public virtual Receipt? Receipt { get; set; }

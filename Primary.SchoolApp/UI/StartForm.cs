@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Mapping;
 using Primary.SchoolApp.Services;
@@ -47,6 +48,7 @@ namespace Primary.SchoolApp.UI
         private readonly ISchoolService schoolService;
         private readonly ISchoolSupplieService schoolSupplieService;
         private readonly IReceiptService receiptService;
+        private readonly ILogger<StartForm> logger;
         public StartForm(ClientApp clientApp, ISchoolYearService schoolYearService, IDisciplineService disciplineService, ICountryService countryService,
             IModuleService moduleService, IEmployeeService employeeService, IUserService userService, IEmployeeGroupService employeeGroupService,
             IRatingSystemService ratingSystemService, IEvaluationSessionService evaluationSessionService, ISubjectService subjectService,
@@ -54,7 +56,7 @@ namespace Primary.SchoolApp.UI
             IPaymentMeanService paymentMeanService, ICashFlowTypeService cashFlowTypeService, ISchoolRoomService schoolRoomService,
             ISchoolClassService schoolClassService, ISchoolGroupService schoolGroupService, IJobService jobService, ICashFlowService cashFlowService,
             IStudentEnrollingService studentEnrollingService, ISubscriptionService subscriptionService, ISchoolService schoolService, ISchoolSupplieFeeService schoolSupplieFeeService,
-            ISchoolSupplieService schoolSupplieService, IReceiptService receiptService
+            ISchoolSupplieService schoolSupplieService, IReceiptService receiptService, ILogger<StartForm> logger
             )
         {
             InitializeComponent();
@@ -87,6 +89,7 @@ namespace Primary.SchoolApp.UI
             this.schoolSupplieFeeService = schoolSupplieFeeService;
             this.schoolSupplieService= schoolSupplieService;
             this.receiptService = receiptService;
+            this.logger = logger;
             InitializeWaitingBar();
             StartWaiting();
             this.Icon = Resources.icon_pink;
@@ -104,14 +107,23 @@ namespace Primary.SchoolApp.UI
         //loading initial data
         private void InitProgram()
         {
-            var initTask=LoadInitialData();
-            initTask.ContinueWith(t => {
-               
+            var initTask = LoadInitialData();
+            initTask.ContinueWith(t =>
+            {
+
             });
 
             this.Invoke(new Action(this.Close));
             //load login form
-            System.Windows.Forms.Application.Run(Program.ServiceProvider.GetRequiredService<LoginForm>());
+            // System.Windows.Forms.Application.Run(Program.ServiceProvider.GetRequiredService<LoginForm>());
+            try
+            {
+                System.Windows.Forms.Application.Run(Program.ServiceProvider.GetRequiredService<LoginForm>());
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Erreur lors du chargement du formulaire de connexion");
+            }
         }
         // extraction des données de base : année scolaire,classe, salle de classe, ....
         private async Task LoadInitialData()
@@ -178,7 +190,7 @@ namespace Primary.SchoolApp.UI
                 var getDiscountListTask = cashFlowService.GetTuitionDiscountBySchoolYearList(schoolYear.Id);
                 var getSchoolSupplieListTask = schoolSupplieService.GetSchoolSupplieBySchoolYearList(schoolYear.Id);
                 var getSchoolingCostItemTask = schoolingCostService.GetSchoolingCostItemsBySchoolYear(schoolYear.Id);
-                var getSubscriptionTask = subscriptionService.GetSubscriptionLisAsync(schoolYear.Id);
+                var getSubscriptionTask = subscriptionService.GetSubscriptionListBySchoolYearAsync(schoolYear.Id);
                 var getCashFlowTask = cashFlowService.GetCashFlowList(schoolYear.Id);
                 var getCashBoxInTask=cashFlowService.GetCashBoxInList(schoolYear.Id);
                 var getCashBoxOutTask = cashFlowService.GetCashBoxOutList(schoolYear.Id);
@@ -237,7 +249,7 @@ namespace Primary.SchoolApp.UI
                 Program.EvaluationSessionStateList = await getEvaluationStateTask;
                 Program.ReceiptList = (await getReceiptListTask).Select(x=>x.AsReceiptDTO()).ToList();
                 foreach (var receipt in Program.ReceiptList) {
-                   AppUtilities.GenerateReceiptItems(receipt);
+                   AppUtilities.GenerateReceiptItems(receipt, Program.TuitionPaymentList, Program.SubscriptionList, Program.SchoolSupplieList);
                 }
             }
         }

@@ -44,608 +44,8 @@ namespace Primary.SchoolApp
             };
         }
 
-        private void CashFlowLeftListView_ToolTipTextNeeded(object sender, ToolTipTextNeededEventArgs e)
-        {
-            try
-            {
-                e.Offset = new System.Drawing.Size(e.Offset.Width + 20, e.Offset.Height + 20);
-                e.ToolTipText = cashFlowLeftViewForToolTipText;
-            }
-            catch
-            {
-            }
-        }
 
-        private void CashFlowLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
-        {
-            cashFlowLeftViewForToolTipText = "" + e.Item.Tag;
-        }
-
-        private void CashFlowGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
-        {
-            CashFlowGridViewCustomFiltering(e);
-        }
-        private void CashFlowGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
-        {
-            if (!e.ContextMenuProvider.ToString().Contains("Header"))
-            {
-                //get authorization modules
-                Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
-                // create  and show the good context menu
-                switch (CashFlowLeftListView.SelectedItem.Key)
-                {
-                    case 0:// Frais de scolarité
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
-                        {
-                            //validate payment
-                            if (!selectedPayment.IsValidated)
-                            {
-                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
-                                {
-                                    Image = AppUtilities.GetImage("Check"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
-                                };
-                                validateMenu.Click += ValidatePaymentMenu_Click;
-                                e.ContextMenu.Items.Add(validateMenu);
-                            }
-                        }
-                        break;
-                    case 1: //Abonnement
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is Subscription selectedSubscription)
-                        {
-                            //validate
-                            if (!selectedSubscription.IsValidated)
-                            {
-                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
-                                {
-                                    Image = AppUtilities.GetImage("Check"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
-                                };
-                                validateMenu.Click += ValidateSubscriptionMenu_Click;
-                                e.ContextMenu.Items.Add(validateMenu);
-                            }
-                        }
-                        break;
-                    case 2:
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxIn selectedCashBoxIn)
-                        {
-                            //validate
-                            if (!selectedCashBoxIn.IsValidated)
-                            {
-                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
-                                {
-                                    Image = AppUtilities.GetImage("Check"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
-                                };
-                                validateMenu.Click += ValidateCashBoxInMenu_Click;
-                                e.ContextMenu.Items.Add(validateMenu);
-                            }
-                            //return CashBoxIn
-                            if (!selectedCashBoxIn.IdNumber.ToLower().Contains("return") && selectedCashBoxIn.IsValidated)
-                            {
-                                RadMenuItem returnMenu = new(Language.labelReturn)
-                                {
-                                    Image = AppUtilities.GetImage("Undo"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true)
-                                };
-                                e.ContextMenu.Items.Add(returnMenu);
-
-                                //Return subscription
-                                returnMenu.Click += (o, ev) =>
-                                {
-                                    if (!Program.CurrentSchoolYear.IsClosed)
-                                    {
-                                        ReturnCashBoxIn(selectedCashBoxIn);
-                                    }
-                                    else
-                                    {
-                                        RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-                                    }
-                                };
-                            }
-                            RadMenuItem printMenu = new(Language.labelPrintReceipt);
-                            printMenu.Image = AppUtilities.GetImage("Printer");
-                            printMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true);
-                            e.ContextMenu.Items.Add(printMenu);
-                            // impression du reçu
-                            printMenu.Click += (o, ev) =>
-                            {
-
-                            };
-                        }
-                        break;
-                    case 3:
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOut selectedCashBoxOut)
-                        {
-                            //validate
-                            if (!selectedCashBoxOut.IsValidated)
-                            {
-                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
-                                {
-                                    Image = AppUtilities.GetImage("Check"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
-                                };
-                                validateMenu.Click += ValidateCashBoxOutMenu_Click;
-                                e.ContextMenu.Items.Add(validateMenu);
-                            }
-                            //return CashBoxOut
-                            if (!selectedCashBoxOut.IdNumber.ToLower().Contains("return") && selectedCashBoxOut.IsValidated)
-                            {
-                                RadMenuItem returnMenu = new(Language.labelReturn)
-                                {
-                                    Image = AppUtilities.GetImage("Undo"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true)
-                                };
-                                e.ContextMenu.Items.Add(returnMenu);
-
-                                //Return subscription
-                                returnMenu.Click += (o, ev) =>
-                                {
-                                    if (!Program.CurrentSchoolYear.IsClosed)
-                                    {
-                                        ReturnCashBoxOut(selectedCashBoxOut);
-                                    }
-                                    else
-                                    {
-                                        RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-                                    }
-                                };
-                            }
-                            RadMenuItem printMenu = new(Language.labelPrintReceipt)
-                            {
-                                Image = AppUtilities.GetImage("Printer"),
-                                Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true)
-                            };
-                            e.ContextMenu.Items.Add(printMenu);
-                            // impression du reçu
-                            printMenu.Click += (o, ev) =>
-                            {
-
-                            };
-                        }
-                        break;
-                    case 4: //Fourniture scolaire
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplie selectedSupplie)
-                        {
-                            //validate
-                            if (!selectedSupplie.IsValidated)
-                            {
-                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
-                                {
-                                    Image = AppUtilities.GetImage("Check"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
-                                };
-                                validateMenu.Click += ValidateSupplieMenu_Click;
-                                e.ContextMenu.Items.Add(validateMenu);
-                            }
-                        }
-                        break;
-                    case 5:
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is ReceiptDTO selectedReceipt)
-                        {
-
-                            if (!selectedReceipt.IsValidated)
-                            {
-                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
-                                {
-                                    Image = AppUtilities.GetImage("Check"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
-                                };
-                                validateMenu.Click += ValidateReceiptMenu_Click;
-                                e.ContextMenu.Items.Add(validateMenu);
-                            }
-
-                            //return Receipt
-                            if (!selectedReceipt.IdNumber.ToLower().Contains("-R") && selectedReceipt.IsValidated)
-                            {
-                                RadMenuItem returnMenu = new(Language.labelReturn)
-                                {
-                                    Image = AppUtilities.GetImage("Undo"),
-                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true)
-                                };
-                                e.ContextMenu.Items.Add(returnMenu);
-                                returnMenu.Click += ReturnReceiptMenu_Click;
-                            }
-                            RadMenuItem printMenu = new(Language.labelPrintReceipt)
-                            {
-                                Image = AppUtilities.GetImage("Printer"),
-                                Enabled = Program.UserConnected.Modules.Any(x => (x.ModuleId == 3 && x.AllowPrint == true) || (x.ModuleId == 4 && x.AllowPrint == true) || (x.ModuleId == 18 && x.AllowPrint == true))
-                            };
-                            e.ContextMenu.Items.Add(printMenu);
-                            // impression du reçu
-                            printMenu.Click += (o, ev) =>
-                            {
-
-                            };
-                        }
-                        break;
-                }
-
-            }
-        }
-        // validation d'un abonnement
-        private async void ValidateSubscriptionMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is Subscription subscription)
-                {
-                    if (await CreateValidationSubscription(subscription))
-                    {
-                        subscription.IsValidated = true;
-                        logger.LogInformation("Validation du versement {IdNumber}", subscription.IdNumber
-                            );
-                        InitCashFlowGridViewForData();
-                    }
-                    else
-                    {
-                        logger.LogWarning("La validation du versement {IdNumber} n'a pas été réalisée", subscription.IdNumber);
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-
-        //Validate tuition payment
-        private async void ValidatePaymentMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment payment)
-                {
-                    await CreateValidationTuitionPayment(payment);
-                    InitCashFlowGridViewForData();
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        private async void ValidateSupplieMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplie supplie)
-                {
-                    if (await CreateValidationSchoolSupplie(supplie))
-                    {
-                        supplie.IsValidated = true;
-                        logger.LogInformation("Validation fourniture scolaire {IdNumber}", supplie.IdNumber
-                            );
-                        InitCashFlowGridViewForData();
-                    }
-                    else
-                    {
-                        logger.LogWarning("La validation fourniture scolaire {IdNumber} n'a pas été réalisée", supplie.IdNumber);
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-
-        // Permet de valider un reçu
-        private async void ValidateReceiptMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is ReceiptDTO receipt)
-                {
-
-                    if (receipt != null && !receipt.IsValidated)
-                    {
-                        var isDone = await receiptService.ValidateReceiptAsync(receipt.Id);
-                        if (isDone)
-                        {
-                            receipt.IsValidated = true;
-                            //enregistrement du log de validation
-                            Log logValidate = new()
-                            {
-                                UserAction = $"Validation du  reçu {receipt.IdNumber} d'un montant de {receipt.Amount} pour {receipt.OpFor}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                UserId = clientApp.UserConnected.Id
-                            };
-                            await logService.CreateLog(logValidate);
-                            logger.LogInformation(logValidate.UserAction);
-                            foreach (var item in receipt.ReceiptItems)
-                            {
-                                if (item.LinkedItem is TuitionPayment payment)
-                                {
-                                    if (!payment.IsValidated)
-                                    {
-                                        if (await CreateValidationTuitionPayment(payment))
-                                        {
-                                            payment.IsValidated = true;
-                                            logger.LogInformation("Validation du versement {IdNumber} du reçu {IdNumber}",
-                                                payment.IdNumber,
-                                                receipt.IdNumber
-                                                );
-                                        }
-                                        else
-                                        {
-                                            logger.LogError("Une erreur est survenue lors de la validation du versement {IdNumber} du reçu {IdNumber}",
-                                                payment.IdNumber,
-                                                receipt.IdNumber
-                                                );
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if (item.LinkedItem is Subscription subscription)
-                                    {
-                                        if (!subscription.IsValidated)
-                                        {
-                                            if (await CreateValidationSubscription(subscription))
-                                            {
-                                                subscription.IsValidated = true;
-                                                logger.LogInformation("Validation de l'abonnement {IdNumber} du reçu {IdNumber}",
-                                                subscription.IdNumber,
-                                                receipt.IdNumber
-                                                );
-                                            }
-                                            else
-                                            {
-                                                logger.LogError("Une erreur est survenue lors de la validation de l'abonnement {IdNumber} du reçu {IdNumber}",
-                                                    subscription.IdNumber,
-                                                    receipt.IdNumber
-                                                    );
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (item.LinkedItem is SchoolSupplie supplie)
-                                        {
-                                            if (!supplie.IsValidated)
-                                            {
-                                                if (await CreateValidationSchoolSupplie(supplie))
-                                                {
-                                                    supplie.IsValidated = true;
-                                                    logger.LogInformation("Validation fourniture scolaire {IdNumber} du reçu {IdNumber}",
-                                                    supplie.IdNumber,
-                                                    receipt.IdNumber
-                                                    );
-                                                }
-                                                else
-                                                {
-                                                    logger.LogError("Une erreur est survenue lors de la validation fourniture scolaire {IdNumber} du reçu {IdNumber}",
-                                                        supplie.IdNumber,
-                                                        receipt.IdNumber
-                                                        );
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            InitCashFlowGridViewForData();
-                        }
-                        else
-                        {
-                            logger.LogWarning($"La validation du  reçu {receipt.IdNumber} d'un montant de {receipt.Amount} pour {receipt.OpFor}  n'a pas été effectuée ");
-                            RadMessageBox.Show(Language.MessageValidateError);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-
-        // validation d'un approvisionnement
-        private async void ValidateCashBoxInMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxIn selectedCashBoxIn)
-                {
-                    if (selectedCashBoxIn != null && selectedCashBoxIn.IsValidated == false)
-                    {
-                        var isValidated = await cashFlowService.ValidateCashBoxIn(selectedCashBoxIn.Id);
-                        if (isValidated)
-                        {
-                            selectedCashBoxIn.IsValidated = true;
-                            //enregistrement du log de validation
-                            Log logValidate = new()
-                            {
-                                UserAction = $"Validation de l'approvisionnement {selectedCashBoxIn.IdNumber} d'un montant de {selectedCashBoxIn.Amount} pour {selectedCashBoxIn.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                UserId = clientApp.UserConnected.Id
-                            };
-                            logger.LogInformation(logValidate.UserAction);
-                            await logService.CreateLog(logValidate);
-                            //create cash flow
-                            var cashFlow = new CashFlow()
-                            {
-                                Amount = selectedCashBoxIn.Amount,
-                                CashFlowType = selectedCashBoxIn.CashFlowType,
-                                CashFlowTypeId = selectedCashBoxIn.CashFlowTypeId,
-                                Date = DateTime.Now,
-                                DoneBy = selectedCashBoxIn.DoneBy,
-                                SchoolYear = Program.CurrentSchoolYear,
-                                SchoolYearId = Program.CurrentSchoolYear.Id,
-                                Note = $"{Language.LabelSupply} {selectedCashBoxIn.IdNumber}: {selectedCashBoxIn.CashFlowType.Name}",
-                            };
-                            var isDone = await cashFlowService.CreateCashFlow(cashFlow);
-                            if (isDone)
-                            {
-                                InitCashFlowGridViewForData();
-                                //enregistrement du log cash flow
-                                Log logCash = new()
-                                {
-                                    UserAction = $"Ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                    UserId = clientApp.UserConnected.Id
-                                };
-                                logger.LogInformation(logCash.UserAction);
-                                await logService.CreateLog(logCash);
-                            }
-                            else
-                            {
-                                logger.LogError($"L'ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé.");
-                                RadMessageBox.Show(Language.messageAddError);
-                            }
-                        }
-                        else
-                        {
-                            logger.LogError($"La validation de l'approvisionnement {selectedCashBoxIn.IdNumber} d'un montant de {selectedCashBoxIn.Amount} pour {selectedCashBoxIn.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisée.");
-                            RadMessageBox.Show(Language.MessageValidateError);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        // validation d'une dépense
-        private async void ValidateCashBoxOutMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOut selectedCashBoxOut)
-                {
-                    if (selectedCashBoxOut != null && selectedCashBoxOut.IsValidated == false)
-                    {
-                        var isValidated = await cashFlowService.ValidateCashBoxOut(selectedCashBoxOut.Id);
-                        if (isValidated)
-                        {
-                            selectedCashBoxOut.IsValidated = true;
-                            //enregistrement du log de validation
-                            Log logValidate = new()
-                            {
-                                UserAction = $"Validation de la dépense {selectedCashBoxOut.IdNumber} d'un montant de {selectedCashBoxOut.Amount} pour {selectedCashBoxOut.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                UserId = clientApp.UserConnected.Id
-                            };
-                            await logService.CreateLog(logValidate);
-                            logger.LogInformation(logValidate.UserAction);
-                            //create cash flow
-                            var cashFlow = new CashFlow()
-                            {
-                                Amount = selectedCashBoxOut.Amount,
-                                CashFlowType = selectedCashBoxOut.CashFlowType,
-                                CashFlowTypeId = selectedCashBoxOut.CashFlowTypeId,
-                                Date = DateTime.Now,
-                                DoneBy = selectedCashBoxOut.DoneBy,
-                                SchoolYear = Program.CurrentSchoolYear,
-                                SchoolYearId = Program.CurrentSchoolYear.Id,
-                                Note = $"{Language.LabelExpense} {selectedCashBoxOut.IdNumber}: {selectedCashBoxOut.CashFlowType.Name}",
-                            };
-                            var isDone = cashFlowService.CreateCashFlow(cashFlow).Result;
-                            if (isDone)
-                            {
-                                InitCashFlowGridViewForData();
-                                //enregistrement du log cash flow
-                                Log logCash = new()
-                                {
-                                    UserAction = $"Ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                    UserId = clientApp.UserConnected.Id
-                                };
-                                await logService.CreateLog(logCash);
-                                logger.LogInformation(logCash.UserAction);
-                            }
-                            else
-                            {
-                                logger.LogError($"L'ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé");
-                                RadMessageBox.Show(Language.messageAddError);
-                            }
-                        }
-                        else
-                        {
-                            logger.LogError($"La validation de la dépense {selectedCashBoxOut.IdNumber} d'un montant de {selectedCashBoxOut.Amount} pour {selectedCashBoxOut.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisée.");
-                            RadMessageBox.Show(Language.MessageValidateError);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-        //Permet de retourner une facture
-        private async void ReturnReceiptMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is ReceiptDTO receipt)
-                {
-                    DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        if (receipt != null)
-                        {
-                            var newReceipt = new Receipt()
-                            {
-                                Amount = receipt.Amount,
-                                Balance = -receipt.Balance,
-                                Date = DateTime.Now,
-                                OpDoneBy = receipt.OpDoneBy,
-                                OpFor = receipt.OpFor,
-                                SchoolYear = receipt.SchoolYear,
-                                SchoolYearId = receipt.SchoolYearId,
-                                IdNumber = receipt.IdNumber,
-                                IsValidated = false
-                            };
-                            var returnReceipt = await receiptService.ReturnReceiptAsync(newReceipt);
-                            var returnReceiptDTO = returnReceipt.AsReceiptDTO();
-                            Program.ReceiptList.Add(returnReceiptDTO);
-                            if (returnReceipt != null)
-                            {
-                                foreach (var item in receipt.ReceiptItems)
-                                {
-                                    if (item.LinkedItem is TuitionPayment payment)
-                                    {
-                                        if (payment.IsValidated)
-                                        {
-                                            if (await CreateReturnPayment(payment,returnReceipt))
-                                            {
-                                                logger.LogInformation($"Retour frais scolaire {payment.IdNumber} du reçu {receipt.IdNumber}");
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (item.LinkedItem is Subscription subscription)
-                                        {
-                                            if (await CreateReturnSubscription(subscription, returnReceipt))
-                                            {
-                                                logger.LogInformation($"Retour abonnement {subscription.IdNumber} du reçu {receipt.IdNumber}");
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (item.LinkedItem is SchoolSupplie supplie)
-                                            {
-                                                if (await CreateReturnSchoolSupplie(supplie, returnReceipt))
-                                                {
-                                                    logger.LogInformation($"Retour Fourniture scolaire {supplie.IdNumber} du reçu {receipt.IdNumber}");
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                                AppUtilities.GenerateReceiptItems(returnReceiptDTO);
-                            }
-                        }
-                        InitCashFlowGridViewForData();
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-
-        }
+        #region Methods
         // return expense
         private void ReturnCashBoxOut(CashBoxOut selectedCashBoxOut)
         {
@@ -680,7 +80,7 @@ namespace Primary.SchoolApp
                                 cashbox.Id = recordAdded.Id;
                                 Program.CashBoxOutList.Add(cashbox);
                             }
-                            InitCashFlowGridViewForData();
+                            CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
 
                             Log log = new()
                             {
@@ -735,8 +135,7 @@ namespace Primary.SchoolApp
                                 cashbox.Id = recordAdded.Id;
                                 Program.CashBoxInList.Add(cashbox);
                             }
-                            InitCashFlowGridViewForData();
-
+                            CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
                             Log log = new()
                             {
                                 UserAction = $"Retour de l'approvisionnement {selectedCashBoxIn.CashFlowType.Name} {selectedCashBoxIn.IdNumber}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
@@ -832,6 +231,7 @@ namespace Primary.SchoolApp
                 var isValidated = await subscriptionService.ValidateSubscriptionAsync(subscription.Id);
                 if (isValidated)
                 {
+                    var selectedEnrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.Id == subscription.EnrollingId);
                     subscription.IsValidated = true;
                     isDone = true;
                     //enregistrement du log de validation
@@ -852,7 +252,7 @@ namespace Primary.SchoolApp
                         DoneBy = subscription.DoneBy,
                         SchoolYear = Program.CurrentSchoolYear,
                         SchoolYearId = Program.CurrentSchoolYear.Id,
-                        Note = $"{Language.labelSubscription} {subscription.IdNumber}:{subscription.CashFlowType.Name}  {subscription?.Student?.FullName}",
+                        Note = $"{Language.labelSubscription} {subscription.IdNumber}:{subscription.CashFlowType.Name}  {selectedEnrolling?.Student?.FullName}",
                     };
                     if (await cashFlowService.CreateCashFlow(cashFlow))
                     {
@@ -957,7 +357,7 @@ namespace Primary.SchoolApp
             return isDone;
         }
         //Return Subscription
-        private async Task<bool> CreateReturnSubscription(Subscription subscription,Receipt receipt)
+        private async Task<bool> CreateReturnSubscription(Subscription subscription, Receipt receipt)
         {
             bool isDone = false;
             if (subscription != null)
@@ -972,10 +372,8 @@ namespace Primary.SchoolApp
                         CashFlowTypeId = subscription.CashFlowTypeId,
                         DoneBy = subscription.DoneBy,
                         EndDate = subscription.EndDate,
-                        Student = subscription.Student,
-                        StudentId = subscription.StudentId,
-                        SchoolYear = subscription.SchoolYear,
-                        SchoolYearId = subscription.SchoolYearId,
+                        Enrolling = subscription.Enrolling,
+                        EnrollingId = subscription.EnrollingId,
                         PaymentMean = subscription.PaymentMean,
                         PaymentMeanId = subscription.PaymentMeanId,
                         StartDate = subscription.StartDate,
@@ -998,7 +396,7 @@ namespace Primary.SchoolApp
                         }
                         Log log = new()
                         {
-                            UserAction = $"Retour de l'abonnement {returnSubscription.CashFlowType.Name} ({returnSubscription.IdNumber})  de l'élève {subscription.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                            UserAction = $"Retour de l'abonnement {returnSubscription.CashFlowType.Name} ({returnSubscription.IdNumber})  de l'élève {subscription.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
                             UserId = clientApp.UserConnected.Id
                         };
                         await logService.CreateLog(log);
@@ -1006,15 +404,18 @@ namespace Primary.SchoolApp
                     }
                     else
                     {
-                        logger.LogError($"Le retour de l'abonnement {subscription.CashFlowType.Name} ({returnSubscription.IdNumber})  de l'élève {subscription.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé.");
+                        logger.LogError($"Le retour de l'abonnement {subscription.CashFlowType.Name} ({returnSubscription.IdNumber})  de l'élève {subscription.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé.");
                         RadMessageBox.Show(Language.messageAddError);
                     }
+                }
+                else { 
+                    logger.LogError($"Le retour de l'abonnement {subscription.CashFlowType.Name} ({subscription.IdNumber})  de l'élève {subscription.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé car il existe déjà.");
                 }
             }
             return isDone;
         }
         // retourne un payement
-        private async Task<bool> CreateReturnPayment(TuitionPayment payment,Receipt receipt)
+        private async Task<bool> CreateReturnPayment(TuitionPayment payment, Receipt receipt)
         {
             bool isDone = false;
             payment.Enrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.Id == payment.EnrollingId).AsStudentEnrolling();
@@ -1047,7 +448,7 @@ namespace Primary.SchoolApp
                 isDone = await cashFlowService.ReturnTuitionPayment(returnPayment);
                 if (isDone)
                 {
-                    var recordAdded = await cashFlowService.GetTuitionPayment(returnPayment.IdNumber + "-R");
+                    var recordAdded = await cashFlowService.GetTuitionPayment(payment.IdNumber + "-R");
                     if (recordAdded != null)
                     {
                         returnPayment.Id = recordAdded.Id;
@@ -1066,12 +467,15 @@ namespace Primary.SchoolApp
                     logger.LogError($"Le retour frais scolaire {returnPayment.CashFlowType.Name} ({returnPayment.IdNumber}) de {returnPayment.Amount}  de l'élève {payment.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé.");
                     RadMessageBox.Show(Language.messageAddError);
                 }
-
+            }
+            else
+            {
+                logger.LogError($"Le retour frais scolaire {payment.CashFlowType.Name} ({payment.IdNumber}) de {payment.Amount}  de l'élève {payment.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé car il existe déjà.");
             }
             return isDone;
         }
         // return school supplie
-        private async Task<bool> CreateReturnSchoolSupplie(SchoolSupplie supplie,Receipt receipt)
+        private async Task<bool> CreateReturnSchoolSupplie(SchoolSupplie supplie, Receipt receipt)
         {
             bool isDone = false;
             supplie.Enrolling = Program.StudentEnrollingList.FirstOrDefault(x => x.Id == supplie.EnrollingId).AsStudentEnrolling();
@@ -1104,7 +508,7 @@ namespace Primary.SchoolApp
                 isDone = await schoolSupplieService.ReturnSchoolSupplie(returnSupplie);
                 if (isDone)
                 {
-                    var recordAdded = await schoolSupplieService.GetSchoolSupplie(supplie.IdNumber+"-R");
+                    var recordAdded = await schoolSupplieService.GetSchoolSupplie(supplie.IdNumber + "-R");
                     if (recordAdded != null)
                     {
                         returnSupplie.Id = recordAdded.Id;
@@ -1123,114 +527,12 @@ namespace Primary.SchoolApp
                     logger.LogError($"Le retour fourniture scolaire {returnSupplie.CashFlowType.Name} ({returnSupplie.IdNumber}) de {returnSupplie.Amount}  de l'élève {supplie.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé.");
                     RadMessageBox.Show(Language.messageAddError);
                 }
-
+            }
+            else
+            {
+                logger.LogError($"Le retour fourniture scolaire {supplie.CashFlowType.Name} ({supplie.IdNumber}) de {supplie.Amount}  de l'élève {supplie.Enrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé car il existe déjà.");
             }
             return isDone;
-        }
-        private void CashFlowAddButton_Click(object sender, EventArgs e)
-        {
-            switch (CashFlowLeftListView.SelectedItem.Key)
-            {
-                case 0:
-                    var pForm = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
-                    pForm.Text = Language.labelAdd + ":.." + Language.labelPayment;
-                    pForm.Icon = this.Icon;
-                    pForm.Init(Program.StudentEnrollingList.Select(x => x.AsStudentEnrolling()).ToList(), TypeFee.TuitionFee);
-                    if (pForm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        InitCashFlowGridViewForData();
-                    }
-                    break;
-                case 1:
-                    var sForm = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
-                    sForm.Text = Language.labelAdd + ":.." + Language.labelSubscription;
-                    sForm.Icon = this.Icon;
-                    sForm.Init(Program.StudentEnrollingList.Select(x => x.AsStudentEnrolling()).ToList(), TypeFee.Subscription);
-                    if (sForm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        InitCashFlowGridViewForData();
-                    }
-                    break;
-                case 2:
-                    var iForm = Program.ServiceProvider.GetService<AddOtherCashFlowForm>();
-                    iForm.Text = Language.labelAdd + ":.." + Language.LabelSupply;
-                    iForm.Icon = this.Icon;
-                    iForm.Init(2);
-                    if (iForm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        InitCashFlowGridViewForData();
-                    }
-                    break;
-                case 3:
-                    var oForm = Program.ServiceProvider.GetService<AddOtherCashFlowForm>();
-                    oForm.Text = Language.labelAdd + ":.." + Language.LabelExpense;
-                    oForm.Icon = this.Icon;
-                    oForm.Init(3);
-                    if (oForm.ShowDialog(this) == DialogResult.OK)
-                    {
-                        InitCashFlowGridViewForData();
-                    }
-                    break;
-            }
-        }
-
-        private void CashFlowLeftListView_SelectedItemChanged(object sender, EventArgs e)
-        {
-            if (CashFlowLeftListView.SelectedItem != null)
-            {
-                InitCashFlowGridViewForData();
-                switch (CashFlowLeftListView.SelectedItem.Key)
-                {
-                    case 0:
-                    case 1:
-                    case 4:
-                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelIdTransaction}, {Language.labelPaymentMean}, {Language.LabelValidation}, {Language.labelCashFlowType}";
-                        if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 0)
-                        {
-                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
-                        }
-                        else
-                        {
-                            if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 1)
-                            {
-                                CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
-                            }
-                            else
-                            {
-                                CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 18 && x.AllowCreate == true);
-
-                            }
-                        }
-
-                        break;
-                    case 2:
-                    case 3:
-                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelNote}, {Language.LabelValidation}, {Language.labelCashFlowType}";
-                        if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2)
-                        {
-                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 15 && x.AllowCreate == true);
-                        }
-                        else
-                        {
-                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
-                        }
-                        break;
-                    case 5:
-                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.LabelValidation}";
-                        var allowAddSchoolFee = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
-                        var allowAddSubscription = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
-                        var allowAddSupplie = Program.UserConnected.Modules.Any(x => x.ModuleId == 18 && x.AllowCreate == true);
-                        if (allowAddSchoolFee && allowAddSubscription && allowAddSupplie)
-                        {
-                            CashFlowAddButton.Enabled = true;
-                        }
-                        else
-                        {
-                            CashFlowAddButton.Enabled = false;
-                        }
-                        break;
-                }
-            }
         }
 
         private void InitCashFlowGridViewForData()
@@ -1370,6 +672,7 @@ namespace Primary.SchoolApp
                 GridViewTextBoxColumn idNumberColumn = new("IdNumber");
                 GridViewDateTimeColumn dateColumn = new("Date");
                 GridViewDecimalColumn amountColumn = new("Amount");
+                GridViewDecimalColumn opForColumn = new("OpFor");
                 GridViewTextBoxColumn isValidatedColumn = new("IsValidated");
                 GridViewTextBoxColumn validationStateColumn = new("ValidattionState");
 
@@ -1382,9 +685,11 @@ namespace Primary.SchoolApp
                 dateColumn.Width = 80;
                 amountColumn.Width = 100;
                 idNumberColumn.Width = 100;
+                opForColumn.Width = 250;
                 dateColumn.HeaderText = "Date";
                 amountColumn.HeaderText = Language.labelAmount;
                 idNumberColumn.HeaderText = Language.LabelReference;
+                opForColumn.HeaderText = Language.labelReason;
                 validationStateColumn.HeaderText = Language.LabelValidation;
                 dateColumn.Format = DateTimePickerFormat.Custom;
                 dateColumn.CustomFormat = "dd-MM-yyyy";
@@ -1403,6 +708,7 @@ namespace Primary.SchoolApp
                 CashFlowGridView.Columns.Add(idNumberColumn);
                 CashFlowGridView.Columns.Add(dateColumn);
                 CashFlowGridView.Columns.Add(amountColumn);
+                CashFlowGridView.Columns.Add(opForColumn);
                 CashFlowGridView.Columns.Add(validationStateColumn);
                 CashFlowGridView.Columns.Add(isValidatedColumn);
 
@@ -1684,7 +990,7 @@ namespace Primary.SchoolApp
                 transactionIdColumn.HeaderText = Language.labelIdTransaction;
                 transactionDateColumn.HeaderText = Language.labelDateTransaction;
                 validationStateColumn.HeaderText = Language.LabelValidation;
-                cashFlowColumn.HeaderText = Language.labelSchoolingFee;
+                cashFlowColumn.HeaderText = Language.LabelSchoolSupplie;
                 dateColumn.Format = DateTimePickerFormat.Custom;
                 dateColumn.CustomFormat = "dd-MM-yyyy";
                 dateColumn.FormatString = "{0:dd-MM-yyyy}";
@@ -1713,6 +1019,743 @@ namespace Primary.SchoolApp
                 CashFlowGridView.DataSource = Program.SchoolSupplieList.OrderByDescending(x => x.Id);
             }
         }
+        #endregion
+
+        #region Events
+        private void CashFlowLeftListView_ToolTipTextNeeded(object sender, ToolTipTextNeededEventArgs e)
+        {
+            try
+            {
+                e.Offset = new System.Drawing.Size(e.Offset.Width + 20, e.Offset.Height + 20);
+                e.ToolTipText = cashFlowLeftViewForToolTipText;
+            }
+            catch
+            {
+            }
+        }
+
+        private void CashFlowLeftListView_ItemMouseHover(object sender, ListViewItemEventArgs e)
+        {
+            cashFlowLeftViewForToolTipText = "" + e.Item.Tag;
+        }
+
+        private void CashFlowLeftListView_SelectedItemChanged(object sender, EventArgs e)
+        {
+            if (CashFlowLeftListView.SelectedItem != null)
+            {
+                InitCashFlowGridViewForData();
+                switch (CashFlowLeftListView.SelectedItem.Key)
+                {
+                    case 0:
+                    case 1:
+                    case 4:
+                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelIdTransaction}, {Language.labelPaymentMean}, {Language.LabelValidation}, {Language.labelCashFlowType}";
+                        if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 0)
+                        {
+                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
+                        }
+                        else
+                        {
+                            if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 1)
+                            {
+                                CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
+                            }
+                            else
+                            {
+                                CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 18 && x.AllowCreate == true);
+
+                            }
+                        }
+
+                        break;
+                    case 2:
+                    case 3:
+                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.labelNote}, {Language.LabelValidation}, {Language.labelCashFlowType}";
+                        if (int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2)
+                        {
+                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 15 && x.AllowCreate == true);
+                        }
+                        else
+                        {
+                            CashFlowAddButton.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
+                        }
+                        break;
+                    case 5:
+                        CashFlowSearchTextBox.NullText = $"{Language.MessageSearchBy} {Language.LabelReference}, {Language.LabelValidation}";
+                        var allowAddSchoolFee = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowCreate == true);
+                        var allowAddSubscription = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowCreate == true);
+                        var allowAddSupplie = Program.UserConnected.Modules.Any(x => x.ModuleId == 18 && x.AllowCreate == true);
+                        if (allowAddSchoolFee && allowAddSubscription && allowAddSupplie)
+                        {
+                            CashFlowAddButton.Enabled = true;
+                        }
+                        else
+                        {
+                            CashFlowAddButton.Enabled = false;
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void CashFlowGridView_CustomFiltering(object sender, GridViewCustomFilteringEventArgs e)
+        {
+            CashFlowGridViewCustomFiltering(e);
+        }
+        private void CashFlowGridView_ContextMenuOpening(object sender, ContextMenuOpeningEventArgs e)
+        {
+            if (!e.ContextMenuProvider.ToString().Contains("Header"))
+            {
+                //get authorization modules
+                Program.UserConnected.Modules = userService.GetUserModuleList(Program.UserConnected.Id).Result;
+                // create  and show the good context menu
+                switch (CashFlowLeftListView.SelectedItem.Key)
+                {
+                    case 0:// Frais de scolarité
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
+                        {
+                            //validate payment
+                            if (!selectedPayment.IsValidated)
+                            {
+                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                                {
+                                    Image = AppUtilities.GetImage("Check"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                                };
+                                validateMenu.Click += ValidatePaymentMenu_Click;
+                                e.ContextMenu.Items.Add(validateMenu);
+                            }
+                        }
+                        break;
+                    case 1: //Abonnement
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is Subscription selectedSubscription)
+                        {
+                            //validate
+                            if (!selectedSubscription.IsValidated)
+                            {
+                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                                {
+                                    Image = AppUtilities.GetImage("Check"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                                };
+                                validateMenu.Click += ValidateSubscriptionMenu_Click;
+                                e.ContextMenu.Items.Add(validateMenu);
+                            }
+                        }
+                        break;
+                    case 2:
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxIn selectedCashBoxIn)
+                        {
+                            //validate
+                            if (!selectedCashBoxIn.IsValidated)
+                            {
+                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                                {
+                                    Image = AppUtilities.GetImage("Check"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                                };
+                                validateMenu.Click += ValidateCashBoxInMenu_Click;
+                                e.ContextMenu.Items.Add(validateMenu);
+                            }
+                            //return CashBoxIn
+                            if (!selectedCashBoxIn.IdNumber.ToUpper().Contains("-R") && selectedCashBoxIn.IsValidated)
+                            {
+                                RadMenuItem returnMenu = new(Language.labelReturn)
+                                {
+                                    Image = AppUtilities.GetImage("Undo"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true)
+                                };
+                                e.ContextMenu.Items.Add(returnMenu);
+
+                                //Return subscription
+                                returnMenu.Click += (o, ev) =>
+                                {
+                                    if (!Program.CurrentSchoolYear.IsClosed)
+                                    {
+                                        ReturnCashBoxIn(selectedCashBoxIn);
+                                    }
+                                    else
+                                    {
+                                        RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                                    }
+                                };
+                            }
+                            RadMenuItem printMenu = new(Language.labelPrintReceipt);
+                            printMenu.Image = AppUtilities.GetImage("Printer");
+                            printMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true);
+                            e.ContextMenu.Items.Add(printMenu);
+                            // impression du reçu
+                            printMenu.Click += (o, ev) =>
+                            {
+
+                            };
+                        }
+                        break;
+                    case 3:
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOut selectedCashBoxOut)
+                        {
+                            //validate
+                            if (!selectedCashBoxOut.IsValidated)
+                            {
+                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                                {
+                                    Image = AppUtilities.GetImage("Check"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                                };
+                                validateMenu.Click += ValidateCashBoxOutMenu_Click;
+                                e.ContextMenu.Items.Add(validateMenu);
+                            }
+                            //return CashBoxOut
+                            if (!selectedCashBoxOut.IdNumber.ToUpper().Contains("-R") && selectedCashBoxOut.IsValidated)
+                            {
+                                RadMenuItem returnMenu = new(Language.labelReturn)
+                                {
+                                    Image = AppUtilities.GetImage("Undo"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true)
+                                };
+                                e.ContextMenu.Items.Add(returnMenu);
+
+                                returnMenu.Click += (o, ev) =>
+                                {
+                                    if (!Program.CurrentSchoolYear.IsClosed)
+                                    {
+                                        ReturnCashBoxOut(selectedCashBoxOut);
+                                    }
+                                    else
+                                    {
+                                        RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+                                    }
+                                };
+                            }
+                            RadMenuItem printMenu = new(Language.labelPrintReceipt)
+                            {
+                                Image = AppUtilities.GetImage("Printer"),
+                                Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 4 && x.AllowPrint == true)
+                            };
+                            e.ContextMenu.Items.Add(printMenu);
+                            // impression du reçu
+                            printMenu.Click += (o, ev) =>
+                            {
+
+                            };
+                        }
+                        break;
+                    case 4: //Fourniture scolaire
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplie selectedSupplie)
+                        {
+                            //validate
+                            if (!selectedSupplie.IsValidated)
+                            {
+                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                                {
+                                    Image = AppUtilities.GetImage("Check"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                                };
+                                validateMenu.Click += ValidateSupplieMenu_Click;
+                                e.ContextMenu.Items.Add(validateMenu);
+                            }
+                        }
+                        break;
+                    case 5:
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is ReceiptDTO selectedReceipt)
+                        {
+
+                            if (!selectedReceipt.IsValidated)
+                            {
+                                RadMenuItem validateMenu = new(Language.LabelValidateTransaction)
+                                {
+                                    Image = AppUtilities.GetImage("Check"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 14 && x.AllowCreate == true)
+                                };
+                                validateMenu.Click += ValidateReceiptMenu_Click;
+                                e.ContextMenu.Items.Add(validateMenu);
+                            }
+
+                            //return Receipt
+                            
+                            if (!selectedReceipt.IdNumber.ToUpper().Contains("-R") && selectedReceipt.IsValidated)
+                            {
+                                RadMenuItem returnMenu = new(Language.labelReturn)
+                                {
+                                    Image = AppUtilities.GetImage("Undo"),
+                                    Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true)
+                                };
+                                e.ContextMenu.Items.Add(returnMenu);
+                                returnMenu.Click += ReturnReceiptMenu_Click;
+                            }
+                            RadMenuItem printMenu = new(Language.labelPrintReceipt)
+                            {
+                                Image = AppUtilities.GetImage("Printer"),
+                                Enabled = Program.UserConnected.Modules.Any(x => (x.ModuleId == 3 && x.AllowPrint == true) || (x.ModuleId == 4 && x.AllowPrint == true) || (x.ModuleId == 18 && x.AllowPrint == true))
+                            };
+                            e.ContextMenu.Items.Add(printMenu);
+                            // impression du reçu
+                            printMenu.Click += (o, ev) =>
+                            {
+                                printService.PrintReceiptAsync(selectedReceipt,true);
+                            };
+                        }
+                        break;
+                }
+
+            }
+        }
+        // validation d'un abonnement
+        private async void ValidateSubscriptionMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is Subscription subscription)
+                {
+                    if (await CreateValidationSubscription(subscription))
+                    {
+                        subscription.IsValidated = true;
+                        logger.LogInformation("Validation du versement {IdNumber}", subscription.IdNumber
+                            );
+                        CashFlowGridView.DataSource = Program.SubscriptionList.OrderByDescending(x => x.Id);
+                    }
+                    else
+                    {
+                        logger.LogWarning("La validation du versement {IdNumber} n'a pas été réalisée", subscription.IdNumber);
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+        //Validate tuition payment
+        private async void ValidatePaymentMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment payment)
+                {
+                    await CreateValidationTuitionPayment(payment);
+                    CashFlowGridView.DataSource = Program.TuitionPaymentList.OrderByDescending(x => x.Id);
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+        private async void ValidateSupplieMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplie supplie)
+                {
+                    if (await CreateValidationSchoolSupplie(supplie))
+                    {
+                        supplie.IsValidated = true;
+                        logger.LogInformation("Validation fourniture scolaire {IdNumber}", supplie.IdNumber
+                            );
+                        CashFlowGridView.DataSource = Program.SchoolSupplieList.OrderByDescending(x => x.Id);
+                    }
+                    else
+                    {
+                        logger.LogWarning("La validation fourniture scolaire {IdNumber} n'a pas été réalisée", supplie.IdNumber);
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+
+        // Permet de valider un reçu
+        private async void ValidateReceiptMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is ReceiptDTO receipt)
+                {
+
+                    if (receipt != null && !receipt.IsValidated)
+                    {
+                        var isDone = await receiptService.ValidateReceiptAsync(receipt.Id);
+                        if (isDone)
+                        {
+                            receipt.IsValidated = true;
+                            //enregistrement du log de validation
+                            Log logValidate = new()
+                            {
+                                UserAction = $"Validation du  reçu {receipt.IdNumber} d'un montant de {receipt.Amount} pour {receipt.OpFor}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserId = clientApp.UserConnected.Id
+                            };
+                            await logService.CreateLog(logValidate);
+                            logger.LogInformation(logValidate.UserAction);
+                            foreach (var item in receipt.ReceiptItems)
+                            {
+                                if (item.LinkedItem is TuitionPayment payment)
+                                {
+                                    if (!payment.IsValidated)
+                                    {
+                                        if (await CreateValidationTuitionPayment(payment))
+                                        {
+                                            payment.IsValidated = true;
+                                            logger.LogInformation("Validation du versement {IdNumber} du reçu {IdNumber}",
+                                                payment.IdNumber,
+                                                receipt.IdNumber
+                                                );
+                                        }
+                                        else
+                                        {
+                                            logger.LogError("Une erreur est survenue lors de la validation du versement {IdNumber} du reçu {IdNumber}",
+                                                payment.IdNumber,
+                                                receipt.IdNumber
+                                                );
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (item.LinkedItem is Subscription subscription)
+                                    {
+                                        if (!subscription.IsValidated)
+                                        {
+                                            if (await CreateValidationSubscription(subscription))
+                                            {
+                                                subscription.IsValidated = true;
+                                                logger.LogInformation("Validation de l'abonnement {IdNumber} du reçu {IdNumber}",
+                                                subscription.IdNumber,
+                                                receipt.IdNumber
+                                                );
+                                            }
+                                            else
+                                            {
+                                                logger.LogError("Une erreur est survenue lors de la validation de l'abonnement {IdNumber} du reçu {IdNumber}",
+                                                    subscription.IdNumber,
+                                                    receipt.IdNumber
+                                                    );
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (item.LinkedItem is SchoolSupplie supplie)
+                                        {
+                                            if (!supplie.IsValidated)
+                                            {
+                                                if (await CreateValidationSchoolSupplie(supplie))
+                                                {
+                                                    supplie.IsValidated = true;
+                                                    logger.LogInformation("Validation fourniture scolaire {IdNumber} du reçu {IdNumber}",
+                                                    supplie.IdNumber,
+                                                    receipt.IdNumber
+                                                    );
+                                                }
+                                                else
+                                                {
+                                                    logger.LogError("Une erreur est survenue lors de la validation fourniture scolaire {IdNumber} du reçu {IdNumber}",
+                                                        supplie.IdNumber,
+                                                        receipt.IdNumber
+                                                        );
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            LoadReceipts();
+                        }
+                        else
+                        {
+                            logger.LogWarning($"La validation du  reçu {receipt.IdNumber} d'un montant de {receipt.Amount} pour {receipt.OpFor}  n'a pas été effectuée ");
+                            RadMessageBox.Show(Language.MessageValidateError);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+
+        // validation d'un approvisionnement
+        private async void ValidateCashBoxInMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxIn selectedCashBoxIn)
+                {
+                    if (selectedCashBoxIn != null && selectedCashBoxIn.IsValidated == false)
+                    {
+                        var isValidated = await cashFlowService.ValidateCashBoxIn(selectedCashBoxIn.Id);
+                        if (isValidated)
+                        {
+                            selectedCashBoxIn.IsValidated = true;
+                            //enregistrement du log de validation
+                            Log logValidate = new()
+                            {
+                                UserAction = $"Validation de l'approvisionnement {selectedCashBoxIn.IdNumber} d'un montant de {selectedCashBoxIn.Amount} pour {selectedCashBoxIn.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserId = clientApp.UserConnected.Id
+                            };
+                            logger.LogInformation(logValidate.UserAction);
+                            await logService.CreateLog(logValidate);
+                            //create cash flow
+                            var cashFlow = new CashFlow()
+                            {
+                                Amount = selectedCashBoxIn.Amount,
+                                CashFlowType = selectedCashBoxIn.CashFlowType,
+                                CashFlowTypeId = selectedCashBoxIn.CashFlowTypeId,
+                                Date = DateTime.Now,
+                                DoneBy = selectedCashBoxIn.DoneBy,
+                                SchoolYear = Program.CurrentSchoolYear,
+                                SchoolYearId = Program.CurrentSchoolYear.Id,
+                                Note = $"{Language.LabelSupply} {selectedCashBoxIn.IdNumber}: {selectedCashBoxIn.CashFlowType.Name}",
+                            };
+                            var isDone = await cashFlowService.CreateCashFlow(cashFlow);
+                            if (isDone)
+                            {
+                                CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
+                                //enregistrement du log cash flow
+                                Log logCash = new()
+                                {
+                                    UserAction = $"Ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                logger.LogInformation(logCash.UserAction);
+                                await logService.CreateLog(logCash);
+                            }
+                            else
+                            {
+                                logger.LogError($"L'ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé.");
+                                RadMessageBox.Show(Language.messageAddError);
+                            }
+                        }
+                        else
+                        {
+                            logger.LogError($"La validation de l'approvisionnement {selectedCashBoxIn.IdNumber} d'un montant de {selectedCashBoxIn.Amount} pour {selectedCashBoxIn.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisée.");
+                            RadMessageBox.Show(Language.MessageValidateError);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+        // validation d'une dépense
+        private async void ValidateCashBoxOutMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOut selectedCashBoxOut)
+                {
+                    if (selectedCashBoxOut != null && selectedCashBoxOut.IsValidated == false)
+                    {
+                        var isValidated = await cashFlowService.ValidateCashBoxOut(selectedCashBoxOut.Id);
+                        if (isValidated)
+                        {
+                            selectedCashBoxOut.IsValidated = true;
+                            //enregistrement du log de validation
+                            Log logValidate = new()
+                            {
+                                UserAction = $"Validation de la dépense {selectedCashBoxOut.IdNumber} d'un montant de {selectedCashBoxOut.Amount} pour {selectedCashBoxOut.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                UserId = clientApp.UserConnected.Id
+                            };
+                            await logService.CreateLog(logValidate);
+                            logger.LogInformation(logValidate.UserAction);
+                            //create cash flow
+                            var cashFlow = new CashFlow()
+                            {
+                                Amount = selectedCashBoxOut.Amount,
+                                CashFlowType = selectedCashBoxOut.CashFlowType,
+                                CashFlowTypeId = selectedCashBoxOut.CashFlowTypeId,
+                                Date = DateTime.Now,
+                                DoneBy = selectedCashBoxOut.DoneBy,
+                                SchoolYear = Program.CurrentSchoolYear,
+                                SchoolYearId = Program.CurrentSchoolYear.Id,
+                                Note = $"{Language.LabelExpense} {selectedCashBoxOut.IdNumber}: {selectedCashBoxOut.CashFlowType.Name}",
+                            };
+                            var isDone = cashFlowService.CreateCashFlow(cashFlow).Result;
+                            if (isDone)
+                            {
+                                CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
+                                //enregistrement du log cash flow
+                                Log logCash = new()
+                                {
+                                    UserAction = $"Ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
+                                    UserId = clientApp.UserConnected.Id
+                                };
+                                await logService.CreateLog(logCash);
+                                logger.LogInformation(logCash.UserAction);
+                            }
+                            else
+                            {
+                                logger.LogError($"L'ajout d'un flux de trésorerie de {cashFlow.Amount} pour {cashFlow.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisé");
+                                RadMessageBox.Show(Language.messageAddError);
+                            }
+                        }
+                        else
+                        {
+                            logger.LogError($"La validation de la dépense {selectedCashBoxOut.IdNumber} d'un montant de {selectedCashBoxOut.Amount} pour {selectedCashBoxOut.CashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress} n'a pas été réalisée.");
+                            RadMessageBox.Show(Language.MessageValidateError);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+        }
+        //Permet de retourner une facture
+        private async void ReturnReceiptMenu_Click(object sender, EventArgs e)
+        {
+            if (!Program.CurrentSchoolYear.IsClosed)
+            {
+                if (CashFlowGridView.CurrentRow.DataBoundItem is ReceiptDTO receipt)
+                {
+                    DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        var returnExist = await receiptService.GetReceiptByIdNumberAsync(receipt.IdNumber + "-R") != null;
+                        if (!returnExist)
+                        {
+                            if (receipt != null)
+                            {
+                                var newReceipt = new Receipt()
+                                {
+                                    Amount = receipt.Amount,
+                                    Balance = -receipt.Balance,
+                                    Date = DateTime.Now,
+                                    OpDoneBy = receipt.OpDoneBy,
+                                    OpFor = receipt.OpFor,
+                                    SchoolYear = receipt.SchoolYear,
+                                    SchoolYearId = receipt.SchoolYearId,
+                                    IdNumber = receipt.IdNumber,
+                                    IsValidated = false
+                                };
+                                var returnReceipt = await receiptService.ReturnReceiptAsync(newReceipt);
+                                var returnReceiptDTO = returnReceipt.AsReceiptDTO();
+                                Program.ReceiptList.Add(returnReceiptDTO);
+                                if (returnReceipt != null)
+                                {
+                                    foreach (var item in receipt.ReceiptItems)
+                                    {
+                                        if (item.LinkedItem is TuitionPayment payment)
+                                        {
+                                            if (payment.IsValidated)
+                                            {
+                                                if (await CreateReturnPayment(payment, returnReceipt))
+                                                {
+                                                    logger.LogInformation($"Retour frais scolaire {payment.IdNumber} du reçu {receipt.IdNumber}");
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (item.LinkedItem is Subscription subscription)
+                                            {
+                                                if (await CreateReturnSubscription(subscription, returnReceipt))
+                                                {
+                                                    logger.LogInformation($"Retour abonnement {subscription.IdNumber} du reçu {receipt.IdNumber}");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (item.LinkedItem is SchoolSupplie supplie)
+                                                {
+                                                    if (await CreateReturnSchoolSupplie(supplie, returnReceipt))
+                                                    {
+                                                        logger.LogInformation($"Retour Fourniture scolaire {supplie.IdNumber} du reçu {receipt.IdNumber}");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    AppUtilities.GenerateReceiptItems(returnReceiptDTO, Program.TuitionPaymentList, Program.SubscriptionList, Program.SchoolSupplieList);
+                                }
+                                LoadReceipts();
+                            }
+                        }
+                        else
+                        {
+                            RadMessageBox.Show(Language.messageReturnAllreadyDone);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
+            }
+
+        }
+        private void CashFlowAddButton_Click(object sender, EventArgs e)
+        {
+            switch (CashFlowLeftListView.SelectedItem.Key)
+            {
+                case 0:
+                    var form_00 = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form_00.Text = Language.labelAdd + ":.." + Language.labelPayment;
+                    form_00.Icon = this.Icon;
+                    form_00.Init(Program.StudentEnrollingList.Select(x => x.AsStudentEnrolling()).ToList(), TypeFee.TuitionFee);
+                    if (form_00.ShowDialog(this) == DialogResult.OK)
+                    {
+                        CashFlowGridView.DataSource = Program.TuitionPaymentList.OrderByDescending(x => x.Id);
+                    }
+                    break;
+                case 1:
+                    var form_01 = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form_01.Text = Language.labelAdd + ":.." + Language.labelSubscription;
+                    form_01.Icon = this.Icon;
+                    form_01.Init(Program.StudentEnrollingList.Select(x => x.AsStudentEnrolling()).ToList(), TypeFee.Subscription);
+                    if (form_01.ShowDialog(this) == DialogResult.OK)
+                    {
+                        CashFlowGridView.DataSource = Program.SubscriptionList.OrderByDescending(x => x.Id);
+                    }
+                    break;
+                case 2:
+                    var form_02 = Program.ServiceProvider.GetService<AddOtherCashFlowForm>();
+                    form_02.Text = Language.labelAdd + ":.." + Language.LabelSupply;
+                    form_02.Icon = this.Icon;
+                    form_02.Init(2);
+                    if (form_02.ShowDialog(this) == DialogResult.OK)
+                    {
+                        CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
+                    }
+                    break;
+                case 3:
+                    var form_03 = Program.ServiceProvider.GetService<AddOtherCashFlowForm>();
+                    form_03.Text = Language.labelAdd + ":.." + Language.LabelExpense;
+                    form_03.Icon = this.Icon;
+                    form_03.Init(3);
+                    if (form_03.ShowDialog(this) == DialogResult.OK)
+                    {
+                        CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
+                    }
+                    break;
+                case 4:
+                    var form_04 = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form_04.Text = Language.labelAdd + ":.." + Language.LabelSchoolSupplie;
+                    form_04.Icon = this.Icon;
+                    form_04.Init(Program.StudentEnrollingList.Select(x => x.AsStudentEnrolling()).ToList(), TypeFee.SchoolSupply);
+                    if (form_04.ShowDialog(this) == DialogResult.OK)
+                    {
+                        CashFlowGridView.DataSource = Program.SchoolSupplieList.OrderByDescending(x => x.Id);
+                    }
+                    break;
+                case 5:
+                    var form_05 = Program.ServiceProvider.GetService<AddFeesPaymentForm>();
+                    form_05.Text = Language.labelAdd + ":.." + Language.LabelSupplies;
+                    form_05.Icon = this.Icon;
+                    form_05.Init(Program.StudentEnrollingList.Select(x => x.AsStudentEnrolling()).ToList(), TypeFee.Unknown);
+                    if (form_05.ShowDialog(this) == DialogResult.OK)
+                    {
+                        LoadReceipts();
+                    }
+                    break;
+            }
+        }
+
         //recherche des données correspondantes pour lancer des filtres
         private void CashFlowSearchTextBox_TextChanged(object sender, System.EventArgs e)
         {
@@ -1747,7 +1790,7 @@ namespace Primary.SchoolApp
             }
             await System.Threading.Tasks.Task.Delay(0);
         }
-
+        #endregion
 
     }
 }

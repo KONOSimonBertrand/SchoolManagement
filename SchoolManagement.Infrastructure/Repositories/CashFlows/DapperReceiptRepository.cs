@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SchoolManagement.Core.Model;
 using SchoolManagement.Core.Repositories;
 using SchoolManagement.Infrastructure.DataBase;
+using System;
 
 namespace SchoolManagement.Infrastructure.Repositories
 {
@@ -42,7 +43,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 using var dbConnection = dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts WHERE Id=@id";
-                receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, new { id });
+                receipt = (await dbConnection.QueryAsync<Receipt>(sql, new { id })).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -58,7 +59,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 using var dbConnection = dbConnectionFactory.CreateConnection();
                 var sql = @"SELECT * FROM Receipts WHERE IdNumber=@idNumber";
-                receipt = await dbConnection.QueryFirstOrDefaultAsync<Receipt>(sql, new { idNumber });
+                receipt = (await dbConnection.QueryAsync<Receipt>(sql, new { idNumber })).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -89,8 +90,8 @@ namespace SchoolManagement.Infrastructure.Repositories
             try
             {
                 using var dbConnection =  dbConnectionFactory.CreateConnection();
-                var sql = @"SELECT * FROM Receipts  WHERE YEAR(Date) = @Year AND MONTH(Date) = @Month ;";
-                receiptList = ( await dbConnection.QueryAsync<Receipt>(sql, new { date })).ToList();
+                var sql = @"SELECT * FROM Receipts  WHERE YEAR(Date) = @year AND MONTH(Date) = @month ;";
+                receiptList = ( await dbConnection.QueryAsync<Receipt>(sql, new { year=date.Year, month=date.Month })).ToList();
             }
             catch (Exception ex)
             {
@@ -102,9 +103,16 @@ namespace SchoolManagement.Infrastructure.Repositories
         public async Task<bool> ValidateReceiptAsync(int receipId)
         {
             var connection = dbConnectionFactory.CreateConnection();
+            int result = 0;
             string query = @"UPDATE Receipts SET IsValidated=1 WHERE Id=@receipId AND IsValidated=0;";
-            var result = await connection.ExecuteAsync(query, new { receipId });
-            await Task.Delay(0);
+            try
+            {
+                result = await connection.ExecuteAsync(query, new { receipId });
+                logger.LogInformation("Validation du reçu {receiptId} dans la base de donnée.",receipId);   
+            }
+            catch (Exception ex) {
+                logger.LogError(ex, "Une erreur est survenue lor de la validation du reçu {receiptId} dans la base de donnée ",receipId);
+            }
             return result > 0;
         }
     }

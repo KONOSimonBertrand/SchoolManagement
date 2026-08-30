@@ -1665,4 +1665,10 @@
   <data name="LabelReceipts" xml:space="preserve">
     <value>Reçus</value>
   </data>
+  <data name="LabelInprogress" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="LabelPending" xml:space="preserve">
+    <value>En attente</value>
+  </data>
 </root>

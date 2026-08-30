@@ -44,7 +44,7 @@ namespace SchoolManagement.Application
 
         public Task<Receipt?> GetReceiptByIdNumberAsync(string idNumber)
         {
-            throw new NotImplementedException();
+            return receiptReadRepository.GetByIdNumberAsync(idNumber);
         }
 
         public Task<List<Receipt>> GetReceiptListAsync(int schoolYearId)

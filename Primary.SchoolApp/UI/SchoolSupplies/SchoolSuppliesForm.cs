@@ -282,24 +282,6 @@ namespace Primary.SchoolApp.UI
                         validateMenu.Click += ValidateMenu_Click;
                         e.ContextMenu.Items.Add(validateMenu);
                     }
-
-                    if (!selectedSupplie.IdNumber.ToLower().Contains("return") && selectedSupplie.IsValidated)
-                    {
-                        RadMenuItem returnMenu = new(Language.labelReturn);
-                        returnMenu.Image = AppUtilities.GetImage("Undo");
-                        returnMenu.Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 13 && x.AllowCreate == true);
-                        e.ContextMenu.Items.Add(returnMenu);
-                        returnMenu.Click += ReturnMenu_Click;
-
-                    }
-                    RadMenuItem printMenu = new(Language.labelPrintReceipt)
-                    {
-                        Enabled = Program.UserConnected.Modules.Any(x => x.ModuleId == 3 && x.AllowPrint == true)
-                    };
-                    e.ContextMenu.Items.Add(printMenu);
-                    printMenu.Image = AppUtilities.GetImage("Printer");
-                    printMenu.Click += PrintMenu_Click;
-
                 }
             }
         }
@@ -355,81 +337,6 @@ namespace Primary.SchoolApp.UI
                         else
                         {
                             RadMessageBox.Show(Language.MessageValidateError);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                RadMessageBox.Show(this, Language.messageNoActionWithClosedYear, "", MessageBoxButtons.OK, RadMessageIcon.Info);
-            }
-        }
-
-        private void PrintMenu_Click(object sender, EventArgs e)
-        {
-            if (DataGridView.CurrentRow.DataBoundItem is SchoolSupplie schoolSupplie)
-            {
-                schoolSupplie.Enrolling = selectedEnrolling;
-                //printService.PrintPaymentReceiptAsync(schoolSupplie, true);
-            }
-        }
-
-        // retour versement
-        private async void ReturnMenu_Click(object sender, EventArgs e)
-        {
-            if (!Program.CurrentSchoolYear.IsClosed)
-            {
-                if (DataGridView.CurrentRow.DataBoundItem is SchoolSupplie selectedSupply)
-                {
-                    if (selectedSupply != null)
-                    {
-                        DialogResult dialogResult = RadMessageBox.Show(Language.messageConfirmReturn, "", MessageBoxButtons.YesNo, RadMessageIcon.Question);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            var schoolSupplie = new SchoolSupplie()
-                            {
-                                Date = DateTime.Now,
-                                Amount = selectedSupply.Amount,
-                                TransactionDate = selectedSupply.TransactionDate,
-                                TransactionId = selectedSupply.TransactionId,
-                                Enrolling = selectedSupply.Enrolling,
-                                EnrollingId = selectedSupply.EnrollingId,
-                                CashFlowType = selectedSupply.CashFlowType,
-                                CashFlowTypeId = selectedSupply.CashFlowTypeId,
-                                PaymentMean = selectedSupply.PaymentMean,
-                                PaymentMeanId = selectedSupply.PaymentMeanId,
-                                Balance = selectedSupply.Balance,
-                                IdNumber = selectedSupply.IdNumber,
-                                DoneBy = selectedSupply.DoneBy,
-                                Quantity = selectedSupply.Quantity,
-                                ReceiptId = selectedSupply.ReceiptId,
-                                Receipt = selectedSupply.Receipt,
-
-                            };
-                            if (!selectedEnrolling.SchoolSuppliesList.ToList().Select(x => x.IdNumber).Contains(selectedSupply.IdNumber + "-R"))
-                            {
-                                var isDone = await schoolSupplieService.ReturnSchoolSupplie(selectedSupply);
-                                if (isDone)
-                                {
-                                    LoadSchoolSupplies(selectedEnrolling.Id);
-                                    Log log = new()
-                                    {
-                                        UserAction = $"Retour Fourniture scolaire {selectedSupply.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}",
-                                        UserId = clientApp.UserConnected.Id
-                                    };
-                                    await logService.CreateLog(log);
-                                    logger.LogInformation($"Retour Fourniture scolaire {selectedSupply.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
-                                }
-                                else
-                                {
-                                    logger.LogError($"Erreur lors du retour  fourniture scolaire {selectedSupply.Amount}  de l'élève {selectedEnrolling.Student.FullName}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
-                                    RadMessageBox.Show(Language.messageAddError);
-                                }
-                            }
-                            else
-                            {
-                                RadMessageBox.Show(Language.messageReturnAllreadyDone);
-                            }
                         }
                     }
                 }

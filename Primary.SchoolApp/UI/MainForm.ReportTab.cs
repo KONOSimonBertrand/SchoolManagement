@@ -56,7 +56,7 @@ namespace Primary.SchoolApp
                 runningTaskCount++;
                 this.TaskWaitingBar.Text = runningTaskCount.ToString();
                 await task;
-                int[] reports_with_detail = { 9, 10, 11, 12, 17,18,19,20, 21 };
+                int[] reports_with_detail = { 9, 10, 11, 12, 17,18,19,20, 21,23 };
                 if (generalReportTaskResult.TryGetValue(task.Id, out var result))
                 {
                     var form = Program.ServiceProvider.GetService<GeneralReportForm>();
@@ -174,7 +174,7 @@ namespace Primary.SchoolApp
                     break;
                 case 11:
                     form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
-                    form.ReportGrid.Columns[5].FormatString = "{0:dd-MM-yyyy}";
+                    form.ReportGrid.Columns[4].FormatString = "{0:dd-MM-yyyy}";
                     summaryRow = new GridViewSummaryRowItem {
                                           new (form.ReportGrid.Columns[2].Name, "{0}", GridAggregateFunction.Sum),
                                           new(form.ReportGrid.Columns[1].Name,"{0}", GridAggregateFunction.Count)
@@ -185,10 +185,10 @@ namespace Primary.SchoolApp
                 case 18:
                 case 19:
                     form.ReportGrid.Columns[2].FormatString = "{0:dd-MM-yyyy}";
-                    form.ReportGrid.Columns[6].FormatString = "{0:dd-MM-yyyy}";
+                    form.ReportGrid.Columns[5].FormatString = "{0:dd-MM-yyyy}";
                     summaryRow = new GridViewSummaryRowItem {
-                                          new (form.ReportGrid.Columns[4].Name, "{0}", GridAggregateFunction.Sum),
-                                          new(form.ReportGrid.Columns[5].Name,"{0}", GridAggregateFunction.Sum)
+                                          new (form.ReportGrid.Columns[0].Name, "{0}", GridAggregateFunction.Count),
+                                          new(form.ReportGrid.Columns[4].Name,"{0}", GridAggregateFunction.Sum)
                                         };
                     form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
                     break;
@@ -201,6 +201,15 @@ namespace Primary.SchoolApp
                     form.ReportGrid.Columns[8].FormatString = "{0:H:mm}";
                     form.ReportGrid.Columns[9].FormatString = "H:mm";
                     form.ReportGrid.Columns[10].FormatString = "H:mm";
+                    break;
+                case 23:
+                    form.ReportGrid.Columns[0].FormatString = "{0:dd-MM-yyyy}";
+                    summaryRow = new GridViewSummaryRowItem {
+                                          new (form.ReportGrid.Columns[0].Name, "{0}", GridAggregateFunction.Count),
+                                          new(form.ReportGrid.Columns[2].Name,"{0}", GridAggregateFunction.Sum),
+                                          new(form.ReportGrid.Columns[3].Name,"{0}", GridAggregateFunction.Sum)
+                                        };
+                    form.ReportGrid.MasterTemplate.SummaryRowsBottom.Add(summaryRow);
                     break;
 
             }
@@ -387,6 +396,10 @@ namespace Primary.SchoolApp
                     var startDate = Program.CurrentSchoolYear.StartFirstQuarter;
                     var endDate = Program.CurrentSchoolYear.EndThirdQuarter;
                     task = listingService.GetUserLogList(startDate.Value,endDate.Value);
+                    generalReportTaskResult.Add(Task.CurrentId, task.Result);
+                    break;
+                case 23:
+                    task = listingService.GetSchoolSupplieList();
                     generalReportTaskResult.Add(Task.CurrentId, task.Result);
                     break;
             }

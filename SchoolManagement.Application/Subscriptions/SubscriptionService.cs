@@ -27,13 +27,13 @@ namespace SchoolManagement.Application
         public async Task<bool> CreateSubscriptionAsync(Subscription subscription)
         {
             subscription.IdNumber=await GenerateSubscriptionIdNumber();
-            subscription.TransactionId = subscription.TransactionId.Trim() == string.Empty ? subscription.IdNumber : subscription.TransactionId;
+            subscription.TransactionId = subscription?.TransactionId?.Trim() == string.Empty ? subscription.IdNumber : subscription.TransactionId;
             return await subscriptionWriteRepository.AddSubscriptionAsync(subscription);
         }
         public async Task<string> GenerateSubscriptionIdNumber()
         {
             string idNumber;
-            var lastRecord = subscriptionReadRepository.GetLastSubscriptionAsync().Result;
+            var lastRecord = await subscriptionReadRepository.GetLastSubscriptionAsync();
             SchoolYear? lastSchoolYear = await schoolYeaRepository.GetLastSchoolYearAsync();
             int lastNumber = 0;
             int year = DateTime.Now.Year;
@@ -50,9 +50,9 @@ namespace SchoolManagement.Application
             await Task.Delay(0);
             return idNumber;
         }
-        public async Task<Subscription?> GetSubscriptionAsync(int studentId,int schoolYearId, int cashFlowTypeId, DateTime subscriptionDate)
+        public async Task<Subscription?> GetSubscriptionAsync(int enrollingId, int cashFlowTypeId, DateTime subscriptionDate)
         {
-            return await subscriptionReadRepository.GetSubscriptionAsync(studentId,schoolYearId, cashFlowTypeId,subscriptionDate);
+            return await subscriptionReadRepository.GetSubscriptionAsync(enrollingId, cashFlowTypeId,subscriptionDate);
         }
 
         public async Task<Subscription?> GetSubscriptionAsync(string idNumber)
@@ -60,14 +60,14 @@ namespace SchoolManagement.Application
             return await subscriptionReadRepository.GetSubscriptionAsync(idNumber);
         }
 
-        public async Task<List<Subscription>> GetSubscriptionListAsync(int studentId,int schoolYearId)
+        public async Task<List<Subscription>> GetSubscriptionListByEnrollingAsync(int enrollingId)
         {
-            return await subscriptionReadRepository.GetSubscriptionListAsync(studentId,schoolYearId);
+            return await subscriptionReadRepository.GetSubscriptionListByEnrollingAsync(enrollingId);
         }
 
-        public  async Task<List<Subscription>> GetSubscriptionLisAsync(int schoolyearId)
+        public  async Task<List<Subscription>> GetSubscriptionListBySchoolYearAsync(int schoolyearId)
         {
-            return await subscriptionReadRepository.GetSubscriptionListAsync(schoolyearId);
+            return await subscriptionReadRepository.GetSubscriptionListBySchoolYearAsync(schoolyearId);
         }
 
         public async Task<bool> ValidateSubscriptionAsync(int subscriptionId)

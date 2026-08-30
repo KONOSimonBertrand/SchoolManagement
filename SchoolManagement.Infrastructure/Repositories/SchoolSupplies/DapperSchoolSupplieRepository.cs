@@ -132,18 +132,22 @@ namespace SchoolManagement.Infrastructure.Repositories
                             INNER JOIN  CashFlowTypes AS B ON A.CashFlowTypeId=B.Id
                             INNER JOIN PaymentMeans AS C ON A.PaymentMeanId=C.Id
                             INNER JOIN Receipts AS R ON A.ReceiptId=R.Id
-                            WHERE A.EnrollingId IN (SELECT Id FROM StudentsEnrollings WHERE SchoolYearId=@schoolYearId) 
+                            INNER JOIN StudentsEnrollings AS E ON A.EnrollingId=E.Id
+                            INNER JOIN Students AS S ON E.StudentId=S.Id
+                            WHERE E.SchoolYearId=@schoolYearId
                              ORDER BY A.Id DESC ;";
 
             List<SchoolSupplie> result = new();
             try
             {
-                var getItems = await connection.QueryAsync<SchoolSupplie, CashFlowType, PaymentMean, Receipt, SchoolSupplie>(query,
-                 (schoolSupplie, cashFlowType, paymentMean, receipt) =>
+                var getItems = await connection.QueryAsync<SchoolSupplie, CashFlowType, PaymentMean, Receipt,StudentEnrolling, Student, SchoolSupplie>(query,
+                 (schoolSupplie, cashFlowType, paymentMean, receipt, enrolling, student) =>
                  {
                      schoolSupplie.CashFlowType = cashFlowType;
                      schoolSupplie.PaymentMean = paymentMean;
                      schoolSupplie.Receipt = receipt;
+                     schoolSupplie.Enrolling = enrolling;
+                     schoolSupplie.Enrolling.Student = student;
                      return schoolSupplie;
                  },
                  new { schoolYearId });
