@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.ui\\reporting\\reportcard\\termprimaryreportcardreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4AD75164-9635-49FB-86BD-1B97B78F099D}|SchoolManagement.UI\\SchoolManagement.UI.csproj|solutionrelative:schoolmanagement.ui\\reporting\\reportcard\\termprimaryreportcardreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\services\\printservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\services\\printservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\reporting\\notereport\\termprimaryreportcardreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\reporting\\notereport\\termprimaryreportcardreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\schoolmanagement.application\\subscriptions\\subscriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45D26950-4955-43D4-8315-EF716DF29D2F}|SchoolManagement.Application\\SchoolManagement.Application.csproj|solutionrelative:schoolmanagement.application\\subscriptions\\subscriptionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\services\\localstudentnoteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\services\\localstudentnoteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|c:\\users\\hp\\source\\repos\\schoolmanagement\\primary.schoolapp\\ui\\mainform.cashflow.tab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{945B1933-9CA0-4947-8B58-68FC09C2AB56}|Primary.SchoolApp\\Primary.SchoolApp.csproj|solutionrelative:primary.schoolapp\\ui\\mainform.cashflow.tab.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,46 +22,72 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TermPrimaryReportCardReport.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\Reporting\\ReportCard\\TermPrimaryReportCardReport.Designer.cs",
-              "RelativeDocumentMoniker": "SchoolManagement.UI\\Reporting\\ReportCard\\TermPrimaryReportCardReport.Designer.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.UI\\Reporting\\ReportCard\\TermPrimaryReportCardReport.Designer.cs",
-              "RelativeToolTip": "SchoolManagement.UI\\Reporting\\ReportCard\\TermPrimaryReportCardReport.Designer.cs",
-              "ViewState": "AgIAABcBAAAAAAAAAAAuwBkBAABxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T00:10:56.169Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TermPrimaryReportCardReport.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\NoteReport\\TermPrimaryReportCardReport.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Reporting\\NoteReport\\TermPrimaryReportCardReport.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Reporting\\NoteReport\\TermPrimaryReportCardReport.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\Reporting\\NoteReport\\TermPrimaryReportCardReport.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAABqAAAAAAAAAA==",
+              "Title": "SubscriptionService.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\Subscriptions\\SubscriptionService.cs",
+              "RelativeDocumentMoniker": "SchoolManagement.Application\\Subscriptions\\SubscriptionService.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\SchoolManagement.Application\\Subscriptions\\SubscriptionService.cs",
+              "RelativeToolTip": "SchoolManagement.Application\\Subscriptions\\SubscriptionService.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAkwEAAAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T00:10:45.76Z",
+              "WhenOpened": "2026-08-29T16:33:15.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PrintService.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\PrintService.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\Services\\PrintService.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\PrintService.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\Services\\PrintService.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAApwOsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-25T14:37:18.769Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LocalStudentNoteService.cs",
-              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\LocalStudentNoteService.cs",
-              "RelativeDocumentMoniker": "Primary.SchoolApp\\Services\\LocalStudentNoteService.cs",
-              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\Services\\LocalStudentNoteService.cs",
-              "RelativeToolTip": "Primary.SchoolApp\\Services\\LocalStudentNoteService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKgAAAAZAAAAAAAAAA==",
+              "Title": "MainForm.CashFlow.Tab.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
+              "RelativeDocumentMoniker": "Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
+              "ToolTip": "C:\\Users\\HP\\source\\repos\\SchoolManagement\\Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
+              "RelativeToolTip": "Primary.SchoolApp\\UI\\MainForm.CashFlow.Tab.cs",
+              "ViewState": "AgIAAIoBAAAAAAAAAAAhwJQBAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-23T00:04:52.301Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-20T05:20:40.432Z"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 73,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 73,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }
