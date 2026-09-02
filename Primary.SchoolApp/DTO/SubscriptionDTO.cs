@@ -1,8 +1,12 @@
 ﻿
 
-namespace SchoolManagement.Core.Model
+using SchoolManagement.Core.Model;
+using System;
+using System.Threading;
+
+namespace Primary.SchoolApp.DTO
 {
-    public class Subscription
+    public  class SubscriptionDTO
     {
         public int Id { get; set; }
         public string? IdNumber { get; set; }
@@ -13,16 +17,30 @@ namespace SchoolManagement.Core.Model
         public string? TransactionId { get; set; }
         public DateTime TransactionDate { get; set; }
         public int EnrollingId { get; set; }
-        public int CashFlowTypeId { get; set; }  
+        public int CashFlowTypeId { get; set; }
         public int PaymentMeanId { get; set; }
         public int ReceiptId { get; set; }
         public bool IsValidated { get; set; }
+        public string ValidattionState
+        {
+            get
+            {
+                if (Thread.CurrentThread.CurrentUICulture.Name == "en-GB")
+                {
+                    return IsValidated ? "OK" : "Pending";
+                }
+                else
+                {
+                    return IsValidated ? "OK" : "En attente";
+                }
+            }
+        }
         virtual public string State
         {
             get
             {
-               
-                if(EndDate.Date> DateTime.Now.Date)
+
+                if (EndDate.Date > DateTime.Now.Date)
                 {
                     return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "Ongoing" : "En cours";
                 }
@@ -30,18 +48,18 @@ namespace SchoolManagement.Core.Model
                 {
                     return Thread.CurrentThread.CurrentUICulture.Name == "en-GB" ? "Expired" : "Expiré";
                 }
-               return string.Empty;
+                return string.Empty;
             }
         }
-        public virtual StudentEnrolling? Enrolling{ get; set; }
+        public virtual StudentEnrolling? Enrolling { get; set; }
         public virtual CashFlowType? CashFlowType { get; set; }
         public virtual PaymentMean? PaymentMean { get; set; }
         public virtual Receipt? Receipt { get; set; }
 
         public override bool Equals(object? obj)
         {
-            if (obj is not Subscription other) return false;
-            return (this.Id == other.Id );
+            if (obj is not SubscriptionDTO other) return false;
+            return (this.Id == other.Id);
         }
         public override int GetHashCode()
         {

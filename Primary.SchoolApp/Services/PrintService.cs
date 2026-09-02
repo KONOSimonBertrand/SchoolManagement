@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Primary.SchoolApp.DTO;
 using Primary.SchoolApp.Reporting;
 using Primary.SchoolApp.Reporting.CashFlow;
+using Primary.SchoolApp.Utilities;
 using SchoolManagement.Application;
 using SchoolManagement.Core.Model;
 using System;
@@ -168,27 +169,27 @@ namespace Primary.SchoolApp.Services
             List<ReceiptItem> receiptItems = new();
             foreach (var item in linkedItems)
             {
-                if (item is TuitionPayment payment)
+                if (item is TuitionPaymentDTO payment)
                 {
-                    enrolling ??= Program.StudentEnrollingList.FirstOrDefault(x => x.Id == payment.EnrollingId);
+                    enrolling ??= payment.Enrolling.AsStudentEnrollingDTO();
                     if (studentName == string.Empty) studentName = enrolling?.Student?.FullName;
                     if (studentIdNumber == string.Empty) studentIdNumber = enrolling?.Student?.IdNumber;
                     if (studentClass == string.Empty) studentClass =  enrolling?.SchoolClass?.Name;
                     transactionIdList.Add(payment.TransactionId);
                     PaymentModeList.Add(payment?.PaymentMean?.Name);
                 }
-                if (item is Subscription subscription)
+                if (item is SubscriptionDTO subscription)
                 {
-                    enrolling ??= Program.StudentEnrollingList.FirstOrDefault(x => x.StudentId == subscription.EnrollingId);
+                    enrolling ??= subscription.Enrolling.AsStudentEnrollingDTO();
                     if (studentName == string.Empty) studentName = enrolling?.Student?.FullName;
                     if (studentIdNumber == string.Empty) studentIdNumber= enrolling?.Student?.IdNumber;
                     if (studentClass == string.Empty) studentClass = enrolling?.SchoolClass?.Name;
                     transactionIdList.Add(subscription.TransactionId);
                     PaymentModeList.Add(subscription?.PaymentMean?.Name);
                 }
-                if (item is SchoolSupplie supplie)
+                if (item is SchoolSupplieDTO supplie)
                 {
-                    enrolling ??= Program.StudentEnrollingList.FirstOrDefault(x => x.Id == supplie.EnrollingId);
+                    enrolling ??= supplie.Enrolling.AsStudentEnrollingDTO();
                     if (studentName == string.Empty) studentName = enrolling?.Student?.FullName;
                     if (studentIdNumber == string.Empty) studentIdNumber = enrolling?.Student?.IdNumber;
                     if (studentClass == string.Empty) studentClass = enrolling?.SchoolClass?.Name;
@@ -209,7 +210,7 @@ namespace Primary.SchoolApp.Services
             );
            foreach(var item in receipt.ReceiptItems)
             {
-                if(item.LinkedItem is SchoolSupplie )
+                if(item.LinkedItem is SchoolSupplieDTO )
                 {
                     receiptItems.Add(
                         new ReceiptItem()

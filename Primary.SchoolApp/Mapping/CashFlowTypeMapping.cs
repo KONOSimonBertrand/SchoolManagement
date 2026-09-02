@@ -8,24 +8,24 @@ namespace Primary.SchoolApp.Mapping
 {
     static class CashFlowTypeMapping
     {
-        public static CashFlowTypeDTO AsCashFlowTypeDTO(this CashFlowType cashFlowType)
+        public static CashFlowTypeDTO ToCashFlowTypeDTO(this CashFlowType entity)
         {
             return new CashFlowTypeDTO
             {
-                Id = cashFlowType.Id,
-                Name = cashFlowType.Name,
-                FlowCategory = cashFlowType.FlowCategory,
-                FlowDomain = cashFlowType.FlowDomain,
-                FlowType = cashFlowType.FlowType,
-                Description = cashFlowType.Description,
-                Sequence = cashFlowType.Sequence,
-                TransactionType = cashFlowType.TransactionType,
-                CategoryName = Helper.GetFlowCategoryName(cashFlowType.FlowCategory),
-                TypeName=Helper.GetFlowTypeName(cashFlowType.FlowType)
+                Id = entity.Id,
+                Name = entity.Name,
+                FlowCategory = entity.FlowCategory,
+                FlowDomain = entity.FlowDomain,
+                FlowType = entity.FlowType,
+                Description = entity.Description,
+                Sequence = entity.Sequence,
+                TransactionType = entity.TransactionType,
+                CategoryName = Helper.GetFlowCategoryName(entity.FlowCategory),
+                TypeName=Helper.GetFlowTypeName(entity.FlowType)
             };
         }
 
-        public static CashFlowType AsCashFlowType(this CashFlowTypeDTO dto)
+        public static CashFlowType ToCashFlowType(this CashFlowTypeDTO dto)
         {
             return new CashFlowType
             {

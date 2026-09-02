@@ -34,9 +34,9 @@ namespace Primary.SchoolApp.UI
         private readonly IPrintService printService;
         private readonly ClientApp clientApp;
         private readonly IReceiptService receiptService;
-        private readonly List<Subscription> subscriptionsToAdd;
-        private readonly List<TuitionPayment> tuitionPaymentsToAdd;
-        private readonly List<SchoolSupplie> schoolSuppliesToAdd;
+        private readonly List<SubscriptionDTO> subscriptionsToAdd;
+        private readonly List<TuitionPaymentDTO> tuitionPaymentsToAdd;
+        private readonly List<SchoolSupplieDTO> schoolSuppliesToAdd;
         private readonly List<ReceiptItem> paymentList;
         private readonly ILogger<AddFeesPaymentForm> logger;
         private StudentEnrolling selectedEnrolling;
@@ -54,9 +54,9 @@ namespace Primary.SchoolApp.UI
             this.clientApp = clientApp;
             this.receiptService = receiptService;
             this.logger = logger;
-            subscriptionsToAdd = new List<Subscription>();
-            tuitionPaymentsToAdd = new List<TuitionPayment>();
-            schoolSuppliesToAdd = new List<SchoolSupplie>();
+            subscriptionsToAdd = new List<SubscriptionDTO>();
+            tuitionPaymentsToAdd = new List<TuitionPaymentDTO>();
+            schoolSuppliesToAdd = new List<SchoolSupplieDTO>();
             paymentList = new List<ReceiptItem>();
             tuitionPayments = new List<TuitionPayment>();
             tuitionDiscounts = new List<TuitionDiscount>();
@@ -183,7 +183,8 @@ namespace Primary.SchoolApp.UI
                                 t.Enrolling = selectedEnrolling;
                                 t.ReceiptId = receipt.Id;
                                 t.Receipt = receipt;
-                                if (await cashFlowService.CreateTuitionPayment(t) == true)
+                                var newTuitionPayment = t.ToTuitionPayment();
+                                if (await cashFlowService.CreateTuitionPayment(newTuitionPayment) == true)
                                 {
                                     Log logTuitionPayment = new()
                                     {
@@ -192,9 +193,10 @@ namespace Primary.SchoolApp.UI
                                     };
                                     await logService.CreateLog(logTuitionPayment);
                                     logger.LogInformation("Enregistrement du paiement de frais scolarité  {TuitionPaymentName} pour l'élève {StudentName}  par l'utilisateur {UserName}", t?.CashFlowType?.Name, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
-                                    var payment = await cashFlowService.GetTuitionPayment(t.IdNumber);
+                                    var payment = await cashFlowService.GetTuitionPayment(newTuitionPayment.IdNumber);
                                     t.Id= payment.Id;
-                                    Program.TuitionPaymentList.Add(payment);
+                                    t.IdNumber = payment.IdNumber;
+                                    Program.TuitionPaymentList.Add(t);
                                 }
                                 else
                                 {
@@ -210,7 +212,8 @@ namespace Primary.SchoolApp.UI
                                 s.Enrolling = selectedEnrolling;
                                 s.ReceiptId = receipt.Id;
                                 s.Receipt = receipt;
-                                if (await subscriptionService.CreateSubscriptionAsync(s) == true)
+                                var newSubscription = s.ToSubscription();
+                                if (await subscriptionService.CreateSubscriptionAsync(newSubscription) == true)
                                 {
                                     Log logSubscription = new()
                                     {
@@ -219,9 +222,10 @@ namespace Primary.SchoolApp.UI
                                     };
                                     await logService.CreateLog(logSubscription);
                                     logger.LogInformation("Enregistrement de l'abonnement {SubscriptionName} pour l'élève {StudentName}  par l'utilisateur {UserName}", s?.CashFlowType?.Name, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
-                                    var subscription = await subscriptionService.GetSubscriptionAsync(s.IdNumber);
+                                    var subscription = await subscriptionService.GetSubscriptionAsync(newSubscription.IdNumber);
                                     s.Id = subscription.Id;
-                                    Program.SubscriptionList.Add(subscription);
+                                    s.IdNumber = subscription.IdNumber;
+                                    Program.SubscriptionList.Add(s);
                                 }
                                 else
                                 {
@@ -237,7 +241,8 @@ namespace Primary.SchoolApp.UI
                                 s.Enrolling = selectedEnrolling;
                                 s.ReceiptId = receipt.Id;
                                 s.Receipt = receipt;
-                                if (await supplieService.CreateSchoolSupplie(s) == true)
+                                var newSupplie = s.ToSchoolSupplie();
+                                if (await supplieService.CreateSchoolSupplie(newSupplie) == true)
                                 {
                                     Log logSupplie = new()
                                     {
@@ -246,9 +251,10 @@ namespace Primary.SchoolApp.UI
                                     };
                                     await logService.CreateLog(logSupplie);
                                     logger.LogInformation("Enregistrement fourniture scolaire  {SupplieName} pour l'élève {StudentName}  par l'utilisateur {UserName}", s?.CashFlowType?.Name, selectedEnrolling?.Student.FullName, clientApp.UserConnected.UserName);
-                                    var supplie = await supplieService.GetSchoolSupplie(s.IdNumber);
+                                    var supplie = await supplieService.GetSchoolSupplie(newSupplie.IdNumber);
                                     s.Id = supplie.Id;
-                                    Program.SchoolSupplieList.Add(supplie);
+                                    s.IdNumber = supplie.IdNumber;
+                                    Program.SchoolSupplieList.Add(s);
                                 }
                                 else
                                 {
@@ -257,7 +263,7 @@ namespace Primary.SchoolApp.UI
                             }
                         }
                         //impression du reçu
-                        var receiptToPrint = receipt.AsReceiptDTO();
+                        var receiptToPrint = receipt.ToReceiptDTO();
                         AppUtilities.GenerateReceiptItems(receiptToPrint, tuitionPaymentsToAdd, subscriptionsToAdd, schoolSuppliesToAdd);
                         Program.ReceiptList.Add(receiptToPrint);
                         await printService.PrintReceiptAsync(receiptToPrint, false);
@@ -652,7 +658,7 @@ namespace Primary.SchoolApp.UI
                 {
                     case TypeFee.TuitionFee:
                         balance = feeItem.Total - amount;
-                        var newTuition = new TuitionPayment()
+                        var newTuition = new TuitionPaymentDTO()
                         {
                             Amount = amount,
                             CashFlowTypeId = (feeItem.Tag as SchoolingCost)?.CashFlowTypeId ?? 0,
@@ -672,7 +678,7 @@ namespace Primary.SchoolApp.UI
 
                         break;
                     case TypeFee.Subscription:
-                        var newSubscription = new Subscription()
+                        var newSubscription = new SubscriptionDTO()
                         {
                             Amount = amount,
                             CashFlowTypeId = (feeItem.Tag as SubscriptionFee)?.CashFlowTypeId ?? 0,
@@ -693,7 +699,7 @@ namespace Primary.SchoolApp.UI
                     case TypeFee.SchoolSupply:
                         var requiredQuantity = (double)(feeItem.Tag as SchoolSupplieFee)?.RequiredQuantity;
                         balance = amount<= requiredQuantity? requiredQuantity - amount:0;
-                        var newSupplie = new SchoolSupplie()
+                        var newSupplie = new SchoolSupplieDTO()
                         {
                             Amount = (feeItem.Tag as SchoolSupplieFee)?.Amount * amount ?? 0,
                             Date = DateTime.Now,

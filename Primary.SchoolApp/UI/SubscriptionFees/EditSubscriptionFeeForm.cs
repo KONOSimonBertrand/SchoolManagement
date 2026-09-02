@@ -143,7 +143,7 @@ namespace Primary.SchoolApp.UI
                 {
                     subscriptionFee.SchoolYear = SchoolYearDropDownList.SelectedItem.DataBoundItem as SchoolYear;
                     subscriptionFee.SchoolYearId = subscriptionFee.SchoolYear.Id;
-                    var type = (SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).AsCashFlowType();
+                    var type = (SubscriptionTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).ToCashFlowType();
                     subscriptionFee.CashFlowType =type ;
                     subscriptionFee.CashFlowTypeId = subscriptionFee.CashFlowType.Id;
                     subscriptionFee.Duration = int.Parse(DurationSpinEditor.Value.ToString());
@@ -240,7 +240,7 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
+                Program.CashFlowTypeList.Add(data.ToCashFlowTypeDTO());
                 SubscriptionTypeDropDownList.DataSource = null;
                 SubscriptionTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Subscription);
                 SubscriptionTypeDropDownList.SelectedValue = data;

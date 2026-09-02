@@ -818,7 +818,7 @@ namespace Primary.SchoolApp.Utilities
         /// <param name="payments"></param>
         /// <param name="subscriptions"></param>
         /// <param name="supplies"></param>
-        public static void GenerateReceiptItems(ReceiptDTO receipt,IEnumerable<TuitionPayment> payments,IEnumerable<Subscription> subscriptions, IEnumerable<SchoolSupplie> supplies)
+        public static void GenerateReceiptItems(ReceiptDTO receipt,IEnumerable<TuitionPaymentDTO> payments,IEnumerable<SubscriptionDTO> subscriptions, IEnumerable<SchoolSupplieDTO> supplies)
         {
             foreach (var p in payments.Where(x => x.ReceiptId == receipt.Id))
             {

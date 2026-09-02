@@ -1,6 +1,4 @@
 ﻿
-
-using Org.BouncyCastle.Crypto.Utilities;
 using SchoolManagement.Core.Enum;
 
 namespace Primary.SchoolApp.DTO
@@ -19,5 +17,14 @@ namespace Primary.SchoolApp.DTO
         public string CategoryName { get; set;}
         public string TypeName { get; set;}
 
+        public override bool Equals(object? obj)
+        {
+            if (obj is not CashFlowTypeDTO other) return false;
+            return (other.Id == this.Id);
+        }
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }

@@ -1,24 +1,24 @@
-﻿
-
-using SchoolManagement.Core.Model;
+﻿using SchoolManagement.Core.Model;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace Primary.SchoolApp.DTO
 {
-    public class ReceiptDTO
+    public  class TuitionPaymentDTO
     {
-
         public int Id { get; set; }
         public string? IdNumber { get; set; }
-        public double Amount { get; set; }
-        public double Balance { get; set; }
-        public string? OpFor { get; set; }
-        public string? OpDoneBy { get; set; }
         public DateTime Date { get; set; }
-        public int SchoolYearId { get; set; }
-        public SchoolYear? SchoolYear { get; set; }
+        public double Amount { get; set; }
+        public int EnrollingId { get; set; }
+        public int CashFlowTypeId { get; set; }
+        public int PaymentMeanId { get; set; }
+        public double Balance { get; set; }
+        public string? DoneBy { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public string? TransactionId { get; set; }
+        public int ReceiptId { get; set; }
+        public string? Note { get; set; }
         public bool IsValidated { get; set; }
         public string ValidattionState
         {
@@ -34,11 +34,13 @@ namespace Primary.SchoolApp.DTO
                 }
             }
         }
-        public virtual List<ReceiptItem> ReceiptItems { get; set; } = new List<ReceiptItem>();
-
+        public virtual StudentEnrolling? Enrolling { get; set; }
+        public virtual CashFlowType? CashFlowType { get; set; }
+        public virtual PaymentMean? PaymentMean { get; set; }
+        public virtual Receipt? Receipt { get; set; }
         public override bool Equals(object? obj)
         {
-            if (obj is not ReceiptDTO other) return false;
+            if (obj is not TuitionPaymentDTO other) return false;
             return (other.Id == this.Id);
         }
         public override int GetHashCode()

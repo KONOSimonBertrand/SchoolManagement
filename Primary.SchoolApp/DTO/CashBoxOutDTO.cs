@@ -1,24 +1,20 @@
 ﻿
-
 using SchoolManagement.Core.Model;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 namespace Primary.SchoolApp.DTO
 {
-    public class ReceiptDTO
+    public  class CashBoxOutDTO
     {
-
         public int Id { get; set; }
-        public string? IdNumber { get; set; }
-        public double Amount { get; set; }
-        public double Balance { get; set; }
-        public string? OpFor { get; set; }
-        public string? OpDoneBy { get; set; }
         public DateTime Date { get; set; }
+        public string IdNumber { get; set; }
+        public double Amount { get; set; }
+        public int CashFlowTypeId { get; set; }
         public int SchoolYearId { get; set; }
-        public SchoolYear? SchoolYear { get; set; }
+        public string DoneBy { get; set; }
+        public string Note { get; set; }
         public bool IsValidated { get; set; }
         public string ValidattionState
         {
@@ -34,11 +30,12 @@ namespace Primary.SchoolApp.DTO
                 }
             }
         }
-        public virtual List<ReceiptItem> ReceiptItems { get; set; } = new List<ReceiptItem>();
+        public virtual CashFlowType CashFlowType { get; set; }
+        public virtual SchoolYear SchoolYear { get; set; }
 
         public override bool Equals(object? obj)
         {
-            if (obj is not ReceiptDTO other) return false;
+            if (obj is not CashBoxInDTO other) return false;
             return (other.Id == this.Id);
         }
         public override int GetHashCode()

@@ -6,6 +6,9 @@ using SchoolManagement.UI.Localization;
 using System;
 using System.Linq;
 using SchoolManagement.Core.Enum;
+using Primary.SchoolApp.Mapping;
+using Microsoft.Extensions.Logging;
+using Primary.SchoolApp.DTO;
 namespace Primary.SchoolApp.UI
 {
     internal class AddOtherCashFlowForm:SchoolManagement.UI.EditOtherCashFlowForm
@@ -13,12 +16,14 @@ namespace Primary.SchoolApp.UI
         private readonly ICashFlowService cashFlowService;
         private readonly ILogService logService;
         private readonly ClientApp clientApp;
-        private int selectedCategory;
+        private FlowType selectedType;
+        private readonly ILogger<AddOtherCashFlowForm> logger;
         internal string LastIdNumber=string.Empty;
-        public AddOtherCashFlowForm(ICashFlowService cashFlowService, ILogService logService, ClientApp clientApp)
+        public AddOtherCashFlowForm(ICashFlowService cashFlowService, ILogService logService, ILogger<AddOtherCashFlowForm> logger, ClientApp clientApp)
         {
             this.cashFlowService = cashFlowService;
             this.logService = logService;
+            this.logger = logger;
             InitEvents();
             this.clientApp = clientApp;
         }
@@ -39,20 +44,21 @@ namespace Primary.SchoolApp.UI
             }
         }
 
-        internal void Init(int selectedType)
+        internal void Init(FlowType selectedType)
         {
-            this.selectedCategory = selectedType;
-            this.CashFlowTypeDropDownList.DataSource = selectedType == 2 ? Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.CashSupply) : Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Expense);
+            this.selectedType = selectedType;
+            this.CashFlowTypeDropDownList.DataSource = selectedType == FlowType.Inflow ? Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.CashSupply) : Program.CashFlowTypeList.Where(x => x.FlowCategory == FlowCategory.Expense);
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private  async void SaveButton_Click(object sender, EventArgs e)
         {
             if (IsValidData()) {
-                var selectedCashFlowType= CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowType;
-                string logMessage;
+                var selectedCashFlowTypeDTO= CashFlowTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO;
+                var selectedCashFlowType= selectedCashFlowTypeDTO.ToCashFlowType();
+                string logMessage=string.Empty;
                 bool isDone;
                 //si c'est une dépense
-                if (selectedCategory == 2)
+                if (selectedType == FlowType.Inflow)
                 {
                     var cashBoxIn = new CashBoxIn()
                     {
@@ -65,17 +71,22 @@ namespace Primary.SchoolApp.UI
                         SchoolYearId = Program.CurrentSchoolYear.Id,
                         Note = NoteTextBox.Text,
                     };
-                    logMessage = $"Ajout d'un approvisionnement de {cashBoxIn.Amount} pour {selectedCashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}";
-                    isDone = cashFlowService.CreateCashBoxIn(cashBoxIn).Result;
+                    isDone = await cashFlowService.CreateCashBoxIn(cashBoxIn);
                     if (isDone)
                     {
+                        logMessage = $"Ajout d'un approvisionnement de {cashBoxIn.Amount} pour {selectedCashFlowTypeDTO.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}";
+                        logger.LogInformation(logMessage);
                         LastIdNumber = cashBoxIn.IdNumber;
-                        var recordAdded = cashFlowService.GetCashBoxIn(LastIdNumber).Result;
+                        var recordAdded = await cashFlowService.GetCashBoxIn(LastIdNumber);
                         if (recordAdded != null)
                         {
                             cashBoxIn.Id = recordAdded.Id;
-                            Program.CashBoxInList.Add(cashBoxIn);
+                            Program.CashBoxInList.Add(cashBoxIn.ToCashBoxInDTO());
                         }
+                    }
+                    else
+                    {
+                        logger.LogError($"Une erreur est survenue lors l'ajout de d'un approvisionnement de {cashBoxIn.Amount} pour {selectedCashFlowTypeDTO.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
                     }
                 }
                 else
@@ -91,17 +102,22 @@ namespace Primary.SchoolApp.UI
                         SchoolYearId = Program.CurrentSchoolYear.Id,
                         Note = NoteTextBox.Text,
                     };
-                    logMessage = $"Ajout d'une dépense de {cashBoxOut.Amount} pour {selectedCashFlowType.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}";
-                    isDone = cashFlowService.CreateCashBoxOut(cashBoxOut).Result;
+                    logMessage = $"Ajout d'une dépense de {cashBoxOut.Amount} pour {selectedCashFlowTypeDTO.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}";
+                    logger.LogInformation(logMessage);
+                    isDone = await cashFlowService.CreateCashBoxOut(cashBoxOut);
                     if (isDone)
                     {
                         LastIdNumber = cashBoxOut.IdNumber;
-                        var recordAdded = cashFlowService.GetCashBoxOut(LastIdNumber).Result;
+                        var recordAdded = await cashFlowService.GetCashBoxOut(LastIdNumber);
                         if (recordAdded != null)
                         {
                             cashBoxOut.Id = recordAdded.Id;
-                            Program.CashBoxOutList.Add(cashBoxOut);
+                            Program.CashBoxOutList.Add(cashBoxOut.ToCashBoxOutDTO());
                         }
+                    }
+                    else
+                    {
+                        logger.LogError($"Une erreur est survenue lors l'ajout de d'une dépense de {cashBoxOut.Amount} pour {selectedCashFlowTypeDTO.Name}  par l'utilisateur {clientApp.UserConnected.UserName} sur le poste {clientApp.IpAddress}");
                     }
                 }
                 if (isDone)
@@ -112,7 +128,7 @@ namespace Primary.SchoolApp.UI
                         UserAction = logMessage,
                         UserId = clientApp.UserConnected.Id
                     };
-                    logService.CreateLog(log);
+                    await logService.CreateLog(log);
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
                     this.Close();
                 }

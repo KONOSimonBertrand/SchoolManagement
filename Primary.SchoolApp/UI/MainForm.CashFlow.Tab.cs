@@ -78,7 +78,7 @@ namespace Primary.SchoolApp
                             if (recordAdded != null)
                             {
                                 cashbox.Id = recordAdded.Id;
-                                Program.CashBoxOutList.Add(cashbox);
+                                Program.CashBoxOutList.Add(cashbox.ToCashBoxOutDTO());
                             }
                             CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
 
@@ -133,7 +133,7 @@ namespace Primary.SchoolApp
                             if (recordAdded != null)
                             {
                                 cashbox.Id = recordAdded.Id;
-                                Program.CashBoxInList.Add(cashbox);
+                                Program.CashBoxInList.Add(cashbox.ToCashBoxInDTO());
                             }
                             CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
                             Log log = new()
@@ -392,7 +392,7 @@ namespace Primary.SchoolApp
                         if (recordAdded != null)
                         {
                             returnSubscription.Id = recordAdded.Id;
-                            Program.SubscriptionList.Add(recordAdded);
+                            Program.SubscriptionList.Add(recordAdded.ToSubscriptionDTO());
                         }
                         Log log = new()
                         {
@@ -452,7 +452,7 @@ namespace Primary.SchoolApp
                     if (recordAdded != null)
                     {
                         returnPayment.Id = recordAdded.Id;
-                        Program.TuitionPaymentList.Add(recordAdded);
+                        Program.TuitionPaymentList.Add(recordAdded.ToTuitionPaymentDTO());
                     }
                     Log log = new()
                     {
@@ -512,7 +512,7 @@ namespace Primary.SchoolApp
                     if (recordAdded != null)
                     {
                         returnSupplie.Id = recordAdded.Id;
-                        Program.SchoolSupplieList.Add(recordAdded);
+                        Program.SchoolSupplieList.Add(recordAdded.ToSchoolSupplieDTO());
                     }
                     Log log = new()
                     {
@@ -1112,7 +1112,7 @@ namespace Primary.SchoolApp
                 switch (CashFlowLeftListView.SelectedItem.Key)
                 {
                     case 0:// Frais de scolarité
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment selectedPayment)
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPaymentDTO selectedPayment)
                         {
                             //validate payment
                             if (!selectedPayment.IsValidated)
@@ -1128,7 +1128,7 @@ namespace Primary.SchoolApp
                         }
                         break;
                     case 1: //Abonnement
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is Subscription selectedSubscription)
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is SubscriptionDTO selectedSubscription)
                         {
                             //validate
                             if (!selectedSubscription.IsValidated)
@@ -1144,7 +1144,7 @@ namespace Primary.SchoolApp
                         }
                         break;
                     case 2:
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxIn selectedCashBoxIn)
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxInDTO selectedCashBoxIn)
                         {
                             //validate
                             if (!selectedCashBoxIn.IsValidated)
@@ -1172,7 +1172,7 @@ namespace Primary.SchoolApp
                                 {
                                     if (!Program.CurrentSchoolYear.IsClosed)
                                     {
-                                        ReturnCashBoxIn(selectedCashBoxIn);
+                                        ReturnCashBoxIn(selectedCashBoxIn.ToCashBoxIn());
                                     }
                                     else
                                     {
@@ -1192,7 +1192,7 @@ namespace Primary.SchoolApp
                         }
                         break;
                     case 3:
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOut selectedCashBoxOut)
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOutDTO selectedCashBoxOut)
                         {
                             //validate
                             if (!selectedCashBoxOut.IsValidated)
@@ -1219,7 +1219,7 @@ namespace Primary.SchoolApp
                                 {
                                     if (!Program.CurrentSchoolYear.IsClosed)
                                     {
-                                        ReturnCashBoxOut(selectedCashBoxOut);
+                                        ReturnCashBoxOut(selectedCashBoxOut.ToCashBoxOut());
                                     }
                                     else
                                     {
@@ -1241,7 +1241,7 @@ namespace Primary.SchoolApp
                         }
                         break;
                     case 4: //Fourniture scolaire
-                        if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplie selectedSupplie)
+                        if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplieDTO selectedSupplie)
                         {
                             //validate
                             if (!selectedSupplie.IsValidated)
@@ -1305,18 +1305,18 @@ namespace Primary.SchoolApp
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is Subscription subscription)
+                if (CashFlowGridView.CurrentRow.DataBoundItem is SubscriptionDTO subscriptionDTO)
                 {
-                    if (await CreateValidationSubscription(subscription))
+                    if (await CreateValidationSubscription(subscriptionDTO.ToSubscription()))
                     {
-                        subscription.IsValidated = true;
-                        logger.LogInformation("Validation du versement {IdNumber}", subscription.IdNumber
+                        subscriptionDTO.IsValidated = true;
+                        logger.LogInformation("Validation du versement {IdNumber}", subscriptionDTO.IdNumber
                             );
                         CashFlowGridView.DataSource = Program.SubscriptionList.OrderByDescending(x => x.Id);
                     }
                     else
                     {
-                        logger.LogWarning("La validation du versement {IdNumber} n'a pas été réalisée", subscription.IdNumber);
+                        logger.LogWarning("La validation du versement {IdNumber} n'a pas été réalisée", subscriptionDTO.IdNumber);
                     }
                 }
             }
@@ -1330,10 +1330,13 @@ namespace Primary.SchoolApp
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPayment payment)
+                if (CashFlowGridView.CurrentRow.DataBoundItem is TuitionPaymentDTO paymentDTO)
                 {
-                    await CreateValidationTuitionPayment(payment);
-                    CashFlowGridView.DataSource = Program.TuitionPaymentList.OrderByDescending(x => x.Id);
+                    if(await CreateValidationTuitionPayment(paymentDTO.ToTuitionPayment()))
+                    {
+                        paymentDTO.IsValidated = true;
+                        CashFlowGridView.DataSource = Program.TuitionPaymentList.OrderByDescending(x => x.Id);
+                    }
                 }
             }
             else
@@ -1345,9 +1348,9 @@ namespace Primary.SchoolApp
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplie supplie)
+                if (CashFlowGridView.CurrentRow.DataBoundItem is SchoolSupplieDTO supplie)
                 {
-                    if (await CreateValidationSchoolSupplie(supplie))
+                    if (await CreateValidationSchoolSupplie(supplie.ToSchoolSupplie()))
                     {
                         supplie.IsValidated = true;
                         logger.LogInformation("Validation fourniture scolaire {IdNumber}", supplie.IdNumber
@@ -1390,22 +1393,22 @@ namespace Primary.SchoolApp
                             logger.LogInformation(logValidate.UserAction);
                             foreach (var item in receipt.ReceiptItems)
                             {
-                                if (item.LinkedItem is TuitionPayment payment)
+                                if (item.LinkedItem is TuitionPaymentDTO paymentDTO)
                                 {
-                                    if (!payment.IsValidated)
+                                    if (!paymentDTO.IsValidated)
                                     {
-                                        if (await CreateValidationTuitionPayment(payment))
+                                        if (await CreateValidationTuitionPayment(paymentDTO.ToTuitionPayment()))
                                         {
-                                            payment.IsValidated = true;
+                                            paymentDTO.IsValidated = true;
                                             logger.LogInformation("Validation du versement {IdNumber} du reçu {IdNumber}",
-                                                payment.IdNumber,
+                                                paymentDTO.IdNumber,
                                                 receipt.IdNumber
                                                 );
                                         }
                                         else
                                         {
                                             logger.LogError("Une erreur est survenue lors de la validation du versement {IdNumber} du reçu {IdNumber}",
-                                                payment.IdNumber,
+                                                paymentDTO.IdNumber,
                                                 receipt.IdNumber
                                                 );
                                         }
@@ -1413,22 +1416,22 @@ namespace Primary.SchoolApp
                                 }
                                 else
                                 {
-                                    if (item.LinkedItem is Subscription subscription)
+                                    if (item.LinkedItem is SubscriptionDTO subscriptionDTO)
                                     {
-                                        if (!subscription.IsValidated)
+                                        if (!subscriptionDTO.IsValidated)
                                         {
-                                            if (await CreateValidationSubscription(subscription))
+                                            if (await CreateValidationSubscription(subscriptionDTO.ToSubscription()))
                                             {
-                                                subscription.IsValidated = true;
+                                                subscriptionDTO.IsValidated = true;
                                                 logger.LogInformation("Validation de l'abonnement {IdNumber} du reçu {IdNumber}",
-                                                subscription.IdNumber,
+                                                subscriptionDTO.IdNumber,
                                                 receipt.IdNumber
                                                 );
                                             }
                                             else
                                             {
                                                 logger.LogError("Une erreur est survenue lors de la validation de l'abonnement {IdNumber} du reçu {IdNumber}",
-                                                    subscription.IdNumber,
+                                                    subscriptionDTO.IdNumber,
                                                     receipt.IdNumber
                                                     );
                                             }
@@ -1436,22 +1439,22 @@ namespace Primary.SchoolApp
                                     }
                                     else
                                     {
-                                        if (item.LinkedItem is SchoolSupplie supplie)
+                                        if (item.LinkedItem is SchoolSupplieDTO supplieDTO)
                                         {
-                                            if (!supplie.IsValidated)
+                                            if (!supplieDTO.IsValidated)
                                             {
-                                                if (await CreateValidationSchoolSupplie(supplie))
+                                                if (await CreateValidationSchoolSupplie(supplieDTO.ToSchoolSupplie()))
                                                 {
-                                                    supplie.IsValidated = true;
+                                                    supplieDTO.IsValidated = true;
                                                     logger.LogInformation("Validation fourniture scolaire {IdNumber} du reçu {IdNumber}",
-                                                    supplie.IdNumber,
+                                                    supplieDTO.IdNumber,
                                                     receipt.IdNumber
                                                     );
                                                 }
                                                 else
                                                 {
                                                     logger.LogError("Une erreur est survenue lors de la validation fourniture scolaire {IdNumber} du reçu {IdNumber}",
-                                                        supplie.IdNumber,
+                                                        supplieDTO.IdNumber,
                                                         receipt.IdNumber
                                                         );
                                                 }
@@ -1481,7 +1484,7 @@ namespace Primary.SchoolApp
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxIn selectedCashBoxIn)
+                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxInDTO selectedCashBoxIn)
                 {
                     if (selectedCashBoxIn != null && selectedCashBoxIn.IsValidated == false)
                     {
@@ -1546,7 +1549,7 @@ namespace Primary.SchoolApp
         {
             if (!Program.CurrentSchoolYear.IsClosed)
             {
-                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOut selectedCashBoxOut)
+                if (CashFlowGridView.CurrentRow.DataBoundItem is CashBoxOutDTO selectedCashBoxOut)
                 {
                     if (selectedCashBoxOut != null && selectedCashBoxOut.IsValidated == false)
                     {
@@ -1574,7 +1577,7 @@ namespace Primary.SchoolApp
                                 SchoolYearId = Program.CurrentSchoolYear.Id,
                                 Note = $"{Language.LabelExpense} {selectedCashBoxOut.IdNumber}: {selectedCashBoxOut.CashFlowType.Name}",
                             };
-                            var isDone = cashFlowService.CreateCashFlow(cashFlow).Result;
+                            var isDone = await cashFlowService.CreateCashFlow(cashFlow);
                             if (isDone)
                             {
                                 CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
@@ -1634,7 +1637,7 @@ namespace Primary.SchoolApp
                                     IsValidated = false
                                 };
                                 var returnReceipt = await receiptService.ReturnReceiptAsync(newReceipt);
-                                var returnReceiptDTO = returnReceipt.AsReceiptDTO();
+                                var returnReceiptDTO = returnReceipt.ToReceiptDTO();
                                 Program.ReceiptList.Add(returnReceiptDTO);
                                 if (returnReceipt != null)
                                 {
@@ -1717,7 +1720,7 @@ namespace Primary.SchoolApp
                     var form_02 = Program.ServiceProvider.GetService<AddOtherCashFlowForm>();
                     form_02.Text = Language.labelAdd + ":.." + Language.LabelSupply;
                     form_02.Icon = this.Icon;
-                    form_02.Init(2);
+                    form_02.Init(FlowType.Inflow);
                     if (form_02.ShowDialog(this) == DialogResult.OK)
                     {
                         CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);
@@ -1727,7 +1730,7 @@ namespace Primary.SchoolApp
                     var form_03 = Program.ServiceProvider.GetService<AddOtherCashFlowForm>();
                     form_03.Text = Language.labelAdd + ":.." + Language.LabelExpense;
                     form_03.Icon = this.Icon;
-                    form_03.Init(3);
+                    form_03.Init(FlowType.Outflow);
                     if (form_03.ShowDialog(this) == DialogResult.OK)
                     {
                         CashFlowGridView.DataSource = int.Parse(CashFlowLeftListView.SelectedItem.Key.ToString()) == 2 ? Program.CashBoxInList.OrderByDescending(x => x.Id) : Program.CashBoxOutList.OrderByDescending(x => x.Id);

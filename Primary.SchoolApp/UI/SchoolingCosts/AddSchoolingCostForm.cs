@@ -430,7 +430,7 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
+                Program.CashFlowTypeList.Add(data.ToCashFlowTypeDTO());
                 CostTypeDropDownList.DataSource = null;
                 CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == SchoolManagement.Core.Enum.FlowCategory.TuitionFee);
                 CostTypeDropDownList.SelectedValue = data;

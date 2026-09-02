@@ -77,7 +77,7 @@ namespace Primary.SchoolApp.UI
                     cashFlowTypeDTO.FlowType = (FlowType)FlowTypeDropDownList.SelectedValue;
                     cashFlowTypeDTO.Description = DescriptionTextBox.Text;
                     cashFlowTypeDTO.Sequence = int.Parse(SequenceSpinEditor.Value.ToString());
-                    bool isDone = cashFlowTypeService.UpdateCashFlowType(cashFlowTypeDTO.AsCashFlowType()).Result;
+                    bool isDone = cashFlowTypeService.UpdateCashFlowType(cashFlowTypeDTO.ToCashFlowType()).Result;
                     if (isDone == true)
                     {
                         Log log = new()

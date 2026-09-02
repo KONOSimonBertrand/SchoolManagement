@@ -115,7 +115,6 @@ namespace Primary.SchoolApp.UI
 
             this.Invoke(new Action(this.Close));
             //load login form
-            // System.Windows.Forms.Application.Run(Program.ServiceProvider.GetRequiredService<LoginForm>());
             try
             {
                 System.Windows.Forms.Application.Run(Program.ServiceProvider.GetRequiredService<LoginForm>());
@@ -157,7 +156,7 @@ namespace Primary.SchoolApp.UI
             Program.ClassSubjectList= await getClassSubjectListTask;
             Program.SchoolRoomList = await getRoomListTask;
             var cashflowTypeList= await getCashflowTypeListTask;
-            Program.CashFlowTypeList = cashflowTypeList.Select(x=>x.AsCashFlowTypeDTO()).ToList();
+            Program.CashFlowTypeList = cashflowTypeList.Select(x=>x.ToCashFlowTypeDTO()).ToList();
             Program.PaymentMeanList = await getPaymenMeantListTask;
             Program.SchoolingCostList = await getSchoolingCostListTask;
             Program.SubscriptionFeeList = await getSubscripFeetionListTask;
@@ -203,11 +202,11 @@ namespace Primary.SchoolApp.UI
                 await Task.WhenAll(getPaymentListTask, getEnrollingListTask, getDiscountListTask);
                 //chargement des données dans les listes principales
                 Program.TuitionDiscountList = await getDiscountListTask;
-                Program.SchoolSupplieList=await getSchoolSupplieListTask;
-                Program.TuitionPaymentList = await getPaymentListTask;
+                Program.SchoolSupplieList=(await getSchoolSupplieListTask).Select(x => x.ToSchoolSupplieDTO()).ToList();
+                Program.TuitionPaymentList = (await getPaymentListTask).Select(x => x.ToTuitionPaymentDTO()).ToList();
                 Program.SchoolingCostItemList = await getSchoolingCostItemTask;
                 var enrollingList = await getEnrollingListTask;
-                Program.SubscriptionList=await getSubscriptionTask;
+                Program.SubscriptionList=(await getSubscriptionTask).Select(x => x.ToSubscriptionDTO()).ToList();
                 Program.CashFlowList = await getCashFlowTask;
                 Program.StudentRoomList = await getStudentRoomTask;
                 Program.EmployeeEnrollingList = await getEmployeeListTask;
@@ -222,8 +221,8 @@ namespace Primary.SchoolApp.UI
                     //extraction de la liste des frais exigibles
                     var feeIdList = Program.SchoolingCostList.Where(x => x.SchoolYearId == schoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Select(x => x.CashFlowTypeId).ToList();
                     //extraction des réductions et des versements de l'élève
-                    enrollingDTO.PaymentList = Program.TuitionPaymentList.Where(x => x.EnrollingId == enrolling.Id).ToList();
-                    enrollingDTO.PaymentPayableList = Program.TuitionPaymentList.Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
+                    enrollingDTO.PaymentList = Program.TuitionPaymentList.Select(t => t.ToTuitionPayment()).Where(x => x.EnrollingId == enrolling.Id).ToList();
+                    enrollingDTO.PaymentPayableList = Program.TuitionPaymentList.Select(t => t.ToTuitionPayment()).Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
                     enrollingDTO.DiscountList = Program.TuitionDiscountList.Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
                     //extraction de la somme des frais exigibles
                     var amountFee = Program.SchoolingCostList.Where(x => x.SchoolYearId == schoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Sum(x => x.Amount);
@@ -244,10 +243,10 @@ namespace Primary.SchoolApp.UI
                     // Ajout de l'inscription dans la liste à afficher
                     Program.StudentEnrollingList.Add(enrollingDTO);
                 }
-                Program.CashBoxInList = await getCashBoxInTask;
-                Program.CashBoxOutList = await getCashBoxOutTask;
+                Program.CashBoxInList = (await getCashBoxInTask).Select(x=>x.ToCashBoxInDTO()).ToList();
+                Program.CashBoxOutList = (await getCashBoxOutTask).Select(x=>x.ToCashBoxOutDTO()).ToList();
                 Program.EvaluationSessionStateList = await getEvaluationStateTask;
-                Program.ReceiptList = (await getReceiptListTask).Select(x=>x.AsReceiptDTO()).ToList();
+                Program.ReceiptList = (await getReceiptListTask).Select(x=>x.ToReceiptDTO()).ToList();
                 foreach (var receipt in Program.ReceiptList) {
                    AppUtilities.GenerateReceiptItems(receipt, Program.TuitionPaymentList, Program.SubscriptionList, Program.SchoolSupplieList);
                 }

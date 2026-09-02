@@ -382,10 +382,10 @@ namespace Primary.SchoolApp
                     var getEmployeeListTask = employeeService.GetEmployeeEnrollingList(schoolYear.Id);
                     var getEmployeeRoomListTask = employeeService.GetRoomListBySchoolYear(schoolYear.Id);
                     Program.TuitionDiscountList = await getDiscountListTask;
-                    Program.SchoolSupplieList = await getSchoolSupplieListTask;
-                    Program.TuitionPaymentList = await getPaymentListTask;
+                    Program.SchoolSupplieList = (await getSchoolSupplieListTask).Select(x => x.ToSchoolSupplieDTO()).ToList();
+                    Program.TuitionPaymentList = (await getPaymentListTask).Select(x => x.ToTuitionPaymentDTO()).ToList();
                     Program.SchoolingCostItemList = await getSchoolingCostItemTask;
-                    Program.SubscriptionList = await getSubscriptionTask;
+                    Program.SubscriptionList = (await getSubscriptionTask).Select(x => x.ToSubscriptionDTO()).ToList();
                     Program.CashFlowList = await getCashFlowTask;
                     Program.StudentRoomList = await getStudentRoomTask;
                     Program.EvaluationSessionStateList = await getEvaluationStateTask;
@@ -402,8 +402,8 @@ namespace Primary.SchoolApp
                         //extraction de la liste des frais exigibles
                         var feeIdList = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Select(x => x.CashFlowTypeId).ToList();
                         //extraction des réductions et des versements de l'élève
-                        enrollingDTO.PaymentList = Program.TuitionPaymentList.Where(x => x.EnrollingId == enrolling.Id).ToList();
-                        enrollingDTO.PaymentPayableList = Program.TuitionPaymentList.Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
+                        enrollingDTO.PaymentList = Program.TuitionPaymentList.Select(t => t.ToTuitionPayment()).Where(x => x.EnrollingId == enrolling.Id).ToList();
+                        enrollingDTO.PaymentPayableList = Program.TuitionPaymentList.Select(t => t.ToTuitionPayment()).Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
                         enrollingDTO.DiscountList = Program.TuitionDiscountList.Where(x => x.EnrollingId == enrolling.Id && feeIdList.Contains(x.CashFlowTypeId)).ToList();
                         //extraction de la somme des frais exigibles
                         var amountFee = Program.SchoolingCostList.Where(x => x.SchoolYearId == Program.CurrentSchoolYear.Id && x.IsPayable == true && x.SchoolClassId == enrolling.ClassId).Sum(x => x.Amount);
@@ -424,9 +424,9 @@ namespace Primary.SchoolApp
                         // Ajout de l'inscription dans la liste à afficher
                         Program.StudentEnrollingList.Add(enrollingDTO);
                     }
-                    Program.CashBoxInList = await getCashBoxInTask;
-                    Program.CashBoxOutList = await getCashBoxOutTask;
-                    Program.ReceiptList = (await getReceiptListTask).Select(x => x.AsReceiptDTO()).ToList();
+                    Program.CashBoxInList = (await getCashBoxInTask).Select(x=>x.ToCashBoxInDTO()).ToList();
+                    Program.CashBoxOutList = (await getCashBoxOutTask).Select(x=>x.ToCashBoxOutDTO()).ToList();
+                    Program.ReceiptList = (await getReceiptListTask).Select(x => x.ToReceiptDTO()).ToList();
                     foreach (var receipt in Program.ReceiptList)
                     {
                         AppUtilities.GenerateReceiptItems(receipt, Program.TuitionPaymentList, Program.SubscriptionList, Program.SchoolSupplieList);
@@ -1683,7 +1683,7 @@ namespace Primary.SchoolApp
             studentEnrollingInfo.HealthFileLabel.Image = AppUtilities.GetImage("Folder");
             studentEnrollingInfo.SubscriptionsLabel.Image = AppUtilities.GetImage("Folder");
 
-            studentEnrollingInfo.RoomTextBox.Text = getRoom.Result.Room.Name;
+            studentEnrollingInfo.RoomTextBox.Text = getRoom.Result?.Room?.Name;
             studentEnrollingInfo.ContactsLabel.Text = $"{Language.labelContacts}: {getContacts.Result.Count}";
             studentEnrollingInfo.DisciplineFileLabel.Text = $"{Language.labelDisciplinaryFile}: {getDisciplines.Result.Count}";
             studentEnrollingInfo.HealthFileLabel.Text = $"{Language.labelMedicalFile}: {getMedicalRecords.Result.Count}";

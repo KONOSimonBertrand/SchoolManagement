@@ -7,23 +7,23 @@ namespace Primary.SchoolApp.Mapping
 {
     public static class ReceiptMapping
     {
-        public static ReceiptDTO AsReceiptDTO(this Receipt receipt) {
+        public static ReceiptDTO ToReceiptDTO(this Receipt entity) {
             return new ReceiptDTO()
             {
-                Id = receipt.Id,
-                Amount = receipt.Amount,
-                Balance = receipt.Balance,
-                Date = receipt.Date,
-                IdNumber = receipt.IdNumber,
-                IsValidated = receipt.IsValidated,
-                OpDoneBy = receipt.OpDoneBy,
-                OpFor = receipt.OpFor,
-                SchoolYear = receipt.SchoolYear,
-                SchoolYearId = receipt.SchoolYearId,
+                Id = entity.Id,
+                Amount = entity.Amount,
+                Balance = entity.Balance,
+                Date = entity.Date,
+                IdNumber = entity.IdNumber,
+                IsValidated = entity.IsValidated,
+                OpDoneBy = entity.OpDoneBy,
+                OpFor = entity.OpFor,
+                SchoolYear = entity.SchoolYear,
+                SchoolYearId = entity.SchoolYearId,
             };
         }
 
-        public static Receipt AsReceipt(this ReceiptDTO dto) {
+        public static Receipt ToReceipt(this ReceiptDTO dto) {
             return new Receipt()
             {
                 Id = dto.Id,

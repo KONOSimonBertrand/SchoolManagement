@@ -190,7 +190,7 @@ namespace Primary.SchoolApp.UI
                     schoolSupplieFee.SchoolClassId = schoolSupplieFee.SchoolYear.Id;
                     schoolSupplieFee.SchoolClass = selectedClass;
                     schoolSupplieFee.SchoolClassId = schoolSupplieFee.SchoolClass.Id;
-                    var cashFlowType = (CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).AsCashFlowType();
+                    var cashFlowType = (CostTypeDropDownList.SelectedItem.DataBoundItem as CashFlowTypeDTO).ToCashFlowType();
                     schoolSupplieFee.CashFlowType = cashFlowType;
                     schoolSupplieFee.CashFlowTypeId = schoolSupplieFee.CashFlowType.Id;
                     schoolSupplieFee.IsPayable = bool.Parse(CostPayableDropDownList.SelectedValue.ToString());
@@ -326,7 +326,7 @@ namespace Primary.SchoolApp.UI
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
+                Program.CashFlowTypeList.Add(data.ToCashFlowTypeDTO());
                 CostTypeDropDownList.DataSource = null;
                 CostTypeDropDownList.DataSource = Program.CashFlowTypeList.Where(x => x.FlowCategory == SchoolManagement.Core.Enum.FlowCategory.SchoolSupplie);
                 CostTypeDropDownList.SelectedValue = data;

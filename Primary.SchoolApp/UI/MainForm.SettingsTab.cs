@@ -916,7 +916,7 @@ namespace Primary.SchoolApp
             var getData = cashFlowTypeService.GetCashFlowTypeList();
             CreateCashFlowTypeColumnsForSettingGridView();
             var result = await getData;
-            Program.CashFlowTypeList = result.Select(x => x.AsCashFlowTypeDTO()).ToList();
+            Program.CashFlowTypeList = result.Select(x => x.ToCashFlowTypeDTO()).ToList();
             SettingGridView.DataSource = Program.CashFlowTypeList;
 
         }
@@ -1425,7 +1425,7 @@ namespace Primary.SchoolApp
             if (form.ShowDialog(this) == DialogResult.OK)
             {
                 var data = cashFlowTypeService.GetCashFlowType(form.NameTextBox.Text).Result;
-                Program.CashFlowTypeList.Add(data.AsCashFlowTypeDTO());
+                Program.CashFlowTypeList.Add(data.ToCashFlowTypeDTO());
                 SettingGridView.DataSource = new List<CashFlowType>();
                 SettingGridView.DataSource = Program.CashFlowTypeList;
             }
